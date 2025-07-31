@@ -1,20 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Corporacioneducativa Conalianza | Arquitectura Moderna</title>
     <link rel="icon" href="logopagina.png" type="image/png" />
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
       :root {
         --primary-color: #002e7d;
-        --secondary-color: #10B981;
+        --secondary-color: #10b981;
         --gradient-start: #0c8dac;
-        --gradient-end: #10B981;
+        --gradient-end: #10b981;
         --text-color: #4a5568;
         --light-bg: #f7fafc;
       }
@@ -24,12 +33,24 @@
         color: var(--text-color);
         line-height: 1.6;
       }
-      .bg-primary { background-color: var(--primary-color); }
-      .text-primary { color: var(--primary-color); }
-      .bg-secondary { background-color: var(--secondary-color); }
-      .text-secondary { color: var(--secondary-color); }
+      .bg-primary {
+        background-color: var(--primary-color);
+      }
+      .text-primary {
+        color: var(--primary-color);
+      }
+      .bg-secondary {
+        background-color: var(--secondary-color);
+      }
+      .text-secondary {
+        color: var(--secondary-color);
+      }
       .btn-main {
-        background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+        background: linear-gradient(
+          90deg,
+          var(--gradient-start) 0%,
+          var(--gradient-end) 100%
+        );
         color: white;
         padding: 0.85rem 2rem;
         border-radius: 9999px;
@@ -42,145 +63,555 @@
         box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);
       }
       .sticky-header {
-        position: sticky; top: 0; width: 100%; z-index: 1000;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
         background: rgba(255, 255, 255, 0.7);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         transition: all 0.4s ease-in-out;
       }
-      .sticky-header .logo-large { filter: none; }
-      .sticky-header nav a { color: #333; }
-      .sticky-header.scrolled { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); }
-      .header-hidden { transform: translateY(-100%); }
-      .logo-large { height: 60px; transition: transform 0.3s ease; }
-      
-      /* Estilos del Catálogo y Carrito (se mantienen) */
-      .catalog-tab { padding: 0.75rem 0.5rem; margin-bottom: -1px; border-bottom: 3px solid transparent; font-size: 1.125rem; font-weight: 600; color: var(--text-color); transition: all 0.3s ease; white-space: nowrap; }
-      .catalog-tab:hover { color: var(--secondary-color); }
-      .catalog-tab.active { color: var(--primary-color); border-bottom-color: var(--primary-color); }
-      .catalog-pane { display: none; animation: fadeIn 0.5s ease; }
-      .catalog-pane.active { display: block; }
-      .service-item { display: flex; flex-direction: column; flex-direction: row; justify-content: space-between; align-items: center; padding: 1rem 0.5rem; border-bottom: 1px solid #e5e7eb; gap: 1rem; }
-      @media (min-width: 768px) { .service-item { flex-direction: row; } }
-      .service-item:last-child { border-bottom: none; }
-      .service-details { flex-grow: 1; text-align: center; }
-      @media (min-width: 768px) { .service-details { text-align: left; } }
-      .service-price { font-weight: 700; color: var(--secondary-color); font-size: 1.125rem; min-width: 150px; text-align: right; white-space: nowrap; }
-      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-      body.cart-open #cart-overlay { display: block; }
-      body.cart-open #cart-drawer { transform: translateX(0); }
-      .cart-item-remove-btn { background-color: #fee2e2; color: #b91c1c; border-radius: 50%; width: 28px; height: 28px; font-size: 14px; font-weight: bold; line-height: 28px; text-align: center; transition: all 0.2s ease; }
-      .cart-item-remove-btn:hover { background-color: #ef4444; color: white; }
-      .whatsapp-btn { position: fixed; bottom: 20px; right: 20px; z-index: 1000; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); transition: all 0.3s ease; }
-      .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5); }
-    </style>
-</head>
-<body class="bg-slate-50">
+      .sticky-header .logo-large {
+        filter: none;
+      }
+      .sticky-header nav a {
+        color: #333;
+      }
+      .sticky-header.scrolled {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+      .header-hidden {
+        transform: translateY(-100%);
+      }
+      .logo-large {
+        height: 50px;
+        transition: transform 0.3s ease;
+      } /* Ligeramente más pequeño para móvil */
+      @media (min-width: 768px) {
+        .logo-large {
+          height: 60px;
+        }
+      }
 
+      /* --- INICIO DE MEJORAS RESPONSIVAS EN EL CATÁLOGO --- */
+
+      .catalog-tab {
+        padding: 0.5rem 0.25rem; /* Menos padding en móvil */
+        margin-bottom: -1px;
+        border-bottom: 3px solid transparent;
+        font-size: 1rem; /* Fuente más pequeña en móvil */
+        font-weight: 600;
+        color: var(--text-color);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+      .catalog-tab:hover {
+        color: var(--secondary-color);
+      }
+      .catalog-tab.active {
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
+      }
+
+      @media (min-width: 768px) {
+        .catalog-tab {
+          padding: 0.75rem 0.5rem; /* Restaurar padding en desktop */
+          font-size: 1.125rem; /* Restaurar fuente en desktop */
+        }
+      }
+
+      .catalog-pane {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+      .catalog-pane.active {
+        display: block;
+      }
+
+      /* Estructura del item en móvil */
+      .service-item {
+        display: flex;
+        flex-direction: column; /* Apilado vertical por defecto */
+        align-items: center; /* Todo centrado en móvil */
+        text-align: center;
+        padding: 1.5rem 0.5rem;
+        border-bottom: 1px solid #e5e7eb;
+        gap: 0.75rem; /* Espacio entre elementos */
+      }
+      .service-item:last-child {
+        border-bottom: none;
+      }
+
+      .service-details {
+        flex-grow: 1;
+        /* El centrado ya está en .service-item */
+      }
+
+      .service-price {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 1.125rem;
+        white-space: nowrap;
+        /* Se quita min-width para móvil */
+      }
+
+      .service-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+
+      /* Estructura del item en Desktop */
+      @media (min-width: 768px) {
+        .service-item {
+          flex-direction: row; /* Fila en desktop */
+          text-align: left;
+        }
+        .service-details {
+          text-align: left;
+        }
+        .service-price {
+          min-width: 150px; /* Restaurar ancho mínimo */
+          text-align: right;
+        }
+        .service-actions {
+          width: auto;
+          margin-top: 0;
+        }
+      }
+
+      /* --- FIN DE MEJORAS RESPONSIVAS --- */
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Estilos del Carrito */
+      body.cart-open #cart-overlay {
+        display: block;
+      }
+      body.cart-open #cart-drawer {
+        transform: translateX(0);
+      }
+      .cart-item-remove-btn {
+        background-color: #fee2e2;
+        color: #b91c1c;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 28px;
+        text-align: center;
+        transition: all 0.2s ease;
+      }
+      .cart-item-remove-btn:hover {
+        background-color: #ef4444;
+        color: white;
+      }
+      .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background-color: #25d366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+      }
+      .whatsapp-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50">
     <header class="sticky-header py-4" id="main-header">
-      <div class="container max-w-7xl mx-auto flex justify-between items-center px-6">
-        <a href="#" class="flex items-center"><img src="logof.png" alt="Corporacioneducativa Conalianza Logo" class="logo-large"/></a>
+      <div
+        class="container max-w-7xl mx-auto flex justify-between items-center px-6"
+      >
+        <a href="#" class="flex items-center"
+          ><img
+            src="logof.png"
+            alt="Corporacioneducativa Conalianza Logo"
+            class="logo-large"
+        /></a>
         <nav class="hidden md:flex items-center space-x-8">
-            <a href="#beneficios" class="text-gray-700 hover:text-primary font-medium transition duration-300">Por qué elegirnos</a>
-            <a href="#catalogo-servicios" class="text-gray-700 hover:text-primary font-medium transition duration-300">Catálogo</a>
-            <a href="#testimonios" class="text-gray-700 hover:text-primary font-medium transition duration-300">Testimonios</a>
-            <a href="#contacto" class="btn-main !mt-0 !py-2 !px-5">Contacto</a>
+          <a
+            href="#beneficios"
+            class="text-gray-700 hover:text-primary font-medium transition duration-300"
+            >Por qué elegirnos</a
+          >
+          <a
+            href="#catalogo-servicios"
+            class="text-gray-700 hover:text-primary font-medium transition duration-300"
+            >Catálogo</a
+          >
+          <a
+            href="#testimonios"
+            class="text-gray-700 hover:text-primary font-medium transition duration-300"
+            >Testimonios</a
+          >
+          <a href="#contacto" class="btn-main !mt-0 !py-2 !px-5">Contacto</a>
         </nav>
-        </div>
+      </div>
     </header>
 
     <main>
-        <section class="relative h-[85vh] min-h-[600px] flex items-center">
-            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('portada.jpg');">
-                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"></div>
+      <section class="relative h-[85vh] min-h-[600px] flex items-center">
+        <div
+          class="absolute inset-0 bg-cover bg-center"
+          style="background-image: url('portada.jpg')"
+        >
+          <div
+            class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"
+          ></div>
+        </div>
+        <div class="container max-w-7xl mx-auto px-6 relative z-10">
+          <div
+            class="max-w-xl p-8 md:p-12 rounded-lg"
+            style="
+              background: rgba(255, 255, 255, 0.1);
+              backdrop-filter: blur(10px);
+              border: 1px solid rgba(255, 255, 255, 0.2);
+            "
+          >
+            <h1
+              class="text-4xl md:text-6xl font-extrabold text-white leading-tight"
+            >
+              Educación de Calidad para un Futuro Brillante
+            </h1>
+            <p class="mt-6 text-lg text-gray-200">
+              Descubre nuestros cursos y diplomados, diseñados por expertos para
+              impulsar tu carrera profesional al siguiente nivel.
+            </p>
+            <div class="mt-8">
+              <a href="#catalogo-servicios" class="btn-main"
+                >Explorar Catálogo</a
+              >
             </div>
-            <div class="container max-w-7xl mx-auto px-6 relative z-10">
-                <div class="max-w-xl p-8 md:p-12 rounded-lg" style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2);">
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight">
-                        Educación de Calidad para un Futuro Brillante
-                    </h1>
-                    <p class="mt-6 text-lg text-gray-200">
-                        Descubre nuestros cursos y diplomados, diseñados por expertos para impulsar tu carrera profesional al siguiente nivel.
-                    </p>
-                    <div class="mt-8">
-                        <a href="#catalogo-servicios" class="btn-main">Explorar Catálogo</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <section id="beneficios" class="py-24 bg-white">
-            <div class="container max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-                <div class="prose max-w-none">
-                    <h2 class="text-4xl font-extrabold text-primary">¿Por Qué Elegir Corporación Educativa Conalianza?</h2>
-                    <p class="text-lg text-gray-600 mt-4">
-                        Estamos comprometidos con tu éxito. Ofrecemos una plataforma educativa que combina flexibilidad, calidad y un enfoque práctico para asegurar que adquieras las habilidades que el mercado laboral demanda hoy.
-                    </p>
-                </div>
-                <div class="space-y-6">
-                    <div class="flex items-start gap-4"><div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"><i class="fas fa-medal text-2xl text-secondary"></i></div><div><h4 class="font-bold text-lg text-primary">Calidad Garantizada</h4><p class="text-gray-600">Contenido y servicios avalados por expertos en cada materia.</p></div></div>
-                    <div class="flex items-start gap-4"><div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"><i class="fas fa-bolt text-2xl text-secondary"></i></div><div><h4 class="font-bold text-lg text-primary">Resultados Rápidos</h4><p class="text-gray-600">Obtén certificaciones valiosas en tiempo récord para avanzar profesionalmente.</p></div></div>
-                    <div class="flex items-start gap-4"><div class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"><i class="fas fa-laptop-code text-2xl text-secondary"></i></div><div><h4 class="font-bold text-lg text-primary">Flexibilidad Total</h4><p class="text-gray-600">Aprende a tu propio ritmo con nuestras opciones online y presenciales.</p></div></div>
-                </div>
+      <section id="beneficios" class="py-24 bg-white">
+        <div
+          class="container max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center"
+        >
+          <div class="prose max-w-none">
+            <h2 class="text-4xl font-extrabold text-primary">
+              ¿Por Qué Elegir Corporación Educativa Conalianza?
+            </h2>
+            <p class="text-lg text-gray-600 mt-4">
+              Estamos comprometidos con tu éxito. Ofrecemos una plataforma
+              educativa que combina flexibilidad, calidad y un enfoque práctico
+              para asegurar que adquieras las habilidades que el mercado laboral
+              demanda hoy.
+            </p>
+          </div>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"
+              >
+                <i class="fas fa-medal text-2xl text-secondary"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg text-primary">
+                  Calidad Garantizada
+                </h4>
+                <p class="text-gray-600">
+                  Contenido y servicios avalados por expertos en cada materia.
+                </p>
+              </div>
             </div>
-        </section>
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"
+              >
+                <i class="fas fa-bolt text-2xl text-secondary"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg text-primary">
+                  Resultados Rápidos
+                </h4>
+                <p class="text-gray-600">
+                  Obtén certificaciones valiosas en tiempo récord para avanzar
+                  profesionalmente.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div
+                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"
+              >
+                <i class="fas fa-laptop-code text-2xl text-secondary"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-lg text-primary">
+                  Flexibilidad Total
+                </h4>
+                <p class="text-gray-600">
+                  Aprende a tu propio ritmo con nuestras opciones online y
+                  presenciales.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        <section id="servicios-destacados" class="py-24 bg-slate-50">
-            <div class="container max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-4xl font-extrabold text-primary">Programas Populares</h2>
-                    <p class="text-lg text-gray-600 mt-4">Un vistazo a los cursos y diplomados que nuestros estudiantes más eligen para transformar su futuro.</p>
+      <section id="servicios-destacados" class="py-24 bg-slate-50">
+        <div class="container max-w-7xl mx-auto px-6">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-4xl font-extrabold text-primary">
+              Programas Populares
+            </h2>
+            <p class="text-lg text-gray-600 mt-4">
+              Un vistazo a los cursos y diplomados que nuestros estudiantes más
+              eligen para transformar su futuro.
+            </p>
+          </div>
+          <div class="swiper services-carousel">
+            <div class="swiper-wrapper">
+              <div
+                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
+              >
+                <img
+                  src="s1.jpg"
+                  alt="Curso Destacado 1"
+                  class="w-full h-72 object-cover"
+                />
+                <div class="p-6">
+                  <h4 class="text-xl font-bold text-primary">
+                    Curso de Manipulación de Alimentos
+                  </h4>
                 </div>
-                <div class="swiper services-carousel"><div class="swiper-wrapper">
-                    <div class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"><img src="s1.jpg" alt="Curso Destacado 1" class="w-full h-72 object-cover"/><div class="p-6"><h4 class="text-xl font-bold text-primary">Curso de Manipulación de Alimentos</h4></div></div>
-                    <div class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"><img src="s2.jpg" alt="Diplomado Destacado 1" class="w-full h-72 object-cover"/><div class="p-6"><h4 class="text-xl font-bold text-primary">Diplomado en Primeros Auxilios</h4></div></div>
-                    <div class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"><img src="s3.jpg" alt="Diplomado Destacado 2" class="w-full h-72 object-cover"/><div class="p-6"><h4 class="text-xl font-bold text-primary">Diplomado en Cuidado al Adulto Mayor</h4></div></div>
-                    <div class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"><img src="s4.jpg" alt="Diplomado Destacado 3" class="w-full h-72 object-cover"/><div class="p-6"><h4 class="text-xl font-bold text-primary">Diplomado en Atención al Cliente</h4></div></div>
-                </div><div class="swiper-pagination mt-8 relative"></div></div>
-            </div>
-        </section>
-
-        <section id="catalogo-servicios" class="py-24 bg-white">
-            <div class="container max-w-7xl mx-auto px-6">
-                <h2 class="text-4xl font-extrabold text-center mb-12 text-primary">Catálogo Completo de Servicios</h2>
-                <div id="catalog-tabs" class="border-b border-gray-200 mb-8 flex flex-wrap justify-center space-x-2 md:space-x-8"><button class="catalog-tab active" data-tab="todos">Todos</button><button class="catalog-tab" data-tab="cursos">Cursos</button><button class="catalog-tab" data-tab="diplomados">Diplomados</button></div>
-                <div id="catalog-content" class="bg-white p-4 md:p-8 rounded-2xl shadow-inner border border-gray-100 min-h-[500px]">
-                    <div class="catalog-pane active" data-pane="todos"></div><div class="catalog-pane" data-pane="cursos"></div><div class="catalog-pane" data-pane="diplomados"></div>
+              </div>
+              <div
+                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
+              >
+                <img
+                  src="s2.jpg"
+                  alt="Diplomado Destacado 1"
+                  class="w-full h-72 object-cover"
+                />
+                <div class="p-6">
+                  <h4 class="text-xl font-bold text-primary">
+                    Diplomado en Primeros Auxilios
+                  </h4>
                 </div>
-            </div>
-        </section>
-
-        <section id="testimonios" class="py-24 bg-primary text-white">
-            <div class="container max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16"><h2 class="text-4xl font-extrabold">Amado por Cientos de Estudiantes</h2></div>
-                <div class="swiper testimonials-carousel"><div class="swiper-wrapper">
-                    </div><div class="swiper-pagination !text-white"></div></div>
-            </div>
-        </section>
-
-        <section id="contacto" class="py-24 bg-white">
-            <div class="container max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-4xl font-extrabold text-primary">¿Listo para Empezar?</h2>
-                    <p class="text-lg text-gray-600 mt-4 mb-8">Ponte en contacto con nuestro equipo de asesores. Estamos aquí para resolver tus dudas y ayudarte a elegir el programa perfecto para ti.</p>
-                    <div class="space-y-6">
-                        <a href="tel:+573107941580" class="flex items-center text-lg text-gray-700 hover:text-secondary group"><div class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"><i class="fas fa-phone-alt text-xl text-secondary group-hover:text-white"></i></div><span class="font-semibold">Llamar: 301 230 7470</span></a>
-                        <a href="https://wa.me/573107941580" target="_blank" class="flex items-center text-lg text-gray-700 hover:text-secondary group"><div class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"><i class="fab fa-whatsapp text-xl text-secondary group-hover:text-white"></i></div><span class="font-semibold">WhatsApp: 301 230 7470</span></a>
-                        <a href="mailto:info@conalianza.com" class="flex items-center text-lg text-gray-700 hover:text-secondary group"><div class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"><i class="fas fa-envelope text-xl text-secondary group-hover:text-white"></i></div><span class="font-semibold">info@conalianza.com</span></a>
-                    </div>
+              </div>
+              <div
+                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
+              >
+                <img
+                  src="s3.jpg"
+                  alt="Diplomado Destacado 2"
+                  class="w-full h-72 object-cover"
+                />
+                <div class="p-6">
+                  <h4 class="text-xl font-bold text-primary">
+                    Diplomado en Cuidado al Adulto Mayor
+                  </h4>
                 </div>
-                <div class="rounded-2xl overflow-hidden shadow-2xl h-96 lg:h-full mt-10 lg:mt-0"><iframe src="http://googleusercontent.com/maps/google.com/0" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+              </div>
+              <div
+                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
+              >
+                <img
+                  src="s4.jpg"
+                  alt="Diplomado Destacado 3"
+                  class="w-full h-72 object-cover"
+                />
+                <div class="p-6">
+                  <h4 class="text-xl font-bold text-primary">
+                    Diplomado en Atención al Cliente
+                  </h4>
+                </div>
+              </div>
             </div>
-        </section>
+            <div class="swiper-pagination mt-8 relative"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="catalogo-servicios" class="py-24 bg-white">
+        <div class="container max-w-7xl mx-auto px-6">
+          <h2 class="text-4xl font-extrabold text-center mb-12 text-primary">
+            Catálogo Completo de Servicios
+          </h2>
+          <div
+            id="catalog-tabs"
+            class="border-b border-gray-200 mb-8 flex flex-wrap justify-center space-x-2 md:space-x-8"
+          >
+            <button class="catalog-tab active" data-tab="todos">Todos</button
+            ><button class="catalog-tab" data-tab="cursos">Cursos</button
+            ><button class="catalog-tab" data-tab="diplomados">
+              Diplomados
+            </button>
+          </div>
+          <div
+            id="catalog-content"
+            class="bg-white p-4 md:p-8 rounded-2xl shadow-inner border border-gray-100 min-h-[500px]"
+          >
+            <div class="catalog-pane active" data-pane="todos"></div>
+            <div class="catalog-pane" data-pane="cursos"></div>
+            <div class="catalog-pane" data-pane="diplomados"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonios" class="py-24 bg-primary text-white">
+        <div class="container max-w-7xl mx-auto px-6">
+          <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-4xl font-extrabold">
+              Amado por Cientos de Estudiantes
+            </h2>
+          </div>
+          <div class="swiper testimonials-carousel">
+            <div class="swiper-wrapper"></div>
+            <div class="swiper-pagination !text-white"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contacto" class="py-24 bg-white">
+        <div
+          class="container max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center"
+        >
+          <div>
+            <h2 class="text-4xl font-extrabold text-primary">
+              ¿Listo para Empezar?
+            </h2>
+            <p class="text-lg text-gray-600 mt-4 mb-8">
+              Ponte en contacto con nuestro equipo de asesores. Estamos aquí
+              para resolver tus dudas y ayudarte a elegir el programa perfecto
+              para ti.
+            </p>
+            <div class="space-y-6">
+              <a
+                href="tel:+573107941580"
+                class="flex items-center text-lg text-gray-700 hover:text-secondary group"
+                ><div
+                  class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"
+                >
+                  <i
+                    class="fas fa-phone-alt text-xl text-secondary group-hover:text-white"
+                  ></i>
+                </div>
+                <span class="font-semibold">Llamar: 301 230 7470</span></a
+              >
+              <a
+                href="https://wa.me/573107941580"
+                target="_blank"
+                class="flex items-center text-lg text-gray-700 hover:text-secondary group"
+                ><div
+                  class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"
+                >
+                  <i
+                    class="fab fa-whatsapp text-xl text-secondary group-hover:text-white"
+                  ></i>
+                </div>
+                <span class="font-semibold">WhatsApp: 301 230 7470</span></a
+              >
+              <a
+                href="mailto:info@conalianza.com"
+                class="flex items-center text-lg text-gray-700 hover:text-secondary group"
+                ><div
+                  class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"
+                >
+                  <i
+                    class="fas fa-envelope text-xl text-secondary group-hover:text-white"
+                  ></i>
+                </div>
+                <span class="font-semibold">info@conalianza.com</span></a
+              >
+            </div>
+          </div>
+          <div
+            class="rounded-2xl overflow-hidden shadow-2xl h-96 lg:h-full mt-10 lg:mt-0"
+          >
+            <iframe
+              src="http://googleusercontent.com/maps/google.com/0"
+              width="100%"
+              height="100%"
+              style="border: 0"
+              allowfullscreen=""
+              loading="lazy"
+            ></iframe>
+          </div>
+        </div>
+      </section>
     </main>
 
     <footer class="bg-slate-800 text-slate-400 py-16">
-      <div class="container max-w-7xl mx-auto px-6 text-center"><p class="text-lg mb-4">© 2025 Corporacioneducativa Conalianza. Todos los derechos reservados.</p><div class="flex justify-center space-x-6 text-slate-400"><a href="#" class="hover:text-white">Privacidad</a><span>&middot;</span><a href="#" class="hover:text-white">Términos</a></div></div>
+      <div class="container max-w-7xl mx-auto px-6 text-center">
+        <p class="text-lg mb-4">
+          © 2025 Corporacioneducativa Conalianza. Todos los derechos reservados.
+        </p>
+        <div class="flex justify-center space-x-6 text-slate-400">
+          <a href="#" class="hover:text-white">Privacidad</a
+          ><span>&middot;</span
+          ><a href="#" class="hover:text-white">Términos</a>
+        </div>
+      </div>
     </footer>
 
-    <a href="https://wa.me/573107941580" target="_blank" class="whatsapp-btn"><img src="icons8-whatsapp-50.png" alt="WhatsApp" class="w-8 h-8" /></a>
-    <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
-    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out"><div class="flex flex-col h-full"><div class="flex justify-between items-center p-4 border-b"><h3 class="text-2xl font-bold text-primary">Tu Carrito</h3><button id="close-cart-btn" class="text-gray-500 hover:text-gray-800 text-3xl">&times;</button></div><div id="cart-items" class="flex-grow p-4 overflow-y-auto"></div><div class="p-4 border-t"><div class="flex justify-between items-center mb-4"><p class="text-lg font-bold">Total:</p><p id="cart-total" class="text-lg font-bold text-primary">COP 0.00</p></div><button id="checkout-btn" class="btn-main w-full text-center !py-3 !text-lg">Finalizar Compra <i class="fab fa-whatsapp ml-2"></i></button></div></div></div>
+    <a href="https://wa.me/573107941580" target="_blank" class="whatsapp-btn"
+      ><img src="icons8-whatsapp-50.png" alt="WhatsApp" class="w-8 h-8"
+    /></a>
+    <div
+      id="cart-overlay"
+      class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"
+    ></div>
+    <div
+      id="cart-drawer"
+      class="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 transform translate-x-full transition-transform duration-300 ease-in-out"
+    >
+      <div class="flex flex-col h-full">
+        <div class="flex justify-between items-center p-4 border-b">
+          <h3 class="text-2xl font-bold text-primary">Tu Carrito</h3>
+          <button
+            id="close-cart-btn"
+            class="text-gray-500 hover:text-gray-800 text-3xl"
+          >
+            &times;
+          </button>
+        </div>
+        <div id="cart-items" class="flex-grow p-4 overflow-y-auto"></div>
+        <div class="p-4 border-t">
+          <div class="flex justify-between items-center mb-4">
+            <p class="text-lg font-bold">Total:</p>
+            <p id="cart-total" class="text-lg font-bold text-primary">
+              COP 0.00
+            </p>
+          </div>
+          <button
+            id="checkout-btn"
+            class="btn-main w-full text-center !py-3 !text-lg"
+          >
+            Finalizar Compra <i class="fab fa-whatsapp ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
@@ -200,107 +631,416 @@
         let cart = [];
         let lastScrollTop = 0;
         const testimonials = [
-            { text: "El curso de manipulación de alimentos fue clave para mi negocio. ¡Rápido, práctico y con excelente soporte!", author: "Juan Pérez", role: "Emprendedor Gastronómico", icon: "fa-utensils" },
-            { text: "Validar mi bachillerato con ustedes cambió mi vida profesional. ¡Gracias, Corporación Educativa Conalianza!", author: "María López", role: "Profesional en Transición", icon: "fa-graduation-cap" },
-            { text: "El diplomado en primeros auxilios me dio confianza para actuar. Contenido de alta calidad y muy flexible.", author: "Carlos Ramírez", role: "Trabajador de Salud", icon: "fa-first-aid" },
+          {
+            text: "El curso de manipulación de alimentos fue clave para mi negocio. ¡Rápido, práctico y con excelente soporte!",
+            author: "Juan Pérez",
+            role: "Emprendedor Gastronómico",
+            icon: "fa-utensils",
+          },
+          {
+            text: "Validar mi bachillerato con ustedes cambió mi vida profesional. ¡Gracias, Corporación Educativa Conalianza!",
+            author: "María López",
+            role: "Profesional en Transición",
+            icon: "fa-graduation-cap",
+          },
+          {
+            text: "El diplomado en primeros auxilios me dio confianza para actuar. Contenido de alta calidad y muy flexible.",
+            author: "Carlos Ramírez",
+            role: "Trabajador de Salud",
+            icon: "fa-first-aid",
+          },
         ];
         const services = [
-            { id: 1, name: 'Curso Manipulación de Alimentos', category: 'cursos', price: 'COP 20,000.00', price_numeric: 20000 },
-            { id: 2, name: 'Curso de Aseo y Desinfección Hospitalaria', category: 'cursos', price: 'COP 30,000.00', price_numeric: 30000 },
-        
-    
-            { id: 6, name: 'Auxiliar de Bodega', category: 'cursos', price: 'COP 30,000.00', price_numeric: 30000 },
-            { id: 101, name: 'Diplomado en Atención al Cliente', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 102, name: 'Diplomado Cuidado Integral al Adulto Mayor', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 103, name: 'Diplomado en Primeros Auxilios', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 104, name: 'Diplomado en Bioseguridad y Residuos Peligrosos', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 105, name: 'Diplomado de Camillero', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 106, name: 'Diplomado de Seguridad en el Paciente', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 107, name: 'Diplomado de Inyectología', category: 'diplomados', price: 'COP 70,000.00', price_numeric: 70000 },
-            { id: 108, name: 'Diplomado en Toma de Muestras de Laboratorio', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 109, name: 'Diplomado en Farmacología', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 110, name: 'Diplomado en Jefe de Cocina', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 111, name: 'Diplomado Auxiliar en Cocina', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 112, name: 'Diplomado en Código Fucsia', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 113, name: 'Diplomado en Vacunación', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 114, name: 'Diplomado en AEIP', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 115, name: 'Diplomado en Cuidados Básicos de Enfermería', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 116, name: 'Diplomado en Salud Reproductiva', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 117, name: 'Diplomado en Atención a Personas con Discapacidad', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 118, name: 'Diplomado en Prevención y Protección de la Salud', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 119, name: 'Diplomado en Farmacovigilancia', category: 'diplomados', price: 'COP 50,000.00', price_numeric: 50000 },
-            { id: 120, name: 'Auxiliar en Rehabilitación Física', category: 'diplomados', price: 'COP 150,000.00', price_numeric: 150000 },
-            { id: 121, name: 'Programas Técnicos Laborales', category: 'diplomados', price: 'COP 600,000.00', price_numeric: 600000 },
+          {
+            id: 1,
+            name: "Curso Manipulación de Alimentos",
+            category: "cursos",
+            price: "COP 20,000.00",
+            price_numeric: 20000,
+          },
+          {
+            id: 2,
+            name: "Curso de Aseo y Desinfección Hospitalaria",
+            category: "cursos",
+            price: "COP 30,000.00",
+            price_numeric: 30000,
+          },
+
+          {
+            id: 6,
+            name: "Auxiliar de Bodega",
+            category: "cursos",
+            price: "COP 30,000.00",
+            price_numeric: 30000,
+          },
+          {
+            id: 101,
+            name: "Diplomado en Atención al Cliente",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 102,
+            name: "Diplomado Cuidado Integral al Adulto Mayor",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 103,
+            name: "Diplomado en Primeros Auxilios",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 104,
+            name: "Diplomado en Bioseguridad y Residuos Peligrosos",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 105,
+            name: "Diplomado de Camillero",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 106,
+            name: "Diplomado de Seguridad en el Paciente",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 107,
+            name: "Diplomado de Inyectología",
+            category: "diplomados",
+            price: "COP 70,000.00",
+            price_numeric: 70000,
+          },
+          {
+            id: 108,
+            name: "Diplomado en Toma de Muestras de Laboratorio",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 109,
+            name: "Diplomado en Farmacología",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 110,
+            name: "Diplomado en Jefe de Cocina",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 111,
+            name: "Diplomado Auxiliar en Cocina",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 112,
+            name: "Diplomado en Código Fucsia",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 113,
+            name: "Diplomado en Vacunación",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 114,
+            name: "Diplomado en AEIP",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 115,
+            name: "Diplomado en Cuidados Básicos de Enfermería",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 116,
+            name: "Diplomado en Salud Reproductiva",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 117,
+            name: "Diplomado en Atención a Personas con Discapacidad",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 118,
+            name: "Diplomado en Prevención y Protección de la Salud",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 119,
+            name: "Diplomado en Farmacovigilancia",
+            category: "diplomados",
+            price: "COP 50,000.00",
+            price_numeric: 50000,
+          },
+          {
+            id: 120,
+            name: "Auxiliar en Rehabilitación Física",
+            category: "diplomados",
+            price: "COP 150,000.00",
+            price_numeric: 150000,
+          },
+          {
+            id: 121,
+            name: "Programas Técnicos Laborales",
+            category: "diplomados",
+            price: "COP 600,000.00",
+            price_numeric: 600000,
+          },
         ];
 
         // FUNCIONES
-        function openCart() { document.body.classList.add("cart-open"); }
-        function closeCart() { document.body.classList.remove("cart-open"); }
-        function renderCart() {
-            cartItemsContainer.innerHTML = ""; let total = 0;
-            if (cart.length === 0) { cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Tu carrito está vacío.</p>'; } 
-            else { cart.forEach(item => { total += item.price_numeric; const itemEl = document.createElement("div"); itemEl.className = "flex justify-between items-center mb-4 pb-2 border-b"; itemEl.innerHTML = `<div class="pr-4"><p class="font-bold text-primary">${item.name}</p><p class="text-sm text-secondary">${item.price}</p></div><button class="cart-item-remove-btn" data-id="${item.id}" title="Quitar item">&times;</button>`; cartItemsContainer.appendChild(itemEl); }); }
-            cartTotalEl.textContent = `COP ${total.toLocaleString("es-CO")}.00`;
+        function openCart() {
+          document.body.classList.add("cart-open");
         }
-        window.addToCart = function(productId) { const productToAdd = services.find(p => p.id === productId); if (productToAdd) { cart.push(productToAdd); renderCart(); openCart(); } }
-        function removeFromCart(productId) { const indexToRemove = cart.findIndex(item => item.id === productId); if (indexToRemove > -1) { cart.splice(indexToRemove, 1); } renderCart(); }
+        function closeCart() {
+          document.body.classList.remove("cart-open");
+        }
+        function renderCart() {
+          cartItemsContainer.innerHTML = "";
+          let total = 0;
+          if (cart.length === 0) {
+            cartItemsContainer.innerHTML =
+              '<p class="text-gray-500 text-center">Tu carrito está vacío.</p>';
+          } else {
+            cart.forEach((item) => {
+              total += item.price_numeric;
+              const itemEl = document.createElement("div");
+              itemEl.className =
+                "flex justify-between items-center mb-4 pb-2 border-b";
+              itemEl.innerHTML = `<div class="pr-4"><p class="font-bold text-primary">${item.name}</p><p class="text-sm text-secondary">${item.price}</p></div><button class="cart-item-remove-btn" data-id="${item.id}" title="Quitar item">&times;</button>`;
+              cartItemsContainer.appendChild(itemEl);
+            });
+          }
+          cartTotalEl.textContent = `COP ${total.toLocaleString("es-CO")}.00`;
+        }
+        window.addToCart = function (productId) {
+          const productToAdd = services.find((p) => p.id === productId);
+          if (productToAdd) {
+            cart.push(productToAdd);
+            renderCart();
+            openCart();
+          }
+        };
+        function removeFromCart(productId) {
+          const indexToRemove = cart.findIndex((item) => item.id === productId);
+          if (indexToRemove > -1) {
+            cart.splice(indexToRemove, 1);
+          }
+          renderCart();
+        }
         function createServiceItemHTML(service) {
-            const buttonText = service.price.toLowerCase() === 'consultar' ? 'Consultar' : 'Añadir al Carrito';
-            let buttonAction;
-            if (service.price.toLowerCase() === 'consultar') { const message = `Hola, quisiera consultar el precio de: ${service.name}`; buttonAction = `window.open('https://wa.me/573107941580?text=${encodeURIComponent(message)}', '_blank')`; } 
-            else { buttonAction = `window.addToCart(${service.id})`; }
-            return `<div class="service-item"><div class="service-details"><h5 class="text-lg font-bold text-primary">${service.name}</h5></div><div class="service-price">${service.price}</div><button onclick="${buttonAction}" class="btn-main !mt-0 !py-2 !px-4 text-sm whitespace-nowrap">${buttonText}</button></div>`;
+          const buttonText =
+            service.price.toLowerCase() === "consultar"
+              ? "Consultar"
+              : "Añadir al Carrito";
+          let buttonAction;
+          let detailsLink = "";
+
+          const serviceSlug = service.name
+            .toLowerCase()
+            .replace(/ /g, "-")
+            .replace(/[^a-z0-9-]/g, "");
+          const serviceUrl = `servicios/${serviceSlug}.html`;
+
+          
+
+          if (service.price.toLowerCase() === "consultar") {
+            const message = `Hola, quisiera consultar el precio de: ${service.name}`;
+            buttonAction = `window.open('https://wa.me/573107941580?text=${encodeURIComponent(
+              message
+            )}', '_blank')`;
+          } else {
+            buttonAction = `window.addToCart(${service.id})`;
+          }
+
+          return `
+        <div class="service-item">
+            <div class="service-details">
+                <h5 class="text-lg font-bold text-primary">${service.name}</h5>
+            </div>
+            
+            <div class="service-actions">
+                <div class="service-price">${service.price}</div>
+                <button onclick="${buttonAction}" class="btn-main !mt-0 !py-2 !px-4 text-sm whitespace-nowrap ml-4">${buttonText}</button>
+                ${detailsLink}
+            </div>
+        </div>
+    `;
         }
         function populatePanes() {
-            const panes = { todos: document.querySelector('.catalog-pane[data-pane="todos"]'), cursos: document.querySelector('.catalog-pane[data-pane="cursos"]'), diplomados: document.querySelector('.catalog-pane[data-pane="diplomados"]') };
-            for (const key in panes) { if (panes[key]) panes[key].innerHTML = ""; }
-            services.forEach(service => { const itemHTML = createServiceItemHTML(service); if (panes.todos) panes.todos.innerHTML += itemHTML; if (panes[service.category]) panes[service.category].innerHTML += itemHTML; });
+          const panes = {
+            todos: document.querySelector('.catalog-pane[data-pane="todos"]'),
+            cursos: document.querySelector('.catalog-pane[data-pane="cursos"]'),
+            diplomados: document.querySelector(
+              '.catalog-pane[data-pane="diplomados"]'
+            ),
+          };
+          for (const key in panes) {
+            if (panes[key]) panes[key].innerHTML = "";
+          }
+          services.forEach((service) => {
+            const itemHTML = createServiceItemHTML(service);
+            if (panes.todos) panes.todos.innerHTML += itemHTML;
+            if (panes[service.category])
+              panes[service.category].innerHTML += itemHTML;
+          });
         }
 
         // EVENTOS E INICIALIZACIONES
-        window.addEventListener("scroll", function () {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        window.addEventListener(
+          "scroll",
+          function () {
+            let scrollTop =
+              window.pageYOffset || document.documentElement.scrollTop;
             if (header) {
-                if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) { header.classList.add("header-hidden"); } 
-                else { header.classList.remove("header-hidden"); }
-                if (scrollTop > 50) { header.classList.add("scrolled"); } 
-                else { header.classList.remove("scrolled"); }
+              if (
+                scrollTop > lastScrollTop &&
+                scrollTop > header.offsetHeight
+              ) {
+                header.classList.add("header-hidden");
+              } else {
+                header.classList.remove("header-hidden");
+              }
+              if (scrollTop > 50) {
+                header.classList.add("scrolled");
+              } else {
+                header.classList.remove("scrolled");
+              }
             }
             lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        }, false);
+          },
+          false
+        );
         closeCartBtn.addEventListener("click", closeCart);
         cartOverlay.addEventListener("click", closeCart);
         checkoutBtn.addEventListener("click", () => {
-            if (cart.length === 0) { alert("Tu carrito está vacío."); return; }
-            let message = "¡Hola! Quisiera solicitar los siguientes servicios de Corporacioneducativa Conalianza:\n\n"; let total = 0;
-            cart.forEach((item, index) => { message += `${index + 1}. ${item.name} - ${item.price}\n`; total += item.price_numeric; });
-            message += `\n*Total a Pagar: COP ${total.toLocaleString("es-CO")}.00*`;
-            const whatsappUrl = `https://wa.me/573107941580?text=${encodeURIComponent(message)}`;
-            window.open(whatsappUrl, "_blank");
+          if (cart.length === 0) {
+            alert("Tu carrito está vacío.");
+            return;
+          }
+          let message =
+            "¡Hola! Quisiera solicitar los siguientes servicios de Corporacioneducativa Conalianza:\n\n";
+          let total = 0;
+          cart.forEach((item, index) => {
+            message += `${index + 1}. ${item.name} - ${item.price}\n`;
+            total += item.price_numeric;
+          });
+          message += `\n*Total a Pagar: COP ${total.toLocaleString(
+            "es-CO"
+          )}.00*`;
+          const whatsappUrl = `https://wa.me/573107941580?text=${encodeURIComponent(
+            message
+          )}`;
+          window.open(whatsappUrl, "_blank");
         });
-        cartItemsContainer.addEventListener('click', function(e) { if (e.target && e.target.matches('.cart-item-remove-btn')) { const itemIdToRemove = parseInt(e.target.dataset.id, 10); removeFromCart(itemIdToRemove); } });
-        catalogTabs.forEach(tab => {
-            tab.addEventListener("click", (e) => { e.preventDefault(); catalogTabs.forEach(t => t.classList.remove("active")); catalogPanes.forEach(p => p.classList.remove("active")); tab.classList.add("active"); const targetPane = document.querySelector(`.catalog-pane[data-pane="${tab.dataset.tab}"]`); if (targetPane) { targetPane.classList.add("active"); } });
+        cartItemsContainer.addEventListener("click", function (e) {
+          if (e.target && e.target.matches(".cart-item-remove-btn")) {
+            const itemIdToRemove = parseInt(e.target.dataset.id, 10);
+            removeFromCart(itemIdToRemove);
+          }
         });
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener("click", function (e) { e.preventDefault(); const targetElement = document.querySelector(this.getAttribute("href")); if (targetElement) { targetElement.scrollIntoView({ behavior: "smooth" }); } }); });
+        catalogTabs.forEach((tab) => {
+          tab.addEventListener("click", (e) => {
+            e.preventDefault();
+            catalogTabs.forEach((t) => t.classList.remove("active"));
+            catalogPanes.forEach((p) => p.classList.remove("active"));
+            tab.classList.add("active");
+            const targetPane = document.querySelector(
+              `.catalog-pane[data-pane="${tab.dataset.tab}"]`
+            );
+            if (targetPane) {
+              targetPane.classList.add("active");
+            }
+          });
+        });
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetElement = document.querySelector(
+              this.getAttribute("href")
+            );
+            if (targetElement) {
+              targetElement.scrollIntoView({ behavior: "smooth" });
+            }
+          });
+        });
 
-        if (document.querySelector(".services-carousel")) { new Swiper(".services-carousel", { loop: true, grabCursor: true, spaceBetween: 30, autoplay: { delay: 3500, disableOnInteraction: false }, pagination: { el: ".swiper-pagination", clickable: true }, breakpoints: { 640: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } } }); }
-        
+        if (document.querySelector(".services-carousel")) {
+          new Swiper(".services-carousel", {
+            loop: true,
+            grabCursor: true,
+            spaceBetween: 30,
+            autoplay: { delay: 3500, disableOnInteraction: false },
+            pagination: { el: ".swiper-pagination", clickable: true },
+            breakpoints: {
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            },
+          });
+        }
+
         // Nuevo carrusel de testimonios
-        if (document.querySelector(".testimonials-carousel")) { 
-            const testimonialsContainer = document.querySelector(".testimonials-carousel .swiper-wrapper");
-            testimonials.forEach(item => {
-                const slide = document.createElement('div');
-                slide.className = 'swiper-slide';
-                slide.innerHTML = `<div class="p-8 rounded-lg bg-white/10 text-center"><i class="fas ${item.icon} text-4xl text-white/50 mb-4"></i><p class="text-lg italic text-white/90 mb-6">"${item.text}"</p><p class="font-bold text-white">${item.author}</p><p class="text-sm text-white/70">${item.role}</p></div>`;
-                testimonialsContainer.appendChild(slide);
-            });
-            new Swiper(".testimonials-carousel", { loop: true, autoplay: { delay: 5000 }, spaceBetween: 30, pagination: { el: ".swiper-pagination", clickable: true, renderBullet: (index, className) => `<span class="${className}" style="background-color: white"></span>` } }); 
+        if (document.querySelector(".testimonials-carousel")) {
+          const testimonialsContainer = document.querySelector(
+            ".testimonials-carousel .swiper-wrapper"
+          );
+          testimonials.forEach((item) => {
+            const slide = document.createElement("div");
+            slide.className = "swiper-slide";
+            slide.innerHTML = `<div class="p-8 rounded-lg bg-white/10 text-center"><i class="fas ${item.icon} text-4xl text-white/50 mb-4"></i><p class="text-lg italic text-white/90 mb-6">"${item.text}"</p><p class="font-bold text-white">${item.author}</p><p class="text-sm text-white/70">${item.role}</p></div>`;
+            testimonialsContainer.appendChild(slide);
+          });
+          new Swiper(".testimonials-carousel", {
+            loop: true,
+            autoplay: { delay: 5000 },
+            spaceBetween: 30,
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+              renderBullet: (index, className) =>
+                `<span class="${className}" style="background-color: white"></span>`,
+            },
+          });
         }
 
         populatePanes();
         renderCart();
       });
     </script>
-</body>
+  </body>
 </html>
