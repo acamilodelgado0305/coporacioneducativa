@@ -561,6 +561,7 @@
         let score = 0;
 
         function startQuiz() {
+          fbq("track", "StartQuiz");
           currentQuestionIndex = 0;
           score = 0;
           quizModal.classList.remove("hidden");
@@ -697,6 +698,7 @@
               );
               return;
             }
+             fbq('track', 'Lead');
             const baseMessage = `He completado y aprobado el curso avanzado de manipulación de alimentos en línea, deseo obtener mi certificado.`;
             const scoreInfo = `\nPuntaje Obtenido: ${score}/${questions.length}`;
             const userInfo = `\n\nMis datos son:\nNombre: ${fullName}\nDocumento: ${documentId}`;
