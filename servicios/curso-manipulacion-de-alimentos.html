@@ -1,399 +1,712 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curso Avanzado de Manipulación de Alimentos | Conalianza</title>
     <link rel="icon" href="logopagina.png" type="image/png" />
-    <meta name="description" content="Curso completo y robusto sobre la inocuidad de los alimentos en Colombia. Supera el examen y obtén tu certificado.">
-    
+    <meta
+      name="description"
+      content="Curso completo y robusto sobre la inocuidad de los alimentos en Colombia. Supera el examen y obtén tu certificado."
+    />
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
 
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f1f5f9; /* bg-slate-100 */
-        }
-        :root {
-            --primary-color: #002e7d;
-            --secondary-color: #10b981;
-            --success-color: #22c55e; /* green-500 */
-            --error-color: #ef4444; /* red-500 */
-        }
-        .text-primary { color: var(--primary-color); }
-        .bg-primary { background-color: var(--primary-color); }
-        .text-secondary { color: var(--secondary-color); }
-        .border-secondary { border-color: var(--secondary-color); }
-        
-        .btn-main {
-            background-color: var(--secondary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            transition: all 0.2s ease-in-out;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-main:hover {
-            background-color: #059669; /* emerald-600 */
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
-        }
-        .btn-main:disabled {
-            background-color: #9ca3af; /* gray-400 */
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f1f5f9; /* bg-slate-100 */
+      }
+      :root {
+        --primary-color: #002e7d;
+        --secondary-color: #10b981;
+        --success-color: #22c55e; /* green-500 */
+        --error-color: #ef4444; /* red-500 */
+      }
+      .text-primary {
+        color: var(--primary-color);
+      }
+      .bg-primary {
+        background-color: var(--primary-color);
+      }
+      .text-secondary {
+        color: var(--secondary-color);
+      }
+      .border-secondary {
+        border-color: var(--secondary-color);
+      }
 
-        /* Estilos para la barra lateral y progreso */
-        #progress-bar {
-            position: fixed;
-            top: 0; left: 0;
-            height: 6px;
-            background-color: var(--secondary-color);
-            width: 0%;
-            z-index: 100;
-            transition: width 0.2s ease-out;
-        }
-        #course-nav a {
-            transition: all 0.2s ease-in-out;
-            border-left: 3px solid transparent;
-        }
-        #course-nav a.active {
-            background-color: #e0f2f1; /* emerald-50 */
-            color: var(--primary-color);
-            border-left-color: var(--secondary-color);
-            transform: translateX(4px);
-        }
-        #course-nav a.completed {
-            color: var(--secondary-color);
-        }
-        #course-nav a.completed::after {
-            content: '✔';
-            font-weight: bold;
-            margin-left: 8px;
-        }
+      .btn-main {
+        background-color: var(--secondary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+        border: none;
+        cursor: pointer;
+      }
+      .btn-main:hover {
+        background-color: #059669; /* emerald-600 */
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+      }
+      .btn-main:disabled {
+        background-color: #9ca3af; /* gray-400 */
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      /* Estilos para la barra lateral y progreso */
+      #progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 6px;
+        background-color: var(--secondary-color);
+        width: 0%;
+        z-index: 100;
+        transition: width 0.2s ease-out;
+      }
+      #course-nav a {
+        transition: all 0.2s ease-in-out;
+        border-left: 3px solid transparent;
+      }
+      #course-nav a.active {
+        background-color: #e0f2f1; /* emerald-50 */
+        color: var(--primary-color);
+        border-left-color: var(--secondary-color);
+        transform: translateX(4px);
+      }
+      #course-nav a.completed {
+        color: var(--secondary-color);
+      }
+      #course-nav a.completed::after {
+        content: "✔";
+        font-weight: bold;
+        margin-left: 8px;
+      }
     </style>
-</head>
-<body class="bg-slate-100">
-
+    <!-- Meta Pixel Code -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+      fbq("init", "639715789143642");
+      fbq("track", "PageView");
+    </script>
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+  </head>
+  <body class="bg-slate-100">
     <div id="progress-bar"></div>
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto max-w-7xl p-4 flex justify-between items-center">
-            <h1 class="text-xl md:text-2xl font-bold text-primary">Conalianza: Curso Avanzado</h1>
-            <a href="#quiz-start" class="btn-main hidden md:inline-block">Iniciar Examen</a>
-        </div>
+      <div
+        class="container mx-auto max-w-7xl p-4 flex justify-between items-center"
+      >
+        <h1 class="text-xl md:text-2xl font-bold text-primary">
+          Conalianza: Curso Avanzado
+        </h1>
+        <a href="#quiz-start" class="btn-main hidden md:inline-block"
+          >Iniciar Examen</a
+        >
+      </div>
     </header>
 
     <div class="container mx-auto max-w-7xl mt-8 px-4">
-        <div class="lg:flex lg:space-x-8">
+      <div class="lg:flex lg:space-x-8">
+        <aside class="hidden lg:block w-1/4">
+          <div class="sticky top-24">
+            <h3 class="font-bold text-lg text-primary mb-4">
+              Contenido del Curso
+            </h3>
+            <nav id="course-nav" class="flex flex-col space-y-2">
+              <a
+                href="#intro"
+                class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200"
+                >Introducción</a
+              >
+              <a
+                href="#clave1"
+                class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200"
+                >Clave 1: Limpieza</a
+              >
+              <a
+                href="#clave2"
+                class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200"
+                >Clave 2: Separar</a
+              >
+              <a
+                href="#clave3"
+                class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200"
+                >Clave 3: Cocinar</a
+              >
+              <a
+                href="#clave4"
+                class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200"
+                >Clave 4: Temperatura</a
+              >
+              <a
+                href="#clave5"
+                class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200"
+                >Clave 5: Materias Primas</a
+              >
+              <a
+                href="#normativa"
+                class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200"
+                >Normativa Colombia</a
+              >
+              <a
+                href="#quiz-start"
+                class="block p-3 rounded-md font-bold text-secondary hover:bg-gray-200"
+                >Evaluación Final</a
+              >
+            </nav>
+          </div>
+        </aside>
 
-            <aside class="hidden lg:block w-1/4">
-                <div class="sticky top-24">
-                    <h3 class="font-bold text-lg text-primary mb-4">Contenido del Curso</h3>
-                    <nav id="course-nav" class="flex flex-col space-y-2">
-                        <a href="#intro" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Introducción</a>
-                        <a href="#clave1" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 1: Limpieza</a>
-                        <a href="#clave2" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 2: Separar</a>
-                        <a href="#clave3" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 3: Cocinar</a>
-                        <a href="#clave4" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 4: Temperatura</a>
-                        <a href="#clave5" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 5: Materias Primas</a>
-                        <a href="#normativa" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Normativa Colombia</a>
-                        <a href="#quiz-start" class="block p-3 rounded-md font-bold text-secondary hover:bg-gray-200">Evaluación Final</a>
-                    </nav>
-                </div>
-            </aside>
-
-            <main class="w-full lg:w-3/4 space-y-12">
-                
-                <section id="intro">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-3xl font-extrabold text-primary mb-3">Bienvenido(a) al Curso Avanzado</h2>
-                        <p class="text-lg text-gray-600">Este curso está diseñado para darte un conocimiento profundo y práctico sobre la manipulación segura de alimentos, basado en estándares internacionales y la normativa colombiana. Estudia cada módulo con atención para superar la evaluación final.</p>
-                    </div>
-                </section>
-
-                <section id="clave1">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-hands-wash mr-3 text-secondary"></i>Clave 1: Mantener la Limpieza</h2>
-                        <p class="text-gray-700 mb-4">La limpieza elimina la suciedad visible, pero la desinfección elimina los microorganismos. Ambos son cruciales.</p>
-                        <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li><strong class="text-primary">Lavado de Manos:</strong> Mínimo 20 segundos con agua y jabón, especialmente después de tocar alimentos crudos, dinero, o ir al baño.</li>
-                            <li><strong class="text-primary">Limpieza de Superficies:</strong> Mesones, tablas de cortar y utensilios deben ser lavados y desinfectados regularmente. Una solución desinfectante común es una cucharadita de hipoclorito (límpido) por cada litro de agua.</li>
-                            <li><strong class="text-primary">Control de Plagas:</strong> Mantén las áreas limpias y los alimentos cubiertos para evitar la atracción de insectos y roedores.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section id="clave2">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-exchange-alt mr-3 text-secondary"></i>Clave 2: Separar Alimentos Crudos y Cocinados</h2>
-                        <p class="text-gray-700 mb-4">La contaminación cruzada es una de las principales causas de intoxicación. ¡Evítala siempre!</p>
-                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Usa equipos y utensilios diferentes (cuchillos, tablas de cortar) para alimentos crudos (carnes, pollos) y alimentos listos para consumir (verduras, frutas, cocidos).</li>
-                            <li>En el refrigerador, almacena las carnes crudas en la parte inferior, en recipientes sellados, para evitar que sus jugos goteen sobre otros alimentos.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section id="clave3">
-                    <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-fire-alt mr-3 text-secondary"></i>Clave 3: Cocinar Completamente</h2>
-                        <p class="text-gray-700 mb-4">La cocción adecuada elimina casi todos los microorganismos peligrosos.</p>
-                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Asegúrate de que los alimentos, especialmente carnes, pollos, huevos y pescados, alcancen una temperatura interna segura (generalmente por encima de 75°C).</li>
-                            <li>Al recalentar comida, asegúrate de que llegue a un hervor o esté muy caliente en todo su volumen, no solo tibia.</li>
-                        </ul>
-                    </div>
-                </section>
-                
-                <section id="clave4">
-                     <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-thermometer-half mr-3 text-secondary"></i>Clave 4: Mantener Alimentos a Temperaturas Seguras</h2>
-                        <p class="text-gray-700 mb-4">No dejes alimentos cocidos a temperatura ambiente por más de 2 horas. La "Zona de Peligro" de temperatura donde las bacterias se multiplican rápidamente es entre 5°C y 60°C.</p>
-                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li><strong>Refrigeración:</strong> Por debajo de 5°C.</li>
-                            <li><strong>Congelación:</strong> Por debajo de -18°C.</li>
-                            <li><strong>Mantener en caliente:</strong> Por encima de 60°C.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section id="clave5">
-                     <div class="bg-white p-6 rounded-lg shadow-md">
-                        <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-seedling mr-3 text-secondary"></i>Clave 5: Usar Agua y Materias Primas Seguras</h2>
-                        <p class="text-gray-700 mb-4">La seguridad empieza desde la selección de tus ingredientes.</p>
-                         <ul class="list-disc list-inside space-y-2 text-gray-700">
-                            <li>Utiliza siempre agua potable para lavar y preparar alimentos.</li>
-                            <li>Lava muy bien frutas y hortalizas, especialmente si se van a consumir crudas.</li>
-                            <li>No utilices alimentos después de su fecha de vencimiento. Revisa siempre el empaque.</li>
-                        </ul>
-                    </div>
-                </section>
-
-                <section id="normativa">
-                     <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary">
-                        <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-gavel mr-3 text-secondary"></i>Normativa Clave en Colombia</h2>
-                        <p class="text-gray-700">En Colombia, el marco principal que regula las prácticas de higiene y manipulación de alimentos es la <strong class="text-primary">Resolución 2674 de 2013</strong>. Esta resolución establece los requisitos sanitarios que deben cumplir las personas, equipos y establecimientos que fabrican, procesan, envasan y venden alimentos en el país. Conocerla y aplicarla es una obligación legal y un compromiso con la salud pública.</p>
-                    </div>
-                </section>
-
-                <section id="quiz-start" class="text-center py-12">
-                    <h2 class="text-3xl font-bold text-primary mb-4">¿Listo para Probar tu Conocimiento?</h2>
-                    <p class="text-gray-600 mb-6">Demuestra que has dominado los conceptos para obtener tu certificado.</p>
-                    <button id="start-quiz-btn" class="btn-main text-xl !px-10 !py-4">¡Iniciar Examen Ahora!</button>
-                </section>
-
-            </main>
-        </div>
-    </div>
-
-    <div id="quiz-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-        <div class="bg-white w-full max-w-2xl rounded-lg shadow-2xl p-6 md:p-8 transform transition-all scale-95 opacity-0" id="quiz-content">
+        <main class="w-full lg:w-3/4 space-y-12">
+          <section id="intro">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-3xl font-extrabold text-primary mb-3">
+                Bienvenido(a) al Curso Avanzado
+              </h2>
+              <p class="text-lg text-gray-600">
+                Este curso está diseñado para darte un conocimiento profundo y
+                práctico sobre la manipulación segura de alimentos, basado en
+                estándares internacionales y la normativa colombiana. Estudia
+                cada módulo con atención para superar la evaluación final.
+              </p>
             </div>
-    </div>
-    
-    <div id="certificate-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-         <div class="bg-white w-full max-w-lg rounded-lg shadow-2xl p-6 md:p-8 text-center transform transition-all scale-95 opacity-0" id="certificate-content">
-            <i class="fas fa-award text-6xl text-yellow-400 mb-4"></i>
-            <h3 class="text-3xl font-extrabold text-primary">¡Examen Aprobado!</h3>
-            <p class="text-gray-600 mt-2 mb-6" id="final-score-text"></p>
-            <p class="text-gray-600 mt-2 mb-6">Ingresa tus datos para generar la solicitud de tu certificado. Serás dirigido a WhatsApp.</p>
-            <div class="text-left space-y-4">
-                <div>
-                    <label for="fullName" class="block font-semibold text-gray-700">Nombre Completo</label>
-                    <input type="text" id="fullName" placeholder="Ej: Ana María Pérez" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary">
-                </div>
-                <div>
-                    <label for="documentId" class="block font-semibold text-gray-700">Número de Documento (C.C. o T.I.)</label>
-                    <input type="text" id="documentId" placeholder="Ej: 1020304050" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary">
-                </div>
-                <div class="pt-4">
-                    <button id="generate-whatsapp-btn" class="btn-main w-full !py-3 text-lg">
-                        <i class="fab fa-whatsapp mr-2"></i>Solicitar mi Certificado
-                    </button>
-                </div>
+          </section>
+
+          <section id="clave1">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-2xl font-bold text-primary mb-4">
+                <i class="fas fa-hands-wash mr-3 text-secondary"></i>Clave 1:
+                Mantener la Limpieza
+              </h2>
+              <p class="text-gray-700 mb-4">
+                La limpieza elimina la suciedad visible, pero la desinfección
+                elimina los microorganismos. Ambos son cruciales.
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>
+                  <strong class="text-primary">Lavado de Manos:</strong> Mínimo
+                  20 segundos con agua y jabón, especialmente después de tocar
+                  alimentos crudos, dinero, o ir al baño.
+                </li>
+                <li>
+                  <strong class="text-primary">Limpieza de Superficies:</strong>
+                  Mesones, tablas de cortar y utensilios deben ser lavados y
+                  desinfectados regularmente. Una solución desinfectante común
+                  es una cucharadita de hipoclorito (límpido) por cada litro de
+                  agua.
+                </li>
+                <li>
+                  <strong class="text-primary">Control de Plagas:</strong>
+                  Mantén las áreas limpias y los alimentos cubiertos para evitar
+                  la atracción de insectos y roedores.
+                </li>
+              </ul>
             </div>
-        </div>
+          </section>
+
+          <section id="clave2">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-2xl font-bold text-primary mb-4">
+                <i class="fas fa-exchange-alt mr-3 text-secondary"></i>Clave 2:
+                Separar Alimentos Crudos y Cocinados
+              </h2>
+              <p class="text-gray-700 mb-4">
+                La contaminación cruzada es una de las principales causas de
+                intoxicación. ¡Evítala siempre!
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>
+                  Usa equipos y utensilios diferentes (cuchillos, tablas de
+                  cortar) para alimentos crudos (carnes, pollos) y alimentos
+                  listos para consumir (verduras, frutas, cocidos).
+                </li>
+                <li>
+                  En el refrigerador, almacena las carnes crudas en la parte
+                  inferior, en recipientes sellados, para evitar que sus jugos
+                  goteen sobre otros alimentos.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="clave3">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-2xl font-bold text-primary mb-4">
+                <i class="fas fa-fire-alt mr-3 text-secondary"></i>Clave 3:
+                Cocinar Completamente
+              </h2>
+              <p class="text-gray-700 mb-4">
+                La cocción adecuada elimina casi todos los microorganismos
+                peligrosos.
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>
+                  Asegúrate de que los alimentos, especialmente carnes, pollos,
+                  huevos y pescados, alcancen una temperatura interna segura
+                  (generalmente por encima de 75°C).
+                </li>
+                <li>
+                  Al recalentar comida, asegúrate de que llegue a un hervor o
+                  esté muy caliente en todo su volumen, no solo tibia.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="clave4">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-2xl font-bold text-primary mb-4">
+                <i class="fas fa-thermometer-half mr-3 text-secondary"></i>Clave
+                4: Mantener Alimentos a Temperaturas Seguras
+              </h2>
+              <p class="text-gray-700 mb-4">
+                No dejes alimentos cocidos a temperatura ambiente por más de 2
+                horas. La "Zona de Peligro" de temperatura donde las bacterias
+                se multiplican rápidamente es entre 5°C y 60°C.
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li><strong>Refrigeración:</strong> Por debajo de 5°C.</li>
+                <li><strong>Congelación:</strong> Por debajo de -18°C.</li>
+                <li>
+                  <strong>Mantener en caliente:</strong> Por encima de 60°C.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="clave5">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+              <h2 class="text-2xl font-bold text-primary mb-4">
+                <i class="fas fa-seedling mr-3 text-secondary"></i>Clave 5: Usar
+                Agua y Materias Primas Seguras
+              </h2>
+              <p class="text-gray-700 mb-4">
+                La seguridad empieza desde la selección de tus ingredientes.
+              </p>
+              <ul class="list-disc list-inside space-y-2 text-gray-700">
+                <li>
+                  Utiliza siempre agua potable para lavar y preparar alimentos.
+                </li>
+                <li>
+                  Lava muy bien frutas y hortalizas, especialmente si se van a
+                  consumir crudas.
+                </li>
+                <li>
+                  No utilices alimentos después de su fecha de vencimiento.
+                  Revisa siempre el empaque.
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <section id="normativa">
+            <div
+              class="bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary"
+            >
+              <h2 class="text-2xl font-bold text-primary mb-4">
+                <i class="fas fa-gavel mr-3 text-secondary"></i>Normativa Clave
+                en Colombia
+              </h2>
+              <p class="text-gray-700">
+                En Colombia, el marco principal que regula las prácticas de
+                higiene y manipulación de alimentos es la
+                <strong class="text-primary">Resolución 2674 de 2013</strong>.
+                Esta resolución establece los requisitos sanitarios que deben
+                cumplir las personas, equipos y establecimientos que fabrican,
+                procesan, envasan y venden alimentos en el país. Conocerla y
+                aplicarla es una obligación legal y un compromiso con la salud
+                pública.
+              </p>
+            </div>
+          </section>
+
+          <section id="quiz-start" class="text-center py-12">
+            <h2 class="text-3xl font-bold text-primary mb-4">
+              ¿Listo para Probar tu Conocimiento?
+            </h2>
+            <p class="text-gray-600 mb-6">
+              Demuestra que has dominado los conceptos para obtener tu
+              certificado.
+            </p>
+            <button id="start-quiz-btn" class="btn-main text-xl !px-10 !py-4">
+              ¡Iniciar Examen Ahora!
+            </button>
+          </section>
+        </main>
+      </div>
     </div>
 
+    <div
+      id="quiz-modal"
+      class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+    >
+      <div
+        class="bg-white w-full max-w-2xl rounded-lg shadow-2xl p-6 md:p-8 transform transition-all scale-95 opacity-0"
+        id="quiz-content"
+      ></div>
+    </div>
+
+    <div
+      id="certificate-modal"
+      class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+    >
+      <div
+        class="bg-white w-full max-w-lg rounded-lg shadow-2xl p-6 md:p-8 text-center transform transition-all scale-95 opacity-0"
+        id="certificate-content"
+      >
+        <i class="fas fa-award text-6xl text-yellow-400 mb-4"></i>
+        <h3 class="text-3xl font-extrabold text-primary">¡Examen Aprobado!</h3>
+        <p class="text-gray-600 mt-2 mb-6" id="final-score-text"></p>
+        <p class="text-gray-600 mt-2 mb-6">
+          Ingresa tus datos para generar la solicitud de tu certificado. Serás
+          dirigido a WhatsApp.
+        </p>
+        <div class="text-left space-y-4">
+          <div>
+            <label for="fullName" class="block font-semibold text-gray-700"
+              >Nombre Completo</label
+            >
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Ej: Ana María Pérez"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"
+            />
+          </div>
+          <div>
+            <label for="documentId" class="block font-semibold text-gray-700"
+              >Número de Documento (C.C. o T.I.)</label
+            >
+            <input
+              type="text"
+              id="documentId"
+              placeholder="Ej: 1020304050"
+              class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"
+            />
+          </div>
+          <div class="pt-4">
+            <button
+              id="generate-whatsapp-btn"
+              class="btn-main w-full !py-3 text-lg"
+            >
+              <i class="fab fa-whatsapp mr-2"></i>Solicitar mi Certificado
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
+      document.addEventListener("DOMContentLoaded", () => {
         // --- MANEJO DE PROGRESO Y NAVEGACIÓN ---
-        const sections = document.querySelectorAll('main section');
-        const navLinks = document.querySelectorAll('#course-nav a');
-        const progressBar = document.getElementById('progress-bar');
+        const sections = document.querySelectorAll("main section");
+        const navLinks = document.querySelectorAll("#course-nav a");
+        const progressBar = document.getElementById("progress-bar");
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href').substring(1) === entry.target.id) {
-                            link.classList.add('active');
-                            link.classList.add('completed');
-                        }
-                    });
-                }
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                navLinks.forEach((link) => {
+                  link.classList.remove("active");
+                  if (
+                    link.getAttribute("href").substring(1) === entry.target.id
+                  ) {
+                    link.classList.add("active");
+                    link.classList.add("completed");
+                  }
+                });
+              }
             });
-        }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+          },
+          { rootMargin: "-50% 0px -50% 0px", threshold: 0 }
+        );
 
-        sections.forEach(section => observer.observe(section));
+        sections.forEach((section) => observer.observe(section));
 
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            progressBar.style.width = `${scrollPercent}%`;
+        window.addEventListener("scroll", () => {
+          const scrollTop = window.scrollY;
+          const docHeight =
+            document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = (scrollTop / docHeight) * 100;
+          progressBar.style.width = `${scrollPercent}%`;
         });
 
         // --- LÓGICA DEL EXAMEN ---
-        const startQuizBtn = document.getElementById('start-quiz-btn');
-        const quizModal = document.getElementById('quiz-modal');
-        const quizContent = document.getElementById('quiz-content');
-        const certificateModal = document.getElementById('certificate-modal');
-        const certificateContent = document.getElementById('certificate-content');
+        const startQuizBtn = document.getElementById("start-quiz-btn");
+        const quizModal = document.getElementById("quiz-modal");
+        const quizContent = document.getElementById("quiz-content");
+        const certificateModal = document.getElementById("certificate-modal");
+        const certificateContent = document.getElementById(
+          "certificate-content"
+        );
 
         const questions = [
-            { question: "La Resolución que rige la manipulación de alimentos en Colombia es:", options: ["La 1080 de 1992", "La 2674 de 2013", "El Decreto 780 de 2016"], answer: 1 },
-            { question: "¿Cuál es la forma más efectiva de evitar la contaminación cruzada?", options: ["Lavar los alimentos con vinagre", "Usar diferentes tablas de cortar para crudos y cocidos", "Cocinar todo a fuego muy alto"], answer: 1 },
-            { question: "La 'Zona de Peligro' de temperatura para la proliferación bacteriana es:", options: ["0°C a 10°C", "-5°C a 5°C", "5°C a 60°C"], answer: 2 },
-            { question: "El lavado de manos debe durar un mínimo de:", options: ["5 segundos", "10 segundos", "20 segundos"], answer: 2 },
-            { question: "Para desinfectar superficies, una práctica común es usar:", options: ["Solo agua caliente", "Una solución de hipoclorito y agua", "Jugo de limón"], answer: 1 },
-            { question: "¿Dónde se deben almacenar las carnes crudas en el refrigerador?", options: ["En la parte superior para que enfríen más rápido", "Junto a las verduras para ahorrar espacio", "En la parte inferior y en recipientes sellados"], answer: 2 },
-            { question: "La cocción completa de un alimento generalmente asegura que se eliminen:", options: ["Los nutrientes", "Los microorganismos peligrosos", "El sabor"], answer: 1 },
-            { question: "No se deben dejar alimentos cocidos a temperatura ambiente por más de:", options: ["8 horas", "4 horas", "2 horas"], answer: 2 },
+          {
+            question:
+              "La Resolución que rige la manipulación de alimentos en Colombia es:",
+            options: [
+              "La 1080 de 1992",
+              "La 2674 de 2013",
+              "El Decreto 780 de 2016",
+            ],
+            answer: 1,
+          },
+          {
+            question:
+              "¿Cuál es la forma más efectiva de evitar la contaminación cruzada?",
+            options: [
+              "Lavar los alimentos con vinagre",
+              "Usar diferentes tablas de cortar para crudos y cocidos",
+              "Cocinar todo a fuego muy alto",
+            ],
+            answer: 1,
+          },
+          {
+            question:
+              "La 'Zona de Peligro' de temperatura para la proliferación bacteriana es:",
+            options: ["0°C a 10°C", "-5°C a 5°C", "5°C a 60°C"],
+            answer: 2,
+          },
+          {
+            question: "El lavado de manos debe durar un mínimo de:",
+            options: ["5 segundos", "10 segundos", "20 segundos"],
+            answer: 2,
+          },
+          {
+            question:
+              "Para desinfectar superficies, una práctica común es usar:",
+            options: [
+              "Solo agua caliente",
+              "Una solución de hipoclorito y agua",
+              "Jugo de limón",
+            ],
+            answer: 1,
+          },
+          {
+            question:
+              "¿Dónde se deben almacenar las carnes crudas en el refrigerador?",
+            options: [
+              "En la parte superior para que enfríen más rápido",
+              "Junto a las verduras para ahorrar espacio",
+              "En la parte inferior y en recipientes sellados",
+            ],
+            answer: 2,
+          },
+          {
+            question:
+              "La cocción completa de un alimento generalmente asegura que se eliminen:",
+            options: [
+              "Los nutrientes",
+              "Los microorganismos peligrosos",
+              "El sabor",
+            ],
+            answer: 1,
+          },
+          {
+            question:
+              "No se deben dejar alimentos cocidos a temperatura ambiente por más de:",
+            options: ["8 horas", "4 horas", "2 horas"],
+            answer: 2,
+          },
         ];
         const passingScore = 0.75; // 75% para aprobar
         let currentQuestionIndex = 0;
         let score = 0;
 
         function startQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            quizModal.classList.remove('hidden');
-            setTimeout(() => { 
-                quizContent.classList.add('scale-100', 'opacity-100');
-                quizContent.classList.remove('scale-95', 'opacity-0');
-            }, 50);
-            renderQuestion();
+          currentQuestionIndex = 0;
+          score = 0;
+          quizModal.classList.remove("hidden");
+          setTimeout(() => {
+            quizContent.classList.add("scale-100", "opacity-100");
+            quizContent.classList.remove("scale-95", "opacity-0");
+          }, 50);
+          renderQuestion();
         }
 
         function renderQuestion() {
-            const q = questions[currentQuestionIndex];
-            quizContent.innerHTML = `
-                <div class="mb-2 text-sm font-semibold text-gray-500">Pregunta ${currentQuestionIndex + 1} de ${questions.length}</div>
-                <h3 class="text-2xl font-bold text-primary mb-6">${q.question}</h3>
+          const q = questions[currentQuestionIndex];
+          quizContent.innerHTML = `
+                <div class="mb-2 text-sm font-semibold text-gray-500">Pregunta ${
+                  currentQuestionIndex + 1
+                } de ${questions.length}</div>
+                <h3 class="text-2xl font-bold text-primary mb-6">${
+                  q.question
+                }</h3>
                 <div id="options-container" class="space-y-3 mb-6">
-                    ${q.options.map((option, index) => `
+                    ${q.options
+                      .map(
+                        (option, index) => `
                         <button data-index="${index}" class="option-btn block w-full text-left p-4 rounded-lg border-2 border-gray-300 hover:border-secondary transition-all">
                             ${option}
                         </button>
-                    `).join('')}
+                    `
+                      )
+                      .join("")}
                 </div>
                 <div id="feedback" class="h-8 text-center font-bold"></div>
                 <div class="flex justify-end mt-4">
                     <button id="next-q-btn" class="btn-main" disabled>Siguiente &rarr;</button>
                 </div>
             `;
-            document.querySelectorAll('.option-btn').forEach(btn => {
-                btn.addEventListener('click', selectAnswer);
-            });
+          document.querySelectorAll(".option-btn").forEach((btn) => {
+            btn.addEventListener("click", selectAnswer);
+          });
         }
 
         function selectAnswer(e) {
-            const selectedBtn = e.currentTarget;
-            const selectedIndex = parseInt(selectedBtn.dataset.index);
-            const correctIndex = questions[currentQuestionIndex].answer;
+          const selectedBtn = e.currentTarget;
+          const selectedIndex = parseInt(selectedBtn.dataset.index);
+          const correctIndex = questions[currentQuestionIndex].answer;
 
-            document.querySelectorAll('.option-btn').forEach(btn => btn.disabled = true); // Deshabilitar opciones
-            
-            const feedbackEl = document.getElementById('feedback');
+          document
+            .querySelectorAll(".option-btn")
+            .forEach((btn) => (btn.disabled = true)); // Deshabilitar opciones
 
-            if (selectedIndex === correctIndex) {
-                score++;
-                selectedBtn.classList.remove('border-gray-300');
-                selectedBtn.classList.add('border-green-500', 'bg-green-50');
-                feedbackEl.textContent = "¡Correcto!";
-                feedbackEl.style.color = 'var(--success-color)';
-            } else {
-                selectedBtn.classList.remove('border-gray-300');
-                selectedBtn.classList.add('border-red-500', 'bg-red-50');
-                feedbackEl.textContent = "Incorrecto.";
-                feedbackEl.style.color = 'var(--error-color)';
-                // Resaltar la respuesta correcta
-                document.querySelector(`.option-btn[data-index="${correctIndex}"]`).classList.add('border-green-500', 'bg-green-50');
-            }
+          const feedbackEl = document.getElementById("feedback");
 
-            document.getElementById('next-q-btn').disabled = false;
+          if (selectedIndex === correctIndex) {
+            score++;
+            selectedBtn.classList.remove("border-gray-300");
+            selectedBtn.classList.add("border-green-500", "bg-green-50");
+            feedbackEl.textContent = "¡Correcto!";
+            feedbackEl.style.color = "var(--success-color)";
+          } else {
+            selectedBtn.classList.remove("border-gray-300");
+            selectedBtn.classList.add("border-red-500", "bg-red-50");
+            feedbackEl.textContent = "Incorrecto.";
+            feedbackEl.style.color = "var(--error-color)";
+            // Resaltar la respuesta correcta
+            document
+              .querySelector(`.option-btn[data-index="${correctIndex}"]`)
+              .classList.add("border-green-500", "bg-green-50");
+          }
+
+          document.getElementById("next-q-btn").disabled = false;
         }
-        
-        quizContent.addEventListener('click', (e) => {
-            if(e.target && e.target.id === 'next-q-btn') {
-                currentQuestionIndex++;
-                if (currentQuestionIndex < questions.length) {
-                    renderQuestion();
-                } else {
-                    showResults();
-                }
+
+        quizContent.addEventListener("click", (e) => {
+          if (e.target && e.target.id === "next-q-btn") {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+              renderQuestion();
+            } else {
+              showResults();
             }
+          }
         });
 
         function showResults() {
-            quizModal.classList.add('hidden');
-            const finalScorePercent = (score / questions.length);
-            
-            if (finalScorePercent >= passingScore) {
-                document.getElementById('final-score-text').textContent = `Tu puntaje: ${score}/${questions.length} (${Math.round(finalScorePercent*100)}%). ¡Has aprobado!`;
-                certificateModal.classList.remove('hidden');
-                 setTimeout(() => { 
-                    certificateContent.classList.add('scale-100', 'opacity-100');
-                    certificateContent.classList.remove('scale-95', 'opacity-0');
-                 }, 50);
-            } else {
-                quizContent.innerHTML = `
+          quizModal.classList.add("hidden");
+          const finalScorePercent = score / questions.length;
+
+          if (finalScorePercent >= passingScore) {
+            document.getElementById(
+              "final-score-text"
+            ).textContent = `Tu puntaje: ${score}/${
+              questions.length
+            } (${Math.round(finalScorePercent * 100)}%). ¡Has aprobado!`;
+            certificateModal.classList.remove("hidden");
+            setTimeout(() => {
+              certificateContent.classList.add("scale-100", "opacity-100");
+              certificateContent.classList.remove("scale-95", "opacity-0");
+            }, 50);
+          } else {
+            quizContent.innerHTML = `
                     <h3 class="text-2xl font-bold text-primary mb-4 text-center">Examen no superado</h3>
-                    <p class="text-center text-gray-700 mb-6">Tu puntaje fue de ${score}/${questions.length} (${Math.round(finalScorePercent*100)}%). Necesitas al menos un ${passingScore*100}% para aprobar.</p>
+                    <p class="text-center text-gray-700 mb-6">Tu puntaje fue de ${score}/${
+              questions.length
+            } (${Math.round(
+              finalScorePercent * 100
+            )}%). Necesitas al menos un ${passingScore * 100}% para aprobar.</p>
                     <p class="text-center text-gray-700 mb-8">Te recomendamos repasar los módulos y volver a intentarlo.</p>
                     <div class="text-center">
                         <button id="retry-quiz-btn" class="btn-main">Volver a Intentar</button>
                     </div>
                 `;
-                quizModal.classList.remove('hidden'); // Mostrar modal de nuevo con resultado
-                 document.getElementById('retry-quiz-btn').addEventListener('click', () => {
-                     quizModal.classList.add('hidden');
-                     startQuiz();
-                 });
-            }
+            quizModal.classList.remove("hidden"); // Mostrar modal de nuevo con resultado
+            document
+              .getElementById("retry-quiz-btn")
+              .addEventListener("click", () => {
+                quizModal.classList.add("hidden");
+                startQuiz();
+              });
+          }
         }
 
-        startQuizBtn.addEventListener('click', startQuiz);
-        
+        startQuizBtn.addEventListener("click", startQuiz);
+
         //--- LÓGICA DEL FORMULARIO DE CERTIFICADO ---
-        document.getElementById('generate-whatsapp-btn').addEventListener('click', () => {
-            const fullName = document.getElementById('fullName').value.trim();
-            const documentId = document.getElementById('documentId').value.trim();
+        document
+          .getElementById("generate-whatsapp-btn")
+          .addEventListener("click", () => {
+            const fullName = document.getElementById("fullName").value.trim();
+            const documentId = document
+              .getElementById("documentId")
+              .value.trim();
             if (!fullName || !documentId) {
-                alert('Por favor, ingresa tu nombre completo y número de documento.');
-                return;
+              alert(
+                "Por favor, ingresa tu nombre completo y número de documento."
+              );
+              return;
             }
             const baseMessage = `He completado y aprobado el curso avanzado de manipulación de alimentos en línea, deseo obtener mi certificado.`;
             const scoreInfo = `\nPuntaje Obtenido: ${score}/${questions.length}`;
             const userInfo = `\n\nMis datos son:\nNombre: ${fullName}\nDocumento: ${documentId}`;
-            const finalMessage = encodeURIComponent(baseMessage + scoreInfo + userInfo);
+            const finalMessage = encodeURIComponent(
+              baseMessage + scoreInfo + userInfo
+            );
             const whatsappUrl = `https://wa.me/573107941580?text=${finalMessage}`; // ¡REEMPLAZA ESTE NÚMERO!
-            window.open(whatsappUrl, '_blank');
-        });
-    });
+            window.open(whatsappUrl, "_blank");
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
