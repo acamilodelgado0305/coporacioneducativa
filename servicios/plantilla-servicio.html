@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curso de Manipulación de Alimentos | Corporacioneducativa Conalianza</title>
+    <meta name="description" content="Aprende las mejores prácticas de manipulación de alimentos con nuestro curso certificado. Obtén tu certificado rápido y mejora tus oportunidades laborales.">
+
+    <link rel="icon" href="../logopagina.png" type="image/png" /> <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+     <style>
+      :root {
+        --primary-color: #002e7d;
+        --secondary-color: #10b981;
+        --gradient-start: #0c8dac;
+        --gradient-end: #10b981;
+        --text-color: #4a5568;
+        --light-bg: #f7fafc;
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--light-bg);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+      .bg-primary {
+        background-color: var(--primary-color);
+      }
+      .text-primary {
+        color: var(--primary-color);
+      }
+      .bg-secondary {
+        background-color: var(--secondary-color);
+      }
+      .text-secondary {
+        color: var(--secondary-color);
+      }
+      .btn-main {
+        background: linear-gradient(
+          90deg,
+          var(--gradient-start) 0%,
+          var(--gradient-end) 100%
+        );
+        color: white;
+        padding: 0.85rem 2rem;
+        border-radius: 9999px;
+        font-weight: 600;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+      }
+      .btn-main:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);
+      }
+      .sticky-header {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.4s ease-in-out;
+      }
+      .sticky-header .logo-large {
+        filter: none;
+      }
+      .sticky-header nav a {
+        color: #333;
+      }
+      .sticky-header.scrolled {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      }
+      .header-hidden {
+        transform: translateY(-100%);
+      }
+      .logo-large {
+        height: 50px;
+        transition: transform 0.3s ease;
+      } /* Ligeramente más pequeño para móvil */
+      @media (min-width: 768px) {
+        .logo-large {
+          height: 60px;
+        }
+      }
+
+      /* --- INICIO DE MEJORAS RESPONSIVAS EN EL CATÁLOGO --- */
+
+      .catalog-tab {
+        padding: 0.5rem 0.25rem; /* Menos padding en móvil */
+        margin-bottom: -1px;
+        border-bottom: 3px solid transparent;
+        font-size: 1rem; /* Fuente más pequeña en móvil */
+        font-weight: 600;
+        color: var(--text-color);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+      }
+      .catalog-tab:hover {
+        color: var(--secondary-color);
+      }
+      .catalog-tab.active {
+        color: var(--primary-color);
+        border-bottom-color: var(--primary-color);
+      }
+
+      @media (min-width: 768px) {
+        .catalog-tab {
+          padding: 0.75rem 0.5rem; /* Restaurar padding en desktop */
+          font-size: 1.125rem; /* Restaurar fuente en desktop */
+        }
+      }
+
+      .catalog-pane {
+        display: none;
+        animation: fadeIn 0.5s ease;
+      }
+      .catalog-pane.active {
+        display: block;
+      }
+
+      /* Estructura del item en móvil */
+      .service-item {
+        display: flex;
+        flex-direction: column; /* Apilado vertical por defecto */
+        align-items: center; /* Todo centrado en móvil */
+        text-align: center;
+        padding: 1.5rem 0.5rem;
+        border-bottom: 1px solid #e5e7eb;
+        gap: 0.75rem; /* Espacio entre elementos */
+      }
+      .service-item:last-child {
+        border-bottom: none;
+      }
+
+      .service-details {
+        flex-grow: 1;
+        /* El centrado ya está en .service-item */
+      }
+
+      .service-price {
+        font-weight: 700;
+        color: var(--secondary-color);
+        font-size: 1.125rem;
+        white-space: nowrap;
+        /* Se quita min-width para móvil */
+      }
+
+      .service-actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+
+      /* Estructura del item en Desktop */
+      @media (min-width: 768px) {
+        .service-item {
+          flex-direction: row; /* Fila en desktop */
+          text-align: left;
+        }
+        .service-details {
+          text-align: left;
+        }
+        .service-price {
+          min-width: 150px; /* Restaurar ancho mínimo */
+          text-align: right;
+        }
+        .service-actions {
+          width: auto;
+          margin-top: 0;
+        }
+      }
+
+      /* --- FIN DE MEJORAS RESPONSIVAS --- */
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Estilos del Carrito */
+      body.cart-open #cart-overlay {
+        display: block;
+      }
+      body.cart-open #cart-drawer {
+        transform: translateX(0);
+      }
+      .cart-item-remove-btn {
+        background-color: #fee2e2;
+        color: #b91c1c;
+        border-radius: 50%;
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 28px;
+        text-align: center;
+        transition: all 0.2s ease;
+      }
+      .cart-item-remove-btn:hover {
+        background-color: #ef4444;
+        color: white;
+      }
+      .whatsapp-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        background-color: #25d366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+        transition: all 0.3s ease;
+      }
+      .whatsapp-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
+      }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <header class="sticky-header py-4" id="main-header">
+        <div class="container max-w-7xl mx-auto flex justify-between items-center px-6">
+            <a href="../index.html" class="flex items-center"><img src="../logof.png" alt="Logo Conalianza" class="logo-large" /></a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="../index.html#beneficios" class="text-gray-700 hover:text-primary font-medium">Por qué elegirnos</a>
+                <a href="../index.html#catalogo-servicios" class="text-gray-700 hover:text-primary font-medium">Catálogo</a>
+                <a href="../index.html#testimonios" class="text-gray-700 hover:text-primary font-medium">Testimonios</a>
+                <a href="../index.html#contacto" class="btn-main !mt-0 !py-2 !px-5">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="py-20 bg-white">
+            <div class="container max-w-4xl mx-auto px-6">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-primary text-center">
+                    Curso de Manipulación de Alimentos
+                </h1>
+                <p class="text-lg text-gray-600 mt-4 text-center mx-auto max-w-2xl">
+                    Este curso está diseñado para proporcionarte los conocimientos y habilidades necesarios para garantizar la seguridad alimentaria en cualquier entorno.
+                </p>
+
+                <div class="mt-12 grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img src="../s1.jpg" alt="Imagen del Curso de Manipulación de Alimentos" class="rounded-lg shadow-xl w-full">
+                    </div>
+                    <div class="prose max-w-none">
+                        <h3 class="text-2xl font-bold text-primary">¿Qué aprenderás?</h3>
+                        <ul>
+                            <li>Normatividad vigente en Colombia.</li>
+                            <li>Técnicas de conservación de alimentos.</li>
+                            <li>Prevención de enfermedades de transmisión alimentaria (ETAs).</li>
+                            <li>Protocolos de limpieza y desinfección.</li>
+                        </ul>
+
+                        <h3 class="text-2xl font-bold text-primary mt-6">Detalles del Curso</h3>
+                        <p><strong>Precio:</strong> COP 20,000.00</p>
+                        <p><strong>Modalidad:</strong> Virtual / Presencial</p>
+                        <p><strong>Duración:</strong> 10 Horas</p>
+
+                        <div class="mt-8">
+                           <button onclick="window.addToCart(1)" class="btn-main w-full text-center !py-3 !text-lg">Añadir al Carrito y Pagar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400 py-16">
+        </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      // ¡IMPORTANTE! Aquí necesitas el MISMO JavaScript de tu página principal.
+      // Específicamente, las variables 'services', 'cart' y las funciones
+      // para manejar el carrito (openCart, closeCart, renderCart, addToCart, etc).
+      // Lo mejor es mover este JS a un archivo separado (ej. 'app.js') y
+      // enlazarlo tanto en index.html como en la plantilla: <script src="../app.js"></script>
+      document.addEventListener("DOMContentLoaded", function () {
+         // ... Tu JS principal va aquí ...
+      });
+    </script>
+</body>
+</html>

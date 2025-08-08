@@ -715,20 +715,7 @@
             price: "COP 50,000.00",
             price_numeric: 50000,
           },
-          {
-            id: 107,
-            name: "Diplomado de Inyectología",
-            category: "diplomados",
-            price: "COP 70,000.00",
-            price_numeric: 70000,
-          },
-          {
-            id: 108,
-            name: "Diplomado en Toma de Muestras de Laboratorio",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
+        
           {
             id: 109,
             name: "Diplomado en Farmacología",
@@ -750,69 +737,11 @@
             price: "COP 50,000.00",
             price_numeric: 50000,
           },
-          {
-            id: 112,
-            name: "Diplomado en Código Fucsia",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 113,
-            name: "Diplomado en Vacunación",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 114,
-            name: "Diplomado en AEIP",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 115,
-            name: "Diplomado en Cuidados Básicos de Enfermería",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 116,
-            name: "Diplomado en Salud Reproductiva",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 117,
-            name: "Diplomado en Atención a Personas con Discapacidad",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 118,
-            name: "Diplomado en Prevención y Protección de la Salud",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 119,
-            name: "Diplomado en Farmacovigilancia",
-            category: "diplomados",
-            price: "COP 50,000.00",
-            price_numeric: 50000,
-          },
-          {
-            id: 120,
-            name: "Auxiliar en Rehabilitación Física",
-            category: "diplomados",
-            price: "COP 150,000.00",
-            price_numeric: 150000,
-          },
+          
+          
+          
+          
+          
           {
             id: 121,
             name: "Programas Técnicos Laborales",
@@ -862,44 +791,35 @@
           }
           renderCart();
         }
-        function createServiceItemHTML(service) {
-          const buttonText =
-            service.price.toLowerCase() === "consultar"
-              ? "Consultar"
-              : "Añadir al Carrito";
-          let buttonAction;
-          let detailsLink = "";
+        // Dentro de tu archivo index.html, en la etiqueta <script>
 
+        function createServiceItemHTML(service) {
+          // Generamos una URL amigable (slug) a partir del nombre del servicio
           const serviceSlug = service.name
             .toLowerCase()
-            .replace(/ /g, "-")
-            .replace(/[^a-z0-9-]/g, "");
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "") // Quita acentos
+            .replace(/ñ/g, "n") // Reemplaza ñ
+            .replace(/[^a-z0-9\s-]/g, "") // Quita caracteres especiales
+            .trim()
+            .replace(/\s+/g, "-"); // Reemplaza espacios con guiones
+
           const serviceUrl = `servicios/${serviceSlug}.html`;
 
-          
+          const buttonText = "Ver Detalles"; // Cambiamos el texto del botón
 
-          if (service.price.toLowerCase() === "consultar") {
-            const message = `Hola, quisiera consultar el precio de: ${service.name}`;
-            buttonAction = `window.open('https://wa.me/573107941580?text=${encodeURIComponent(
-              message
-            )}', '_blank')`;
-          } else {
-            buttonAction = `window.addToCart(${service.id})`;
-          }
-
+          // El botón ahora es un enlace (<a>) que luce como un botón
           return `
-        <div class="service-item">
-            <div class="service-details">
-                <h5 class="text-lg font-bold text-primary">${service.name}</h5>
-            </div>
-            
-            <div class="service-actions">
-                <div class="service-price">${service.price}</div>
-                <button onclick="${buttonAction}" class="btn-main !mt-0 !py-2 !px-4 text-sm whitespace-nowrap ml-4">${buttonText}</button>
-                ${detailsLink}
-            </div>
+    <div class="service-item">
+        <div class="service-details">
+            <h5 class="text-lg font-bold text-primary">${service.name}</h5>
         </div>
-    `;
+        <div class="service-actions">
+            <div class="service-price">${service.price}</div>
+            <a href="${serviceUrl}" class="btn-main !mt-0 !py-2 !px-4 text-sm whitespace-nowrap ml-4">${buttonText}</a>
+        </div>
+    </div>
+  `;
         }
         function populatePanes() {
           const panes = {
