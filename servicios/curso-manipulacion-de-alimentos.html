@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Curso Avanzado de Manipulación de Alimentos | Conalianza</title>
+    <title>Curso y Certificado de Manipulación de Alimentos | Conalianza</title>
     <link rel="icon" href="logopagina.png" type="image/png" />
     <meta
       name="description"
-      content="Curso completo y robusto sobre la inocuidad de los alimentos en Colombia. Supera el examen y obtén tu certificado."
+      content="Obtén tu certificado oficial de Manipulación de Alimentos en Colombia. Curso 100% online, rápido y válido. ¡Inscríbete ahora!"
     />
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -23,74 +23,54 @@
     />
 
     <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: #f1f5f9; /* bg-slate-100 */
-      }
       :root {
         --primary-color: #002e7d;
         --secondary-color: #10b981;
-        --success-color: #22c55e; /* green-500 */
-        --error-color: #ef4444; /* red-500 */
+        --success-color: #22c55e;
+        --error-color: #ef4444;
       }
+      html { scroll-behavior: smooth; }
+      body { font-family: "Poppins", sans-serif; background-color: #f1f5f9; }
       .text-primary { color: var(--primary-color); }
       .bg-primary { background-color: var(--primary-color); }
       .text-secondary { color: var(--secondary-color); }
       .border-secondary { border-color: var(--secondary-color); }
-
       .btn-main {
-        background-color: var(--secondary-color);
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        font-weight: 600;
-        transition: all 0.2s ease-in-out;
-        border: none;
-        cursor: pointer;
+        background-color: var(--secondary-color); color: white; padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem; font-weight: 600; transition: all 0.2s ease-in-out;
+        border: none; cursor: pointer; text-align: center;
       }
       .btn-main:hover {
-        background-color: #059669; /* emerald-600 */
-        transform: translateY(-2px);
+        background-color: #059669; transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
       }
       .btn-main:disabled {
-        background-color: #9ca3af; /* gray-400 */
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
+        background-color: #9ca3af; cursor: not-allowed;
+        transform: none; box-shadow: none;
       }
       #progress-bar {
-        position: fixed; top: 0; left: 0; height: 6px;
-        background-color: var(--secondary-color);
+        position: fixed; top: 0; left: 0; height: 6px; background-color: var(--secondary-color);
         width: 0%; z-index: 100; transition: width 0.2s ease-out;
       }
       #course-nav a {
-        transition: all 0.2s ease-in-out;
-        border-left: 3px solid transparent;
+        transition: all 0.2s ease-in-out; border-left: 3px solid transparent;
       }
       #course-nav a.active {
-        background-color: #e0f2f1; /* emerald-50 */
-        color: var(--primary-color);
-        border-left-color: var(--secondary-color);
-        transform: translateX(4px);
+        background-color: #e0f2f1; color: var(--primary-color);
+        border-left-color: var(--secondary-color); transform: translateX(4px);
       }
       #course-nav a.completed { color: var(--secondary-color); }
-      #course-nav a.completed::after {
-        content: "✔"; font-weight: bold; margin-left: 8px;
-      }
+      #course-nav a.completed::after { content: "✔"; font-weight: bold; margin-left: 8px; }
       .step-circle {
-        background-color: var(--secondary-color);
-        color: white;
-        border-radius: 9999px;
-        width: 2rem;
-        height: 2rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        margin-right: 0.75rem;
-        font-size: 1rem;
-        font-weight: 600;
-        flex-shrink: 0;
+        background-color: var(--secondary-color); color: white; border-radius: 9999px;
+        width: 2rem; height: 2rem; display: inline-flex; align-items: center;
+        justify-content: center; margin-right: 0.75rem; font-size: 1rem;
+        font-weight: 600; flex-shrink: 0;
+      }
+      .testimonial-card {
+        background: white; border-radius: 0.5rem; padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -2px rgba(0,0,0,.1);
+        display: flex; flex-direction: column;
       }
     </style>
     <script>
@@ -122,127 +102,170 @@
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
       <div class="container mx-auto max-w-7xl p-4 flex justify-between items-center">
-        <h1 class="text-xl md:text-2xl font-bold text-primary">Conalianza: Curso Avanzado</h1>
-        <a href="#quiz-start" class="btn-main hidden md:inline-block">Iniciar Examen</a>
+        <h1 class="text-xl md:text-2xl font-bold text-primary">Conalianza Capacitaciones</h1>
+        <a href="#start-process" class="btn-main hidden md:inline-block">¡Obtener Mi Certificado!</a>
       </div>
     </header>
 
-    <div class="container mx-auto max-w-7xl mt-8 px-4">
-      <div class="lg:flex lg:space-x-8">
-        <aside class="hidden lg:block w-1/4">
-          <div class="sticky top-24">
-            <h3 class="font-bold text-lg text-primary mb-4">Contenido del Curso</h3>
-            <nav id="course-nav" class="flex flex-col space-y-2">
-              <a href="#intro" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Introducción</a>
-              <a href="#clave1" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 1: Limpieza</a>
-              <a href="#clave2" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 2: Separar</a>
-              <a href="#clave3" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 3: Cocinar</a>
-              <a href="#clave4" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 4: Temperatura</a>
-              <a href="#clave5" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 5: Materias Primas</a>
-              <a href="#normativa" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Normativa Colombia</a>
-              <a href="#quiz-start" class="block p-3 rounded-md font-bold text-secondary hover:bg-gray-200">Evaluación Final</a>
-            </nav>
-          </div>
-        </aside>
+    <main class="w-full">
+        <section id="hero" class="bg-white">
+            <div class="container mx-auto max-w-5xl text-center py-16 md:py-24 px-4">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-primary leading-tight">
+                    Obtén tu Certificado de Manipulación de Alimentos, <span class="text-secondary">Rápido y Válido en toda Colombia</span>
+                </h2>
+                <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                    Nuestro curso 100% online te da el conocimiento y la certificación oficial que necesitas para trabajar, emprender o cumplir con la normativa.
+                </p>
+                <div class="mt-10">
+                    <a href="#start-process" class="btn-main text-xl !px-10 !py-4">
+                        ¡QUIERO MI CERTIFICADO AHORA!
+                    </a>
+                    <p class="mt-4 text-gray-500">Inicia el proceso hoy mismo. Valor: $20.000 COP</p>
+                </div>
+            </div>
+        </section>
 
-        <main class="w-full lg:w-3/4 space-y-12">
-            <section id="intro"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-3xl font-extrabold text-primary mb-3">Bienvenido(a) al Curso Avanzado</h2><p class="text-lg text-gray-600">Este curso está diseñado para darte un conocimiento profundo y práctico sobre la manipulación segura de alimentos, basado en estándares internacionales y la normativa colombiana. Estudia cada módulo con atención para superar la evaluación final.</p></div></section>
-            <section id="clave1"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-hands-wash mr-3 text-secondary"></i>Clave 1: Mantener la Limpieza</h2><p class="text-gray-700 mb-4">La limpieza elimina la suciedad visible, pero la desinfección elimina los microorganismos. Ambos son cruciales.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong class="text-primary">Lavado de Manos:</strong> Mínimo 20 segundos con agua y jabón, especialmente después de tocar alimentos crudos, dinero, o ir al baño.</li><li><strong class="text-primary">Limpieza de Superficies:</strong> Mesones, tablas de cortar y utensilios deben ser lavados y desinfectados regularmente. Una solución desinfectante común es una cucharadita de hipoclorito (límpido) por cada litro de agua.</li><li><strong class="text-primary">Control de Plagas:</strong> Mantén las áreas limpias y los alimentos cubiertos para evitar la atracción de insectos y roedores.</li></ul></div></section>
-            <section id="clave2"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-exchange-alt mr-3 text-secondary"></i>Clave 2: Separar Alimentos Crudos y Cocinados</h2><p class="text-gray-700 mb-4">La contaminación cruzada es una de las principales causas de intoxicación. ¡Evítala siempre!</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li>Usa equipos y utensilios diferentes (cuchillos, tablas de cortar) para alimentos crudos (carnes, pollos) y alimentos listos para consumir (verduras, frutas, cocidos).</li><li>En el refrigerador, almacena las carnes crudas en la parte inferior, en recipientes sellados, para evitar que sus jugos goteen sobre otros alimentos.</li></ul></div></section>
-            <section id="clave3"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-fire-alt mr-3 text-secondary"></i>Clave 3: Cocinar Completamente</h2><p class="text-gray-700 mb-4">La cocción adecuada elimina casi todos los microorganismos peligrosos.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li>Asegúrate de que los alimentos, especialmente carnes, pollos, huevos y pescados, alcancen una temperatura interna segura (generalmente por encima de 75°C).</li><li>Al recalentar comida, asegúrate de que llegue a un hervor o esté muy caliente en todo su volumen, no solo tibia.</li></ul></div></section>
-            <section id="clave4"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-thermometer-half mr-3 text-secondary"></i>Clave 4: Mantener Alimentos a Temperaturas Seguras</h2><p class="text-gray-700 mb-4">No dejes alimentos cocidos a temperatura ambiente por más de 2 horas. La "Zona de Peligro" de temperatura donde las bacterias se multiplican rápidamente es entre 5°C y 60°C.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Refrigeración:</strong> Por debajo de 5°C.</li><li><strong>Congelación:</strong> Por debajo de -18°C.</li><li><strong>Mantener en caliente:</strong> Por encima de 60°C.</li></ul></div></section>
-            <section id="clave5"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-seedling mr-3 text-secondary"></i>Clave 5: Usar Agua y Materias Primas Seguras</h2><p class="text-gray-700 mb-4">La seguridad empieza desde la selección de tus ingredientes.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li>Utiliza siempre agua potable para lavar y preparar alimentos.</li><li>Lava muy bien frutas y hortalizas, especialmente si se van a consumir crudas.</li><li>No utilices alimentos después de su fecha de vencimiento. Revisa siempre el empaque.</li></ul></div></section>
-            <section id="normativa"><div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-gavel mr-3 text-secondary"></i>Normativa Clave en Colombia</h2><p class="text-gray-700">En Colombia, el marco principal que regula las prácticas de higiene y manipulación de alimentos es la <strong class="text-primary">Resolución 2674 de 2013</strong>. Esta resolución establece los requisitos sanitarios que deben cumplir las personas, equipos y establecimientos que fabrican, procesan, envasan y venden alimentos en el país. Conocerla y aplicarla es una obligación legal y un compromiso con la salud pública.</p></div></section>
-            <section id="quiz-start" class="text-center py-12"><h2 class="text-3xl font-bold text-primary mb-4">¿Listo para Probar tu Conocimiento?</h2><p class="text-gray-600 mb-6">Demuestra que has dominado los conceptos para obtener tu certificado.</p><button id="start-quiz-btn" class="btn-main text-xl !px-10 !py-4">¡Iniciar Examen Ahora!</button></section>
-        </main>
-      </div>
-    </div>
-
-    <div id="quiz-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
-      <div class="bg-white w-full max-w-2xl rounded-lg shadow-2xl p-6 md:p-8 transform transition-all scale-95 opacity-0" id="quiz-content"></div>
-    </div>
-
-    <div id="certificate-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div class="bg-white w-full max-w-lg rounded-lg shadow-2xl p-6 md:p-8 transform transition-all scale-95 opacity-0" id="certificate-content">
-        
-        <div id="modal-step-1">
-          <div class="text-center">
-            <i class="fas fa-award text-6xl text-yellow-400 mb-4"></i>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">¡Excelente! Has aprobado el examen</h3>
-            <p class="text-gray-600 mt-2 text-base" id="final-score-text"></p>
-          </div>
-          <div class="mt-8 text-left">
-            <div class="border-t pt-6">
-                <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">1</span>Completa tus datos</h4>
-                <div class="space-y-4">
-                    <div>
-                        <label for="fullName" class="block font-semibold text-gray-700 mb-1">Nombre Completo</label>
-                        <input type="text" id="fullName" placeholder="Tu nombre para el certificado" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"/>
+        <section id="testimonials" class="py-16 md:py-20">
+            <div class="container mx-auto max-w-6xl px-4">
+                <h3 class="text-3xl font-bold text-center text-primary mb-12">
+                    Más de 500 Colombianos ya se han certificado con Nosotros
+                </h3>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="testimonial-card">
+                        <div class="flex-grow"><p class="text-gray-600">"El proceso fue súper rápido y fácil. Hice el curso desde mi celular y al día siguiente ya tenía el certificado para una entrevista de trabajo. ¡Recomendadísimo!"</p></div>
+                        <div class="mt-4 pt-4 border-t"><p class="font-bold text-primary">Laura Gómez</p><p class="text-sm text-gray-500">Bogotá D.C.</p></div>
                     </div>
-                    <div>
-                        <label for="documentId" class="block font-semibold text-gray-700 mb-1">Número de Documento</label>
-                        <input type="text" id="documentId" placeholder="Para el registro oficial" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"/>
+                    <div class="testimonial-card">
+                         <div class="flex-grow"><p class="text-gray-600">"Tengo un pequeño emprendimiento de postres y necesitaba el certificado urgente para un evento. Conalianza me salvó, la información es clara y el pago seguro."</p></div>
+                        <div class="mt-4 pt-4 border-t"><p class="font-bold text-primary">Carlos Pérez</p><p class="text-sm text-gray-500">Medellín, Antioquia</p></div>
                     </div>
-                    <div class="pt-2">
-                        <label class="flex items-start">
-                            <input id="photo-check" type="checkbox" class="h-5 w-5 rounded border-gray-300 text-secondary focus:ring-secondary mt-1">
-                             <span class="ml-3 text-sm text-gray-700"><strong>Opcional:</strong> Marcar si quieres adjuntar la foto (no es obligatoria para el certificado).</span>
-                        </label>
+                    <div class="testimonial-card">
+                         <div class="flex-grow"><p class="text-gray-600">"Soy jefe de cocina y todo mi equipo se certificó aquí. La plataforma es muy intuitiva y el contenido está actualizado con la norma colombiana. Excelente servicio."</p></div>
+                        <div class="mt-4 pt-4 border-t"><p class="font-bold text-primary">Sofia Ramirez</p><p class="text-sm text-gray-500">Cali, Valle del Cauca</p></div>
                     </div>
                 </div>
             </div>
-            <button id="go-to-step-2-btn" class="btn-main w-full !py-3 text-lg mt-8">
-                Siguiente: Realizar Pago <i class="fas fa-arrow-right ml-2"></i>
-            </button>
-          </div>
-        </div>
+        </section>
 
-        <div id="modal-step-2" class="hidden">
-           <div class="text-center">
-            <i class="fas fa-wallet text-6xl text-secondary mb-4"></i>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">Último Paso: Realiza el Pago</h3>
-            <p class="text-gray-600 mt-2 text-base">Elige tu método de pago preferido para emitir tu certificado.</p>
-          </div>
-          <div class="mt-8 text-left space-y-6">
-             <div>
-                <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">2</span>Elige tu método de pago</h4>
-                <div class="bg-slate-100 p-3 my-4 rounded-lg text-center">
-                    <p class="text-gray-600 text-sm">Valor de la expedición</p>
-                    <p class="text-3xl font-extrabold text-primary">$20.000 <span class="text-2xl font-semibold">COP</span></p>
-                </div>
-                <a href="https://linkdepagospse.rappipay.co/U7pafq" target="_blank" class="w-full flex items-center justify-center gap-3 bg-blue-900 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition-all text-lg mb-4">
-                    <img src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp" alt="Logo PSE" class="h-8">
-                    Pagar con PSE
-                </a>
-                <details class="bg-gray-50 rounded-lg">
-                    <summary class="p-3 font-semibold text-gray-600 cursor-pointer">Ver otros medios de pago (Transferencia)</summary>
-                    <div class="p-3 border-t grid grid-cols-1 gap-4">
-                        <div class="bg-white p-3 rounded-lg border">
-                            <img src="https://brandemia.org/contenido/subidas/2023/10/nequi-nuevo-logotipo-1200x670.jpg" alt="Nequi Logo" class="h-8 mb-2">
-                            <div class="flex items-center"><p id="nequi-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">3223267797</p><button onclick="copyToClipboard('nequi-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg border">
-                            <img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" alt="Daviplata Logo" class="h-8 mb-2">
-                            <div class="flex items-center"><p id="nequi-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">3223267797</p><button onclick="copyToClipboard('nequi-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg border">
-                            <img src="https://www.uam.edu.co/wp-content/uploads/2022/09/logo-bancolombia1.png" alt="Bancolombia Logo" class="h-10 mb-2">
-                            <div class="flex items-center"><p id="bancolombia-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">81658969749</p><button onclick="copyToClipboard('bancolombia-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
-                        </div>
+        <div id="start-process" class="container mx-auto max-w-7xl mt-8 px-4">
+            <div class="text-center mb-12">
+                 <h3 class="text-3xl font-bold text-primary">Obtener tu Certificado es Fácil</h3>
+                 <p class="text-lg text-gray-600 mt-2">Sigue estos pasos para empezar:</p>
+            </div>
+            <div class="lg:flex lg:space-x-8">
+                <aside class="hidden lg:block w-1/4">
+                    <div class="sticky top-24 bg-white p-4 rounded-lg shadow-md">
+                        <h3 class="font-bold text-lg text-primary mb-4">1. Estudia el Contenido Clave</h3>
+                        <nav id="course-nav" class="flex flex-col space-y-2">
+                            <a href="#intro" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Introducción</a>
+                            <a href="#clave1" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 1: Limpieza</a>
+                            <a href="#clave2" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 2: Separar</a>
+                            <a href="#clave3" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 3: Cocinar</a>
+                            <a href="#clave4" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 4: Temperatura</a>
+                            <a href="#clave5" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 5: Materias Primas</a>
+                            <a href="#normativa" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Normativa Colombia</a>
+                            <a href="#quiz-start" class="block p-3 rounded-md font-bold text-secondary hover:bg-gray-200">2. Presenta la Evaluación</a>
+                        </nav>
                     </div>
-                </details>
-             </div>
-             <div>
-                <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">3</span>Envía el comprobante</h4>
-                 <p class="text-gray-700 text-sm mb-4">Es <strong>indispensable que adjuntes el comprobante de pago</strong> en el chat de WhatsApp para verificar tu pago y enviarte tu certificado.</p>
-                <button id="generate-whatsapp-btn" class="btn-main w-full !py-3 text-lg"><i class="fab fa-whatsapp mr-2"></i>Finalizar y Enviar a WhatsApp</button>
-             </div>
-          </div>
-           <div class="text-center mt-6">
-            <button id="go-to-step-1-btn" class="text-sm text-gray-500 hover:text-primary font-semibold">&larr; Volver y corregir mis datos</button>
+                </aside>
+                <div class="w-full lg:w-3/4 space-y-12">
+                    <section id="intro"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-3xl font-extrabold text-primary mb-3">Lo que Aprenderás</h2><p class="text-lg text-gray-600">Este material está diseñado para darte el conocimiento profundo y práctico para la manipulación segura de alimentos, basado en estándares internacionales y la normativa colombiana. Estudia con atención para superar la evaluación final.</p></div></section>
+                    <section id="clave1"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-hands-wash mr-3 text-secondary"></i>Clave 1: Mantener la Limpieza</h2><p class="text-gray-700 mb-4">La limpieza elimina la suciedad visible, pero la desinfección elimina los microorganismos. Ambos son cruciales.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong class="text-primary">Lavado de Manos:</strong> Mínimo 20 segundos con agua y jabón, especialmente después de tocar alimentos crudos, dinero, o ir al baño.</li><li><strong class="text-primary">Limpieza de Superficies:</strong> Mesones, tablas de cortar y utensilios deben ser lavados y desinfectados regularmente. Una solución desinfectante común es una cucharadita de hipoclorito (límpido) por cada litro de agua.</li><li><strong class="text-primary">Control de Plagas:</strong> Mantén las áreas limpias y los alimentos cubiertos para evitar la atracción de insectos y roedores.</li></ul></div></section>
+                    <section id="clave2"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-exchange-alt mr-3 text-secondary"></i>Clave 2: Separar Alimentos Crudos y Cocinados</h2><p class="text-gray-700 mb-4">La contaminación cruzada es una de las principales causes de intoxicación. ¡Evítala siempre!</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li>Usa equipos y utensilios diferentes (cuchillos, tablas de cortar) para alimentos crudos (carnes, pollos) y alimentos listos para consumir (verduras, frutas, cocidos).</li><li>En el refrigerador, almacena las carnes crudas en la parte inferior, en recipientes sellados, para evitar que sus jugos goteen sobre otros alimentos.</li></ul></div></section>
+                    <section id="clave3"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-fire-alt mr-3 text-secondary"></i>Clave 3: Cocinar Completamente</h2><p class="text-gray-700 mb-4">La cocción adecuada elimina casi todos los microorganismos peligrosos.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li>Asegúrate de que los alimentos, especialmente carnes, pollos, huevos y pescados, alcancen una temperatura interna segura (generalmente por encima de 75°C).</li><li>Al recalentar comida, asegúrate de que llegue a un hervor o esté muy caliente en todo su volumen, no solo tibia.</li></ul></div></section>
+                    <section id="clave4"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-thermometer-half mr-3 text-secondary"></i>Clave 4: Mantener Alimentos a Temperaturas Seguras</h2><p class="text-gray-700 mb-4">No dejes alimentos cocidos a temperatura ambiente por más de 2 horas. La "Zona de Peligro" de temperatura donde las bacterias se multiplican rápidamente es entre 5°C y 60°C.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Refrigeración:</strong> Por debajo de 5°C.</li><li><strong>Congelación:</strong> Por debajo de -18°C.</li><li><strong>Mantener en caliente:</strong> Por encima de 60°C.</li></ul></div></section>
+                    <section id="clave5"><div class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-seedling mr-3 text-secondary"></i>Clave 5: Usar Agua y Materias Primas Seguras</h2><p class="text-gray-700 mb-4">La seguridad empieza desde la selección de tus ingredientes.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li>Utiliza siempre agua potable para lavar y preparar alimentos.</li><li>Lava muy bien frutas y hortalizas, especialmente si se van a consumir crudas.</li><li>No utilices alimentos después de su fecha de vencimiento. Revisa siempre el empaque.</li></ul></div></section>
+                    <section id="normativa"><div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-gavel mr-3 text-secondary"></i>Normativa Clave en Colombia</h2><p class="text-gray-700">En Colombia, el marco principal que regula las prácticas de higiene y manipulación de alimentos es la <strong class="text-primary">Resolución 2674 de 2013</strong>. Esta resolución establece los requisitos sanitarios que deben cumplir las personas, equipos y establecimientos que fabrican, procesan, envasan y venden alimentos en el país. Conocerla y aplicarla es una obligación legal y un compromiso con la salud pública.</p></div></section>
+                    
+                    <section id="quiz-start" class="text-center py-12"><h2 class="text-3xl font-bold text-primary mb-4">¿Listo para Probar tu Conocimiento?</h2><p class="text-gray-600 mb-6">Demuestra que has dominado los conceptos para obtener tu certificado.</p><button id="start-quiz-btn" class="btn-main text-xl !px-10 !py-4">¡Iniciar Examen Ahora!</button></section>
+                </div>
+            </div>
         </div>
-        </div>
-      </div>
+        
+        <section id="certificate-process" class="hidden py-12 md:py-20">
+            <div class="bg-white w-full max-w-2xl mx-auto rounded-lg shadow-2xl p-6 md:p-8">
+                <div id="form-step-1">
+                    <div class="text-center">
+                        <i class="fas fa-award text-6xl text-yellow-400 mb-4"></i>
+                        <h3 class="text-2xl md:text-3xl font-extrabold text-primary">¡Excelente! Has aprobado el examen</h3>
+                        <p class="text-gray-600 mt-2 text-base" id="final-score-text"></p>
+                    </div>
+                    <div class="mt-8 text-left">
+                        <div class="border-t pt-6">
+                            <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">1</span>Completa tus datos</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="fullName" class="block font-semibold text-gray-700 mb-1">Nombre Completo</label>
+                                    <input type="text" id="fullName" placeholder="Tu nombre para el certificado" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"/>
+                                </div>
+                                <div>
+                                    <label for="documentId" class="block font-semibold text-gray-700 mb-1">Número de Documento</label>
+                                    <input type="text" id="documentId" placeholder="Para el registro oficial" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"/>
+                                </div>
+                                <div class="pt-2">
+                                    <label class="flex items-start">
+                                        <input id="photo-check" type="checkbox" class="h-5 w-5 rounded border-gray-300 text-secondary focus:ring-secondary mt-1">
+                                        <span class="ml-3 text-sm text-gray-700"><strong>Opcional:</strong> Marcar si quieres adjuntar la foto (no es obligatoria para el certificado).</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="go-to-step-2-btn" class="btn-main w-full !py-3 text-lg mt-8">
+                            Siguiente: Realizar Pago <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="form-step-2" class="hidden">
+                   <div class="text-center">
+                     <i class="fas fa-wallet text-6xl text-secondary mb-4"></i>
+                     <h3 class="text-2xl md:text-3xl font-extrabold text-primary">Último Paso: Realiza el Pago</h3>
+                     <p class="text-gray-600 mt-2 text-base">Elige tu método de pago preferido para emitir tu certificado.</p>
+                   </div>
+                   <div class="mt-8 text-left space-y-6">
+                       <div>
+                           <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">2</span>Elige tu método de pago</h4>
+                           <div class="bg-slate-100 p-3 my-4 rounded-lg text-center">
+                               <p class="text-gray-600 text-sm">Valor de la expedición</p>
+                               <p class="text-3xl font-extrabold text-primary">$20.000 <span class="text-2xl font-semibold">COP</span></p>
+                           </div>
+                           <a href="https://linkdepagospse.rappipay.co/U7pafq" target="_blank" class="w-full flex items-center justify-center gap-3 bg-blue-900 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition-all text-lg mb-4">
+                               <img src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp" alt="Logo PSE" class="h-8">
+                               Pagar con PSE
+                           </a>
+                           <details class="bg-gray-50 rounded-lg">
+                               <summary class="p-3 font-semibold text-gray-600 cursor-pointer">Ver otros medios de pago (Transferencia)</summary>
+                               <div class="p-3 border-t grid grid-cols-1 gap-4">
+                                   <div class="bg-white p-3 rounded-lg border">
+                                       <img src="https://brandemia.org/contenido/subidas/2023/10/nequi-nuevo-logotipo-1200x670.jpg" alt="Nequi Logo" class="h-8 mb-2">
+                                       <div class="flex items-center"><p id="nequi-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">3223267797</p><button onclick="copyToClipboard('nequi-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
+                                   </div>
+                                   <div class="bg-white p-3 rounded-lg border">
+                                       <img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" alt="Daviplata Logo" class="h-8 mb-2">
+                                       <div class="flex items-center"><p id="daviplata-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">3223267797</p><button onclick="copyToClipboard('daviplata-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
+                                   </div>
+                                   <div class="bg-white p-3 rounded-lg border">
+                                       <img src="https://www.uam.edu.co/wp-content/uploads/2022/09/logo-bancolombia1.png" alt="Bancolombia Logo" class="h-10 mb-2">
+                                       <div class="flex items-center"><p id="bancolombia-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">81658969749</p><button onclick="copyToClipboard('bancolombia-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
+                                   </div>
+                               </div>
+                           </details>
+                        </div>
+                        <div>
+                           <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">3</span>Finaliza el proceso</h4>
+                            <p class="text-gray-700 text-sm mb-4">Haz clic en el botón de WhatsApp para notificarnos. <strong>Si pagaste por transferencia (Nequi, etc.), no olvides adjuntar el comprobante en el chat.</strong> Si pagaste por PSE, solo notifícanos.</p>
+                           <button id="generate-whatsapp-btn" class="btn-main w-full !py-3 text-lg"><i class="fab fa-whatsapp mr-2"></i>Finalizar y Notificar por WhatsApp</button>
+                        </div>
+                   </div>
+                    <div class="text-center mt-6">
+                     <button id="go-to-step-1-btn" class="text-sm text-gray-500 hover:text-primary font-semibold">&larr; Volver y corregir mis datos</button>
+                 </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="quiz-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4">
+      <div class="bg-white w-full max-w-2xl rounded-lg shadow-2xl p-6 md:p-8 transform transition-all scale-95 opacity-0" id="quiz-content"></div>
     </div>
 
     <script>
@@ -263,9 +286,10 @@
       }
 
       document.addEventListener("DOMContentLoaded", () => {
-        const sections = document.querySelectorAll("main section");
+        const sections = document.querySelectorAll("main section[id]");
         const navLinks = document.querySelectorAll("#course-nav a");
         const progressBar = document.getElementById("progress-bar");
+        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -279,7 +303,10 @@
                 }
             });
         }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
-        sections.forEach(section => observer.observe(section));
+        sections.forEach(section => {
+            if(section.id) observer.observe(section);
+        });
+        
         window.addEventListener("scroll", () => {
             const scrollTop = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -290,8 +317,8 @@
         const startQuizBtn = document.getElementById("start-quiz-btn");
         const quizModal = document.getElementById("quiz-modal");
         const quizContent = document.getElementById("quiz-content");
-        const certificateModal = document.getElementById("certificate-modal");
-        const certificateContent = document.getElementById("certificate-content");
+        const certificateProcessSection = document.getElementById('certificate-process');
+
         const questions = [
             { question: "La Resolución que rige la manipulación de alimentos en Colombia es:", options: ["La 1080 de 1992", "La 2674 de 2013", "El Decreto 780 de 2016"], answer: 1 },
             { question: "¿Cuál es la forma más efectiva de evitar la contaminación cruzada?", options: ["Lavar los alimentos con vinagre", "Usar diferentes tablas de cortar para crudos y cocidos", "Cocinar todo a fuego muy alto"], answer: 1 },
@@ -305,10 +332,9 @@
         const passingScore = 0.75;
         let currentQuestionIndex = 0;
         let score = 0;
-
-        // --- LÓGICA DEL MODAL MULTI-PASO ---
-        const modalStep1 = document.getElementById('modal-step-1');
-        const modalStep2 = document.getElementById('modal-step-2');
+        
+        const formStep1 = document.getElementById('form-step-1');
+        const formStep2 = document.getElementById('form-step-2');
         const goToStep2Btn = document.getElementById('go-to-step-2-btn');
         const goToStep1Btn = document.getElementById('go-to-step-1-btn');
         const fullNameInput = document.getElementById('fullName');
@@ -319,17 +345,16 @@
                 alert('Por favor, completa tu nombre y número de documento para continuar.');
                 return;
             }
-            modalStep1.classList.add('hidden');
-            modalStep2.classList.remove('hidden');
+            formStep1.classList.add('hidden');
+            formStep2.classList.remove('hidden');
         });
-
         goToStep1Btn.addEventListener('click', () => {
-            modalStep2.classList.add('hidden');
-            modalStep1.classList.remove('hidden');
+            formStep2.classList.add('hidden');
+            formStep1.classList.remove('hidden');
         });
         
         function startQuiz() {
-            fbq("track", "StartQuiz");
+            fbq("track", "InitiateCheckout");
             currentQuestionIndex = 0; score = 0;
             quizModal.classList.remove("hidden");
             setTimeout(() => {
@@ -380,14 +405,27 @@
             quizModal.classList.add("hidden");
             const finalScorePercent = score / questions.length;
             if (finalScorePercent >= passingScore) {
+                fbq('track', 'AddPaymentInfo');
                 document.getElementById("final-score-text").textContent = `Tu puntaje: ${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%).`;
-                certificateModal.classList.remove("hidden");
-                modalStep1.classList.remove('hidden'); // Asegurarse que el paso 1 sea visible
-                modalStep2.classList.add('hidden'); // Asegurarse que el paso 2 esté oculto
-                setTimeout(() => {
-                    certificateContent.classList.add("scale-100", "opacity-100");
-                    certificateContent.classList.remove("scale-95", "opacity-0");
-                }, 50);
+                
+                // *** INICIO DE LA NUEVA LÓGICA DE OCULTAR ***
+                
+                // 1. Ocultar todas las secciones de contenido y el header
+                document.querySelector('header').classList.add('hidden');
+                document.getElementById('hero').classList.add('hidden');
+                document.getElementById('testimonials').classList.add('hidden');
+                document.getElementById('start-process').classList.add('hidden');
+                document.getElementById('progress-bar').classList.add('hidden');
+
+                // 2. Cambiar el color de fondo para una vista limpia
+                document.body.style.backgroundColor = '#ffffff';
+                
+                // 3. Mostrar únicamente la sección del proceso de certificación
+                certificateProcessSection.classList.remove('hidden');
+                window.scrollTo(0, 0); // Ir al inicio de la página
+
+                // *** FIN DE LA NUEVA LÓGICA ***
+
             } else {
                 quizContent.innerHTML = `<h3 class="text-2xl font-bold text-primary mb-4 text-center">Examen no superado</h3><p class="text-center text-gray-700 mb-6">Tu puntaje fue de ${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%). Necesitas al menos un ${passingScore * 100}% para aprobar.</p><p class="text-center text-gray-700 mb-8">Te recomendamos repasar los módulos y volver a intentarlo.</p><div class="text-center"><button id="retry-quiz-btn" class="btn-main">Volver a Intentar</button></div>`;
                 quizModal.classList.remove("hidden");
@@ -403,11 +441,14 @@
                 alert("Hubo un error. Por favor, vuelve atrás y completa tus datos.");
                 return;
             }
-            fbq("track", "Lead");
-            const baseMessage = `¡Hola! He completado el curso y realizado el pago para mi certificado.`;
+            fbq("track", "Purchase", {currency: "COP", value: 20000}); // ¡Evento de Compra!
+            const baseMessage = `¡Hola! He aprobado el examen de Manipulación de Alimentos.`;
             const userInfo = `\n\nMis datos son:\n*Nombre:* ${fullNameInput.value.trim()}\n*Documento:* ${documentIdInput.value.trim()}`;
-            const photoInfo = `\n\nConfirmado: Tengo mi foto lista para el carnet.`;
-            const finalMessage = encodeURIComponent(baseMessage + userInfo + photoInfo);
+            let photoInfo = '';
+            if (document.getElementById('photo-check').checked) {
+              photoInfo = `\n*Foto para carnet:* Sí, la adjuntaré.`
+            }
+            const finalMessage = encodeURIComponent(baseMessage + userInfo + photoInfo + "\n\nQuedo atento(a) a la confirmación para recibir mi certificado.");
             const whatsappUrl = `https://wa.me/573107941580?text=${finalMessage}`;
             window.open(whatsappUrl, "_blank");
         });
