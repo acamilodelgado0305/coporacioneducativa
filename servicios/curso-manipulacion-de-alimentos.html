@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Curso Avanzado de Manipulación de Alimentos | Conalianza</title>
@@ -116,8 +116,8 @@
     <noscript><img height="1" width="1" style="display: none"
       src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
     /></noscript>
-  </head>
-  <body class="bg-slate-100">
+</head>
+<body class="bg-slate-100">
     <div id="progress-bar"></div>
 
     <header class="bg-white shadow-sm sticky top-0 z-50">
@@ -183,12 +183,6 @@
                         <label for="documentId" class="block font-semibold text-gray-700 mb-1">Número de Documento</label>
                         <input type="text" id="documentId" placeholder="Para el registro oficial" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"/>
                     </div>
-                    <div class="pt-2">
-                        <label class="flex items-start">
-                            <input id="photo-check" type="checkbox" class="h-5 w-5 rounded border-gray-300 text-secondary focus:ring-secondary mt-1">
-                             <span class="ml-3 text-sm text-gray-700"><strong>Opcional:</strong> Marcar si quieres adjuntar la foto (no es obligatoria para el certificado).</span>
-                        </label>
-                    </div>
                 </div>
             </div>
             <button id="go-to-step-2-btn" class="btn-main w-full !py-3 text-lg mt-8">
@@ -200,48 +194,78 @@
         <div id="modal-step-2" class="hidden">
            <div class="text-center">
             <i class="fas fa-wallet text-6xl text-secondary mb-4"></i>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">Último Paso: Realiza el Pago</h3>
-            <p class="text-gray-600 mt-2 text-base">Elige tu método de pago preferido para emitir tu certificado.</p>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">Realiza el Pago</h3>
+            <p class="text-gray-600 mt-2 text-base">Elige tu método preferido para emitir tu certificado.</p>
+           </div>
+           <div class="mt-8 text-left space-y-6">
+               <div>
+                   <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">2</span>Elige tu método de pago</h4>
+                   <div class="bg-slate-100 p-3 my-4 rounded-lg text-center">
+                       <p class="text-gray-600 text-sm">Valor de la expedición</p>
+                       <p class="text-3xl font-extrabold text-primary">$20.000 <span class="text-2xl font-semibold">COP</span></p>
+                   </div>
+                   <a href="https://checkout.nequi.wompi.co/l/AIzs0h" target="_blank" class="w-full flex items-center justify-center gap-3 bg-blue-900 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition-all text-lg mb-4">
+                       <img src="https://brandemia.org/contenido/subidas/2023/10/nequi-nuevo-logotipo-1200x670.jpg" alt="Logo PSE" class="h-8">
+                       Pagar con Nequi
+                   </a>
+                   <a href="https://linkdepagospse.rappipay.co/U7pafq" target="_blank" class="w-full flex items-center justify-center gap-3 bg-blue-900 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition-all text-lg mb-4">
+                       <img src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp" alt="Logo PSE" class="h-8">
+                       Pagar con PSE
+                   </a>
+                   <details class="bg-gray-50 rounded-lg">
+                       <summary class="p-3 font-semibold text-gray-600 cursor-pointer">Ver otros medios de pago (Transferencia)</summary>
+                       <div class="p-4 border-t grid grid-cols-1 sm:grid-cols-2 gap-4">
+                           <div class="bg-white p-3 rounded-lg border">
+                               <img src="https://brandemia.org/contenido/subidas/2023/10/nequi-nuevo-logotipo-1200x670.jpg" alt="Nequi Logo" class="h-8 mb-2">
+                               <div class="flex items-center"><p id="nequi-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md flex-grow">3223267797</p><button onclick="copyToClipboard('nequi-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
+                           </div>
+                           <div class="bg-white p-3 rounded-lg border">
+                               <img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" alt="Daviplata Logo" class="h-8 mb-2">
+                               <div class="flex items-center"><p id="daviplata-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md flex-grow">3223267797</p><button onclick="copyToClipboard('daviplata-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
+                           </div>
+                           <div class="bg-white p-3 rounded-lg border col-span-1 sm:col-span-2"> <img src="https://www.uam.edu.co/wp-content/uploads/2022/09/logo-bancolombia1.png" alt="Bancolombia Logo" class="h-10 mb-2">
+                               <p class="text-xs text-gray-500 mb-1">Ahorros Bancolombia</p>
+                               <div class="flex items-center"><p id="bancolombia-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md flex-grow">81658969749</p><button onclick="copyToClipboard('bancolombia-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
+                           </div>
+                       </div>
+                   </details>
+              </div>
+              <button id="go-to-step-3-btn" class="btn-main w-full !py-3 text-lg">
+                Ya realicé el pago, siguiente <i class="fas fa-arrow-right ml-2"></i>
+              </button>
+           </div>
+           <div class="text-center mt-6">
+             <button id="go-to-step-1-btn" class="text-sm text-gray-500 hover:text-primary font-semibold">&larr; Volver y corregir mis datos</button>
+           </div>
+        </div>
+
+        <div id="modal-step-3" class="hidden">
+          <div class="text-center">
+            <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">¡Proceso Casi Completo!</h3>
+            <p class="text-gray-600 mt-2 text-base">Solo falta un paso para finalizar.</p>
           </div>
           <div class="mt-8 text-left space-y-6">
-             <div>
-                <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">2</span>Elige tu método de pago</h4>
-                <div class="bg-slate-100 p-3 my-4 rounded-lg text-center">
-                    <p class="text-gray-600 text-sm">Valor de la expedición</p>
-                    <p class="text-3xl font-extrabold text-primary">$20.000 <span class="text-2xl font-semibold">COP</span></p>
-                </div>
-                <a href="https://linkdepagospse.rappipay.co/U7pafq" target="_blank" class="w-full flex items-center justify-center gap-3 bg-blue-900 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-800 transition-all text-lg mb-4">
-                    <img src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp" alt="Logo PSE" class="h-8">
-                    Pagar con PSE
-                </a>
-                <details class="bg-gray-50 rounded-lg">
-                    <summary class="p-3 font-semibold text-gray-600 cursor-pointer">Ver otros medios de pago (Transferencia)</summary>
-                    <div class="p-3 border-t grid grid-cols-2 gap-4">
-                        <div class="bg-white p-3 rounded-lg border">
-                            <img src="https://brandemia.org/contenido/subidas/2023/10/nequi-nuevo-logotipo-1200x670.jpg" alt="Nequi Logo" class="h-8 mb-2">
-                            <div class="flex items-center"><p id="nequi-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">3223267797</p><button onclick="copyToClipboard('nequi-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg border">
-                            <img src="https://cdn.worldvectorlogo.com/logos/daviplata.svg" alt="Daviplata Logo" class="h-8 mb-2">
-                            <div class="flex items-center"><p id="nequi-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">3223267797</p><button onclick="copyToClipboard('nequi-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
-                        </div>
-                        <div class="bg-white p-3 rounded-lg border">
-                            <img src="https://www.uam.edu.co/wp-content/uploads/2022/09/logo-bancolombia1.png" alt="Bancolombia Logo" class="h-10 mb-2">
-                            <div class="flex items-center"><p id="bancolombia-number" class="text-md font-mono bg-gray-200 px-2 py-1 rounded-l-md">81658969749</p><button onclick="copyToClipboard('bancolombia-number', this)" class="bg-gray-300 hover:bg-gray-400 px-3 py-1 rounded-r-md transition-colors"><i class="far fa-copy"></i></button></div>
-                        </div>
-                    </div>
-                </details>
-             </div>
-             <div>
-                <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">3</span>Envía el comprobante</h4>
-                 <p class="text-gray-700 text-sm mb-4">Es <strong>indispensable que adjuntes el comprobante de pago</strong> en el chat de WhatsApp para verificar tu pago y enviarte tu certificado.</p>
-                <button id="generate-whatsapp-btn" class="btn-main w-full !py-3 text-lg"><i class="fab fa-whatsapp mr-2"></i>Finalizar y Enviar a WhatsApp</button>
-             </div>
+              <div>
+                  <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">3</span>Envía el comprobante</h4>
+                  <p class="text-gray-700 text-sm mb-4">Haz clic en el botón para abrir WhatsApp y <strong>adjunta tu comprobante de pago</strong>. Esto es indispensable para validar tu certificado.</p>
+                  <button id="generate-whatsapp-btn" class="w-full !py-3 text-lg bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp"></i>Enviar Comprobante
+                  </button>
+              </div>
+              <div class="border-t pt-6">
+                  <h4 class="font-bold text-xl text-primary flex items-center mb-3"><span class="step-circle">4</span>Verifica y descarga</h4>
+                  <p class="text-gray-700 text-sm mb-4">Una vez validemos tu pago (esto puede tardar unas horas), tu certificado aparecerá en el siguiente enlace. <strong>¡Guárdalo para consultarlo más tarde!</strong></p>
+                  <a href="https://quickcontrola.com/verificacion" target="_blank" class="w-full !py-3 text-lg bg-primary hover:bg-blue-800 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
+                    <i class="fas fa-search"></i>Verificar mi Certificado
+                  </a>
+              </div>
           </div>
            <div class="text-center mt-6">
-            <button id="go-to-step-1-btn" class="text-sm text-gray-500 hover:text-primary font-semibold">&larr; Volver y corregir mis datos</button>
+             <button id="go-to-step-2-btn-back" class="text-sm text-gray-500 hover:text-primary font-semibold">&larr; Volver a los métodos de pago</button>
+           </div>
         </div>
-        </div>
+
       </div>
     </div>
 
@@ -306,14 +330,20 @@
         let currentQuestionIndex = 0;
         let score = 0;
 
-        // --- LÓGICA DEL MODAL MULTI-PASO ---
+        // --- CAMBIO AQUÍ: LÓGICA DEL MODAL MULTI-PASO ACTUALIZADA ---
         const modalStep1 = document.getElementById('modal-step-1');
         const modalStep2 = document.getElementById('modal-step-2');
-        const goToStep2Btn = document.getElementById('go-to-step-2-btn');
+        const modalStep3 = document.getElementById('modal-step-3'); // Nuevo paso
+        
         const goToStep1Btn = document.getElementById('go-to-step-1-btn');
+        const goToStep2Btn = document.getElementById('go-to-step-2-btn');
+        const goToStep2BtnBack = document.getElementById('go-to-step-2-btn-back'); // Nuevo botón de regreso
+        const goToStep3Btn = document.getElementById('go-to-step-3-btn'); // Nuevo botón para avanzar
+
         const fullNameInput = document.getElementById('fullName');
         const documentIdInput = document.getElementById('documentId');
 
+        // Ir del paso 1 al 2
         goToStep2Btn.addEventListener('click', () => {
             if (fullNameInput.value.trim() === '' || documentIdInput.value.trim() === '') {
                 alert('Por favor, completa tu nombre y número de documento para continuar.');
@@ -321,13 +351,30 @@
             }
             modalStep1.classList.add('hidden');
             modalStep2.classList.remove('hidden');
+            modalStep3.classList.add('hidden');
         });
 
+        // Volver del paso 2 al 1
         goToStep1Btn.addEventListener('click', () => {
-            modalStep2.classList.add('hidden');
             modalStep1.classList.remove('hidden');
+            modalStep2.classList.add('hidden');
+            modalStep3.classList.add('hidden');
         });
         
+        // Ir del paso 2 al 3
+        goToStep3Btn.addEventListener('click', () => {
+            modalStep1.classList.add('hidden');
+            modalStep2.classList.add('hidden');
+            modalStep3.classList.remove('hidden');
+        });
+
+        // Volver del paso 3 al 2
+        goToStep2BtnBack.addEventListener('click', () => {
+            modalStep1.classList.add('hidden');
+            modalStep2.classList.remove('hidden');
+            modalStep3.classList.add('hidden');
+        });
+
         function startQuiz() {
             fbq("track", "StartQuiz");
             currentQuestionIndex = 0; score = 0;
@@ -382,8 +429,12 @@
             if (finalScorePercent >= passingScore) {
                 document.getElementById("final-score-text").textContent = `Tu puntaje: ${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%).`;
                 certificateModal.classList.remove("hidden");
-                modalStep1.classList.remove('hidden'); // Asegurarse que el paso 1 sea visible
-                modalStep2.classList.add('hidden'); // Asegurarse que el paso 2 esté oculto
+                
+                // Asegurarse que siempre inicie en el paso 1
+                modalStep1.classList.remove('hidden'); 
+                modalStep2.classList.add('hidden');
+                modalStep3.classList.add('hidden');
+
                 setTimeout(() => {
                     certificateContent.classList.add("scale-100", "opacity-100");
                     certificateContent.classList.remove("scale-95", "opacity-0");
@@ -398,20 +449,20 @@
             }
         }
         startQuizBtn.addEventListener("click", startQuiz);
+
         document.getElementById("generate-whatsapp-btn").addEventListener("click", () => {
             if (fullNameInput.value.trim() === '' || documentIdInput.value.trim() === '') {
                 alert("Hubo un error. Por favor, vuelve atrás y completa tus datos.");
                 return;
             }
             fbq("track", "Lead");
-            const baseMessage = `¡Hola! He completado el curso y realizado el pago para mi certificado.`;
-            const userInfo = `\n\nMis datos son:\n*Nombre:* ${fullNameInput.value.trim()}\n*Documento:* ${documentIdInput.value.trim()}`;
-            const photoInfo = `\n\nConfirmado: Tengo mi foto lista para el carnet.`;
-            const finalMessage = encodeURIComponent(baseMessage + userInfo + photoInfo);
+            const baseMessage = `¡Hola! He completado el curso y adjunto mi comprobante de pago para el certificado.`;
+            const userInfo = `\n\n*Nombre:* ${fullNameInput.value.trim()}\n*Documento:* ${documentIdInput.value.trim()}`;
+            const finalMessage = encodeURIComponent(baseMessage + userInfo);
             const whatsappUrl = `https://wa.me/573107941580?text=${finalMessage}`;
             window.open(whatsappUrl, "_blank");
         });
       });
     </script>
-  </body>
+</body>
 </html>
