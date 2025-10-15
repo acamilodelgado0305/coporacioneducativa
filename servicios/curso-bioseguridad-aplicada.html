@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Curso de Bioseguridad Aplicada | Conalianza</title>
+    <link rel="icon" href="/logopagina.png" type="image/png" />
+    <meta name="description" content="Obtén tu certificado en Bioseguridad Aplicada. Curso 100% online, válido en Colombia y esencial para profesionales de la salud, estética y más." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body { font-family: "Poppins", sans-serif; background-color: #f1f5f9; }
+        :root { --primary-color: #002e7d; --secondary-color: #8b5cf6; /* Violeta para diferenciar */ }
+        .text-primary { color: var(--primary-color); }
+        .bg-primary { background-color: var(--primary-color); }
+        .text-secondary { color: var(--secondary-color); }
+        .border-secondary { border-color: var(--secondary-color); }
+        .btn-main { background-color: var(--secondary-color); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; text-align: center; transition: all 0.2s ease-in-out; }
+        .btn-main:hover { background-color: #7c3aed; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
+        #progress-bar { position: fixed; top: 0; left: 0; height: 6px; background-color: var(--secondary-color); width: 0%; z-index: 100; transition: width 0.2s ease-out; }
+        #course-nav a { transition: all 0.2s ease-in-out; border-left: 3px solid transparent; }
+        #course-nav a.active { background-color: #ede9fe; color: var(--primary-color); border-left-color: var(--secondary-color); transform: translateX(4px); }
+        #course-nav a.completed::after { content: "✔"; font-weight: bold; margin-left: 8px; color: var(--secondary-color); }
+        .hero-section { background-image: url("https://i.pinimg.com/736x/5b/af/52/5baf52faf55e3a31d752889f7d43da23.jpg"); background-size: cover; background-position: center; position: relative; color: white; padding: 6rem 0; }
+        .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; margin: 0 auto; }
+    </style>
+</head>
+<body class="bg-slate-100">
+    <div id="progress-bar"></div>
+
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto max-w-7xl p-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="/logo.png" alt="Conalianza Logo" class="h-10 mr-3" />
+                <span class="text-xl md:text-2xl font-bold text-primary">Conalianza</span>
+            </a>
+            <a href="examen-bioseguridad.html" class="btn-main hidden md:inline-block">
+                Iniciar Examen
+            </a>
+        </div>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content px-4">
+            <h2 class="text-4xl md:text-5xl font-extrabold leading-tight mb-4">
+                Certifícate en Bioseguridad Aplicada
+            </h2>
+            <p class="text-lg md:text-xl mb-6 font-light">
+                Domina los protocolos para prevenir riesgos biológicos. **100% Online** y válido a nivel nacional.
+            </p>
+            <a href="examen-bioseguridad.html" class="btn-main !bg-yellow-400 hover:!bg-yellow-500 !text-primary !text-xl !px-8 !py-4 inline-block">
+                ¡Obtén Tu Certificado Ahora! <i class="fas fa-arrow-right ml-3"></i>
+            </a>
+        </div>
+    </section>
+
+    <div class="container mx-auto max-w-7xl mt-12 px-4">
+        <div class="lg:flex lg:space-x-8">
+            <aside class="hidden lg:block w-1/4">
+                <div class="sticky top-24 bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="font-bold text-lg text-primary mb-4">Contenido del Curso</h3>
+                    <nav id="course-nav" class="flex flex-col space-y-2">
+                        <a href="#intro" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200 active">Introducción</a>
+                        <a href="#principios" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Principios Clave</a>
+                        <a href="#epp" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Uso de EPP</a>
+                        <a href="#limpieza" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Limpieza y Desinfección</a>
+                        <a href="#residuos" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Manejo de Residuos</a>
+                        <a href="#quiz-start" class="block p-3 rounded-md font-bold text-secondary hover:bg-gray-200">Evaluación Final</a>
+                    </nav>
+                </div>
+            </aside>
+
+            <main class="w-full lg:w-3/4 space-y-12">
+                <section id="intro" class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-3xl font-extrabold text-primary mb-3">Bienvenido(a) al Curso de Bioseguridad</h2><p class="text-lg text-gray-600">Este curso te proporcionará los conocimientos esenciales para identificar, prevenir y controlar los riesgos biológicos en tu entorno laboral, protegiendo tanto tu salud como la de los demás.</p></section>
+                <section id="principios" class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-shield-virus mr-3 text-secondary"></i>Principios Clave de la Bioseguridad</h2><p class="text-gray-700 mb-4">La bioseguridad se basa en tres pilares fundamentales:</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong class="text-primary">Universalidad:</strong> Asumir que toda persona puede ser portadora de agentes infecciosos. Las medidas deben aplicarse a todos por igual.</li><li><strong class="text-primary">Barreras de Protección:</strong> Uso de Equipos de Protección Personal (EPP) para evitar el contacto directo con sangre, fluidos y otros materiales potencialmente infecciosos.</li><li><strong class="text-primary">Medidas de Eliminación:</strong> Procedimientos correctos para desechar material contaminado y minimizar el riesgo para otras personas y el medio ambiente.</li></ul></section>
+                <section id="epp" class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-user-shield mr-3 text-secondary"></i>Uso de Equipos de Protección Personal (EPP)</h2><p class="text-gray-700 mb-4">La correcta selección y uso de EPP es vital. Incluyen:</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Guantes:</strong> Para proteger las manos. Deben cambiarse entre cada paciente o procedimiento.</li><li><strong>Mascarillas/Tapabocas:</strong> Para proteger las mucosas de nariz y boca de salpicaduras y aerosoles.</li><li><strong>Protección Ocular:</strong> Gafas o caretas para proteger los ojos.</li><li><strong>Batas o Uniformes:</strong> Para proteger la piel y la ropa de la contaminación.</li></ul></section>
+                <section id="limpieza" class="bg-white p-6 rounded-lg shadow-md"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-pump-soap mr-3 text-secondary"></i>Limpieza, Desinfección y Esterilización</h2><p class="text-gray-700 mb-4">Son procesos diferentes pero complementarios:</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Limpieza:</strong> Remoción de suciedad y materia orgánica de superficies u objetos. Es el primer paso indispensable.</li><li><strong>Desinfección:</strong> Eliminación de la mayoría de microorganismos patógenos (pero no necesariamente esporas) de objetos inanimados.</li><li><strong>Esterilización:</strong> Destrucción total de toda forma de vida microbiana, incluyendo las esporas bacterianas. Se aplica a instrumental crítico.</li></ul></section>
+                <section id="residuos" class="bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary"><h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-biohazard mr-3 text-secondary"></i>Manejo de Residuos Hospitalarios y Similares</h2><p class="text-gray-700 mb-4">La correcta segregación de residuos es crucial para evitar accidentes y contaminación.</p><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Recipiente Rojo (Riesgo Biológico):</strong> Para residuos biosanitarios, cortopunzantes y de animales.</li><li><strong>Recipiente Verde (Ordinarios):</strong> Para residuos no peligrosos, como papel usado en áreas administrativas, cartón, etc.</li><li><strong>Guardián de Seguridad:</strong> Contenedor rígido, rojo, específico para desechar de forma segura agujas, bisturís y otros elementos cortopunzantes.</li></ul></section>
+                
+                <section id="quiz-start" class="text-center py-12">
+                    <h2 class="text-3xl font-bold text-primary mb-4">¿Listo para Validar tus Conocimientos?</h2>
+                    <p class="text-gray-600 mb-6">Completa la evaluación para dar el último paso hacia tu certificación en bioseguridad.</p>
+                    <a href="examen-bioseguridad.html" class="btn-main text-xl !px-10 !py-4 inline-block">¡Presentar Examen Ahora!</a>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <footer class="bg-primary text-white py-8 mt-12 px-4">
+        <div class="container mx-auto max-w-7xl text-center">
+            <p>&copy; 2024 Conalianza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const sections = document.querySelectorAll("main section");
+            const navLinks = document.querySelectorAll("#course-nav a");
+            const progressBar = document.getElementById("progress-bar");
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach((link) => {
+                            link.classList.remove("active");
+                            if (link.getAttribute("href").substring(1) === entry.target.id) {
+                                link.classList.add("active");
+                                link.classList.add("completed");
+                            }
+                        });
+                    }
+                });
+            }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+            
+            sections.forEach((section) => observer.observe(section));
+
+            window.addEventListener("scroll", () => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                progressBar.style.width = `${scrollPercent}%`;
+            });
+        });
+    </script>
+</body>
+</html>

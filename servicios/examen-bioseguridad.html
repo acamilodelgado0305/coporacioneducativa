@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen de Bioseguridad | Conalianza</title>
+    <link rel="icon" href="logopagina.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body { font-family: "Poppins", sans-serif; background-color: #f1f5f9; }
+        :root { --primary-color: #002e7d; --secondary-color: #8b5cf6; --success-color: #22c55e; --error-color: #ef4444; }
+        .text-primary { color: var(--primary-color); }
+        .bg-primary { background-color: var(--primary-color); }
+        .btn-main { background-color: var(--secondary-color); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s ease-in-out; border: none; cursor: pointer; }
+        .btn-main:hover { background-color: #7c3aed; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3); }
+        .btn-main:disabled { background-color: #9ca3af; cursor: not-allowed; transform: none; box-shadow: none; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto max-w-4xl p-4 flex justify-between items-center">
+            <a href="bioseguridad.html" class="flex items-center">
+                <img src="logopagina.png" alt="Conalianza Logo" class="h-10 mr-3" />
+                <span class="text-xl md:text-2xl font-bold text-primary">Conalianza</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto max-w-4xl p-4 flex items-center justify-center">
+        <div id="quiz-wrapper" class="w-full bg-white p-6 md:p-10 rounded-xl shadow-2xl transition-all duration-300">
+            <div id="start-view">
+                <div class="text-center">
+                    <h1 class="text-3xl font-extrabold text-primary mb-3">Evaluación de Bioseguridad</h1>
+                    <p class="text-gray-600 mb-6">Es hora de demostrar tus conocimientos. El examen consta de 8 preguntas y necesitas un 75% para aprobar.</p>
+                    <button id="start-exam-btn" class="btn-main text-xl !px-10 !py-4"><i class="fas fa-play-circle mr-2"></i>Comenzar Examen</button>
+                </div>
+            </div>
+            <div id="quiz-view" class="hidden"></div>
+            <div id="results-view" class="hidden"></div>
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white py-4 mt-8">
+        <div class="container mx-auto max-w-4xl text-center">
+            <p>&copy; 2024 Conalianza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const startView = document.getElementById("start-view");
+        const quizView = document.getElementById("quiz-view");
+        const resultsView = document.getElementById("results-view");
+        const startExamBtn = document.getElementById("start-exam-btn");
+
+        const questions = [
+            { question: "El principio que establece que se deben tomar precauciones con todas las personas por igual se llama:", options: ["Barrera de Protección", "Universalidad", "Medida de Eliminación"], answer: 1 },
+            { question: "¿Cuál es el objetivo principal de la Esterilización?", options: ["Eliminar la suciedad visible", "Eliminar la mayoría de bacterias", "Destruir TODA forma de vida microbiana, incluyendo esporas"], answer: 2 },
+            { question: "Las agujas y hojas de bisturí usadas deben desecharse en:", options: ["Una bolsa roja", "Una bolsa verde", "Un guardián de seguridad rígido"], answer: 2 },
+            { question: "Usar guantes, tapabocas y gafas de protección corresponde al principio de:", options: ["Universalidad", "Barreras de Protección", "Eliminación de Residuos"], answer: 1 },
+            { question: "El primer paso, absolutamente indispensable antes de desinfectar o esterilizar, es:", options: ["La Limpieza", "El Enjuague", "El Secado"], answer: 0 },
+            { question: "Un residuo como el papel de oficina de un consultorio se considera:", options: ["Residuo Biosanitario", "Residuo Cortopunzante", "Residuo Ordinario no Peligroso"], answer: 2 },
+            { question: "¿Qué elemento de EPP protege principalmente las mucosas de la nariz y la boca contra aerosoles?", options: ["Guantes", "Bata", "Mascarilla / Tapabocas"], answer: 2 },
+            { question: "La Desinfección garantiza la eliminación de:", options: ["Toda forma de vida, incluyendo esporas", "La mayoría de microorganismos patógenos de objetos", "Únicamente la suciedad visible"], answer: 1 }
+        ];
+        const passingScore = 0.75;
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function renderQuestion() {
+            const q = questions[currentQuestionIndex];
+            quizView.innerHTML = `
+                <div class="mb-2 text-sm font-semibold text-gray-500">Pregunta ${currentQuestionIndex + 1} de ${questions.length}</div>
+                <h3 class="text-2xl font-bold text-primary mb-6">${q.question}</h3>
+                <div class="space-y-3 mb-6">
+                    ${q.options.map((option, index) => `<button data-index="${index}" class="option-btn block w-full text-left p-4 rounded-lg border-2 border-gray-300 hover:border-secondary transition-all text-gray-700">${option}</button>`).join('')}
+                </div>
+                <div id="feedback" class="h-8 text-center font-bold"></div>
+                <div class="flex justify-end mt-4"><button id="next-q-btn" class="btn-main" disabled>Siguiente &rarr;</button></div>`;
+            
+            document.querySelectorAll(".option-btn").forEach(btn => btn.addEventListener("click", selectAnswer));
+            document.getElementById("next-q-btn").addEventListener("click", nextQuestion);
+        }
+
+        function selectAnswer(e) {
+            const selectedBtn = e.currentTarget;
+            const selectedIndex = parseInt(selectedBtn.dataset.index);
+            const correctIndex = questions[currentQuestionIndex].answer;
+            document.querySelectorAll(".option-btn").forEach(btn => { btn.disabled = true; });
+            const feedbackEl = document.getElementById("feedback");
+
+            if (selectedIndex === correctIndex) {
+                score++;
+                selectedBtn.classList.add("!border-green-500", "bg-green-50");
+                feedbackEl.textContent = "¡Correcto!";
+                feedbackEl.style.color = "var(--success-color)";
+            } else {
+                selectedBtn.classList.add("!border-red-500", "bg-red-50");
+                feedbackEl.textContent = "Incorrecto.";
+                feedbackEl.style.color = "var(--error-color)";
+                document.querySelector(`.option-btn[data-index="${correctIndex}"]`).classList.add("!border-green-500", "bg-green-50");
+            }
+            document.getElementById("next-q-btn").disabled = false;
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            quizView.classList.add("hidden");
+            resultsView.classList.remove("hidden");
+            const finalScorePercent = score / questions.length;
+            if (finalScorePercent >= passingScore) {
+                resultsView.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-primary mb-3">¡Felicitaciones, has APROBADO!</h2>
+                        <p class="text-gray-700 text-lg mb-6">Tu puntaje: <strong>${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%)</strong>.</p>
+                        <p class="text-gray-600 mb-8">Estás listo para recibir tu certificado. Contáctanos por WhatsApp para coordinar el pago y la entrega.</p>
+                        <a href="https://wa.me/573107941580?text=¡Hola!%20Aprobé%20el%20examen%20de%20Bioseguridad.%20Quisiera%20obtener%20mi%20certificado." target="_blank" class="btn-main !bg-green-600 hover:!bg-green-700 text-lg !px-8 !py-3"><i class="fab fa-whatsapp mr-3"></i>Contactar para Certificado</a>
+                    </div>`;
+            } else {
+                resultsView.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-times-circle text-6xl text-red-500 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-primary mb-3">Necesitas Estudiar un Poco Más</h2>
+                        <p class="text-gray-700 text-lg mb-6">Tu puntaje fue de <strong>${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%)</strong>. Necesitas ${passingScore * 100}% para aprobar.</p>
+                        <p class="text-gray-600 mb-8">Te recomendamos repasar los módulos del curso y volver a intentarlo. ¡No te rindas!</p>
+                        <button id="retry-quiz-btn" class="btn-main">Volver a Intentar</button>
+                    </div>`;
+                document.getElementById("retry-quiz-btn").addEventListener("click", startQuiz);
+            }
+        }
+        
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            startView.classList.add("hidden");
+            resultsView.classList.add("hidden");
+            quizView.classList.remove("hidden");
+            renderQuestion();
+        }
+
+        startExamBtn.addEventListener("click", startQuiz);
+    });
+    </script>
+</body>
+</html>

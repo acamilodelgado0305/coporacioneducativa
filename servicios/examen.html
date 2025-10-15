@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Examen Final | Conalianza</title>
+    <link rel="icon" href="../logopagina.png" type="image/png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        body { font-family: "Poppins", sans-serif; background-color: #f1f5f9; /* bg-slate-100 */ }
+        :root { --primary-color: #002e7d; --secondary-color: #10b981; --success-color: #22c55e; --error-color: #ef4444; }
+        .text-primary { color: var(--primary-color); }
+        .bg-primary { background-color: var(--primary-color); }
+        .text-secondary { color: var(--secondary-color); }
+        .bg-secondary { background-color: var(--secondary-color); }
+        .btn-main { background-color: var(--secondary-color); color: white; padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s ease-in-out; border: none; cursor: pointer; }
+        .btn-main:hover { background-color: #059669; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
+        .btn-main:disabled { background-color: #9ca3af; cursor: not-allowed; transform: none; box-shadow: none; }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto max-w-4xl p-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center">
+                <img src="../logopagina.png" alt="Conalianza Logo" class="h-10 mr-3" />
+                <span class="text-xl md:text-2xl font-bold text-primary">Conalianza</span>
+            </a>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto max-w-4xl p-4 flex items-center justify-center">
+        <div id="quiz-wrapper" class="w-full bg-white p-6 md:p-10 rounded-xl shadow-2xl transition-all duration-300">
+            
+            <div id="start-view" class="">
+                <div class="text-center">
+                    <h1 class="text-3xl font-extrabold text-primary mb-3">Evaluación Final</h1>
+                    <p class="text-gray-600 mb-6">Demuestra lo que has aprendido para obtener tu certificado. Consta de 8 preguntas y necesitas un 75% para aprobar.</p>
+                    <p class="text-gray-600 mb-8 font-semibold">¡Mucho éxito!</p>
+                    <button id="start-exam-btn" class="btn-main text-xl !px-10 !py-4">
+                        <i class="fas fa-play-circle mr-2"></i>Comenzar Examen
+                    </button>
+                </div>
+            </div>
+
+            <div id="quiz-view" class="hidden">
+                </div>
+
+            <div id="results-view" class="hidden">
+                </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-primary text-white py-4 mt-8">
+        <div class="container mx-auto max-w-4xl text-center">
+            <p>&copy; 2024 Conalianza. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. REFERENCIAS A ELEMENTOS DEL HTML ---
+        const startView = document.getElementById("start-view");
+        const quizView = document.getElementById("quiz-view");
+        const resultsView = document.getElementById("results-view");
+        const startExamBtn = document.getElementById("start-exam-btn");
+
+        // --- 2. DATOS DEL EXAMEN ---
+        const questions = [
+            { question: "La Resolución que rige la manipulación de alimentos en Colombia es:", options: ["La 1080 de 1992", "La 2674 de 2013", "El Decreto 780 de 2016"], answer: 1 },
+            { question: "¿Cuál es la forma más efectiva de evitar la contaminación cruzada?", options: ["Lavar los alimentos con vinagre", "Usar diferentes tablas de cortar para crudos y cocidos", "Cocinar todo a fuego muy alto"], answer: 1 },
+            { question: "La 'Zona de Peligro' de temperatura para la proliferación bacteriana es:", options: ["0°C a 10°C", "-5°C a 5°C", "5°C a 60°C"], answer: 2 },
+            { question: "El lavado de manos debe durar un mínimo de:", options: ["5 segundos", "10 segundos", "20 segundos"], answer: 2 },
+            { question: "Para desinfectar superficies, una práctica común es usar:", options: ["Solo agua caliente", "Una solución de hipoclorito y agua", "Jugo de limón"], answer: 1 },
+            { question: "¿Dónde se deben almacenar las carnes crudas en el refrigerador?", options: ["En la parte superior para que enfríen más rápido", "Junto a las verduras para ahorrar espacio", "En la parte inferior y en recipientes sellados"], answer: 2 },
+            { question: "La cocción completa de un alimento generalmente asegura que se eliminen:", options: ["Los nutrientes", "Los microorganismos peligrosos", "El sabor"], answer: 1 },
+            { question: "No se deben dejar alimentos cocidos a temperatura ambiente por más de:", options: ["8 horas", "4 horas", "2 horas"], answer: 2 }
+        ];
+        const passingScore = 0.75;
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        // --- 3. FUNCIONES PRINCIPALES ---
+
+        // Función para mostrar la pregunta actual
+        function renderQuestion() {
+            const q = questions[currentQuestionIndex];
+            quizView.innerHTML = `
+                <div class="mb-2 text-sm font-semibold text-gray-500">Pregunta ${currentQuestionIndex + 1} de ${questions.length}</div>
+                <h3 class="text-2xl font-bold text-primary mb-6">${q.question}</h3>
+                <div class="space-y-3 mb-6">
+                    ${q.options.map((option, index) => 
+                        `<button data-index="${index}" class="option-btn block w-full text-left p-4 rounded-lg border-2 border-gray-300 hover:border-secondary transition-all text-gray-700">${option}</button>`
+                    ).join('')}
+                </div>
+                <div id="feedback" class="h-8 text-center font-bold"></div>
+                <div class="flex justify-end mt-4">
+                    <button id="next-q-btn" class="btn-main" disabled>Siguiente &rarr;</button>
+                </div>`;
+            
+            // Se añaden los listeners a los botones recién creados
+            document.querySelectorAll(".option-btn").forEach(btn => btn.addEventListener("click", selectAnswer));
+            document.getElementById("next-q-btn").addEventListener("click", nextQuestion);
+        }
+
+        // Función que se ejecuta al seleccionar una respuesta
+        function selectAnswer(e) {
+            const selectedBtn = e.currentTarget;
+            const selectedIndex = parseInt(selectedBtn.dataset.index);
+            const correctIndex = questions[currentQuestionIndex].answer;
+
+            document.querySelectorAll(".option-btn").forEach(btn => { btn.disabled = true; });
+            const feedbackEl = document.getElementById("feedback");
+
+            if (selectedIndex === correctIndex) {
+                score++;
+                selectedBtn.classList.add("!border-green-500", "bg-green-50");
+                feedbackEl.textContent = "¡Correcto!";
+                feedbackEl.style.color = "var(--success-color)";
+            } else {
+                selectedBtn.classList.add("!border-red-500", "bg-red-50");
+                feedbackEl.textContent = "Incorrecto.";
+                feedbackEl.style.color = "var(--error-color)";
+                document.querySelector(`.option-btn[data-index="${correctIndex}"]`).classList.add("!border-green-500", "bg-green-50");
+            }
+            document.getElementById("next-q-btn").disabled = false;
+        }
+
+        // Función para ir a la siguiente pregunta o mostrar resultados
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                renderQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        // Función para mostrar los resultados finales
+        function showResults() {
+            quizView.classList.add("hidden");
+            resultsView.classList.remove("hidden");
+            const finalScorePercent = score / questions.length;
+
+            if (finalScorePercent >= passingScore) {
+                // APROBADO
+                resultsView.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-primary mb-3">¡Felicitaciones, has APROBADO!</h2>
+                        <p class="text-gray-700 text-lg mb-6">Tu puntaje: <strong>${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%)</strong>.</p>
+                        <p class="text-gray-600 mb-8">Estás a un solo paso de obtener tu certificado. Realiza el pago de <strong>$20.000 COP</strong> y contáctanos por WhatsApp para enviártelo.</p>
+                        <a href="https://wa.me/573107941580?text=¡Hola!%20Aprobé%20el%20examen%20de%20Manipulación%20de%20Alimentos.%20Quisiera%20proceder%20con%20el%20pago%20para%20obtener%20mi%20certificado." target="_blank" class="btn-main !bg-green-600 hover:!bg-green-700 text-lg !px-8 !py-3">
+                            <i class="fab fa-whatsapp mr-3"></i>Pagar y Obtener Certificado
+                        </a>
+                    </div>`;
+            } else {
+                // REPROBADO
+                resultsView.innerHTML = `
+                    <div class="text-center">
+                        <i class="fas fa-times-circle text-6xl text-red-500 mb-4"></i>
+                        <h2 class="text-3xl font-bold text-primary mb-3">Necesitas Estudiar un Poco Más</h2>
+                        <p class="text-gray-700 text-lg mb-6">Tu puntaje fue de <strong>${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%)</strong>. Necesitas ${passingScore * 100}% para aprobar.</p>
+                        <p class="text-gray-600 mb-8">No te preocupes. Te recomendamos repasar los módulos y volver a intentarlo. ¡Tú puedes!</p>
+                        <button id="retry-quiz-btn" class="btn-main">Volver a Intentar</button>
+                    </div>`;
+                document.getElementById("retry-quiz-btn").addEventListener("click", startQuiz);
+            }
+        }
+        
+        // Función para iniciar o reiniciar el examen
+        function startQuiz() {
+            // Reiniciar valores
+            currentQuestionIndex = 0;
+            score = 0;
+            // Ocultar las otras vistas y mostrar la del examen
+            startView.classList.add("hidden");
+            resultsView.classList.add("hidden");
+            quizView.classList.remove("hidden");
+            // Mostrar la primera pregunta
+            renderQuestion();
+        }
+
+        // --- 4. INICIALIZACIÓN ---
+        // Se añade la acción de "click" al botón de empezar. ¡Este es el punto de partida!
+        startExamBtn.addEventListener("click", startQuiz);
+    });
+    </script>
+</body>
+</html>
