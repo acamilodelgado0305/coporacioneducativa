@@ -2,87 +2,101 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Curso Avanzado de Manipulación de Alimentos | CertiTec colombia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Certificado de Manipulación de Alimentos Online | CertiTec Colombia
+    </title>
     <link rel="icon" href="logopagina.png" type="image/png" />
     <meta
       name="description"
-      content="Curso completo y robusto sobre la inocuidad de los alimentos en Colombia. Supera el examen y obtén tu certificado."
+      content="Obtén tu Certificado de Manipulación de Alimentos 100% online en menos de 1 hora. Curso, evaluación y emisión inmediata. Válido en toda Colombia (Resolución 2674 de 2013)."
     />
-    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Preload/Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preload" as="image" href="/certificado-preview.jpg" />
+
     <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: #f1f5f9; /* bg-slate-100 */
-      }
       :root {
-        --primary-color: #002e7d;
-        --secondary-color: #10b981;
-        --success-color: #22c55e; /* green-500 */
-        --error-color: #ef4444; /* red-500 */
+        --primary: #002e7d;
+        --secondary: #10b981;
+        --success: #22c55e;
+        --danger: #ef4444;
       }
-      .text-primary { color: var(--primary-color); }
-      .bg-primary { background-color: var(--primary-color); }
-      .text-secondary { color: var(--secondary-color); }
-      .border-secondary { border-color: var(--secondary-color); }
+      body {
+        font-family: Poppins, ui-sans-serif, system-ui;
+        background: #f1f5f9;
+      }
+      .text-primary {
+        color: var(--primary);
+      }
+      .bg-primary {
+        background: var(--primary);
+      }
       .btn-main {
-        background-color: var(--secondary-color);
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
-        font-weight: 600;
-        transition: all 0.2s ease-in-out;
-        border: none;
-        cursor: pointer;
+        background: var(--secondary);
+        color: #fff;
+        font-weight: 700;
+        padding: 0.9rem 1.25rem;
+        border-radius: 0.75rem;
+        transition: 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
       }
       .btn-main:hover {
-        background-color: #059669; /* emerald-600 */
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+        filter: brightness(0.95);
+        transform: translateY(-1px);
       }
-      .btn-main:disabled {
-        background-color: #9ca3af; /* gray-400 */
-        cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
+      .btn-ghost {
+        background: #fff;
+        border: 2px solid #e5e7eb;
+        border-radius: 0.75rem;
+        padding: 0.85rem 1.2rem;
+        font-weight: 600;
       }
-      #progress-bar {
-        position: fixed; top: 0; left: 0; height: 6px;
-        background-color: var(--secondary-color);
-        width: 0%; z-index: 100; transition: width 0.2s ease-out;
-      }
-      #course-nav a {
-        transition: all 0.2s ease-in-out;
-        border-left: 3px solid transparent;
-      }
-      #course-nav a.active {
-        background-color: #e0f2f1; /* emerald-50 */
-        color: var(--primary-color);
-        border-left-color: var(--secondary-color);
-        transform: translateX(4px);
-      }
-      #course-nav a.completed { color: var(--secondary-color); }
-      #course-nav a.completed::after {
-        content: "✔"; font-weight: bold; margin-left: 8px;
+      .shadow-soft {
+        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
       }
       .step-circle {
-        background-color: var(--secondary-color);
-        color: white; border-radius: 9999px; width: 2rem;
-        height: 2rem; display: inline-flex; align-items: center;
-        justify-content: center; margin-right: 0.75rem; font-size: 1rem;
-        font-weight: 600; flex-shrink: 0;
+        background: var(--secondary);
+        color: #fff;
+        width: 2rem;
+        height: 2rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 9999px;
+        font-weight: 800;
+        margin-right: 0.5rem;
+      }
+      /* Sticky CTA mobile */
+      .sticky-cta {
+        position: fixed;
+        inset: auto 0 0 0;
+        z-index: 50;
+      }
+      @media (min-width: 768px) {
+        .sticky-cta {
+          display: none;
+        }
       }
     </style>
+
+    <!-- Facebook Pixel -->
     <script>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
@@ -92,434 +106,675 @@
             : n.queue.push(arguments);
         };
         if (!f._fbq) f._fbq = n;
-        n.push = n; n.loaded = !0; n.version = "2.0"; n.queue = [];
-        t = b.createElement(e); t.async = !0; t.src = v;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
         s = b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t, s);
       })(
-        window, document, "script",
+        window,
+        document,
+        "script",
         "https://connect.facebook.net/en_US/fbevents.js"
       );
       fbq("init", "639715789143642");
       fbq("track", "PageView");
     </script>
-    <noscript><img height="1" width="1" style="display: none"
+    <noscript
+      ><img
+        height="1"
+        width="1"
+        style="display: none"
         src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
     /></noscript>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Es válido el certificado en toda Colombia?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. El certificado es válido a nivel nacional y se fundamenta en la Resolución 2674 de 2013."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto tarda el proceso?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La mayoría de los estudiantes completan curso, evaluación y emisión en menos de 60 minutos."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cómo pago?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Puedes pagar por PSE o transferencia (Nequi, Daviplata, Bancolombia)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuándo recibo mi certificado?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Tras validar el pago, el certificado queda disponible para verificación y descarga inmediata."
+            }
+          }
+        ]
+      }
+    </script>
   </head>
-  <body class="bg-slate-100">
-    <div id="progress-bar"></div>
-    <header class="bg-white shadow-sm sticky top-0 z-50">
+  <body>
+    <!-- Header -->
+    <header class="bg-white/90 backdrop-blur shadow-sm sticky top-0 z-40">
       <div
-        class="container mx-auto max-w-7xl p-4 flex justify-between items-center"
+        class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
       >
-        <h1 class="text-xl md:text-2xl font-bold text-primary">
-          CertiTec colombia: Curso Avanzado
-        </h1>
-        <a href="#quiz-start" class="btn-main hidden md:inline-block"
-          >Iniciar Examen</a
+        <a href="#" class="font-extrabold text-xl md:text-2xl text-primary"
+          >CertiTec Colombia</a
+        >
+        <nav class="hidden md:flex gap-6 text-sm font-semibold text-slate-700">
+          <a href="#beneficios" class="hover:text-primary">Beneficios</a>
+          <a href="#temario" class="hover:text-primary">Temario</a>
+          <a href="#quiz-start" class="hover:text-primary">Examen</a>
+        </nav>
+        <a href="#quiz-start" class="btn-main hidden md:inline-flex"
+          >Iniciar examen</a
         >
       </div>
     </header>
-    <div class="container mx-auto max-w-7xl mt-8 px-4">
-      <div class="lg:flex lg:space-x-8">
-        <aside class="hidden lg:block w-1/4">
-          <div class="sticky top-24">
-            <h3 class="font-bold text-lg text-primary mb-4">
-              Contenido del Curso
-            </h3>
-            <nav id="course-nav" class="flex flex-col space-y-2">
-                <a href="#intro" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Introducción</a>
-                <a href="#clave1" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 1: Limpieza</a>
-                <a href="#clave2" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 2: Separar</a>
-                <a href="#clave3" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 3: Cocinar</a>
-                <a href="#clave4" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 4: Temperatura</a>
-                <a href="#clave5" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Clave 5: Materias Primas</a>
-                <a href="#normativa" class="block p-3 rounded-md font-semibold text-gray-600 hover:bg-gray-200">Normativa Colombia</a>
-                <a href="#quiz-start" class="block p-3 rounded-md font-bold text-secondary hover:bg-gray-200">Evaluación Final</a>
-            </nav>
+
+    <!-- HERO -->
+    <section class="max-w-7xl mx-auto px-4 mt-6">
+      <div
+        class="bg-white rounded-2xl shadow-soft p-6 md:p-10 grid md:grid-cols-2 gap-8 items-center"
+      >
+        <div>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-primary">
+            Certificado de Manipulación de Alimentos
+          </h1>
+          <p class="mt-3 text-slate-700">
+            Curso y evaluación 100% online. Emite tu certificado en menos de 1
+            hora. Válido en toda Colombia (Resolución 2674 de 2013).
+          </p>
+          <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            <li class="bg-slate-50 p-3 rounded">✅ Certificado al instante</li>
+            <li class="bg-slate-50 p-3 rounded">
+              ✅ Pago seguro (PSE / transferencias)
+            </li>
+            <li class="bg-slate-50 p-3 rounded">✅ Soporte por WhatsApp</li>
+            <li class="bg-slate-50 p-3 rounded">
+              ✅ +3.000 certificados emitidos
+            </li>
+          </ul>
+          <div class="mt-6 flex gap-3">
+            <a href="#quiz-start" class="btn-main text-base"
+              >Iniciar examen ahora</a
+            >
+            <a
+              class="btn-ghost"
+              href="https://wa.me/573107941580?text=Hola%20necesito%20ayuda%20para%20obtener%20mi%20certificado"
+              >Ayuda por WhatsApp</a
+            >
           </div>
-        </aside>
-        <main class="w-full lg:w-3/4 space-y-12">
-            <section id="intro">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-extrabold text-primary mb-3">Bienvenido(a) al Curso Avanzado</h2>
-                    <p class="text-lg text-gray-600">Este curso está diseñado para darte un conocimiento profundo y práctico sobre la manipulación segura de alimentos, basado en estándares internacionales y la normativa colombiana. Estudia cada módulo con atención para superar la evaluación final.</p>
-                </div>
-            </section>
-            <section id="clave1">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-hands-wash mr-3 text-secondary"></i>Clave 1: Mantener la Limpieza</h2>
-                    <p class="text-gray-700 mb-4">La limpieza elimina la suciedad visible, pero la desinfección elimina los microorganismos. Ambos son cruciales.</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li><strong class="text-primary">Lavado de Manos:</strong> Mínimo 20 segundos con agua y jabón, especialmente después de tocar alimentos crudos, dinero, o ir al baño.</li>
-                        <li><strong class="text-primary">Limpieza de Superficies:</strong> Mesones, tablas de cortar y utensilios deben ser lavados y desinfectados regularmente. Una solución desinfectante común es una cucharadita de hipoclorito (límpido) por cada litro de agua.</li>
-                        <li><strong class="text-primary">Control de Plagas:</strong> Mantén las áreas limpias y los alimentos cubiertos para evitar la atracción de insectos y roedores.</li>
-                    </ul>
-                </div>
-            </section>
-             <section id="clave2">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-exchange-alt mr-3 text-secondary"></i>Clave 2: Separar Alimentos Crudos y Cocinados</h2>
-                    <p class="text-gray-700 mb-4">La contaminación cruzada es una de las principales causas de intoxicación. ¡Evítala siempre!</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li>Usa equipos y utensilios diferentes (cuchillos, tablas de cortar) para alimentos crudos (carnes, pollos) y alimentos listos para consumir (verduras, frutas, cocidos).</li>
-                        <li>En el refrigerador, almacena las carnes crudas en la parte inferior, en recipientes sellados, para evitar que sus jugos goteen sobre otros alimentos.</li>
-                    </ul>
-                </div>
-            </section>
-            <section id="clave3">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-fire-alt mr-3 text-secondary"></i>Clave 3: Cocinar Completamente</h2>
-                    <p class="text-gray-700 mb-4">La cocción adecuada elimina casi todos los microorganismos peligrosos.</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li>Asegúrate de que los alimentos, especialmente carnes, pollos, huevos y pescados, alcancen una temperatura interna segura (generalmente por encima de 75°C).</li>
-                        <li>Al recalentar comida, asegúrate de que llegue a un hervor o esté muy caliente en todo su volumen, no solo tibia.</li>
-                    </ul>
-                </div>
-            </section>
-            <section id="clave4">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-thermometer-half mr-3 text-secondary"></i>Clave 4: Mantener Alimentos a Temperaturas Seguras</h2>
-                    <p class="text-gray-700 mb-4">No dejes alimentos cocidos a temperatura ambiente por más de 2 horas. La "Zona de Peligro" de temperatura donde las bacterias se multiplican rápidamente es entre 5°C y 60°C.</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li><strong>Refrigeración:</strong> Por debajo de 5°C.</li>
-                        <li><strong>Congelación:</strong> Por debajo de -18°C.</li>
-                        <li><strong>Mantener en caliente:</strong> Por encima de 60°C.</li>
-                    </ul>
-                </div>
-            </section>
-            <section id="clave5">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-seedling mr-3 text-secondary"></i>Clave 5: Usar Agua y Materias Primas Seguras</h2>
-                    <p class="text-gray-700 mb-4">La seguridad empieza desde la selección de tus ingredientes.</p>
-                    <ul class="list-disc list-inside space-y-2 text-gray-700">
-                        <li>Utiliza siempre agua potable para lavar y preparar alimentos.</li>
-                        <li>Lava muy bien frutas y hortalizas, especialmente si se van a consumir crudas.</li>
-                        <li>No utilices alimentos después de su fecha de vencimiento. Revisa siempre el empaque.</li>
-                    </ul>
-                </div>
-            </section>
-            <section id="normativa">
-                <div class="bg-white p-6 rounded-lg shadow-md border-t-4 border-secondary">
-                    <h2 class="text-2xl font-bold text-primary mb-4"><i class="fas fa-gavel mr-3 text-secondary"></i>Normativa Clave en Colombia</h2>
-                    <p class="text-gray-700">En Colombia, el marco principal que regula las prácticas de higiene y manipulación de alimentos es la <strong class="text-primary">Resolución 2674 de 2013</strong>. Esta resolución establece los requisitos sanitarios que deben cumplir las personas, equipos y establecimientos que fabrican, procesan, envasan y venden alimentos en el país. Conocerla y aplicarla es una obligación legal y un compromiso con la salud pública.</p>
-                </div>
-            </section>
-            <section id="quiz-start" class="text-center py-12">
-                <h2 class="text-3xl font-bold text-primary mb-4">¿Listo para Probar tu Conocimiento?</h2>
-                <p class="text-gray-600 mb-6">Demuestra que has dominado los conceptos para obtener tu certificado.</p>
-                <button id="start-quiz-btn" class="btn-main text-xl !px-10 !py-4">¡Iniciar Examen Ahora!</button>
-            </section>
-        </main>
+          <p class="text-xs text-slate-500 mt-3">
+            Precio: <strong>$20.000 COP</strong>
+          </p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+          <figure class="bg-white rounded-xl shadow-soft p-3">
+            <img
+              src="../preview_certificado.png.png"
+              alt="Vista previa Certificado de Manipulación de Alimentos"
+              class="rounded-lg w-full h-auto"
+              loading="lazy"
+            />
+            <figcaption class="text-sm text-slate-600 mt-2 text-center">
+              Ejemplo de Certificado
+            </figcaption>
+          </figure>
+
+          <figure class="bg-white rounded-xl shadow-soft p-3">
+            <img
+              src="../preview_carnet.png.png"
+              alt="Vista previa Carnet de Manipulación de Alimentos"
+              class="rounded-lg w-full h-auto"
+              loading="lazy"
+            />
+            <figcaption class="text-sm text-slate-600 mt-2 text-center">
+              Ejemplo de Carnet
+            </figcaption>
+          </figure>
+        </div>
       </div>
+    </section>
+
+    <!-- Beneficios / Confianza -->
+    <section id="beneficios" class="max-w-7xl mx-auto px-4 mt-10">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-soft">
+          <h3 class="font-bold text-lg text-primary">Válido en Colombia</h3>
+          <p class="text-slate-700 mt-2">
+            Cumple con la Resolución 2674 de 2013. Aceptado por entidades
+            sanitarias.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-soft">
+          <h3 class="font-bold text-lg text-primary">Rápido y sencillo</h3>
+          <p class="text-slate-700 mt-2">
+            Curso práctico + evaluación. La mayoría lo completa en 60 minutos.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-soft">
+          <h3 class="font-bold text-lg text-primary">Soporte humano</h3>
+          <p class="text-slate-700 mt-2">
+            ¿Dudas? Escríbenos por WhatsApp. Te guiamos paso a paso.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Temario resumido -->
+    <section id="temario" class="max-w-7xl mx-auto px-4 mt-10">
+      <div class="bg-white rounded-2xl shadow-soft p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-primary mb-4">
+          Contenido del curso
+        </h2>
+        <div class="grid md:grid-cols-2 gap-6 text-slate-700">
+          <ul class="list-disc list-inside space-y-2">
+            <li>Clave 1: Limpieza e higiene personal</li>
+            <li>Clave 2: Separación de crudos y cocidos</li>
+            <li>Clave 3: Cocción segura</li>
+            <li>Clave 4: Control de temperaturas</li>
+            <li>Clave 5: Agua e insumos seguros</li>
+          </ul>
+          <ul class="list-disc list-inside space-y-2">
+            <li>Normativa colombiana: Resolución 2674 de 2013</li>
+            <li>Buenas prácticas y control de plagas</li>
+            <li>Almacenamiento, rotulación y fechas</li>
+            <li>Prevención de contaminación cruzada</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Examen -->
+    <section id="quiz-start" class="max-w-7xl mx-auto px-4 mt-10 text-center">
+      <div class="bg-white rounded-2xl shadow-soft p-8">
+        <h2 class="text-3xl font-extrabold text-primary">
+          ¿Listo para obtener tu certificado?
+        </h2>
+        <p class="text-slate-600 mt-2">
+          Presenta la evaluación. Si apruebas, completas tus datos y realizas el
+          pago.
+        </p>
+        <button id="start-quiz-btn" class="btn-main text-lg mt-6 px-6 py-4">
+          ¡Iniciar evaluación!
+        </button>
+        <p class="text-xs text-slate-500 mt-3">Necesitas 75% para aprobar.</p>
+      </div>
+    </section>
+
+    <!-- Sticky CTA (móvil) -->
+    <div class="sticky-cta bg-white border-t p-3 flex gap-3">
+      <a href="#quiz-start" class="btn-main flex-1">Iniciar examen</a>
+      <a
+        href="https://wa.me/573107941580?text=Hola%20necesito%20ayuda%20para%20obtener%20mi%20certificado"
+        class="btn-ghost flex-1 text-center"
+        >WhatsApp</a
+      >
     </div>
+
+    <!-- Modal Evaluación -->
     <div
       id="quiz-modal"
-      class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50 p-4"
+      class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
     >
       <div
-        class="bg-white w-full max-w-2xl rounded-lg shadow-2xl p-6 md:p-8 transform transition-all scale-95 opacity-0"
+        class="bg-white w-full max-w-2xl rounded-xl p-6 md:p-8 shadow-2xl"
         id="quiz-content"
       ></div>
     </div>
 
-    <div id="certificate-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[60] p-4 overflow-y-auto">
-      <div class="bg-white w-full max-w-lg rounded-lg shadow-2xl p-6 md:p-8 transform transition-all scale-95 opacity-0" id="certificate-content">
+    <!-- Modal Certificado / Pago -->
+    <div
+      id="certificate-modal"
+      class="hidden fixed inset-0 bg-black/75 flex items-center justify-center z-[60] p-4 overflow-y-auto"
+    >
+      <div
+        class="bg-white w-full max-w-lg rounded-2xl p-6 md:p-8 shadow-2xl"
+        id="certificate-content"
+      >
+        <!-- Paso 1: Datos -->
         <div id="modal-step-1">
           <div class="text-center">
-            <i class="fas fa-award text-6xl text-yellow-400 mb-4"></i>
             <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
-              ¡Excelente! Has aprobado el examen
+              ¡Aprobaste! 🎉
             </h3>
-            <p class="text-gray-600 mt-2 text-base" id="final-score-text"></p>
+            <p class="text-slate-600 mt-1" id="final-score-text"></p>
           </div>
-          <div class="mt-8 text-left border-t pt-6">
-            <h4 class="font-bold text-xl text-primary flex items-center mb-4">
+          <div class="mt-6">
+            <h4 class="font-bold text-xl text-primary flex items-center mb-3">
               <span class="step-circle">1</span>Completa tus datos
             </h4>
             <div class="space-y-4">
               <div>
-                <label for="fullName" class="block font-semibold text-gray-700 mb-1">Nombre Completo</label>
-                <input type="text" id="fullName" placeholder="Tu nombre para el certificado" class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"/>
+                <label class="block font-semibold">Nombre completo</label>
+                <input
+                  id="fullName"
+                  class="w-full border border-gray-300 rounded-lg p-2"
+                  placeholder="Tal como aparecerá en el certificado"
+                />
               </div>
-              <div>
-                <label for="documentId" class="block font-semibold text-gray-700 mb-1">Documento de Identidad</label>
-                <div class="grid grid-cols-3 gap-2">
-                   <select id="documentType" class="col-span-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary">
-                      <option value="CC">C.C.</option>
-                      <option value="CE">C.E.</option>
-                      <option value="Pasaporte">Pasaporte</option>
-                      <option value="PPT">PPT</option>
-                   </select>
-                   <input type="text" id="documentId" placeholder="Tu número" class="col-span-2 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-secondary focus:border-secondary"/>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="block font-semibold">Tipo</label>
+                  <select
+                    id="documentType"
+                    class="w-full border border-gray-300 rounded-lg p-2"
+                  >
+                    <option value="CC">C.C.</option>
+                    <option value="CE">C.E.</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="PPT">PPT</option>
+                  </select>
+                </div>
+                <div class="col-span-2">
+                  <label class="block font-semibold">Documento</label>
+                  <input
+                    id="documentId"
+                    class="w-full border border-gray-300 rounded-lg p-2"
+                    placeholder="Número"
+                  />
                 </div>
               </div>
+              <div>
+                <label class="block font-semibold">Correo electrónico</label>
+                <input
+                  id="email"
+                  type="email"
+                  class="w-full border border-gray-300 rounded-lg p-2"
+                  placeholder="Para enviar copia del certificado"
+                />
+              </div>
             </div>
-            <button id="go-to-step-2-btn" class="btn-main w-full !py-3 text-lg mt-8">
-              Siguiente: Realizar Pago <i class="fas fa-arrow-right ml-2"></i>
+            <button id="go-to-step-2-btn" class="btn-main w-full mt-6">
+              Siguiente: elegir pago →
             </button>
           </div>
         </div>
+
+        <!-- Paso 2: Pago -->
         <div id="modal-step-2" class="hidden">
           <div class="text-center">
-            <i class="fas fa-wallet text-6xl text-secondary mb-4"></i>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">Realiza el Pago</h3>
-            <p class="text-gray-600 mt-2 text-base">Elige tu método preferido para emitir tu certificado.</p>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
+              Realiza el pago
+            </h3>
+            <p class="text-slate-600 mt-1">
+              Monto: <strong>$20.000 COP</strong>
+            </p>
           </div>
-          <div class="mt-8 text-left space-y-6">
-            <div>
-              <h4 class="font-bold text-xl text-primary flex items-center mb-4">
-                <span class="step-circle">2</span>Elige tu método de pago
-              </h4>
-              <div class="bg-slate-100 p-3 my-4 rounded-lg text-center">
-                <p class="text-gray-600 text-sm">Valor de la expedición</p>
-                <p class="text-3xl font-extrabold text-primary">$20.000 <span class="text-2xl font-semibold">COP</span></p>
-              </div>
-              <div class="space-y-3">
-                   <a href="https://linkdepagospse.rappipay.co/kZYKi5" target="_blank" class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg hover:border-primary transition-all text-lg">
-                     <img src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp" alt="Logo PSE" class="h-8"/>
-                     <span>Pagar con PSE</span>
-                   </a>
-                   
-                   <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                     <h5 class="font-bold text-lg text-primary mb-3 text-center">Pagar por Transferencia</h5>
-                     <p class="text-sm text-gray-600 mb-4 text-center">Realiza tu pago a cualquiera de las siguientes cuentas:</p>
-                     <ul class="space-y-2 text-gray-700">
-                       <li class="flex justify-between items-center">
-                         <span class="font-semibold">✅ Daviplata:</span>
-                         <strong class="font-mono">3223267797</strong>
-                       </li>
-                       <li class="flex justify-between items-center">
-                         <span class="font-semibold">✅ Nequi:</span>
-                         <strong class="font-mono">3223267797</strong>
-                       </li>
-                       <li class="flex justify-between items-center">
-                         <span class="font-semibold">✅ Bancolombia Ahorros:</span>
-                         <strong class="font-mono">816-589697-49</strong>
-                       </li>
-                     </ul>
-                     <p class="text-xs text-gray-500 mt-4 text-center">
-                       Recuerda guardar el comprobante. Lo necesitarás en el siguiente paso.
-                     </p>
-                   </div>
-                   </div>
+          <div class="mt-6 space-y-5">
+            <h4 class="font-bold text-xl text-primary flex items-center mb-2">
+              <span class="step-circle">2</span>Elige tu método
+            </h4>
+            <a
+              href="https://linkdepagospse.rappipay.co/kZYKi5"
+              target="_blank"
+              class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg hover:border-blue-700 transition-all text-lg"
+            >
+              <img
+                src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp"
+                alt="Logo PSE"
+                class="h-8"
+                loading="lazy"
+              />
+              <span
+                >Pagar con PSE
+                <span class="text-xs font-normal">(recomendado)</span></span
+              >
+            </a>
+
+            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+              <h5 class="font-bold text-lg text-primary text-center mb-3">
+                Transferencia
+              </h5>
+              <ul class="text-slate-700 space-y-2">
+                <li class="flex justify-between">
+                  <span>✅ Daviplata:</span
+                  ><strong class="font-mono">3223267797</strong>
+                </li>
+                <li class="flex justify-between">
+                  <span>✅ Nequi:</span
+                  ><strong class="font-mono">3223267797</strong>
+                </li>
+                <li class="flex justify-between">
+                  <span>✅ Bancolombia Ahorros:</span
+                  ><strong class="font-mono">816-589697-49</strong>
+                </li>
+              </ul>
+              <p class="text-xs text-slate-500 mt-3">
+                Validación manual (puede tardar unas horas).
+              </p>
             </div>
-            <button id="go-to-step-3-btn" class="btn-main w-full !py-3 text-lg">
-              Ya realicé el pago, siguiente <i class="fas fa-arrow-right ml-2"></i>
-            </button>
           </div>
-          <div class="text-center mt-6">
-            <button id="go-to-step-1-btn" class="text-sm text-gray-500 hover:text-primary font-semibold">
-              &larr; Volver y corregir mis datos
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button id="go-to-step-3-btn" class="btn-main w-full">
+              Ya pagué, continuar →
+            </button>
+            <button id="go-to-step-1-btn" class="btn-ghost w-full">
+              ← Corregir mis datos
             </button>
           </div>
         </div>
+
+        <!-- Paso 3: Comprobante y verificación -->
         <div id="modal-step-3" class="hidden">
           <div class="text-center">
-            <i class="fas fa-check-circle text-6xl text-green-500 mb-4"></i>
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">¡Proceso Casi Completo!</h3>
-            <p class="text-gray-600 mt-2 text-base">Solo falta un paso para finalizar.</p>
+            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
+              Último paso
+            </h3>
+            <p class="text-slate-600 mt-1">
+              Envíanos el comprobante para validar tu certificado.
+            </p>
           </div>
-          <div class="mt-8 text-left space-y-6">
-            <div>
-              <h4 class="font-bold text-xl text-primary flex items-center mb-3">
-                <span class="step-circle">3</span>Envía el comprobante
-              </h4>
-              <p class="text-gray-700 text-sm mb-4">
-                Haz clic en el botón para abrir WhatsApp y <strong>adjunta tu comprobante de pago</strong>. Esto es indispensable para validar tu certificado.
-              </p>
-              <button id="generate-whatsapp-btn" class="w-full !py-3 text-lg bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
-                <i class="fab fa-whatsapp"></i>Enviar Comprobante
-              </button>
-            </div>
-            <div class="border-t pt-6">
-              <h4 class="font-bold text-xl text-primary flex items-center mb-3">
+          <div class="mt-6 space-y-5">
+            <h4 class="font-bold text-xl text-primary flex items-center">
+              <span class="step-circle">3</span>Enviar comprobante
+            </h4>
+            <input
+              type="file"
+              id="receiptFile"
+              accept="image/*,application/pdf"
+              class="w-full border border-gray-300 rounded-lg p-2"
+            />
+            <button id="upload-receipt-btn" class="btn-ghost w-full">
+              Subir comprobante
+            </button>
+            <button
+              id="generate-whatsapp-btn"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg py-3"
+            >
+              Enviar por WhatsApp
+            </button>
+
+            <div class="border-t pt-5">
+              <h4 class="font-bold text-xl text-primary flex items-center mb-2">
                 <span class="step-circle">4</span>Verifica y descarga
               </h4>
-              <p class="text-gray-700 text-sm mb-4">
-                Una vez validemos tu pago (esto puede tardar unas horas), tu certificado aparecerá en el siguiente enlace. <strong>¡Guárdalo para consultarlo más tarde!</strong>
+              <p class="text-slate-600 text-sm mb-3">
+                Cuando validemos tu pago, podrás ver tu certificado aquí:
               </p>
-              <a href="https://quickcontrola.com/verificacion" target="_blank" class="w-full !py-3 text-lg bg-primary hover:bg-blue-800 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2">
-                <i class="fas fa-search"></i>Verificar mi Certificado
-              </a>
+              <a
+                href="https://quickcontrola.com/verificacion"
+                target="_blank"
+                class="btn-main w-full"
+                >Verificar mi certificado</a
+              >
             </div>
           </div>
           <div class="text-center mt-6">
-            <button id="go-to-step-2-btn-back" class="text-sm text-gray-500 hover:text-primary font-semibold">
-              &larr; Volver a los métodos de pago
+            <button id="go-to-step-2-btn-back" class="btn-ghost w-full">
+              ← Volver a métodos de pago
             </button>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- FAQ -->
+    <section class="max-w-7xl mx-auto px-4 mt-12 mb-24">
+      <div class="bg-white rounded-2xl shadow-soft p-6 md:p-8">
+        <h2 class="text-2xl md:text-3xl font-extrabold text-primary mb-4">
+          Preguntas frecuentes
+        </h2>
+        <div class="divide-y">
+          <details class="py-3" open>
+            <summary class="font-semibold cursor-pointer">
+              ¿El certificado es válido en todo el país?
+            </summary>
+            <p class="text-slate-700 mt-2">
+              Sí. Es válido a nivel nacional y se sustenta en la Resolución 2674
+              de 2013.
+            </p>
+          </details>
+          <details class="py-3">
+            <summary class="font-semibold cursor-pointer">
+              ¿Cuánto tiempo toma el proceso?
+            </summary>
+            <p class="text-slate-700 mt-2">
+              En promedio, 60 minutos entre curso, evaluación y emisión.
+            </p>
+          </details>
+          <details class="py-3">
+            <summary class="font-semibold cursor-pointer">
+              ¿Qué medios de pago aceptan?
+            </summary>
+            <p class="text-slate-700 mt-2">
+              PSE y transferencias (Nequi, Daviplata, Bancolombia).
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scripts -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const sections = document.querySelectorAll("main section");
-            const navLinks = document.querySelectorAll("#course-nav a");
-            const progressBar = document.getElementById("progress-bar");
+      document.addEventListener("DOMContentLoaded", () => {
+        const startQuizBtn = document.getElementById("start-quiz-btn");
+        const quizModal = document.getElementById("quiz-modal");
+        const quizContent = document.getElementById("quiz-content");
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        navLinks.forEach((link) => {
-                            link.classList.remove("active");
-                            if (link.getAttribute("href").substring(1) === entry.target.id) {
-                                link.classList.add("active", "completed");
-                            }
-                        });
-                    }
-                });
-            }, { rootMargin: "-50% 0px -50% 0px", threshold: 0 });
+        const certificateModal = document.getElementById("certificate-modal");
+        const modal1 = document.getElementById("modal-step-1");
+        const modal2 = document.getElementById("modal-step-2");
+        const modal3 = document.getElementById("modal-step-3");
 
-            sections.forEach((section) => observer.observe(section));
+        const goToStep1Btn = document.getElementById("go-to-step-1-btn");
+        const goToStep2Btn = document.getElementById("go-to-step-2-btn");
+        const goToStep2BtnBack = document.getElementById(
+          "go-to-step-2-btn-back"
+        );
+        const goToStep3Btn = document.getElementById("go-to-step-3-btn");
 
-            window.addEventListener("scroll", () => {
-                const scrollTop = window.scrollY;
-                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-                const scrollPercent = (scrollTop / docHeight) * 100;
-                progressBar.style.width = `${scrollPercent}%`;
-            });
+        const fullName = document.getElementById("fullName");
+        const documentType = document.getElementById("documentType");
+        const documentId = document.getElementById("documentId");
+        const email = document.getElementById("email");
 
-            const startQuizBtn = document.getElementById("start-quiz-btn");
-            const quizModal = document.getElementById("quiz-modal");
-            const quizContent = document.getElementById("quiz-content");
-            const certificateModal = document.getElementById("certificate-modal");
-            const certificateContent = document.getElementById("certificate-content");
-            
-            const questions = [
-                { question: "La Resolución que rige la manipulación de alimentos en Colombia es:", options: ["La 1080 de 1992", "La 2674 de 2013", "El Decreto 780 de 2016"], answer: 1 },
-                { question: "¿Cuál es la forma más efectiva de evitar la contaminación cruzada?", options: ["Lavar los alimentos con vinagre", "Usar diferentes tablas de cortar para crudos y cocidos", "Cocinar todo a fuego muy alto"], answer: 1 },
-                { question: "La 'Zona de Peligro' de temperatura para la proliferación bacteriana es:", options: ["0°C a 10°C", "-5°C a 5°C", "5°C a 60°C"], answer: 2 },
-                { question: "El lavado de manos debe durar un mínimo de:", options: ["5 segundos", "10 segundos", "20 segundos"], answer: 2 },
-                { question: "Para desinfectar superficies, una práctica común es usar:", options: ["Solo agua caliente", "Una solución de hipoclorito y agua", "Jugo de limón"], answer: 1 },
-                { question: "¿Dónde se deben almacenar las carnes crudas en el refrigerador?", options: ["En la parte superior para que enfríen más rápido", "Junto a las verduras para ahorrar espacio", "En la parte inferior y en recipientes sellados"], answer: 2 },
-                { question: "La cocción completa de un alimento generalmente asegura que se eliminen:", options: ["Los nutrientes", "Los microorganismos peligrosos", "El sabor"], answer: 1 },
-                { question: "No se deben dejar alimentos cocidos a temperatura ambiente por más de:", options: ["8 horas", "4 horas", "2 horas"], answer: 2 },
-            ];
+        const receiptInput = document.getElementById("receiptFile");
+        const uploadReceiptBtn = document.getElementById("upload-receipt-btn");
 
-            const passingScore = 0.75;
-            let currentQuestionIndex = 0;
-            let score = 0;
+        const questions = [
+          {
+            q: "La Resolución que rige la manipulación de alimentos en Colombia es:",
+            opt: ["1080 de 1992", "2674 de 2013", "780 de 2016"],
+            a: 1,
+          },
+          {
+            q: "¿Cómo evitas mejor la contaminación cruzada?",
+            opt: [
+              "Lavar con vinagre",
+              "Tablas separadas para crudos y cocidos",
+              "Cocinar a fuego alto",
+            ],
+            a: 1,
+          },
+          {
+            q: "La 'Zona de Peligro' de temperatura es:",
+            opt: ["0°C a 10°C", "-5°C a 5°C", "5°C a 60°C"],
+            a: 2,
+          },
+          {
+            q: "¿Cuánto dura el lavado de manos?",
+            opt: ["5 s", "10 s", "20 s"],
+            a: 2,
+          },
+          {
+            q: "Para desinfectar superficies, es común usar:",
+            opt: ["Agua caliente", "Hipoclorito + agua", "Jugo de limón"],
+            a: 1,
+          },
+          {
+            q: "¿Dónde almacenar carnes crudas en refrigerador?",
+            opt: [
+              "Parte superior",
+              "Con verduras",
+              "Parte inferior en recipientes",
+            ],
+            a: 2,
+          },
+          {
+            q: "La cocción completa elimina:",
+            opt: ["Nutrientes", "Microorganismos peligrosos", "Sabor"],
+            a: 1,
+          },
+          {
+            q: "No dejar alimentos cocidos a temperatura ambiente más de:",
+            opt: ["8 h", "4 h", "2 h"],
+            a: 2,
+          },
+        ];
+        const pass = 0.75;
+        let i = 0,
+          score = 0;
 
-            const modalStep1 = document.getElementById("modal-step-1");
-            const modalStep2 = document.getElementById("modal-step-2");
-            const modalStep3 = document.getElementById("modal-step-3");
-            const goToStep1Btn = document.getElementById("go-to-step-1-btn");
-            const goToStep2Btn = document.getElementById("go-to-step-2-btn");
-            const goToStep2BtnBack = document.getElementById("go-to-step-2-btn-back");
-            const goToStep3Btn = document.getElementById("go-to-step-3-btn");
-            
-            const fullNameInput = document.getElementById("fullName");
-            const documentTypeInput = document.getElementById("documentType"); // Nuevo
-            const documentIdInput = document.getElementById("documentId");
+        function openQuiz() {
+          fbq("track", "StartQuiz");
+          i = 0;
+          score = 0;
+          quizModal.classList.remove("hidden");
+          renderQ();
+        }
+        function renderQ() {
+          const x = questions[i];
+          quizContent.innerHTML = `<div class='text-sm font-semibold text-slate-500 mb-2'>Pregunta ${
+            i + 1
+          } de ${questions.length}</div>
+      <h3 class='text-2xl font-bold text-primary mb-4'>${x.q}</h3>
+      <div class='space-y-3'>${x.opt
+        .map(
+          (o, idx) =>
+            `<button class='w-full text-left p-4 border-2 border-gray-200 rounded-lg option' data-i='${idx}'>${o}</button>`
+        )
+        .join("")}</div>
+      <div class='flex justify-end mt-4'><button class='btn-main' id='next' disabled>Siguiente →</button></div>`;
+          quizContent
+            .querySelectorAll(".option")
+            .forEach((b) => b.addEventListener("click", onSelect));
+          quizContent.querySelector("#next").addEventListener("click", onNext);
+        }
+        function onSelect(e) {
+          const sel = +e.currentTarget.dataset.i;
+          const correct = questions[i].a;
+          quizContent
+            .querySelectorAll(".option")
+            .forEach((b) => (b.disabled = true));
+          if (sel === correct) {
+            score++;
+            e.currentTarget.classList.add("border-green-500", "bg-green-50");
+          } else {
+            e.currentTarget.classList.add("border-red-500", "bg-red-50");
+            quizContent
+              .querySelector(`.option[data-i='${correct}']`)
+              .classList.add("border-green-500", "bg-green-50");
+          }
+          quizContent.querySelector("#next").disabled = false;
+        }
+        function onNext() {
+          i++;
+          i < questions.length ? renderQ() : showResult();
+        }
 
-            function navigateToStep(step) {
-                modalStep1.classList.add("hidden");
-                modalStep2.classList.add("hidden");
-                modalStep3.classList.add("hidden");
-                if (step === 1) modalStep1.classList.remove("hidden");
-                if (step === 2) modalStep2.classList.remove("hidden");
-                if (step === 3) modalStep3.classList.remove("hidden");
-            }
+        function showResult() {
+          quizModal.classList.add("hidden");
+          const pct = score / questions.length;
+          const text = document.getElementById("final-score-text");
+          if (pct >= pass) {
+            text.textContent = `Tu puntaje: ${score}/${
+              questions.length
+            } (${Math.round(pct * 100)}%).`;
+            certificateModal.classList.remove("hidden");
+            showStep(1);
+          } else {
+            quizModal.classList.remove("hidden");
+            quizContent.innerHTML = `<h3 class='text-2xl font-bold text-primary mb-2 text-center'>Examen no superado</h3><p class='text-center text-slate-700 mb-4'>Obtuviste ${score}/${
+              questions.length
+            } (${Math.round(
+              pct * 100
+            )}%). Necesitas 75%.</p><div class='text-center'><button class='btn-main' id='retry'>Reintentar</button></div>`;
+            quizContent
+              .querySelector("#retry")
+              .addEventListener("click", openQuiz);
+          }
+        }
 
-            goToStep2Btn.addEventListener("click", () => {
-                if (fullNameInput.value.trim() === "" || documentIdInput.value.trim() === "") {
-                    alert("Por favor, completa tu nombre y número de documento para continuar.");
-                    return;
-                }
-                navigateToStep(2);
-            });
+        function showStep(n) {
+          [modal1, modal2, modal3].forEach((m) => m.classList.add("hidden"));
+          if (n === 1) modal1.classList.remove("hidden");
+          if (n === 2) {
+            modal2.classList.remove("hidden");
+            fbq("track", "AddPaymentInfo");
+          }
+          if (n === 3) modal3.classList.remove("hidden");
+        }
 
-            goToStep1Btn.addEventListener("click", () => navigateToStep(1));
-            goToStep3Btn.addEventListener("click", () => navigateToStep(3));
-            goToStep2BtnBack.addEventListener("click", () => navigateToStep(2));
-            
-            function startQuiz() {
-                fbq("track", "StartQuiz");
-                currentQuestionIndex = 0;
-                score = 0;
-                quizModal.classList.remove("hidden");
-                setTimeout(() => {
-                    quizContent.classList.add("scale-100", "opacity-100");
-                    quizContent.classList.remove("scale-95", "opacity-0");
-                }, 50);
-                renderQuestion();
-            }
+        startQuizBtn.addEventListener("click", openQuiz);
 
-            function renderQuestion() {
-                const q = questions[currentQuestionIndex];
-                quizContent.innerHTML = `<div class="mb-2 text-sm font-semibold text-gray-500">Pregunta ${currentQuestionIndex + 1} de ${questions.length}</div><h3 class="text-2xl font-bold text-primary mb-6">${q.question}</h3><div id="options-container" class="space-y-3 mb-6">${q.options.map((option, index) => `<button data-index="${index}" class="option-btn block w-full text-left p-4 rounded-lg border-2 border-gray-300 hover:border-secondary transition-all">${option}</button>`).join("")}</div><div id="feedback" class="h-8 text-center font-bold"></div><div class="flex justify-end mt-4"><button id="next-q-btn" class="btn-main" disabled>Siguiente &rarr;</button></div>`;
-                document.querySelectorAll(".option-btn").forEach((btn) => btn.addEventListener("click", selectAnswer));
-            }
-
-            function selectAnswer(e) {
-                const selectedBtn = e.currentTarget;
-                const selectedIndex = parseInt(selectedBtn.dataset.index);
-                const correctIndex = questions[currentQuestionIndex].answer;
-                document.querySelectorAll(".option-btn").forEach((btn) => (btn.disabled = true));
-                const feedbackEl = document.getElementById("feedback");
-                if (selectedIndex === correctIndex) {
-                    score++;
-                    selectedBtn.classList.add("border-green-500", "bg-green-50");
-                    feedbackEl.textContent = "¡Correcto!";
-                    feedbackEl.style.color = "var(--success-color)";
-                } else {
-                    selectedBtn.classList.add("border-red-500", "bg-red-50");
-                    feedbackEl.textContent = "Incorrecto.";
-                    feedbackEl.style.color = "var(--error-color)";
-                    document.querySelector(`.option-btn[data-index="${correctIndex}"]`).classList.add("border-green-500", "bg-green-50");
-                }
-                document.getElementById("next-q-btn").disabled = false;
-            }
-            
-            quizContent.addEventListener("click", (e) => {
-                if (e.target && e.target.id === "next-q-btn") {
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < questions.length) {
-                        renderQuestion();
-                    } else {
-                        showResults();
-                    }
-                }
-            });
-            
-            function showResults() {
-                quizModal.classList.add("hidden");
-                const finalScorePercent = score / questions.length;
-                if (finalScorePercent >= passingScore) {
-                    document.getElementById("final-score-text").textContent = `Tu puntaje: ${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%).`;
-                    certificateModal.classList.remove("hidden");
-                    navigateToStep(1); // Siempre iniciar en el paso 1
-                    setTimeout(() => {
-                        certificateContent.classList.add("scale-100", "opacity-100");
-                        certificateContent.classList.remove("scale-95", "opacity-0");
-                    }, 50);
-                } else {
-                    quizContent.innerHTML = `<h3 class="text-2xl font-bold text-primary mb-4 text-center">Examen no superado</h3><p class="text-center text-gray-700 mb-6">Tu puntaje fue de ${score}/${questions.length} (${Math.round(finalScorePercent * 100)}%). Necesitas al menos un ${passingScore * 100}% para aprobar.</p><p class="text-center text-gray-700 mb-8">Te recomendamos repasar los módulos y volver a intentarlo.</p><div class="text-center"><button id="retry-quiz-btn" class="btn-main">Volver a Intentar</button></div>`;
-                    quizModal.classList.remove("hidden");
-                    document.getElementById("retry-quiz-btn").addEventListener("click", () => {
-                        quizModal.classList.add("hidden");
-                        startQuiz();
-                    });
-                }
-            }
-
-            startQuizBtn.addEventListener("click", startQuiz);
-
-            document.getElementById("generate-whatsapp-btn").addEventListener("click", () => {
-                if (fullNameInput.value.trim() === "" || documentIdInput.value.trim() === "") {
-                    alert("Hubo un error. Por favor, vuelve atrás y completa tus datos.");
-                    return;
-                }
-                fbq("track", "Lead");
-                const baseMessage = `¡Hola! He completado el curso y adjunto mi comprobante de pago para el certificado.`;
-                const userInfo = `\n\n*Nombre:* ${fullNameInput.value.trim()}\n*Documento:* ${documentTypeInput.value} ${documentIdInput.value.trim()}`; // Incluye el tipo de doc
-                const finalMessage = encodeURIComponent(baseMessage + userInfo);
-                const whatsappUrl = `https://wa.me/573107941580?text=${finalMessage}`;
-                window.open(whatsappUrl, "_blank");
-            });
+        goToStep2Btn.addEventListener("click", () => {
+          if (!fullName.value.trim() || !documentId.value.trim()) {
+            alert("Por favor, completa nombre y documento.");
+            return;
+          }
+          showStep(2);
         });
+        goToStep1Btn.addEventListener("click", () => showStep(1));
+        goToStep3Btn.addEventListener("click", () => showStep(3));
+        document
+          .getElementById("go-to-step-2-btn-back")
+          .addEventListener("click", () => showStep(2));
+
+        // Upload comprobante (placeholder sin backend)
+        uploadReceiptBtn.addEventListener("click", () => {
+          if (!receiptInput.files.length) {
+            alert("Adjunta un archivo de comprobante.");
+            return;
+          }
+          alert(
+            "Comprobante adjuntado localmente. (Integrar backend para guardarlo)."
+          );
+        });
+
+        // WhatsApp con datos + evento Lead
+        document
+          .getElementById("generate-whatsapp-btn")
+          .addEventListener("click", () => {
+            if (!fullName.value.trim() || !documentId.value.trim()) {
+              alert("Faltan datos. Regresa y complétalos.");
+              return;
+            }
+            fbq("track", "Lead");
+            const msg = `¡Hola! He completado el curso y adjunto el comprobante para mi certificado.\n\n*Nombre:* ${fullName.value.trim()}\n*Documento:* ${
+              documentType.value
+            } ${documentId.value.trim()}${
+              email.value ? `\n*Email:* ${email.value.trim()}` : ""
+            }`;
+            const url = `https://wa.me/573107941580?text=${encodeURIComponent(
+              msg
+            )}`;
+            window.open(url, "_blank");
+          });
+      });
     </script>
   </body>
 </html>
