@@ -218,9 +218,7 @@
             </li>
           </ul>
           <div class="mt-6 flex gap-3">
-            <a href="#quiz-start" class="btn-main text-base"
-              >Iniciar examen ahora</a
-            >
+            <a class="btn-main" data-open-quiz>Iniciar examen ahora</a>
             <a
               class="btn-ghost"
               href="https://wa.me/573107941580?text=Hola%20necesito%20ayuda%20para%20obtener%20mi%20certificado"
@@ -327,7 +325,8 @@
 
     <!-- Sticky CTA (móvil) -->
     <div class="sticky-cta bg-white border-t p-3 flex gap-3">
-      <a href="#quiz-start" class="btn-main flex-1">Iniciar examen</a>
+      <a class="btn-main" data-open-quiz>Iniciar examen ahora</a>
+
       <a
         href="https://wa.me/573107941580?text=Hola%20necesito%20ayuda%20para%20obtener%20mi%20certificado"
         class="btn-ghost flex-1 text-center"
@@ -674,6 +673,31 @@
             .forEach((b) => b.addEventListener("click", onSelect));
           quizContent.querySelector("#next").addEventListener("click", onNext);
         }
+
+        function isOpenQuizText(el) {
+          const t = (el.textContent || el.value || "").toLowerCase().trim();
+          return /iniciar.*(examen|evaluación)|^examen$|^evaluación$/i.test(t);
+        }
+
+        function shouldOpenQuiz(el) {
+          // Botón con id clásico
+          if (el.id === "start-quiz-btn") return true;
+          // Cualquier elemento con atributo data-open-quiz
+          if (el.closest("[data-open-quiz]")) return true;
+          // Cualquier enlace que apunte a #quiz-start
+          if (el.closest("a[href='#quiz-start']")) return true;
+          // Cualquier botón/enlace cuyo texto haga match
+          const clickable = el.closest("a, button, [role='button']");
+          return clickable ? isOpenQuizText(clickable) : false;
+        }
+
+        // Delegación global: captura clics y abre el modal
+        document.addEventListener("click", function (e) {
+          if (!shouldOpenQuiz(e.target)) return;
+          e.preventDefault();
+          openQuiz();
+        });
+
         function onSelect(e) {
           const sel = +e.currentTarget.dataset.i;
           const correct = questions[i].a;
