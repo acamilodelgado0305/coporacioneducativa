@@ -1,19 +1,18 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-IA" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
-      Certificado de Manipulación de Alimentos Online | CertiTec Colombia
+      Evaluación - Certificado de Manipulación de Alimentos | CertiTec Colombia
     </title>
     <link rel="icon" href="logopagina.png" type="image/png" />
     <meta
       name="description"
-      content="Obtén tu Certificado de Manipulación de Alimentos 100% online en menos de 1 hora. Curso, evaluación y emisión inmediata. Válido en toda Colombia (Resolución 2674 de 2013)."
+      content="Presenta la evaluación en línea para obtener tu Certificado de Manipulación de Alimentos."
     />
 
-    <!-- Preload/Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="httpshttps://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
@@ -26,18 +25,20 @@
     />
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preload" as="image" href="/certificado-preview.jpg" />
 
     <style>
       :root {
         --primary: #002e7d;
         --secondary: #10b981;
-        --success: #22c55e;
-        --danger: #ef4444;
       }
       body {
         font-family: Poppins, ui-sans-serif, system-ui;
         background: #f1f5f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 1rem;
       }
       .text-primary {
         color: var(--primary);
@@ -56,6 +57,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.5rem;
+        width: 100%;
       }
       .btn-main:hover {
         filter: brightness(0.95);
@@ -67,6 +69,9 @@
         border-radius: 0.75rem;
         padding: 0.85rem 1.2rem;
         font-weight: 600;
+        width: 100%;
+        text-align: center;
+        justify-content: center;
       }
       .shadow-soft {
         box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
@@ -82,21 +87,10 @@
         border-radius: 9999px;
         font-weight: 800;
         margin-right: 0.5rem;
-      }
-      /* Sticky CTA mobile */
-      .sticky-cta {
-        position: fixed;
-        inset: auto 0 0 0;
-        z-index: 50;
-      }
-      @media (min-width: 768px) {
-        .sticky-cta {
-          display: none;
-        }
+        flex-shrink: 0;
       }
     </style>
 
-    <!-- Facebook Pixel -->
     <script>
       !(function (f, b, e, v, n, t, s) {
         if (f.fbq) return;
@@ -119,248 +113,63 @@
         window,
         document,
         "script",
-        "https://connect.facebook.net/en_US/fbevents.js"
+        "httpshttps://connect.facebook.net/en_US/fbevents.js"
       );
       fbq("init", "639715789143642");
       fbq("track", "PageView");
     </script>
-    <noscript
-      ><img
-        height="1"
-        width="1"
-        style="display: none"
-        src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
-    /></noscript>
-
-    <!-- FAQ Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "¿Es válido el certificado en toda Colombia?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sí. El certificado es válido a nivel nacional y se fundamenta en la Resolución 2674 de 2013."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Cuánto tarda el proceso?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "La mayoría de los estudiantes completan curso, evaluación y emisión en menos de 60 minutos."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Cómo pago?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Puedes pagar por PSE o transferencia (Nequi, Daviplata, Bancolombia)."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "¿Cuándo recibo mi certificado?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Tras validar el pago, el certificado queda disponible para verificación y descarga inmediata."
-            }
-          }
-        ]
-      }
-    </script>
   </head>
   <body>
-    <!-- Header -->
-    <header class="bg-white/90 backdrop-blur shadow-sm sticky top-0 z-40">
-      <div
-        class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between"
-      >
-        <a href="#" class="font-extrabold text-xl md:text-2xl text-primary"
-          >CertiTec Colombia</a
-        >
-        <nav class="hidden md:flex gap-6 text-sm font-semibold text-slate-700">
-          <a href="#beneficios" class="hover:text-primary">Beneficios</a>
-          <a href="#temario" class="hover:text-primary">Temario</a>
-          <a href="#quiz-start" class="hover:text-primary">Examen</a>
-        </nav>
-        <a href="#quiz-start" class="btn-main hidden md:inline-flex"
-          >Iniciar examen</a
-        >
-      </div>
-    </header>
-
-    <!-- HERO -->
-    <section class="max-w-7xl mx-auto px-4 mt-6">
-      <div
-        class="bg-white rounded-2xl shadow-soft p-6 md:p-10 grid md:grid-cols-2 gap-8 items-center"
-      >
-        <div>
-          <h1 class="text-3xl md:text-4xl font-extrabold text-primary">
-            Certificado de Manipulación de Alimentos
-          </h1>
-          <p class="mt-3 text-slate-700">
-            Curso y evaluación 100% online. Emite tu certificado en menos de 1
-            hora. Válido en toda Colombia (Resolución 2674 de 2013).
-          </p>
-          <ul class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
-            <li class="bg-slate-50 p-3 rounded">✅ Certificado al instante</li>
-            <li class="bg-slate-50 p-3 rounded">
-              ✅ Pago seguro (PSE / transferencias)
-            </li>
-            <li class="bg-slate-50 p-3 rounded">✅ Soporte por WhatsApp</li>
-            <li class="bg-slate-50 p-3 rounded">
-              ✅ +3.000 certificados emitidos
-            </li>
-          </ul>
-          <div class="mt-6 flex gap-3">
-            <a class="btn-main" data-open-quiz>Iniciar examen ahora</a>
-            <a
-              class="btn-ghost"
-              href="https://wa.me/573107941580?text=Hola%20necesito%20ayuda%20para%20obtener%20mi%20certificado"
-              >Ayuda por WhatsApp</a
-            >
+    <main
+      class="bg-white w-full max-w-2xl rounded-2xl p-6 md:p-8 shadow-soft"
+    >
+      <div id="quiz-section">
+        <div class="text-center mb-6">
+          <a href="#" class="font-extrabold text-xl md:text-2xl text-primary"
+            >CertiTec Colombia</a
+          >
+          <h2
+            class="text-2xl md:text-3xl font-extrabold text-primary mt-4"
+          >
+            Evaluación de Manipulación de Alimentos
+          </h2>
+        </div>
+        <div id="quiz-content" class="w-full">
           </div>
-          <p class="text-xs text-slate-500 mt-3">
-            Precio: <strong>$20.000 COP</strong>
-          </p>
-        </div>
-        <div class="grid sm:grid-cols-2 gap-4">
-          <figure class="bg-white rounded-xl shadow-soft p-3">
-            <img
-              src="../preview_certificado.png.png"
-              alt="Vista previa Certificado de Manipulación de Alimentos"
-              class="rounded-lg w-full h-auto"
-              loading="lazy"
-            />
-            <figcaption class="text-sm text-slate-600 mt-2 text-center">
-              Ejemplo de Certificado
-            </figcaption>
-          </figure>
-
-          <figure class="bg-white rounded-xl shadow-soft p-3">
-            <img
-              src="../preview_carnet.png.png"
-              alt="Vista previa Carnet de Manipulación de Alimentos"
-              class="rounded-lg w-full h-auto"
-              loading="lazy"
-            />
-            <figcaption class="text-sm text-slate-600 mt-2 text-center">
-              Ejemplo de Carnet
-            </figcaption>
-          </figure>
-        </div>
       </div>
-    </section>
 
-    <!-- Beneficios / Confianza -->
-    <section id="beneficios" class="max-w-7xl mx-auto px-4 mt-10">
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl p-6 shadow-soft">
-          <h3 class="font-bold text-lg text-primary">Válido en Colombia</h3>
-          <p class="text-slate-700 mt-2">
-            Cumple con la Resolución 2674 de 2013. Aceptado por entidades
-            sanitarias.
-          </p>
-        </div>
-        <div class="bg-white rounded-xl p-6 shadow-soft">
-          <h3 class="font-bold text-lg text-primary">Rápido y sencillo</h3>
-          <p class="text-slate-700 mt-2">
-            Curso práctico + evaluación. La mayoría lo completa en 60 minutos.
-          </p>
-        </div>
-        <div class="bg-white rounded-xl p-6 shadow-soft">
-          <h3 class="font-bold text-lg text-primary">Soporte humano</h3>
-          <p class="text-slate-700 mt-2">
-            ¿Dudas? Escríbenos por WhatsApp. Te guiamos paso a paso.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Temario resumido -->
-    <section id="temario" class="max-w-7xl mx-auto px-4 mt-10">
-      <div class="bg-white rounded-2xl shadow-soft p-6 md:p-8">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-primary mb-4">
-          Contenido del curso
-        </h2>
-        <div class="grid md:grid-cols-2 gap-6 text-slate-700">
-          <ul class="list-disc list-inside space-y-2">
-            <li>Clave 1: Limpieza e higiene personal</li>
-            <li>Clave 2: Separación de crudos y cocidos</li>
-            <li>Clave 3: Cocción segura</li>
-            <li>Clave 4: Control de temperaturas</li>
-            <li>Clave 5: Agua e insumos seguros</li>
-          </ul>
-          <ul class="list-disc list-inside space-y-2">
-            <li>Normativa colombiana: Resolución 2674 de 2013</li>
-            <li>Buenas prácticas y control de plagas</li>
-            <li>Almacenamiento, rotulación y fechas</li>
-            <li>Prevención de contaminación cruzada</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- CTA Examen -->
-    <section id="quiz-start" class="max-w-7xl mx-auto px-4 mt-10 text-center">
-      <div class="bg-white rounded-2xl shadow-soft p-8">
-        <h2 class="text-3xl font-extrabold text-primary">
-          ¿Listo para obtener tu certificado?
-        </h2>
-        <p class="text-slate-600 mt-2">
-          Presenta la evaluación. Si apruebas, completas tus datos y realizas el
-          pago.
-        </p>
-        <button id="start-quiz-btn" class="btn-main text-lg mt-6 px-6 py-4">
-          ¡Iniciar evaluación!
-        </button>
-        <p class="text-xs text-slate-500 mt-3">Necesitas 75% para aprobar.</p>
-      </div>
-    </section>
-
-    <!-- Sticky CTA (móvil) -->
-    <div class="sticky-cta bg-white border-t p-3 flex gap-3">
-      <a class="btn-main" data-open-quiz>Iniciar examen ahora</a>
-
-      <a
-        href="https://wa.me/573107941580?text=Hola%20necesito%20ayuda%20para%20obtener%20mi%20certificado"
-        class="btn-ghost flex-1 text-center"
-        >WhatsApp</a
-      >
-    </div>
-
-    <!-- Modal Evaluación -->
-    <div
-      id="quiz-modal"
-      class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
-    >
-      <div
-        class="bg-white w-full max-w-2xl rounded-xl p-6 md:p-8 shadow-2xl"
-        id="quiz-content"
-      ></div>
-    </div>
-
-    <!-- Modal Certificado / Pago -->
-    <div
-      id="certificate-modal"
-      class="hidden fixed inset-0 bg-black/75 flex items-center justify-center z-[60] p-4 overflow-y-auto"
-    >
-      <div
-        class="bg-white w-full max-w-lg rounded-2xl p-6 md:p-8 shadow-2xl"
-        id="certificate-content"
-      >
-        <!-- Paso 1: Datos -->
+      <div id="certificate-section" class="hidden">
         <div id="modal-step-1">
           <div class="text-center">
             <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
               ¡Aprobaste! 🎉
             </h3>
             <p class="text-slate-600 mt-1" id="final-score-text"></p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-4 my-6">
+            <figure class="bg-white rounded-xl shadow p-3 border">
+              <img
+                src="../preview_carnet.png.png"
+                alt="Vista previa Certificado de Manipulación de Alimentos"
+                class="rounded-lg w-full h-auto"
+                loading="lazy"
+              />
+              <figcaption class="text-sm text-slate-600 mt-2 text-center">
+                Ejemplo de Certificado
+              </figcaption>
+            </figure>
+            <figure class="bg-white rounded-xl shadow p-3 border">
+              <img
+                src="../preview_certificado.png.png"
+                alt="Vista previa Carnet de Manipulación de Alimentos"
+                class="rounded-lg w-full h-auto"
+                loading="lazy"
+              />
+              <figcaption class="text-sm text-slate-600 mt-2 text-center">
+                Ejemplo de Carnet
+              </figcaption>
+            </figure>
           </div>
           <div class="mt-6">
             <h4 class="font-bold text-xl text-primary flex items-center mb-3">
@@ -407,13 +216,12 @@
                 />
               </div>
             </div>
-            <button id="go-to-step-2-btn" class="btn-main w-full mt-6">
+            <button id="go-to-step-2-btn" class="btn-main mt-6">
               Siguiente: elegir pago →
             </button>
           </div>
         </div>
 
-        <!-- Paso 2: Pago -->
         <div id="modal-step-2" class="hidden">
           <div class="text-center">
             <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
@@ -477,7 +285,6 @@
           </div>
         </div>
 
-        <!-- Paso 3: Comprobante y verificación -->
         <div id="modal-step-3" class="hidden">
           <div class="text-center">
             <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
@@ -491,6 +298,10 @@
             <h4 class="font-bold text-xl text-primary flex items-center">
               <span class="step-circle">3</span>Enviar comprobante
             </h4>
+            <p class="text-slate-600 text-sm">
+              Puedes subir el comprobante aquí, o enviarlo por WhatsApp (botón
+              verde).
+            </p>
             <input
               type="file"
               id="receiptFile"
@@ -502,7 +313,7 @@
             </button>
             <button
               id="generate-whatsapp-btn"
-              class="w-full bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg py-3"
+              class="w-full bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg py-3 btn-main"
             >
               Enviar por WhatsApp
             </button>
@@ -529,56 +340,24 @@
           </div>
         </div>
       </div>
-    </div>
+    </main>
 
-    <!-- FAQ -->
-    <section class="max-w-7xl mx-auto px-4 mt-12 mb-24">
-      <div class="bg-white rounded-2xl shadow-soft p-6 md:p-8">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-primary mb-4">
-          Preguntas frecuentes
-        </h2>
-        <div class="divide-y">
-          <details class="py-3" open>
-            <summary class="font-semibold cursor-pointer">
-              ¿El certificado es válido en todo el país?
-            </summary>
-            <p class="text-slate-700 mt-2">
-              Sí. Es válido a nivel nacional y se sustenta en la Resolución 2674
-              de 2013.
-            </p>
-          </details>
-          <details class="py-3">
-            <summary class="font-semibold cursor-pointer">
-              ¿Cuánto tiempo toma el proceso?
-            </summary>
-            <p class="text-slate-700 mt-2">
-              En promedio, 60 minutos entre curso, evaluación y emisión.
-            </p>
-          </details>
-          <details class="py-3">
-            <summary class="font-semibold cursor-pointer">
-              ¿Qué medios de pago aceptan?
-            </summary>
-            <p class="text-slate-700 mt-2">
-              PSE y transferencias (Nequi, Daviplata, Bancolombia).
-            </p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <!-- Scripts -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const startQuizBtn = document.getElementById("start-quiz-btn");
-        const quizModal = document.getElementById("quiz-modal");
         const quizContent = document.getElementById("quiz-content");
 
-        const certificateModal = document.getElementById("certificate-modal");
+        // Contenedores principales
+        const quizSection = document.getElementById("quiz-section");
+        const certificateSection = document.getElementById(
+          "certificate-section"
+        );
+
+        // Pasos del formulario de certificado
         const modal1 = document.getElementById("modal-step-1");
         const modal2 = document.getElementById("modal-step-2");
         const modal3 = document.getElementById("modal-step-3");
 
+        // Botones de navegación entre pasos
         const goToStep1Btn = document.getElementById("go-to-step-1-btn");
         const goToStep2Btn = document.getElementById("go-to-step-2-btn");
         const goToStep2BtnBack = document.getElementById(
@@ -586,11 +365,13 @@
         );
         const goToStep3Btn = document.getElementById("go-to-step-3-btn");
 
+        // Campos de datos
         const fullName = document.getElementById("fullName");
         const documentType = document.getElementById("documentType");
         const documentId = document.getElementById("documentId");
         const email = document.getElementById("email");
 
+        // Campos de comprobante
         const receiptInput = document.getElementById("receiptFile");
         const uploadReceiptBtn = document.getElementById("upload-receipt-btn");
 
@@ -648,55 +429,31 @@
         let i = 0,
           score = 0;
 
-        function openQuiz() {
+        function startOver() {
           fbq("track", "StartQuiz");
           i = 0;
           score = 0;
-          quizModal.classList.remove("hidden");
           renderQ();
         }
+
         function renderQ() {
           const x = questions[i];
           quizContent.innerHTML = `<div class='text-sm font-semibold text-slate-500 mb-2'>Pregunta ${
             i + 1
           } de ${questions.length}</div>
-      <h3 class='text-2xl font-bold text-primary mb-4'>${x.q}</h3>
-      <div class='space-y-3'>${x.opt
-        .map(
-          (o, idx) =>
-            `<button class='w-full text-left p-4 border-2 border-gray-200 rounded-lg option' data-i='${idx}'>${o}</button>`
-        )
-        .join("")}</div>
-      <div class='flex justify-end mt-4'><button class='btn-main' id='next' disabled>Siguiente →</button></div>`;
+        <h3 class='text-2xl font-bold text-primary mb-4'>${x.q}</h3>
+        <div class='space-y-3'>${x.opt
+          .map(
+            (o, idx) =>
+              `<button class='w-full text-left p-4 border-2 border-gray-200 rounded-lg option' data-i='${idx}'>${o}</button>`
+          )
+          .join("")}</div>
+        <div class='flex justify-end mt-4'><button class='btn-main !w-auto' id='next' disabled>Siguiente →</button></div>`;
           quizContent
             .querySelectorAll(".option")
             .forEach((b) => b.addEventListener("click", onSelect));
           quizContent.querySelector("#next").addEventListener("click", onNext);
         }
-
-        function isOpenQuizText(el) {
-          const t = (el.textContent || el.value || "").toLowerCase().trim();
-          return /iniciar.*(examen|evaluación)|^examen$|^evaluación$/i.test(t);
-        }
-
-        function shouldOpenQuiz(el) {
-          // Botón con id clásico
-          if (el.id === "start-quiz-btn") return true;
-          // Cualquier elemento con atributo data-open-quiz
-          if (el.closest("[data-open-quiz]")) return true;
-          // Cualquier enlace que apunte a #quiz-start
-          if (el.closest("a[href='#quiz-start']")) return true;
-          // Cualquier botón/enlace cuyo texto haga match
-          const clickable = el.closest("a, button, [role='button']");
-          return clickable ? isOpenQuizText(clickable) : false;
-        }
-
-        // Delegación global: captura clics y abre el modal
-        document.addEventListener("click", function (e) {
-          if (!shouldOpenQuiz(e.target)) return;
-          e.preventDefault();
-          openQuiz();
-        });
 
         function onSelect(e) {
           const sel = +e.currentTarget.dataset.i;
@@ -715,23 +472,27 @@
           }
           quizContent.querySelector("#next").disabled = false;
         }
+
         function onNext() {
           i++;
           i < questions.length ? renderQ() : showResult();
         }
 
         function showResult() {
-          quizModal.classList.add("hidden");
           const pct = score / questions.length;
           const text = document.getElementById("final-score-text");
           if (pct >= pass) {
             text.textContent = `Tu puntaje: ${score}/${
               questions.length
             } (${Math.round(pct * 100)}%).`;
-            certificateModal.classList.remove("hidden");
+            
+            // Oculta la sección del quiz y muestra la de certificado
+            quizSection.classList.add("hidden");
+            certificateSection.classList.remove("hidden");
             showStep(1);
+
           } else {
-            quizModal.classList.remove("hidden");
+            // Se queda en la sección del quiz, pero muestra el resultado
             quizContent.innerHTML = `<h3 class='text-2xl font-bold text-primary mb-2 text-center'>Examen no superado</h3><p class='text-center text-slate-700 mb-4'>Obtuviste ${score}/${
               questions.length
             } (${Math.round(
@@ -739,7 +500,7 @@
             )}%). Necesitas 75%.</p><div class='text-center'><button class='btn-main' id='retry'>Reintentar</button></div>`;
             quizContent
               .querySelector("#retry")
-              .addEventListener("click", openQuiz);
+              .addEventListener("click", startOver);
           }
         }
 
@@ -753,8 +514,7 @@
           if (n === 3) modal3.classList.remove("hidden");
         }
 
-        startQuizBtn.addEventListener("click", openQuiz);
-
+        // Navegación de pasos
         goToStep2Btn.addEventListener("click", () => {
           if (!fullName.value.trim() || !documentId.value.trim()) {
             alert("Por favor, completa nombre y documento.");
@@ -764,9 +524,7 @@
         });
         goToStep1Btn.addEventListener("click", () => showStep(1));
         goToStep3Btn.addEventListener("click", () => showStep(3));
-        document
-          .getElementById("go-to-step-2-btn-back")
-          .addEventListener("click", () => showStep(2));
+        goToStep2BtnBack.addEventListener("click", () => showStep(2));
 
         // Upload comprobante (placeholder sin backend)
         uploadReceiptBtn.addEventListener("click", () => {
@@ -798,6 +556,9 @@
             )}`;
             window.open(url, "_blank");
           });
+
+    
+        renderQ();
       });
     </script>
   </body>
