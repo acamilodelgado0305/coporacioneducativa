@@ -120,22 +120,17 @@
     </script>
   </head>
   <body>
-    <main
-      class="bg-white w-full max-w-2xl rounded-2xl p-6 md:p-8 shadow-soft"
-    >
+    <main class="bg-white w-full max-w-2xl rounded-2xl p-6 md:p-8 shadow-soft">
       <div id="quiz-section">
         <div class="text-center mb-6">
           <a href="#" class="font-extrabold text-xl md:text-2xl text-primary"
             >CertiTec Colombia</a
           >
-          <h2
-            class="text-2xl md:text-3xl font-extrabold text-primary mt-4"
-          >
+          <h2 class="text-2xl md:text-3xl font-extrabold text-primary mt-4">
             Evaluación de Manipulación de Alimentos
           </h2>
         </div>
-        <div id="quiz-content" class="w-full">
-          </div>
+        <div id="quiz-content" class="w-full"></div>
       </div>
 
       <div id="certificate-section" class="hidden">
@@ -150,17 +145,6 @@
           <div class="grid sm:grid-cols-2 gap-4 my-6">
             <figure class="bg-white rounded-xl shadow p-3 border">
               <img
-                src="../preview_carnet.png.png"
-                alt="Vista previa Certificado de Manipulación de Alimentos"
-                class="rounded-lg w-full h-auto"
-                loading="lazy"
-              />
-              <figcaption class="text-sm text-slate-600 mt-2 text-center">
-                Ejemplo de Certificado
-              </figcaption>
-            </figure>
-            <figure class="bg-white rounded-xl shadow p-3 border">
-              <img
                 src="../preview_certificado.png.png"
                 alt="Vista previa Carnet de Manipulación de Alimentos"
                 class="rounded-lg w-full h-auto"
@@ -168,6 +152,18 @@
               />
               <figcaption class="text-sm text-slate-600 mt-2 text-center">
                 Ejemplo de Carnet
+              </figcaption>
+            </figure>
+
+            <figure class="bg-white rounded-xl shadow p-3 border">
+              <img
+                src="../preview_carnet.png.png"
+                alt="Vista previa Certificado de Manipulación de Alimentos"
+                class="rounded-lg w-full h-auto"
+                loading="lazy"
+              />
+              <figcaption class="text-sm text-slate-600 mt-2 text-center">
+                Ejemplo de Certificado
               </figcaption>
             </figure>
           </div>
@@ -485,12 +481,11 @@
             text.textContent = `Tu puntaje: ${score}/${
               questions.length
             } (${Math.round(pct * 100)}%).`;
-            
+
             // Oculta la sección del quiz y muestra la de certificado
             quizSection.classList.add("hidden");
             certificateSection.classList.remove("hidden");
             showStep(1);
-
           } else {
             // Se queda en la sección del quiz, pero muestra el resultado
             quizContent.innerHTML = `<h3 class='text-2xl font-bold text-primary mb-2 text-center'>Examen no superado</h3><p class='text-center text-slate-700 mb-4'>Obtuviste ${score}/${
@@ -557,7 +552,6 @@
             window.open(url, "_blank");
           });
 
-    
         renderQ();
       });
     </script>
