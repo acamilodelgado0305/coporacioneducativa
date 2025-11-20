@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <meta charset="UTF-IA" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      Evaluación - Certificado de Manipulación de Alimentos | CertiTec Colombia
-    </title>
-    <link rel="icon" href="logopagina.png" type="image/png" />
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <title>Evaluación y Certificación | CertiTec Colombia</title>
+    <link rel="icon" href="../logo.png" type="image/png" />
     <meta
       name="description"
-      content="Presenta la evaluación en línea para obtener tu Certificado de Manipulación de Alimentos."
+      content="Plataforma oficial para la evaluación y certificación de manipulación de alimentos en línea."
     />
 
-    <link rel="preconnect" href="httpshttps://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -28,66 +24,86 @@
 
     <style>
       :root {
-        --primary: #002e7d;
-        --secondary: #10b981;
+        --primary: #002e7d; /* Azul institucional */
+        --secondary: #10b981; /* Verde éxito */
+        --bg-form: #f0f4f8; /* Fondo suave tipo Google Forms */
       }
+
       body {
-        font-family: Poppins, ui-sans-serif, system-ui;
-        background: #f1f5f9;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-form);
+        color: #334155;
+        padding-top: 80px; /* Espacio para el header fijo */
+      }
+
+      /* Animaciones suaves */
+      .fade-in {
+        animation: fadeIn 0.4s ease-in-out;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Estilos Botones */
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        font-weight: 600;
         padding: 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.2s;
+        box-shadow: 0 4px 6px -1px rgba(0, 46, 125, 0.2);
       }
-      .text-primary {
-        color: var(--primary);
-      }
-      .bg-primary {
-        background: var(--primary);
-      }
-      .btn-main {
-        background: var(--secondary);
-        color: #fff;
-        font-weight: 700;
-        padding: 0.9rem 1.25rem;
-        border-radius: 0.75rem;
-        transition: 0.2s;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        width: 100%;
-      }
-      .btn-main:hover {
-        filter: brightness(0.95);
+      .btn-primary:hover {
+        background-color: #002463;
         transform: translateY(-1px);
       }
-      .btn-ghost {
-        background: #fff;
-        border: 2px solid #e5e7eb;
-        border-radius: 0.75rem;
-        padding: 0.85rem 1.2rem;
+      .btn-primary:disabled {
+        background-color: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .btn-outline {
+        background: white;
+        border: 2px solid #e2e8f0;
+        color: #475569;
         font-weight: 600;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        transition: all 0.2s;
+      }
+      .btn-outline:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      /* Estilo Input mejorado para móvil */
+      .input-field {
         width: 100%;
-        text-align: center;
-        justify-content: center;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        outline: none;
+        transition: border-color 0.3s;
+        font-size: 16px; /* Evita zoom en iOS */
       }
-      .shadow-soft {
-        box-shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+      .input-field:focus {
+        border-color: var(--primary);
+        background: #fff;
       }
-      .step-circle {
-        background: var(--secondary);
-        color: #fff;
-        width: 2rem;
-        height: 2rem;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 9999px;
-        font-weight: 800;
-        margin-right: 0.5rem;
-        flex-shrink: 0;
+
+      /* Tarjeta Principal */
+      .main-card {
+        border-top: 8px solid var(--primary); /* Toque Google Forms */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
       }
     </style>
 
@@ -113,226 +129,349 @@
         window,
         document,
         "script",
-        "httpshttps://connect.facebook.net/en_US/fbevents.js"
+        "https://connect.facebook.net/en_US/fbevents.js"
       );
       fbq("init", "639715789143642");
       fbq("track", "PageView");
     </script>
   </head>
-  <body>
-    <main class="bg-white w-full max-w-2xl rounded-2xl p-6 md:p-8 shadow-soft">
-      <div id="quiz-section">
-        <div class="text-center mb-6">
-          <a href="#" class="font-extrabold text-xl md:text-2xl text-primary"
-            >CertiTec Colombia</a
-          >
-          <h2 class="text-2xl md:text-3xl font-extrabold text-primary mt-4">
-            Evaluación de Manipulación de Alimentos
-          </h2>
+
+  <body class="flex flex-col items-center min-h-screen pb-10 px-4">
+    <header
+      class="fixed top-0 left-0 w-full bg-white shadow-md z-50 h-[70px] flex items-center px-4 md:px-8 justify-between"
+    >
+      <div class="flex items-center gap-2">
+        <div
+          class="w-8 h-8 bg-blue-900 rounded flex items-center justify-center text-white font-bold"
+        >
+          C
         </div>
+        <span class="font-bold text-lg text-slate-800 tracking-tight"
+          >CertiTec <span class="text-blue-700">Colombia</span></span
+        >
+      </div>
+      <a
+        href="https://wa.me/573107941580"
+        target="_blank"
+        class="flex items-center gap-2 text-sm font-medium text-green-600 bg-green-50 px-3 py-1.5 rounded-full hover:bg-green-100 transition"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"
+          />
+        </svg>
+        <span class="hidden sm:inline">Soporte</span>
+      </a>
+    </header>
+
+    <main class="w-full max-w-2xl">
+      <div
+        id="quiz-section"
+        class="bg-white rounded-xl p-6 md:p-8 main-card fade-in"
+      >
+        <div class="text-center mb-6">
+          <h1 class="text-2xl font-bold text-slate-800 mb-2">
+            Evaluación de Manipulación
+          </h1>
+          <p class="text-slate-500 text-sm">
+            Responde correctamente para obtener tu certificado oficial.
+          </p>
+        </div>
+
+        <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+          <div
+            id="progress-bar"
+            class="bg-blue-600 h-2.5 rounded-full transition-all duration-500"
+            style="width: 0%"
+          ></div>
+        </div>
+
         <div id="quiz-content" class="w-full"></div>
       </div>
 
-      <div id="certificate-section" class="hidden">
+      <div
+        id="certificate-section"
+        class="hidden bg-white rounded-xl p-6 md:p-8 main-card fade-in"
+      >
         <div id="modal-step-1">
-          <div class="text-center">
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
-              ¡Aprobaste! 🎉
-            </h3>
-            <p class="text-slate-600 mt-1" id="final-score-text"></p>
+          <div class="text-center border-b pb-4 mb-4">
+            <div
+              class="inline-flex items-center justify-center w-16 h-16 bg-green-100 text-green-600 rounded-full mb-2"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-800">¡Aprobado! 🎉</h3>
+            <p class="text-slate-600 text-sm mt-1" id="final-score-text"></p>
           </div>
 
-          <div class="grid sm:grid-cols-2 gap-4 my-6">
-            <figure class="bg-white rounded-xl shadow p-3 border">
-              <img
-                src="../preview_certificado.png.png"
-                alt="Vista previa Carnet de Manipulación de Alimentos"
-                class="rounded-lg w-full h-auto"
-                loading="lazy"
-              />
-              <figcaption class="text-sm text-slate-600 mt-2 text-center">
-                Ejemplo de Carnet
-              </figcaption>
-            </figure>
-
-            <figure class="bg-white rounded-xl shadow p-3 border">
-              <img
-                src="../preview_carnet.png.png"
-                alt="Vista previa Certificado de Manipulación de Alimentos"
-                class="rounded-lg w-full h-auto"
-                loading="lazy"
-              />
-              <figcaption class="text-sm text-slate-600 mt-2 text-center">
-                Ejemplo de Certificado
-              </figcaption>
-            </figure>
+          <div
+            class="bg-blue-50 p-4 rounded-lg mb-6 border border-blue-100 text-center"
+          >
+            <p class="text-sm text-blue-800 font-medium mb-2">
+              Tu certificado está listo para ser emitido
+            </p>
+            <div class="text-xs text-blue-600">
+              Válido por 1 año • Resolución oficial
+            </div>
           </div>
-          <div class="mt-6">
-            <h4 class="font-bold text-xl text-primary flex items-center mb-3">
-              <span class="step-circle">1</span>Completa tus datos
-            </h4>
+
+          <form id="data-form" onsubmit="return false;">
             <div class="space-y-4">
               <div>
-                <label class="block font-semibold">Nombre completo</label>
+                <label class="block text-sm font-medium text-slate-700 mb-1"
+                  >Nombre Completo (Como saldrá en el carnet)</label
+                >
                 <input
                   id="fullName"
-                  class="w-full border border-gray-300 rounded-lg p-2"
-                  placeholder="Tal como aparecerá en el certificado"
+                  type="text"
+                  class="input-field uppercase"
+                  placeholder="EJ: PEPITO PÉREZ"
+                  required
                 />
               </div>
-              <div class="grid grid-cols-3 gap-2">
+
+              <div class="grid grid-cols-3 gap-3">
                 <div>
-                  <label class="block font-semibold">Tipo</label>
-                  <select
-                    id="documentType"
-                    class="w-full border border-gray-300 rounded-lg p-2"
+                  <label class="block text-sm font-medium text-slate-700 mb-1"
+                    >Tipo</label
                   >
+                  <select id="documentType" class="input-field bg-white">
                     <option value="CC">C.C.</option>
                     <option value="CE">C.E.</option>
-                    <option value="Pasaporte">Pasaporte</option>
+                    <option value="TI">T.I.</option>
                     <option value="PPT">PPT</option>
+                    <option value="PAS">PAS</option>
                   </select>
                 </div>
                 <div class="col-span-2">
-                  <label class="block font-semibold">Documento</label>
+                  <label class="block text-sm font-medium text-slate-700 mb-1"
+                    >Número de Documento</label
+                  >
                   <input
                     id="documentId"
-                    class="w-full border border-gray-300 rounded-lg p-2"
-                    placeholder="Número"
+                    type="tel"
+                    class="input-field"
+                    placeholder="1234567890"
+                    required
                   />
                 </div>
               </div>
+
               <div>
-                <label class="block font-semibold">Correo electrónico</label>
+                <label class="block text-sm font-medium text-slate-700 mb-1"
+                  >Correo Electrónico</label
+                >
                 <input
                   id="email"
                   type="email"
-                  class="w-full border border-gray-300 rounded-lg p-2"
-                  placeholder="Para enviar copia del certificado"
+                  class="input-field"
+                  placeholder="ejemplo@correo.com"
                 />
               </div>
             </div>
-            <button id="go-to-step-2-btn" class="btn-main mt-6">
-              Siguiente: elegir pago →
+
+            <button
+              id="go-to-step-2-btn"
+              class="btn-primary w-full mt-8 flex justify-center items-center gap-2"
+            >
+              Continuar al Pago
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
             </button>
-          </div>
+          </form>
         </div>
 
         <div id="modal-step-2" class="hidden">
-          <div class="text-center">
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
-              Realiza el pago
+          <div class="flex items-center mb-6">
+            <button
+              id="back-to-step-1"
+              class="text-slate-400 hover:text-slate-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+            <h3 class="text-xl font-bold text-slate-800 ml-2">
+              Método de Pago
             </h3>
-            <p class="text-slate-600 mt-1">
-              Monto: <strong>$20.000 COP</strong>
-            </p>
           </div>
-          <div class="mt-6 space-y-5">
-            <h4 class="font-bold text-xl text-primary flex items-center mb-2">
-              <span class="step-circle">2</span>Elige tu método
-            </h4>
+
+          <div
+            class="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-6 text-center"
+          >
+            <p class="text-slate-600 text-sm">Valor del Certificado</p>
+            <p class="text-3xl font-bold text-blue-900">$20.000 COP</p>
+          </div>
+
+          <div class="space-y-3">
             <a
               href="https://linkdepagospse.rappipay.co/kZYKi5"
               target="_blank"
-              class="w-full flex items-center justify-center gap-3 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-4 rounded-lg hover:border-blue-700 transition-all text-lg"
+              class="block w-full border-2 border-blue-600 bg-blue-50 hover:bg-blue-100 rounded-xl p-4 flex items-center justify-between transition"
             >
-              <img
-                src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp"
-                alt="Logo PSE"
-                class="h-8"
-                loading="lazy"
-              />
-              <span
-                >Pagar con PSE
-                <span class="text-xs font-normal">(recomendado)</span></span
+              <div class="flex items-center gap-3">
+                <img
+                  src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp"
+                  class="h-8 object-contain"
+                  alt="PSE"
+                />
+                <div class="text-left">
+                  <div class="font-bold text-blue-900">Pagar con PSE</div>
+                  <div class="text-xs text-blue-700">Activación inmediata</div>
+                </div>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-blue-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
               >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
             </a>
 
-            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
-              <h5 class="font-bold text-lg text-primary text-center mb-3">
-                Transferencia
-              </h5>
-              <ul class="text-slate-700 space-y-2">
-                <li class="flex justify-between">
-                  <span>✅ Daviplata:</span
-                  ><strong class="font-mono">3223267797</strong>
-                </li>
-                <li class="flex justify-between">
-                  <span>✅ Nequi:</span
-                  ><strong class="font-mono">3223267797</strong>
-                </li>
-                <li class="flex justify-between">
-                  <span>✅ Bancolombia Ahorros:</span
-                  ><strong class="font-mono">816-589697-49</strong>
-                </li>
-              </ul>
-              <p class="text-xs text-slate-500 mt-3">
-                Validación manual (puede tardar unas horas).
+            <div class="border rounded-xl p-4">
+              <p class="font-bold text-slate-800 mb-2">
+                Transferencia Bancaria:
+              </p>
+              <div
+                class="text-sm text-slate-600 space-y-2 font-mono bg-slate-50 p-3 rounded"
+              >
+                <div class="flex justify-between">
+                  <span>Nequi / Daviplata:</span> <strong>322 326 7797</strong>
+                </div>
+                <div class="flex justify-between">
+                  <span>Bancolombia:</span> <strong>816-589697-49</strong>
+                </div>
+              </div>
+              <p class="text-xs text-slate-400 mt-2 text-center">
+                Requiere validación manual por WhatsApp.
               </p>
             </div>
           </div>
-          <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <button id="go-to-step-3-btn" class="btn-main w-full">
-              Ya pagué, continuar →
-            </button>
-            <button id="go-to-step-1-btn" class="btn-ghost w-full">
-              ← Corregir mis datos
-            </button>
-          </div>
+
+          <button id="go-to-step-3-btn" class="btn-primary w-full mt-6">
+            Ya realicé el pago
+          </button>
         </div>
 
-        <div id="modal-step-3" class="hidden">
-          <div class="text-center">
-            <h3 class="text-2xl md:text-3xl font-extrabold text-primary">
-              Último paso
+        <div id="modal-step-3" class="hidden text-center">
+          <div class="mb-6">
+            <h3 class="text-xl font-bold text-slate-800">
+              Validar y Descargar
             </h3>
-            <p class="text-slate-600 mt-1">
-              Envíanos el comprobante para validar tu certificado.
+            <p class="text-slate-600 text-sm mt-1">
+              Para activar tu certificado, envíanos el comprobante.
             </p>
           </div>
-          <div class="mt-6 space-y-5">
-            <h4 class="font-bold text-xl text-primary flex items-center">
-              <span class="step-circle">3</span>Enviar comprobante
-            </h4>
-            <p class="text-slate-600 text-sm">
-              Puedes subir el comprobante aquí, o enviarlo por WhatsApp (botón
-              verde).
-            </p>
-            <input
-              type="file"
-              id="receiptFile"
-              accept="image/*,application/pdf"
-              class="w-full border border-gray-300 rounded-lg p-2"
-            />
-            <button id="upload-receipt-btn" class="btn-ghost w-full">
-              Subir comprobante
-            </button>
+
+          <div class="space-y-4">
+            <div
+              class="relative border-2 border-dashed border-gray-300 rounded-lg p-6 hover:bg-gray-50 transition cursor-pointer"
+              onclick="document.getElementById('receiptFile').click()"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-10 w-10 mx-auto text-gray-400 mb-2"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                />
+              </svg>
+              <span class="text-sm text-gray-500" id="file-text"
+                >Toca para subir comprobante</span
+              >
+              <input
+                type="file"
+                id="receiptFile"
+                class="hidden"
+                accept="image/*,application/pdf"
+                onchange="document.getElementById('file-text').innerText = this.files[0].name; document.getElementById('file-text').classList.add('text-blue-600', 'font-bold');"
+              />
+            </div>
+
             <button
               id="generate-whatsapp-btn"
-              class="w-full bg-green-500 hover:bg-green-600 text-white font-bold rounded-lg py-3 btn-main"
+              class="w-full bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-4 rounded-lg shadow-lg flex items-center justify-center gap-2 transition transform active:scale-95"
             >
-              Enviar por WhatsApp
-            </button>
-
-            <div class="border-t pt-5">
-              <h4 class="font-bold text-xl text-primary flex items-center mb-2">
-                <span class="step-circle">4</span>Verifica y descarga
-              </h4>
-              <p class="text-slate-600 text-sm mb-3">
-                Cuando validemos tu pago, podrás ver tu certificado aquí:
-              </p>
-              <a
-                href="https://quickcontrola.com/verificacion"
-                target="_blank"
-                class="btn-main w-full"
-                >Verificar mi certificado</a
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                fill="currentColor"
+                viewBox="0 0 16 16"
               >
-            </div>
-          </div>
-          <div class="text-center mt-6">
-            <button id="go-to-step-2-btn-back" class="btn-ghost w-full">
-              ← Volver a métodos de pago
+                <path
+                  d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592z"
+                />
+              </svg>
+              Enviar por WhatsApp y Activar
             </button>
+          </div>
+
+          <div class="mt-8 pt-6 border-t">
+            <p class="text-xs text-slate-500 mb-2">
+              ¿Ya recibiste confirmación?
+            </p>
+            <a
+              href="https://quickcontrola.com/verificacion"
+              target="_blank"
+              class="text-blue-700 font-bold text-sm hover:underline"
+              >Descargar mi certificado aquí</a
+            >
           </div>
         </div>
       </div>
@@ -340,219 +479,243 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const quizContent = document.getElementById("quiz-content");
-
-        // Contenedores principales
-        const quizSection = document.getElementById("quiz-section");
-        const certificateSection = document.getElementById(
-          "certificate-section"
-        );
-
-        // Pasos del formulario de certificado
-        const modal1 = document.getElementById("modal-step-1");
-        const modal2 = document.getElementById("modal-step-2");
-        const modal3 = document.getElementById("modal-step-3");
-
-        // Botones de navegación entre pasos
-        const goToStep1Btn = document.getElementById("go-to-step-1-btn");
-        const goToStep2Btn = document.getElementById("go-to-step-2-btn");
-        const goToStep2BtnBack = document.getElementById(
-          "go-to-step-2-btn-back"
-        );
-        const goToStep3Btn = document.getElementById("go-to-step-3-btn");
-
-        // Campos de datos
-        const fullName = document.getElementById("fullName");
-        const documentType = document.getElementById("documentType");
-        const documentId = document.getElementById("documentId");
-        const email = document.getElementById("email");
-
-        // Campos de comprobante
-        const receiptInput = document.getElementById("receiptFile");
-        const uploadReceiptBtn = document.getElementById("upload-receipt-btn");
-
+        // --- DATOS CON PISTAS EDUCATIVAS ---
         const questions = [
           {
-            q: "La Resolución que rige la manipulación de alimentos en Colombia es:",
-            opt: ["1080 de 1992", "2674 de 2013", "780 de 2016"],
-            a: 1,
-          },
-          {
-            q: "¿Cómo evitas mejor la contaminación cruzada?",
+            q: "¿Cuál es la norma principal de manipulación en Colombia?",
             opt: [
-              "Lavar con vinagre",
-              "Tablas separadas para crudos y cocidos",
-              "Cocinar a fuego alto",
+              "Res. 1080/92 (Antigua)",
+              "Res. 2674/2013 (Vigente)",
+              "Res. 780/2016 (No aplica)",
             ],
             a: 1,
+            hint: "La norma se actualizó en el año 2013 reemplazando a la 3075.",
           },
           {
-            q: "La 'Zona de Peligro' de temperatura es:",
+            q: "¿Cómo se evita la contaminación cruzada de forma correcta?",
+            opt: [
+              "Lavando con vinagre",
+              "Usando tablas diferentes para crudos y cocidos",
+              "Cocinando a fuego alto",
+            ],
+            a: 1,
+            hint: "Debes separar físicamente los utensilios. Lo crudo no debe tocar lo cocido.",
+          },
+          {
+            q: "La 'Zona de Peligro' donde las bacterias se multiplican es:",
             opt: ["0°C a 10°C", "-5°C a 5°C", "5°C a 60°C"],
             a: 2,
+            hint: "Es el rango de temperatura ambiente y tibia. Ni muy frío, ni hirviendo.",
           },
           {
-            q: "¿Cuánto dura el lavado de manos?",
-            opt: ["5 s", "10 s", "20 s"],
+            q: "¿Cuánto debe durar como mínimo el lavado de manos?",
+            opt: ["5 segundos", "10 segundos", "20 segundos"],
             a: 2,
+            hint: "Debes frotar vigorosamente, incluyendo uñas y antebrazos.",
           },
           {
-            q: "Para desinfectar superficies, es común usar:",
-            opt: ["Agua caliente", "Hipoclorito + agua", "Jugo de limón"],
+            q: "Para desinfectar superficies, lo más común y efectivo es:",
+            opt: [
+              "Agua caliente",
+              "Solución de Hipoclorito (Cloro)",
+              "Jugo de limón",
+            ],
             a: 1,
+            hint: "El agente químico más usado en la industria es el cloro diluido.",
           },
           {
-            q: "¿Dónde almacenar carnes crudas en refrigerador?",
+            q: "En la nevera, ¿dónde deben ir las carnes crudas?",
             opt: [
               "Parte superior",
-              "Con verduras",
-              "Parte inferior en recipientes",
+              "Junto a las frutas",
+              "Parte inferior en recipiente cerrado",
             ],
             a: 2,
+            hint: "Deben ir abajo para evitar que sus jugos goteen sobre otros alimentos listos.",
           },
           {
-            q: "La cocción completa elimina:",
-            opt: ["Nutrientes", "Microorganismos peligrosos", "Sabor"],
+            q: "La cocción completa garantiza la eliminación de:",
+            opt: ["Nutrientes", "Microorganismos patógenos", "El sabor"],
             a: 1,
-          },
-          {
-            q: "No dejar alimentos cocidos a temperatura ambiente más de:",
-            opt: ["8 h", "4 h", "2 h"],
-            a: 2,
+            hint: "El calor por encima de 70°C mata a las bacterias peligrosas.",
           },
         ];
-        const pass = 0.75;
-        let i = 0,
-          score = 0;
 
-        function startOver() {
-          fbq("track", "StartQuiz");
-          i = 0;
-          score = 0;
-          renderQ();
+        let currentQ = 0;
+        const quizContainer = document.getElementById("quiz-content");
+        const progressBar = document.getElementById("progress-bar");
+
+        // Función para renderizar la pregunta
+        function renderQuestion() {
+          // Actualizar barra
+          const progress = (currentQ / questions.length) * 100;
+          progressBar.style.width = `${progress}%`;
+
+          const q = questions[currentQ];
+
+          let html = `
+                <div class="fade-in">
+                    <div class="text-xs font-bold text-blue-600 mb-2 uppercase tracking-wider">Pregunta ${
+                      currentQ + 1
+                    } de ${questions.length}</div>
+                    <h2 class="text-xl font-bold text-gray-800 mb-4 leading-snug">${
+                      q.q
+                    }</h2>
+                    
+                    <div class="space-y-3" id="options-container">
+            `;
+
+          q.opt.forEach((opt, index) => {
+            html += `
+                <button onclick="handleAnswer(this, ${index})" class="option-btn w-full text-left p-4 rounded-lg border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all group flex items-center justify-between relative">
+                    <span class="font-medium text-slate-700">${opt}</span>
+                    <div class="status-icon w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center"></div>
+                </button>`;
+          });
+
+          // Área para el mensaje de feedback (Pista o Éxito)
+          html += `
+                    </div>
+                    <div id="feedback-msg" class="mt-4 hidden p-3 rounded-lg text-sm font-medium text-center animate-pulse"></div>
+                </div>`;
+
+          quizContainer.innerHTML = html;
         }
 
-        function renderQ() {
-          const x = questions[i];
-          quizContent.innerHTML = `<div class='text-sm font-semibold text-slate-500 mb-2'>Pregunta ${
-            i + 1
-          } de ${questions.length}</div>
-        <h3 class='text-2xl font-bold text-primary mb-4'>${x.q}</h3>
-        <div class='space-y-3'>${x.opt
-          .map(
-            (o, idx) =>
-              `<button class='w-full text-left p-4 border-2 border-gray-200 rounded-lg option' data-i='${idx}'>${o}</button>`
-          )
-          .join("")}</div>
-        <div class='flex justify-end mt-4'><button class='btn-main !w-auto' id='next' disabled>Siguiente →</button></div>`;
-          quizContent
-            .querySelectorAll(".option")
-            .forEach((b) => b.addEventListener("click", onSelect));
-          quizContent.querySelector("#next").addEventListener("click", onNext);
-        }
+        // Lógica de respuesta "Acierto Obligatorio"
+        window.handleAnswer = (btn, index) => {
+          const q = questions[currentQ];
+          const feedbackDiv = document.getElementById("feedback-msg");
+          const allBtns = document.querySelectorAll(".option-btn");
 
-        function onSelect(e) {
-          const sel = +e.currentTarget.dataset.i;
-          const correct = questions[i].a;
-          quizContent
-            .querySelectorAll(".option")
-            .forEach((b) => (b.disabled = true));
-          if (sel === correct) {
-            score++;
-            e.currentTarget.classList.add("border-green-500", "bg-green-50");
+          // Si es correcto
+          if (index === q.a) {
+            // Estilos de éxito
+            btn.classList.remove("border-gray-200", "hover:bg-blue-50");
+            btn.classList.add(
+              "bg-green-100",
+              "border-green-500",
+              "text-green-800"
+            );
+            btn.querySelector(".status-icon").innerHTML = "✓";
+            btn
+              .querySelector(".status-icon")
+              .classList.add("border-green-600", "bg-green-600", "text-white");
+
+            // Feedback positivo
+            feedbackDiv.classList.remove(
+              "hidden",
+              "bg-red-100",
+              "text-red-700"
+            );
+            feedbackDiv.classList.add("bg-green-50", "text-green-700");
+            feedbackDiv.innerHTML = `¡Correcto! 👏 Avanzando...`;
+
+            // Bloquear todos los botones
+            allBtns.forEach((b) => (b.disabled = true));
+
+            // Avanzar automáticamente
+            setTimeout(() => {
+              currentQ++;
+              if (currentQ < questions.length) {
+                renderQuestion();
+              } else {
+                progressBar.style.width = "100%";
+                finishQuiz();
+              }
+            }, 1000); // Espera 1 segundo para que lea "Correcto"
           } else {
-            e.currentTarget.classList.add("border-red-500", "bg-red-50");
-            quizContent
-              .querySelector(`.option[data-i='${correct}']`)
-              .classList.add("border-green-500", "bg-green-50");
+            // Si es incorrecto
+            // Estilos de error
+            btn.classList.remove("border-gray-200", "hover:border-blue-400");
+            btn.classList.add(
+              "bg-red-50",
+              "border-red-400",
+              "text-red-700",
+              "opacity-75"
+            );
+            btn.querySelector(".status-icon").innerHTML = "✕";
+            btn
+              .querySelector(".status-icon")
+              .classList.add("border-red-400", "text-red-400");
+
+            // Deshabilitar este botón específico para que no lo vuelva a hundir
+            btn.disabled = true;
+
+            // Mostrar Pista Educativa
+            feedbackDiv.classList.remove(
+              "hidden",
+              "bg-green-50",
+              "text-green-700"
+            );
+            feedbackDiv.classList.add(
+              "bg-orange-50",
+              "text-orange-800",
+              "border",
+              "border-orange-200"
+            );
+            feedbackDiv.innerHTML = `⚠️ <strong>No es correcto.</strong><br>Pista: ${q.hint}`;
           }
-          quizContent.querySelector("#next").disabled = false;
+        };
+
+        function finishQuiz() {
+          // Ya no verificamos score, porque siempre es 100%
+          document.getElementById("quiz-section").classList.add("hidden");
+          document
+            .getElementById("certificate-section")
+            .classList.remove("hidden");
+          document.getElementById(
+            "final-score-text"
+          ).innerText = `Resultado: Aprobado con éxito 🌟`;
+          fbq("track", "CompleteRegistration");
         }
 
-        function onNext() {
-          i++;
-          i < questions.length ? renderQ() : showResult();
-        }
+        // --- LÓGICA DEL FORMULARIO (Misma de antes) ---
+        document
+          .getElementById("go-to-step-2-btn")
+          .addEventListener("click", () => {
+            const name = document.getElementById("fullName").value;
+            const id = document.getElementById("documentId").value;
+            if (!name || !id) {
+              alert("Por favor completa tu Nombre y Documento");
+              return;
+            }
+            document.getElementById("modal-step-1").classList.add("hidden");
+            document.getElementById("modal-step-2").classList.remove("hidden");
+            fbq("track", "InitiateCheckout");
+          });
 
-        function showResult() {
-          const pct = score / questions.length;
-          const text = document.getElementById("final-score-text");
-          if (pct >= pass) {
-            text.textContent = `Tu puntaje: ${score}/${
-              questions.length
-            } (${Math.round(pct * 100)}%).`;
+        document
+          .getElementById("back-to-step-1")
+          .addEventListener("click", () => {
+            document.getElementById("modal-step-2").classList.add("hidden");
+            document.getElementById("modal-step-1").classList.remove("hidden");
+          });
 
-            // Oculta la sección del quiz y muestra la de certificado
-            quizSection.classList.add("hidden");
-            certificateSection.classList.remove("hidden");
-            showStep(1);
-          } else {
-            // Se queda en la sección del quiz, pero muestra el resultado
-            quizContent.innerHTML = `<h3 class='text-2xl font-bold text-primary mb-2 text-center'>Examen no superado</h3><p class='text-center text-slate-700 mb-4'>Obtuviste ${score}/${
-              questions.length
-            } (${Math.round(
-              pct * 100
-            )}%). Necesitas 75%.</p><div class='text-center'><button class='btn-main' id='retry'>Reintentar</button></div>`;
-            quizContent
-              .querySelector("#retry")
-              .addEventListener("click", startOver);
-          }
-        }
+        document
+          .getElementById("go-to-step-3-btn")
+          .addEventListener("click", () => {
+            document.getElementById("modal-step-2").classList.add("hidden");
+            document.getElementById("modal-step-3").classList.remove("hidden");
+          });
 
-        function showStep(n) {
-          [modal1, modal2, modal3].forEach((m) => m.classList.add("hidden"));
-          if (n === 1) modal1.classList.remove("hidden");
-          if (n === 2) {
-            modal2.classList.remove("hidden");
-            fbq("track", "AddPaymentInfo");
-          }
-          if (n === 3) modal3.classList.remove("hidden");
-        }
-
-        // Navegación de pasos
-        goToStep2Btn.addEventListener("click", () => {
-          if (!fullName.value.trim() || !documentId.value.trim()) {
-            alert("Por favor, completa nombre y documento.");
-            return;
-          }
-          showStep(2);
-        });
-        goToStep1Btn.addEventListener("click", () => showStep(1));
-        goToStep3Btn.addEventListener("click", () => showStep(3));
-        goToStep2BtnBack.addEventListener("click", () => showStep(2));
-
-        // Upload comprobante (placeholder sin backend)
-        uploadReceiptBtn.addEventListener("click", () => {
-          if (!receiptInput.files.length) {
-            alert("Adjunta un archivo de comprobante.");
-            return;
-          }
-          alert(
-            "Comprobante adjuntado localmente. (Integrar backend para guardarlo)."
-          );
-        });
-
-        // WhatsApp con datos + evento Lead
         document
           .getElementById("generate-whatsapp-btn")
           .addEventListener("click", () => {
-            if (!fullName.value.trim() || !documentId.value.trim()) {
-              alert("Faltan datos. Regresa y complétalos.");
-              return;
-            }
-            fbq("track", "Lead");
-            const msg = `¡Hola! He completado el curso y adjunto el comprobante para mi certificado.\n\n*Nombre:* ${fullName.value.trim()}\n*Documento:* ${
-              documentType.value
-            } ${documentId.value.trim()}${
-              email.value ? `\n*Email:* ${email.value.trim()}` : ""
-            }`;
-            const url = `https://wa.me/573107941580?text=${encodeURIComponent(
-              msg
+            const name = document.getElementById("fullName").value;
+            const docType = document.getElementById("documentType").value;
+            const docId = document.getElementById("documentId").value;
+            const email = document.getElementById("email").value;
+            const message = `Hola CertiTec, terminé mi curso y realicé el pago.\n\n*DATOS:* \nNombre: ${name}\nDocumento: ${docType} ${docId}\nEmail: ${email}\n\nAdjunto comprobante 👇`;
+            const whatsappUrl = `https://wa.me/573107941580?text=${encodeURIComponent(
+              message
             )}`;
-            window.open(url, "_blank");
+            fbq("track", "Purchase", { value: 20000, currency: "COP" });
+            window.open(whatsappUrl, "_blank");
           });
 
-        renderQ();
+        // Iniciar app
+        renderQuestion();
       });
     </script>
   </body>
