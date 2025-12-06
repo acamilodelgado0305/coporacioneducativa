@@ -1,713 +1,259 @@
 <!DOCTYPE html>
-<html lang="es">
-  <head>
+<html lang="es" class="scroll-smooth">
+<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Corporacioneducativa Conalianza | Arquitectura Moderna</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>CertiTec Colombia | Certificaciones Profesionales</title>
     <link rel="icon" href="logopagina.png" type="image/png" />
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper/swiper-bundle.min.css"
-    />
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    
     <style>
-      :root {
-        --primary-color: #002e7d;
-        --secondary-color: #10b981;
-        --gradient-start: #0c8dac;
-        --gradient-end: #10b981;
-        --text-color: #4a5568;
-        --light-bg: #f7fafc;
-      }
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: var(--light-bg);
-        color: var(--text-color);
-        line-height: 1.6;
-      }
-      .bg-primary {
-        background-color: var(--primary-color);
-      }
-      .text-primary {
-        color: var(--primary-color);
-      }
-      .bg-secondary {
-        background-color: var(--secondary-color);
-      }
-      .text-secondary {
-        color: var(--secondary-color);
-      }
-      .btn-main {
-        background: linear-gradient(
-          90deg,
-          var(--gradient-start) 0%,
-          var(--gradient-end) 100%
-        );
-        color: white;
-        padding: 0.85rem 2rem;
-        border-radius: 9999px;
-        font-weight: 600;
-        transition: all 0.3s ease-in-out;
-        box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
-      }
-      .btn-main:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 15px 25px rgba(16, 185, 129, 0.4);
-      }
-      .sticky-header {
-        position: sticky;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.7);
-        backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        transition: all 0.4s ease-in-out;
-      }
-      .sticky-header.scrolled {
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-      }
-      .header-hidden {
-        transform: translateY(-100%);
-      }
-      .logo-large {
-        height: 50px;
-        transition: transform 0.3s ease;
-      }
-      @media (min-width: 768px) {
-        .logo-large {
-          height: 60px;
+        body { font-family: "Poppins", sans-serif; background-color: #020617; /* Slate 950 */ color: #f8fafc; }
+        
+        /* Efecto Glow en tarjetas */
+        .premium-card {
+            background: rgba(30, 41, 59, 0.7); /* Slate 800 semi-transparent */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
-      }
-      .catalog-tab {
-        padding: 0.5rem 0.25rem;
-        margin-bottom: -1px;
-        border-bottom: 3px solid transparent;
-        font-size: 1rem;
-        font-weight: 600;
-        color: var(--text-color);
-        transition: all 0.3s ease;
-        white-space: nowrap;
-      }
-      .catalog-tab:hover {
-        color: var(--secondary-color);
-      }
-      .catalog-tab.active {
-        color: var(--primary-color);
-        border-bottom-color: var(--primary-color);
-      }
-      @media (min-width: 768px) {
-        .catalog-tab {
-          padding: 0.75rem 0.5rem;
-          font-size: 1.125rem;
+        .premium-card:hover {
+            transform: translateY(-5px);
+            border-color: #3b82f6; /* Blue 500 */
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
         }
-      }
-      .catalog-pane {
-        display: none;
-        animation: fadeIn 0.5s ease;
-      }
-      .catalog-pane.active {
-        display: block;
-      }
-      .service-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        padding: 1.5rem 0.5rem;
-        border-bottom: 1px solid #e5e7eb;
-        gap: 0.75rem;
-      }
-      .service-item:last-child {
-        border-bottom: none;
-      }
-      .service-details {
-        flex-grow: 1;
-      }
-      .service-price {
-        font-weight: 700;
-        color: var(--secondary-color);
-        font-size: 1.125rem;
-        white-space: nowrap;
-      }
-      .service-actions {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-      @media (min-width: 768px) {
-        .service-item {
-          flex-direction: row;
-          text-align: left;
+
+        /* Botón Gradiente */
+        .btn-gradient {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            transition: all 0.3s ease;
         }
-        .service-details {
-          text-align: left;
+        .btn-gradient:hover {
+            filter: brightness(1.1);
+            box-shadow: 0 0 15px rgba(37, 99, 235, 0.5);
         }
-        .service-price {
-          min-width: 150px;
-          text-align: right;
+
+        /* Botón WhatsApp Flotante */
+        .whatsapp-float {
+            position: fixed; bottom: 20px; right: 20px; z-index: 100;
+            background-color: #25d366; color: white;
+            width: 60px; height: 60px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.3s;
         }
-        .service-actions {
-          width: auto;
-          margin-top: 0;
-        }
-      }
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .whatsapp-btn {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        background-color: #25d366;
-        color: white;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
-        transition: all 0.3s ease;
-      }
-      .whatsapp-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 15px rgba(37, 211, 102, 0.5);
-      }
+        .whatsapp-float:hover { transform: scale(1.1); }
     </style>
-    <script>
-      !(function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod
-            ? n.callMethod.apply(n, arguments)
-            : n.queue.push(arguments);
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = "2.0";
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s);
-      })(
-        window,
-        document,
-        "script",
-        "https://connect.facebook.net/en_US/fbevents.js"
-      );
-      fbq("init", "639715789143642");
-      fbq("track", "PageView");
-    </script>
-    <noscript
-      ><img
-        height="1"
-        width="1"
-        style="display: none"
-        src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
-    /></noscript>
-    </head>
-  <body class="bg-slate-50">
-    <header class="sticky-header py-4" id="main-header">
-      <div
-        class="container max-w-7xl mx-auto flex justify-between items-center px-6"
-      >
-        <a href="#" class="flex items-center"
-          ><img
-            src="logof.png"
-            alt="Corporacioneducativa Conalianza Logo"
-            class="logo-large"
-        /></a>
-        <nav class="hidden md:flex items-center space-x-8">
-          <a
-            href="#beneficios"
-            class="text-gray-700 hover:text-primary font-medium transition duration-300"
-            >Por qué elegirnos</a
-          >
-          <a
-            href="#catalogo-servicios"
-            class="text-gray-700 hover:text-primary font-medium transition duration-300"
-            >Catálogo</a
-          >
-          <a
-            href="#testimonios"
-            class="text-gray-700 hover:text-primary font-medium transition duration-300"
-            >Testimonios</a
-          >
-          <a href="#contacto" class="btn-main !mt-0 !py-2 !px-5">Contacto</a>
-        </nav>
-      </div>
+</head>
+<body class="antialiased selection:bg-blue-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-[#020617]/90 backdrop-blur-md border-b border-slate-800">
+        <div class="container mx-auto max-w-5xl px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="logopagina.png" alt="CertiTec" class="h-10 w-auto" onerror="this.style.display='none'"/>
+                <div class="leading-none">
+                    <h1 class="text-xl font-bold text-white tracking-tight">CertiTec <span class="text-blue-500">Colombia</span></h1>
+                    <span class="text-[10px] text-gray-400 uppercase tracking-widest">Formación Virtual</span>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-6 text-sm font-medium text-gray-300">
+                <a href="#cursos" class="hover:text-white transition">Cursos</a>
+                <a href="#beneficios" class="hover:text-white transition">Nosotros</a>
+                <a href="#contacto" class="hover:text-white transition">Contacto</a>
+            </nav>
+            <a href="https://wa.me/573107941580" class="text-xs font-bold border border-slate-600 px-4 py-2 rounded-full hover:bg-slate-800 transition">
+                SOPORTE
+            </a>
+        </div>
     </header>
 
-    <main>
-      <section class="relative h-[85vh] min-h-[600px] flex items-center">
-        <div
-          class="absolute inset-0 bg-cover bg-center"
-          style="background-image: url('portada.jpg')"
-        >
-          <div
-            class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent"
-          ></div>
+    <section class="relative pt-20 pb-32 px-4 overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-5xl h-full z-0 opacity-20 pointer-events-none">
+            <div class="absolute top-20 left-10 w-72 h-72 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+            <div class="absolute bottom-20 right-10 w-72 h-72 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl animate-pulse" style="animation-delay: 2s"></div>
         </div>
-        <div class="container max-w-7xl mx-auto px-6 relative z-10">
-          <div
-            class="max-w-xl p-8 md:p-12 rounded-lg"
-            style="
-              background: rgba(255, 255, 255, 0.1);
-              backdrop-filter: blur(10px);
-              border: 1px solid rgba(255, 255, 255, 0.2);
-            "
-          >
-            <h1
-              class="text-4xl md:text-6xl font-extrabold text-white leading-tight"
-            >
-              Educación de Calidad para un Futuro Brillante
+
+        <div class="container mx-auto max-w-3xl text-center relative z-10">
+            <div class="inline-flex items-center bg-slate-800/50 border border-slate-700 rounded-full px-3 py-1 mb-6">
+                <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2 animate-ping"></span>
+                <span class="text-xs text-gray-300 font-medium">Certificaciones Legales 2024</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-black text-white mb-6 leading-tight tracking-tight">
+                Impulsa tu Hoja de Vida <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Sin Salir de Casa</span>
             </h1>
-            <p class="mt-6 text-lg text-gray-200">
-              Descubre nuestros cursos y diplomados, diseñados por expertos para
-              impulsar tu carrera profesional al siguiente nivel.
+            
+            <p class="text-lg text-gray-400 mb-10 max-w-xl mx-auto">
+                Plataforma líder en cursos cortos y diplomados con validez nacional. Estudia, aprueba y descarga tu certificado el mismo día.
             </p>
-            <div class="mt-8">
-              <a href="#catalogo-servicios" class="btn-main"
-                >Explorar Catálogo</a
-              >
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#cursos" class="btn-gradient text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-blue-500/20">
+                    Ver Catálogo de Cursos
+                </a>
+                <a href="https://wa.me/573107941580" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 px-8 rounded-xl border border-slate-700 transition">
+                    Hablar con Asesor
+                </a>
             </div>
-          </div>
         </div>
-      </section>
+    </section>
 
-      <section id="beneficios" class="py-24 bg-white">
-        <div
-          class="container max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center"
-        >
-          <div class="prose max-w-none">
-            <h2 class="text-4xl font-extrabold text-primary">
-              ¿Por Qué Elegir Corporación Educativa Conalianza?
-            </h2>
-            <p class="text-lg text-gray-600 mt-4">
-              Estamos comprometidos con tu éxito. Ofrecemos una plataforma
-              educativa que combina flexibilidad, calidad y un enfoque práctico
-              para asegurar que adquieras las habilidades que el mercado laboral
-              demanda hoy.
+    <section id="cursos" class="py-16 bg-slate-900/50 border-y border-slate-800/50">
+        <div class="container mx-auto max-w-5xl px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+                <div>
+                    <h2 class="text-3xl font-bold text-white mb-2">Nuestros Cursos</h2>
+                    <p class="text-gray-400 text-sm">Selecciona el programa que necesitas para tu trabajo.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="px-4 py-1 rounded-full bg-blue-600 text-white text-xs font-bold">Todos</button>
+                    <button class="px-4 py-1 rounded-full bg-slate-800 text-gray-400 text-xs font-bold hover:bg-slate-700 transition">Salud</button>
+                    <button class="px-4 py-1 rounded-full bg-slate-800 text-gray-400 text-xs font-bold hover:bg-slate-700 transition">Logística</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <div class="premium-card rounded-2xl p-6 flex flex-col h-full relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-bl-lg z-10">OBLIGATORIO</div>
+                    <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center text-yellow-400 text-2xl mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Manipulación de Alimentos</h3>
+                    <p class="text-sm text-gray-400 mb-4 flex-grow">Certificado + Carnet. Cumple con Resolución 2674/2013. Ideal para restaurantes.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-700">
+                        <span class="text-2xl font-bold text-white">$20.000</span>
+                        <a href="manipulacion.html" class="text-blue-400 text-sm font-bold hover:text-blue-300 flex items-center">
+                            Iniciar <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="premium-card rounded-2xl p-6 flex flex-col h-full group">
+                    <div class="w-12 h-12 bg-blue-500/20 rounded-xl flex items-center justify-center text-blue-400 text-2xl mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-shield-virus"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Bioseguridad General</h3>
+                    <p class="text-sm text-gray-400 mb-4 flex-grow">Protocolos de seguridad para establecimientos de belleza, salud y estética.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-700">
+                        <span class="text-2xl font-bold text-white">$20.000</span>
+                        <a href="bioseguridad.html" class="text-blue-400 text-sm font-bold hover:text-blue-300 flex items-center">
+                            Iniciar <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="premium-card rounded-2xl p-6 flex flex-col h-full group">
+                    <div class="w-12 h-12 bg-teal-500/20 rounded-xl flex items-center justify-center text-teal-400 text-2xl mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-pump-medical"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Aseo Hospitalario</h3>
+                    <p class="text-sm text-gray-400 mb-4 flex-grow">Técnicas de limpieza y desinfección en áreas clínicas y hospitalarias.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-700">
+                        <span class="text-2xl font-bold text-white">$20.000</span>
+                        <a href="aseo.html" class="text-blue-400 text-sm font-bold hover:text-blue-300 flex items-center">
+                            Iniciar <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="premium-card rounded-2xl p-6 flex flex-col h-full group">
+                    <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center text-orange-400 text-2xl mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-boxes"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Auxiliar de Bodega</h3>
+                    <p class="text-sm text-gray-400 mb-4 flex-grow">Logística, inventarios, picking y packing. Curso completo + Diploma.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-700">
+                        <span class="text-2xl font-bold text-white">$50.000</span>
+                        <a href="bodega.html" class="text-blue-400 text-sm font-bold hover:text-blue-300 flex items-center">
+                            Iniciar <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="premium-card rounded-2xl p-6 flex flex-col h-full group">
+                    <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center text-purple-400 text-2xl mb-4 group-hover:scale-110 transition">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Atención al Cliente</h3>
+                    <p class="text-sm text-gray-400 mb-4 flex-grow">Manejo de PQRS, etiqueta telefónica y clientes difíciles.</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-700">
+                        <span class="text-2xl font-bold text-white">$50.000</span>
+                        <a href="cliente.html" class="text-blue-400 text-sm font-bold hover:text-blue-300 flex items-center">
+                            Iniciar <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="premium-card rounded-2xl p-6 flex flex-col h-full group border-dashed border-slate-700 opacity-70">
+                    <div class="w-12 h-12 bg-slate-800 rounded-xl flex items-center justify-center text-slate-500 text-2xl mb-4">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-300 mb-2">Próximamente...</h3>
+                    <p class="text-sm text-gray-500 mb-4 flex-grow">Estamos creando nuevos cursos para ti. ¡Mantente atento!</p>
+                    <div class="flex items-center justify-between mt-4 pt-4 border-t border-slate-800">
+                        <span class="text-sm font-bold text-gray-500">Muy pronto</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="py-16 px-4">
+        <div class="container mx-auto max-w-5xl">
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 md:p-12 border border-slate-700 shadow-2xl relative overflow-hidden">
+                <div class="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+                    <div>
+                        <h2 class="text-3xl font-bold text-white mb-4">¿Por qué elegir CertiTec?</h2>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span class="text-gray-300 text-sm"><strong>Legalidad Garantizada:</strong> Cumplimos con todas las normativas vigentes en Colombia.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-bolt text-yellow-500 mt-1 mr-3"></i>
+                                <span class="text-gray-300 text-sm"><strong>Velocidad:</strong> Sin esperas. Estudias, apruebas y recibes tu certificado el mismo día.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-mobile-alt text-blue-500 mt-1 mr-3"></i>
+                                <span class="text-gray-300 text-sm"><strong>100% Móvil:</strong> Plataforma diseñada para que uses tu celular sin problemas.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-slate-950/50 p-6 rounded-2xl border border-slate-700 inline-block">
+                            <p class="text-4xl font-black text-white mb-1">+5.000</p>
+                            <p class="text-sm text-gray-400">Estudiantes Certificados</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-10 border-t border-slate-900 text-center">
+        <div class="container mx-auto max-w-5xl px-4">
+            <img src="logopagina.png" alt="Logo" class="h-8 mx-auto mb-6 opacity-80" onerror="this.style.display='none'"/>
+            <p class="text-gray-600 text-xs mb-4">
+                © 2024 CertiTec Colombia - Corporación Educativa Conalianza. <br>
+                Todos los derechos reservados.
             </p>
-          </div>
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div
-                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"
-              >
-                <i class="fas fa-medal text-2xl text-secondary"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-lg text-primary">
-                  Calidad Garantizada
-                </h4>
-                <p class="text-gray-600">
-                  Contenido y servicios avalados por expertos en cada materia.
-                </p>
-              </div>
+            <div class="flex justify-center gap-4 text-gray-700 text-sm">
+                <a href="#" class="hover:text-gray-400">Términos</a>
+                <a href="#" class="hover:text-gray-400">Privacidad</a>
+                <a href="https://wa.me/573107941580" class="hover:text-gray-400">Soporte</a>
             </div>
-            <div class="flex items-start gap-4">
-              <div
-                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"
-              >
-                <i class="fas fa-bolt text-2xl text-secondary"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-lg text-primary">
-                  Resultados Rápidos
-                </h4>
-                <p class="text-gray-600">
-                  Obtén certificaciones valiosas en tiempo récord para avanzar
-                  profesionalmente.
-                </p>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div
-                class="flex-shrink-0 w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center"
-              >
-                <i class="fas fa-laptop-code text-2xl text-secondary"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-lg text-primary">
-                  Flexibilidad Total
-                </h4>
-                <p class="text-gray-600">
-                  Aprende a tu propio ritmo con nuestras opciones online y
-                  presenciales.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </section>
-
-      <section id="servicios-destacados" class="py-24 bg-slate-50">
-        <div class="container max-w-7xl mx-auto px-6">
-          <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-4xl font-extrabold text-primary">
-              Programas Populares
-            </h2>
-            <p class="text-lg text-gray-600 mt-4">
-              Un vistazo a los cursos y diplomados que nuestros estudiantes más
-              eligen para transformar su futuro.
-            </p>
-          </div>
-          <div class="swiper services-carousel">
-            <div class="swiper-wrapper">
-              <div
-                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
-              >
-                <img
-                  src="s1.jpg"
-                  alt="Curso Destacado 1"
-                  class="w-full h-72 object-cover"
-                />
-                <div class="p-6">
-                  <h4 class="text-xl font-bold text-primary">
-                    Curso de Manipulación de Alimentos
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
-              >
-                <img
-                  src="s2.jpg"
-                  alt="Diplomado Destacado 1"
-                  class="w-full h-72 object-cover"
-                />
-                <div class="p-6">
-                  <h4 class="text-xl font-bold text-primary">
-                    Diplomado en Primeros Auxilios
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
-              >
-                <img
-                  src="s3.jpg"
-                  alt="Diplomado Destacado 2"
-                  class="w-full h-72 object-cover"
-                />
-                <div class="p-6">
-                  <h4 class="text-xl font-bold text-primary">
-                    Diplomado en Cuidado al Adulto Mayor
-                  </h4>
-                </div>
-              </div>
-              <div
-                class="swiper-slide bg-white rounded-xl overflow-hidden shadow-lg"
-              >
-                <img
-                  src="s4.jpg"
-                  alt="Diplomado Destacado 3"
-                  class="w-full h-72 object-cover"
-                />
-                <div class="p-6">
-                  <h4 class="text-xl font-bold text-primary">
-                    Diplomado en Atención al Cliente
-                  </h4>
-                </div>
-              </div>
-            </div>
-            <div class="swiper-pagination mt-8 relative"></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="catalogo-servicios" class="py-24 bg-white">
-        <div class="container max-w-7xl mx-auto px-6">
-          <h2 class="text-4xl font-extrabold text-center mb-12 text-primary">
-            Catálogo Completo de Servicios
-          </h2>
-          <div
-            id="catalog-tabs"
-            class="border-b border-gray-200 mb-8 flex flex-wrap justify-center space-x-2 md:space-x-8"
-          >
-            <button class="catalog-tab active" data-tab="todos">Todos</button
-            ><button class="catalog-tab" data-tab="cursos">Cursos</button
-            ><button class="catalog-tab" data-tab="diplomados">
-              Diplomados
-            </button>
-          </div>
-          <div
-            id="catalog-content"
-            class="bg-white p-4 md:p-8 rounded-2xl shadow-inner border border-gray-100 min-h-[500px]"
-          >
-            <div class="catalog-pane active" data-pane="todos"></div>
-            <div class="catalog-pane" data-pane="cursos"></div>
-            <div class="catalog-pane" data-pane="diplomados"></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="testimonios" class="py-24 bg-primary text-white">
-        <div class="container max-w-7xl mx-auto px-6">
-          <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-4xl font-extrabold">
-              Amado por Cientos de Estudiantes
-            </h2>
-          </div>
-          <div class="swiper testimonials-carousel">
-            <div class="swiper-wrapper"></div>
-            <div class="swiper-pagination !text-white"></div>
-          </div>
-        </div>
-      </section>
-
-      <section id="contacto" class="py-24 bg-white">
-        <div
-          class="container max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center"
-        >
-          <div>
-            <h2 class="text-4xl font-extrabold text-primary">
-              ¿Listo para Empezar?
-            </h2>
-            <p class="text-lg text-gray-600 mt-4 mb-8">
-              Ponte en contacto con nuestro equipo de asesores. Estamos aquí
-              para resolver tus dudas y ayudarte a elegir el programa perfecto
-              para ti.
-            </p>
-            <div class="space-y-6">
-              <a
-                href="tel:+573107941580"
-                class="flex items-center text-lg text-gray-700 hover:text-secondary group"
-                ><div
-                  class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"
-                >
-                  <i
-                    class="fas fa-phone-alt text-xl text-secondary group-hover:text-white"
-                  ></i>
-                </div>
-                <span class="font-semibold">Llamar: 310 794 1580</span></a
-              >
-              <a
-                href="https://wa.me/573107941580"
-                target="_blank"
-                class="flex items-center text-lg text-gray-700 hover:text-secondary group"
-                ><div
-                  class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"
-                >
-                  <i
-                    class="fab fa-whatsapp text-xl text-secondary group-hover:text-white"
-                  ></i>
-                </div>
-                <span class="font-semibold">WhatsApp: 310 794 1580</span></a
-              >
-              <a
-                href="mailto:info@conalianza.com"
-                class="flex items-center text-lg text-gray-700 hover:text-secondary group"
-                ><div
-                  class="flex-shrink-0 w-12 h-12 rounded-lg bg-secondary/10 flex items-center justify-center mr-4 group-hover:bg-secondary transition-colors"
-                >
-                  <i
-                    class="fas fa-envelope text-xl text-secondary group-hover:text-white"
-                  ></i>
-                </div>
-                <span class="font-semibold">info@conalianza.com</span></a
-              >
-            </div>
-          </div>
-          <div
-            class="rounded-2xl overflow-hidden shadow-2xl h-96 lg:h-full mt-10 lg:mt-0"
-          >
-            <iframe
-              src="http://googleusercontent.com/maps/google.com/0"
-              width="100%"
-              height="100%"
-              style="border: 0"
-              allowfullscreen=""
-              loading="lazy"
-            ></iframe>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="bg-slate-800 text-slate-400 py-16">
-      <div class="container max-w-7xl mx-auto px-6 text-center">
-        <p class="text-lg mb-4">
-          © 2025 Corporacioneducativa Conalianza. Todos los derechos reservados.
-        </p>
-        <div class="flex justify-center space-x-6 text-slate-400">
-          <a href="#" class="hover:text-white">Privacidad</a
-          ><span>&middot;</span
-          ><a href="#" class="hover:text-white">Términos</a>
-        </div>
-      </div>
     </footer>
 
-    <a href="https://wa.me/573107941580" target="_blank" class="whatsapp-btn"
-      ><img src="icons8-whatsapp-50.png" alt="WhatsApp" class="w-8 h-8"
-    /></a>
- 
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const header = document.getElementById("main-header");
-        const catalogTabs = document.querySelectorAll(".catalog-tab");
-        const catalogPanes = document.querySelectorAll(".catalog-pane");
-        let lastScrollTop = 0;
-        
-        const testimonials = [
-            { text: "El curso de manipulación de alimentos fue clave para mi negocio. ¡Rápido, práctico y con excelente soporte!", author: "Juan Pérez", role: "Emprendedor Gastronómico", icon: "fa-utensils" },
-            { text: "Validar mi bachillerato con ustedes cambió mi vida profesional. ¡Gracias, Corporación Educativa Conalianza!", author: "María López", role: "Profesional en Transición", icon: "fa-graduation-cap" },
-            { text: "El diplomado en primeros auxilios me dio confianza para actuar. Contenido de alta calidad y muy flexible.", author: "Carlos Ramírez", role: "Trabajador de Salud", icon: "fa-first-aid" },
-        ];
-        
-        const services = [
-            { id: 1, name: "Curso Manipulacion de Alimentos", category: "cursos", price: "COP 20,000.00", price_numeric: 20000 },
-            { id: 2, name: "Curso de Aseo y Desinfeccion Hospitalaria", category: "cursos", price: "COP 30,000.00", price_numeric: 30000 },
-            { id: 6, name: "Auxiliar de Bodega", category: "cursos", price: "COP 20,000.00", price_numeric: 20000 },
-            { id: 7, name: "Curso Bioseguridad aplicada", category: "cursos", price: "COP 30,000.00", price_numeric: 30000 },
-            { id: 101, name: "Diplomado en Atencion al Cliente", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 102, name: "Diplomado Cuidado Integral al Adulto Mayor", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 103, name: "Diplomado en Primeros Auxilios", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 105, name: "Diplomado de Camillero", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 106, name: "Diplomado de Seguridad en el Paciente", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 109, name: "Diplomado en Farmacologia", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 110, name: "Diplomado en Jefe de Cocina", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 111, name: "Diplomado Auxiliar en Cocina", category: "diplomados", price: "COP 50,000.00", price_numeric: 50000 },
-            { id: 121, name: "Programas Tecnicos Laborales", category: "diplomados", price: "COP 600,000.00", price_numeric: 600000 },
-        ];
+    <a href="https://wa.me/573107941580" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </a>
 
-        function createServiceItemHTML(service) {
-            const serviceSlug = service.name
-                .toLowerCase()
-                .normalize("NFD")
-                .replace(/[\u0300-\u036f]/g, "") 
-                .replace(/ñ/g, "n") 
-                .replace(/[^a-z0-9\s-]/g, "") 
-                .trim()
-                .replace(/\s+/g, "-"); 
-
-            const serviceUrl = `servicios/${serviceSlug}.html`;
-            const buttonText = "Ver Detalles"; 
-            
-            return `
-                <div class="service-item">
-                    <div class="service-details">
-                        <h5 class="text-lg font-bold text-primary">${service.name}</h5>
-                    </div>
-                    <div class="service-actions">
-                        <div class="service-price">${service.price}</div>
-                        <a href="${serviceUrl}" class="btn-main !mt-0 !py-2 !px-4 text-sm whitespace-nowrap ml-4">${buttonText}</a>
-                    </div>
-                </div>
-            `;
-        }
-        
-        function populatePanes() {
-            const panes = {
-                todos: document.querySelector('.catalog-pane[data-pane="todos"]'),
-                cursos: document.querySelector('.catalog-pane[data-pane="cursos"]'),
-                diplomados: document.querySelector('.catalog-pane[data-pane="diplomados"]'),
-            };
-            for (const key in panes) {
-                if (panes[key]) panes[key].innerHTML = "";
-            }
-            services.forEach((service) => {
-                const itemHTML = createServiceItemHTML(service);
-                if (panes.todos) panes.todos.innerHTML += itemHTML;
-                if (panes[service.category])
-                panes[service.category].innerHTML += itemHTML;
-            });
-        }
-
-        window.addEventListener("scroll", function () {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (header) {
-                if (scrollTop > lastScrollTop && scrollTop > header.offsetHeight) {
-                    header.classList.add("header-hidden");
-                } else {
-                    header.classList.remove("header-hidden");
-                }
-                if (scrollTop > 50) {
-                    header.classList.add("scrolled");
-                } else {
-                    header.classList.remove("scrolled");
-                }
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-            }, false
-        );
-        
-        catalogTabs.forEach((tab) => {
-            tab.addEventListener("click", (e) => {
-                e.preventDefault();
-                catalogTabs.forEach((t) => t.classList.remove("active"));
-                catalogPanes.forEach((p) => p.classList.remove("active"));
-                tab.classList.add("active");
-                const targetPane = document.querySelector(`.catalog-pane[data-pane="${tab.dataset.tab}"]`);
-                if (targetPane) {
-                    targetPane.classList.add("active");
-                }
-            });
-        });
-        
-        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-            anchor.addEventListener("click", function (e) {
-                e.preventDefault();
-                const targetElement = document.querySelector(this.getAttribute("href"));
-                if (targetElement) {
-                    targetElement.scrollIntoView({ behavior: "smooth" });
-                }
-            });
-        });
-
-        if (document.querySelector(".services-carousel")) {
-            new Swiper(".services-carousel", {
-                loop: true,
-                grabCursor: true,
-                spaceBetween: 30,
-                autoplay: { delay: 3500, disableOnInteraction: false },
-                pagination: { el: ".swiper-pagination", clickable: true },
-                breakpoints: { 640: { slidesPerView: 1 }, 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 }, },
-            });
-        }
-
-        if (document.querySelector(".testimonials-carousel")) {
-            const testimonialsContainer = document.querySelector(".testimonials-carousel .swiper-wrapper");
-            testimonials.forEach((item) => {
-                const slide = document.createElement("div");
-                slide.className = "swiper-slide";
-                slide.innerHTML = `<div class="p-8 rounded-lg bg-white/10 text-center"><i class="fas ${item.icon} text-4xl text-white/50 mb-4"></i><p class="text-lg italic text-white/90 mb-6">"${item.text}"</p><p class="font-bold text-white">${item.author}</p><p class="text-sm text-white/70">${item.role}</p></div>`;
-                testimonialsContainer.appendChild(slide);
-            });
-            new Swiper(".testimonials-carousel", {
-                loop: true,
-                autoplay: { delay: 5000 },
-                spaceBetween: 30,
-                pagination: { el: ".swiper-pagination", clickable: true, renderBullet: (index, className) => `<span class="${className}" style="background-color: white"></span>`,},
-            });
-        }
-
-        populatePanes();
-      });
-    </script>
-  </body>
+</body>
 </html>
