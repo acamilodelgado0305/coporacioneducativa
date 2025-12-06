@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Certificación Bioseguridad | Conalianza</title>
+    <title>Curso Manipulación de Alimentos | Conalianza</title>
     <link rel="icon" href="../logopagina.png" type="image/png" />
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -14,12 +14,12 @@
         body { font-family: "Poppins", sans-serif; background-color: #f0f2f5; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
         :root { --primary: #002e7d; --accent: #e11d48; --success: #16a34a; --nequi-pink: #DA0063; --nequi-purple: #6A008F; }
         
-        /* Utilidades de visualización */
+        /* Utilidades */
         .hidden-section { display: none !important; }
         .fade-in { animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Botón Pulsante Genérico (Para la Landing) */
+        /* Botón Pulsante Rojo (Landing) */
         .pulse-btn-red { animation: pulse-red 2s infinite; }
         @keyframes pulse-red {
             0% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.7); }
@@ -27,7 +27,7 @@
             100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
         }
 
-        /* --- NUEVO ESTILO BOTÓN DE PAGO NEQUI --- */
+        /* --- BOTÓN DE PAGO NEQUI --- */
         .btn-nequi-pay {
             background: linear-gradient(135deg, var(--nequi-pink) 0%, var(--nequi-purple) 100%);
             color: white;
@@ -40,14 +40,14 @@
              box-shadow: 0 15px 35px -5px rgba(218, 0, 99, 0.8);
              filter: brightness(1.1);
         }
-        /* Animación de pulso constante para el botón de pago */
+        /* Animación pulso botón pago */
         .animate-pulse-slow { animation: pulse-slow 3s infinite ease-in-out; }
         @keyframes pulse-slow {
             0%, 100% { box-shadow: 0 10px 25px -5px rgba(218, 0, 99, 0.6); }
             50% { box-shadow: 0 20px 40px -5px rgba(218, 0, 99, 0.9); }
         }
         
-        /* Checkmarks en lista */
+        /* Listas */
         .benefit-list li { margin-bottom: 12px; display: flex; align-items: start; }
         .benefit-list i { color: var(--success); margin-right: 12px; margin-top: 4px; flex-shrink: 0; font-size: 1.1rem; }
     </style>
@@ -74,29 +74,29 @@
         <div id="view-sales-page">
             
             <section class="bg-black text-white pt-12 pb-20 px-4 text-center rounded-b-[2.5rem] shadow-2xl relative overflow-hidden">
-                <div class="absolute inset-0 opacity-5 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+            
                 
                 <div class="relative z-10 max-w-3xl mx-auto">
                     <div class="inline-flex items-center bg-red-600/90 backdrop-blur text-white text-xs md:text-sm font-bold px-4 py-1.5 rounded-full mb-6 animate-bounce shadow-lg">
-                        <i class="fas fa-exclamation-triangle mr-2"></i> Requisito Legal Obligatorio
+                        <i class="fas fa-utensils mr-2"></i> Exigido por Secretaría de Salud
                     </div>
                     <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
-                        Protege tu Negocio: <br class="md:hidden">Certifícate en <span class="text-yellow-300 inline-block transform -rotate-1">Bioseguridad</span>
+                        Evita el Cierre de tu Cocina: <br class="hidden md:block">Certifícate en <span class="text-yellow-400 inline-block transform -rotate-1">Manipulación de Alimentos</span>
                     </h1>
-                    <p class="text-blue-100 text-lg md:text-2xl mb-10 leading-relaxed font-medium max-w-2xl mx-auto">
-                        Cumple la normativa de Secretaría de Salud hoy mismo. Sin filas, sin horarios y 100% online.
+                    <p class="text-gray-300 text-lg md:text-2xl mb-10 leading-relaxed font-medium max-w-2xl mx-auto">
+                        Cumple la resolución 2674 de 2013. Curso 100% Válido para restaurantes, plantas y transportadores.
                     </p>
                     
-                    <div class="bg-white text-slate-900 p-6 md:p-8 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] max-w-sm mx-auto transform transition duration-500 hover:scale-105 relative z-20 border-2 border-white/20">
-                        <div class="absolute -top-4 right-4 bg-yellow-400 text-slate-900 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">Oferta Flash</div>
+                    <div class="bg-white text-slate-900 p-6 md:p-8 rounded-2xl shadow-[0_20px_50px_rgba(255,255,255,0.1)] max-w-sm mx-auto transform transition duration-500 hover:scale-105 relative z-20 border-4 border-yellow-400">
+                        <div class="absolute -top-4 right-4 bg-red-600 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide shadow-sm animate-pulse">Oferta Hoy</div>
                         <div class="flex justify-center items-baseline gap-3 mb-6">
-                            <span class="text-5xl md:text-6xl font-black text-primary tracking-tighter">$20.000</span>
+                            <span class="text-5xl md:text-6xl font-black text-primary tracking-tighter">$25.000</span>
                             <span class="text-lg text-gray-400 line-through font-semibold">$50.000</span>
                         </div>
                         <button onclick="scrollToExam()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl shadow-xl text-lg transition flex justify-center items-center pulse-btn-red active:scale-95">
-                            ¡Quiero Certificarme! <i class="fas fa-arrow-right ml-3"></i>
+                            ¡Quiero mi Carnet! <i class="fas fa-arrow-right ml-3"></i>
                         </button>
-                         <p class="text-xs text-gray-400 mt-3 flex items-center justify-center"><i class="fas fa-shield-alt mr-1 text-green-500"></i> Pago seguro y entrega inmediata</p>
+                         <p class="text-xs text-gray-400 mt-3 flex items-center justify-center"><i class="fas fa-check-circle mr-1 text-green-500"></i> Entrega inmediata post-examen</p>
                     </div>
                 </div>
             </section>
@@ -104,27 +104,27 @@
             <section class="py-16 px-4 bg-white">
                 <div class="max-w-5xl mx-auto">
                     <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 text-slate-800">
-                        ¿Sabías que una visita de sanidad podría cerrar tu local?
+                        ¿Tu negocio pasaría una inspección sorpresa hoy?
                     </h2>
                     <div class="grid md:grid-cols-2 gap-8 items-start">
-                        <div class="bg-slate-50 p-6 rounded-2xl">
+                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
                             <p class="text-gray-600 mb-6 text-lg font-medium leading-relaxed">
-                                Las autoridades están intensificando los controles. Trabajar sin la certificación vigente es un riesgo enorme que te expone a:
+                                No arriesgues tu inversión. La falta de capacitación certificada del personal es la causa #1 de:
                             </p>
                             <ul class="benefit-list text-base text-gray-700">
-                                <li><i class="fas fa-times-circle text-red-500"></i> <strong>Multas millonarias</strong> (superiores a 10 SMMLV).</li>
-                                <li><i class="fas fa-store-slash text-red-500"></i> <strong>Cierre temporal o definitivo</strong> del establecimiento.</li>
-                                <li><i class="fas fa-sad-tear text-red-500"></i> <strong>Pérdida de confianza</strong> y clientes.</li>
+                                <li><i class="fas fa-ban text-red-500"></i> <strong>Clausura inmediata</strong> del establecimiento.</li>
+                                <li><i class="fas fa-file-invoice-dollar text-red-500"></i> <strong>Multas costosas</strong> y procesos legales.</li>
+                                <li><i class="fas fa-bacterium text-red-500"></i> <strong>Intoxicaciones</strong> en clientes (Mala reputación).</li>
                             </ul>
                         </div>
                         <div class="bg-white border-2 border-blue-100 p-6 rounded-2xl shadow-lg relative overflow-hidden">
                             <div class="absolute top-0 right-0 -mt-4 -mr-4 bg-blue-100 w-20 h-20 rounded-full opacity-50"></div>
-                            <h3 class="font-bold text-xl text-blue-800 mb-4 flex items-center"><i class="fas fa-check-circle text-blue-500 mr-2"></i> La Solución Inteligente:</h3>
+                            <h3 class="font-bold text-xl text-blue-800 mb-4 flex items-center"><i class="fas fa-certificate text-blue-500 mr-2"></i> Solución Inmediata:</h3>
                             <p class="text-base text-gray-700 mb-4 leading-relaxed">
-                                No necesitas cerrar tu negocio para ir a estudiar. En <strong>Conalianza</strong> validamos tu experiencia profesional.
+                                En <strong>Conalianza</strong> certificamos tus conocimientos sin que pierdas días de trabajo en cursos presenciales.
                             </p>
                             <p class="font-medium text-blue-900">
-                                Realiza un examen rápido online y obtén tu <strong>certificado legal</strong> al instante. Fácil, rápido y al mejor precio.
+                                Realiza el examen online desde tu celular. Si apruebas, obtienes tu <strong>Certificado y Carnet de Manipulador</strong> al instante por solo $25.000.
                             </p>
                         </div>
                     </div>
@@ -137,9 +137,9 @@
                     <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center text-slate-900 text-4xl mx-auto mb-6 shadow-lg shadow-yellow-400/30">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-black mb-4">¡Demuestra lo que sabes!</h2>
+                    <h2 class="text-3xl md:text-4xl font-black mb-4">¡Valida tu Experiencia!</h2>
                     <p class="text-gray-300 mb-10 text-lg md:text-xl leading-relaxed">
-                        Realiza nuestra evaluación diagnóstica <strong>gratuita</strong>. Si apruebas, podrás desbloquear y descargar tu certificado oficial inmediatamente.
+                        Realiza la evaluación diagnóstica <strong>gratuita</strong>. Si tienes buenas prácticas de manufactura (BPM), aprobarás fácil y rápido.
                     </p>
                     <button onclick="startQuizFlow()" class="group relative bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-black text-xl py-5 px-12 rounded-full shadow-2xl w-full md:w-auto transform transition active:scale-95 overflow-hidden">
                         <span class="relative z-10 flex items-center justify-center">
@@ -148,7 +148,7 @@
                         <div class="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-110 group-hover:bg-yellow-300/30"></div>
                     </button>
                     <p class="mt-6 text-sm text-gray-400 font-medium flex items-center justify-center">
-                        <i class="fas fa-infinity mr-2"></i> Intentos ilimitados sin costo.
+                        <i class="fas fa-sync-alt mr-2"></i> Intentos ilimitados sin costo adicional.
                     </p>
                 </div>
             </section>
@@ -162,7 +162,7 @@
 
         <div id="view-quiz-app" class="hidden-section min-h-screen bg-slate-100 flex flex-col">
             <div class="bg-primary text-white p-4 shadow-md sticky top-0 z-40 flex justify-between items-center">
-                <div class="text-sm font-bold flex items-center"><i class="fas fa-clipboard-list mr-2 opacity-70"></i> Pregunta <span id="q-current" class="mx-1">1</span> de <span id="q-total">8</span></div>
+                <div class="text-sm font-bold flex items-center"><i class="fas fa-clipboard-check mr-2 opacity-70"></i> Pregunta <span id="q-current" class="mx-1">1</span> de <span id="q-total">8</span></div>
                 <button onclick="exitQuiz()" class="text-xs bg-white/10 px-3 py-1.5 rounded hover:bg-white/20 transition font-medium">Salir</button>
             </div>
             
@@ -170,7 +170,8 @@
                 <div id="progress-bar" class="bg-green-500 h-2 transition-all duration-500 ease-out shadow-[0_0_10px_rgba(22,163,74,0.5)]" style="width: 0%"></div>
             </div>
 
-            <div class="flex-grow container mx-auto max-w-2xl p-4 md:p-8 pb-40"> <div class="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] p-6 md:p-8 mb-6 fade-in border border-slate-100">
+            <div class="flex-grow container mx-auto max-w-2xl p-4 md:p-8 pb-40"> 
+                <div class="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] p-6 md:p-8 mb-6 fade-in border border-slate-100">
                     <h3 id="q-text" class="text-xl md:text-2xl font-bold text-slate-800 mb-8 leading-snug">
                         Cargando pregunta...
                     </h3>
@@ -197,7 +198,6 @@
                 <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-20 w-full h-full pointer-events-none overflow-hidden z-0">
                      <div class="absolute top-1/4 left-1/4 w-4 h-4 bg-red-400 rounded-full opacity-70 animate-ping"></div>
                      <div class="absolute top-1/3 right-1/4 w-3 h-3 bg-blue-400 rounded-lg opacity-70 animate-bounce"></div>
-                     <div class="absolute bottom-1/4 left-1/3 w-5 h-5 bg-yellow-400 rounded-full opacity-70 animate-pulse"></div>
                 </div>
 
                 <div class="mb-8 inline-flex p-5 rounded-full bg-green-100 shadow-[0_0_30px_rgba(22,163,74,0.3)] relative z-10 animate-[bounce_2s_infinite]">
@@ -206,45 +206,45 @@
                 
                 <h2 class="text-4xl font-black text-slate-900 mb-3 tracking-tight leading-none">¡APROBADO!</h2>
                 <p class="text-lg text-gray-600 mb-8 font-medium leading-relaxed px-4">
-                    Has demostrado los conocimientos necesarios. Tu certificado está listo.
+                    Has aprobado la evaluación BPM. Tu carnet está listo.
                 </p>
 
                 <div class="bg-white border-2 border-blue-50 rounded-2xl p-6 shadow-lg mb-8 text-left relative overflow-hidden z-10">
-                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">Listo para emitir</div>
+                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">Curso + Carnet</div>
                     <h3 class="font-bold text-gray-800 border-b border-gray-100 pb-3 mb-4 text-lg flex items-center">
                         <i class="fas fa-receipt mr-2 text-blue-500"></i> Resumen del Pedido
                     </h3>
                     
                     <div class="space-y-3 mb-6">
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-600 font-medium"><i class="fas fa-certificate text-gray-400 mr-2 sm"></i>Concepto:</span>
-                            <span class="font-bold text-slate-800">Certificación Bioseguridad</span>
+                            <span class="text-gray-600 font-medium"><i class="fas fa-utensils text-gray-400 mr-2 sm"></i>Curso:</span>
+                            <span class="font-bold text-slate-800">Manipulación de Alimentos</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-600 font-medium"><i class="fas fa-wifi text-gray-400 mr-2 sm"></i>Modalidad:</span>
-                            <span class="font-bold text-slate-800">100% Virtual</span>
+                            <span class="text-gray-600 font-medium"><i class="fas fa-clock text-gray-400 mr-2 sm"></i>Vigencia:</span>
+                            <span class="font-bold text-slate-800">1 Año (Legal)</span>
                         </div>
                     </div>
                     
                     <div class="flex justify-between items-center pt-4 border-t border-gray-100 bg-blue-50/50 -mx-6 -mb-6 p-6">
                         <span class="font-extrabold text-xl text-primary">Total a Pagar:</span>
-                        <span class="font-black text-3xl text-green-600 tracking-tight">$20.000 COP</span>
+                        <span class="font-black text-3xl text-green-600 tracking-tight">$25.000 COP</span>
                     </div>
                 </div>
 
-                <a href="https://checkout.nequi.wompi.co/l/UEgrAY" class="btn-nequi-pay animate-pulse-slow w-full flex items-center justify-between py-5 px-6 rounded-2xl text-xl font-black mb-6 no-underline relative z-20 group">
+                <a href="https://checkout.nequi.wompi.co/l/AWUVic" class="btn-nequi-pay animate-pulse-slow w-full flex items-center justify-between py-5 px-6 rounded-2xl text-xl font-black mb-6 no-underline relative z-20 group">
                     <div class="bg-white rounded-xl p-2 flex-shrink-0 shadow-sm">
                          <img src="https://zen-marketing-assets.s3-us-west-2.amazonaws.com/images/gordan-tmp/logo-Nequi_by_Bancolombia.png" alt="Logo Nequi" class="h-8 md:h-10 w-auto object-contain">
                     </div>
-                    <span class="flex-grow text-center pl-4 tracking-wide text-white text-lg md:text-xl lg:text-2xl">PAGAR $20.000 Y DESCARGAR</span>
+                    <span class="flex-grow text-center pl-4 tracking-wide text-white text-lg md:text-xl lg:text-2xl">PAGAR $25.000 Y DESCARGAR</span>
                     <i class="fas fa-chevron-right ml-4 text-white/70 group-hover:translate-x-1 transition-transform"></i>
                 </a>
                 
                 <div class="text-xs text-gray-500 bg-white p-3 rounded-xl border border-gray-100 shadow-sm flex items-start text-left relative z-10">
                     <i class="fas fa-shield-alt text-green-500 mt-0.5 mr-2 text-sm"></i>
                     <div>
-                        <strong>Pago Seguro:</strong> Procesado por Wompi Bancolombia. Acepta Nequi, PSE y Tarjetas.
-                        <br><span class="text-red-500 font-bold">IMPORTANTE:</span> Toma captura de pantalla al finalizar tu pago.
+                        <strong>Pago Seguro:</strong> Procesado por Wompi Bancolombia.
+                        <br><span class="text-red-500 font-bold">IMPORTANTE:</span> Toma captura al finalizar.
                     </div>
                 </div>
             </div>
@@ -257,9 +257,9 @@
                     <i class="fas fa-times text-6xl text-red-500"></i>
                 </div>
                 <div class="mt-8">
-                    <h2 class="text-3xl font-black text-slate-900 mb-3 leading-none">Ups, no alcanzó</h2>
+                    <h2 class="text-3xl font-black text-slate-900 mb-3 leading-none">Casi lo logras</h2>
                     <p class="text-gray-600 mb-8 font-medium text-lg leading-relaxed">
-                        Necesitas un <strong>75%</strong> de aciertos para aprobar. No te desanimes.
+                        Necesitas un <strong>75%</strong> para aprobar. Repasa conceptos de higiene y vuelve a intentar.
                     </p>
                     
                     <button onclick="startQuizFlow()" class="w-full bg-slate-900 text-white font-bold py-4 rounded-2xl hover:bg-slate-800 transition shadow-lg transform active:scale-95 flex items-center justify-center text-lg">
@@ -273,21 +273,21 @@
     </main>
 
     <script>
-        // --- BASE DE DATOS PREGUNTAS ---
+        // --- BASE DE DATOS PREGUNTAS (MANIPULACIÓN ALIMENTOS) ---
         const questions = [
-            { q: "El principio que establece tomar precauciones con TODAS las personas por igual se llama:", options: ["Barrera de Protección", "Universalidad", "Aislamiento Selectivo"], a: 1 },
-            { q: "¿Cuál es el objetivo principal de la Esterilización?", options: ["Limpiar la suciedad visible", "Eliminar la mayoría de bacterias", "Destruir TODA forma de vida microbiana"], a: 2 },
-            { q: "Las agujas, cuchillas y elementos cortopunzantes se desechan OBLIGATORIAMENTE en:", options: ["Bolsa Roja", "Guardián de Seguridad Rígido", "Bolsa Negra Doble"], a: 1 },
-            { q: "¿Qué elemento de protección personal (EPP) protege principalmente las vías respiratorias contra aerosoles?", options: ["Guantes de látex", "Gorro desechable", "Mascarilla / Tapabocas"], a: 2 },
-            { q: "Antes de cualquier proceso de desinfección o esterilización, el PRIMER paso indispensable es:", options: ["Limpieza profunda (Agua y Jabón)", "Secado con aire caliente", "Aplicación de alcohol al 70%"], a: 0 },
-            { q: "Los residuos comunes no peligrosos (papel de oficina, cartón, envolturas limpias) van en bolsa color:", options: ["Roja", "Negra o Verde", "Solo en Guardián"], a: 1 },
-            { q: "¿El proceso de Desinfección de alto nivel garantiza la eliminación de esporas bacterianas?", options: ["Sí, siempre las elimina", "No necesariamente elimina esporas", "Solo si se hierve 1 hora"], a: 1 },
-            { q: "¿En qué color de bolsa se deben depositar los residuos con riesgo biológico (gasas con sangre, fluidos)?", options: ["Verde", "Gris", "Roja"], a: 2 }
+            { q: "¿Cuál es la norma actual que rige la manipulación de alimentos en Colombia?", options: ["Resolución 1080/92 (Antigua)", "Resolución 2674/2013 (Vigente)", "Resolución 780 (No aplica)"], a: 1 },
+            { q: "¿Cómo se evita correctamente la contaminación cruzada?", options: ["Lavando con vinagre", "Usando tablas diferentes para crudos y cocidos", "Cocinando a fuego muy alto"], a: 1 },
+            { q: "La 'Zona de Peligro' donde las bacterias se multiplican rápidamente es:", options: ["Entre 0°C y 10°C", "Entre -5°C y 5°C", "Entre 5°C y 60°C (Temperatura ambiente)"], a: 2 },
+            { q: "¿Cuánto debe durar como mínimo el lavado de manos con agua y jabón?", options: ["5 segundos", "10 segundos", "20 a 30 segundos (frotando vigorosamente)"], a: 2 },
+            { q: "Para desinfectar superficies en cocinas, el agente químico más común y efectivo es:", options: ["Agua hirviendo", "Solución de Hipoclorito (Cloro)", "Jugo de limón"], a: 1 },
+            { q: "En la nevera, ¿dónde deben almacenarse las carnes crudas para evitar goteos?", options: ["En la parte superior", "Junto a las frutas y verduras", "En la parte inferior y en recipiente cerrado"], a: 2 },
+            { q: "La cocción completa de los alimentos garantiza la eliminación de:", options: ["Los nutrientes", "Microorganismos patógenos peligrosos", "El sabor de la comida"], a: 1 },
+            { q: "¿Qué vestimenta es obligatoria para un manipulador de alimentos?", options: ["Ropa oscura y joyas", "Uniforme de color claro, sin botones y cabello recogido", "Cualquier ropa cómoda"], a: 1 }
         ];
 
         let currentIdx = 0;
         let score = 0;
-        const passingScore = 0.75; // 75%
+        const passingScore = 0.75; 
 
         // Referencias DOM
         const els = {
@@ -310,9 +310,7 @@
         }
 
         function exitQuiz() {
-            if(confirm("¿Seguro que deseas salir? Perderás el progreso actual.")) {
-                location.reload();
-            }
+            if(confirm("¿Seguro que deseas salir?")) location.reload();
         }
 
         function switchView(viewName) {
@@ -353,7 +351,6 @@
 
             qData.options.forEach((opt, index) => {
                 const btn = document.createElement('button');
-                // Estilos mejorados para opciones móviles (más grandes y fáciles de tocar)
                 btn.className = "w-full text-left p-5 rounded-2xl border-2 border-slate-100 bg-white shadow-sm hover:border-blue-300 hover:bg-blue-50 transition-all text-slate-700 font-semibold text-lg active:scale-[0.98] leading-snug";
                 btn.innerHTML = `<span class="inline-block w-8 h-8 bg-slate-100 rounded-full text-center leading-8 mr-3 text-slate-500 font-bold text-sm">${String.fromCharCode(65 + index)}</span> ${opt}`;
                 btn.onclick = () => checkAnswer(btn, index, qData.a);
@@ -379,17 +376,14 @@
                 els.feedback.innerHTML = '<i class="fas fa-times-circle text-red-600 text-2xl mr-2 align-middle"></i> Respuesta Incorrecta';
                 els.feedback.className = "block p-4 rounded-xl bg-red-100 text-red-800 font-bold text-center mb-4 border-2 border-red-200 shadow-sm text-xl animate-[shake_0.5s_ease-in-out]";
                 
-                // Resaltar la correcta
                 const correctBtn = allOptions[correctIdx];
                 correctBtn.className = "w-full text-left p-5 rounded-2xl border-2 border-green-500 bg-green-50 opacity-80 font-semibold text-lg leading-snug";
             }
 
-            // Activar botón siguiente (Más llamativo)
             els.btnNext.disabled = false;
             els.btnNext.className = "w-full bg-gradient-to-r from-blue-600 to-blue-800 text-white font-black py-4 rounded-2xl text-xl transition-all duration-300 shadow-[0_10px_25px_-5px_rgba(37,99,235,0.5)] hover:shadow-[0_20px_35px_-5px_rgba(37,99,235,0.6)] flex justify-center items-center animate-[pulse_2s_infinite] cursor-pointer active:scale-95 tracking-wide";
             els.btnNext.innerHTML = '<span>Siguiente Pregunta</span> <i class="fas fa-arrow-right ml-3"></i>';
 
-            // Auto-scroll al botón
             setTimeout(() => {
                 els.btnNext.scrollIntoView({ behavior: 'smooth', block: 'end' });
             }, 400);
