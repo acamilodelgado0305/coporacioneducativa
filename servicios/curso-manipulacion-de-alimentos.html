@@ -3,237 +3,280 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Evaluación Certificación | Manipulación de Alimentos</title>
+    <title>Certificación Oficial | Manipulación de Alimentos</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     
     <style>
-        /* Estilo Microsoft Forms / Corporativo */
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; color: #252423; }
-        
-        .ms-form-header {
-            background-color: #03787c; /* Verde azulado tipo Forms */
-            height: 10px;
-            width: 100%;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #111827; /* Fondo de respaldo */
+            /* SOLUCIÓN PIXELACIÓN: Imagen 4K de Ingredientes */
+            background-image: url('https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
 
-        .form-card {
-            background: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            margin-bottom: 16px;
+        /* Capa oscura para legibilidad perfecta */
+        .bg-overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+            backdrop-filter: blur(5px);
+            min-height: 100vh;
+        }
+
+        /* Tarjeta Principal Flotante */
+        .main-card {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 16px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             overflow: hidden;
+            max-width: 640px;
+            width: 100%;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .input-ms {
-            border: 1px solid #8a8886;
-            border-bottom: 2px solid #8a8886; /* Estilo input clásico */
-            border-radius: 2px;
-            padding: 8px 12px;
+        /* Barra de marca superior */
+        .brand-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #15803d 0%, #16a34a 100%);
             width: 100%;
-            transition: all 0.2s;
-            background: #faf9f8;
         }
-        .input-ms:focus {
-            border-color: #03787c;
-            border-bottom-width: 3px;
+
+        /* Inputs Profesionales */
+        .input-pro {
+            background-color: #f8fafc;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 12px 16px;
+            width: 100%;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            color: #1f2937;
+        }
+        .input-pro:focus {
+            background-color: #ffffff;
+            border-color: #16a34a; 
             outline: none;
-            background: white;
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
         }
 
         /* Botones */
-        .btn-primary {
-            background-color: #03787c;
+        .btn-action {
+            background: #15803d; 
             color: white;
-            transition: background-color 0.2s;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: transform 0.1s, background 0.2s;
         }
-        .btn-primary:hover { background-color: #025c5f; }
-        .btn-primary:disabled { background-color: #c8c6c4; cursor: not-allowed; }
+        .btn-action:hover { background: #166534; }
+        .btn-action:active { transform: scale(0.98); }
+        .btn-action:disabled { background: #9ca3af; cursor: not-allowed; }
 
         /* Utilidades */
         .hidden-section { display: none !important; }
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Estilos Pago Colombia */
-        .bancolombia-gradient { background: linear-gradient(90deg, #FDDA24 0%, #F5B51E 100%); color: black; }
-        .nequi-gradient { background: linear-gradient(135deg, #DA0063 0%, #6A008F 100%); color: white; }
+        /* Estilo Botón Nequi */
+        .btn-nequi {
+            background: #110e2e; 
+            background-image: linear-gradient(135deg, #2D0F3F 0%, #180925 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
     </style>
 </head>
-<body class="antialiased min-h-screen flex flex-col items-center pt-4 pb-12 px-2 md:px-0">
+<body class="antialiased text-slate-800">
 
-    <main class="w-full max-w-2xl">
+    <div class="bg-overlay flex flex-col items-center justify-center p-4 min-h-screen">
+        
+        <div class="mb-6 text-center drop-shadow-md">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/30">
+          <img src="../logof.png" class="w-10 h-10 rounded-lg border border-white/20 object-cover" alt="Nequi">
 
-        <div id="view-registration" class="fade-in">
-            <div class="form-card relative">
-                <div class="ms-form-header"></div>
-                <div class="p-6 md:p-10">
-                    <h1 class="text-3xl font-bold text-slate-800 mb-2">Evaluación Manipulación de Alimentos</h1>
-                    <p class="text-sm text-gray-600 mb-4">
-                        Diligencia tus datos personales tal cual aparecerán en tu certificado. 
-                        <br><strong>Tiempo estimado:</strong> 10 minutos.
+            </div>
+            <h1 class="text-white font-bold text-xl tracking-wide uppercase text-shadow">CertiTec Colombia</h1>
+            <p class="text-white/80 text-xs">Evaluación Oficial Manipulación de Alimentos</p>
+        </div>
+
+        <main class="main-card fade-in">
+            <div class="brand-bar"></div>
+
+            <div id="view-registration" class="p-8 md:p-10">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-2">Registro del Participante</h2>
+                    <p class="text-slate-500 text-sm">
+                        Diligencia tus datos personales tal cual aparecerán en tu certificado.
                     </p>
-                    <div class="text-xs text-red-600 font-semibold">* Obligatorio</div>
+                    <div id="resume-alert" class="hidden mt-4 bg-blue-50 text-blue-800 text-xs p-2 rounded border border-blue-100 flex items-center justify-center gap-2">
+                        <i class="fas fa-history"></i> <span>Hemos recuperado tu progreso anterior.</span>
+                    </div>
                 </div>
+
+                <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-5">
+                    
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">1. Tipo de Documento <span class="text-red-500">*</span></label>
+                        <select id="user-doctype" required class="input-pro cursor-pointer">
+                            <option value="" disabled selected>Selecciona una opción...</option>
+                            <option value="CC">Cédula de Ciudadanía</option>
+                            <option value="TI">Tarjeta de Identidad</option>
+                            <option value="CE">Cédula de Extranjería</option>
+                            <option value="PPT">Permiso por Protección Temporal (PPT)</option>
+                            <option value="PAS">Pasaporte</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">2. Número de Documento <span class="text-red-500">*</span></label>
+                        <input type="number" id="user-docnum" required placeholder="Ej: 1090333444" class="input-pro" />
+                        <p class="text-xs text-gray-400 mt-1">Sin puntos ni comas.</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">3. Nombre Completo <span class="text-red-500">*</span></label>
+                        <input type="text" id="user-fullname" required placeholder="Nombres y Apellidos" class="input-pro capitalize" />
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit" class="btn-action w-full py-4 text-lg shadow-lg shadow-green-900/10 flex justify-center items-center gap-2">
+                            <span>Siguiente</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
 
-            <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-4">
-                
-                <div class="form-card p-6">
-                    <label class="block text-base font-semibold mb-2">1. Tipo de Documento <span class="text-red-600">*</span></label>
-                    <select id="user-doctype" required class="input-ms">
-                        <option value="" disabled selected>Selecciona una opción...</option>
-                        <option value="CC">Cédula de Ciudadanía</option>
-                        <option value="TI">Tarjeta de Identidad</option>
-                        <option value="CE">Cédula de Extranjería</option>
-                        <option value="PPT">Permiso por Protección Temporal (PPT)</option>
-                        <option value="PAS">Pasaporte</option>
-                    </select>
+            <div id="view-quiz-app" class="hidden-section flex flex-col h-full">
+                <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
+                    <span class="text-xs font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200">
+                        PREGUNTA <span id="q-current">1</span>/8
+                    </span>
+                    <button onclick="resetApp()" class="text-xs text-gray-400 hover:text-red-500 underline" title="Borrar progreso">Reiniciar</button>
+                </div>
+                <div class="w-full bg-gray-200 h-1.5">
+                    <div id="progress-bar" class="bg-green-600 h-full transition-all duration-500" style="width: 0%"></div>
                 </div>
 
-                <div class="form-card p-6">
-                    <label class="block text-base font-semibold mb-2">2. Número de Documento <span class="text-red-600">*</span></label>
-                    <p class="text-xs text-gray-500 mb-2">Sin puntos ni comas.</p>
-                    <input type="number" id="user-docnum" required placeholder="Ej: 1090333444" class="input-ms" />
+                <div class="p-8 md:p-10 flex-grow">
+                    <h3 id="q-text" class="text-xl font-bold text-slate-800 mb-8 leading-relaxed">
+                        Cargando pregunta...
+                    </h3>
+                    
+                    <div id="q-options" class="space-y-3">
+                        </div>
+
+                    <div id="feedback-area" class="hidden mt-6 p-4 rounded-lg text-sm font-bold text-center animate-pulse"></div>
                 </div>
 
-                <div class="form-card p-6">
-                    <label class="block text-base font-semibold mb-2">3. Nombre Completo <span class="text-red-600">*</span></label>
-                    <p class="text-xs text-gray-500 mb-2">Escribe tus nombres y apellidos.</p>
-                    <input type="text" id="user-fullname" required placeholder="Tu respuesta" class="input-ms" />
-                </div>
-
-                <div class="mt-6 flex justify-end">
-                    <button type="submit" class="btn-primary px-8 py-2 rounded shadow text-lg font-semibold">
+                <div class="p-6 bg-gray-50 border-t border-gray-100 flex justify-end">
+                    <button id="btn-next" onclick="nextQuestion()" disabled class="btn-action px-8 py-3 opacity-50 cursor-not-allowed shadow-md">
                         Siguiente
                     </button>
                 </div>
-            </form>
-        </div>
-
-
-        <div id="view-quiz-app" class="hidden-section flex-col">
-            <div class="bg-white p-4 shadow-sm mb-4 rounded-lg flex justify-between items-center sticky top-0 z-10 border-t-4 border-[#03787c]">
-                <div class="text-sm font-semibold text-gray-600">Pregunta <span id="q-current">1</span> de 8</div>
-                <div class="w-1/3 bg-gray-200 h-2 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-[#03787c] h-full transition-all duration-300" style="width: 10%"></div>
-                </div>
             </div>
 
-            <div class="form-card p-6 md:p-8 fade-in">
-                <h3 id="q-text" class="text-xl font-bold text-slate-800 mb-6">
-                    Cargando pregunta...
-                </h3>
-                <div id="q-options" class="space-y-3">
+            <div id="view-checkout" class="hidden-section">
+                <div class="bg-green-50 p-8 text-center border-b border-green-100">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4 animate-bounce shadow-sm">
+                        <i class="fas fa-check text-4xl text-green-600"></i>
                     </div>
-            </div>
-
-            <div id="feedback-area" class="hidden p-4 rounded-lg font-bold text-center text-sm mb-4 mx-2"></div>
-
-            <div class="mt-4 flex justify-end px-2">
-                <button id="btn-next" onclick="nextQuestion()" disabled class="btn-primary px-6 py-2 rounded shadow opacity-50 cursor-not-allowed">
-                    Siguiente
-                </button>
-            </div>
-        </div>
-
-
-        <div id="view-checkout" class="hidden-section fade-in">
-            <div class="form-card relative overflow-hidden">
-                <div class="bg-green-600 h-2 w-full"></div>
-                <div class="p-8 text-center">
-                    <div class="inline-flex p-4 rounded-full bg-green-100 mb-4 animate-bounce">
-                        <i class="fas fa-check-circle text-5xl text-green-600"></i>
-                    </div>
-                    <h2 class="text-3xl font-bold text-slate-900">¡EXAMEN APROBADO!</h2>
-                    <p class="text-gray-600 mt-2">
+                    <h2 class="text-2xl font-bold text-slate-800">¡EXAMEN APROBADO!</h2>
+                    <p class="text-gray-600 mt-2 text-sm">
                         Hola <span id="display-name" class="font-bold"></span>, ya aprobaste tu certificación.
                     </p>
-                    <div class="mt-4 bg-yellow-50 border border-yellow-200 p-3 rounded text-sm text-yellow-800">
-                        <i class="fas fa-exclamation-triangle mr-1"></i> Tu certificado está listo para descarga inmediata tras el pago.
+                    <div class="mt-3 inline-block bg-yellow-50 border border-yellow-200 p-2 rounded text-xs text-yellow-800 font-medium">
+                        <i class="fas fa-exclamation-triangle mr-1"></i> Certificado listo para descarga tras el pago.
                     </div>
                 </div>
-            </div>
 
-            <div class="flex justify-between items-center px-4 mb-2">
-                <span class="text-gray-500 text-sm">Total a pagar:</span>
-                <span class="text-2xl font-bold text-slate-800">$20.000 COP</span>
-            </div>
+                <div class="p-8 space-y-6">
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-4">
+                        <span class="text-gray-500 text-sm font-medium">Total a pagar:</span>
+                        <span class="text-2xl font-bold text-slate-800">$20.000 COP</span>
+                    </div>
 
-            <div class="space-y-4">
-                
-                <div class="form-card p-0 overflow-hidden cursor-pointer hover:shadow-md transition">
-                    <a href="https://checkout.nequi.wompi.co/l/Nw8SU4" target="_blank" class="block p-5 flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWzDg3fwC8JPtQSd3XtxrtaXjk0lO88Db5QQ&s" alt="Nequi Logo" class="h-10 w-auto" />
-                                <h3 class="font-bold text-slate-800">Pagar con Nequi / PSE</h3>
-                                <p class="text-xs text-gray-500">Activación automática inmediata.</p>
+                    <a href="https://checkout.nequi.wompi.co/l/Nw8SU4" target="_blank" class="btn-nequi block w-full p-4 rounded-xl text-white shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all">
+                        <div class="relative z-10 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcDzl-dmkSdq1kfDUofrt0YnXm73WpKmQ8TA&s" class="w-10 h-10 rounded-lg border border-white/20 object-cover" alt="Nequi">
+                                <div class="text-left">
+                                    <p class="font-bold text-lg leading-none">Pagar con Nequi / PSE</p>
+                                    <p class="text-xs text-white/60 mt-1">Activación automática inmediata.</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-chevron-right group-hover:translate-x-1 transition"></i>
+                        </div>
+                    </a>
+
+                    <div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fas fa-university text-yellow-500 text-xl"></i>
+                            <h3 class="font-bold text-slate-700">Transferencias Manuales</h3>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 gap-3 mb-4">
+                            <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                                <p class="text-[10px] text-gray-500 uppercase tracking-wide font-bold">Nequi / Daviplata</p>
+                                <p class="text-lg font-mono font-bold text-slate-800 select-all">3223267797</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                                <p class="text-[10px] text-gray-500 uppercase tracking-wide font-bold">Bancolombia Ahorros</p>
+                                <p class="text-lg font-mono font-bold text-slate-800 select-all">816-589697-49</p>
                             </div>
                         </div>
-                        <i class="fas fa-chevron-right text-gray-400"></i>
-                    </a>
+
+                        <div class="bg-blue-50 border border-blue-100 p-3 rounded-lg mb-4 text-center shadow-sm">
+                            <p class="text-sm text-blue-900 leading-snug">
+                                <i class="fas fa-camera text-xl block mb-1 text-blue-600"></i>
+                                <strong>¡Importante!</strong> No olvides tomar captura de tu comprobante para la posterior verificación del pago.
+                            </p>
+                        </div>
+
+                        <a href="https://wa.me/573000000000?text=Hola,%20ya%20pagué%20mis%20$20.000%20del%20curso%20de%20manipulación.%20Envío%20comprobante." target="_blank" 
+                           class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-green-600 text-white font-bold py-3 rounded-lg transition shadow-md">
+                            <i class="fab fa-whatsapp text-xl"></i>
+                            Enviar Comprobante
+                        </a>
+                    </div>
                 </div>
-
-                <div class="form-card p-6 border-2 border-slate-100">
-                    <div class="flex items-center mb-4">
-                        <i class="fas fa-university text-2xl text-yellow-500 mr-3"></i>
-                        <h3 class="font-bold text-lg">Transferencias</h3>
-                    </div>
-                    
-                    <div class="bg-gray-100 p-4 rounded-lg mb-4 text-center">
-                        <p class="text-xs text-gray-500 uppercase tracking-wide">Nequi/Daviplata</p>
-                        <p class="text-xl font-mono font-bold text-slate-800 select-all">3223267797</p>
-                  
-                    </div>
-                      <div class="bg-gray-100 p-4 rounded-lg mb-4 text-center">
-                        <p class="text-xs text-gray-500 uppercase tracking-wide">Cuenta de Ahorros</p>
-                        <p class="text-xl font-mono font-bold text-slate-800 select-all">816-589697-49</p>
-                    
-                    </div>
-
-                  <div class="bg-blue-50 border border-blue-100 p-3 rounded-lg mb-4 text-center shadow-sm">
-    <p class="text-sm text-blue-900 leading-snug">
-        <i class="fas fa-camera text-xl block mb-1 text-blue-600"></i>
-        <strong>¡Importante!</strong> No olvides tomar captura de tu comprobante para la posterior verificación del pago.
-    </p>
-</div>
-
-                    <a href="https://wa.me/573000000000?text=Hola,%20ya%20pagué%20mis%20$20.000%20del%20curso%20de%20manipulación.%20Envío%20comprobante." 
-                       target="_blank"
-                       class="w-full bg-[#25D366] text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center hover:bg-green-600 transition shadow-lg">
-                        <i class="fab fa-whatsapp text-xl mr-2"></i> Enviar Comprobante
-                    </a>
-                </div>
-
             </div>
-            
-            <p class="text-center text-xs text-gray-400 mt-6 pb-6">Pago 100% Seguro. Certificación Válida Resolución 2674.</p>
-        </div>
 
-
-        <div id="view-fail" class="hidden-section fade-in text-center mt-10">
-            <div class="form-card p-8 border-t-4 border-red-500">
-                <i class="fas fa-times-circle text-5xl text-red-500 mb-4"></i>
+            <div id="view-fail" class="hidden-section text-center p-10">
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full mb-6">
+                    <i class="fas fa-times text-4xl text-red-500"></i>
+                </div>
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">No alcanzaste el puntaje</h2>
-                <p class="text-gray-600 mb-6">
+                <p class="text-gray-500 mb-8 text-sm">
                     Necesitas un mínimo del 75% para certificarte. No te preocupes, puedes intentarlo de nuevo gratis.
                 </p>
-                <button onclick="restartQuiz()" class="btn-primary w-full py-3 rounded font-bold">
-                    Intentar de Nuevo
+                <button onclick="resetApp()" class="btn-action w-full py-3 bg-slate-800 hover:bg-slate-900 shadow-lg">
+                    <i class="fas fa-redo mr-2"></i> Intentar de Nuevo
                 </button>
             </div>
-        </div>
 
-    </main>
+        </main>
+
+        <footer class="mt-8 text-center text-white/50 text-xs pb-4">
+            <p>Pago 100% Seguro. Certificación Válida Resolución 2674.</p>
+            <p class="mt-2 text-[10px] opacity-60">© 2024 CertiTec Colombia</p>
+        </footer>
+    </div>
 
     <script>
-        // --- DATOS Y LÓGICA ---
-        let userData = { type: '', num: '', name: '' };
+        const STORAGE_KEY = 'certitec_data_v2';
         
+        // Estado inicial
+        let state = {
+            view: 'view-registration',
+            userData: { type: '', num: '', name: '' },
+            quiz: { currentIdx: 0, score: 0 }
+        };
+
         const questions = [
             { q: "1. ¿Cuál es la norma principal que regula la manipulación de alimentos en Colombia?", options: ["Resolución 2674 de 2013", "Código de Policía", "Ley 100"], a: 0 },
             { q: "2. La contaminación cruzada ocurre cuando:", options: ["Se lavan bien los alimentos", "Se mezclan alimentos crudos con cocidos", "Se congela la carne"], a: 1 },
@@ -245,58 +288,96 @@
             { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 }
         ];
 
-        let currentIdx = 0;
-        let score = 0;
-        const passingScore = 0.75; // 75%
+        const passingScore = 0.75; 
 
-        // Referencias
+        // Elementos DOM
         const els = {
-            reg: document.getElementById('view-registration'),
-            quiz: document.getElementById('view-quiz-app'),
-            checkout: document.getElementById('view-checkout'),
-            fail: document.getElementById('view-fail'),
-            
-            form: document.getElementById('reg-form'),
+            docType: document.getElementById('user-doctype'),
+            docNum: document.getElementById('user-docnum'),
+            fullName: document.getElementById('user-fullname'),
             displayName: document.getElementById('display-name'),
-            
             qText: document.getElementById('q-text'),
             qOptions: document.getElementById('q-options'),
             qCurrent: document.getElementById('q-current'),
             progressBar: document.getElementById('progress-bar'),
             btnNext: document.getElementById('btn-next'),
-            feedback: document.getElementById('feedback-area')
+            feedback: document.getElementById('feedback-area'),
+            resumeAlert: document.getElementById('resume-alert')
         };
 
-        // 1. REGISTRO
+        // --- SISTEMA DE PERSISTENCIA ---
+        function saveState() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                state = JSON.parse(saved);
+                applyStateToUI();
+            }
+        }
+
+        function resetApp() {
+            if(confirm('¿Borrar progreso y empezar de nuevo?')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+
+        function applyStateToUI() {
+            // Llenar inputs si existen
+            if (state.userData.type) els.docType.value = state.userData.type;
+            if (state.userData.num) els.docNum.value = state.userData.num;
+            if (state.userData.name) els.fullName.value = state.userData.name;
+
+            // Mostrar alerta si recuperamos datos en registro
+            if (state.view === 'view-registration' && state.userData.name) {
+                els.resumeAlert.classList.remove('hidden');
+            }
+
+            switchView(state.view);
+
+            if (state.view === 'view-quiz-app') loadQuestionUI();
+            if (state.view === 'view-checkout') els.displayName.innerText = state.userData.name.split(' ')[0];
+        }
+
+        function switchView(viewName) {
+            ['view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'].forEach(id => {
+                document.getElementById(id).classList.add('hidden-section');
+            });
+            document.getElementById(viewName).classList.remove('hidden-section');
+            window.scrollTo(0,0);
+        }
+
+        // --- LÓGICA APP ---
+
         function submitRegistration(e) {
             e.preventDefault();
-            const docType = document.getElementById('user-doctype').value;
-            const docNum = document.getElementById('user-docnum').value;
-            const fullName = document.getElementById('user-fullname').value;
+            const dt = els.docType.value;
+            const dn = els.docNum.value;
+            const fn = els.fullName.value;
 
-            if(!docType || !docNum || !fullName) {
-                alert("Por favor completa todos los campos.");
+            if(!dt || !dn || !fn) return;
+
+            state.userData = { type: dt, num: dn, name: fn };
+            state.view = 'view-quiz-app';
+            saveState(); // Guardar
+
+            switchView('view-quiz-app');
+            loadQuestionUI();
+        }
+
+        function loadQuestionUI() {
+            if (state.quiz.currentIdx >= questions.length) {
+                finishQuiz();
                 return;
             }
 
-            userData = { type: docType, num: docNum, name: fullName };
-            
-            // Personalizar el checkout desde ya
-            els.displayName.innerText = fullName.split(' ')[0]; // Primer nombre
-            
-            // Ir al Quiz
-            els.reg.classList.add('hidden-section');
-            els.quiz.classList.remove('hidden-section');
-            loadQuestion();
-            window.scrollTo(0, 0);
-        }
-
-        // 2. QUIZ
-        function loadQuestion() {
-            const q = questions[currentIdx];
+            const q = questions[state.quiz.currentIdx];
             els.qText.innerText = q.q;
-            els.qCurrent.innerText = currentIdx + 1;
-            els.progressBar.style.width = ((currentIdx + 1) / questions.length * 100) + "%";
+            els.qCurrent.innerText = state.quiz.currentIdx + 1;
+            els.progressBar.style.width = ((state.quiz.currentIdx) / questions.length * 100) + "%";
 
             els.qOptions.innerHTML = '';
             els.feedback.className = 'hidden';
@@ -304,83 +385,79 @@
             els.btnNext.classList.add('opacity-50', 'cursor-not-allowed');
 
             q.options.forEach((opt, idx) => {
-                const div = document.createElement('div');
-                div.className = "flex items-center p-3 border rounded cursor-pointer hover:bg-gray-50 transition";
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-4 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-green-400 transition-all font-medium text-slate-600 flex items-center group";
                 
-                const radio = document.createElement('input');
-                radio.type = 'radio';
-                radio.name = 'qOption';
-                radio.id = 'opt-'+idx;
-                radio.className = "mr-3 h-5 w-5 text-[#03787c] focus:ring-[#03787c]";
+                // Icono radio simulado
+                const circle = document.createElement('span');
+                circle.className = "w-5 h-5 rounded-full border-2 border-gray-300 mr-3 group-hover:border-green-500 transition flex-shrink-0";
                 
-                const label = document.createElement('label');
-                label.htmlFor = 'opt-'+idx;
-                label.className = "flex-grow cursor-pointer text-slate-700";
-                label.innerText = opt;
+                const text = document.createElement('span');
+                text.innerText = opt;
 
-                div.onclick = () => checkAnswer(idx, q.a, div);
-                
-                div.appendChild(radio);
-                div.appendChild(label);
-                els.qOptions.appendChild(div);
+                btn.appendChild(circle);
+                btn.appendChild(text);
+
+                btn.onclick = () => checkAnswer(idx, q.a, btn);
+                els.qOptions.appendChild(btn);
             });
         }
 
-        function checkAnswer(selectedIdx, correctIdx, containerDiv) {
-            // Bloquear todos
-            const allDivs = els.qOptions.childNodes;
-            allDivs.forEach(d => d.style.pointerEvents = 'none');
+        function checkAnswer(selectedIdx, correctIdx, btnElement) {
+            // Bloquear botones
+            const allBtns = els.qOptions.querySelectorAll('button');
+            allBtns.forEach(b => {
+                b.disabled = true;
+                b.classList.add('cursor-default');
+            });
 
-            // Feedback Visual
             els.feedback.classList.remove('hidden');
-            if(selectedIdx === correctIdx) {
-                score++;
-                containerDiv.classList.add('bg-green-100', 'border-green-500');
-                containerDiv.querySelector('input').checked = true;
-                els.feedback.innerHTML = '<span class="text-green-700">✓ Correcto</span>';
-            } else {
-                containerDiv.classList.add('bg-red-100', 'border-red-500');
-                // Mostrar la correcta
-                allDivs[correctIdx].classList.add('bg-green-50', 'border-green-300');
-                els.feedback.innerHTML = '<span class="text-red-700">✗ Incorrecto</span>';
-            }
 
-            // Habilitar botón Siguiente
+            if(selectedIdx === correctIdx) {
+                state.quiz.score++;
+                btnElement.className = "w-full text-left p-4 rounded-lg border-2 border-green-500 bg-green-50 text-green-800 font-bold flex items-center";
+                btnElement.querySelector('span').className = "w-5 h-5 rounded-full border-4 border-green-500 bg-white mr-3 flex-shrink-0"; 
+                els.feedback.innerHTML = '<i class="fas fa-check-circle text-green-600"></i> ¡Respuesta Correcta!';
+                els.feedback.classList.add('bg-green-100', 'text-green-800');
+            } else {
+                btnElement.className = "w-full text-left p-4 rounded-lg border-2 border-red-500 bg-red-50 text-red-800 font-bold flex items-center";
+                els.feedback.innerHTML = '<i class="fas fa-times-circle text-red-600"></i> Respuesta Incorrecta';
+                els.feedback.classList.add('bg-red-100', 'text-red-800');
+                
+                // Mostrar correcta
+                allBtns[correctIdx].className = "w-full text-left p-4 rounded-lg border border-green-500 bg-green-50 opacity-70 flex items-center";
+            }
+            
+            saveState(); // Guardar Score parcial
+            
             els.btnNext.disabled = false;
             els.btnNext.classList.remove('opacity-50', 'cursor-not-allowed');
         }
 
         function nextQuestion() {
-            currentIdx++;
-            if (currentIdx < questions.length) {
-                loadQuestion();
-                // Pequeño scroll arriba si es móvil
-                if(window.innerWidth < 768) window.scrollTo({top: 0, behavior: 'smooth'});
+            state.quiz.currentIdx++;
+            if (state.quiz.currentIdx < questions.length) {
+                saveState(); 
+                loadQuestionUI();
             } else {
                 finishQuiz();
             }
         }
 
         function finishQuiz() {
-            els.quiz.classList.add('hidden-section');
-            const finalScore = score / questions.length;
-            
+            const finalScore = state.quiz.score / questions.length;
             if (finalScore >= passingScore) {
-                els.checkout.classList.remove('hidden-section');
-                // Confetti o algo visual simple
-                window.scrollTo(0, 0);
+                state.view = 'view-checkout';
+                els.displayName.innerText = state.userData.name.split(' ')[0];
             } else {
-                els.fail.classList.remove('hidden-section');
+                state.view = 'view-fail';
             }
+            saveState();
+            switchView(state.view);
         }
 
-        function restartQuiz() {
-            currentIdx = 0;
-            score = 0;
-            els.fail.classList.add('hidden-section');
-            els.quiz.classList.remove('hidden-section');
-            loadQuestion();
-        }
+        // Iniciar App
+        document.addEventListener('DOMContentLoaded', loadState);
 
     </script>
 </body>
