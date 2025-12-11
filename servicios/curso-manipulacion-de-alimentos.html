@@ -89,8 +89,7 @@
         
         <div class="mb-6 text-center drop-shadow-md">
             <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/30">
-    <img src="../logof.png" class="w-10 h-10 rounded-lg border border-white/20 object-cover" alt="Nequi">
-
+                <img src="../logof.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2921/2921822.png'" class="w-10 h-10 object-contain p-1" alt="Logo">
             </div>
             <h1 class="text-white font-bold text-xl tracking-wide uppercase text-shadow">CertiTec Colombia</h1>
             <p class="text-white/80 text-xs">Evaluación Oficial Manipulación de Alimentos</p>
@@ -238,6 +237,14 @@
                             Enviar Comprobante
                         </a>
                     </div>
+
+                    <div class="mt-8 text-center border-t border-gray-100 pt-6">
+                        <p class="text-xs text-gray-400 mb-3">¿Necesitas certificar a otra persona?</p>
+                        <button onclick="startNewProcess()" class="text-slate-600 hover:text-green-700 font-medium text-sm transition flex items-center justify-center mx-auto gap-2">
+                            <i class="fas fa-user-plus"></i> Iniciar Nueva Certificación
+                        </button>
+                    </div>
+
                 </div>
             </div>
 
@@ -249,8 +256,8 @@
                 <p class="text-gray-500 mb-8 text-sm">
                     Necesitas un mínimo del 75% para certificarte. No te preocupes, puedes intentarlo de nuevo gratis.
                 </p>
-                <button onclick="resetApp()" class="btn-action w-full py-3 bg-slate-800 hover:bg-slate-900 shadow-lg">
-                    <i class="fas fa-redo mr-2"></i> Intentar de Nuevo
+                <button onclick="startNewProcess()" class="btn-action w-full py-3 bg-slate-800 hover:bg-slate-900 shadow-lg">
+                    <i class="fas fa-redo mr-2"></i> Intentar de Nuevo (Reiniciar)
                 </button>
             </div>
 
@@ -319,11 +326,17 @@
             }
         }
 
+        // Función para RESETEAR (Pregunta confirmación) - Usada durante el quiz
         function resetApp() {
             if(confirm('¿Borrar progreso y empezar de nuevo?')) {
-                localStorage.removeItem(STORAGE_KEY);
-                location.reload();
+                startNewProcess();
             }
+        }
+
+        // --- NUEVA FUNCIÓN: INICIAR NUEVO PROCESO (Sin confirmar, borra y recarga) ---
+        function startNewProcess() {
+            localStorage.removeItem(STORAGE_KEY);
+            location.reload();
         }
 
         function applyStateToUI() {
@@ -349,16 +362,13 @@
             window.scrollTo(0,0);
         }
 
-        // --- FUNCIÓN DE INTEGRACIÓN CON BACKEND ---
+        // --- INTEGRACIÓN API ---
         async function registerAndPay() {
-            // 1. Efecto Visual de Carga
             const loader = document.getElementById('loader-nequi');
             const arrow = document.getElementById('icon-arrow');
             loader.classList.remove('hidden');
             arrow.classList.add('hidden');
 
-            // 2. Preparar Datos para API
-            // Separar Nombre y Apellido simple
             const nameParts = state.userData.name.trim().split(' ');
             const firstName = nameParts[0];
             const lastName = nameParts.slice(1).join(' ') || '';
@@ -371,38 +381,30 @@
                 cuenta: FIXED_ACCOUNT,
                 tipo: FIXED_PRODUCT,
                 customer_email: "", 
-                usuarioId: FIXED_USER_ID // ID = 1
+                usuarioId: FIXED_USER_ID 
             };
 
             try {
                 console.log("Enviando venta...", payload);
-                
-                // 3. Llamada al Endpoint Público
                 const response = await fetch('https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(payload)
                 });
 
-                if (response.ok) {
-                    console.log("✅ Venta registrada en BD");
-                } else {
-                    console.error("⚠️ Error registrando en BD, pero continuando al pago.");
-                }
+                if (response.ok) console.log("✅ Venta registrada");
+                else console.error("⚠️ Error API");
 
             } catch (error) {
-                console.error("❌ Error de conexión API:", error);
+                console.error("❌ Error conexión", error);
             } finally {
-                // 4. ABRIR SIEMPRE LA PASARELA (Pase lo que pase)
                 window.open('https://checkout.nequi.wompi.co/l/Nw8SU4', '_blank');
-                
-                // Restaurar botón
                 loader.classList.add('hidden');
                 arrow.classList.remove('hidden');
             }
         }
 
-        // --- LÓGICA APP ---
+        // --- LÓGICA QUIZ ---
         function submitRegistration(e) {
             e.preventDefault();
             const dt = els.docType.value;
