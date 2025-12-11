@@ -12,8 +12,8 @@
     <style>
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #111827; /* Fondo de respaldo */
-            /* SOLUCIÓN PIXELACIÓN: Imagen 4K de Ingredientes */
+            background-color: #111827; 
+            /* Imagen HD - Anti Pixelación */
             background-image: url('https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -21,14 +21,12 @@
             background-repeat: no-repeat;
         }
 
-        /* Capa oscura para legibilidad perfecta */
         .bg-overlay {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
             backdrop-filter: blur(5px);
             min-height: 100vh;
         }
 
-        /* Tarjeta Principal Flotante */
         .main-card {
             background: rgba(255, 255, 255, 0.98);
             border-radius: 16px;
@@ -40,14 +38,12 @@
             position: relative;
         }
 
-        /* Barra de marca superior */
         .brand-bar {
             height: 8px;
             background: linear-gradient(90deg, #15803d 0%, #16a34a 100%);
             width: 100%;
         }
 
-        /* Inputs Profesionales */
         .input-pro {
             background-color: #f8fafc;
             border: 1px solid #cbd5e1;
@@ -65,7 +61,6 @@
             box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
         }
 
-        /* Botones */
         .btn-action {
             background: #15803d; 
             color: white;
@@ -77,12 +72,10 @@
         .btn-action:active { transform: scale(0.98); }
         .btn-action:disabled { background: #9ca3af; cursor: not-allowed; }
 
-        /* Utilidades */
         .hidden-section { display: none !important; }
         .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Estilo Botón Nequi */
         .btn-nequi {
             background: #110e2e; 
             background-image: linear-gradient(135deg, #2D0F3F 0%, #180925 100%);
@@ -96,8 +89,7 @@
         
         <div class="mb-6 text-center drop-shadow-md">
             <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/30">
-          <img src="../logof.png" class="w-10 h-10 rounded-lg border border-white/20 object-cover" alt="Nequi">
-
+                <i class="fas fa-carrot text-2xl"></i>
             </div>
             <h1 class="text-white font-bold text-xl tracking-wide uppercase text-shadow">CertiTec Colombia</h1>
             <p class="text-white/80 text-xs">Evaluación Oficial Manipulación de Alimentos</p>
@@ -118,7 +110,6 @@
                 </div>
 
                 <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-5">
-                    
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-1">1. Tipo de Documento <span class="text-red-500">*</span></label>
                         <select id="user-doctype" required class="input-pro cursor-pointer">
@@ -200,18 +191,21 @@
                         <span class="text-2xl font-bold text-slate-800">$20.000 COP</span>
                     </div>
 
-                    <a href="https://checkout.nequi.wompi.co/l/Nw8SU4" target="_blank" class="btn-nequi block w-full p-4 rounded-xl text-white shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all">
+                    <div onclick="registerAndPay()" class="btn-nequi cursor-pointer block w-full p-4 rounded-xl text-white shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all">
                         <div class="relative z-10 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcDzl-dmkSdq1kfDUofrt0YnXm73WpKmQ8TA&s" class="w-10 h-10 rounded-lg border border-white/20 object-cover" alt="Nequi">
+                                <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="w-10 h-10 rounded-lg border border-white/20 object-cover" alt="Nequi">
                                 <div class="text-left">
                                     <p class="font-bold text-lg leading-none">Pagar con Nequi / PSE</p>
                                     <p class="text-xs text-white/60 mt-1">Activación automática inmediata.</p>
                                 </div>
                             </div>
-                            <i class="fas fa-chevron-right group-hover:translate-x-1 transition"></i>
+                            <div id="loader-nequi" class="hidden">
+                                <i class="fas fa-circle-notch fa-spin text-xl"></i>
+                            </div>
+                            <i id="icon-arrow" class="fas fa-chevron-right group-hover:translate-x-1 transition"></i>
                         </div>
-                    </a>
+                    </div>
 
                     <div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
                         <div class="flex items-center gap-2 mb-4">
@@ -270,6 +264,12 @@
     <script>
         const STORAGE_KEY = 'certitec_data_v2';
         
+        // --- DATOS FIJOS PARA EL API ---
+        const FIXED_USER_ID = 1;
+        const FIXED_PRODUCT = "Curso Manipulación de alimentos";
+        const FIXED_VALUE = 20000;
+        const FIXED_ACCOUNT = "Nequi Web";
+
         // Estado inicial
         let state = {
             view: 'view-registration',
@@ -326,12 +326,10 @@
         }
 
         function applyStateToUI() {
-            // Llenar inputs si existen
             if (state.userData.type) els.docType.value = state.userData.type;
             if (state.userData.num) els.docNum.value = state.userData.num;
             if (state.userData.name) els.fullName.value = state.userData.name;
 
-            // Mostrar alerta si recuperamos datos en registro
             if (state.view === 'view-registration' && state.userData.name) {
                 els.resumeAlert.classList.remove('hidden');
             }
@@ -350,8 +348,60 @@
             window.scrollTo(0,0);
         }
 
-        // --- LÓGICA APP ---
+        // --- FUNCIÓN DE INTEGRACIÓN CON BACKEND ---
+        async function registerAndPay() {
+            // 1. Efecto Visual de Carga
+            const loader = document.getElementById('loader-nequi');
+            const arrow = document.getElementById('icon-arrow');
+            loader.classList.remove('hidden');
+            arrow.classList.add('hidden');
 
+            // 2. Preparar Datos para API
+            // Separar Nombre y Apellido simple
+            const nameParts = state.userData.name.trim().split(' ');
+            const firstName = nameParts[0];
+            const lastName = nameParts.slice(1).join(' ') || '';
+
+            const payload = {
+                nombre: firstName,
+                apellido: lastName,
+                numeroDeDocumento: state.userData.num,
+                valor: FIXED_VALUE,
+                cuenta: FIXED_ACCOUNT,
+                tipo: FIXED_PRODUCT,
+                customer_email: "", 
+                usuarioId: FIXED_USER_ID // ID = 1
+            };
+
+            try {
+                console.log("Enviando venta...", payload);
+                
+                // 3. Llamada al Endpoint Público
+                const response = await fetch('http://localhost:8080/api/ingresos/publico', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    console.log("✅ Venta registrada en BD");
+                } else {
+                    console.error("⚠️ Error registrando en BD, pero continuando al pago.");
+                }
+
+            } catch (error) {
+                console.error("❌ Error de conexión API:", error);
+            } finally {
+                // 4. ABRIR SIEMPRE LA PASARELA (Pase lo que pase)
+                window.open('https://checkout.nequi.wompi.co/l/Nw8SU4', '_blank');
+                
+                // Restaurar botón
+                loader.classList.add('hidden');
+                arrow.classList.remove('hidden');
+            }
+        }
+
+        // --- LÓGICA APP ---
         function submitRegistration(e) {
             e.preventDefault();
             const dt = els.docType.value;
@@ -362,8 +412,7 @@
 
             state.userData = { type: dt, num: dn, name: fn };
             state.view = 'view-quiz-app';
-            saveState(); // Guardar
-
+            saveState();
             switchView('view-quiz-app');
             loadQuestionUI();
         }
@@ -388,7 +437,6 @@
                 const btn = document.createElement('button');
                 btn.className = "w-full text-left p-4 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-green-400 transition-all font-medium text-slate-600 flex items-center group";
                 
-                // Icono radio simulado
                 const circle = document.createElement('span');
                 circle.className = "w-5 h-5 rounded-full border-2 border-gray-300 mr-3 group-hover:border-green-500 transition flex-shrink-0";
                 
@@ -404,7 +452,6 @@
         }
 
         function checkAnswer(selectedIdx, correctIdx, btnElement) {
-            // Bloquear botones
             const allBtns = els.qOptions.querySelectorAll('button');
             allBtns.forEach(b => {
                 b.disabled = true;
@@ -423,13 +470,10 @@
                 btnElement.className = "w-full text-left p-4 rounded-lg border-2 border-red-500 bg-red-50 text-red-800 font-bold flex items-center";
                 els.feedback.innerHTML = '<i class="fas fa-times-circle text-red-600"></i> Respuesta Incorrecta';
                 els.feedback.classList.add('bg-red-100', 'text-red-800');
-                
-                // Mostrar correcta
                 allBtns[correctIdx].className = "w-full text-left p-4 rounded-lg border border-green-500 bg-green-50 opacity-70 flex items-center";
             }
             
-            saveState(); // Guardar Score parcial
-            
+            saveState();
             els.btnNext.disabled = false;
             els.btnNext.classList.remove('opacity-50', 'cursor-not-allowed');
         }
@@ -456,7 +500,6 @@
             switchView(state.view);
         }
 
-        // Iniciar App
         document.addEventListener('DOMContentLoaded', loadState);
 
     </script>
