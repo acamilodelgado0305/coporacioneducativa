@@ -1,9 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Certificación Oficial | Manipulación de Alimentos</title>
+    <link rel="icon" href="../logopagina.png" type="image/png" />
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -12,25 +13,21 @@
     <style>
         body { 
             font-family: 'Inter', sans-serif; 
-            background-color: #111827; 
-            /* Imagen HD - Anti Pixelación */
-            background-image: url('https://images.unsplash.com/photo-1543353071-873f17a7a088?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
+            background-color: #f8fafc;
+            background-image: radial-gradient(1200px 600px at 10% -10%, rgba(14, 165, 233, 0.15), transparent 60%),
+                              radial-gradient(1000px 500px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%);
             background-attachment: fixed;
-            background-repeat: no-repeat;
         }
 
         .bg-overlay {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
-            backdrop-filter: blur(5px);
+            background: linear-gradient(180deg, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.9));
             min-height: 100vh;
         }
 
         .main-card {
-            background: rgba(255, 255, 255, 0.98);
+            background: #ffffff;
             border-radius: 16px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.35);
             overflow: hidden;
             max-width: 640px;
             width: 100%;
@@ -87,27 +84,24 @@
 
     <div class="bg-overlay flex flex-col items-center justify-center p-4 min-h-screen">
         
-        <div class="mb-6 text-center drop-shadow-md">
-            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/30">
+        <div class="mb-6 text-center">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/20">
                 <img src="../logof.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2921/2921822.png'" class="w-10 h-10 object-contain p-1" alt="Logo">
             </div>
-            <h1 class="text-white font-bold text-xl tracking-wide uppercase text-shadow">CertiTec Colombia</h1>
-            <p class="text-white/80 text-xs">Evaluación Oficial Manipulación de Alimentos</p>
+            <h1 class="text-slate-900 font-bold text-xl tracking-wide uppercase">CertiTec Colombia</h1>
+            <p class="text-slate-600 text-xs">Evaluación Oficial Manipulación de Alimentos</p>
         </div>
 
         <main class="main-card fade-in">
             <div class="brand-bar"></div>
 
-            <div id="view-registration" class="p-8 md:p-10">
+            <div id="view-registration" class="p-8 md:p-10 hidden-section">
                 <div class="text-center mb-6">
-                    <h2 class="text-2xl font-bold text-slate-900 mb-2">Registro del Participante</h2>
-                    <p class="text-slate-500 text-sm">
-                        Diligencia tus datos personales tal cual aparecerán en tu certificado.
+                    <h2 id="reg-title" class="text-2xl font-bold text-slate-900 mb-2">Datos para tu Certificado</h2>
+                    <p id="reg-subtitle" class="text-slate-500 text-sm">
+                        Ya aprobaste la evaluación. Completa tus datos para continuar.
                     </p>
-                    <div id="resume-alert" class="hidden mt-4 bg-blue-50 text-blue-800 text-xs p-2 rounded border border-blue-100 flex items-center justify-center gap-2">
-                        <i class="fas fa-history"></i> <span>Hemos recuperado tu progreso anterior.</span>
                     </div>
-                </div>
 
                 <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-5">
                     <div>
@@ -135,14 +129,14 @@
 
                     <div class="pt-4">
                         <button type="submit" class="btn-action w-full py-4 text-lg shadow-lg shadow-green-900/10 flex justify-center items-center gap-2">
-                            <span>Siguiente</span>
+                            <span id="reg-btn-text">Continuar al pago</span>
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </div>
                 </form>
             </div>
 
-            <div id="view-quiz-app" class="hidden-section flex flex-col h-full">
+            <div id="view-quiz-app" class="flex flex-col h-full">
                 <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
                     <span class="text-xs font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200">
                         PREGUNTA <span id="q-current">1</span>/8
@@ -188,7 +182,7 @@
                 <div class="p-8 space-y-6">
                     <div class="flex justify-between items-center border-b border-gray-100 pb-4">
                         <span class="text-gray-500 text-sm font-medium">Total a pagar:</span>
-                        <span class="text-2xl font-bold text-slate-800">$20.000 COP</span>
+                        <span class="text-2xl font-bold text-slate-800">$22.000 COP</span>
                     </div>
 
                     <div onclick="registerAndPay()" class="btn-nequi cursor-pointer block w-full p-4 rounded-xl text-white shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all">
@@ -231,7 +225,7 @@
                             </p>
                         </div>
 
-                        <a href="https://wa.me/573000000000?text=Hola,%20ya%20pagué%20mis%20$20.000%20del%20curso%20de%20manipulación.%20Envío%20comprobante." target="_blank" 
+                        <a href="https://wa.me/573000000000?text=Hola,%20ya%20pagué%20mis%20$22.000%20del%20curso%20de%20manipulación.%20Envío%20comprobante." target="_blank" 
                            class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-green-600 text-white font-bold py-3 rounded-lg transition shadow-md">
                             <i class="fab fa-whatsapp text-xl"></i>
                             Enviar Comprobante
@@ -263,9 +257,9 @@
 
         </main>
 
-        <footer class="mt-8 text-center text-white/50 text-xs pb-4">
+        <footer class="mt-8 text-center text-slate-500 text-xs pb-4">
             <p>Pago 100% Seguro. Certificación Válida Resolución 2674.</p>
-            <p class="mt-2 text-[10px] opacity-60">© 2024 CertiTec Colombia</p>
+            <p class="mt-2 text-[10px] opacity-70">© 2024 CertiTec Colombia</p>
         </footer>
     </div>
 
@@ -275,12 +269,13 @@
         // --- DATOS FIJOS PARA EL API ---
         const FIXED_USER_ID = 1;
         const FIXED_PRODUCT = "Curso Manipulación de alimentos";
-        const FIXED_VALUE = 20000;
+        const FIXED_VALUE = 22000;
         const FIXED_ACCOUNT = "Nequi Web";
 
         // Estado inicial
         let state = {
-            view: 'view-registration',
+            view: 'view-quiz-app',
+            pendingCheckout: false,
             userData: { type: '', num: '', name: '' },
             quiz: { currentIdx: 0, score: 0 }
         };
@@ -310,7 +305,9 @@
             progressBar: document.getElementById('progress-bar'),
             btnNext: document.getElementById('btn-next'),
             feedback: document.getElementById('feedback-area'),
-            resumeAlert: document.getElementById('resume-alert')
+            regTitle: document.getElementById('reg-title'),
+            regSubtitle: document.getElementById('reg-subtitle'),
+            regBtnText: document.getElementById('reg-btn-text')
         };
 
         // --- SISTEMA DE PERSISTENCIA ---
@@ -322,8 +319,8 @@
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) {
                 state = JSON.parse(saved);
-                applyStateToUI();
             }
+            applyStateToUI();
         }
 
         // Función para RESETEAR (Pregunta confirmación) - Usada durante el quiz
@@ -344,14 +341,18 @@
             if (state.userData.num) els.docNum.value = state.userData.num;
             if (state.userData.name) els.fullName.value = state.userData.name;
 
-            if (state.view === 'view-registration' && state.userData.name) {
-                els.resumeAlert.classList.remove('hidden');
+            if (state.pendingCheckout && els.regTitle) {
+                els.regTitle.innerText = "Datos para tu Certificado";
+                els.regSubtitle.innerText = "Ya aprobaste la evaluaciÃ³n. Completa tus datos para continuar.";
+                els.regBtnText.innerText = "Continuar al pago";
             }
 
             switchView(state.view);
 
             if (state.view === 'view-quiz-app') loadQuestionUI();
-            if (state.view === 'view-checkout') els.displayName.innerText = state.userData.name.split(' ')[0];
+            if (state.view === 'view-checkout' && state.userData.name) {
+                els.displayName.innerText = state.userData.name.split(' ')[0];
+            }
         }
 
         function switchView(viewName) {
@@ -362,7 +363,7 @@
             window.scrollTo(0,0);
         }
 
-        // --- INTEGRACIÓN API ---
+        // --- INTEGRACIÃ“N API ---
         async function registerAndPay() {
             const loader = document.getElementById('loader-nequi');
             const arrow = document.getElementById('icon-arrow');
@@ -392,13 +393,13 @@
                     body: JSON.stringify(payload)
                 });
 
-                if (response.ok) console.log("✅ Venta registrada");
-                else console.error("⚠️ Error API");
+                if (response.ok) console.log("Venta registrada");
+                else console.error("Error API");
 
             } catch (error) {
-                console.error("❌ Error conexión", error);
+                console.error("Error conexión", error);
             } finally {
-                window.open('https://checkout.nequi.wompi.co/l/Nw8SU4', '_blank');
+                window.open('https://checkout.nequi.wompi.co/l/bSxc9E', '_blank');
                 loader.classList.add('hidden');
                 arrow.classList.remove('hidden');
             }
@@ -414,10 +415,11 @@
             if(!dt || !dn || !fn) return;
 
             state.userData = { type: dt, num: dn, name: fn };
-            state.view = 'view-quiz-app';
+            state.view = state.pendingCheckout ? 'view-checkout' : 'view-quiz-app';
             saveState();
-            switchView('view-quiz-app');
-            loadQuestionUI();
+            switchView(state.view);
+            if (state.view === 'view-quiz-app') loadQuestionUI();
+            if (state.view === 'view-checkout') els.displayName.innerText = state.userData.name.split(' ')[0];
         }
 
         function loadQuestionUI() {
@@ -494,13 +496,20 @@
         function finishQuiz() {
             const finalScore = state.quiz.score / questions.length;
             if (finalScore >= passingScore) {
-                state.view = 'view-checkout';
-                els.displayName.innerText = state.userData.name.split(' ')[0];
+                if (state.userData.name) {
+                    state.view = 'view-checkout';
+                } else {
+                    state.pendingCheckout = true;
+                    state.view = 'view-registration';
+                }
             } else {
                 state.view = 'view-fail';
             }
             saveState();
             switchView(state.view);
+            if (state.view === 'view-checkout' && state.userData.name) {
+                els.displayName.innerText = state.userData.name.split(' ')[0];
+            }
         }
 
         document.addEventListener('DOMContentLoaded', loadState);
@@ -508,3 +517,5 @@
     </script>
 </body>
 </html>
+
+
