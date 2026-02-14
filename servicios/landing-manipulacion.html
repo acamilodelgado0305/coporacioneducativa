@@ -23,7 +23,7 @@
     </script>
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .gradient-hero { background: linear-gradient(135deg, #14532d 0%, #166534 40%, #15803d 100%); }
+        .gradient-hero { background: linear-gradient(135deg, #0c3b1e 0%, #14532d 40%, #166534 100%); }
         .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); }
         .float-up { animation: floatUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; opacity:0; }
         @keyframes floatUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
@@ -40,6 +40,19 @@
         .cta-btn:active { transform: scale(0.98); }
         .faq-answer { max-height:0; overflow:hidden; transition: max-height 0.3s ease; }
         .faq-answer.open { max-height:200px; }
+
+        /* ===== MOBILE READABILITY FIXES ===== */
+        .hero-text-shadow { text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
+        .hero-sub-shadow { text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+
+        @media (max-width: 767px) {
+            .gradient-hero { background: linear-gradient(180deg, #0a2e16 0%, #14532d 50%, #166534 100%); }
+            .hero-blurs { display: none !important; }
+            .gradient-hero h1 { font-size: 1.75rem; line-height: 1.2; }
+            .gradient-hero p { font-size: 0.938rem; color: rgba(220,252,231,0.95); }
+            .dark-section-text { font-size: 0.875rem; line-height: 1.7; color: #cbd5e1; }
+            .mobile-pb { padding-bottom: 80px; }
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
@@ -60,7 +73,7 @@
 
     <!-- HERO SECTION -->
     <section class="gradient-hero relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
+        <div class="absolute inset-0 opacity-10 hero-blurs">
             <div class="absolute top-10 left-10 w-72 h-72 bg-green-300 rounded-full filter blur-3xl"></div>
             <div class="absolute bottom-10 right-10 w-96 h-96 bg-emerald-200 rounded-full filter blur-3xl"></div>
         </div>
@@ -72,11 +85,11 @@
                         <span class="w-2 h-2 bg-green-400 rounded-full animate-ping"></span>
                         <span class="text-green-200 text-xs font-semibold uppercase tracking-wider">Disponible 24/7</span>
                     </div>
-                    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4">
+                    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4 hero-text-shadow">
                         Certificado de <br>
-                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-emerald-200">Manipulación de Alimentos</span>
+                        <span class="text-green-300 md:text-transparent md:bg-clip-text md:bg-gradient-to-r md:from-green-300 md:to-emerald-200">Manipulación de Alimentos</span>
                     </h1>
-                    <p class="text-green-100/80 text-base md:text-lg mb-6 leading-relaxed max-w-md">
+                    <p class="text-green-100 text-base md:text-lg mb-6 leading-relaxed max-w-md hero-sub-shadow">
                         Obtén tu <strong class="text-white">certificado + carnet</strong> con validez nacional bajo la <strong class="text-white">Resolución 2674 de 2013</strong>. Presenta el examen en línea y recibe tu documento al instante.
                     </p>
 
@@ -89,7 +102,7 @@
                         </a>
                     </div>
 
-                    <div class="flex items-center gap-4 text-green-200/70 text-xs">
+                    <div class="flex flex-wrap items-center gap-3 md:gap-4 text-green-200 text-xs hero-sub-shadow">
                         <span><i class="fas fa-shield-alt mr-1"></i> Pago seguro</span>
                         <span><i class="fas fa-lock mr-1"></i> Datos protegidos</span>
                         <span><i class="fas fa-undo mr-1"></i> Intentos ilimitados</span>
@@ -253,10 +266,10 @@
                             <span class="text-green-300 text-xs font-bold uppercase tracking-wider">Marco Legal</span>
                         </div>
                         <h2 class="text-2xl md:text-3xl font-black mb-4">Resolución 2674 de 2013</h2>
-                        <p class="text-slate-300 text-sm leading-relaxed mb-4">
+                        <p class="text-slate-300 dark-section-text text-sm leading-relaxed mb-4">
                             Esta resolución del <strong class="text-white">Ministerio de Salud y Protección Social</strong> establece que toda persona que manipule alimentos debe contar con una certificación vigente en Buenas Prácticas de Manufactura (BPM).
                         </p>
-                        <p class="text-slate-400 text-xs">
+                        <p class="text-slate-400 dark-section-text text-xs">
                             Es obligatorio para: restaurantes, panaderías, tiendas, supermercados, hoteles, servicios de catering, plazas de mercado y cualquier establecimiento que prepare o venda alimentos.
                         </p>
                     </div>
@@ -376,7 +389,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-white py-10 px-4">
+    <footer class="bg-slate-900 text-white py-10 px-4 mobile-pb">
         <div class="container mx-auto max-w-4xl text-center">
             <div class="flex items-center justify-center gap-3 mb-4">
                 <img src="../logopagina.png" alt="CertiTec" class="h-8 brightness-200" onerror="this.style.display='none'" />
@@ -392,12 +405,12 @@
     </footer>
 
     <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/573107941580?text=Hola,%20tengo%20una%20pregunta%20sobre%20el%20certificado%20de%20manipulación%20de%20alimentos" target="_blank" class="fixed bottom-5 right-5 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 transition">
+    <a href="https://wa.me/573107941580?text=Hola,%20tengo%20una%20pregunta%20sobre%20el%20certificado%20de%20manipulación%20de%20alimentos" target="_blank" class="fixed bottom-20 md:bottom-5 right-4 md:right-5 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 transition">
         <i class="fab fa-whatsapp text-white text-2xl"></i>
     </a>
 
     <!-- STICKY CTA MOBILE -->
-    <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white/95 backdrop-blur-md border-t border-slate-200 p-3 shadow-2xl">
+    <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-slate-200 p-3 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
         <a href="curso-manipulacion-de-alimentos.html" class="block w-full bg-green-700 hover:bg-green-800 text-white font-bold py-4 rounded-xl text-center shadow-lg transition">
             <i class="fas fa-play-circle mr-2"></i> Presentar Examen · $22.000
         </a>
