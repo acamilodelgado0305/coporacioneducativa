@@ -6,6 +6,24 @@
     <title>Certificación Oficial | Manipulación de Alimentos</title>
     <link rel="icon" href="../logopagina.png" type="image/png" />
     
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '639715789143642');
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -399,6 +417,14 @@
             } catch (error) {
                 console.error("Error conexión", error);
             } finally {
+                // Meta Pixel: Purchase event
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Purchase', {
+                        content_name: 'Certificado Manipulación de Alimentos',
+                        value: 22000,
+                        currency: 'COP'
+                    });
+                }
                 window.open('https://checkout.nequi.wompi.co/l/bSxc9E', '_blank');
                 loader.classList.add('hidden');
                 arrow.classList.remove('hidden');
@@ -496,6 +522,14 @@
         function finishQuiz() {
             const finalScore = state.quiz.score / questions.length;
             if (finalScore >= passingScore) {
+                // Meta Pixel: InitiateCheckout event (examen aprobado)
+                if (typeof fbq === 'function') {
+                    fbq('track', 'InitiateCheckout', {
+                        content_name: 'Certificado Manipulación de Alimentos',
+                        value: 22000,
+                        currency: 'COP'
+                    });
+                }
                 if (state.userData.name) {
                     state.view = 'view-checkout';
                 } else {
