@@ -1,472 +1,658 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Certificado de Manipulación de Alimentos | Resolución 2674 | CertiTec Colombia</title>
-    <meta name="description" content="Obtén tu certificado y carnet de manipulación de alimentos con validez nacional. Resolución 2674/2013. Entrega inmediata. 100% en línea desde $22.000 COP." />
-    <link rel="icon" href="../logopagina.png" type="image/png" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Certificado de Manipulación de Alimentos | Resolución 2674 | CertiTec Colombia</title>
+<meta name="description" content="Certifícate en manipulación de alimentos online. Resolución 2674 de 2013. Certificado + carnet desde $22.000. Entrega inmediata."/>
+<link rel="icon" href="../logopagina.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','639715789143642');fbq('track','PageView');</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:#1a1a1a;background:#fff;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto}
 
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '639715789143642');
-    fbq('track', 'PageView');
-    fbq('track', 'ViewContent', {
-        content_name: 'Landing Manipulación de Alimentos',
-        content_category: 'Certificaciones',
-        value: 22000,
-        currency: 'COP'
-    });
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+/* NAV */
+.nav{background:#7f1d1d;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:99;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.nav-logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:15px}
+.nav-logo img{height:30px;filter:brightness(10)}
+.nav-btn{background:#dc2626;color:#fff;padding:9px 20px;border-radius:7px;font-size:13px;font-weight:700;transition:.2s;white-space:nowrap}
+.nav-btn:hover{background:#b91c1c}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: { 50:'#f0fdf4', 100:'#dcfce7', 200:'#bbf7d0', 500:'#22c55e', 600:'#16a34a', 700:'#15803d', 800:'#166534', 900:'#14532d' },
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-hero { background: linear-gradient(135deg, #0c3b1e 0%, #14532d 40%, #166534 100%); }
-        .glass { background: rgba(255,255,255,0.08); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.12); }
-        .float-up { animation: floatUp 0.6s cubic-bezier(0.16,1,0.3,1) forwards; opacity:0; }
-        @keyframes floatUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-        .pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
-        @keyframes pulseGlow { 0%,100%{box-shadow:0 0 0 0 rgba(22,163,74,0.4)} 50%{box-shadow:0 0 0 12px rgba(22,163,74,0)} }
-        .count-badge { animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards; }
-        @keyframes popIn { from{transform:scale(0)} to{transform:scale(1)} }
-        .ticker { animation: ticker 20s linear infinite; }
-        @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-        .stat-card { transition: all 0.3s ease; }
-        .stat-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px -10px rgba(0,0,0,0.15); }
-        .cta-btn { transition: all 0.2s ease; }
-        .cta-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-        .cta-btn:active { transform: scale(0.98); }
-        .faq-answer { max-height:0; overflow:hidden; transition: max-height 0.3s ease; }
-        .faq-answer.open { max-height:200px; }
+/* TICKER */
+.ticker{background:#450a0a;overflow:hidden;padding:8px 0;border-bottom:2px solid #dc2626}
+.ticker-t{display:flex;white-space:nowrap;animation:tick 24s linear infinite}
+.ticker-t span{margin:0 40px;font-size:11px;font-weight:600;color:#fca5a5;letter-spacing:.3px}
+.ticker-t span i{margin-right:5px;color:#ef4444}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-        /* ===== MOBILE READABILITY FIXES ===== */
-        .hero-text-shadow { text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
-        .hero-sub-shadow { text-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+/* HERO */
+.hero{background:#fff;padding:60px 24px 40px}
+.hero-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 480px;gap:48px;align-items:center}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:#fef2f2;border:1px solid #fecaca;border-radius:50px;padding:6px 16px;margin-bottom:20px}
+.hero-eyebrow span{font-size:12px;font-weight:700;color:#991b1b;text-transform:uppercase;letter-spacing:.8px}
+.hero-eyebrow .dot{width:7px;height:7px;background:#22c55e;border-radius:50%;animation:blink 1.8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(28px,3.8vw,50px);font-weight:900;line-height:1.13;color:#111;margin-bottom:20px}
+.hero h1 span{color:#dc2626}
+.hero-desc{font-size:16px;color:#555;line-height:1.75;max-width:460px;margin-bottom:28px}
+.check-list{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.check-list li{list-style:none;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:500;color:#222}
+.check-list li .ck{width:22px;height:22px;background:#dc2626;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.check-list li .ck i{color:#fff;font-size:10px}
+.btn-red{display:inline-flex;align-items:center;gap:8px;background:#dc2626;color:#fff;font-weight:800;font-size:15px;padding:15px 34px;border-radius:9px;transition:.2s;border:none;cursor:pointer;box-shadow:0 6px 20px rgba(220,38,38,.35);text-transform:uppercase;letter-spacing:.4px}
+.btn-red:hover{background:#b91c1c;transform:translateY(-2px);box-shadow:0 10px 28px rgba(220,38,38,.45)}
+.btn-outline{display:inline-flex;align-items:center;gap:7px;background:#fff;color:#7f1d1d;font-weight:700;font-size:14px;padding:13px 22px;border-radius:9px;border:2px solid #fecaca;transition:.2s;margin-left:12px}
+.btn-outline:hover{border-color:#dc2626;color:#dc2626}
+.trust-row{display:flex;flex-wrap:wrap;gap:16px;margin-top:22px}
+.trust-row span{font-size:12px;color:#888;display:flex;align-items:center;gap:5px;font-weight:500}
+.trust-row span i{color:#22c55e}
 
-        @media (max-width: 767px) {
-            .gradient-hero { background: linear-gradient(180deg, #0a2e16 0%, #14532d 50%, #166534 100%); }
-            .hero-blurs { display: none !important; }
-            .gradient-hero h1 { font-size: 1.75rem; line-height: 1.2; }
-            .gradient-hero p { font-size: 0.938rem; color: rgba(220,252,231,0.95); }
-            .dark-section-text { font-size: 0.875rem; line-height: 1.7; color: #cbd5e1; }
-            .mobile-pb { padding-bottom: 80px; }
-        }
-    </style>
+/* STATS */
+.stats{background:#7f1d1d;padding:28px 24px}
+.stats-g{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-radius:12px;overflow:hidden}
+.stat{padding:22px 16px;text-align:center;border-right:1px solid rgba(255,255,255,.12)}
+.stat:last-child{border-right:none}
+.stat .n{font-size:30px;font-weight:900;color:#fff;line-height:1}
+.stat .l{font-size:11px;color:rgba(255,255,255,.6);margin-top:5px;font-weight:500}
+
+/* SECTIONS */
+.sec{padding:80px 24px}
+.sec-gray{background:#f9fafb}
+.sec-white{background:#fff}
+.sec-dark{background:#111}
+.w{max-width:1100px;margin:0 auto}
+.sec-tag{font-size:11px;font-weight:700;color:#dc2626;text-transform:uppercase;letter-spacing:2px;display:block;margin-bottom:8px}
+.sec-h{font-size:clamp(22px,3vw,36px);font-weight:900;line-height:1.2;color:#111;margin-bottom:12px}
+.sec-h.wh{color:#fff}
+.sec-sub{font-size:15px;color:#666;line-height:1.7;max-width:550px}
+.sec-sub.wh{color:rgba(255,255,255,.65)}
+.hd{margin-bottom:48px}
+.hd.c{text-align:center}
+.hd.c .sec-sub{margin:0 auto}
+
+/* WHO NEEDS */
+.who-g{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.who-c{background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:28px 18px;text-align:center;transition:.25s;cursor:default}
+.who-c:hover{border-color:#dc2626;transform:translateY(-4px);box-shadow:0 10px 28px rgba(220,38,38,.1)}
+.who-c .ico{width:58px;height:58px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:#fef2f2}
+.who-c .ico i{font-size:24px;color:#dc2626}
+.who-c p{font-size:13px;font-weight:600;color:#333}
+
+/* HOW IT WORKS */
+.steps-g{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.step{background:#fff;border:1.5px solid #e5e7eb;border-radius:18px;padding:36px 28px;text-align:center;transition:.25s;position:relative;overflow:hidden}
+.step:hover{border-color:#dc2626;box-shadow:0 12px 34px rgba(220,38,38,.1)}
+.step-num{width:48px;height:48px;border-radius:50%;background:#dc2626;color:#fff;font-size:20px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 20px}
+.step-svg{margin:0 auto 20px;display:block}
+.step h3{font-size:18px;font-weight:800;margin-bottom:10px;color:#111}
+.step p{font-size:14px;color:#666;line-height:1.65}
+.step-pill{display:inline-block;margin-top:14px;background:#fef2f2;border:1px solid #fecaca;color:#991b1b;font-size:11px;font-weight:700;padding:4px 12px;border-radius:50px;text-transform:uppercase;letter-spacing:.8px}
+
+/* INCLUDES two-col */
+.inc-g{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.inc-c{display:flex;gap:16px;align-items:flex-start;background:#fff;border:1.5px solid #e5e7eb;border-radius:14px;padding:22px;transition:.25s}
+.inc-c:hover{border-color:#dc2626;box-shadow:0 8px 24px rgba(220,38,38,.08)}
+.inc-ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.inc-ico.r{background:#fef2f2;color:#dc2626}
+.inc-ico.b{background:#111;color:#fff}
+.inc-c h4{font-size:15px;font-weight:700;margin-bottom:5px;color:#111}
+.inc-c p{font-size:13px;color:#666;line-height:1.6}
+
+/* LEGAL */
+.legal-box{background:linear-gradient(135deg,#450a0a,#7f1d1d);border-radius:22px;padding:52px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;overflow:hidden}
+.legal-box::after{content:'';position:absolute;width:400px;height:400px;border-radius:50%;background:rgba(220,38,38,.12);filter:blur(80px);right:-100px;top:-100px;pointer-events:none}
+.lb-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:5px 14px;margin-bottom:16px}
+.lb-badge span{font-size:11px;font-weight:700;color:#fca5a5;text-transform:uppercase;letter-spacing:1px}
+.legal-box h2{font-size:clamp(22px,3vw,34px);font-weight:900;color:#fff;margin-bottom:14px}
+.legal-box p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.8}
+.legal-box p strong{color:#fff}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:50px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,.7);font-weight:500}
+.fine-box{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:30px 28px;text-align:center;min-width:200px;backdrop-filter:blur(8px)}
+.fine-box i{font-size:36px;color:#fca5a5;display:block;margin-bottom:12px}
+.fine-box .fl{font-size:11px;color:rgba(255,255,255,.5);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.fine-box .fa{font-size:28px;font-weight:900;color:#fca5a5;line-height:1.2}
+.fine-box .fn{font-size:11px;color:rgba(255,255,255,.35);margin-top:8px}
+
+/* TESTIMONIALS */
+.testi-g{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.testi{background:#fff;border:1.5px solid #e5e7eb;border-radius:16px;padding:26px;transition:.25s}
+.testi:hover{border-color:#fecaca;box-shadow:0 8px 24px rgba(220,38,38,.07)}
+.stars{color:#dc2626;font-size:13px;margin-bottom:12px}
+.testi blockquote{font-size:14px;color:#555;line-height:1.7;margin-bottom:16px;font-style:italic}
+.av{display:flex;align-items:center;gap:10px}
+.av-ic{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+.av h5{font-size:13px;font-weight:700;color:#111}
+.av span{font-size:11px;color:#999}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;max-width:760px;margin:0 auto}
+.faq-i{border:1.5px solid #e5e7eb;border-radius:12px;overflow:hidden;transition:.2s}
+.faq-i.op{border-color:#dc2626}
+.faq-btn{width:100%;display:flex;justify-content:space-between;align-items:center;padding:18px 22px;background:none;border:none;cursor:pointer;font-size:14px;font-weight:600;color:#111;font-family:'Inter',sans-serif;text-align:left}
+.faq-btn:hover{background:#fef2f2}
+.faq-btn i{color:#dc2626;font-size:12px;transition:transform .25s;flex-shrink:0;margin-left:12px}
+.faq-i.op .faq-btn i{transform:rotate(180deg)}
+.faq-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-i.op .faq-body{max-height:180px}
+.faq-body p{padding:0 22px 18px;font-size:14px;color:#666;line-height:1.75}
+
+/* CTA FINAL */
+.cta-sec{background:#7f1d1d;padding:80px 24px;text-align:center}
+.cta-sec .tag{font-size:12px;font-weight:700;color:#fca5a5;text-transform:uppercase;letter-spacing:2px;display:block;margin-bottom:14px}
+.cta-sec h2{font-size:clamp(26px,4vw,44px);font-weight:900;color:#fff;margin-bottom:10px}
+.cta-sec p{font-size:16px;color:rgba(255,255,255,.6);margin-bottom:20px}
+.cta-price{font-size:64px;font-weight:900;color:#fff;line-height:1;margin-bottom:6px}
+.cta-price sub{font-size:22px;font-weight:400;color:rgba(255,255,255,.5);vertical-align:bottom}
+.btn-white{display:inline-flex;align-items:center;gap:8px;background:#fff;color:#7f1d1d;font-weight:800;font-size:17px;padding:18px 44px;border-radius:10px;transition:.2s;margin:24px 0 16px;box-shadow:0 8px 28px rgba(0,0,0,.25);text-transform:uppercase;letter-spacing:.4px}
+.btn-white:hover{background:#fee2e2;transform:translateY(-2px)}
+.cta-notes{display:flex;justify-content:center;flex-wrap:wrap;gap:20px}
+.cta-notes span{font-size:12px;color:rgba(255,255,255,.45);display:flex;align-items:center;gap:5px}
+.cta-notes i{color:rgba(255,255,255,.6)}
+
+/* FOOTER */
+footer{background:#1a0303;padding:36px 24px 110px}
+.ft-in{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+.ft-logo{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;font-size:15px}
+.ft-logo img{height:28px;filter:brightness(10)}
+.ft-links{display:flex;gap:18px}
+.ft-links a{color:rgba(255,255,255,.35);font-size:13px;transition:.2s}
+.ft-links a:hover{color:#fca5a5}
+.ft-copy{font-size:11px;color:rgba(255,255,255,.2)}
+
+/* STICKY MOBILE */
+.s-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(20,0,0,.97);padding:10px 14px;border-top:1px solid rgba(220,38,38,.3)}
+.s-cta a{display:block;background:#dc2626;color:#fff;font-weight:800;text-align:center;padding:14px;border-radius:9px;font-size:14px;text-transform:uppercase;letter-spacing:.4px}
+/* WA */
+.wa{position:fixed;bottom:78px;right:16px;z-index:150;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(37,211,102,.4);transition:.2s}
+.wa:hover{transform:scale(1.1)}
+.wa i{color:#fff;font-size:22px}
+
+/* ANIMATIONS */
+.fu{opacity:0;transform:translateY(24px);transition:opacity .6s,transform .6s}
+.fu.v{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .hero-wrap,.steps-g,.testi-g{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .who-g{grid-template-columns:repeat(2,1fr)}
+  .legal-box{grid-template-columns:1fr}
+  .stats-g{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+  .inc-g{grid-template-columns:1fr}
+  .who-g{grid-template-columns:repeat(2,1fr)}
+  .s-cta{display:block}
+  .wa{bottom:88px}
+  .sec{padding:56px 16px}
+}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body>
 
-    <!-- URGENCY TICKER -->
-    <div class="bg-slate-900 text-white py-2 overflow-hidden">
-        <div class="flex whitespace-nowrap ticker">
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-bolt text-yellow-400 mr-1"></i> Certificado + Carnet por solo $22.000</span>
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-check-circle text-green-400 mr-1"></i> Resolución 2674 de 2013</span>
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-clock text-sky-400 mr-1"></i> Entrega inmediata al aprobar</span>
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-mobile-alt text-purple-400 mr-1"></i> 100% desde tu celular</span>
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-bolt text-yellow-400 mr-1"></i> Certificado + Carnet por solo $22.000</span>
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-check-circle text-green-400 mr-1"></i> Resolución 2674 de 2013</span>
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-clock text-sky-400 mr-1"></i> Entrega inmediata al aprobar</span>
-            <span class="mx-8 text-xs font-medium"><i class="fas fa-mobile-alt text-purple-400 mr-1"></i> 100% desde tu celular</span>
-        </div>
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-t">
+<span><i class="fas fa-check-circle"></i>Resolución 2674 de 2013 · Validez Nacional</span>
+<span><i class="fas fa-bolt"></i>Certificado + Carnet · $22.000 COP</span>
+<span><i class="fas fa-clock"></i>Entrega inmediata al aprobar</span>
+<span><i class="fas fa-mobile-alt"></i>100% en línea · Sin salir de casa</span>
+<span><i class="fas fa-shield-alt"></i>Avalado por Ministerio de Salud</span>
+<span><i class="fas fa-check-circle"></i>Resolución 2674 de 2013 · Validez Nacional</span>
+<span><i class="fas fa-bolt"></i>Certificado + Carnet · $22.000 COP</span>
+<span><i class="fas fa-clock"></i>Entrega inmediata al aprobar</span>
+<span><i class="fas fa-mobile-alt"></i>100% en línea · Sin salir de casa</span>
+<span><i class="fas fa-shield-alt"></i>Avalado por Ministerio de Salud</span>
+</div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="../index.html" class="nav-logo">
+    <img src="../logopagina.png" alt="CertiTec" onerror="this.style.display='none'"/>
+    <span>CertiTec Colombia</span>
+  </a>
+  <a href="curso-manipulacion-de-alimentos.html" class="nav-btn">
+    <i class="fas fa-play-circle" style="margin-right:6px"></i>Certificarme · $22.000
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-wrap">
+    <div>
+      <div class="hero-eyebrow">
+        <div class="dot"></div>
+        <span>Disponible 24/7 · Acceso inmediato</span>
+      </div>
+      <h1>Obtén tu Certificado de<br><span>Manipulación de Alimentos</span><br>Hoy Mismo</h1>
+      <p class="hero-desc">Cumple con la normativa vigente. Presenta el examen en línea, paga de forma segura y recibe tu <strong>certificado oficial + carnet</strong> al instante. Sin filas, sin trámites presenciales.</p>
+      <ul class="check-list">
+        <li><div class="ck"><i class="fas fa-check"></i></div>Avalado bajo Resolución 2674 de 2013</li>
+        <li><div class="ck"><i class="fas fa-check"></i></div>Válido ante Secretaría de Salud en toda Colombia</li>
+        <li><div class="ck"><i class="fas fa-check"></i></div>Intentos de examen ilimitados — sin costo extra</li>
+        <li><div class="ck"><i class="fas fa-check"></i></div>Certificado PDF + Carnet digital incluidos</li>
+      </ul>
+      <div>
+        <a href="curso-manipulacion-de-alimentos.html" class="btn-red"><i class="fas fa-play-circle"></i>Iniciar Examen Ahora</a>
+        <a href="#como-funciona" class="btn-outline">¿Cómo funciona? <i class="fas fa-arrow-down"></i></a>
+      </div>
+      <div class="trust-row">
+        <span><i class="fas fa-shield-alt"></i>Pago seguro</span>
+        <span><i class="fas fa-lock"></i>Datos protegidos</span>
+        <span><i class="fas fa-infinity"></i>Sin límite de intentos</span>
+        <span><i class="fas fa-bolt"></i>Entrega instantánea</span>
+      </div>
     </div>
-
-    <!-- HERO SECTION -->
-    <section class="gradient-hero relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10 hero-blurs">
-            <div class="absolute top-10 left-10 w-72 h-72 bg-green-300 rounded-full filter blur-3xl"></div>
-            <div class="absolute bottom-10 right-10 w-96 h-96 bg-emerald-200 rounded-full filter blur-3xl"></div>
-        </div>
-
-        <div class="relative z-10 container mx-auto max-w-5xl px-4 py-16 md:py-24">
-            <div class="grid md:grid-cols-2 gap-10 items-center">
-                <div class="float-up">
-                    <div class="inline-flex items-center gap-2 glass rounded-full px-4 py-2 mb-6">
-                        <span class="w-2 h-2 bg-green-400 rounded-full animate-ping"></span>
-                        <span class="text-green-200 text-xs font-semibold uppercase tracking-wider">Disponible 24/7</span>
-                    </div>
-                    <h1 class="text-3xl md:text-5xl font-black text-white leading-tight mb-4 hero-text-shadow">
-                        Certificado de <br>
-                        <span class="text-green-300 md:text-transparent md:bg-clip-text md:bg-gradient-to-r md:from-green-300 md:to-emerald-200">Manipulación de Alimentos</span>
-                    </h1>
-                    <p class="text-green-100 text-base md:text-lg mb-6 leading-relaxed max-w-md hero-sub-shadow">
-                        Obtén tu <strong class="text-white">certificado + carnet</strong> con validez nacional bajo la <strong class="text-white">Resolución 2674 de 2013</strong>. Presenta el examen en línea y recibe tu documento al instante.
-                    </p>
-
-                    <div class="flex flex-col sm:flex-row gap-3 mb-8">
-                        <a href="curso-manipulacion-de-alimentos.html" class="cta-btn bg-white text-green-800 font-bold py-4 px-8 rounded-xl shadow-lg shadow-green-900/30 text-center text-lg pulse-glow">
-                            <i class="fas fa-play-circle mr-2"></i> Presentar Examen Ahora
-                        </a>
-                        <a href="#como-funciona" class="cta-btn glass text-white font-semibold py-4 px-6 rounded-xl text-center">
-                            ¿Cómo funciona? <i class="fas fa-arrow-down ml-2"></i>
-                        </a>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-3 md:gap-4 text-green-200 text-xs hero-sub-shadow">
-                        <span><i class="fas fa-shield-alt mr-1"></i> Pago seguro</span>
-                        <span><i class="fas fa-lock mr-1"></i> Datos protegidos</span>
-                        <span><i class="fas fa-undo mr-1"></i> Intentos ilimitados</span>
-                    </div>
-                </div>
-
-                <div class="float-up hidden md:block" style="animation-delay:0.2s">
-                    <div class="relative">
-                        <div class="glass rounded-2xl p-6">
-                            <div class="bg-white rounded-xl p-4 shadow-lg mb-4">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-file-certificate text-green-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-sm text-slate-800">Certificado Digital</p>
-                                        <p class="text-[10px] text-slate-500">PDF alta resolución</p>
-                                    </div>
-                                    <span class="ml-auto text-green-600 text-xs font-bold bg-green-50 px-2 py-1 rounded-full">Incluido</span>
-                                </div>
-                                <div class="h-32 bg-gradient-to-br from-green-50 to-emerald-50 rounded-lg flex items-center justify-center border border-green-100">
-                                    <img src="../preview_certificado.png.png" alt="Preview certificado" class="h-28 object-contain rounded" onerror="this.parentElement.innerHTML='<div class=\'text-center\'><i class=\'fas fa-award text-4xl text-green-300 mb-2\'></i><p class=\'text-xs text-green-600 font-semibold\'>CERTIFICADO OFICIAL</p><p class=\'text-[10px] text-slate-400\'>Manipulación de Alimentos</p></div>'">
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow-lg">
-                                <div class="flex items-center gap-3 mb-3">
-                                    <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center">
-                                        <i class="fas fa-id-card text-yellow-600"></i>
-                                    </div>
-                                    <div>
-                                        <p class="font-bold text-sm text-slate-800">Carnet Plastificado</p>
-                                        <p class="text-[10px] text-slate-500">Formato portátil</p>
-                                    </div>
-                                    <span class="ml-auto text-green-600 text-xs font-bold bg-green-50 px-2 py-1 rounded-full">Incluido</span>
-                                </div>
-                                <div class="h-20 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg flex items-center justify-center border border-yellow-100">
-                                    <img src="../preview_carnet.png.png" alt="Preview carnet" class="h-16 object-contain rounded" onerror="this.parentElement.innerHTML='<div class=\'text-center\'><i class=\'fas fa-id-badge text-3xl text-yellow-300 mb-1\'></i><p class=\'text-xs text-yellow-600 font-semibold\'>CARNET OFICIAL</p></div>'">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- STATS BAR -->
-    <section class="bg-white border-y border-slate-200 py-8">
-        <div class="container mx-auto max-w-4xl px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div class="stat-card p-3 rounded-xl">
-                    <p class="text-2xl md:text-3xl font-black text-green-700">5.000+</p>
-                    <p class="text-xs text-slate-500 mt-1">Certificados emitidos</p>
-                </div>
-                <div class="stat-card p-3 rounded-xl">
-                    <p class="text-2xl md:text-3xl font-black text-green-700">15 min</p>
-                    <p class="text-xs text-slate-500 mt-1">Duración del examen</p>
-                </div>
-                <div class="stat-card p-3 rounded-xl">
-                    <p class="text-2xl md:text-3xl font-black text-green-700">24/7</p>
-                    <p class="text-xs text-slate-500 mt-1">Disponible siempre</p>
-                </div>
-                <div class="stat-card p-3 rounded-xl">
-                    <p class="text-2xl md:text-3xl font-black text-green-700">$22.000</p>
-                    <p class="text-xs text-slate-500 mt-1">Precio único</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CÓMO FUNCIONA -->
-    <section id="como-funciona" class="py-16 md:py-20 px-4">
-        <div class="container mx-auto max-w-4xl">
-            <div class="text-center mb-12">
-                <span class="text-xs font-bold text-green-600 uppercase tracking-widest">Proceso simple</span>
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-2">¿Cómo funciona?</h2>
-                <p class="text-slate-500 mt-3 max-w-lg mx-auto">En 3 pasos sencillos obtienes tu certificación oficial sin salir de casa</p>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                    <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-green-600 text-2xl mb-4 group-hover:scale-110 transition">
-                        <i class="fas fa-laptop"></i>
-                    </div>
-                    <div class="text-[10px] font-bold text-green-600 uppercase tracking-widest mb-2">Paso 1</div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">Presenta el examen</h3>
-                    <p class="text-sm text-slate-500">8 preguntas de selección múltiple sobre higiene y normativa alimentaria. Puedes presentarlo las veces que necesites.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                    <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:scale-110 transition">
-                        <i class="fas fa-credit-card"></i>
-                    </div>
-                    <div class="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-2">Paso 2</div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">Realiza el pago</h3>
-                    <p class="text-sm text-slate-500">Paga con <strong>Nequi, PSE, Daviplata o Bancolombia</strong>. Solo $22.000 COP. Proceso 100% seguro.</p>
-                </div>
-                <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-lg transition relative overflow-hidden group">
-                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-orange-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-                    <div class="w-14 h-14 bg-yellow-100 rounded-2xl flex items-center justify-center text-yellow-600 text-2xl mb-4 group-hover:scale-110 transition">
-                        <i class="fas fa-download"></i>
-                    </div>
-                    <div class="text-[10px] font-bold text-yellow-600 uppercase tracking-widest mb-2">Paso 3</div>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2">Descarga tu certificado</h3>
-                    <p class="text-sm text-slate-500">Recibe tu <strong>certificado + carnet</strong> en formato digital de alta resolución listo para imprimir.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- QUÉ INCLUYE -->
-    <section class="py-16 bg-white border-y border-slate-200 px-4">
-        <div class="container mx-auto max-w-4xl">
-            <div class="text-center mb-12">
-                <span class="text-xs font-bold text-green-600 uppercase tracking-widest">Todo incluido</span>
-                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-2">¿Qué recibes por $22.000?</h2>
-            </div>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="flex items-start gap-4 p-5 rounded-xl bg-green-50 border border-green-100">
-                    <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center text-white flex-shrink-0"><i class="fas fa-award"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Certificado Digital Oficial</h4>
-                        <p class="text-sm text-slate-600 mt-1">PDF de alta resolución con código QR verificable. Avalado bajo Resolución 2674 de 2013.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 p-5 rounded-xl bg-yellow-50 border border-yellow-100">
-                    <div class="w-10 h-10 bg-yellow-500 rounded-lg flex items-center justify-center text-white flex-shrink-0"><i class="fas fa-id-card"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Carnet de Identificación</h4>
-                        <p class="text-sm text-slate-600 mt-1">Formato portátil tipo tarjeta para que lo lleves siempre contigo en tu lugar de trabajo.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 p-5 rounded-xl bg-blue-50 border border-blue-100">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white flex-shrink-0"><i class="fas fa-redo"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Intentos Ilimitados</h4>
-                        <p class="text-sm text-slate-600 mt-1">Si no apruebas la primera vez, puedes volver a presentar el examen sin costo adicional.</p>
-                    </div>
-                </div>
-                <div class="flex items-start gap-4 p-5 rounded-xl bg-purple-50 border border-purple-100">
-                    <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white flex-shrink-0"><i class="fas fa-bolt"></i></div>
-                    <div>
-                        <h4 class="font-bold text-slate-900">Entrega Inmediata</h4>
-                        <p class="text-sm text-slate-600 mt-1">No esperes días. Una vez aprobado y pagado, recibes tus documentos al instante.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- RESOLUCIÓN LEGAL -->
-    <section class="py-16 px-4">
-        <div class="container mx-auto max-w-4xl">
-            <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 md:p-12 text-white relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-green-500/10 rounded-full filter blur-3xl"></div>
-                <div class="relative z-10 grid md:grid-cols-5 gap-8 items-center">
-                    <div class="md:col-span-3">
-                        <div class="inline-flex items-center gap-2 bg-green-500/20 rounded-full px-3 py-1 mb-4">
-                            <i class="fas fa-gavel text-green-400 text-xs"></i>
-                            <span class="text-green-300 text-xs font-bold uppercase tracking-wider">Marco Legal</span>
-                        </div>
-                        <h2 class="text-2xl md:text-3xl font-black mb-4">Resolución 2674 de 2013</h2>
-                        <p class="text-slate-300 dark-section-text text-sm leading-relaxed mb-4">
-                            Esta resolución del <strong class="text-white">Ministerio de Salud y Protección Social</strong> establece que toda persona que manipule alimentos debe contar con una certificación vigente en Buenas Prácticas de Manufactura (BPM).
-                        </p>
-                        <p class="text-slate-400 dark-section-text text-xs">
-                            Es obligatorio para: restaurantes, panaderías, tiendas, supermercados, hoteles, servicios de catering, plazas de mercado y cualquier establecimiento que prepare o venda alimentos.
-                        </p>
-                    </div>
-                    <div class="md:col-span-2 text-center">
-                        <div class="bg-white/10 rounded-2xl p-6 backdrop-blur-sm border border-white/10">
-                            <i class="fas fa-balance-scale text-5xl text-green-400 mb-4"></i>
-                            <p class="text-sm font-bold text-white mb-1">Multas por incumplimiento</p>
-                            <p class="text-3xl font-black text-yellow-400">Hasta 10.000 SMLMV</p>
-                            <p class="text-xs text-slate-400 mt-2">Evita sanciones. Certifícate hoy.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIOS -->
-    <section class="py-16 bg-white border-y border-slate-200 px-4">
-        <div class="container mx-auto max-w-4xl">
-            <div class="text-center mb-12">
-                <span class="text-xs font-bold text-green-600 uppercase tracking-widest">Opiniones reales</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-2">Lo que dicen nuestros certificados</h2>
-            </div>
-            <div class="grid md:grid-cols-3 gap-6">
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                    <div class="flex text-yellow-400 text-sm mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-sm text-slate-600 mb-4">"Súper rápido, lo hice desde el celular en el bus. En 15 minutos ya tenía mi certificado. Mi jefe quedó impresionado."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-green-200 rounded-full flex items-center justify-center text-green-700 font-bold text-xs">LC</div>
-                        <div><p class="text-sm font-bold text-slate-800">Laura C.</p><p class="text-[10px] text-slate-400">Bogotá</p></div>
-                    </div>
-                </div>
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                    <div class="flex text-yellow-400 text-sm mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="text-sm text-slate-600 mb-4">"Me pedían el carnet para empezar a trabajar en un restaurante. Lo saqué el mismo día. Muy recomendado."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-blue-200 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs">JR</div>
-                        <div><p class="text-sm font-bold text-slate-800">Juan R.</p><p class="text-[10px] text-slate-400">Medellín</p></div>
-                    </div>
-                </div>
-                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100">
-                    <div class="flex text-yellow-400 text-sm mb-3"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
-                    <p class="text-sm text-slate-600 mb-4">"Necesitaba certificar a 10 empleados y con esta plataforma cada uno lo hizo desde su casa. Ahorré tiempo y dinero."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 bg-purple-200 rounded-full flex items-center justify-center text-purple-700 font-bold text-xs">MG</div>
-                        <div><p class="text-sm font-bold text-slate-800">María G.</p><p class="text-[10px] text-slate-400">Cali</p></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="py-16 px-4">
-        <div class="container mx-auto max-w-3xl">
-            <div class="text-center mb-12">
-                <span class="text-xs font-bold text-green-600 uppercase tracking-widest">Resuelve tus dudas</span>
-                <h2 class="text-3xl font-black text-slate-900 mt-2">Preguntas Frecuentes</h2>
-            </div>
-            <div class="space-y-3" id="faq-container">
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-5 text-left font-semibold text-slate-800 hover:bg-slate-50 transition">
-                        <span>¿Tiene validez legal el certificado?</span><i class="fas fa-chevron-down text-slate-400 text-sm transition-transform"></i>
-                    </button>
-                    <div class="faq-answer px-5 text-sm text-slate-600"><p class="pb-5">Sí. Nuestro certificado cumple con la <strong>Resolución 2674 de 2013</strong> del Ministerio de Salud y Protección Social. Es válido en todo el territorio nacional ante la Secretaría de Salud y cualquier ente de vigilancia.</p></div>
-                </div>
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-5 text-left font-semibold text-slate-800 hover:bg-slate-50 transition">
-                        <span>¿Cuánto dura el examen?</span><i class="fas fa-chevron-down text-slate-400 text-sm transition-transform"></i>
-                    </button>
-                    <div class="faq-answer px-5 text-sm text-slate-600"><p class="pb-5">El examen consta de 8 preguntas de selección múltiple y toma aproximadamente <strong>10 a 15 minutos</strong>. Necesitas un mínimo de 75% de respuestas correctas para aprobar.</p></div>
-                </div>
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-5 text-left font-semibold text-slate-800 hover:bg-slate-50 transition">
-                        <span>¿Qué pasa si no apruebo?</span><i class="fas fa-chevron-down text-slate-400 text-sm transition-transform"></i>
-                    </button>
-                    <div class="faq-answer px-5 text-sm text-slate-600"><p class="pb-5">No te preocupes. Puedes volver a presentar el examen <strong>las veces que necesites sin costo adicional</strong> hasta que apruebes. Solo pagas una vez al momento de descargar tu certificado.</p></div>
-                </div>
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-5 text-left font-semibold text-slate-800 hover:bg-slate-50 transition">
-                        <span>¿Cuánto tiempo tarda la entrega?</span><i class="fas fa-chevron-down text-slate-400 text-sm transition-transform"></i>
-                    </button>
-                    <div class="faq-answer px-5 text-sm text-slate-600"><p class="pb-5"><strong>Entrega inmediata.</strong> Una vez apruebes el examen y realices el pago, tu certificado y carnet estarán disponibles para descarga instantánea en formato PDF de alta resolución.</p></div>
-                </div>
-                <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
-                    <button onclick="toggleFaq(this)" class="w-full flex justify-between items-center p-5 text-left font-semibold text-slate-800 hover:bg-slate-50 transition">
-                        <span>¿Qué métodos de pago aceptan?</span><i class="fas fa-chevron-down text-slate-400 text-sm transition-transform"></i>
-                    </button>
-                    <div class="faq-answer px-5 text-sm text-slate-600"><p class="pb-5">Aceptamos <strong>Nequi, PSE, Daviplata y transferencia a Bancolombia</strong>. El proceso de pago es seguro y encriptado.</p></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA FINAL -->
-    <section class="py-16 px-4">
-        <div class="container mx-auto max-w-3xl">
-            <div class="bg-gradient-to-br from-green-700 to-green-900 rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden">
-                <div class="absolute inset-0 opacity-10">
-                    <div class="absolute top-0 left-1/2 w-96 h-96 bg-green-300 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
-                </div>
-                <div class="relative z-10">
-                    <div class="inline-flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 mb-6 backdrop-blur-sm">
-                        <i class="fas fa-fire text-yellow-400"></i>
-                        <span class="text-sm font-semibold">Precio especial por tiempo limitado</span>
-                    </div>
-                    <h2 class="text-3xl md:text-4xl font-black mb-3">¿Listo para certificarte?</h2>
-                    <p class="text-green-200 mb-2 text-lg">Certificado + Carnet por solo</p>
-                    <p class="text-5xl md:text-6xl font-black mb-6">$22.000 <span class="text-lg font-normal text-green-300">COP</span></p>
-                    <a href="curso-manipulacion-de-alimentos.html" class="cta-btn inline-block bg-white text-green-800 font-bold py-5 px-12 rounded-xl shadow-lg shadow-green-900/40 text-lg pulse-glow">
-                        <i class="fas fa-play-circle mr-2"></i> Iniciar Examen Ahora
-                    </a>
-                    <p class="text-green-300/60 text-xs mt-6">Sin suscripciones · Pago único · Entrega inmediata</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="bg-slate-900 text-white py-10 px-4 mobile-pb">
-        <div class="container mx-auto max-w-4xl text-center">
-            <div class="flex items-center justify-center gap-3 mb-4">
-                <img src="../logopagina.png" alt="CertiTec" class="h-8 brightness-200" onerror="this.style.display='none'" />
-                <span class="font-bold text-lg">CertiTec Colombia</span>
-            </div>
-            <p class="text-slate-400 text-xs mb-4">Corporación Educativa Conalianza · Certificaciones con validez nacional</p>
-            <div class="flex justify-center gap-6 text-sm text-slate-500 mb-6">
-                <a href="https://wa.me/573107941580" target="_blank" class="hover:text-green-400 transition"><i class="fab fa-whatsapp mr-1"></i> Soporte</a>
-                <a href="../index.html" class="hover:text-white transition">Todos los cursos</a>
-            </div>
-            <p class="text-slate-600 text-[10px]">© 2024 CertiTec Colombia. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <!-- WHATSAPP FLOAT -->
-    <a href="https://wa.me/573107941580?text=Hola,%20tengo%20una%20pregunta%20sobre%20el%20certificado%20de%20manipulación%20de%20alimentos" target="_blank" class="fixed bottom-20 md:bottom-5 right-4 md:right-5 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg shadow-green-500/30 hover:scale-110 transition">
-        <i class="fab fa-whatsapp text-white text-2xl"></i>
-    </a>
-
-    <!-- STICKY CTA MOBILE -->
-    <div class="fixed bottom-0 left-0 right-0 z-40 md:hidden bg-white border-t border-slate-200 p-3 shadow-[0_-4px_20px_rgba(0,0,0,0.15)]">
-        <a href="curso-manipulacion-de-alimentos.html" class="block w-full bg-green-700 hover:bg-green-800 text-white font-bold py-4 rounded-xl text-center shadow-lg transition">
-            <i class="fas fa-play-circle mr-2"></i> Presentar Examen · $22.000
-        </a>
+    <!-- HERO ILLUSTRATION SVG -->
+    <div class="hero-right">
+      <svg viewBox="0 0 480 440" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px">
+        <!-- Background circle -->
+        <circle cx="240" cy="220" r="200" fill="#fef2f2"/>
+        <!-- Body -->
+        <ellipse cx="240" cy="380" rx="90" ry="30" fill="#fee2e2" opacity=".5"/>
+        <!-- Torso white uniform -->
+        <rect x="170" y="220" width="140" height="160" rx="14" fill="#fff" stroke="#e5e7eb" stroke-width="2"/>
+        <!-- Red apron -->
+        <path d="M200 240 h80 v120 q0 10-10 10 h-60 q-10 0-10-10 Z" fill="#dc2626" opacity=".85"/>
+        <!-- Apron pocket -->
+        <rect x="220" y="320" width="40" height="30" rx="6" fill="#b91c1c"/>
+        <!-- Neck -->
+        <rect x="223" y="200" width="34" height="28" rx="8" fill="#f8d5b0"/>
+        <!-- Head -->
+        <ellipse cx="240" cy="175" rx="46" ry="50" fill="#f8d5b0"/>
+        <!-- Hair -->
+        <path d="M194 155 q0-50 46-55 q46 5 46 55 q-10-15-46-12 q-36-3-46 12Z" fill="#3d2314"/>
+        <!-- Eyes -->
+        <ellipse cx="226" cy="172" rx="6" ry="7" fill="#fff"/>
+        <ellipse cx="254" cy="172" rx="6" ry="7" fill="#fff"/>
+        <circle cx="228" cy="173" r="3.5" fill="#3d2314"/>
+        <circle cx="256" cy="173" r="3.5" fill="#3d2314"/>
+        <!-- Smile -->
+        <path d="M228 190 q12 10 24 0" stroke="#3d2314" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+        <!-- Chef hat -->
+        <rect x="210" y="115" width="60" height="42" rx="6" fill="#fff" stroke="#e5e7eb" stroke-width="1.5"/>
+        <ellipse cx="240" cy="115" rx="34" ry="14" fill="#fff" stroke="#e5e7eb" stroke-width="1.5"/>
+        <ellipse cx="240" cy="108" rx="22" ry="28" fill="#fff" stroke="#e5e7eb" stroke-width="1.5"/>
+        <!-- Arms -->
+        <rect x="110" y="230" width="62" height="28" rx="14" fill="#f8d5b0" transform="rotate(20 110 244)"/>
+        <rect x="308" y="230" width="62" height="28" rx="14" fill="#f8d5b0" transform="rotate(-20 370 244)"/>
+        <!-- Certificate in left hand -->
+        <rect x="80" y="255" width="90" height="110" rx="8" fill="#fff" stroke="#dc2626" stroke-width="2.5" transform="rotate(-8 125 310)"/>
+        <rect x="80" y="255" width="90" height="18" rx="4" fill="#dc2626" transform="rotate(-8 125 310)"/>
+        <!-- Cert gold seal -->
+        <circle cx="113" cy="334" r="14" fill="#fbbf24" transform="rotate(-8 113 334)"/>
+        <circle cx="113" cy="334" r="9" fill="#f59e0b" transform="rotate(-8 113 334)"/>
+        <!-- Cert lines -->
+        <rect x="92" y="280" width="66" height="5" rx="2" fill="#e5e7eb" transform="rotate(-8 125 282)"/>
+        <rect x="92" y="292" width="54" height="4" rx="2" fill="#e5e7eb" transform="rotate(-8 125 294)"/>
+        <rect x="92" y="303" width="60" height="4" rx="2" fill="#e5e7eb" transform="rotate(-8 125 305)"/>
+        <!-- Star on cert -->
+        <text x="108" y="337" font-size="12" text-anchor="middle" fill="#fff" font-weight="bold">★</text>
+        <!-- Floating badge top right -->
+        <rect x="320" y="100" width="130" height="60" rx="14" fill="#fff" stroke="#e5e7eb" stroke-width="1.5" filter="url(#sh)"/>
+        <circle cx="348" cy="130" r="16" fill="#fef2f2"/>
+        <text x="348" y="135" text-anchor="middle" font-size="16" fill="#dc2626">✓</text>
+        <text x="374" y="124" font-size="11" font-weight="700" fill="#111">Aprobado</text>
+        <text x="374" y="139" font-size="10" fill="#888">Entrega inmediata</text>
+        <!-- Badge bottom right -->
+        <rect x="330" y="290" width="120" height="56" rx="14" fill="#fff" stroke="#e5e7eb" stroke-width="1.5"/>
+        <circle cx="356" cy="318" r="14" fill="#fef2f2"/>
+        <text x="356" y="323" text-anchor="middle" font-size="14" fill="#dc2626">$</text>
+        <text x="380" y="312" font-size="11" font-weight="700" fill="#111">Solo $22.000</text>
+        <text x="380" y="327" font-size="10" fill="#22c55e">COP · Pago único</text>
+        <defs>
+          <filter id="sh"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity=".1"/></filter>
+        </defs>
+      </svg>
     </div>
+  </div>
+</section>
 
-    <script>
-        function toggleFaq(btn) {
-            const answer = btn.nextElementSibling;
-            const icon = btn.querySelector('i');
-            const isOpen = answer.classList.contains('open');
-            
-            document.querySelectorAll('.faq-answer').forEach(a => { a.classList.remove('open'); });
-            document.querySelectorAll('#faq-container button i').forEach(i => { i.style.transform = ''; });
-            
-            if (!isOpen) {
-                answer.classList.add('open');
-                icon.style.transform = 'rotate(180deg)';
-            }
-        }
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-g">
+    <div class="stat"><div class="n">5.000+</div><div class="l">Certificados emitidos</div></div>
+    <div class="stat"><div class="n">15 min</div><div class="l">Duración del examen</div></div>
+    <div class="stat"><div class="n">24/7</div><div class="l">Disponible siempre</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">En línea · Sin presencial</div></div>
+  </div>
+</div>
 
-        // Intersection Observer for animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('float-up');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
+<!-- QUIÉN LO NECESITA -->
+<section class="sec sec-gray">
+  <div class="w">
+    <div class="hd c fu">
+      <span class="sec-tag">¿Quién lo necesita?</span>
+      <h2 class="sec-h">Obligatorio para estos sectores</h2>
+      <p class="sec-sub">La Resolución 2674 de 2013 impone esta certificación a toda persona que manipule, prepare o venda alimentos en Colombia.</p>
+    </div>
+    <div class="who-g fu">
+      <div class="who-c"><div class="ico"><i class="fas fa-utensils"></i></div><p>Restaurantes y fondas</p></div>
+      <div class="who-c"><div class="ico"><i class="fas fa-bread-slice"></i></div><p>Panaderías y pastelerías</p></div>
+      <div class="who-c"><div class="ico"><i class="fas fa-store"></i></div><p>Tiendas y supermercados</p></div>
+      <div class="who-c"><div class="ico"><i class="fas fa-hotel"></i></div><p>Hoteles y hostales</p></div>
+      <div class="who-c"><div class="ico"><i class="fas fa-truck"></i></div><p>Servicios de catering</p></div>
+      <div class="who-c"><div class="ico"><i class="fas fa-shopping-basket"></i></div><p>Plazas de mercado</p></div>
+      <div class="who-c"><div class="ico"><i class="fas fa-school"></i></div><p>Colegios y cafeterías</p></div>
+      <div class="who-c"><div class="ico"><i class="fas fa-industry"></i></div><p>Plantas de producción</p></div>
+    </div>
+  </div>
+</section>
 
-        document.querySelectorAll('section > div').forEach(el => observer.observe(el));
-    </script>
+<!-- CÓMO FUNCIONA -->
+<section class="sec sec-white" id="como-funciona">
+  <div class="w">
+    <div class="hd c fu">
+      <span class="sec-tag">Proceso simple</span>
+      <h2 class="sec-h">Certifícate en 4 sencillos pasos</h2>
+      <p class="sec-sub">Sin filas, sin desplazamientos. Paga primero, nuestro bot verifica automáticamente y recibes acceso al examen al instante.</p>
+    </div>
+    <div class="steps-g fu" style="grid-template-columns:repeat(2,1fr)">
+      <!-- Step 1 -->
+      <div class="step">
+        <div class="step-num">1</div>
+        <!-- Payment SVG -->
+        <svg class="step-svg" width="140" height="110" viewBox="0 0 140 110">
+          <rect x="20" y="20" width="100" height="64" rx="10" fill="#111"/>
+          <rect x="20" y="32" width="100" height="18" fill="#1f2937"/>
+          <rect x="30" y="56" width="28" height="8" rx="3" fill="#374151"/>
+          <rect x="68" y="56" width="28" height="8" rx="3" fill="#374151"/>
+          <rect x="32" y="38" width="18" height="12" rx="3" fill="#fbbf24"/>
+          <rect x="30" y="84" width="80" height="18" rx="9" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+          <text x="70" y="96" text-anchor="middle" font-size="9" font-weight="700" fill="#dc2626">Nequi · PSE · Daviplata · Bancolombia</text>
+          <circle cx="112" cy="28" r="11" fill="#dc2626"/>
+          <text x="112" y="33" text-anchor="middle" font-size="12" fill="#fff" font-weight="bold">$</text>
+        </svg>
+        <h3>Completa el pago</h3>
+        <p>Ingresa tus datos, elige tu método y paga <strong>$22.000 COP</strong> con Nequi, PSE, Daviplata o Bancolombia.</p>
+        <span class="step-pill"><i class="fas fa-shield-alt" style="margin-right:4px"></i>Pago seguro</span>
+      </div>
+      <!-- Step 2 -->
+      <div class="step">
+        <div class="step-num">2</div>
+        <!-- Telegram SVG -->
+        <svg class="step-svg" width="140" height="110" viewBox="0 0 140 110">
+          <!-- Phone -->
+          <rect x="40" y="8" width="60" height="90" rx="12" fill="#229ED9" opacity=".15" stroke="#229ED9" stroke-width="1.5"/>
+          <!-- Telegram circle -->
+          <circle cx="70" cy="52" r="28" fill="#229ED9"/>
+          <!-- Telegram arrow -->
+          <path d="M55 52 l30-12 -8 30 -10-10-12 8Z" fill="#fff"/>
+          <path d="M57 62 l8-8 10 10" fill="#229ED9"/>
+          <!-- Screenshot image indicator -->
+          <rect x="88" y="14" width="38" height="28" rx="6" fill="#fff" stroke="#e5e7eb" stroke-width="1"/>
+          <rect x="88" y="14" width="38" height="9" rx="6" fill="#e5e7eb"/>
+          <rect x="91" y="26" width="14" height="10" rx="2" fill="#d1d5db"/>
+          <rect x="108" y="28" width="14" height="4" rx="2" fill="#d1d5db"/>
+          <rect x="108" y="34" width="10" height="4" rx="2" fill="#d1d5db"/>
+          <!-- Check badge -->
+          <circle cx="118" cy="52" r="12" fill="#22c55e"/>
+          <path d="M112 52 l3 4 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <!-- Auto label -->
+          <rect x="30" y="92" width="80" height="16" rx="8" fill="#f0fdf4" stroke="#bbf7d0" stroke-width="1"/>
+          <text x="70" y="103" text-anchor="middle" font-size="9" font-weight="700" fill="#166534">✓ Verificación automática</text>
+        </svg>
+        <h3>Envía el comprobante al Bot</h3>
+        <p>Abre nuestro bot de Telegram y envía la captura del pago. El bot lo verifica <strong>automáticamente</strong> con n8n.</p>
+        <span class="step-pill"><i class="fab fa-telegram-plane" style="margin-right:4px"></i>Bot automático</span>
+      </div>
+      <!-- Step 3 -->
+      <div class="step">
+        <div class="step-num">3</div>
+        <!-- Exam SVG -->
+        <svg class="step-svg" width="140" height="110" viewBox="0 0 140 110">
+          <rect x="18" y="8" width="104" height="82" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1.5"/>
+          <rect x="28" y="20" width="84" height="8" rx="4" fill="#fecaca"/>
+          <circle cx="33" cy="42" r="5" fill="#dc2626"/>
+          <rect x="42" y="39" width="58" height="5" rx="2.5" fill="#e5e7eb"/>
+          <circle cx="33" cy="56" r="5" fill="#e5e7eb" stroke="#d1d5db" stroke-width="1"/>
+          <rect x="42" y="53" width="50" height="5" rx="2.5" fill="#e5e7eb"/>
+          <circle cx="33" cy="70" r="5" fill="#e5e7eb" stroke="#d1d5db" stroke-width="1"/>
+          <rect x="42" y="67" width="62" height="5" rx="2.5" fill="#e5e7eb"/>
+          <rect x="28" y="84" width="84" height="14" rx="7" fill="#dc2626"/>
+          <text x="70" y="94" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">Responder preguntas</text>
+        </svg>
+        <h3>Presenta el examen</h3>
+        <p>El bot te envía el enlace de acceso. Responde las 8 preguntas sobre higiene y normativa. Intentos ilimitados.</p>
+        <span class="step-pill"><i class="fas fa-clock" style="margin-right:4px"></i>~10-15 minutos</span>
+      </div>
+      <!-- Step 4 -->
+      <div class="step">
+        <div class="step-num">4</div>
+        <!-- Certificate Download SVG -->
+        <svg class="step-svg" width="140" height="110" viewBox="0 0 140 110">
+          <rect x="22" y="6" width="96" height="80" rx="9" fill="#fff" stroke="#e5e7eb" stroke-width="1.5"/>
+          <rect x="22" y="6" width="96" height="20" rx="9" fill="#dc2626"/>
+          <rect x="22" y="18" width="96" height="8" fill="#dc2626"/>
+          <text x="70" y="21" text-anchor="middle" font-size="8" font-weight="700" fill="#fff">CERTIFICADO OFICIAL</text>
+          <circle cx="46" cy="63" r="18" fill="#fbbf24"/>
+          <circle cx="46" cy="63" r="12" fill="#f59e0b"/>
+          <text x="46" y="68" text-anchor="middle" font-size="14" fill="#fff">★</text>
+          <rect x="72" y="36" width="38" height="6" rx="3" fill="#e5e7eb"/>
+          <rect x="72" y="48" width="30" height="5" rx="2.5" fill="#e5e7eb"/>
+          <rect x="72" y="58" width="34" height="5" rx="2.5" fill="#e5e7eb"/>
+          <rect x="72" y="68" width="26" height="5" rx="2.5" fill="#e5e7eb"/>
+          <!-- Download button -->
+          <rect x="30" y="90" width="80" height="18" rx="9" fill="#22c55e"/>
+          <path d="M62 98 v7 m-4-3 l4 4 4-4" stroke="#fff" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <text x="85" y="102" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">Descargar PDF</text>
+        </svg>
+        <h3>Descarga tu certificado</h3>
+        <p>Al aprobar recibes tu <strong>certificado oficial + carnet</strong> en PDF de alta resolución con QR verificable.</p>
+        <span class="step-pill"><i class="fas fa-bolt" style="margin-right:4px"></i>Entrega inmediata</span>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px" class="fu">
+      <a href="curso-manipulacion-de-alimentos.html" class="btn-red"><i class="fas fa-play-circle"></i>Empezar Ahora — Solo $22.000</a>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section class="sec sec-gray">
+  <div class="w">
+    <div class="hd fu">
+      <span class="sec-tag">Todo incluido</span>
+      <h2 class="sec-h">¿Qué recibes por $22.000?</h2>
+      <p class="sec-sub">Un solo pago. Acceso completo. Sin costos ocultos.</p>
+    </div>
+    <div class="inc-g fu">
+      <div class="inc-c">
+        <div class="inc-ico r"><i class="fas fa-award"></i></div>
+        <div><h4>Certificado Digital Oficial</h4><p>PDF alta resolución con QR verificable. Avalado bajo Resolución 2674 de 2013 del Ministerio de Salud.</p></div>
+      </div>
+      <div class="inc-c">
+        <div class="inc-ico b"><i class="fas fa-id-card"></i></div>
+        <div><h4>Carnet de Identificación</h4><p>Formato portátil tipo tarjeta para portarlo en tu lugar de trabajo. Aceptado en todo el país.</p></div>
+      </div>
+      <div class="inc-c">
+        <div class="inc-ico r"><i class="fas fa-redo"></i></div>
+        <div><h4>Intentos Ilimitados</h4><p>Si no apruebas la primera vez, puedes repetir el examen sin costo adicional hasta que lo superes.</p></div>
+      </div>
+      <div class="inc-c">
+        <div class="inc-ico b"><i class="fas fa-bolt"></i></div>
+        <div><h4>Entrega Inmediata</h4><p>Una vez aprobado y confirmado el pago, tus documentos están listos para descarga instantánea.</p></div>
+      </div>
+      <div class="inc-c">
+        <div class="inc-ico r"><i class="fas fa-headset"></i></div>
+        <div><h4>Soporte por WhatsApp</h4><p>Equipo disponible para resolver dudas antes, durante y después del proceso de certificación.</p></div>
+      </div>
+      <div class="inc-c">
+        <div class="inc-ico b"><i class="fas fa-qrcode"></i></div>
+        <div><h4>QR de Verificación Único</h4><p>Código QR exclusivo para que empleadores e inspectores verifiquen la autenticidad del certificado.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEGAL -->
+<section class="sec sec-white">
+  <div class="w fu">
+    <div class="legal-box">
+      <div>
+        <div class="lb-badge"><i class="fas fa-gavel" style="color:#fca5a5;font-size:11px"></i><span>Marco Legal Vigente</span></div>
+        <h2>Resolución 2674 de 2013</h2>
+        <p>Esta resolución del <strong>Ministerio de Salud y Protección Social</strong> establece que toda persona que manipule, prepare, almacene o distribuya alimentos en Colombia <strong>debe tener certificación vigente</strong> en Buenas Prácticas de Manufactura. El incumplimiento expone a sanciones severas y cierre del establecimiento.</p>
+        <div class="pills">
+          <span class="pill">Restaurantes</span><span class="pill">Panaderías</span><span class="pill">Supermercados</span>
+          <span class="pill">Hoteles</span><span class="pill">Catering</span><span class="pill">Plazas de Mercado</span>
+          <span class="pill">Plantas procesadoras</span><span class="pill">Colegios</span>
+        </div>
+      </div>
+      <div>
+        <!-- Legal SVG Illustration -->
+        <div class="fine-box">
+          <svg width="80" height="80" viewBox="0 0 80 80" style="display:block;margin:0 auto 12px">
+            <circle cx="40" cy="40" r="38" fill="rgba(220,38,38,.15)" stroke="rgba(220,38,38,.3)" stroke-width="1.5"/>
+            <!-- Scales of justice simplified -->
+            <rect x="37" y="14" width="6" height="38" rx="3" fill="#fca5a5"/>
+            <rect x="18" y="50" width="44" height="5" rx="2.5" fill="#fca5a5"/>
+            <!-- Left pan -->
+            <path d="M20 32 q-6 12 0 12 q6 0 6-12Z" fill="rgba(252,165,165,.5)" stroke="#fca5a5" stroke-width="1.5"/>
+            <line x1="23" y1="22" x2="20" y2="32" stroke="#fca5a5" stroke-width="1.5"/>
+            <line x1="23" y1="22" x2="26" y2="32" stroke="#fca5a5" stroke-width="1.5"/>
+            <!-- Right pan -->
+            <path d="M54 32 q-6 12 0 12 q6 0 6-12Z" fill="rgba(252,165,165,.5)" stroke="#fca5a5" stroke-width="1.5"/>
+            <line x1="57" y1="22" x2="54" y2="32" stroke="#fca5a5" stroke-width="1.5"/>
+            <line x1="57" y1="22" x2="60" y2="32" stroke="#fca5a5" stroke-width="1.5"/>
+            <line x1="23" y1="22" x2="57" y2="22" stroke="#fca5a5" stroke-width="1.5"/>
+          </svg>
+          <div class="fl">Multas por incumplimiento</div>
+          <div class="fa">Hasta<br>10.000<br>SMLMV</div>
+          <div class="fn">Evita sanciones. Certifícate hoy.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="sec sec-gray">
+  <div class="w">
+    <div class="hd c fu">
+      <span class="sec-tag">Opiniones reales</span>
+      <h2 class="sec-h">Lo que dicen nuestros certificados</h2>
+      <p class="sec-sub">Más de 5.000 personas ya obtuvieron su certificación con CertiTec Colombia.</p>
+    </div>
+    <div class="testi-g fu">
+      <div class="testi">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote>"Súper rápido, lo hice desde el celular en 15 minutos. Mi jefe quedó impresionado con la calidad del documento. Totalmente recomendado."</blockquote>
+        <div class="av"><div class="av-ic" style="background:#fef2f2;color:#991b1b">LC</div><div><h5>Laura C.</h5><span>Bogotá · Restaurante</span></div></div>
+      </div>
+      <div class="testi">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote>"Me pedían el carnet para trabajar en un restaurante. Lo saqué el mismo día. El proceso fue clarísimo y el certificado llegó al instante. ¡Excelente!"</blockquote>
+        <div class="av"><div class="av-ic" style="background:#111;color:#fff">JR</div><div><h5>Juan R.</h5><span>Medellín · Cocina</span></div></div>
+      </div>
+      <div class="testi">
+        <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+        <blockquote>"Certifiqué 10 empleados de mi panadería. Cada uno lo hizo desde casa. Ahorré tiempo y dinero. El certificado es de muy buena presentación."</blockquote>
+        <div class="av"><div class="av-ic" style="background:#fef2f2;color:#991b1b">MG</div><div><h5>María G.</h5><span>Cali · Panadería</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-white">
+  <div class="w">
+    <div class="hd c fu">
+      <span class="sec-tag">Resuelve tus dudas</span>
+      <h2 class="sec-h">Preguntas Frecuentes</h2>
+    </div>
+    <div class="faq-list fu">
+      <div class="faq-i"><button class="faq-btn" onclick="fq(this)"><span>¿Tiene validez legal el certificado?</span><i class="fas fa-chevron-down"></i></button><div class="faq-body"><p>Sí. Cumple con la <strong>Resolución 2674 de 2013</strong> del Ministerio de Salud. Es válido en todo el territorio nacional ante la Secretaría de Salud y cualquier ente de vigilancia sanitaria.</p></div></div>
+      <div class="faq-i"><button class="faq-btn" onclick="fq(this)"><span>¿Cuánto tiempo dura el examen?</span><i class="fas fa-chevron-down"></i></button><div class="faq-body"><p>El examen consta de <strong>8 preguntas de selección múltiple</strong> y toma 10-15 minutos. Necesitas mínimo 75% de respuestas correctas para aprobar.</p></div></div>
+      <div class="faq-i"><button class="faq-btn" onclick="fq(this)"><span>¿Qué pasa si no apruebo?</span><i class="fas fa-chevron-down"></i></button><div class="faq-body"><p>Puedes volver a presentar el examen <strong>las veces que necesites sin costo adicional</strong>. Solo pagas una vez al descargar tu certificado después de aprobar.</p></div></div>
+      <div class="faq-i"><button class="faq-btn" onclick="fq(this)"><span>¿Cuánto tarda la entrega del certificado?</span><i class="fas fa-chevron-down"></i></button><div class="faq-body"><p><strong>Entrega inmediata.</strong> Una vez apruebes y realices el pago, tu certificado y carnet quedan disponibles para descarga instantánea en PDF alta resolución.</p></div></div>
+      <div class="faq-i"><button class="faq-btn" onclick="fq(this)"><span>¿Qué métodos de pago aceptan?</span><i class="fas fa-chevron-down"></i></button><div class="faq-body"><p>Aceptamos <strong>Nequi, PSE, Daviplata y Bancolombia</strong>. El proceso es 100% seguro. Después del pago envías comprobante por WhatsApp y recibes tu documento.</p></div></div>
+      <div class="faq-i"><button class="faq-btn" onclick="fq(this)"><span>¿Puedo certificar a varios empleados?</span><i class="fas fa-chevron-down"></i></button><div class="faq-body"><p>¡Sí! Cada empleado hace el proceso desde su dispositivo. Para grupos grandes contáctanos por WhatsApp para obtener condiciones especiales para empresas.</p></div></div>
+      <div class="faq-i"><button class="faq-btn" onclick="fq(this)"><span>¿El certificado tiene fecha de vencimiento?</span><i class="fas fa-chevron-down"></i></button><div class="faq-body"><p>Según la Resolución 2674, la capacitación debe ser <strong>anual</strong>. El certificado tiene vigencia de un año, luego deberás renovarlo para mantener el cumplimiento.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-sec">
+  <div class="fu">
+    <!-- CTA Illustration SVG -->
+    <svg width="200" height="90" viewBox="0 0 200 90" style="display:block;margin:0 auto 24px">
+      <!-- Three small figures -->
+      <circle cx="50" cy="28" r="14" fill="rgba(252,165,165,.25)" stroke="#fca5a5" stroke-width="1.5"/>
+      <circle cx="100" cy="22" r="18" fill="rgba(252,165,165,.35)" stroke="#fca5a5" stroke-width="1.5"/>
+      <circle cx="150" cy="28" r="14" fill="rgba(252,165,165,.25)" stroke="#fca5a5" stroke-width="1.5"/>
+      <text x="50" y="33" text-anchor="middle" font-size="14" fill="#fca5a5">👨‍🍳</text>
+      <text x="100" y="28" text-anchor="middle" font-size="18" fill="#fca5a5">👩‍🍳</text>
+      <text x="150" y="33" text-anchor="middle" font-size="14" fill="#fca5a5">👨‍🍳</text>
+      <!-- Stars -->
+      <text x="50" y="58" text-anchor="middle" font-size="10" fill="#fbbf24">★★★★★</text>
+      <text x="100" y="58" text-anchor="middle" font-size="10" fill="#fbbf24">★★★★★</text>
+      <text x="150" y="58" text-anchor="middle" font-size="10" fill="#fbbf24">★★★★★</text>
+      <text x="100" y="80" text-anchor="middle" font-size="11" fill="rgba(252,165,165,.7)" font-weight="600">+5.000 certificados emitidos</text>
+    </svg>
+    <span class="tag"><i class="fas fa-fire" style="margin-right:6px"></i>Oferta por tiempo limitado</span>
+    <h2>¿Listo para certificarte?</h2>
+    <p>Únete a más de 5.000 personas que ya cumplen con la normativa vigente.</p>
+    <div class="cta-price">$22.000 <sub>COP</sub></div>
+    <small style="color:rgba(255,255,255,.4);font-size:13px">Certificado + Carnet + Soporte incluidos</small>
+    <br>
+    <a href="curso-manipulacion-de-alimentos.html" class="btn-white"><i class="fas fa-play-circle" style="color:#dc2626"></i>Iniciar Examen Ahora</a>
+    <div class="cta-notes">
+      <span><i class="fas fa-shield-alt"></i>Pago 100% seguro</span>
+      <span><i class="fas fa-infinity"></i>Intentos ilimitados</span>
+      <span><i class="fas fa-bolt"></i>Entrega inmediata</span>
+      <span><i class="fas fa-map-marker-alt"></i>Válido en toda Colombia</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-in">
+    <div class="ft-logo"><img src="../logopagina.png" alt="CertiTec" onerror="this.style.display='none'"/><span>CertiTec Colombia</span></div>
+    <p style="color:rgba(255,255,255,.3);font-size:13px">Corporación Educativa Conalianza · Certificaciones con validez nacional</p>
+    <div class="ft-links">
+      <a href="https://wa.me/573107941580" target="_blank"><i class="fab fa-whatsapp" style="margin-right:5px"></i>Soporte</a>
+      <a href="../index.html">Todos los cursos</a>
+    </div>
+    <p class="ft-copy">© 2025 CertiTec Colombia. Todos los derechos reservados. · Resolución 2674 de 2013</p>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a href="https://wa.me/573107941580?text=Hola,%20tengo%20una%20pregunta%20sobre%20el%20certificado%20de%20manipulación%20de%20alimentos" target="_blank" class="wa" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- STICKY MOBILE CTA -->
+<div class="s-cta" id="scta">
+  <a href="curso-manipulacion-de-alimentos.html"><i class="fas fa-play-circle" style="margin-right:6px"></i>Iniciar Examen · $22.000</a>
+</div>
+
+<script>
+function fq(btn){
+  const item=btn.closest('.faq-i');
+  const open=item.classList.contains('op');
+  document.querySelectorAll('.faq-i').forEach(i=>i.classList.remove('op'));
+  if(!open)item.classList.add('op');
+}
+// scroll animations
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target);}});
+},{threshold:.07});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+// hide sticky when cta visible
+const btnF=document.querySelector('.cta-sec');
+const scta=document.getElementById('scta');
+const ob2=new IntersectionObserver(([e])=>{scta.style.transform=e.isIntersecting?'translateY(100%)':'translateY(0)';scta.style.transition='transform .3s';});
+if(btnF&&scta)ob2.observe(btnF);
+</script>
+
 </body>
 </html>

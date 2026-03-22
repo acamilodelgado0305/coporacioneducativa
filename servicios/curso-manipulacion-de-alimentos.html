@@ -1,555 +1,818 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Certificación Oficial | Manipulación de Alimentos</title>
-    <link rel="icon" href="../logopagina.png" type="image/png" />
-    
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '639715789143642');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Checkout · Certificado de Manipulación de Alimentos | CertiTec Colombia</title>
+<meta name="description" content="Obtén tu certificado de manipulación de alimentos. Paga y recibe acceso inmediato."/>
+<link rel="icon" href="../logopagina.png" type="image/png"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','639715789143642');fbq('track','PageView');</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:#f4f4f5;color:#111;-webkit-font-smoothing:antialiased;min-height:100vh}
+a{text-decoration:none;color:inherit}
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
-            background-color: #f8fafc;
-            background-image: radial-gradient(1200px 600px at 10% -10%, rgba(14, 165, 233, 0.15), transparent 60%),
-                              radial-gradient(1000px 500px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%);
-            background-attachment: fixed;
-        }
+/* NAV */
+.nav{background:#7f1d1d;padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.nav-l{display:flex;align-items:center;gap:9px;color:#fff;font-weight:800;font-size:14px}
+.nav-l img{height:28px;filter:brightness(10)}
+.nav-r{display:flex;align-items:center;gap:5px;color:rgba(255,255,255,.6);font-size:12px}
 
-        .bg-overlay {
-            background: linear-gradient(180deg, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.9));
-            min-height: 100vh;
-        }
+/* PROGRESS */
+.prog-bar{background:#fff;border-bottom:1px solid #e5e7eb;padding:12px 20px}
+.prog{max-width:900px;margin:0 auto;display:flex;align-items:center}
+.pstep{display:flex;align-items:center;gap:7px;flex:1}
+.pstep:last-child{flex:0}
+.pnum{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:.3s}
+.pnum.active{background:#dc2626;color:#fff;box-shadow:0 0 0 3px rgba(220,38,38,.2)}
+.pnum.done{background:#22c55e;color:#fff}
+.pnum.idle{background:#e5e7eb;color:#9ca3af}
+.plbl{font-size:11px;font-weight:600;transition:.3s}
+.plbl.active{color:#dc2626}
+.plbl.done{color:#22c55e}
+.plbl.idle{color:#9ca3af}
+.pline{flex:1;height:2px;background:#e5e7eb;margin:0 8px;transition:.3s}
+.pline.done{background:#22c55e}
+@media(max-width:480px){.plbl{display:none}}
 
-        .main-card {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.35);
-            overflow: hidden;
-            max-width: 640px;
-            width: 100%;
-            margin: 0 auto;
-            position: relative;
-        }
+/* LAYOUT */
+.page{max-width:900px;margin:24px auto;padding:0 16px 60px;display:grid;grid-template-columns:1fr 310px;gap:18px;align-items:start}
+@media(max-width:680px){.page{grid-template-columns:1fr}.sum-col{order:-1}}
 
-        .brand-bar {
-            height: 8px;
-            background: linear-gradient(90deg, #15803d 0%, #16a34a 100%);
-            width: 100%;
-        }
+/* CARD */
+.card{background:#fff;border-radius:14px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:16px}
+.card:last-child{margin-bottom:0}
+.chd{padding:16px 20px;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:9px}
+.chd span{font-size:14px;font-weight:700}
+.chd i{color:#dc2626;font-size:15px}
+.cb{padding:20px}
 
-        .input-pro {
-            background-color: #f8fafc;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 12px 16px;
-            width: 100%;
-            font-size: 15px;
-            transition: all 0.3s ease;
-            color: #1f2937;
-        }
-        .input-pro:focus {
-            background-color: #ffffff;
-            border-color: #16a34a; 
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
-        }
+/* FIELD */
+.fl{margin-bottom:14px}
+.fl label{display:block;font-size:11px;font-weight:700;color:#374151;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.fl input,.fl select{width:100%;padding:11px 14px;border:1.5px solid #d1d5db;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#111;background:#fff;transition:.2s;outline:none}
+.fl input:focus,.fl select:focus{border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.1)}
+.fl .ht{font-size:11px;color:#9ca3af;margin-top:3px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.row2{grid-template-columns:1fr}}
 
-        .btn-action {
-            background: #15803d; 
-            color: white;
-            font-weight: 600;
-            border-radius: 8px;
-            transition: transform 0.1s, background 0.2s;
-        }
-        .btn-action:hover { background: #166534; }
-        .btn-action:active { transform: scale(0.98); }
-        .btn-action:disabled { background: #9ca3af; cursor: not-allowed; }
+/* PAYMENT METHODS */
+.pmethods{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
+.pm{border:1.5px solid #e5e7eb;border-radius:10px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.2s}
+.pm:hover{border-color:#dc2626}
+.pm.sel{border-color:#dc2626;background:#fef2f2}
+.pm-rb{width:18px;height:18px;border-radius:50%;border:2px solid #d1d5db;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.2s}
+.pm.sel .pm-rb{border-color:#dc2626}
+.pm.sel .pm-rb::after{content:'';width:8px;height:8px;background:#dc2626;border-radius:50%;display:block}
+.pm-ic{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.pm-txt h4{font-size:13px;font-weight:700}
+.pm-txt p{font-size:11px;color:#6b7280;margin-top:1px}
 
-        .hidden-section { display: none !important; }
-        .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+/* PAYMENT NUMBERS BOX */
+.pbox{border:1.5px dashed #d1d5db;border-radius:10px;padding:14px 16px;background:#f9fafb;margin-top:12px}
+.pr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pr:last-child{margin-bottom:0}
+.pr .pl{font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px}
+.pr .pv{font-size:15px;font-weight:800;color:#111;font-family:monospace;cursor:pointer;user-select:all;transition:.2s}
+.pr .pv:hover{color:#dc2626}
+.copy-tip{font-size:10px;color:#9ca3af;margin-top:6px;text-align:right}
 
-        .btn-nequi {
-            background: #110e2e; 
-            background-image: linear-gradient(135deg, #2D0F3F 0%, #180925 100%);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-    </style>
+/* UPLOAD ZONE */
+.upload-zone{border:2px dashed #d1d5db;border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:.2s;position:relative;background:#fafafa}
+.upload-zone:hover,.upload-zone.drag{border-color:#dc2626;background:#fef2f2}
+.upload-zone.has-file{border-color:#22c55e;background:#f0fdf4;border-style:solid}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.uz-icon{font-size:36px;color:#d1d5db;display:block;margin-bottom:12px;transition:.2s}
+.upload-zone:hover .uz-icon,.upload-zone.drag .uz-icon{color:#dc2626}
+.upload-zone.has-file .uz-icon{color:#22c55e}
+.uz-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:4px}
+.uz-sub{font-size:12px;color:#9ca3af}
+.file-preview{display:none;align-items:center;gap:12px;padding:12px;background:#fff;border:1px solid #d1fcdf;border-radius:10px;margin-top:12px}
+.file-preview.show{display:flex}
+.fp-img{width:52px;height:52px;border-radius:8px;object-fit:cover;border:1px solid #e5e7eb;flex-shrink:0}
+.fp-info{flex:1;min-width:0}
+.fp-name{font-size:13px;font-weight:700;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fp-size{font-size:11px;color:#6b7280}
+.fp-remove{color:#9ca3af;cursor:pointer;font-size:14px;flex-shrink:0;padding:4px}
+.fp-remove:hover{color:#dc2626}
+
+/* BUTTONS */
+.btn-red{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#dc2626;color:#fff;font-weight:800;font-size:15px;padding:15px;border-radius:10px;border:none;cursor:pointer;transition:.2s;text-transform:uppercase;letter-spacing:.4px;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(220,38,38,.3)}
+.btn-red:hover{background:#b91c1c;transform:translateY(-1px)}
+.btn-red:disabled{background:#e5e7eb;color:#9ca3af;cursor:not-allowed;box-shadow:none;transform:none}
+.btn-ghost{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:#fff;color:#6b7280;font-weight:600;font-size:13px;padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;margin-top:8px}
+.btn-ghost:hover{border-color:#dc2626;color:#dc2626}
+.btn-wa{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-weight:700;font-size:13px;padding:12px;border-radius:10px;transition:.2s;margin-top:8px;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+.btn-wa:hover{background:#1da851}
+
+/* VIEWS */
+.view{display:none}
+.view.active{display:block}
+
+/* VIEW 3: VERIFYING */
+.verif-wrap{text-align:center;padding:10px 0}
+.spinner-wrap{width:90px;height:90px;border-radius:50%;background:#fef2f2;border:3px solid #dc2626;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative}
+.spinner-wrap i{font-size:32px;color:#dc2626}
+.spinner-ring{position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:#dc2626;animation:spin 1.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.done-wrap{width:90px;height:90px;border-radius:50%;background:#f0fdf4;border:3px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.done-wrap i{font-size:36px;color:#22c55e}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+.error-wrap{width:90px;height:90px;border-radius:50%;background:#fef2f2;border:3px solid #dc2626;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
+.error-wrap i{font-size:36px;color:#dc2626}
+.tl{display:flex;flex-direction:column;gap:10px;margin:18px 0;text-align:left}
+.tl-i{display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:10px;border:1.5px solid #e5e7eb;transition:.5s}
+.tl-i.done{background:#f0fdf4;border-color:#bbf7d0}
+.tl-i.active{background:#fef2f2;border-color:#fecaca}
+.tl-i.idle{background:#f9fafb}
+.tl-ic{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.tl-i.done .tl-ic{background:#22c55e;color:#fff}
+.tl-i.active .tl-ic{background:#dc2626;color:#fff}
+.tl-i.idle .tl-ic{background:#e5e7eb;color:#9ca3af}
+.tl-t h5{font-size:13px;font-weight:700}
+.tl-t p{font-size:11px;color:#6b7280;margin-top:1px}
+.verif-note{background:#fff8e1;border:1px solid #fde68a;border-radius:10px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;text-align:left;margin:14px 0}
+.verif-note i{color:#d97706;font-size:15px;margin-top:1px;flex-shrink:0}
+.verif-note p{font-size:12px;color:#92400e;line-height:1.55;font-weight:500}
+
+/* ORDER SUMMARY */
+.sum-item{display:flex;gap:12px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid #f3f4f6;margin-bottom:14px}
+.s-ic{width:44px;height:44px;background:#fef2f2;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#dc2626;flex-shrink:0}
+.s-tx h4{font-size:13px;font-weight:700;margin-bottom:2px}
+.s-tx p{font-size:11px;color:#6b7280;line-height:1.5}
+.s-pr{margin-left:auto;font-size:15px;font-weight:800;color:#dc2626;white-space:nowrap}
+.tot{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;border-top:2px solid #e5e7eb}
+.tot .tl2{font-size:13px;font-weight:700;color:#374151}
+.tot .tv{font-size:22px;font-weight:900}
+.chklist{margin-top:14px;display:flex;flex-direction:column;gap:7px}
+.cki{display:flex;align-items:center;gap:7px;font-size:12px;color:#374151;font-weight:500}
+.cki i{color:#22c55e;font-size:11px;width:14px}
+.trust-badge{display:flex;align-items:center;gap:8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;margin-top:14px}
+.trust-badge i{color:#22c55e;font-size:15px;flex-shrink:0}
+.trust-badge p{font-size:11px;font-weight:600;color:#166534;line-height:1.4}
+
+/* WA float */
+.wa{position:fixed;bottom:20px;right:16px;z-index:99;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(37,211,102,.4)}
+.wa:hover{transform:scale(1.08)}
+.wa i{color:#fff;font-size:22px}
+</style>
 </head>
-<body class="antialiased text-slate-800">
+<body>
 
-    <div class="bg-overlay flex flex-col items-center justify-center p-4 min-h-screen">
-        
-        <div class="mb-6 text-center">
-            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/20">
-                <img src="../logof.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2921/2921822.png'" class="w-10 h-10 object-contain p-1" alt="Logo">
+<!-- NAV -->
+<nav class="nav">
+  <a href="landing-manipulacion.html" class="nav-l">
+    <img src="../logopagina.png" alt="CertiTec" onerror="this.style.display='none'"/>
+    <span>CertiTec Colombia</span>
+  </a>
+  <div class="nav-r"><i class="fas fa-lock"></i> Pago 100% Seguro</div>
+</nav>
+
+<!-- PROGRESS -->
+<div class="prog-bar">
+  <div class="prog">
+    <div class="pstep"><div class="pnum active" id="pn1">1</div><span class="plbl active" id="pl1">Mis datos</span></div>
+    <div class="pline" id="ln12"></div>
+    <div class="pstep"><div class="pnum idle" id="pn2">2</div><span class="plbl idle" id="pl2">Pago</span></div>
+    <div class="pline" id="ln23"></div>
+    <div class="pstep"><div class="pnum idle" id="pn3">3</div><span class="plbl idle" id="pl3">Verificación</span></div>
+    <div class="pline" id="ln34"></div>
+    <div class="pstep"><div class="pnum idle" id="pn4"><i class="fas fa-check" style="font-size:10px"></i></div><span class="plbl idle" id="pl4">¡Listo!</span></div>
+  </div>
+</div>
+
+<div class="page">
+  <div>
+
+    <!-- ═══ VIEW 1: DATOS ═══ -->
+    <div class="view active" id="v1">
+      <div class="card">
+        <div class="chd"><i class="fas fa-user-circle"></i><span>Tus datos personales</span></div>
+        <div class="cb">
+          <div class="row2">
+            <div class="fl">
+              <label>Tipo de documento <span style="color:#dc2626">*</span></label>
+              <select id="doctype">
+                <option value="" disabled selected>Selecciona...</option>
+                <option value="CC">Cédula de Ciudadanía</option>
+                <option value="TI">Tarjeta de Identidad</option>
+                <option value="CE">Cédula de Extranjería</option>
+                <option value="PPT">Permiso PPT</option>
+                <option value="PAS">Pasaporte</option>
+              </select>
             </div>
-            <h1 class="text-slate-900 font-bold text-xl tracking-wide uppercase">CertiTec Colombia</h1>
-            <p class="text-slate-600 text-xs">Evaluación Oficial Manipulación de Alimentos</p>
+            <div class="fl">
+              <label>Número de documento <span style="color:#dc2626">*</span></label>
+              <input type="number" id="docnum" placeholder="Sin puntos ni comas"/>
+            </div>
+          </div>
+          <div class="fl">
+            <label>Nombre completo <span style="color:#dc2626">*</span></label>
+            <input type="text" id="fullname" placeholder="Nombres y Apellidos"/>
+          </div>
+          <div class="row2">
+            <div class="fl">
+              <label>Departamento <span style="color:#dc2626">*</span></label>
+              <select id="dept">
+                <option value="" disabled selected>Selecciona...</option>
+                <option>Amazonas</option><option>Antioquia</option><option>Arauca</option>
+                <option>Atlántico</option><option>Bolívar</option><option>Boyacá</option>
+                <option>Caldas</option><option>Caquetá</option><option>Casanare</option>
+                <option>Cauca</option><option>Cesar</option><option>Chocó</option>
+                <option>Córdoba</option><option>Cundinamarca</option><option>Guainía</option>
+                <option>Guaviare</option><option>Huila</option><option>La Guajira</option>
+                <option>Magdalena</option><option>Meta</option><option>Nariño</option>
+                <option>Norte de Santander</option><option>Putumayo</option><option>Quindío</option>
+                <option>Risaralda</option><option>San Andrés y Providencia</option>
+                <option>Santander</option><option>Sucre</option><option>Tolima</option>
+                <option>Valle del Cauca</option><option>Vaupés</option><option>Vichada</option>
+              </select>
+            </div>
+            <div class="fl">
+              <label>Teléfono / WhatsApp</label>
+              <input type="tel" id="phone" placeholder="3001234567"/>
+              <div class="ht">Para notificaciones de tu certificado</div>
+            </div>
+          </div>
+          <button class="btn-red" onclick="goStep2()"><i class="fas fa-arrow-right"></i>Continuar al pago</button>
         </div>
-
-        <main class="main-card fade-in">
-            <div class="brand-bar"></div>
-
-            <div id="view-registration" class="p-8 md:p-10 hidden-section">
-                <div class="text-center mb-6">
-                    <h2 id="reg-title" class="text-2xl font-bold text-slate-900 mb-2">Datos para tu Certificado</h2>
-                    <p id="reg-subtitle" class="text-slate-500 text-sm">
-                        Ya aprobaste la evaluación. Completa tus datos para continuar.
-                    </p>
-                    </div>
-
-                <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">1. Tipo de Documento <span class="text-red-500">*</span></label>
-                        <select id="user-doctype" required class="input-pro cursor-pointer">
-                            <option value="" disabled selected>Selecciona una opción...</option>
-                            <option value="CC">Cédula de Ciudadanía</option>
-                            <option value="TI">Tarjeta de Identidad</option>
-                            <option value="CE">Cédula de Extranjería</option>
-                            <option value="PPT">Permiso por Protección Temporal (PPT)</option>
-                            <option value="PAS">Pasaporte</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">2. Número de Documento <span class="text-red-500">*</span></label>
-                        <input type="number" id="user-docnum" required placeholder="Ej: 1090333444" class="input-pro" />
-                        <p class="text-xs text-gray-400 mt-1">Sin puntos ni comas.</p>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">3. Nombre Completo <span class="text-red-500">*</span></label>
-                        <input type="text" id="user-fullname" required placeholder="Nombres y Apellidos" class="input-pro capitalize" />
-                    </div>
-
-                    <div class="pt-4">
-                        <button type="submit" class="btn-action w-full py-4 text-lg shadow-lg shadow-green-900/10 flex justify-center items-center gap-2">
-                            <span id="reg-btn-text">Continuar al pago</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-
-            <div id="view-quiz-app" class="flex flex-col h-full">
-                <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
-                    <span class="text-xs font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200">
-                        PREGUNTA <span id="q-current">1</span>/8
-                    </span>
-                    <button onclick="resetApp()" class="text-xs text-gray-400 hover:text-red-500 underline" title="Borrar progreso">Reiniciar</button>
-                </div>
-                <div class="w-full bg-gray-200 h-1.5">
-                    <div id="progress-bar" class="bg-green-600 h-full transition-all duration-500" style="width: 0%"></div>
-                </div>
-
-                <div class="p-8 md:p-10 flex-grow">
-                    <h3 id="q-text" class="text-xl font-bold text-slate-800 mb-8 leading-relaxed">
-                        Cargando pregunta...
-                    </h3>
-                    
-                    <div id="q-options" class="space-y-3">
-                        </div>
-
-                    <div id="feedback-area" class="hidden mt-6 p-4 rounded-lg text-sm font-bold text-center animate-pulse"></div>
-                </div>
-
-                <div class="p-6 bg-gray-50 border-t border-gray-100 flex justify-end">
-                    <button id="btn-next" onclick="nextQuestion()" disabled class="btn-action px-8 py-3 opacity-50 cursor-not-allowed shadow-md">
-                        Siguiente
-                    </button>
-                </div>
-            </div>
-
-            <div id="view-checkout" class="hidden-section">
-                <div class="bg-green-50 p-8 text-center border-b border-green-100">
-                    <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4 animate-bounce shadow-sm">
-                        <i class="fas fa-check text-4xl text-green-600"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold text-slate-800">¡EXAMEN APROBADO!</h2>
-                    <p class="text-gray-600 mt-2 text-sm">
-                        Hola <span id="display-name" class="font-bold"></span>, ya aprobaste tu certificación.
-                    </p>
-                    <div class="mt-3 inline-block bg-yellow-50 border border-yellow-200 p-2 rounded text-xs text-yellow-800 font-medium">
-                        <i class="fas fa-exclamation-triangle mr-1"></i> Certificado listo para descarga tras el pago.
-                    </div>
-                </div>
-
-                <div class="p-8 space-y-6">
-                    <div class="flex justify-between items-center border-b border-gray-100 pb-4">
-                        <span class="text-gray-500 text-sm font-medium">Total a pagar:</span>
-                        <span class="text-2xl font-bold text-slate-800">$22.000 COP</span>
-                    </div>
-
-                    <div onclick="registerAndPay()" class="btn-nequi cursor-pointer block w-full p-4 rounded-xl text-white shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all">
-                        <div class="relative z-10 flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-10 h-10 rounded-lg border border-white/20 object-cover" alt="Nequi">
-                                <div class="text-left">
-                                    <p class="font-bold text-lg leading-none">Pagar con Nequi / PSE</p>
-                                    <p class="text-xs text-white/60 mt-1">Activación automática inmediata.</p>
-                                </div>
-                            </div>
-                            <div id="loader-nequi" class="hidden">
-                                <i class="fas fa-circle-notch fa-spin text-xl"></i>
-                            </div>
-                            <i id="icon-arrow" class="fas fa-chevron-right group-hover:translate-x-1 transition"></i>
-                        </div>
-                    </div>
-
-                    <div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
-                        <div class="flex items-center gap-2 mb-4">
-                            <i class="fas fa-university text-yellow-500 text-xl"></i>
-                            <h3 class="font-bold text-slate-700">Transferencias Manuales</h3>
-                        </div>
-                        
-                        <div class="grid grid-cols-1 gap-3 mb-4">
-                            <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide font-bold">Nequi / Daviplata</p>
-                                <p class="text-lg font-mono font-bold text-slate-800 select-all">3223267797</p>
-                            </div>
-                            <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wide font-bold">Bancolombia Ahorros</p>
-                                <p class="text-lg font-mono font-bold text-slate-800 select-all">816-589697-49</p>
-                            </div>
-                        </div>
-
-                        <div class="bg-blue-50 border border-blue-100 p-3 rounded-lg mb-4 text-center shadow-sm">
-                            <p class="text-sm text-blue-900 leading-snug">
-                                <i class="fas fa-camera text-xl block mb-1 text-blue-600"></i>
-                                <strong>¡Importante!</strong> No olvides tomar captura de tu comprobante para la posterior verificación del pago.
-                            </p>
-                        </div>
-
-                        <a href="https://wa.me/573107941580?text=Hola,%20ya%20pagué%20mis%20$22.000%20del%20curso%20de%20manipulación.%20Envío%20comprobante." target="_blank" 
-                           class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-green-600 text-white font-bold py-3 rounded-lg transition shadow-md">
-                            <i class="fab fa-whatsapp text-xl"></i>
-                            Enviar Comprobante
-                        </a>
-                    </div>
-
-                    <div class="mt-8 text-center border-t border-gray-100 pt-6">
-                        <p class="text-xs text-gray-400 mb-3">¿Necesitas certificar a otra persona?</p>
-                        <button onclick="startNewProcess()" class="text-slate-600 hover:text-green-700 font-medium text-sm transition flex items-center justify-center mx-auto gap-2">
-                            <i class="fas fa-user-plus"></i> Iniciar Nueva Certificación
-                        </button>
-                    </div>
-
-                </div>
-            </div>
-
-            <div id="view-fail" class="hidden-section text-center p-10">
-                <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full mb-6">
-                    <i class="fas fa-times text-4xl text-red-500"></i>
-                </div>
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">No alcanzaste el puntaje</h2>
-                <p class="text-gray-500 mb-8 text-sm">
-                    Necesitas un mínimo del 75% para certificarte. No te preocupes, puedes intentarlo de nuevo gratis.
-                </p>
-                <button onclick="startNewProcess()" class="btn-action w-full py-3 bg-slate-800 hover:bg-slate-900 shadow-lg">
-                    <i class="fas fa-redo mr-2"></i> Intentar de Nuevo (Reiniciar)
-                </button>
-            </div>
-
-        </main>
-
-        <footer class="mt-8 text-center text-slate-500 text-xs pb-4">
-            <p>Pago 100% Seguro. Certificación Válida Resolución 2674.</p>
-            <p class="mt-2 text-[10px] opacity-70">© 2024 CertiTec Colombia</p>
-        </footer>
+      </div>
     </div>
 
-    <script>
-        const STORAGE_KEY = 'certitec_data_v2';
-        
-        // --- DATOS FIJOS PARA EL API ---
-        const FIXED_USER_ID = 1;
-        const FIXED_PRODUCT = "Curso Manipulación de alimentos";
-        const FIXED_VALUE = 22000;
-        const FIXED_ACCOUNT = "Nequi Web";
+    <!-- ═══ VIEW 2: PAGO + UPLOAD ═══ -->
+    <div class="view" id="v2">
+      <!-- Payment method -->
+      <div class="card">
+        <div class="chd"><i class="fas fa-credit-card"></i><span>Selecciona tu método de pago</span></div>
+        <div class="cb">
+          <div class="pmethods">
+            <div class="pm sel" id="pm-nequi" onclick="selPay('nequi')">
+              <div class="pm-rb"></div>
+              <div class="pm-ic" style="background:#f5f0ff"><i class="fas fa-mobile-alt" style="color:#7c3aed"></i></div>
+              <div class="pm-txt"><h4>Nequi</h4><p>Transferencia al número 3223267797</p></div>
+            </div>
+            <div class="pm" id="pm-daviplata" onclick="selPay('daviplata')">
+              <div class="pm-rb"></div>
+              <div class="pm-ic" style="background:#fff3e0"><i class="fas fa-mobile-alt" style="color:#f57c00"></i></div>
+              <div class="pm-txt"><h4>Daviplata</h4><p>Transferencia al número 3223267797</p></div>
+            </div>
+            <div class="pm" id="pm-bancolombia" onclick="selPay('bancolombia')">
+              <div class="pm-rb"></div>
+              <div class="pm-ic" style="background:#fffde7"><i class="fas fa-university" style="color:#f9a825"></i></div>
+              <div class="pm-txt"><h4>Bancolombia</h4><p>Cuenta Ahorros 816-589697-49</p></div>
+            </div>
+            <div class="pm" id="pm-pse" onclick="selPay('pse')">
+              <div class="pm-rb"></div>
+              <div class="pm-ic" style="background:#e3f2fd"><i class="fas fa-globe" style="color:#1976d2"></i></div>
+              <div class="pm-txt"><h4>PSE / Botón en línea</h4><p>Pago por débito bancario</p></div>
+            </div>
+          </div>
 
-        // Estado inicial
-        let state = {
-            view: 'view-quiz-app',
-            pendingCheckout: false,
-            userData: { type: '', num: '', name: '' },
-            quiz: { currentIdx: 0, score: 0 }
-        };
+          <!-- Dynamic payment box -->
+          <div class="pbox" id="paybox"></div>
+        </div>
+      </div>
 
-        const questions = [
-            { q: "1. ¿Cuál es la norma principal que regula la manipulación de alimentos en Colombia?", options: ["Resolución 2674 de 2013", "Código de Policía", "Ley 100"], a: 0 },
-            { q: "2. La contaminación cruzada ocurre cuando:", options: ["Se lavan bien los alimentos", "Se mezclan alimentos crudos con cocidos", "Se congela la carne"], a: 1 },
-            { q: "3. ¿Cuánto tiempo mínimo debe durar el lavado de manos?", options: ["5 segundos", "20 a 30 segundos con jabón", "Solo enjuagar con agua"], a: 1 },
-            { q: "4. ¿Cuál es la zona de temperatura de peligro para los alimentos?", options: ["Entre 5°C y 60°C", "Menos de 0°C", "Más de 100°C"], a: 0 },
-            { q: "5. Si tienes gripe o heridas en las manos, ¿qué debes hacer?", options: ["Usar tapabocas y seguir trabajando", "Informar al jefe y no manipular alimentos", "Ponerse doble guante"], a: 1 },
-            { q: "6. El agua utilizada para preparar alimentos debe ser:", options: ["De río", "Potable", "Lluvia"], a: 1 },
-            { q: "7. ¿Cómo se deben almacenar los productos químicos de aseo?", options: ["Junto a la comida para tenerlos cerca", "En un lugar separado y rotulado", "En la nevera"], a: 1 },
-            { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 }
-        ];
+      <!-- Upload comprobante -->
+      <div class="card">
+        <div class="chd"><i class="fas fa-image"></i><span>Sube el comprobante de pago</span></div>
+        <div class="cb">
+          <p style="font-size:13px;color:#555;margin-bottom:14px;line-height:1.6">Una vez realizado el pago, <strong>sube la captura de pantalla</strong> de tu comprobante. Nuestro sistema lo verificará automáticamente.</p>
 
-        const passingScore = 0.75; 
+          <!-- Upload zone -->
+          <div class="upload-zone" id="upzone"
+               ondragover="e=>e.preventDefault()" 
+               ondragenter="handleDragEnter(event)"
+               ondragleave="handleDragLeave(event)"
+               ondrop="handleDrop(event)">
+            <input type="file" id="fileInput" accept="image/*,.pdf" onchange="handleFile(this.files[0])"/>
+            <i class="fas fa-cloud-upload-alt uz-icon" id="uz-icon"></i>
+            <div class="uz-title" id="uz-title">Toca aquí o arrastra tu comprobante</div>
+            <div class="uz-sub">Captura de pantalla, foto o PDF · Máx 10 MB</div>
+          </div>
 
-        // Elementos DOM
-        const els = {
-            docType: document.getElementById('user-doctype'),
-            docNum: document.getElementById('user-docnum'),
-            fullName: document.getElementById('user-fullname'),
-            displayName: document.getElementById('display-name'),
-            qText: document.getElementById('q-text'),
-            qOptions: document.getElementById('q-options'),
-            qCurrent: document.getElementById('q-current'),
-            progressBar: document.getElementById('progress-bar'),
-            btnNext: document.getElementById('btn-next'),
-            feedback: document.getElementById('feedback-area'),
-            regTitle: document.getElementById('reg-title'),
-            regSubtitle: document.getElementById('reg-subtitle'),
-            regBtnText: document.getElementById('reg-btn-text')
-        };
+          <!-- File preview -->
+          <div class="file-preview" id="file-preview">
+            <img id="fp-img" class="fp-img" src="" alt="preview"/>
+            <div class="fp-info">
+              <div class="fp-name" id="fp-name"></div>
+              <div class="fp-size" id="fp-size"></div>
+            </div>
+            <i class="fas fa-times fp-remove" onclick="removeFile()" title="Quitar archivo"></i>
+          </div>
 
-        // --- SISTEMA DE PERSISTENCIA ---
-        function saveState() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+          <div style="margin-top:18px">
+            <button class="btn-red" id="btn-submit" onclick="submitReceipt()" disabled>
+              <i class="fas fa-check-circle"></i> Enviar Comprobante y Verificar
+            </button>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px">
+            <i class="fas fa-shield-alt" style="color:#22c55e;font-size:12px"></i>
+            <span style="font-size:11px;color:#9ca3af">Tu comprobante se verifica en segundos · Proceso automático</span>
+          </div>
+
+          <button class="btn-ghost" onclick="goStep1()"><i class="fas fa-arrow-left"></i>Volver a mis datos</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ VIEW 3: VERIFICANDO ═══ -->
+    <div class="view" id="v3">
+      <div class="card">
+        <div class="chd"><i class="fas fa-shield-alt"></i><span>Verificando tu pago</span></div>
+        <div class="cb">
+          <div class="verif-wrap" id="verif-content">
+            <!-- Spinner state -->
+            <div class="spinner-wrap">
+              <i class="fas fa-file-invoice-dollar"></i>
+              <div class="spinner-ring"></div>
+            </div>
+            <h2 style="font-size:19px;font-weight:800;margin-bottom:8px">Verificando comprobante...</h2>
+            <p style="font-size:14px;color:#6b7280;margin-bottom:4px">Nuestro sistema está analizando tu pago automáticamente.</p>
+            <p style="font-size:13px;color:#9ca3af">Esto toma solo unos segundos.</p>
+
+            <div class="tl" id="tl-wrap">
+              <div class="tl-i done" id="tl1">
+                <div class="tl-ic"><i class="fas fa-check"></i></div>
+                <div class="tl-t"><h5>Datos registrados</h5><p>Tu información fue guardada</p></div>
+              </div>
+              <div class="tl-i done" id="tl2">
+                <div class="tl-ic"><i class="fas fa-check"></i></div>
+                <div class="tl-t"><h5>Comprobante recibido</h5><p>Imagen cargada correctamente</p></div>
+              </div>
+              <div class="tl-i active" id="tl3">
+                <div class="tl-ic"><i class="fas fa-sync fa-spin"></i></div>
+                <div class="tl-t"><h5>Validando pago...</h5><p>Verificando monto y cuenta destino</p></div>
+              </div>
+              <div class="tl-i idle" id="tl4">
+                <div class="tl-ic"><i class="fas fa-graduation-cap"></i></div>
+                <div class="tl-t"><h5>Habilitando acceso al examen</h5><p>Pendiente de validación</p></div>
+              </div>
+            </div>
+
+            <div class="verif-note">
+              <i class="fas fa-info-circle"></i>
+              <p>Si en 5 minutos no recibes tu acceso, nuestro equipo te contactará por WhatsApp para ayudarte.</p>
+            </div>
+
+            <a href="https://wa.me/573107941580?text=Hola%2C%20envié%20mi%20comprobante%20pero%20no%20he%20recibido%20acceso%20al%20examen." target="_blank" class="btn-wa">
+              <i class="fab fa-whatsapp" style="font-size:17px"></i> ¿Sin respuesta? Soporte por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ VIEW 4: ÉXITO ═══ -->
+    <div class="view" id="v4">
+      <div class="card">
+        <div class="chd"><i class="fas fa-check-circle" style="color:#22c55e"></i><span>¡Pago verificado!</span></div>
+        <div class="cb">
+          <div style="text-align:center;padding:6px 0 16px">
+            <div class="done-wrap"><i class="fas fa-check"></i></div>
+            <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;color:#166534">¡Comprobante aprobado!</h2>
+            <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:20px">Tu pago fue verificado exitosamente. Te estamos redirigiendo al examen.</p>
+          </div>
+
+          <!-- Detalles del pago -->
+          <div id="pay-details" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:16px;margin-bottom:16px">
+            <p style="font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px"><i class="fas fa-receipt" style="margin-right:5px"></i>Resumen del pago verificado</p>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:12px;color:#6b7280;font-weight:600">MONTO</span>
+                <span style="font-size:15px;font-weight:800;color:#166534" id="det-monto">$22.000 COP</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:12px;color:#6b7280;font-weight:600">BANCO / PLATAFORMA</span>
+                <span style="font-size:13px;font-weight:700;color:#111" id="det-banco">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:12px;color:#6b7280;font-weight:600">REFERENCIA</span>
+                <span style="font-size:13px;font-weight:700;color:#111;font-family:monospace" id="det-ref">—</span>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span style="font-size:12px;color:#6b7280;font-weight:600">FECHA</span>
+                <span style="font-size:13px;font-weight:700;color:#111" id="det-fecha">—</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Cuenta regresiva de redirección -->
+          <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:18px;text-align:center">
+            <i class="fas fa-spinner fa-spin" style="font-size:26px;color:#22c55e;display:block;margin-bottom:10px"></i>
+            <p style="font-size:14px;font-weight:700;color:#166534;margin-bottom:4px">Redirigiendo al examen...</p>
+            <p style="font-size:13px;color:#6b7280;margin-bottom:10px">Serás redirigido automáticamente en <strong id="countdown">3</strong> segundos.</p>
+            <a href="https://quickcontrola.com/verificacion" style="display:inline-block;font-size:13px;font-weight:700;color:#22c55e;text-decoration:underline">Ir ahora sin esperar →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══ VIEW ERROR ═══ -->
+    <div class="view" id="v-err">
+      <div class="card">
+        <div class="chd"><i class="fas fa-exclamation-circle" style="color:#dc2626"></i><span>No pudimos verificar el pago</span></div>
+        <div class="cb">
+          <div style="text-align:center;padding:10px 0">
+            <div class="error-wrap"><i class="fas fa-times"></i></div>
+            <h2 style="font-size:19px;font-weight:800;margin-bottom:8px">Comprobante no válido</h2>
+            <p style="font-size:14px;color:#6b7280;line-height:1.65;margin-bottom:12px" id="err-msg">No pudimos verificar el pago. Asegúrate de que el monto sea $22.000 y la cuenta sea correcta.</p>
+            <button class="btn-red" onclick="retry()"><i class="fas fa-redo"></i> Intentar de nuevo</button>
+            <a href="https://wa.me/573107941580" target="_blank" class="btn-wa"><i class="fab fa-whatsapp" style="font-size:17px"></i> Hablar con soporte</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /left col -->
+
+  <!-- ORDER SUMMARY (sticky) -->
+  <div class="sum-col">
+    <div class="card" style="position:sticky;top:16px;margin-bottom:0">
+      <div class="chd"><i class="fas fa-shopping-cart"></i><span>Tu pedido</span></div>
+      <div class="cb">
+        <div class="sum-item">
+          <div class="s-ic"><i class="fas fa-award"></i></div>
+          <div class="s-tx">
+            <h4>Certificado Manipulación de Alimentos</h4>
+            <p>Resolución 2674 · Validez nacional · PDF + Carnet</p>
+          </div>
+          <div class="s-pr">$22.000</div>
+        </div>
+
+        <div class="chklist">
+          <div class="cki"><i class="fas fa-check-circle"></i>Certificado PDF alta resolución</div>
+          <div class="cki"><i class="fas fa-check-circle"></i>Carnet digital oficial</div>
+          <div class="cki"><i class="fas fa-check-circle"></i>Código QR verificable</div>
+          <div class="cki"><i class="fas fa-check-circle"></i>Examen con intentos ilimitados</div>
+          <div class="cki"><i class="fas fa-check-circle"></i>Entrega inmediata al aprobar</div>
+          <div class="cki"><i class="fas fa-check-circle"></i>Soporte por WhatsApp</div>
+        </div>
+
+        <div class="tot">
+          <span class="tl2">Total</span>
+          <span class="tv">$22.000 <small style="font-size:12px;font-weight:400;color:#9ca3af">COP</small></span>
+        </div>
+
+        <div class="trust-badge">
+          <i class="fas fa-shield-alt"></i>
+          <p>Pago seguro. Verificación automática. Resolución 2674 de 2013.</p>
+        </div>
+
+        <!-- Mini cert SVG -->
+        <div style="margin-top:16px;text-align:center">
+          <svg width="170" height="110" viewBox="0 0 170 110" style="display:block;margin:0 auto">
+            <rect x="10" y="6" width="150" height="96" rx="8" fill="#fff" stroke="#e5e7eb" stroke-width="1.5"/>
+            <rect x="10" y="6" width="150" height="22" rx="8" fill="#dc2626"/>
+            <rect x="10" y="20" width="150" height="8" fill="#dc2626"/>
+            <text x="85" y="21" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">CERTIFICADO OFICIAL</text>
+            <text x="85" y="33" text-anchor="middle" font-size="7" fill="#fff" opacity=".8">Manipulación de Alimentos · Res. 2674/2013</text>
+            <circle cx="42" cy="72" r="20" fill="#fbbf24"/>
+            <circle cx="42" cy="72" r="13" fill="#f59e0b"/>
+            <text x="42" y="78" text-anchor="middle" font-size="16" fill="#fff">★</text>
+            <rect x="70" y="46" width="76" height="6" rx="3" fill="#e5e7eb"/>
+            <rect x="70" y="58" width="62" height="5" rx="2.5" fill="#e5e7eb"/>
+            <rect x="70" y="69" width="70" height="5" rx="2.5" fill="#e5e7eb"/>
+            <rect x="70" y="80" width="52" height="5" rx="2.5" fill="#e5e7eb"/>
+            <circle cx="150" cy="18" r="14" fill="#22c55e"/>
+            <path d="M143 18 l4 5 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <span style="font-size:11px;color:#9ca3af">Tu certificado te espera</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WA float -->
+<a href="https://wa.me/573107941580" target="_blank" class="wa" aria-label="WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<script>
+// ════════════════════════════════════════════════
+//  ⚙ CONFIGURACIÓN — ACTUALIZA ESTOS VALORES
+// ════════════════════════════════════════════════
+const N8N_WEBHOOK   = 'https://TU-N8N.app/webhook/verificar-pago'; // ← URL webhook n8n
+const NEQUI_NUM     = '3223267797';
+const DAVIPLATA_NUM = '3223267797';
+const BANCO_ACC     = '816-589697-49';
+const BANCO_OWNER   = 'Corporación Educativa Conalianza';
+const PSE_URL       = 'https://checkout.nequi.wompi.co/l/bSxc9E';
+const REDIRECT_URL  = 'https://quickcontrola.com/verificacion'; // ← redirección tras pago verificado
+const WA_NUM        = '573107941580';
+// ════════════════════════════════════════════════
+
+const payInfo = {
+  nequi: {
+    html:`<div class="pr"><span class="pl">Número Nequi</span><span class="pv" onclick="copyTxt('${NEQUI_NUM}',this)">${NEQUI_NUM}</span></div>
+          <div class="pr"><span class="pl">Monto exacto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
+          <div class="copy-tip"><i class="fas fa-hand-pointer"></i> Toca el número para copiarlo</div>`
+  },
+  daviplata: {
+    html:`<div class="pr"><span class="pl">Número Daviplata</span><span class="pv" onclick="copyTxt('${DAVIPLATA_NUM}',this)">${DAVIPLATA_NUM}</span></div>
+          <div class="pr"><span class="pl">Monto exacto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
+          <div class="copy-tip"><i class="fas fa-hand-pointer"></i> Toca el número para copiarlo</div>`
+  },
+  bancolombia: {
+    html:`<div class="pr"><span class="pl">Cuenta Ahorros</span><span class="pv" onclick="copyTxt('${BANCO_ACC}',this)">${BANCO_ACC}</span></div>
+          <div class="pr"><span class="pl">Titular</span><span class="pv" style="font-size:12px;font-family:'Inter'">${BANCO_OWNER}</span></div>
+          <div class="pr"><span class="pl">Monto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
+          <div class="copy-tip"><i class="fas fa-hand-pointer"></i> Toca la cuenta para copiarla</div>`
+  },
+  pse: {
+    html:`<div class="pr"><span class="pl">Monto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
+          <div style="margin-top:10px"><a href="${PSE_URL}" target="_blank" style="display:block;background:#1d4ed8;color:#fff;text-align:center;padding:11px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none"><i class="fas fa-external-link-alt" style="margin-right:6px"></i>Ir al portal de pago PSE</a></div>`
+  }
+};
+
+let selMethod = 'nequi';
+let uploadedFile = null;
+let userData    = {};
+let isSubmitting = false; // ← bloqueo anti-doble-click
+
+// ─── PAYMENT METHOD SELECTION ──────────────────
+function selPay(m) {
+  selMethod = m;
+  document.querySelectorAll('.pm').forEach(el => el.classList.remove('sel'));
+  document.getElementById('pm-' + m).classList.add('sel');
+  document.getElementById('paybox').innerHTML = payInfo[m].html;
+}
+
+function copyTxt(txt, el) {
+  navigator.clipboard.writeText(txt).then(() => {
+    const orig = el.innerText;
+    el.innerText = '¡Copiado! ✓';
+    el.style.color = '#22c55e';
+    setTimeout(() => { el.innerText = orig; el.style.color = ''; }, 1800);
+  });
+}
+
+// ─── FILE UPLOAD ───────────────────────────────
+function handleDragEnter(e) { e.preventDefault(); document.getElementById('upzone').classList.add('drag'); }
+function handleDragLeave(e) { document.getElementById('upzone').classList.remove('drag'); }
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upzone').classList.remove('drag');
+  const file = e.dataTransfer.files[0];
+  if (file) handleFile(file);
+}
+
+function handleFile(file) {
+  if (!file) return;
+  if (file.size > 10 * 1024 * 1024) { alert('El archivo es muy grande. Máximo 10 MB.'); return; }
+  uploadedFile = file;
+
+  // Update upload zone
+  const zone = document.getElementById('upzone');
+  zone.classList.add('has-file');
+  document.getElementById('uz-icon').className = 'fas fa-check-circle uz-icon';
+  document.getElementById('uz-title').innerText = 'Comprobante cargado ✓';
+
+  // Show preview
+  const preview = document.getElementById('file-preview');
+  preview.classList.add('show');
+  document.getElementById('fp-name').innerText = file.name;
+  document.getElementById('fp-size').innerText = (file.size / 1024).toFixed(0) + ' KB · ' + (file.type.includes('pdf') ? 'PDF' : 'Imagen');
+
+  if (file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = e => { document.getElementById('fp-img').src = e.target.result; };
+    reader.readAsDataURL(file);
+  } else {
+    document.getElementById('fp-img').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="%23fef2f2"/><text x="20" y="26" text-anchor="middle" font-size="18" fill="%23dc2626">📄</text></svg>';
+  }
+
+  document.getElementById('btn-submit').disabled = false;
+}
+
+function removeFile() {
+  uploadedFile = null;
+  document.getElementById('fileInput').value = '';
+  const zone = document.getElementById('upzone');
+  zone.classList.remove('has-file', 'drag');
+  document.getElementById('uz-icon').className = 'fas fa-cloud-upload-alt uz-icon';
+  document.getElementById('uz-title').innerText = 'Toca aquí o arrastra tu comprobante';
+  document.getElementById('file-preview').classList.remove('show');
+  document.getElementById('btn-submit').disabled = true;
+}
+
+// ─── FORM VALIDATION ───────────────────────────
+function validate() {
+  const dt = document.getElementById('doctype').value;
+  const dn = document.getElementById('docnum').value.trim();
+  const fn = document.getElementById('fullname').value.trim();
+  const dp = document.getElementById('dept').value;
+  if (!dt) { alert('Selecciona el tipo de documento'); return false; }
+  if (!dn || dn.length < 5) { alert('Ingresa un número de documento válido'); return false; }
+  if (!fn || fn.split(' ').filter(Boolean).length < 2) { alert('Ingresa tu nombre y apellido completo'); return false; }
+  if (!dp) { alert('Selecciona tu departamento'); return false; }
+  const parts = fn.trim().split(' ');
+  userData = { type: dt, num: dn, name: fn, dept: dp, phone: document.getElementById('phone').value.trim(), firstName: parts[0], lastName: parts.slice(1).join(' ') };
+  return true;
+}
+
+// ─── NAV STEPS ─────────────────────────────────
+function goStep1() { setStep(1); show('v1'); }
+function goStep2() {
+  if (!validate()) return;
+  localStorage.setItem('certitec_ud', JSON.stringify(userData));
+  setStep(2);
+  selPay('nequi');
+  show('v2');
+}
+
+// ─── SUBMIT RECEIPT ────────────────────────────
+async function submitReceipt() {
+  if (isSubmitting) { console.warn('Ya hay una verificación en curso'); return; }
+  if (!uploadedFile) { alert('Primero sube el comprobante de pago'); return; }
+
+  isSubmitting = true; // bloquear inmediatamente
+  document.getElementById('btn-submit').disabled = true;
+
+  setStep(3);
+  show('v3');
+
+  if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', { value: 22000, currency: 'COP' });
+
+
+
+  // Capturar referencia local del archivo ANTES del FileReader
+  const archivo = uploadedFile;
+  if (!archivo) {
+    document.getElementById('err-msg').innerText = 'No se detectó el archivo. Por favor vuelve y sube el comprobante de nuevo.';
+    setStep(2); show('v-err'); return;
+  }
+
+  // Leer imagen como base64 y enviar JSON al webhook de n8n
+  const reader = new FileReader();
+  reader.onerror = () => {
+    document.getElementById('err-msg').innerText = 'Error al leer la imagen. Intenta con otro formato (JPG o PNG).';
+    setStep(2); show('v-err');
+  };
+  reader.onload = async (ev) => {
+    const result = ev.target.result;
+    if (!result || !result.includes(',')) {
+      document.getElementById('err-msg').innerText = 'No se pudo leer la imagen. Intenta con otro archivo.';
+      setStep(2); show('v-err'); return;
+    }
+    const base64 = result.split(',')[1];
+    if (!base64 || base64.length < 100) {
+      document.getElementById('err-msg').innerText = 'La imagen parece estar vacía o corrupta. Selecciona otra captura.';
+      setStep(2); show('v-err'); return;
+    }
+
+    const payload = {
+      nombre:       userData.name,
+      documento:    userData.type + ' ' + userData.num,
+      departamento: userData.dept,
+      telefono:     userData.phone,
+      metodo_pago:  selMethod.toUpperCase(),
+      valor:        '22000',
+      producto:     'Certificado Manipulación de Alimentos',
+      imagen:       base64,
+      mimeType:     archivo.type || 'image/jpeg'
+    };
+
+    // Debug: verificar que imagen llega antes de enviar
+    console.log('📤 Enviando al webhook n8n...');
+    console.log('Tamaño base64:', base64.length, 'caracteres');
+    console.log('mimeType:', archivo.type);
+    console.log('Campos enviados:', Object.keys(payload));
+
+    try {
+      const res = await fetch(
+        'https://n8n.certitecol.com/webhook/e8f9546e-cf35-4adc-8ffa-0f5a99d66276',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
         }
+      );
 
-        function loadState() {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            if (saved) {
-                state = JSON.parse(saved);
-            }
-            applyStateToUI();
-        }
+      const data = await res.json().catch(() => ({}));
+      console.log('📨 Respuesta n8n:', JSON.stringify(data));
 
-        // Función para RESETEAR (Pregunta confirmación) - Usada durante el quiz
-        function resetApp() {
-            if(confirm('¿Borrar progreso y empezar de nuevo?')) {
-                startNewProcess();
-            }
-        }
+      // ─── CASO 1: Pago válido ──────────────────────────
+      if (data.valido === true) {
+        setTimeout(() => updateTl('tl3', 'done', 'Pago verificado', 'Monto y cuenta confirmados'), 1200);
+        setTimeout(() => updateTl('tl4', 'done', 'Acceso habilitado', '¡El examen está disponible!'), 2200);
+        setTimeout(() => {
+          if (typeof fbq === 'function') fbq('track', 'Purchase', { value: 22000, currency: 'COP' });
+          showSuccess(data);
+        }, 3000);
 
-        // --- NUEVA FUNCIÓN: INICIAR NUEVO PROCESO (Sin confirmar, borra y recarga) ---
-        function startNewProcess() {
-            localStorage.removeItem(STORAGE_KEY);
-            location.reload();
-        }
+      // ─── CASO 2: Comprobante rechazado por el bot ───────────
+      } else if (data.valido === false) {
+        updateTl('tl3', 'active', 'Comprobante no válido', data.motivo_rechazo || 'No coincide con el pago esperado');
+        setTimeout(() => {
+          document.getElementById('err-msg').innerText =
+            data.motivo_rechazo || 'No pudimos verificar tu pago. Asegúrate que el monto sea $22.000 y la imagen sea clara.';
+          setStep(2);
+          show('v-err');
+        }, 1800);
 
-        function applyStateToUI() {
-            if (state.userData.type) els.docType.value = state.userData.type;
-            if (state.userData.num) els.docNum.value = state.userData.num;
-            if (state.userData.name) els.fullName.value = state.userData.name;
+      // ─── CASO 3: Respuesta inesperada del servidor ─────────
+      } else {
+        document.getElementById('err-msg').innerText = 'Respuesta inesperada del servidor. Intenta de nuevo o contáctanos.';
+        setStep(2);
+        show('v-err');
+      }
 
-            if (state.pendingCheckout && els.regTitle) {
-                els.regTitle.innerText = "Datos para tu Certificado";
-                els.regSubtitle.innerText = "Ya aprobaste la evaluaciÃ³n. Completa tus datos para continuar.";
-                els.regBtnText.innerText = "Continuar al pago";
-            }
+    } catch(e) {
+      console.error('Webhook error', e);
+      // ─── CASO 4: Error de red / timeout ────────────────
+      document.getElementById('err-msg').innerText = 'Error de conexión al verificar. Verifica tu internet e inténtalo de nuevo.';
+      setStep(2);
+      show('v-err');
+    } finally {
+      isSubmitting = false; // liberar bloqueo siempre
+    }
+  };
+  reader.readAsDataURL(archivo); // usar referencia local, no la global
+}
 
-            switchView(state.view);
+function updateTl(id, state, title, sub) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.className = 'tl-i ' + state;
+  const ic = el.querySelector('.tl-ic');
+  ic.className = 'tl-ic';
+  ic.innerHTML = state === 'done' ? '<i class="fas fa-check"></i>' : '<i class="fas fa-sync fa-spin"></i>';
+  el.querySelector('h5').innerText = title;
+  el.querySelector('p').innerText = sub;
+}
 
-            if (state.view === 'view-quiz-app') loadQuestionUI();
-            if (state.view === 'view-checkout' && state.userData.name) {
-                els.displayName.innerText = state.userData.name.split(' ')[0];
-            }
-        }
+function retry() { goStep2(); removeFile(); }
 
-        function switchView(viewName) {
-            ['view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'].forEach(id => {
-                document.getElementById(id).classList.add('hidden-section');
-            });
-            document.getElementById(viewName).classList.remove('hidden-section');
-            window.scrollTo(0,0);
-        }
+// ─── SHOW SUCCESS ──────────────────────────────
+function showSuccess(data) {
+  const fmt = (v) => v || '—';
+  document.getElementById('det-monto').innerText = data.monto ? '$' + data.monto + ' COP' : '$22.000 COP';
+  document.getElementById('det-banco').innerText = fmt(data.banco);
+  document.getElementById('det-ref').innerText   = fmt(data.referencia);
+  document.getElementById('det-fecha').innerText  = fmt(data.fecha);
 
-        // --- INTEGRACIÃ“N API ---
-        async function registerAndPay() {
-            const loader = document.getElementById('loader-nequi');
-            const arrow = document.getElementById('icon-arrow');
-            loader.classList.remove('hidden');
-            arrow.classList.add('hidden');
+  if (typeof fbq === 'function') fbq('track', 'Purchase', { value: 22000, currency: 'COP' });
 
-            const nameParts = state.userData.name.trim().split(' ');
-            const firstName = nameParts[0];
-            const lastName = nameParts.slice(1).join(' ') || '';
+  setStep(4);
+  show('v4');
 
-            const payload = {
-                nombre: firstName,
-                apellido: lastName,
-                numeroDeDocumento: state.userData.num,
-                valor: FIXED_VALUE,
-                cuenta: FIXED_ACCOUNT,
-                tipo: FIXED_PRODUCT,
-                customer_email: "", 
-                usuarioId: FIXED_USER_ID 
-            };
+  // Cuenta regresiva y redirección automática
+  const destino = data.enlaceExamen || REDIRECT_URL;
+  let secs = 3;
+  const cdEl = document.getElementById('countdown');
+  const timer = setInterval(() => {
+    secs--;
+    if (cdEl) cdEl.innerText = secs;
+    if (secs <= 0) {
+      clearInterval(timer);
+      window.location.href = destino;
+    }
+  }, 1000);
+}
 
-            try {
-                console.log("Enviando venta...", payload);
-                const response = await fetch('https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
+// ─── VIEW / STEP UTILS ─────────────────────────
+function show(id) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-                if (response.ok) console.log("Venta registrada");
-                else console.error("Error API");
+function setStep(n) {
+  const lbls = ['Mis datos', 'Pago', 'Verificación', '¡Listo!'];
+  for (let i = 1; i <= 4; i++) {
+    const num = document.getElementById('pn' + i);
+    const lbl = document.getElementById('pl' + i);
+    const ln  = i < 4 ? document.getElementById('ln' + i + (i+1)) : null;
+    if (i < n) {
+      num.className = 'pnum done'; lbl.className = 'plbl done';
+      if (ln) ln.className = 'pline done';
+    } else if (i === n) {
+      num.className = 'pnum active'; lbl.className = 'plbl active';
+    } else {
+      num.className = 'pnum idle'; lbl.className = 'plbl idle';
+    }
+  }
+}
 
-            } catch (error) {
-                console.error("Error conexión", error);
-            } finally {
-                // Meta Pixel: Purchase event
-                if (typeof fbq === 'function') {
-                    fbq('track', 'Purchase', {
-                        content_name: 'Certificado Manipulación de Alimentos',
-                        value: 22000,
-                        currency: 'COP'
-                    });
-                }
-                window.open('https://checkout.nequi.wompi.co/l/bSxc9E', '_blank');
-                loader.classList.add('hidden');
-                arrow.classList.remove('hidden');
-            }
-        }
-
-        // --- LÓGICA QUIZ ---
-        function submitRegistration(e) {
-            e.preventDefault();
-            const dt = els.docType.value;
-            const dn = els.docNum.value;
-            const fn = els.fullName.value;
-
-            if(!dt || !dn || !fn) return;
-
-            state.userData = { type: dt, num: dn, name: fn };
-            state.view = state.pendingCheckout ? 'view-checkout' : 'view-quiz-app';
-            saveState();
-            switchView(state.view);
-            if (state.view === 'view-quiz-app') loadQuestionUI();
-            if (state.view === 'view-checkout') els.displayName.innerText = state.userData.name.split(' ')[0];
-        }
-
-        function loadQuestionUI() {
-            if (state.quiz.currentIdx >= questions.length) {
-                finishQuiz();
-                return;
-            }
-
-            const q = questions[state.quiz.currentIdx];
-            els.qText.innerText = q.q;
-            els.qCurrent.innerText = state.quiz.currentIdx + 1;
-            els.progressBar.style.width = ((state.quiz.currentIdx) / questions.length * 100) + "%";
-
-            els.qOptions.innerHTML = '';
-            els.feedback.className = 'hidden';
-            els.btnNext.disabled = true;
-            els.btnNext.classList.add('opacity-50', 'cursor-not-allowed');
-
-            q.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 hover:border-green-400 transition-all font-medium text-slate-600 flex items-center group";
-                
-                const circle = document.createElement('span');
-                circle.className = "w-5 h-5 rounded-full border-2 border-gray-300 mr-3 group-hover:border-green-500 transition flex-shrink-0";
-                
-                const text = document.createElement('span');
-                text.innerText = opt;
-
-                btn.appendChild(circle);
-                btn.appendChild(text);
-
-                btn.onclick = () => checkAnswer(idx, q.a, btn);
-                els.qOptions.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(selectedIdx, correctIdx, btnElement) {
-            const allBtns = els.qOptions.querySelectorAll('button');
-            allBtns.forEach(b => {
-                b.disabled = true;
-                b.classList.add('cursor-default');
-            });
-
-            els.feedback.classList.remove('hidden');
-
-            if(selectedIdx === correctIdx) {
-                state.quiz.score++;
-                btnElement.className = "w-full text-left p-4 rounded-lg border-2 border-green-500 bg-green-50 text-green-800 font-bold flex items-center";
-                btnElement.querySelector('span').className = "w-5 h-5 rounded-full border-4 border-green-500 bg-white mr-3 flex-shrink-0"; 
-                els.feedback.innerHTML = '<i class="fas fa-check-circle text-green-600"></i> ¡Respuesta Correcta!';
-                els.feedback.classList.add('bg-green-100', 'text-green-800');
-            } else {
-                btnElement.className = "w-full text-left p-4 rounded-lg border-2 border-red-500 bg-red-50 text-red-800 font-bold flex items-center";
-                els.feedback.innerHTML = '<i class="fas fa-times-circle text-red-600"></i> Respuesta Incorrecta';
-                els.feedback.classList.add('bg-red-100', 'text-red-800');
-                allBtns[correctIdx].className = "w-full text-left p-4 rounded-lg border border-green-500 bg-green-50 opacity-70 flex items-center";
-            }
-            
-            saveState();
-            els.btnNext.disabled = false;
-            els.btnNext.classList.remove('opacity-50', 'cursor-not-allowed');
-        }
-
-        function nextQuestion() {
-            state.quiz.currentIdx++;
-            if (state.quiz.currentIdx < questions.length) {
-                saveState(); 
-                loadQuestionUI();
-            } else {
-                finishQuiz();
-            }
-        }
-
-        function finishQuiz() {
-            const finalScore = state.quiz.score / questions.length;
-            if (finalScore >= passingScore) {
-                // Meta Pixel: InitiateCheckout event (examen aprobado)
-                if (typeof fbq === 'function') {
-                    fbq('track', 'InitiateCheckout', {
-                        content_name: 'Certificado Manipulación de Alimentos',
-                        value: 22000,
-                        currency: 'COP'
-                    });
-                }
-                if (state.userData.name) {
-                    state.view = 'view-checkout';
-                } else {
-                    state.pendingCheckout = true;
-                    state.view = 'view-registration';
-                }
-            } else {
-                state.view = 'view-fail';
-            }
-            saveState();
-            switchView(state.view);
-            if (state.view === 'view-checkout' && state.userData.name) {
-                els.displayName.innerText = state.userData.name.split(' ')[0];
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', loadState);
-
-    </script>
+// ─── INIT ──────────────────────────────────────
+window.onload = () => {
+  selPay('nequi');
+  // Restore saved data
+  try {
+    const s = JSON.parse(localStorage.getItem('certitec_ud') || '{}');
+    if (s.type) document.getElementById('doctype').value = s.type;
+    if (s.num)  document.getElementById('docnum').value  = s.num;
+    if (s.name) document.getElementById('fullname').value = s.name;
+    if (s.dept) document.getElementById('dept').value    = s.dept;
+    if (s.phone) document.getElementById('phone').value  = s.phone;
+  } catch(e) {}
+};
+</script>
 </body>
 </html>
-
-
