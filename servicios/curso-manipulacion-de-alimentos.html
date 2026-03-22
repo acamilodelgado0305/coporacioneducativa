@@ -667,15 +667,16 @@ async function submitReceipt() {
     }
 
     const payload = {
-      nombre:       userData.name,
-      documento:    userData.type + ' ' + userData.num,
-      departamento: userData.dept,
-      telefono:     userData.phone,
-      metodo_pago:  selMethod.toUpperCase(),
-      valor:        '22000',
-      producto:     'Certificado Manipulación de Alimentos',
-      imagen:       base64,
-      mimeType:     archivo.type || 'image/jpeg'
+      nombre:           userData.name,
+      tipo_documento:   userData.type,
+      numero_documento: userData.num,
+      departamento:     userData.dept,
+      telefono:         userData.phone,
+      metodo_pago:      selMethod.toUpperCase(),
+      valor:            '22000',
+      producto:         'Certificado Manipulación de Alimentos',
+      imagen:           base64,
+      mimeType:         archivo.type || 'image/jpeg'
     };
 
     // Debug: verificar que imagen llega antes de enviar
