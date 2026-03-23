@@ -459,6 +459,14 @@ a{text-decoration:none;color:inherit}
       <div class="cb" style="text-align:center;padding:20px">
         <div class="done-wrap"><i class="fas fa-check"></i></div>
         <h2 style="font-size:19px;font-weight:800;margin-bottom:6px;color:#166534">¡Comprobante aprobado!</h2>
+        <p style="font-size:14px;color:#555;margin-bottom:16px;line-height:1.6">Tu pago fue verificado y tu certificado est&aacute; listo.</p>
+        <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:14px;margin-bottom:14px;text-align:left">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">MONTO</span><span style="font-size:14px;font-weight:800;color:#166534" id="det-monto">$22.000 COP</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">BANCO</span><span style="font-size:13px;font-weight:700" id="det-banco">&mdash;</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">REFERENCIA</span><span style="font-size:13px;font-weight:700;font-family:monospace" id="det-ref">&mdash;</span></div>
+          </div>
+        </div>
         <a href="https://quickcontrola.com/verificacion" id="btn-portal" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#166534;color:#fff;font-weight:800;font-size:15px;padding:14px;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(22,101,52,.3);margin-top:16px">
           <i class="fas fa-search"></i> Verificar mi certificado
         </a>
@@ -825,7 +833,7 @@ function showSuccess(data) {
   clearSession(); // limpiar sesión al pagar exitosamente
   setStep(3); show('v-ok');
   const btnPortal = document.getElementById('btn-portal');
-  if (btnPortal) btnPortal.href = data.enlaceExamen || REDIRECT_URL;
+  if (btnPortal) btnPortal.href = REDIRECT_URL;
 }
 
 function updateTl(id, state, title, sub) {
