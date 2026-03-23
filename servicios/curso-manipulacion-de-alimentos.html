@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Checkout · Certificado de Manipulación de Alimentos | CertiTec Colombia</title>
-<meta name="description" content="Obtén tu certificado de manipulación de alimentos. Paga y recibe acceso inmediato."/>
+<title>Examen · Manipulación de Alimentos | CertiTec Colombia</title>
+<meta name="description" content="Presenta el examen de manipulación de alimentos. Resolución 2674. Aprueba y obtén tu certificado oficial."/>
 <link rel="icon" href="../logopagina.png" type="image/png"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
@@ -14,16 +14,14 @@
 html{scroll-behavior:smooth}
 body{font-family:'Inter',sans-serif;background:#f4f4f5;color:#111;-webkit-font-smoothing:antialiased;min-height:100vh}
 a{text-decoration:none;color:inherit}
-
-/* NAV */
-.nav{background:#7f1d1d;padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between}
+.nav{background:#545454;padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between}
 .nav-l{display:flex;align-items:center;gap:9px;color:#fff;font-weight:800;font-size:14px}
 .nav-l img{height:28px;filter:brightness(10)}
-.nav-r{display:flex;align-items:center;gap:5px;color:rgba(255,255,255,.6);font-size:12px}
+.nav-r{color:rgba(255,255,255,.6);font-size:12px;display:flex;align-items:center;gap:5px}
 
 /* PROGRESS */
-.prog-bar{background:#fff;border-bottom:1px solid #e5e7eb;padding:12px 20px}
-.prog{max-width:900px;margin:0 auto;display:flex;align-items:center}
+.prog-bar{background:#fff;border-bottom:1px solid #e5e7eb;padding:10px 20px}
+.prog{max-width:680px;margin:0 auto;display:flex;align-items:center}
 .pstep{display:flex;align-items:center;gap:7px;flex:1}
 .pstep:last-child{flex:0}
 .pnum{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;transition:.3s}
@@ -31,170 +29,244 @@ a{text-decoration:none;color:inherit}
 .pnum.done{background:#22c55e;color:#fff}
 .pnum.idle{background:#e5e7eb;color:#9ca3af}
 .plbl{font-size:11px;font-weight:600;transition:.3s}
-.plbl.active{color:#dc2626}
-.plbl.done{color:#22c55e}
-.plbl.idle{color:#9ca3af}
+.plbl.active{color:#dc2626}.plbl.done{color:#22c55e}.plbl.idle{color:#9ca3af}
 .pline{flex:1;height:2px;background:#e5e7eb;margin:0 8px;transition:.3s}
 .pline.done{background:#22c55e}
 @media(max-width:480px){.plbl{display:none}}
 
 /* LAYOUT */
-.page{max-width:900px;margin:24px auto;padding:0 16px 60px;display:grid;grid-template-columns:1fr 310px;gap:18px;align-items:start}
-@media(max-width:680px){.page{grid-template-columns:1fr}.sum-col{order:-1}}
-
-/* CARD */
+.wrap{max-width:680px;margin:24px auto;padding:0 16px 60px}
 .card{background:#fff;border-radius:14px;border:1px solid #e5e7eb;overflow:hidden;margin-bottom:16px}
-.card:last-child{margin-bottom:0}
-.chd{padding:16px 20px;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:9px}
+.chd{padding:14px 20px;border-bottom:1px solid #f3f4f6;display:flex;align-items:center;gap:9px}
 .chd span{font-size:14px;font-weight:700}
 .chd i{color:#dc2626;font-size:15px}
 .cb{padding:20px}
 
-/* FIELD */
+/* EXAM */
+.q-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.q-counter{font-size:12px;font-weight:700;color:#9ca3af;text-transform:uppercase;letter-spacing:.5px}
+.q-prog{flex:1;height:6px;background:#f3f4f6;border-radius:3px;margin:0 16px}
+.q-prog-fill{height:100%;background:#dc2626;border-radius:3px;transition:.4s}
+.q-text{font-size:17px;font-weight:700;color:#111;line-height:1.55;margin-bottom:20px}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid #e5e7eb;border-radius:10px;padding:13px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.2s;font-size:14px;font-weight:500;color:#374151;background:#fff}
+.opt:hover{border-color:#dc2626;background:#fef2f2;color:#dc2626}
+.opt.sel{border-color:#dc2626;background:#fef2f2;color:#dc2626}
+.opt.correct{border-color:#22c55e;background:#f0fdf4;color:#166534}
+.opt.wrong{border-color:#dc2626;background:#fef2f2;color:#991b1b}
+.opt-letter{width:28px;height:28px;border-radius:50%;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;transition:.2s}
+.opt.sel .opt-letter{background:#dc2626;color:#fff}
+.opt.correct .opt-letter{background:#22c55e;color:#fff}
+.opt.wrong .opt-letter{background:#dc2626;color:#fff}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;gap:10px}
+
+/* RESULT */
+.result-circle{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:32px}
+.result-circle.pass{background:#f0fdf4;border:3px solid #22c55e;color:#22c55e;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.result-circle.fail{background:#fef2f2;border:3px solid #dc2626;color:#dc2626}
+@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
+
+/* FORM */
 .fl{margin-bottom:14px}
 .fl label{display:block;font-size:11px;font-weight:700;color:#374151;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
-.fl input,.fl select{width:100%;padding:11px 14px;border:1.5px solid #d1d5db;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#111;background:#fff;transition:.2s;outline:none}
+.fl input,.fl select{width:100%;padding:11px 14px;border:1.5px solid #d1d5db;border-radius:8px;font-size:14px;font-family:'Inter',sans-serif;color:#111;transition:.2s;outline:none}
 .fl input:focus,.fl select:focus{border-color:#dc2626;box-shadow:0 0 0 3px rgba(220,38,38,.1)}
-.fl .ht{font-size:11px;color:#9ca3af;margin-top:3px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:480px){.row2{grid-template-columns:1fr}}
 
-/* PAYMENT METHODS */
-.pmethods{display:flex;flex-direction:column;gap:8px;margin-bottom:18px}
-.pm{border:1.5px solid #e5e7eb;border-radius:10px;padding:12px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.2s}
+/* PAYMENT */
+.pmethods{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.pm{border:1.5px solid #e5e7eb;border-radius:10px;padding:11px 14px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:.2s}
 .pm:hover{border-color:#dc2626}
 .pm.sel{border-color:#dc2626;background:#fef2f2}
 .pm-rb{width:18px;height:18px;border-radius:50%;border:2px solid #d1d5db;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.2s}
 .pm.sel .pm-rb{border-color:#dc2626}
 .pm.sel .pm-rb::after{content:'';width:8px;height:8px;background:#dc2626;border-radius:50%;display:block}
-.pm-ic{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px}
+.pm-ic{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pm-txt h4{font-size:13px;font-weight:700}
-.pm-txt p{font-size:11px;color:#6b7280;margin-top:1px}
-
-/* PAYMENT NUMBERS BOX */
-.pbox{border:1.5px dashed #d1d5db;border-radius:10px;padding:14px 16px;background:#f9fafb;margin-top:12px}
-.pr{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pm-txt p{font-size:11px;color:#6b7280}
+.pbox{border:1.5px dashed #d1d5db;border-radius:10px;padding:13px 16px;background:#f9fafb;margin-bottom:14px}
+.pr{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
 .pr:last-child{margin-bottom:0}
 .pr .pl{font-size:10px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.5px}
-.pr .pv{font-size:15px;font-weight:800;color:#111;font-family:monospace;cursor:pointer;user-select:all;transition:.2s}
+.pr .pv{font-size:15px;font-weight:800;color:#111;cursor:pointer;user-select:all}
 .pr .pv:hover{color:#dc2626}
-.copy-tip{font-size:10px;color:#9ca3af;margin-top:6px;text-align:right}
 
-/* UPLOAD ZONE */
-.upload-zone{border:2px dashed #d1d5db;border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:.2s;position:relative;background:#fafafa}
+/* UPLOAD */
+.upload-zone{border:2px dashed #d1d5db;border-radius:12px;padding:28px 20px;text-align:center;cursor:pointer;transition:.2s;position:relative;background:#fafafa}
 .upload-zone:hover,.upload-zone.drag{border-color:#dc2626;background:#fef2f2}
 .upload-zone.has-file{border-color:#22c55e;background:#f0fdf4;border-style:solid}
 .upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.uz-icon{font-size:36px;color:#d1d5db;display:block;margin-bottom:12px;transition:.2s}
+.uz-icon{font-size:32px;color:#d1d5db;display:block;margin-bottom:10px;transition:.2s}
 .upload-zone:hover .uz-icon,.upload-zone.drag .uz-icon{color:#dc2626}
 .upload-zone.has-file .uz-icon{color:#22c55e}
-.uz-title{font-size:15px;font-weight:700;color:#374151;margin-bottom:4px}
-.uz-sub{font-size:12px;color:#9ca3af}
-.file-preview{display:none;align-items:center;gap:12px;padding:12px;background:#fff;border:1px solid #d1fcdf;border-radius:10px;margin-top:12px}
+.file-preview{display:none;align-items:center;gap:10px;padding:10px;background:#fff;border:1px solid #d1fcdf;border-radius:9px;margin-top:10px}
 .file-preview.show{display:flex}
-.fp-img{width:52px;height:52px;border-radius:8px;object-fit:cover;border:1px solid #e5e7eb;flex-shrink:0}
-.fp-info{flex:1;min-width:0}
-.fp-name{font-size:13px;font-weight:700;color:#111;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fp-img{width:48px;height:48px;border-radius:7px;object-fit:cover;border:1px solid #e5e7eb;flex-shrink:0}
+.fp-name{font-size:12px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .fp-size{font-size:11px;color:#6b7280}
-.fp-remove{color:#9ca3af;cursor:pointer;font-size:14px;flex-shrink:0;padding:4px}
-.fp-remove:hover{color:#dc2626}
+.fp-rm{color:#9ca3af;cursor:pointer;font-size:13px;flex-shrink:0;padding:4px}
+.fp-rm:hover{color:#dc2626}
 
 /* BUTTONS */
-.btn-red{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#dc2626;color:#fff;font-weight:800;font-size:15px;padding:15px;border-radius:10px;border:none;cursor:pointer;transition:.2s;text-transform:uppercase;letter-spacing:.4px;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(220,38,38,.3)}
+.btn-red{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#dc2626;color:#fff;font-weight:800;font-size:15px;padding:14px;border-radius:10px;border:none;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;box-shadow:0 4px 14px rgba(220,38,38,.3)}
 .btn-red:hover{background:#b91c1c;transform:translateY(-1px)}
 .btn-red:disabled{background:#e5e7eb;color:#9ca3af;cursor:not-allowed;box-shadow:none;transform:none}
 .btn-ghost{width:100%;display:flex;align-items:center;justify-content:center;gap:7px;background:#fff;color:#6b7280;font-weight:600;font-size:13px;padding:11px;border-radius:10px;border:1.5px solid #e5e7eb;cursor:pointer;transition:.2s;font-family:'Inter',sans-serif;margin-top:8px}
 .btn-ghost:hover{border-color:#dc2626;color:#dc2626}
-.btn-wa{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;font-weight:700;font-size:13px;padding:12px;border-radius:10px;transition:.2s;margin-top:8px;border:none;cursor:pointer;font-family:'Inter',sans-serif}
-.btn-wa:hover{background:#1da851}
 
 /* VIEWS */
 .view{display:none}
 .view.active{display:block}
 
-/* VIEW 3: VERIFYING */
-.verif-wrap{text-align:center;padding:10px 0}
-.spinner-wrap{width:90px;height:90px;border-radius:50%;background:#fef2f2;border:3px solid #dc2626;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;position:relative}
-.spinner-wrap i{font-size:32px;color:#dc2626}
+/* VERIFYING */
+.spinner-wrap{width:84px;height:84px;border-radius:50%;background:#fef2f2;border:3px solid #dc2626;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;position:relative}
+.spinner-wrap i{font-size:28px;color:#dc2626}
 .spinner-ring{position:absolute;inset:-3px;border-radius:50%;border:3px solid transparent;border-top-color:#dc2626;animation:spin 1.2s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.done-wrap{width:90px;height:90px;border-radius:50%;background:#f0fdf4;border:3px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
-.done-wrap i{font-size:36px;color:#22c55e}
-@keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
-.error-wrap{width:90px;height:90px;border-radius:50%;background:#fef2f2;border:3px solid #dc2626;display:flex;align-items:center;justify-content:center;margin:0 auto 18px}
-.error-wrap i{font-size:36px;color:#dc2626}
-.tl{display:flex;flex-direction:column;gap:10px;margin:18px 0;text-align:left}
-.tl-i{display:flex;align-items:center;gap:11px;padding:11px 14px;border-radius:10px;border:1.5px solid #e5e7eb;transition:.5s}
+.done-wrap{width:84px;height:84px;border-radius:50%;background:#f0fdf4;border:3px solid #22c55e;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;animation:popIn .4s cubic-bezier(.34,1.56,.64,1)}
+.done-wrap i{font-size:34px;color:#22c55e}
+.tl{display:flex;flex-direction:column;gap:9px;margin:16px 0}
+.tl-i{display:flex;align-items:center;gap:10px;padding:10px 13px;border-radius:10px;border:1.5px solid #e5e7eb;transition:.5s}
 .tl-i.done{background:#f0fdf4;border-color:#bbf7d0}
 .tl-i.active{background:#fef2f2;border-color:#fecaca}
 .tl-i.idle{background:#f9fafb}
-.tl-ic{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.tl-ic{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .tl-i.done .tl-ic{background:#22c55e;color:#fff}
 .tl-i.active .tl-ic{background:#dc2626;color:#fff}
 .tl-i.idle .tl-ic{background:#e5e7eb;color:#9ca3af}
 .tl-t h5{font-size:13px;font-weight:700}
-.tl-t p{font-size:11px;color:#6b7280;margin-top:1px}
-.verif-note{background:#fff8e1;border:1px solid #fde68a;border-radius:10px;padding:12px 14px;display:flex;gap:10px;align-items:flex-start;text-align:left;margin:14px 0}
-.verif-note i{color:#d97706;font-size:15px;margin-top:1px;flex-shrink:0}
-.verif-note p{font-size:12px;color:#92400e;line-height:1.55;font-weight:500}
+.tl-t p{font-size:11px;color:#6b7280}
 
-/* ORDER SUMMARY */
-.sum-item{display:flex;gap:12px;align-items:flex-start;padding-bottom:14px;border-bottom:1px solid #f3f4f6;margin-bottom:14px}
-.s-ic{width:44px;height:44px;background:#fef2f2;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;color:#dc2626;flex-shrink:0}
-.s-tx h4{font-size:13px;font-weight:700;margin-bottom:2px}
-.s-tx p{font-size:11px;color:#6b7280;line-height:1.5}
-.s-pr{margin-left:auto;font-size:15px;font-weight:800;color:#dc2626;white-space:nowrap}
-.tot{display:flex;justify-content:space-between;align-items:center;padding:12px 0 0;border-top:2px solid #e5e7eb}
-.tot .tl2{font-size:13px;font-weight:700;color:#374151}
-.tot .tv{font-size:22px;font-weight:900}
-.chklist{margin-top:14px;display:flex;flex-direction:column;gap:7px}
-.cki{display:flex;align-items:center;gap:7px;font-size:12px;color:#374151;font-weight:500}
-.cki i{color:#22c55e;font-size:11px;width:14px}
-.trust-badge{display:flex;align-items:center;gap:8px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;margin-top:14px}
-.trust-badge i{color:#22c55e;font-size:15px;flex-shrink:0}
-.trust-badge p{font-size:11px;font-weight:600;color:#166534;line-height:1.4}
+/* WA */
+.wa-float{position:fixed;bottom:20px;right:16px;z-index:99;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(37,211,102,.4)}
+.wa-float i{color:#fff;font-size:22px}
 
-/* WA float */
-.wa{position:fixed;bottom:20px;right:16px;z-index:99;width:50px;height:50px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(37,211,102,.4)}
-.wa:hover{transform:scale(1.08)}
-.wa i{color:#fff;font-size:22px}
+/* MINI STEPPER PAGO */
+.ps-num{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;transition:.3s}
+.ps-num.active{background:#dc2626;color:#fff;box-shadow:0 0 0 3px rgba(220,38,38,.2)}
+.ps-num.done{background:#22c55e;color:#fff}
+.ps-num.idle{background:#e5e7eb;color:#9ca3af}
+.ps-line-c{flex:1;height:2px;background:#e5e7eb;margin:0 6px;transition:.3s}
+.ps-line-c.done{background:#22c55e}
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav class="nav">
   <a href="landing-manipulacion.html" class="nav-l">
-    <img src="../logopagina.png" alt="CertiTec" onerror="this.style.display='none'"/>
+    <img src="../logofinal.png" alt="CertiTec" onerror="this.style.display='none'"/>
     <span>CertiTec Colombia</span>
   </a>
-  <div class="nav-r"><i class="fas fa-lock"></i> Pago 100% Seguro</div>
+  <div class="nav-r"><i class="fas fa-shield-alt"></i> 100% Oficial · Res. 2674</div>
 </nav>
 
-<!-- PROGRESS -->
 <div class="prog-bar">
   <div class="prog">
-    <div class="pstep"><div class="pnum active" id="pn1">1</div><span class="plbl active" id="pl1">Mis datos</span></div>
+    <div class="pstep"><div class="pnum active" id="pn1">1</div><span class="plbl active" id="pl1">Examen</span></div>
     <div class="pline" id="ln12"></div>
-    <div class="pstep"><div class="pnum idle" id="pn2">2</div><span class="plbl idle" id="pl2">Pago</span></div>
+    <div class="pstep"><div class="pnum idle" id="pn2">2</div><span class="plbl idle" id="pl2">Datos y Pago</span></div>
     <div class="pline" id="ln23"></div>
-    <div class="pstep"><div class="pnum idle" id="pn3">3</div><span class="plbl idle" id="pl3">Verificación</span></div>
-    <div class="pline" id="ln34"></div>
-    <div class="pstep"><div class="pnum idle" id="pn4"><i class="fas fa-check" style="font-size:10px"></i></div><span class="plbl idle" id="pl4">¡Listo!</span></div>
+    <div class="pstep"><div class="pnum idle" id="pn3"><i class="fas fa-check" style="font-size:10px"></i></div><span class="plbl idle" id="pl3">¡Listo!</span></div>
   </div>
 </div>
 
-<div class="page">
-  <div>
+<div class="wrap">
 
-    <!-- ═══ VIEW 1: DATOS ═══ -->
-    <div class="view active" id="v1">
+  <!-- ═══ VIEW 1: INTRO ═══ -->
+  <div class="view active" id="v-intro">
+    <div class="card">
+      <div class="chd"><i class="fas fa-graduation-cap"></i><span>Examen de Manipulación de Alimentos</span></div>
+      <div class="cb" style="text-align:center;padding:32px 20px">
+        <svg width="100" height="100" viewBox="0 0 100 100" style="display:block;margin:0 auto 18px">
+          <circle cx="50" cy="50" r="48" fill="#fef2f2" stroke="#fecaca" stroke-width="2"/>
+          <rect x="30" y="28" width="40" height="50" rx="6" fill="#fff" stroke="#dc2626" stroke-width="2"/>
+          <rect x="30" y="28" width="40" height="12" rx="6" fill="#dc2626"/>
+          <rect x="36" y="46" width="28" height="4" rx="2" fill="#e5e7eb"/>
+          <rect x="36" y="55" width="22" height="4" rx="2" fill="#e5e7eb"/>
+          <rect x="36" y="64" width="26" height="4" rx="2" fill="#e5e7eb"/>
+          <circle cx="72" cy="72" r="16" fill="#22c55e"/>
+          <path d="M64 72 l4 5 9-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <h2 style="font-size:20px;font-weight:800;margin-bottom:8px">¿Listo para certificarte?</h2>
+        <p style="font-size:14px;color:#555;line-height:1.65;margin-bottom:20px">El examen tiene <strong>8 preguntas</strong> sobre higiene y normativa alimentaria (Resolución 2674). Necesitas responder <strong>6 o más correctamente</strong> para aprobar. Tienes <strong>intentos ilimitados</strong>.</p>
+        <div style="display:flex;flex-direction:column;gap:8px;background:#f9fafb;border-radius:10px;padding:14px;margin-bottom:20px;text-align:left">
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#374151"><i class="fas fa-check-circle" style="color:#22c55e"></i> 8 preguntas de selección múltiple</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#374151"><i class="fas fa-check-circle" style="color:#22c55e"></i> 10-15 minutos aproximadamente</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#374151"><i class="fas fa-check-circle" style="color:#22c55e"></i> Al aprobar completas el pago y recibes tu certificado</div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:#374151"><i class="fas fa-check-circle" style="color:#22c55e"></i> Intentos ilimitados sin costo adicional</div>
+        </div>
+        <button class="btn-red" onclick="startExam()"><i class="fas fa-play-circle"></i> Comenzar Examen</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VIEW 2: EXAM ═══ -->
+  <div class="view" id="v-exam">
+    <div class="card">
+      <div class="chd"><i class="fas fa-clipboard-list"></i><span id="q-title">Pregunta 1 de 8</span></div>
+      <div class="cb">
+        <div class="q-header">
+          <span class="q-counter" id="q-num">1 / 8</span>
+          <div class="q-prog"><div class="q-prog-fill" id="q-bar" style="width:12.5%"></div></div>
+        </div>
+        <p class="q-text" id="q-text"></p>
+        <div class="opts" id="q-opts"></div>
+        <div class="q-nav">
+          <button class="btn-ghost" style="width:auto;padding:10px 18px" onclick="prevQ()"><i class="fas fa-arrow-left"></i> Anterior</button>
+          <button class="btn-red" style="width:auto;padding:10px 24px" id="btn-next" onclick="nextQ()">Siguiente <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VIEW 3: RESULTADO ═══ -->
+  <div class="view" id="v-result">
+    <div class="card">
+      <div class="chd"><i class="fas fa-chart-bar"></i><span>Resultado del Examen</span></div>
+      <div class="cb" style="text-align:center;padding:24px 20px">
+        <div id="result-icon"></div>
+        <h2 id="result-title" style="font-size:20px;font-weight:800;margin-bottom:8px"></h2>
+        <p id="result-msg" style="font-size:14px;color:#555;line-height:1.65;margin-bottom:20px"></p>
+        <div id="result-score" style="background:#f9fafb;border-radius:10px;padding:14px;margin-bottom:20px;font-size:15px;font-weight:700"></div>
+        <div id="result-actions"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VIEW 4: DATOS + PAGO ═══ -->
+  <div class="view" id="v-pago">
+
+    <!-- Mini stepper de pago -->
+    <div class="card" style="margin-bottom:14px">
+      <div style="padding:16px 20px">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div class="ps-item active" id="ps1" style="display:flex;align-items:center;gap:7px;flex:1">
+            <div class="ps-num active" id="psn1">1</div>
+            <span style="font-size:12px;font-weight:700;color:#dc2626">Tus datos</span>
+          </div>
+          <div class="ps-line-c" id="psl12"></div>
+          <div class="ps-item" id="ps2" style="display:flex;align-items:center;gap:7px;flex:1;justify-content:center">
+            <div class="ps-num idle" id="psn2">2</div>
+            <span style="font-size:12px;font-weight:700;color:#9ca3af" id="psl2">Pago</span>
+          </div>
+          <div class="ps-line-c" id="psl23"></div>
+          <div class="ps-item" id="ps3" style="display:flex;align-items:center;gap:7px;flex:1;justify-content:flex-end">
+            <div class="ps-num idle" id="psn3">3</div>
+            <span style="font-size:12px;font-weight:700;color:#9ca3af" id="psl3">Comprobante</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SUB-PASO 1: DATOS ── -->
+    <div id="pago-s1" class="pago-sub">
       <div class="card">
-        <div class="chd"><i class="fas fa-user-circle"></i><span>Tus datos personales</span></div>
+        <div class="chd"><i class="fas fa-user-circle"></i><span>Paso 1 · Tus datos para el certificado</span></div>
         <div class="cb">
           <div class="row2">
             <div class="fl">
-              <label>Tipo de documento <span style="color:#dc2626">*</span></label>
+              <label>Tipo de documento *</label>
               <select id="doctype">
                 <option value="" disabled selected>Selecciona...</option>
                 <option value="CC">Cédula de Ciudadanía</option>
@@ -205,337 +277,403 @@ a{text-decoration:none;color:inherit}
               </select>
             </div>
             <div class="fl">
-              <label>Número de documento <span style="color:#dc2626">*</span></label>
+              <label>Número de documento *</label>
               <input type="number" id="docnum" placeholder="Sin puntos ni comas"/>
             </div>
           </div>
           <div class="fl">
-            <label>Nombre completo <span style="color:#dc2626">*</span></label>
+            <label>Nombre completo *</label>
             <input type="text" id="fullname" placeholder="Nombres y Apellidos"/>
           </div>
           <div class="row2">
             <div class="fl">
-              <label>Departamento <span style="color:#dc2626">*</span></label>
+              <label>Departamento *</label>
               <select id="dept">
                 <option value="" disabled selected>Selecciona...</option>
-                <option>Amazonas</option><option>Antioquia</option><option>Arauca</option>
-                <option>Atlántico</option><option>Bolívar</option><option>Boyacá</option>
-                <option>Caldas</option><option>Caquetá</option><option>Casanare</option>
-                <option>Cauca</option><option>Cesar</option><option>Chocó</option>
-                <option>Córdoba</option><option>Cundinamarca</option><option>Guainía</option>
-                <option>Guaviare</option><option>Huila</option><option>La Guajira</option>
-                <option>Magdalena</option><option>Meta</option><option>Nariño</option>
-                <option>Norte de Santander</option><option>Putumayo</option><option>Quindío</option>
-                <option>Risaralda</option><option>San Andrés y Providencia</option>
-                <option>Santander</option><option>Sucre</option><option>Tolima</option>
-                <option>Valle del Cauca</option><option>Vaupés</option><option>Vichada</option>
+                <option>Antioquia</option><option>Atlántico</option><option>Bogotá D.C.</option>
+                <option>Bolívar</option><option>Boyacá</option><option>Caldas</option>
+                <option>Caquetá</option><option>Cauca</option><option>Cesar</option>
+                <option>Córdoba</option><option>Cundinamarca</option><option>Huila</option>
+                <option>La Guajira</option><option>Magdalena</option><option>Meta</option>
+                <option>Nariño</option><option>Norte de Santander</option><option>Quindío</option>
+                <option>Risaralda</option><option>Santander</option><option>Sucre</option>
+                <option>Tolima</option><option>Valle del Cauca</option><option>Otro</option>
               </select>
             </div>
             <div class="fl">
               <label>Teléfono / WhatsApp</label>
               <input type="tel" id="phone" placeholder="3001234567"/>
-              <div class="ht">Para notificaciones de tu certificado</div>
             </div>
           </div>
-          <button class="btn-red" onclick="goStep2()"><i class="fas fa-arrow-right"></i>Continuar al pago</button>
+          <button class="btn-red" onclick="goPayStep(2)">
+            Continuar al pago <i class="fas fa-arrow-right"></i>
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- ═══ VIEW 2: PAGO + UPLOAD ═══ -->
-    <div class="view" id="v2">
-      <!-- Payment method -->
+    <!-- ── SUB-PASO 2: PAGO ── -->
+    <div id="pago-s2" class="pago-sub" style="display:none">
       <div class="card">
-        <div class="chd"><i class="fas fa-credit-card"></i><span>Selecciona tu método de pago</span></div>
+        <div class="chd"><i class="fas fa-credit-card"></i><span>Paso 2 · Realiza el pago — Solo $22.000 COP</span></div>
         <div class="cb">
           <div class="pmethods">
-            <div class="pm sel" id="pm-nequi" onclick="selPay('nequi')">
+            <div class="pm sel" id="pm-pse" onclick="selPay('pse')">
               <div class="pm-rb"></div>
-              <div class="pm-ic" style="background:#f5f0ff"><i class="fas fa-mobile-alt" style="color:#7c3aed"></i></div>
-              <div class="pm-txt"><h4>Nequi</h4><p>Transferencia al número 3223267797</p></div>
+              <div class="pm-ic" style="background:#f0f4ff;padding:4px">
+                <img src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp" style="width:46px;height:26px;object-fit:contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+                <i class="fas fa-university" style="color:#1976d2;display:none"></i>
+              </div>
+              <div class="pm-txt"><h4>PSE — Débito bancario</h4><p>Pago inmediato desde tu banco</p></div>
+            </div>
+            <div class="pm" id="pm-nequi" onclick="selPay('nequi')">
+              <div class="pm-rb"></div>
+              <div class="pm-ic" style="background:#fff;padding:2px">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/NEQUI.jpg" style="width:46px;height:26px;object-fit:contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+                <i class="fas fa-mobile-alt" style="color:#e40046;display:none"></i>
+              </div>
+              <div class="pm-txt"><h4>Nequi</h4><p>Transferencia al 3223267797</p></div>
             </div>
             <div class="pm" id="pm-daviplata" onclick="selPay('daviplata')">
               <div class="pm-rb"></div>
-              <div class="pm-ic" style="background:#fff3e0"><i class="fas fa-mobile-alt" style="color:#f57c00"></i></div>
-              <div class="pm-txt"><h4>Daviplata</h4><p>Transferencia al número 3223267797</p></div>
+              <div class="pm-ic" style="background:#fff;padding:2px">
+                <img src="https://colombiafintech.co/wp-content/uploads/2025/03/NM_DaviPlata_Color.png" style="width:46px;height:26px;object-fit:contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+                <i class="fas fa-mobile-alt" style="color:#f57c00;display:none"></i>
+              </div>
+              <div class="pm-txt"><h4>Daviplata</h4><p>Transferencia al 3223267797</p></div>
             </div>
             <div class="pm" id="pm-bancolombia" onclick="selPay('bancolombia')">
               <div class="pm-rb"></div>
-              <div class="pm-ic" style="background:#fffde7"><i class="fas fa-university" style="color:#f9a825"></i></div>
-              <div class="pm-txt"><h4>Bancolombia</h4><p>Cuenta Ahorros 816-589697-49</p></div>
-            </div>
-            <div class="pm" id="pm-pse" onclick="selPay('pse')">
-              <div class="pm-rb"></div>
-              <div class="pm-ic" style="background:#e3f2fd"><i class="fas fa-globe" style="color:#1976d2"></i></div>
-              <div class="pm-txt"><h4>PSE / Botón en línea</h4><p>Pago por débito bancario</p></div>
+              <div class="pm-ic" style="background:#fff;padding:2px">
+                <img src="https://d31dn7nfpuwjnm.cloudfront.net/images/valoraciones/0044/5728/C%C3%B3mo_sacar_un_certificado_de_cuenta_en_Bancolombia_foro.png?1624941843" style="width:46px;height:26px;object-fit:contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+                <i class="fas fa-university" style="color:#f9a825;display:none"></i>
+              </div>
+              <div class="pm-txt"><h4>Bancolombia</h4><p>Ahorros 816-589697-49</p></div>
             </div>
           </div>
-
-          <!-- Dynamic payment box -->
-          <div class="pbox" id="paybox"></div>
+          <div class="pbox" id="paybox" style="margin-bottom:16px"></div>
+          <button class="btn-red" onclick="goPayStep(3)">
+            <i class="fas fa-check"></i> Ya realicé el pago
+          </button>
+          <button class="btn-ghost" onclick="goPayStep(1)">
+            <i class="fas fa-arrow-left"></i> Volver a mis datos
+          </button>
         </div>
       </div>
+    </div>
 
-      <!-- Upload comprobante -->
+    <!-- ── SUB-PASO 3: COMPROBANTE ── -->
+    <div id="pago-s3" class="pago-sub" style="display:none">
       <div class="card">
-        <div class="chd"><i class="fas fa-image"></i><span>Sube el comprobante de pago</span></div>
+        <div class="chd"><i class="fas fa-image"></i><span>Paso 3 · Sube o verifica tu comprobante</span></div>
         <div class="cb">
-          <p style="font-size:13px;color:#555;margin-bottom:14px;line-height:1.6">Una vez realizado el pago, <strong>sube la captura de pantalla</strong> de tu comprobante. Nuestro sistema lo verificará automáticamente.</p>
-
-          <!-- Upload zone -->
-          <div class="upload-zone" id="upzone"
-               ondragover="e=>e.preventDefault()" 
-               ondragenter="handleDragEnter(event)"
-               ondragleave="handleDragLeave(event)"
-               ondrop="handleDrop(event)">
+          <p style="font-size:13px;color:#555;margin-bottom:14px;line-height:1.6">Sube la <strong>captura de pantalla</strong> del pago y nuestro sistema lo verifica automáticamente. O si prefieres, envíanosla por WhatsApp.</p>
+          <div class="upload-zone" id="upzone" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)" ondragover="event.preventDefault()">
             <input type="file" id="fileInput" accept="image/*,.pdf" onchange="handleFile(this.files[0])"/>
             <i class="fas fa-cloud-upload-alt uz-icon" id="uz-icon"></i>
-            <div class="uz-title" id="uz-title">Toca aquí o arrastra tu comprobante</div>
-            <div class="uz-sub">Captura de pantalla, foto o PDF · Máx 10 MB</div>
+            <div style="font-size:14px;font-weight:700;color:#374151;margin-bottom:4px" id="uz-title">Toca aquí o arrastra tu comprobante</div>
+            <div style="font-size:12px;color:#9ca3af">Captura, foto o PDF · Máx 10 MB</div>
           </div>
-
-          <!-- File preview -->
           <div class="file-preview" id="file-preview">
             <img id="fp-img" class="fp-img" src="" alt="preview"/>
-            <div class="fp-info">
+            <div style="flex:1;min-width:0">
               <div class="fp-name" id="fp-name"></div>
               <div class="fp-size" id="fp-size"></div>
             </div>
-            <i class="fas fa-times fp-remove" onclick="removeFile()" title="Quitar archivo"></i>
+            <i class="fas fa-times fp-rm" onclick="removeFile()"></i>
           </div>
-
-          <div style="margin-top:18px">
+          <div style="margin-top:14px">
             <button class="btn-red" id="btn-submit" onclick="submitReceipt()" disabled>
-              <i class="fas fa-check-circle"></i> Enviar Comprobante y Verificar
+              <i class="fas fa-check-circle"></i> Verificar pago automáticamente
             </button>
           </div>
-
-          <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px">
-            <i class="fas fa-shield-alt" style="color:#22c55e;font-size:12px"></i>
-            <span style="font-size:11px;color:#9ca3af">Tu comprobante se verifica en segundos · Proceso automático</span>
+          <!-- Separador -->
+          <div style="display:flex;align-items:center;gap:10px;margin:14px 0">
+            <div style="flex:1;height:1px;background:#e5e7eb"></div>
+            <span style="font-size:11px;color:#9ca3af;font-weight:600">O TAMBIÉN PUEDES</span>
+            <div style="flex:1;height:1px;background:#e5e7eb"></div>
           </div>
-
-          <button class="btn-ghost" onclick="goStep1()"><i class="fas fa-arrow-left"></i>Volver a mis datos</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══ VIEW 3: VERIFICANDO ═══ -->
-    <div class="view" id="v3">
-      <div class="card">
-        <div class="chd"><i class="fas fa-shield-alt"></i><span>Verificando tu pago</span></div>
-        <div class="cb">
-          <div class="verif-wrap" id="verif-content">
-            <!-- Spinner state -->
-            <div class="spinner-wrap">
-              <i class="fas fa-file-invoice-dollar"></i>
-              <div class="spinner-ring"></div>
-            </div>
-            <h2 style="font-size:19px;font-weight:800;margin-bottom:8px">Verificando comprobante...</h2>
-            <p style="font-size:14px;color:#6b7280;margin-bottom:4px">Nuestro sistema está analizando tu pago automáticamente.</p>
-            <p style="font-size:13px;color:#9ca3af">Esto toma solo unos segundos.</p>
-
-            <div class="tl" id="tl-wrap">
-              <div class="tl-i done" id="tl1">
-                <div class="tl-ic"><i class="fas fa-check"></i></div>
-                <div class="tl-t"><h5>Datos registrados</h5><p>Tu información fue guardada</p></div>
-              </div>
-              <div class="tl-i done" id="tl2">
-                <div class="tl-ic"><i class="fas fa-check"></i></div>
-                <div class="tl-t"><h5>Comprobante recibido</h5><p>Imagen cargada correctamente</p></div>
-              </div>
-              <div class="tl-i active" id="tl3">
-                <div class="tl-ic"><i class="fas fa-sync fa-spin"></i></div>
-                <div class="tl-t"><h5>Validando pago...</h5><p>Verificando monto y cuenta destino</p></div>
-              </div>
-              <div class="tl-i idle" id="tl4">
-                <div class="tl-ic"><i class="fas fa-graduation-cap"></i></div>
-                <div class="tl-t"><h5>Habilitando acceso al examen</h5><p>Pendiente de validación</p></div>
-              </div>
-            </div>
-
-            <div class="verif-note">
-              <i class="fas fa-info-circle"></i>
-              <p>Si en 5 minutos no recibes tu acceso, nuestro equipo te contactará por WhatsApp para ayudarte.</p>
-            </div>
-
-            <a href="https://wa.me/573107941580?text=Hola%2C%20envié%20mi%20comprobante%20pero%20no%20he%20recibido%20acceso%20al%20examen." target="_blank" class="btn-wa">
-              <i class="fab fa-whatsapp" style="font-size:17px"></i> ¿Sin respuesta? Soporte por WhatsApp
-            </a>
+          <!-- WhatsApp alternativo -->
+          <a id="btn-wa-comp" href="#" target="_blank"
+             style="display:flex;align-items:center;justify-content:center;gap:9px;background:#25D366;color:#fff;font-weight:700;font-size:14px;padding:13px;border-radius:10px;text-decoration:none">
+            <i class="fab fa-whatsapp" style="font-size:18px"></i> Enviar comprobante por WhatsApp
+          </a>
+          <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:6px">Te responderemos en minutos con tu acceso al certificado</p>
+          <button class="btn-ghost" onclick="goPayStep(2)" style="margin-top:8px">
+            <i class="fas fa-arrow-left"></i> Volver al pago
+          </button>
+          <div style="display:flex;align-items:center;justify-content:center;gap:7px;margin-top:10px">
+            <i class="fas fa-shield-alt" style="color:#22c55e;font-size:11px"></i>
+            <span style="font-size:11px;color:#9ca3af">Verificación automática · Proceso seguro</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ═══ VIEW 4: ÉXITO ═══ -->
-    <div class="view" id="v4">
-      <div class="card">
-        <div class="chd"><i class="fas fa-check-circle" style="color:#22c55e"></i><span>¡Pago verificado!</span></div>
-        <div class="cb">
-          <div style="text-align:center;padding:6px 0 16px">
-            <div class="done-wrap"><i class="fas fa-check"></i></div>
-            <h2 style="font-size:20px;font-weight:800;margin-bottom:6px;color:#166534">¡Comprobante aprobado!</h2>
-            <p style="font-size:14px;color:#555;line-height:1.6;margin-bottom:20px">Tu pago fue verificado exitosamente. Te estamos redirigiendo al examen.</p>
-          </div>
+  </div>
 
-          <!-- Detalles del pago -->
-          <div id="pay-details" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:16px;margin-bottom:16px">
-            <p style="font-size:11px;font-weight:700;color:#166534;text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px"><i class="fas fa-receipt" style="margin-right:5px"></i>Resumen del pago verificado</p>
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <span style="font-size:12px;color:#6b7280;font-weight:600">MONTO</span>
-                <span style="font-size:15px;font-weight:800;color:#166534" id="det-monto">$22.000 COP</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <span style="font-size:12px;color:#6b7280;font-weight:600">BANCO / PLATAFORMA</span>
-                <span style="font-size:13px;font-weight:700;color:#111" id="det-banco">—</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <span style="font-size:12px;color:#6b7280;font-weight:600">REFERENCIA</span>
-                <span style="font-size:13px;font-weight:700;color:#111;font-family:monospace" id="det-ref">—</span>
-              </div>
-              <div style="display:flex;justify-content:space-between;align-items:center">
-                <span style="font-size:12px;color:#6b7280;font-weight:600">FECHA</span>
-                <span style="font-size:13px;font-weight:700;color:#111" id="det-fecha">—</span>
-              </div>
-            </div>
-          </div>
 
-          <!-- Cuenta regresiva de redirección -->
-          <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:18px;text-align:center">
-            <i class="fas fa-spinner fa-spin" style="font-size:26px;color:#22c55e;display:block;margin-bottom:10px"></i>
-            <p style="font-size:14px;font-weight:700;color:#166534;margin-bottom:4px">Redirigiendo al examen...</p>
-            <p style="font-size:13px;color:#6b7280;margin-bottom:10px">Serás redirigido automáticamente en <strong id="countdown">3</strong> segundos.</p>
-            <a href="https://quickcontrola.com/verificacion" style="display:inline-block;font-size:13px;font-weight:700;color:#22c55e;text-decoration:underline">Ir ahora sin esperar →</a>
+
+  <!-- ═══ VIEW 5: VERIFICANDO ═══ -->
+
+  <div class="view" id="v-verif">
+    <div class="card">
+      <div class="chd"><i class="fas fa-shield-alt"></i><span>Verificando tu pago</span></div>
+      <div class="cb" style="text-align:center;padding:16px">
+        <div class="spinner-wrap">
+          <i class="fas fa-file-invoice-dollar"></i>
+          <div class="spinner-ring"></div>
+        </div>
+        <h2 style="font-size:18px;font-weight:800;margin-bottom:6px">Verificando comprobante...</h2>
+        <p style="font-size:13px;color:#6b7280;margin-bottom:4px">Nuestro sistema está analizando tu pago automáticamente.</p>
+        <div class="tl">
+          <div class="tl-i done" id="tl1">
+            <div class="tl-ic"><i class="fas fa-check"></i></div>
+            <div class="tl-t"><h5>Examen aprobado</h5><p>Obtuviste la calificación mínima</p></div>
+          </div>
+          <div class="tl-i done" id="tl2">
+            <div class="tl-ic"><i class="fas fa-check"></i></div>
+            <div class="tl-t"><h5>Comprobante recibido</h5><p>Imagen cargada correctamente</p></div>
+          </div>
+          <div class="tl-i active" id="tl3">
+            <div class="tl-ic"><i class="fas fa-sync fa-spin"></i></div>
+            <div class="tl-t"><h5>Validando pago...</h5><p>Verificando monto y cuenta</p></div>
+          </div>
+          <div class="tl-i idle" id="tl4">
+            <div class="tl-ic"><i class="fas fa-award"></i></div>
+            <div class="tl-t"><h5>Generando certificado</h5><p>Pendiente de validación</p></div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- ═══ VIEW ERROR ═══ -->
-    <div class="view" id="v-err">
-      <div class="card">
-        <div class="chd"><i class="fas fa-exclamation-circle" style="color:#dc2626"></i><span>No pudimos verificar el pago</span></div>
-        <div class="cb">
-          <div style="text-align:center;padding:10px 0">
-            <div class="error-wrap"><i class="fas fa-times"></i></div>
-            <h2 style="font-size:19px;font-weight:800;margin-bottom:8px">Comprobante no válido</h2>
-            <p style="font-size:14px;color:#6b7280;line-height:1.65;margin-bottom:12px" id="err-msg">No pudimos verificar el pago. Asegúrate de que el monto sea $22.000 y la cuenta sea correcta.</p>
-            <button class="btn-red" onclick="retry()"><i class="fas fa-redo"></i> Intentar de nuevo</button>
-            <a href="https://wa.me/573107941580" target="_blank" class="btn-wa"><i class="fab fa-whatsapp" style="font-size:17px"></i> Hablar con soporte</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div><!-- /left col -->
-
-  <!-- ORDER SUMMARY (sticky) -->
-  <div class="sum-col">
-    <div class="card" style="position:sticky;top:16px;margin-bottom:0">
-      <div class="chd"><i class="fas fa-shopping-cart"></i><span>Tu pedido</span></div>
-      <div class="cb">
-        <div class="sum-item">
-          <div class="s-ic"><i class="fas fa-award"></i></div>
-          <div class="s-tx">
-            <h4>Certificado Manipulación de Alimentos</h4>
-            <p>Resolución 2674 · Validez nacional · PDF + Carnet</p>
-          </div>
-          <div class="s-pr">$22.000</div>
-        </div>
-
-        <div class="chklist">
-          <div class="cki"><i class="fas fa-check-circle"></i>Certificado PDF alta resolución</div>
-          <div class="cki"><i class="fas fa-check-circle"></i>Carnet digital oficial</div>
-          <div class="cki"><i class="fas fa-check-circle"></i>Código QR verificable</div>
-          <div class="cki"><i class="fas fa-check-circle"></i>Examen con intentos ilimitados</div>
-          <div class="cki"><i class="fas fa-check-circle"></i>Entrega inmediata al aprobar</div>
-          <div class="cki"><i class="fas fa-check-circle"></i>Soporte por WhatsApp</div>
-        </div>
-
-        <div class="tot">
-          <span class="tl2">Total</span>
-          <span class="tv">$22.000 <small style="font-size:12px;font-weight:400;color:#9ca3af">COP</small></span>
-        </div>
-
-        <div class="trust-badge">
-          <i class="fas fa-shield-alt"></i>
-          <p>Pago seguro. Verificación automática. Resolución 2674 de 2013.</p>
-        </div>
-
-        <!-- Mini cert SVG -->
-        <div style="margin-top:16px;text-align:center">
-          <svg width="170" height="110" viewBox="0 0 170 110" style="display:block;margin:0 auto">
-            <rect x="10" y="6" width="150" height="96" rx="8" fill="#fff" stroke="#e5e7eb" stroke-width="1.5"/>
-            <rect x="10" y="6" width="150" height="22" rx="8" fill="#dc2626"/>
-            <rect x="10" y="20" width="150" height="8" fill="#dc2626"/>
-            <text x="85" y="21" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">CERTIFICADO OFICIAL</text>
-            <text x="85" y="33" text-anchor="middle" font-size="7" fill="#fff" opacity=".8">Manipulación de Alimentos · Res. 2674/2013</text>
-            <circle cx="42" cy="72" r="20" fill="#fbbf24"/>
-            <circle cx="42" cy="72" r="13" fill="#f59e0b"/>
-            <text x="42" y="78" text-anchor="middle" font-size="16" fill="#fff">★</text>
-            <rect x="70" y="46" width="76" height="6" rx="3" fill="#e5e7eb"/>
-            <rect x="70" y="58" width="62" height="5" rx="2.5" fill="#e5e7eb"/>
-            <rect x="70" y="69" width="70" height="5" rx="2.5" fill="#e5e7eb"/>
-            <rect x="70" y="80" width="52" height="5" rx="2.5" fill="#e5e7eb"/>
-            <circle cx="150" cy="18" r="14" fill="#22c55e"/>
-            <path d="M143 18 l4 5 8-8" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          </svg>
-          <span style="font-size:11px;color:#9ca3af">Tu certificado te espera</span>
+        <div style="background:#fff8e1;border:1px solid #fde68a;border-radius:10px;padding:11px 13px;display:flex;gap:9px;align-items:flex-start;text-align:left;margin-top:8px">
+          <i class="fas fa-info-circle" style="color:#d97706;font-size:14px;margin-top:1px;flex-shrink:0"></i>
+          <p style="font-size:12px;color:#92400e;line-height:1.5;font-weight:500">Si en 5 minutos no recibes respuesta, contáctanos por WhatsApp.</p>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ═══ VIEW 6: ÉXITO ═══ -->
+  <div class="view" id="v-ok">
+    <div class="card">
+      <div class="chd"><i class="fas fa-check-circle" style="color:#22c55e"></i><span>¡Pago verificado!</span></div>
+      <div class="cb" style="text-align:center;padding:20px">
+        <div class="done-wrap"><i class="fas fa-check"></i></div>
+        <h2 style="font-size:19px;font-weight:800;margin-bottom:6px;color:#166534">¡Comprobante aprobado!</h2>
+        <p style="font-size:14px;color:#555;margin-bottom:16px;line-height:1.6">Tu pago fue verificado. Te estamos redirigiendo a la plataforma.</p>
+        <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:14px;margin-bottom:14px">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">MONTO</span><span style="font-size:14px;font-weight:800;color:#166534" id="det-monto">$22.000 COP</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">BANCO</span><span style="font-size:13px;font-weight:700" id="det-banco">—</span></div>
+            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">REFERENCIA</span><span style="font-size:13px;font-weight:700;font-family:monospace" id="det-ref">—</span></div>
+          </div>
+        </div>
+        <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:16px">
+          <i class="fas fa-spinner fa-spin" style="font-size:22px;color:#22c55e;display:block;margin-bottom:8px"></i>
+          <p style="font-size:13px;font-weight:700;color:#166534;margin-bottom:4px">Redirigiendo a la plataforma...</p>
+          <p style="font-size:12px;color:#6b7280;margin-bottom:8px">Espera <strong id="countdown">3</strong> segundos</p>
+          <a href="https://quickcontrola.com/verificacion" style="font-size:13px;font-weight:700;color:#22c55e;text-decoration:underline">Ir ahora →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ VIEW ERROR ═══ -->
+  <div class="view" id="v-err">
+    <div class="card">
+      <div class="chd"><i class="fas fa-exclamation-circle" style="color:#dc2626"></i><span>Comprobante no válido</span></div>
+      <div class="cb" style="text-align:center;padding:20px">
+        <div style="width:80px;height:80px;border-radius:50%;background:#fef2f2;border:3px solid #dc2626;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px;color:#dc2626"><i class="fas fa-times"></i></div>
+        <h2 style="font-size:18px;font-weight:800;margin-bottom:8px">No pudimos verificar el pago</h2>
+        <p style="font-size:14px;color:#6b7280;line-height:1.6;margin-bottom:14px" id="err-msg">No pudimos verificar el pago. Asegúrate de que el monto sea $22.000 y la cuenta sea la correcta.</p>
+        <button class="btn-red" onclick="retryPayment()"><i class="fas fa-redo"></i> Intentar de nuevo</button>
+        <a href="https://wa.me/573107941580" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:7px;background:#25D366;color:#fff;font-weight:700;font-size:13px;padding:12px;border-radius:10px;margin-top:8px"><i class="fab fa-whatsapp" style="font-size:16px"></i> Soporte por WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
-<!-- WA float -->
-<a href="https://wa.me/573107941580" target="_blank" class="wa" aria-label="WhatsApp">
-  <i class="fab fa-whatsapp"></i>
-</a>
+<a href="https://wa.me/573107941580" target="_blank" class="wa-float"><i class="fab fa-whatsapp"></i></a>
 
 <script>
-// ════════════════════════════════════════════════
-//  ⚙ CONFIGURACIÓN — ACTUALIZA ESTOS VALORES
-// ════════════════════════════════════════════════
-const N8N_WEBHOOK   = 'https://TU-N8N.app/webhook/verificar-pago'; // ← URL webhook n8n
+// ════ CONFIG ════
+const REDIRECT_URL  = 'https://quickcontrola.com/verificacion';
+const N8N_WEBHOOK   = 'https://n8n.certitecol.com/webhook/e8f9546e-cf35-4adc-8ffa-0f5a99d66276';
 const NEQUI_NUM     = '3223267797';
 const DAVIPLATA_NUM = '3223267797';
 const BANCO_ACC     = '816-589697-49';
 const BANCO_OWNER   = 'Corporación Educativa Conalianza';
 const PSE_URL       = 'https://checkout.nequi.wompi.co/l/bSxc9E';
-const REDIRECT_URL  = 'https://quickcontrola.com/verificacion'; // ← redirección tras pago verificado
-const WA_NUM        = '573107941580';
-// ════════════════════════════════════════════════
+const MIN_CORRECT   = 6; // mínimo para aprobar
 
-const payInfo = {
-  nequi: {
-    html:`<div class="pr"><span class="pl">Número Nequi</span><span class="pv" onclick="copyTxt('${NEQUI_NUM}',this)">${NEQUI_NUM}</span></div>
-          <div class="pr"><span class="pl">Monto exacto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
-          <div class="copy-tip"><i class="fas fa-hand-pointer"></i> Toca el número para copiarlo</div>`
+// ════ PREGUNTAS ════
+const preguntas = [
+  {
+    q: '¿A qué temperatura deben conservarse los alimentos fríos para evitar la proliferación de bacterias?',
+    opts: ['Por encima de 15°C', 'Por debajo de 4°C', 'Entre 10°C y 15°C', 'A temperatura ambiente'],
+    ans: 1
   },
-  daviplata: {
-    html:`<div class="pr"><span class="pl">Número Daviplata</span><span class="pv" onclick="copyTxt('${DAVIPLATA_NUM}',this)">${DAVIPLATA_NUM}</span></div>
-          <div class="pr"><span class="pl">Monto exacto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
-          <div class="copy-tip"><i class="fas fa-hand-pointer"></i> Toca el número para copiarlo</div>`
+  {
+    q: '¿Cuál es el rango de temperatura conocido como "zona de peligro" para los alimentos?',
+    opts: ['Entre 4°C y 60°C', 'Entre 0°C y 100°C', 'Entre -18°C y 4°C', 'Entre 60°C y 100°C'],
+    ans: 0
   },
-  bancolombia: {
-    html:`<div class="pr"><span class="pl">Cuenta Ahorros</span><span class="pv" onclick="copyTxt('${BANCO_ACC}',this)">${BANCO_ACC}</span></div>
-          <div class="pr"><span class="pl">Titular</span><span class="pv" style="font-size:12px;font-family:'Inter'">${BANCO_OWNER}</span></div>
-          <div class="pr"><span class="pl">Monto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
-          <div class="copy-tip"><i class="fas fa-hand-pointer"></i> Toca la cuenta para copiarla</div>`
+  {
+    q: '¿Con qué frecuencia debe lavarse las manos el manipulador de alimentos?',
+    opts: ['Solo al inicio de la jornada', 'Cada 2 horas exactas', 'Antes y después de manipular alimentos y cuando sea necesario', 'Una vez por turno'],
+    ans: 2
   },
-  pse: {
-    html:`<div class="pr"><span class="pl">Monto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>
-          <div style="margin-top:10px"><a href="${PSE_URL}" target="_blank" style="display:block;background:#1d4ed8;color:#fff;text-align:center;padding:11px;border-radius:8px;font-weight:700;font-size:13px;text-decoration:none"><i class="fas fa-external-link-alt" style="margin-right:6px"></i>Ir al portal de pago PSE</a></div>`
+  {
+    q: '¿Cuál de las siguientes prácticas NO es correcta en la manipulación de alimentos?',
+    opts: ['Usar guantes desechables', 'Almacenar carne cruda sobre alimentos ya cocinados', 'Lavar frutas y verduras antes de usarlas', 'Mantener las áreas de trabajo limpias'],
+    ans: 1
+  },
+  {
+    q: 'Según la Resolución 2674 de 2013, ¿con qué frecuencia debe renovarse el certificado de manipulación de alimentos?',
+    opts: ['Cada 6 meses', 'Cada año', 'Cada 2 años', 'Cada 5 años'],
+    ans: 1
+  },
+  {
+    q: '¿Qué debe hacer un manipulador de alimentos si presenta síntomas de enfermedad gastrointestinal?',
+    opts: ['Tomar medicamentos y seguir trabajando', 'Usar mascarilla y guantes', 'Informar a su empleador y evitar manipular alimentos', 'Trabajar solo en áreas de almacenamiento'],
+    ans: 2
+  },
+  {
+    q: '¿Cuál es la mejor práctica para descongelar alimentos de forma segura?',
+    opts: ['Dejarlos a temperatura ambiente toda la noche', 'Descongelarlos al sol', 'En el refrigerador o en microondas', 'Con agua caliente del grifo'],
+    ans: 2
+  },
+  {
+    q: '¿Qué significa la contaminación cruzada en los alimentos?',
+    opts: ['Mezclar dos tipos de condimentos', 'Transferencia de microorganismos entre alimentos crudos y cocidos', 'Cocinar alimentos a temperatura inadecuada', 'Usar agua sin tratar en la cocina'],
+    ans: 1
   }
+];
+
+// ════ STATE ════
+let curQ       = 0;
+let respuestas = new Array(preguntas.length).fill(null);
+let userData   = {};
+let selMethod  = 'nequi';
+let uploadedFile = null;
+let isSubmitting = false;
+
+// ════ EXAM ════
+function startExam() { curQ = 0; respuestas = new Array(preguntas.length).fill(null); renderQ(); setStep(1); show('v-exam'); }
+
+function renderQ() {
+  const p = preguntas[curQ];
+  document.getElementById('q-title').innerText = `Pregunta ${curQ+1} de ${preguntas.length}`;
+  document.getElementById('q-num').innerText = `${curQ+1} / ${preguntas.length}`;
+  document.getElementById('q-bar').style.width = `${((curQ+1)/preguntas.length)*100}%`;
+  document.getElementById('q-text').innerText = p.q;
+  const container = document.getElementById('q-opts');
+  container.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  p.opts.forEach((opt, i) => {
+    const div = document.createElement('div');
+    div.className = 'opt' + (respuestas[curQ] === i ? ' sel' : '');
+    div.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    div.onclick = () => selectOpt(i);
+    container.appendChild(div);
+  });
+  const btnNext = document.getElementById('btn-next');
+  const isLast = curQ === preguntas.length - 1;
+  btnNext.innerHTML = isLast ? 'Ver resultado <i class="fas fa-trophy"></i>' : 'Siguiente <i class="fas fa-arrow-right"></i>';
+  document.getElementById('q-title').previousElementSibling && null;
+}
+
+function selectOpt(i) {
+  respuestas[curQ] = i;
+  document.querySelectorAll('.opt').forEach((el, idx) => { el.className = 'opt' + (idx === i ? ' sel' : ''); });
+}
+
+function prevQ() { if (curQ > 0) { curQ--; renderQ(); } }
+function nextQ() {
+  if (respuestas[curQ] === null) { alert('Selecciona una respuesta para continuar.'); return; }
+  if (curQ < preguntas.length - 1) { curQ++; renderQ(); }
+  else { showResult(); }
+}
+
+function showResult() {
+  const correct = respuestas.filter((r, i) => r === preguntas[i].ans).length;
+  const pass = correct >= MIN_CORRECT;
+  const pct = Math.round((correct / preguntas.length) * 100);
+  const icon = document.getElementById('result-icon');
+  const title = document.getElementById('result-title');
+  const msg = document.getElementById('result-msg');
+  const score = document.getElementById('result-score');
+  const actions = document.getElementById('result-actions');
+  if (pass) {
+    icon.innerHTML = '<div class="result-circle pass"><i class="fas fa-check"></i></div>';
+    title.innerText = '¡Felicitaciones, aprobaste!';
+    title.style.color = '#166534';
+    msg.innerText = `Respondiste correctamente ${correct} de ${preguntas.length} preguntas (${pct}%). Ahora completa tus datos y el pago para obtener tu certificado.`;
+    msg.style.color = '#555';
+    score.innerHTML = `<span style="color:#22c55e">✓ ${correct} correctas</span> &nbsp;·&nbsp; <span style="color:#dc2626">✗ ${preguntas.length-correct} incorrectas</span> &nbsp;·&nbsp; ${pct}%`;
+    actions.innerHTML = '<button class="btn-red" onclick="goPago()"><i class="fas fa-arrow-right"></i> Continuar al pago</button>';
+    saveSession(correct, preguntas.length); // guardar sesión aprobada
+    if (typeof fbq === 'function') fbq('track', 'Lead');
+  } else {
+    icon.innerHTML = '<div class="result-circle fail"><i class="fas fa-times"></i></div>';
+    title.innerText = 'No aprobaste esta vez';
+    title.style.color = '#991b1b';
+    msg.innerText = `Respondiste correctamente ${correct} de ${preguntas.length} preguntas (${pct}%). Necesitas al menos ${MIN_CORRECT} para aprobar. ¡Puedes intentarlo de nuevo!`;
+    msg.style.color = '#555';
+    score.innerHTML = `<span style="color:#22c55e">✓ ${correct} correctas</span> &nbsp;·&nbsp; <span style="color:#dc2626">✗ ${preguntas.length-correct} incorrectas</span> &nbsp;·&nbsp; ${pct}%`;
+    actions.innerHTML = '<button class="btn-red" onclick="startExam()"><i class="fas fa-redo"></i> Intentar de nuevo</button>';
+  }
+  show('v-result');
+}
+
+function goPago() {
+  setStep(2);
+  goPayStep(1);
+  selPay('pse');
+  show('v-pago');
+}
+
+// ════ SUB-STEPPER PAGO ════
+let curPayStep = 1;
+function goPayStep(n) {
+  if (n === 2 && !validate()) return; // validar datos antes de ir al pago
+  curPayStep = n;
+  [1,2,3].forEach(i => {
+    const el = document.getElementById('pago-s'+i);
+    if (el) el.style.display = (i === n) ? 'block' : 'none';
+  });
+  ['psn1','psn2','psn3'].forEach((id, idx) => {
+    const el  = document.getElementById(id);
+    const lbl = document.getElementById('psl'+(idx+1));
+    if (!el) return;
+    const step = idx + 1;
+    if (step < n)      { el.className='ps-num done';   el.innerHTML='<i class="fas fa-check" style="font-size:10px"></i>'; if(lbl)lbl.style.color='#22c55e'; }
+    else if (step===n) { el.className='ps-num active'; el.innerHTML=step; if(lbl)lbl.style.color='#dc2626'; }
+    else               { el.className='ps-num idle';   el.innerHTML=step; if(lbl)lbl.style.color='#9ca3af'; }
+  });
+  const ln12 = document.getElementById('psl12');
+  const ln23 = document.getElementById('psl23');
+  if (ln12) ln12.className = 'ps-line-c' + (n > 1 ? ' done' : '');
+  if (ln23) ln23.className = 'ps-line-c' + (n > 2 ? ' done' : '');
+  if (n === 3) {
+    const waLink = document.getElementById('btn-wa-comp');
+    if (waLink && userData.name) {
+      const msg = encodeURIComponent('Hola, soy ' + userData.name + ' (' + userData.type + ' ' + userData.num + '). Acabo de realizar el pago de $22.000 por el certificado de manipulación de alimentos. Adjunto el comprobante.');
+      waLink.href = 'https://wa.me/573107941580?text=' + msg;
+    }
+  }
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+
+// ════ PAYMENT ════
+const payInfo = {
+  nequi:       { html:`<div class="pr"><span class="pl">Número Nequi</span><span class="pv" onclick="copyTxt('${NEQUI_NUM}',this)">${NEQUI_NUM}</span></div><div class="pr"><span class="pl">Monto exacto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div><div style="font-size:10px;color:#9ca3af;margin-top:6px;text-align:right">Toca el número para copiarlo</div>` },
+  daviplata:   { html:`<div class="pr"><span class="pl">Número Daviplata</span><span class="pv" onclick="copyTxt('${DAVIPLATA_NUM}',this)">${DAVIPLATA_NUM}</span></div><div class="pr"><span class="pl">Monto exacto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div><div style="font-size:10px;color:#9ca3af;margin-top:6px;text-align:right">Toca el número para copiarlo</div>` },
+  bancolombia: { html:`<div class="pr"><span class="pl">Cuenta Ahorros</span><span class="pv" onclick="copyTxt('${BANCO_ACC}',this)">${BANCO_ACC}</span></div><div class="pr"><span class="pl">Titular</span><span class="pv" style="font-size:12px;font-family:'Inter'">${BANCO_OWNER}</span></div><div class="pr"><span class="pl">Monto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div>` },
+  pse:         { html:`<div class="pr"><span class="pl">Monto</span><span class="pv" style="color:#dc2626">$22.000 COP</span></div><div style="margin-top:10px"><a href="${PSE_URL}" target="_blank" style="display:block;background:#1d4ed8;color:#fff;text-align:center;padding:10px;border-radius:8px;font-weight:700;font-size:13px">Ir al portal PSE <i class="fas fa-external-link-alt"></i></a></div>` }
 };
 
-let selMethod = 'nequi';
-let uploadedFile = null;
-let userData    = {};
-let isSubmitting = false; // ← bloqueo anti-doble-click
-
-// ─── PAYMENT METHOD SELECTION ──────────────────
 function selPay(m) {
   selMethod = m;
   document.querySelectorAll('.pm').forEach(el => el.classList.remove('sel'));
@@ -545,63 +683,48 @@ function selPay(m) {
 
 function copyTxt(txt, el) {
   navigator.clipboard.writeText(txt).then(() => {
-    const orig = el.innerText;
-    el.innerText = '¡Copiado! ✓';
-    el.style.color = '#22c55e';
+    const orig = el.innerText; el.innerText = '¡Copiado! ✓'; el.style.color = '#22c55e';
     setTimeout(() => { el.innerText = orig; el.style.color = ''; }, 1800);
   });
 }
 
-// ─── FILE UPLOAD ───────────────────────────────
+// ════ FILE UPLOAD ════
 function handleDragEnter(e) { e.preventDefault(); document.getElementById('upzone').classList.add('drag'); }
 function handleDragLeave(e) { document.getElementById('upzone').classList.remove('drag'); }
 function handleDrop(e) {
-  e.preventDefault();
-  document.getElementById('upzone').classList.remove('drag');
-  const file = e.dataTransfer.files[0];
-  if (file) handleFile(file);
+  e.preventDefault(); document.getElementById('upzone').classList.remove('drag');
+  if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
 }
-
 function handleFile(file) {
   if (!file) return;
-  if (file.size > 10 * 1024 * 1024) { alert('El archivo es muy grande. Máximo 10 MB.'); return; }
+  if (file.size > 10 * 1024 * 1024) { alert('Archivo muy grande. Máximo 10 MB.'); return; }
   uploadedFile = file;
-
-  // Update upload zone
   const zone = document.getElementById('upzone');
   zone.classList.add('has-file');
   document.getElementById('uz-icon').className = 'fas fa-check-circle uz-icon';
   document.getElementById('uz-title').innerText = 'Comprobante cargado ✓';
-
-  // Show preview
-  const preview = document.getElementById('file-preview');
-  preview.classList.add('show');
+  const prev = document.getElementById('file-preview');
+  prev.classList.add('show');
   document.getElementById('fp-name').innerText = file.name;
-  document.getElementById('fp-size').innerText = (file.size / 1024).toFixed(0) + ' KB · ' + (file.type.includes('pdf') ? 'PDF' : 'Imagen');
-
+  document.getElementById('fp-size').innerText = (file.size/1024).toFixed(0) + ' KB';
   if (file.type.startsWith('image/')) {
     const reader = new FileReader();
     reader.onload = e => { document.getElementById('fp-img').src = e.target.result; };
     reader.readAsDataURL(file);
-  } else {
-    document.getElementById('fp-img').src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="6" fill="%23fef2f2"/><text x="20" y="26" text-anchor="middle" font-size="18" fill="%23dc2626">📄</text></svg>';
   }
-
   document.getElementById('btn-submit').disabled = false;
 }
-
 function removeFile() {
   uploadedFile = null;
   document.getElementById('fileInput').value = '';
-  const zone = document.getElementById('upzone');
-  zone.classList.remove('has-file', 'drag');
+  document.getElementById('upzone').classList.remove('has-file','drag');
   document.getElementById('uz-icon').className = 'fas fa-cloud-upload-alt uz-icon';
   document.getElementById('uz-title').innerText = 'Toca aquí o arrastra tu comprobante';
   document.getElementById('file-preview').classList.remove('show');
   document.getElementById('btn-submit').disabled = true;
 }
 
-// ─── FORM VALIDATION ───────────────────────────
+// ════ VALIDATE FORM ════
 function validate() {
   const dt = document.getElementById('doctype').value;
   const dn = document.getElementById('docnum').value.trim();
@@ -616,55 +739,24 @@ function validate() {
   return true;
 }
 
-// ─── NAV STEPS ─────────────────────────────────
-function goStep1() { setStep(1); show('v1'); }
-function goStep2() {
-  if (!validate()) return;
-  localStorage.setItem('certitec_ud', JSON.stringify(userData));
-  setStep(2);
-  selPay('nequi');
-  show('v2');
-}
-
-// ─── SUBMIT RECEIPT ────────────────────────────
+// ════ SUBMIT RECEIPT ════
 async function submitReceipt() {
-  if (isSubmitting) { console.warn('Ya hay una verificación en curso'); return; }
-  if (!uploadedFile) { alert('Primero sube el comprobante de pago'); return; }
+  if (isSubmitting) return;
+  if (!uploadedFile) { alert('Primero sube el comprobante'); return; }
+  if (!validate()) return;
 
-  isSubmitting = true; // bloquear inmediatamente
+  isSubmitting = true;
   document.getElementById('btn-submit').disabled = true;
+  setStep(3); show('v-verif');
 
-  setStep(3);
-  show('v3');
-
-  if (typeof fbq === 'function') fbq('track', 'InitiateCheckout', { value: 22000, currency: 'COP' });
-
-
-
-  // Capturar referencia local del archivo ANTES del FileReader
   const archivo = uploadedFile;
-  if (!archivo) {
-    document.getElementById('err-msg').innerText = 'No se detectó el archivo. Por favor vuelve y sube el comprobante de nuevo.';
-    setStep(2); show('v-err'); return;
-  }
-
-  // Leer imagen como base64 y enviar JSON al webhook de n8n
   const reader = new FileReader();
-  reader.onerror = () => {
-    document.getElementById('err-msg').innerText = 'Error al leer la imagen. Intenta con otro formato (JPG o PNG).';
-    setStep(2); show('v-err');
-  };
+  reader.onerror = () => { showError('Error al leer la imagen. Intenta con JPG o PNG.'); };
   reader.onload = async (ev) => {
     const result = ev.target.result;
-    if (!result || !result.includes(',')) {
-      document.getElementById('err-msg').innerText = 'No se pudo leer la imagen. Intenta con otro archivo.';
-      setStep(2); show('v-err'); return;
-    }
+    if (!result || !result.includes(',')) { showError('No se pudo leer la imagen.'); return; }
     const base64 = result.split(',')[1];
-    if (!base64 || base64.length < 100) {
-      document.getElementById('err-msg').innerText = 'La imagen parece estar vacía o corrupta. Selecciona otra captura.';
-      setStep(2); show('v-err'); return;
-    }
+    if (!base64 || base64.length < 100) { showError('La imagen parece estar vacía.'); return; }
 
     const payload = {
       nombre:           userData.name,
@@ -679,67 +771,64 @@ async function submitReceipt() {
       mimeType:         archivo.type || 'image/jpeg'
     };
 
-    // Debug: verificar que imagen llega antes de enviar
-    console.log('📤 Enviando al webhook n8n...');
-    console.log('Tamaño base64:', base64.length, 'caracteres');
-    console.log('mimeType:', archivo.type);
-    console.log('Campos enviados:', Object.keys(payload));
-
+    console.log('📤 Enviando webhook n8n...', Object.keys(payload));
     try {
-      const res = await fetch(
-        'https://n8n.certitecol.com/webhook/e8f9546e-cf35-4adc-8ffa-0f5a99d66276',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        }
-      );
-
+      const res = await fetch(N8N_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
       const data = await res.json().catch(() => ({}));
-      console.log('📨 Respuesta n8n:', JSON.stringify(data));
+      console.log('📨 Respuesta n8n:', data);
 
-      // ─── CASO 1: Pago válido ──────────────────────────
       if (data.valido === true) {
-        setTimeout(() => updateTl('tl3', 'done', 'Pago verificado', 'Monto y cuenta confirmados'), 1200);
-        setTimeout(() => updateTl('tl4', 'done', 'Acceso habilitado', '¡El examen está disponible!'), 2200);
-        setTimeout(() => {
-          if (typeof fbq === 'function') fbq('track', 'Purchase', { value: 22000, currency: 'COP' });
-          showSuccess(data);
-        }, 3000);
-
-      // ─── CASO 2: Comprobante rechazado por el bot ───────────
+        updateTl('tl3','done','Pago verificado','Monto y cuenta confirmados');
+        setTimeout(() => updateTl('tl4','done','Certificado generado','¡Listo para descargar!'), 1200);
+        setTimeout(() => showSuccess(data), 2000);
       } else if (data.valido === false) {
-        updateTl('tl3', 'active', 'Comprobante no válido', data.motivo_rechazo || 'No coincide con el pago esperado');
-        setTimeout(() => {
-          document.getElementById('err-msg').innerText =
-            data.motivo_rechazo || 'No pudimos verificar tu pago. Asegúrate que el monto sea $22.000 y la imagen sea clara.';
-          setStep(2);
-          show('v-err');
-        }, 1800);
-
-      // ─── CASO 3: Respuesta inesperada del servidor ─────────
+        updateTl('tl3','active','Comprobante no válido', data.motivo_rechazo || 'No coincide');
+        setTimeout(() => showError(data.motivo_rechazo || 'El comprobante no fue reconocido. Asegúrate que el monto sea $22.000.'), 1800);
       } else {
-        document.getElementById('err-msg').innerText = 'Respuesta inesperada del servidor. Intenta de nuevo o contáctanos.';
-        setStep(2);
-        show('v-err');
+        showError('Respuesta inesperada. Intenta de nuevo.');
       }
-
     } catch(e) {
       console.error('Webhook error', e);
-      // ─── CASO 4: Error de red / timeout ────────────────
-      document.getElementById('err-msg').innerText = 'Error de conexión al verificar. Verifica tu internet e inténtalo de nuevo.';
-      setStep(2);
-      show('v-err');
+      showError('Error de conexión. Verifica tu internet e intenta de nuevo.');
     } finally {
-      isSubmitting = false; // liberar bloqueo siempre
+      isSubmitting = false;
     }
   };
-  reader.readAsDataURL(archivo); // usar referencia local, no la global
+  reader.readAsDataURL(archivo);
+}
+
+function showError(msg) {
+  document.getElementById('err-msg').innerText = msg;
+  setStep(2); show('v-err');
+  isSubmitting = false;
+  document.getElementById('btn-submit').disabled = false;
+}
+
+function retryPayment() { selPay('nequi'); removeFile(); setStep(2); show('v-pago'); }
+
+function showSuccess(data) {
+  const fmt = v => v || '—';
+  document.getElementById('det-monto').innerText = data.monto ? '$'+data.monto+' COP' : '$22.000 COP';
+  document.getElementById('det-banco').innerText = fmt(data.banco);
+  document.getElementById('det-ref').innerText   = fmt(data.referencia);
+  if (typeof fbq === 'function') fbq('track', 'Purchase', { value: 22000, currency: 'COP' });
+  clearSession(); // limpiar sesión al pagar exitosamente
+  setStep(3); show('v-ok');
+  const destino = data.enlaceExamen || REDIRECT_URL;
+  let secs = 3;
+  const cdEl = document.getElementById('countdown');
+  const timer = setInterval(() => {
+    secs--; if (cdEl) cdEl.innerText = secs;
+    if (secs <= 0) { clearInterval(timer); window.location.href = destino; }
+  }, 1000);
 }
 
 function updateTl(id, state, title, sub) {
-  const el = document.getElementById(id);
-  if (!el) return;
+  const el = document.getElementById(id); if (!el) return;
   el.className = 'tl-i ' + state;
   const ic = el.querySelector('.tl-ic');
   ic.className = 'tl-ic';
@@ -748,36 +837,7 @@ function updateTl(id, state, title, sub) {
   el.querySelector('p').innerText = sub;
 }
 
-function retry() { goStep2(); removeFile(); }
-
-// ─── SHOW SUCCESS ──────────────────────────────
-function showSuccess(data) {
-  const fmt = (v) => v || '—';
-  document.getElementById('det-monto').innerText = data.monto ? '$' + data.monto + ' COP' : '$22.000 COP';
-  document.getElementById('det-banco').innerText = fmt(data.banco);
-  document.getElementById('det-ref').innerText   = fmt(data.referencia);
-  document.getElementById('det-fecha').innerText  = fmt(data.fecha);
-
-  if (typeof fbq === 'function') fbq('track', 'Purchase', { value: 22000, currency: 'COP' });
-
-  setStep(4);
-  show('v4');
-
-  // Cuenta regresiva y redirección automática
-  const destino = data.enlaceExamen || REDIRECT_URL;
-  let secs = 3;
-  const cdEl = document.getElementById('countdown');
-  const timer = setInterval(() => {
-    secs--;
-    if (cdEl) cdEl.innerText = secs;
-    if (secs <= 0) {
-      clearInterval(timer);
-      window.location.href = destino;
-    }
-  }, 1000);
-}
-
-// ─── VIEW / STEP UTILS ─────────────────────────
+// ════ UTILS ════
 function show(id) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -785,35 +845,69 @@ function show(id) {
 }
 
 function setStep(n) {
-  const lbls = ['Mis datos', 'Pago', 'Verificación', '¡Listo!'];
-  for (let i = 1; i <= 4; i++) {
-    const num = document.getElementById('pn' + i);
-    const lbl = document.getElementById('pl' + i);
-    const ln  = i < 4 ? document.getElementById('ln' + i + (i+1)) : null;
-    if (i < n) {
-      num.className = 'pnum done'; lbl.className = 'plbl done';
-      if (ln) ln.className = 'pline done';
-    } else if (i === n) {
-      num.className = 'pnum active'; lbl.className = 'plbl active';
-    } else {
-      num.className = 'pnum idle'; lbl.className = 'plbl idle';
-    }
+  for (let i = 1; i <= 3; i++) {
+    const num = document.getElementById('pn'+i);
+    const lbl = document.getElementById('pl'+i);
+    const ln  = i < 3 ? document.getElementById('ln'+i+(i+1)) : null;
+    if (i < n) { num.className='pnum done'; lbl.className='plbl done'; if(ln)ln.className='pline done'; }
+    else if (i===n) { num.className='pnum active'; lbl.className='plbl active'; }
+    else { num.className='pnum idle'; lbl.className='plbl idle'; }
   }
 }
 
-// ─── INIT ──────────────────────────────────────
-window.onload = () => {
-  selPay('nequi');
-  // Restore saved data
+// ════ SESSION PERSISTENCE ════
+const SESSION_KEY = 'certitec_exam_session';
+const SESSION_TTL = 2 * 60 * 60 * 1000; // 2 horas
+
+function saveSession(correct, total) {
+  localStorage.setItem(SESSION_KEY, JSON.stringify({ approved: true, timestamp: Date.now(), correct, total }));
+}
+function loadSession() {
   try {
-    const s = JSON.parse(localStorage.getItem('certitec_ud') || '{}');
-    if (s.type) document.getElementById('doctype').value = s.type;
-    if (s.num)  document.getElementById('docnum').value  = s.num;
-    if (s.name) document.getElementById('fullname').value = s.name;
-    if (s.dept) document.getElementById('dept').value    = s.dept;
-    if (s.phone) document.getElementById('phone').value  = s.phone;
-  } catch(e) {}
-};
+    const s = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+    if (!s || !s.approved) return null;
+    if (Date.now() - s.timestamp > SESSION_TTL) { clearSession(); return null; }
+    return s;
+  } catch(e) { return null; }
+}
+function clearSession() { localStorage.removeItem(SESSION_KEY); }
+function minutesLeft(s) { return Math.max(1, Math.ceil((SESSION_TTL - (Date.now() - s.timestamp)) / 60000)); }
+
+function showSessionBanner(session) {
+  const existing = document.getElementById('session-banner');
+  if (existing) existing.remove();
+  const banner = document.createElement('div');
+  banner.id = 'session-banner';
+  banner.style.cssText = 'background:#fff8e1;border:1.5px solid #fde68a;border-radius:12px;padding:13px 15px;margin-bottom:14px;display:flex;gap:10px;align-items:flex-start';
+  banner.innerHTML =
+    '<i class="fas fa-history" style="color:#d97706;font-size:16px;margin-top:1px;flex-shrink:0"></i>' +
+    '<div style="flex:1">' +
+      '<p style="font-size:13px;font-weight:700;color:#92400e;margin-bottom:3px">\u2713 Examen ya aprobado</p>' +
+      '<p style="font-size:12px;color:#b45309;line-height:1.5">Obtuviste <strong>' + session.correct + '/' + session.total + '</strong> correctas. Sesi\u00f3n v\u00e1lida por <strong>' + minutesLeft(session) + ' minutos</strong> m\u00e1s.</p>' +
+      '<button onclick="resetExam()" style="margin-top:8px;font-size:11px;color:#dc2626;font-weight:700;background:none;border:none;cursor:pointer;padding:0">' +
+        '<i class="fas fa-redo" style="margin-right:4px"></i>Volver a presentar el examen</button>' +
+    '</div>';
+  const cb = document.querySelector('#v-pago .cb');
+  if (cb) cb.insertBefore(banner, cb.firstChild);
+}
+
+function resetExam() {
+  clearSession();
+  const b = document.getElementById('session-banner'); if (b) b.remove();
+  setStep(1); show('v-intro');
+}
+
+// ════ INIT — restaurar sesion al cargar ════
+document.addEventListener('DOMContentLoaded', () => {
+  const session = loadSession();
+  if (session) {
+    showSessionBanner(session);
+    selPay('pse');
+    setStep(2);
+    show('v-pago');
+  }
+});
+
 </script>
 </body>
 </html>
