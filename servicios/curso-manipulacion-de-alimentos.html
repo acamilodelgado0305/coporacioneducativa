@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8"/>
@@ -459,20 +459,9 @@ a{text-decoration:none;color:inherit}
       <div class="cb" style="text-align:center;padding:20px">
         <div class="done-wrap"><i class="fas fa-check"></i></div>
         <h2 style="font-size:19px;font-weight:800;margin-bottom:6px;color:#166534">¡Comprobante aprobado!</h2>
-        <p style="font-size:14px;color:#555;margin-bottom:16px;line-height:1.6">Tu pago fue verificado. Te estamos redirigiendo a la plataforma.</p>
-        <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:14px;margin-bottom:14px">
-          <div style="display:flex;flex-direction:column;gap:7px">
-            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">MONTO</span><span style="font-size:14px;font-weight:800;color:#166534" id="det-monto">$22.000 COP</span></div>
-            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">BANCO</span><span style="font-size:13px;font-weight:700" id="det-banco">—</span></div>
-            <div style="display:flex;justify-content:space-between"><span style="font-size:11px;color:#6b7280;font-weight:600">REFERENCIA</span><span style="font-size:13px;font-weight:700;font-family:monospace" id="det-ref">—</span></div>
-          </div>
-        </div>
-        <div style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:12px;padding:16px">
-          <i class="fas fa-spinner fa-spin" style="font-size:22px;color:#22c55e;display:block;margin-bottom:8px"></i>
-          <p style="font-size:13px;font-weight:700;color:#166534;margin-bottom:4px">Redirigiendo a la plataforma...</p>
-          <p style="font-size:12px;color:#6b7280;margin-bottom:8px">Espera <strong id="countdown">3</strong> segundos</p>
-          <a href="https://quickcontrola.com/verificacion" style="font-size:13px;font-weight:700;color:#22c55e;text-decoration:underline">Ir ahora →</a>
-        </div>
+        <a href="https://quickcontrola.com/verificacion" id="btn-portal" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#166534;color:#fff;font-weight:800;font-size:15px;padding:14px;border-radius:10px;text-decoration:none;box-shadow:0 4px 14px rgba(22,101,52,.3);margin-top:16px">
+          <i class="fas fa-search"></i> Verificar mi certificado
+        </a>
       </div>
     </div>
   </div>
@@ -636,7 +625,17 @@ function goPago() {
 // ════ SUB-STEPPER PAGO ════
 let curPayStep = 1;
 function goPayStep(n) {
-  if (n === 2 && !validate()) return; // validar datos antes de ir al pago
+  if (n === 2) {
+    if (!validate()) return; // validar datos antes de ir al pago
+    if (typeof fbq === 'function' && curPayStep !== 2) {
+      fbq('track', 'InitiateCheckout', { value: 22000, currency: 'COP', content_name: 'Curso de Manipulación de Alimentos' }, {
+        fn: userData.firstName,
+        ln: userData.lastName,
+        ph: '57' + (userData.phone || '').replace(/\D/g, ''),
+        st: (userData.dept || '').toLowerCase()
+      });
+    }
+  }
   curPayStep = n;
   [1,2,3].forEach(i => {
     const el = document.getElementById('pago-s'+i);
@@ -815,16 +814,18 @@ function showSuccess(data) {
   document.getElementById('det-monto').innerText = data.monto ? '$'+data.monto+' COP' : '$22.000 COP';
   document.getElementById('det-banco').innerText = fmt(data.banco);
   document.getElementById('det-ref').innerText   = fmt(data.referencia);
-  if (typeof fbq === 'function') fbq('track', 'Purchase', { value: 22000, currency: 'COP' });
+  if (typeof fbq === 'function') {
+    fbq('track', 'Purchase', { value: 22000, currency: 'COP', content_name: 'Certificado Manipulación de Alimentos' }, {
+      fn: userData.firstName,
+      ln: userData.lastName,
+      ph: '57' + (userData.phone || '').replace(/\D/g, ''),
+      st: (userData.dept || '').toLowerCase()
+    });
+  }
   clearSession(); // limpiar sesión al pagar exitosamente
   setStep(3); show('v-ok');
-  const destino = data.enlaceExamen || REDIRECT_URL;
-  let secs = 3;
-  const cdEl = document.getElementById('countdown');
-  const timer = setInterval(() => {
-    secs--; if (cdEl) cdEl.innerText = secs;
-    if (secs <= 0) { clearInterval(timer); window.location.href = destino; }
-  }, 1000);
+  const btnPortal = document.getElementById('btn-portal');
+  if (btnPortal) btnPortal.href = data.enlaceExamen || REDIRECT_URL;
 }
 
 function updateTl(id, state, title, sub) {
