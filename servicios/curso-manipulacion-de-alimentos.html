@@ -277,25 +277,30 @@
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
 
         function trackEvent(eventName, extraData = {}) {
-            const payload = {
-                evento: eventName,
-                pagina: "Curso Manipulación de Alimentos",
-                url: window.location.href,
-                fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
-                usuario: {
-                    tipo_doc: state?.userData?.type || null,
-                    num_doc: state?.userData?.num || null,
-                    nombre: state?.userData?.name || null,
-                },
-                ...extraData
-            };
-            try {
-                navigator.sendBeacon(N8N_WEBHOOK, new Blob([JSON.stringify(payload)], { type: 'application/json' }));
-            } catch (_) {
-                fetch(N8N_WEBHOOK, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), keepalive: true }).catch(() => {});
-            }
-        }
+    const payload = {
+        evento: eventName,
+        pagina: "Curso Manipulación de Alimentos",
+        url: window.location.href,
+        fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+        usuario: {
+            tipo_doc: state?.userData?.type || null,
+            num_doc: state?.userData?.num || null,
+            nombre: state?.userData?.name || null,
+        },
+        ...extraData
+    };
 
+    // Intentamos fetch primero porque es más confiable para JSON con n8n
+    fetch(N8N_WEBHOOK, {
+        method: 'POST',
+        mode: 'cors', // Forzamos modo CORS
+        headers: {
+            'Content-Type': 'text/plain', // Usamos text/plain para evitar el Preflight (OPTIONS) complejo
+        },
+        body: JSON.stringify(payload),
+        keepalive: true
+    }).catch(err => console.warn("Error enviando evento:", err));
+}
         // Estado inicial
         let state = {
             view: 'view-quiz-app',
