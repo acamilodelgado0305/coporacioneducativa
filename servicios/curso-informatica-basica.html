@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Curso Básico de Informática | Conalianza</title>
+    <link rel="icon" href="../logopagina.png" type="image/png" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        body { font-family: "Poppins", sans-serif; background-color: #f0f2f5; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+        :root { --primary: #0c4a6e; --accent: #0284c7; --success: #16a34a; }
+
+        .hidden-section { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Botón pulsante azul */
+        .pulse-btn-blue { animation: pulse-blue 2s infinite; }
+        @keyframes pulse-blue {
+            0%   { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0.7); }
+            70%  { box-shadow: 0 0 0 12px rgba(2, 132, 199, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(2, 132, 199, 0); }
+        }
+
+        /* Botón pago principal */
+        .btn-pay-main {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            color: white;
+            box-shadow: 0 10px 30px -5px rgba(22,163,74,0.6);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .btn-pay-main:hover, .btn-pay-main:active {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 18px 40px -5px rgba(22,163,74,0.8);
+            filter: brightness(1.05);
+        }
+        .animate-pulse-slow { animation: pulse-pay 2.5s infinite ease-in-out; }
+        @keyframes pulse-pay {
+            0%,100% { box-shadow: 0 10px 30px -5px rgba(22,163,74,0.6); }
+            50%     { box-shadow: 0 22px 45px -5px rgba(22,163,74,0.9); }
+        }
+
+        /* Pasos de pago */
+        .pay-step { display:flex; align-items:flex-start; gap:12px; }
+        .pay-step-num { width:28px; height:28px; background:#0c4a6e; color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; flex-shrink:0; margin-top:2px; }
+
+        /* Urgencia */
+        .urgency-bar { background: linear-gradient(90deg, #dc2626, #b91c1c); }
+        .timer-digit { font-variant-numeric: tabular-nums; }
+
+        /* Módulos del quiz */
+        .module-dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.25); transition:all 0.3s; }
+        .module-dot.active { background:#ffffff; transform:scale(1.3); }
+        .module-dot.done { background:#4ade80; }
+
+        /* Ticker */
+        @keyframes ticker { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50 border-b border-slate-100">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="../logof.png" onerror="this.style.display='none'" alt="Conalianza" class="h-9 md:h-11 mr-3" />
+                <div class="leading-tight">
+                    <p class="font-extrabold text-[#0c4a6e] text-base md:text-xl tracking-tight">Conalianza</p>
+                    <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold">Formación & Certificación</p>
+                </div>
+            </div>
+            <a href="#form-datos" onclick="scrollToForm()" class="bg-[#0284c7] text-white text-xs md:text-sm font-bold px-5 py-2.5 rounded-full shadow-sm hover:bg-[#0369a1] transition transform active:scale-95 flex items-center gap-2">
+                <i class="fas fa-laptop text-[10px]"></i> Obtener Certificado
+            </a>
+        </div>
+    </header>
+
+    <main id="main-container" class="flex-grow">
+
+    <!-- ═══════════════════════════════════ LANDING PAGE ═══════════════════════════════════ -->
+    <div id="view-sales-page">
+
+        <!-- TICKER -->
+        <div class="bg-[#0284c7] overflow-hidden py-2 border-b border-sky-700">
+            <div class="flex whitespace-nowrap" style="animation:ticker 22s linear infinite">
+                <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-laptop"></i> Competencias digitales exigidas por el mercado laboral colombiano</span>
+                <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-certificate"></i> Certificado válido para hojas de vida y contratación</span>
+                <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-bolt"></i> 4 módulos · Examen gratis · Resultado en minutos</span>
+                <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-laptop"></i> Competencias digitales exigidas por el mercado laboral colombiano</span>
+                <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-certificate"></i> Certificado válido para hojas de vida y contratación</span>
+                <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-bolt"></i> 4 módulos · Examen gratis · Resultado en minutos</span>
+            </div>
+        </div>
+
+        <!-- ── HERO (fondo negro) ── -->
+        <section class="bg-gradient-to-br from-slate-900 via-black to-[#0c1a2e] text-white pt-10 pb-16 px-4 relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <!-- Glow decorativo -->
+            <div class="absolute top-0 right-0 w-72 h-72 bg-sky-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-56 h-56 bg-blue-700/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-4xl mx-auto text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 bg-sky-600 text-white text-xs font-black px-4 py-1.5 rounded-full mb-5 shadow-lg">
+                    <span class="w-2 h-2 bg-white rounded-full animate-ping inline-block"></span>
+                    CERTIFICACIÓN EN COMPETENCIAS DIGITALES — NIVEL BÁSICO
+                </div>
+
+                <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight">
+                    Certifícate en <span class="text-sky-400">Informática Básica</span><br class="hidden md:block"> y abre más puertas laborales
+                </h1>
+                <p class="text-gray-300 text-base md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
+                    4 módulos · 100% online · Desde tu celular · <strong class="text-white">Sin asistir a clases</strong> · Válido para hoja de vida y contratación empresarial.
+                </p>
+
+                <!-- Módulos preview -->
+                <div class="flex flex-wrap justify-center gap-2 mb-8">
+                    <span class="bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5"><i class="fas fa-desktop text-sky-300"></i> Fundamentos</span>
+                    <span class="bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5"><i class="fas fa-folder text-yellow-300"></i> Windows y Archivos</span>
+                    <span class="bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5"><i class="fas fa-file-excel text-green-300"></i> Ofimática Office</span>
+                    <span class="bg-white/10 text-white text-xs font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5"><i class="fas fa-wifi text-purple-300"></i> Internet y Seguridad</span>
+                </div>
+
+                <!-- Prueba social -->
+                <div class="flex items-center justify-center gap-3 mb-8">
+                    <div class="flex -space-x-2">
+                        <div class="w-9 h-9 rounded-full bg-sky-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">DM</div>
+                        <div class="w-9 h-9 rounded-full bg-emerald-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">KR</div>
+                        <div class="w-9 h-9 rounded-full bg-violet-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">PL</div>
+                        <div class="w-9 h-9 rounded-full bg-orange-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">+</div>
+                    </div>
+                    <p class="text-sm text-gray-300 font-medium"><strong class="text-sky-400">+850 personas</strong> certificadas este mes</p>
+                </div>
+
+                <!-- Tarjeta precio + CTA -->
+                <div class="bg-white text-slate-900 rounded-3xl p-6 md:p-8 max-w-sm mx-auto shadow-2xl border-4 border-sky-400 relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs font-black px-4 py-1.5 rounded-full shadow-md animate-pulse whitespace-nowrap uppercase tracking-wide">
+                        🔥 Precio especial — Solo hoy
+                    </div>
+                    <div class="flex justify-center items-baseline gap-3 mb-1 mt-2">
+                        <span class="text-5xl font-black text-[#0c4a6e]">$80.000</span>
+                        <span class="text-xl text-gray-400 line-through font-semibold">$160.000</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-5 font-medium">4 Módulos + Certificado + Carnet · Vigencia 1 año</p>
+                    <button onclick="scrollToForm()" class="w-full bg-[#0284c7] hover:bg-[#0369a1] text-white font-black py-4 rounded-2xl text-lg shadow-xl transition pulse-btn-blue active:scale-95 flex items-center justify-center gap-2">
+                        <i class="fas fa-laptop"></i> OBTENER MI CERTIFICADO
+                    </button>
+                    <div class="flex items-center justify-center gap-4 mt-4 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i class="fas fa-redo text-blue-400"></i> Examen gratis</span>
+                        <span class="flex items-center gap-1"><i class="fas fa-bolt text-yellow-400"></i> Resultado inmediato</span>
+                    </div>
+                </div>
+
+                <!-- Trust badges -->
+                <div class="flex flex-wrap justify-center gap-3 mt-7">
+                    <span class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold"><i class="fas fa-shield-alt text-green-400"></i> Pago 100% seguro</span>
+                    <span class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold"><i class="fas fa-mobile-alt text-sky-400"></i> Desde tu celular</span>
+                    <span class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold"><i class="fas fa-clock text-yellow-400"></i> 15–20 minutos</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FORMULARIO DE DATOS ── -->
+        <section id="form-datos" class="py-12 px-4 bg-[#0c4a6e] relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+            <div class="max-w-lg mx-auto relative z-10">
+                <div class="text-center mb-7">
+                    <div class="inline-flex items-center gap-2 bg-white/10 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+                        <i class="fas fa-user-check"></i> PASO 1 DE 2 — TUS DATOS
+                    </div>
+                    <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">Ingresa tus datos para <span class="text-sky-300">personalizar tu certificado</span></h2>
+                    <p class="text-sky-200 text-sm mt-2">Solo toma 20 segundos · Se usan para emitir tu certificado oficial</p>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-8">
+                    <form id="landing-form" onsubmit="submitLandingForm(event)" class="space-y-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">Tipo de Documento <span class="text-red-500">*</span></label>
+                                <select id="land-doctype" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 cursor-pointer transition">
+                                    <option value="" disabled selected>Selecciona…</option>
+                                    <option value="CC">Cédula de Ciudadanía</option>
+                                    <option value="TI">Tarjeta de Identidad</option>
+                                    <option value="CE">Cédula de Extranjería</option>
+                                    <option value="PPT">Permiso PPT</option>
+                                    <option value="PAS">Pasaporte</option>
+                                </select>
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">Número de Documento <span class="text-red-500">*</span></label>
+                                <input type="number" id="land-docnum" required placeholder="Ej: 1090333444"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition" />
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">Nombre Completo <span class="text-red-500">*</span></label>
+                            <input type="text" id="land-name" required placeholder="Nombres y apellidos"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition capitalize" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">WhatsApp <span class="text-red-500">*</span> <span class="text-gray-400 font-normal normal-case">(para enviarte el certificado)</span></label>
+                            <div class="relative">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-500">🇨🇴 +57</span>
+                                <input type="tel" id="land-phone" required placeholder="3001234567" maxlength="10"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-16 pr-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 transition" />
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-[#0284c7] hover:bg-[#0369a1] text-white font-black py-4 rounded-2xl text-lg shadow-xl transition pulse-btn-blue active:scale-95 flex items-center justify-center gap-3 mt-2">
+                            <i class="fas fa-laptop text-xl"></i>
+                            INICIAR MI EXAMEN GRATIS
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <p class="text-center text-xs text-gray-400 flex items-center justify-center gap-1.5">
+                            <i class="fas fa-lock text-green-500"></i> Tus datos solo se usan para emitir tu certificado oficial
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── POR QUÉ NECESITAS ESTE CURSO ── -->
+        <section class="py-12 px-4 bg-white">
+            <div class="max-w-4xl mx-auto text-center">
+                <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">El mercado laboral cambió</p>
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-8">Sin competencias digitales, las oportunidades se cierran</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-red-50 border border-red-100 rounded-2xl p-5 text-left">
+                        <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-user-times text-red-500 text-lg"></i></div>
+                        <h3 class="font-bold text-slate-800 mb-1">Rechazos en entrevistas</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">El 78% de las empresas en Colombia exigen conocimientos básicos de computación para cualquier cargo.</p>
+                    </div>
+                    <div class="bg-orange-50 border border-orange-100 rounded-2xl p-5 text-left">
+                        <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-chart-line text-orange-500 text-lg"></i></div>
+                        <h3 class="font-bold text-slate-800 mb-1">Salarios más bajos</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Quienes tienen certificación en informática acceden a cargos con hasta un 30% más de salario base.</p>
+                    </div>
+                    <div class="bg-yellow-50 border border-yellow-100 rounded-2xl p-5 text-left">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-ban text-yellow-600 text-lg"></i></div>
+                        <h3 class="font-bold text-slate-800 mb-1">Bloqueo en ascensos</h3>
+                        <p class="text-sm text-gray-500 leading-relaxed">Sin un aval digital no puedes aplicar a cargos administrativos, de ventas ni de gestión empresarial.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── MÓDULOS DEL CURSO ── -->
+        <section class="py-12 px-4 bg-slate-50">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">Contenido del curso</p>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900">4 Módulos completos</h2>
+                    <p class="text-gray-500 text-sm mt-2 max-w-xl mx-auto">Cada módulo cubre un área esencial de la informática básica. El examen valida tus conocimientos en todos ellos.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Módulo 1 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex gap-4">
+                        <div class="w-12 h-12 bg-sky-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-desktop text-sky-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-sky-500">Módulo 1</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base">Fundamentos de Computación</h3>
+                            <p class="text-sm text-gray-500 mt-1">Hardware, software, sistema operativo, tipos de memoria y dispositivos de entrada/salida.</p>
+                            <div class="flex flex-wrap gap-1 mt-2">
+                                <span class="text-[10px] bg-sky-50 text-sky-600 border border-sky-100 rounded-full px-2 py-0.5 font-semibold">CPU</span>
+                                <span class="text-[10px] bg-sky-50 text-sky-600 border border-sky-100 rounded-full px-2 py-0.5 font-semibold">RAM / ROM</span>
+                                <span class="text-[10px] bg-sky-50 text-sky-600 border border-sky-100 rounded-full px-2 py-0.5 font-semibold">Sistema Operativo</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 2 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex gap-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-folder-open text-yellow-500 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-yellow-500">Módulo 2</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base">Windows y Gestión de Archivos</h3>
+                            <p class="text-sm text-gray-500 mt-1">Navegación en Windows, creación de carpetas, copiar/mover archivos, papelera y atajos esenciales.</p>
+                            <div class="flex flex-wrap gap-1 mt-2">
+                                <span class="text-[10px] bg-yellow-50 text-yellow-600 border border-yellow-100 rounded-full px-2 py-0.5 font-semibold">Explorador</span>
+                                <span class="text-[10px] bg-yellow-50 text-yellow-600 border border-yellow-100 rounded-full px-2 py-0.5 font-semibold">Ctrl+C / Ctrl+V</span>
+                                <span class="text-[10px] bg-yellow-50 text-yellow-600 border border-yellow-100 rounded-full px-2 py-0.5 font-semibold">Extensiones</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 3 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-file-excel text-green-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-green-600">Módulo 3</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base">Ofimática (Microsoft Office)</h3>
+                            <p class="text-sm text-gray-500 mt-1">Word para documentos, Excel para hojas de cálculo y PowerPoint para presentaciones profesionales.</p>
+                            <div class="flex flex-wrap gap-1 mt-2">
+                                <span class="text-[10px] bg-green-50 text-green-600 border border-green-100 rounded-full px-2 py-0.5 font-semibold">Word</span>
+                                <span class="text-[10px] bg-green-50 text-green-600 border border-green-100 rounded-full px-2 py-0.5 font-semibold">Excel</span>
+                                <span class="text-[10px] bg-green-50 text-green-600 border border-green-100 rounded-full px-2 py-0.5 font-semibold">PowerPoint</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Módulo 4 -->
+                    <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex gap-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-wifi text-purple-600 text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-black uppercase tracking-widest text-purple-600">Módulo 4</span>
+                            </div>
+                            <h3 class="font-bold text-slate-800 text-base">Internet y Seguridad Digital</h3>
+                            <p class="text-sm text-gray-500 mt-1">Navegación segura, correo electrónico, contraseñas, phishing y protección de datos personales.</p>
+                            <div class="flex flex-wrap gap-1 mt-2">
+                                <span class="text-[10px] bg-purple-50 text-purple-600 border border-purple-100 rounded-full px-2 py-0.5 font-semibold">Email</span>
+                                <span class="text-[10px] bg-purple-50 text-purple-600 border border-purple-100 rounded-full px-2 py-0.5 font-semibold">Phishing</span>
+                                <span class="text-[10px] bg-purple-50 text-purple-600 border border-purple-100 rounded-full px-2 py-0.5 font-semibold">Contraseñas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CÓMO FUNCIONA ── -->
+        <section class="py-12 px-4 bg-white">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">Simple y rápido</p>
+                <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-8">Tu certificado en 3 pasos desde el celular</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                    <div class="bg-slate-50 rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
+                        <div class="w-12 h-12 bg-[#0c4a6e] text-white rounded-2xl flex items-center justify-center text-xl font-black mx-auto mb-4 shadow-md">1</div>
+                        <h3 class="font-bold text-slate-800 mb-1">Llena tus datos</h3>
+                        <p class="text-sm text-gray-500">Nombre, documento y WhatsApp. Son necesarios para el certificado.</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
+                        <div class="w-12 h-12 bg-sky-600 text-white rounded-2xl flex items-center justify-center text-xl font-black mx-auto mb-4 shadow-md">2</div>
+                        <h3 class="font-bold text-slate-800 mb-1">Resuelve el examen</h3>
+                        <p class="text-sm text-gray-500">8 preguntas en 4 módulos. Gratis e intentos ilimitados.</p>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-6 shadow-sm border border-slate-100 text-center">
+                        <div class="w-12 h-12 bg-yellow-400 text-slate-900 rounded-2xl flex items-center justify-center text-xl font-black mx-auto mb-4 shadow-md">3</div>
+                        <h3 class="font-bold text-slate-800 mb-1">Paga y recibe</h3>
+                        <p class="text-sm text-gray-500">$80.000 por pasarela segura. Certificado por WhatsApp en minutos.</p>
+                    </div>
+                </div>
+                <button onclick="scrollToForm()" class="bg-[#0284c7] hover:bg-[#0369a1] text-white font-black py-4 px-10 rounded-full text-lg shadow-xl transition pulse-btn-blue active:scale-95 inline-flex items-center gap-2">
+                    <i class="fas fa-laptop"></i> Quiero mi certificado — comenzar
+                </button>
+            </div>
+        </section>
+
+        <!-- ── QUÉ INCLUYE ── -->
+        <section class="py-12 px-4 bg-slate-50">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-8">
+                    <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">Todo incluido</p>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900">¿Qué recibes por $80.000?</h2>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-4 bg-white border border-sky-100 rounded-2xl p-5">
+                        <div class="w-10 h-10 bg-sky-600 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-certificate"></i></div>
+                        <div><h3 class="font-bold text-slate-800">Certificado Digital PDF</h3><p class="text-sm text-gray-500 mt-0.5">Avalado por Conalianza, válido para hoja de vida y procesos de contratación.</p></div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white border border-green-100 rounded-2xl p-5">
+                        <div class="w-10 h-10 bg-green-600 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-id-card"></i></div>
+                        <div><h3 class="font-bold text-slate-800">Carnet con QR verificable</h3><p class="text-sm text-gray-500 mt-0.5">Escaneable por empleadores para verificar la autenticidad del certificado.</p></div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white border border-yellow-100 rounded-2xl p-5">
+                        <div class="w-10 h-10 bg-yellow-500 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-layer-group"></i></div>
+                        <div><h3 class="font-bold text-slate-800">Certificación en 4 módulos</h3><p class="text-sm text-gray-500 mt-0.5">Fundamentos, Windows, Ofimática e Internet. Cobertura completa del perfil básico.</p></div>
+                    </div>
+                    <div class="flex items-start gap-4 bg-white border border-purple-100 rounded-2xl p-5">
+                        <div class="w-10 h-10 bg-purple-600 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fab fa-whatsapp"></i></div>
+                        <div><h3 class="font-bold text-slate-800">Entrega por WhatsApp</h3><p class="text-sm text-gray-500 mt-0.5">Recibes todo en menos de 10 minutos directamente en tu celular.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── TESTIMONIOS ── -->
+        <section class="py-12 px-4 bg-white">
+            <div class="max-w-3xl mx-auto text-center">
+                <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">Lo dicen nuestros usuarios</p>
+                <h2 class="text-2xl font-black text-slate-900 mb-8">Cientos ya están certificados</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-left">
+                        <div class="flex text-yellow-400 text-sm mb-3">★★★★★</div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">"Nunca había usado un computador de forma profesional. En 20 minutos terminé el examen y me llegó el certificado al WhatsApp."</p>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-sky-500 rounded-full flex items-center justify-center text-white text-xs font-bold">DM</div>
+                            <div><p class="text-xs font-bold text-slate-800">Diana M.</p><p class="text-[10px] text-gray-400">Asistente admin. · Bogotá</p></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-left">
+                        <div class="flex text-yellow-400 text-sm mb-3">★★★★★</div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">"Me lo exigieron en una empresa donde apliqué. Hice el curso ese mismo día y al día siguiente lo adjunté en mi hoja de vida."</p>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-emerald-500 rounded-full flex items-center justify-center text-white text-xs font-bold">KR</div>
+                            <div><p class="text-xs font-bold text-slate-800">Kevin R.</p><p class="text-[10px] text-gray-400">Auxiliar contable · Medellín</p></div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 text-left">
+                        <div class="flex text-yellow-400 text-sm mb-3">★★★★★</div>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-4">"Perfecto para emprendedores. El certificado me da más credibilidad con mis clientes. Fácil, rápido y económico."</p>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-violet-500 rounded-full flex items-center justify-center text-white text-xs font-bold">PL</div>
+                            <div><p class="text-xs font-bold text-slate-800">Patricia L.</p><p class="text-[10px] text-gray-400">Emprendedora · Cali</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── FAQ ── -->
+        <section class="py-12 px-4 bg-slate-50">
+            <div class="max-w-2xl mx-auto">
+                <div class="text-center mb-8">
+                    <p class="text-xs font-bold uppercase tracking-widest text-sky-600 mb-2">Preguntas frecuentes</p>
+                    <h2 class="text-2xl font-black text-slate-900">Resolvemos tus dudas</h2>
+                </div>
+                <div class="space-y-3" id="faq-list">
+                    <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                            ¿Necesito saber informática para hacer el examen?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                            El examen evalúa conocimientos básicos que muchas personas ya tienen del uso cotidiano del computador. Si usas un celular o PC regularmente, seguramente aprobarás sin problemas.
+                        </div>
+                    </div>
+                    <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                            ¿Qué pasa si no apruebo?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                            Puedes repetirlo las veces que necesites sin ningún costo. El examen es completamente gratuito — solo pagas cuando apruebas y decides obtener tu certificado.
+                        </div>
+                    </div>
+                    <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                            ¿El certificado sirve para buscar empleo?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                            Sí. El certificado de Conalianza es reconocido por empresas del sector privado como aval de competencias digitales básicas. Es ideal para adjuntar en hoja de vida para cargos administrativos, ventas, atención al cliente y logística.
+                        </div>
+                    </div>
+                    <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                            ¿Cuánto tiempo toma el examen?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                            Entre 15 y 20 minutos en total. Son 8 preguntas divididas en 4 módulos (2 preguntas por módulo). Puedes hacerlo desde el celular en cualquier momento.
+                        </div>
+                    </div>
+                    <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                        <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                            ¿Puedo certificar a todo mi equipo?
+                            <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                            ¡Claro! Cada persona realiza el examen individualmente. Para grupos de más de 5 personas escríbenos al WhatsApp y te damos una tarifa corporativa especial.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── CTA FINAL ── -->
+        <section id="inicio-examen" class="py-16 px-4 bg-gradient-to-br from-slate-900 to-[#0c1a2e] text-white text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+            <div class="absolute top-0 right-0 w-64 h-64 bg-sky-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="max-w-xl mx-auto relative z-10">
+                <div class="w-16 h-16 bg-sky-400 rounded-2xl flex items-center justify-center text-slate-900 text-3xl mx-auto mb-6 shadow-lg shadow-sky-400/30">
+                    <i class="fas fa-laptop"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black mb-3">¿Listo para certificarte?</h2>
+                <p class="text-gray-300 mb-8 text-base md:text-lg leading-relaxed">
+                    El examen es <strong class="text-white">completamente gratis</strong>. Solo pagas si apruebas y decides obtener tu certificado.
+                </p>
+                <button onclick="scrollToForm()" class="group bg-sky-400 hover:bg-sky-300 text-slate-900 font-black text-xl py-5 px-12 rounded-full shadow-2xl w-full md:w-auto transform transition active:scale-95 inline-flex items-center justify-center gap-3">
+                    <i class="fas fa-laptop text-2xl"></i> INICIAR MI PROCESO AHORA
+                </button>
+                <p class="mt-5 text-sm text-gray-400 font-medium flex items-center justify-center gap-2">
+                    <i class="fas fa-sync-alt"></i> Intentos ilimitados · Sin costo hasta aprobar
+                </p>
+            </div>
+        </section>
+
+        <footer class="bg-slate-900 py-8 text-center text-sm text-gray-500 border-t border-slate-800">
+            <p class="font-medium mb-1 text-gray-400">© 2024 Conalianza Capacitaciones</p>
+            <p class="text-xs">Educación para el trabajo y el desarrollo humano · Curso Básico de Informática</p>
+        </footer>
+    </div><!-- /view-sales-page -->
+
+
+    <!-- ═══════════════════════════════════ QUIZ EDUCATIVO ═══════════════════════════════════ -->
+    <div id="view-quiz-app" class="hidden-section min-h-screen bg-slate-100 flex flex-col">
+
+        <!-- Header sticky -->
+        <div class="bg-[#0c4a6e] text-white p-4 shadow-md sticky top-0 z-40">
+            <div class="flex justify-between items-center mb-2.5">
+                <div class="flex items-center gap-2 text-sm font-bold">
+                    <i id="module-icon" class="fas fa-desktop opacity-80 text-base"></i>
+                    <span id="module-label" class="text-xs font-black opacity-90 tracking-wide"></span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <span class="text-xs text-white/60 font-semibold"><span id="q-current">1</span>/<span id="q-total">8</span></span>
+                    <button onclick="exitQuiz()" class="text-xs bg-white/10 px-3 py-1.5 rounded hover:bg-white/20 transition font-medium">Salir</button>
+                </div>
+            </div>
+            <!-- Puntos de módulo -->
+            <div class="flex items-center justify-center gap-2">
+                <div class="module-dot active" id="mdot-0"></div>
+                <div class="w-8 h-px bg-white/20"></div>
+                <div class="module-dot" id="mdot-1"></div>
+                <div class="w-8 h-px bg-white/20"></div>
+                <div class="module-dot" id="mdot-2"></div>
+                <div class="w-8 h-px bg-white/20"></div>
+                <div class="module-dot" id="mdot-3"></div>
+            </div>
+        </div>
+        <div class="w-full bg-gray-200 h-2 sticky top-[80px] z-30">
+            <div id="progress-bar" class="bg-sky-400 h-2 transition-all duration-700 ease-out" style="width:0%"></div>
+        </div>
+
+        <!-- Contenido dinámico -->
+        <div class="flex-grow container mx-auto max-w-2xl px-4 pt-5 pb-36">
+
+            <!-- ── TARJETA DE LECCIÓN ── -->
+            <div id="lesson-card" class="fade-in">
+                <!-- Badge módulo -->
+                <div id="lesson-module-badge" class="inline-flex items-center gap-2 text-xs font-black px-3 py-1.5 rounded-full mb-4 shadow-sm"></div>
+
+                <div class="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden">
+                    <!-- Header lección -->
+                    <div id="lesson-header-bar" class="px-6 pt-6 pb-4 border-b border-slate-100">
+                        <div class="flex items-center gap-3 mb-1">
+                            <div id="lesson-icon-circle" class="w-11 h-11 rounded-2xl flex items-center justify-center text-xl flex-shrink-0"></div>
+                            <div>
+                                <p id="lesson-num" class="text-[10px] font-black uppercase tracking-widest text-gray-400"></p>
+                                <h3 id="lesson-title" class="text-xl font-black text-slate-900 leading-tight"></h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cuerpo lección -->
+                    <div class="px-6 py-5">
+                        <p id="lesson-content" class="text-base text-gray-700 leading-relaxed mb-5"></p>
+
+                        <!-- Punto clave -->
+                        <div id="lesson-keypoint" class="flex items-start gap-3 bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+                            <i class="fas fa-lightbulb text-yellow-500 text-lg flex-shrink-0 mt-0.5"></i>
+                            <p id="lesson-keypoint-text" class="text-sm font-bold text-yellow-800 leading-snug"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ── TARJETA DE PREGUNTA ── -->
+            <div id="question-card" class="hidden fade-in">
+                <div class="bg-white rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] border border-slate-100 p-6 md:p-8">
+                    <div class="flex items-center gap-2 mb-5">
+                        <div class="w-7 h-7 rounded-full bg-sky-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-question text-sky-600 text-xs font-black"></i>
+                        </div>
+                        <p class="text-xs font-black text-sky-600 uppercase tracking-widest">Pon a prueba lo que aprendiste</p>
+                    </div>
+                    <h3 id="q-text" class="text-lg md:text-xl font-bold text-slate-800 mb-6 leading-snug"></h3>
+                    <div id="q-options" class="space-y-3"></div>
+                </div>
+
+                <!-- Feedback con explicación -->
+                <div id="feedback-area" class="hidden mt-3 p-5 rounded-2xl shadow-sm border-2">
+                    <div id="feedback-header" class="flex items-center gap-2 font-black text-lg mb-2"></div>
+                    <p id="feedback-explanation" class="text-sm leading-relaxed font-medium"></p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Botón fijo al fondo -->
+        <div class="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md border-t border-gray-200 p-4 shadow-[0_-4px_15px_-3px_rgba(0,0,0,0.1)] z-50">
+            <div class="container mx-auto max-w-2xl">
+                <button id="btn-action" class="w-full font-black py-4 rounded-2xl text-lg transition-all duration-300 flex justify-center items-center tracking-wide">
+                    <span id="btn-action-text">...</span>
+                </button>
+            </div>
+        </div>
+    </div><!-- /view-quiz-app -->
+
+
+    <!-- ═══════════════════════════════════ CHECKOUT ═══════════════════════════════════ -->
+    <div id="view-checkout" class="hidden-section min-h-screen bg-slate-50 flex flex-col pb-10 fade-in">
+
+        <!-- Barra de urgencia -->
+        <div class="urgency-bar text-white text-center py-2.5 px-4 sticky top-0 z-50 shadow-md">
+            <p class="text-sm font-bold flex items-center justify-center gap-2">
+                <i class="fas fa-clock animate-pulse"></i>
+                Tu resultado está reservado por:
+                <span class="bg-white/20 rounded px-2 py-0.5 font-black timer-digit" id="checkout-timer">23:59</span>
+            </p>
+        </div>
+
+        <div class="max-w-md w-full mx-auto px-4 pt-6">
+
+            <!-- Aprobado -->
+            <div class="text-center mb-6">
+                <div class="inline-flex p-4 rounded-full bg-green-100 shadow-[0_0_25px_rgba(22,163,74,0.25)] mb-4">
+                    <i class="fas fa-check-circle text-6xl text-green-600"></i>
+                </div>
+                <h2 class="text-4xl font-black text-slate-900 tracking-tight leading-none mb-2">¡APROBADO!</h2>
+                <p class="text-base text-gray-500 font-medium">Bien <strong id="checkout-name" class="text-slate-700"></strong> completa el pago para recibir tu certificado.</p>
+            </div>
+
+            <!-- Módulos aprobados -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 mb-4 p-4">
+                <p class="text-xs font-black uppercase tracking-widest text-slate-500 mb-3 text-center">Módulos certificados</p>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="flex items-center gap-2 bg-sky-50 rounded-xl p-2.5"><i class="fas fa-desktop text-sky-500 text-sm w-4"></i><span class="text-xs font-semibold text-slate-700">Fundamentos</span><i class="fas fa-check-circle text-green-500 text-xs ml-auto"></i></div>
+                    <div class="flex items-center gap-2 bg-yellow-50 rounded-xl p-2.5"><i class="fas fa-folder text-yellow-500 text-sm w-4"></i><span class="text-xs font-semibold text-slate-700">Windows</span><i class="fas fa-check-circle text-green-500 text-xs ml-auto"></i></div>
+                    <div class="flex items-center gap-2 bg-green-50 rounded-xl p-2.5"><i class="fas fa-file-excel text-green-600 text-sm w-4"></i><span class="text-xs font-semibold text-slate-700">Ofimática</span><i class="fas fa-check-circle text-green-500 text-xs ml-auto"></i></div>
+                    <div class="flex items-center gap-2 bg-purple-50 rounded-xl p-2.5"><i class="fas fa-wifi text-purple-500 text-sm w-4"></i><span class="text-xs font-semibold text-slate-700">Internet</span><i class="fas fa-check-circle text-green-500 text-xs ml-auto"></i></div>
+                </div>
+            </div>
+
+            <!-- Resumen pedido -->
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 mb-4 overflow-hidden">
+                <div class="bg-[#0c4a6e] text-white text-xs font-bold px-4 py-2 uppercase tracking-wider flex items-center gap-2">
+                    <i class="fas fa-receipt"></i> Resumen del Pedido
+                </div>
+                <div class="p-5 space-y-3">
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-500 font-medium flex items-center gap-2"><i class="fas fa-laptop text-gray-300"></i> Curso</span>
+                        <span class="font-bold text-slate-800">Informática Básica (4 módulos)</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-500 font-medium flex items-center gap-2"><i class="fas fa-certificate text-gray-300"></i> Incluye</span>
+                        <span class="font-bold text-slate-800">Certificado + Carnet</span>
+                    </div>
+                    <div class="flex justify-between items-center text-sm">
+                        <span class="text-gray-500 font-medium flex items-center gap-2"><i class="fas fa-calendar-check text-gray-300"></i> Vigencia</span>
+                        <span class="font-bold text-slate-800">1 Año</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                        <span class="font-extrabold text-lg text-[#0c4a6e]">Total:</span>
+                        <div class="text-right">
+                            <span class="text-gray-400 line-through text-sm mr-2">$160.000</span>
+                            <span class="font-black text-2xl text-green-600">$80.000 COP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logos de métodos de pago -->
+            <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 mb-4">
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center mb-2.5">Métodos de pago aceptados</p>
+                <div class="flex flex-wrap justify-center items-center gap-2">
+                    <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center shadow-sm">
+                        <img src="https://zen-marketing-assets.s3-us-west-2.amazonaws.com/images/gordan-tmp/logo-Nequi_by_Bancolombia.png"
+                             onerror="this.parentElement.innerHTML='<span style=\'color:#DA0063;font-size:11px;font-weight:700\'>Nequi</span>'"
+                             alt="Nequi" class="h-5 w-auto object-contain">
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center shadow-sm">
+                        <img src="https://www.pse.com.co/images/logo-pse.png"
+                             onerror="this.parentElement.innerHTML='<span style=\'color:#1a3c8f;font-size:11px;font-weight:700\'>PSE</span>'"
+                             alt="PSE" class="h-5 w-auto object-contain">
+                    </div>
+                    <div class="bg-[#FDDA24] border border-yellow-300 rounded-lg px-2.5 py-1.5 flex items-center shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Bancolombia_logo.svg/200px-Bancolombia_logo.svg.png"
+                             onerror="this.parentElement.innerHTML='<span style=\'font-size:11px;font-weight:700;color:#1a1a1a\'>Bancolombia</span>'"
+                             alt="Bancolombia" class="h-4 w-auto object-contain">
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png"
+                             onerror="this.parentElement.innerHTML='<span style=\'color:#1a1f71;font-size:11px;font-weight:700\'>VISA</span>'"
+                             alt="Visa" class="h-4 w-auto object-contain">
+                    </div>
+                    <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center shadow-sm">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png"
+                             onerror="this.parentElement.innerHTML='<span style=\'font-size:11px;font-weight:700\'>Mastercard</span>'"
+                             alt="Mastercard" class="h-5 w-auto object-contain">
+                    </div>
+                </div>
+            </div>
+
+            <!-- ╔══════════════════════════════════╗ -->
+            <!-- ║  AQUÍ VA EL ENLACE DE PASARELA   ║ -->
+            <!-- ╚══════════════════════════════════╝ -->
+            <button onclick="initPayment()"
+                class="btn-pay-main animate-pulse-slow w-full flex items-center justify-center gap-3 py-5 px-6 rounded-2xl font-black mb-3 cursor-pointer border-0 group">
+                <i class="fas fa-lock text-white/80 text-lg"></i>
+                <span class="text-white text-xl tracking-wide">PAGAR $80.000 — SEGURO</span>
+                <span id="pay-loader" class="hidden"><i class="fas fa-circle-notch fa-spin text-white"></i></span>
+                <i class="fas fa-chevron-right text-white/70 group-hover:translate-x-1 transition-transform"></i>
+            </button>
+
+            <p class="text-center text-xs text-gray-400 font-medium mb-4 flex items-center justify-center gap-1">
+                <i class="fas fa-shield-alt text-green-500"></i>
+                Pago procesado por <strong class="text-gray-500">Wompi</strong> · Respaldado por Bancolombia
+            </p>
+
+            <!-- Cómo pagar -->
+            <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 mb-4">
+                <h3 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+                    <i class="fas fa-info-circle text-sky-500"></i> ¿Cómo pago? — Solo 3 pasos
+                </h3>
+                <div class="space-y-3">
+                    <div class="pay-step">
+                        <div class="pay-step-num">1</div>
+                        <div><p class="font-semibold text-sm text-slate-800">Haz clic en "PAGAR $80.000"</p><p class="text-xs text-gray-500 mt-0.5">Se abre la pasarela segura de Wompi (Bancolombia).</p></div>
+                    </div>
+                    <div class="pay-step">
+                        <div class="pay-step-num">2</div>
+                        <div><p class="font-semibold text-sm text-slate-800">Elige tu método de pago</p><p class="text-xs text-gray-500 mt-0.5">Nequi, PSE, tarjeta de crédito o débito. Todos funcionan.</p></div>
+                    </div>
+                    <div class="pay-step">
+                        <div class="pay-step-num">3</div>
+                        <div><p class="font-semibold text-sm text-slate-800">Toma captura y envía por WhatsApp</p><p class="text-xs text-gray-500 mt-0.5">Recibes tu <strong>certificado y carnet en menos de 10 minutos</strong>.</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qué recibes -->
+            <div class="bg-green-50 border border-green-100 rounded-xl p-4 mb-4">
+                <p class="text-xs font-bold text-green-700 mb-2 flex items-center gap-1.5"><i class="fas fa-gift text-green-500"></i> Lo que recibes al pagar</p>
+                <ul class="space-y-1.5">
+                    <li class="flex items-center gap-2 text-xs text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> Certificado PDF en 4 módulos (válido para hoja de vida)</li>
+                    <li class="flex items-center gap-2 text-xs text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> Carnet digital con QR verificable</li>
+                    <li class="flex items-center gap-2 text-xs text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> Entrega en menos de 10 minutos por WhatsApp</li>
+                    <li class="flex items-center gap-2 text-xs text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> Vigencia 1 año</li>
+                </ul>
+            </div>
+
+            <!-- Prueba social -->
+            <div class="flex items-center gap-3 bg-white rounded-xl border border-slate-100 p-3 mb-4 shadow-sm">
+                <div class="flex -space-x-2 flex-shrink-0">
+                    <div class="w-8 h-8 rounded-full bg-sky-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">DM</div>
+                    <div class="w-8 h-8 rounded-full bg-emerald-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">KR</div>
+                    <div class="w-8 h-8 rounded-full bg-violet-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">PL</div>
+                </div>
+                <p class="text-xs text-gray-600 font-medium"><strong class="text-slate-800">+850 personas</strong> obtuvieron su certificado este mes.</p>
+            </div>
+
+            <!-- WhatsApp dudas -->
+            <div class="text-center">
+                <p class="text-xs text-gray-400 mb-2">¿Tienes dudas antes de pagar?</p>
+                <a href="https://wa.me/573107941580?text=Hola%2C%20aprobé%20el%20examen%20de%20informática%20y%20tengo%20una%20duda%20sobre%20el%20pago."
+                   target="_blank" rel="noopener" onclick="trackEvent('whatsapp_duda')"
+                   class="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-green-700 font-semibold underline transition">
+                    <i class="fab fa-whatsapp text-green-500 text-sm"></i> Hablar con un asesor
+                </a>
+            </div>
+        </div>
+    </div><!-- /view-checkout -->
+
+
+    <!-- ═══════════════════════════════════ FAIL ═══════════════════════════════════ -->
+    <div id="view-fail" class="hidden-section min-h-screen bg-slate-100 flex flex-col items-center justify-center p-6 fade-in">
+        <div class="bg-white p-8 md:p-10 rounded-3xl shadow-2xl text-center max-w-sm w-full border-t-8 border-sky-500 relative">
+            <div class="absolute -top-14 left-1/2 -translate-x-1/2 bg-sky-100 p-6 rounded-full border-4 border-white shadow-lg">
+                <i class="fas fa-redo text-5xl text-sky-500"></i>
+            </div>
+            <div class="mt-8">
+                <h2 class="text-3xl font-black text-slate-900 mb-3 leading-none">¡Casi lo logras!</h2>
+                <p class="text-gray-600 mb-2 font-medium text-base leading-relaxed">
+                    Necesitas un <strong>75%</strong> para obtener tu certificado. Repasa los módulos y vuelve a intentarlo.
+                </p>
+                <p id="fail-score" class="text-sm text-gray-400 mb-6"></p>
+                <button onclick="startQuizFlow()" class="w-full bg-[#0c4a6e] text-white font-bold py-4 rounded-2xl hover:bg-[#0369a1] transition shadow-lg transform active:scale-95 flex items-center justify-center text-lg gap-2">
+                    <i class="fas fa-redo-alt"></i> Intentar de Nuevo — Gratis
+                </button>
+                <button onclick="exitQuiz()" class="mt-4 text-gray-400 text-sm font-medium hover:text-gray-600 underline transition block w-full">Volver al inicio</button>
+            </div>
+        </div>
+    </div><!-- /view-fail -->
+
+    </main>
+
+    <script>
+        // ── N8N TRACKING ─────────────────────────────────────────────
+        const N8N_WEBHOOK  = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
+        const API_INGRESOS = 'https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico';
+
+        function trackEvent(eventName, extraData = {}) {
+            fetch(N8N_WEBHOOK, {
+                method  : 'POST',
+                headers : { 'Content-Type': 'text/plain' },
+                body    : JSON.stringify({ evento: eventName, pagina: 'Curso Informática Básica', fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }), usuario: userData, ...extraData }),
+                keepalive: true
+            }).catch(() => {});
+        }
+
+        // ── DATOS DEL USUARIO ────────────────────────────────────────
+        let userData = { docType:'', docNum:'', name:'', phone:'' };
+
+        // ── CURRÍCULO (lección + pregunta + explicación) ─────────────
+        const curriculum = [
+            // ── MÓDULO 1: Fundamentos ──
+            {
+                moduleIdx : 0,
+                lesson: {
+                    num     : 'Módulo 1 · Lección 1 de 2',
+                    title   : 'El Sistema Operativo',
+                    icon    : 'fas fa-desktop',
+                    iconBg  : 'bg-sky-100',
+                    iconColor: 'text-sky-600',
+                    badgeBg : 'bg-sky-100 text-sky-700',
+                    content : 'El sistema operativo (SO) es el software más importante del computador. Se encarga de gestionar todos los recursos: el procesador, la memoria RAM, el disco duro y los dispositivos como el teclado y el mouse. Gracias a él, puedes abrir aplicaciones como Word, Chrome o WhatsApp. Los más conocidos son Windows, macOS y Linux.',
+                    keyPoint: 'Sin sistema operativo, el computador no puede hacer absolutamente nada. Es el "cerebro" que lo controla todo.'
+                },
+                q          : '¿Cuál es la función principal del sistema operativo en un computador?',
+                options    : ['Reproducir videos y música en internet', 'Gestionar los recursos del hardware y permitir ejecutar programas', 'Guardar automáticamente los documentos en la nube'],
+                a          : 1,
+                explanation: 'Correcto. El sistema operativo coordina el hardware y permite que todos los programas funcionen. Sin él, el computador sería como un auto sin motor.'
+            },
+            {
+                moduleIdx : 0,
+                lesson: {
+                    num     : 'Módulo 1 · Lección 2 de 2',
+                    title   : 'RAM vs. Disco Duro',
+                    icon    : 'fas fa-hdd',
+                    iconBg  : 'bg-sky-100',
+                    iconColor: 'text-sky-600',
+                    badgeBg : 'bg-sky-100 text-sky-700',
+                    content : 'El computador tiene dos tipos de memoria. La RAM (memoria temporal) guarda solo lo que estás usando en este momento y se borra al apagar el equipo. El disco duro o SSD (memoria permanente) almacena todos tus archivos, fotos y programas aunque el computador esté apagado. Más RAM = el equipo trabaja más rápido. Más disco = más espacio de almacenamiento.',
+                    keyPoint: 'RAM = temporal (se borra al apagar). Disco duro / SSD = permanente (guarda todo siempre).'
+                },
+                q          : '¿Cuál de estos componentes almacena la información de forma permanente, incluso cuando el equipo está apagado?',
+                options    : ['La memoria RAM', 'El procesador (CPU)', 'El disco duro o SSD'],
+                a          : 2,
+                explanation: '¡Exacto! El disco duro o SSD guarda tus archivos de forma permanente. La RAM solo funciona mientras el computador está encendido.'
+            },
+            // ── MÓDULO 2: Windows ──
+            {
+                moduleIdx : 1,
+                lesson: {
+                    num     : 'Módulo 2 · Lección 1 de 2',
+                    title   : 'Atajos de Teclado Esenciales',
+                    icon    : 'fas fa-keyboard',
+                    iconBg  : 'bg-yellow-100',
+                    iconColor: 'text-yellow-600',
+                    badgeBg : 'bg-yellow-100 text-yellow-700',
+                    content : 'Los atajos de teclado te permiten trabajar mucho más rápido. Los más importantes son: Ctrl+C (copiar el elemento sin moverlo), Ctrl+X (cortar = mover), Ctrl+V (pegar), Ctrl+Z (deshacer el último cambio) y Ctrl+S (guardar el documento). Al usar Ctrl+C, el archivo original queda exactamente en su lugar. Con Ctrl+X, el archivo se quita de su ubicación original.',
+                    keyPoint: 'Ctrl+C = Copiar (el original no se mueve). Ctrl+X = Cortar (el original sí se mueve). Ctrl+V = Pegar.'
+                },
+                q          : '¿Cuál es el atajo correcto para COPIAR un archivo sin moverlo de su ubicación original?',
+                options    : ['Ctrl + X  y luego  Ctrl + V  (cortar y pegar)', 'Ctrl + C  y luego  Ctrl + V  (copiar y pegar)', 'Ctrl + Z  y luego  Enter  (deshacer y confirmar)'],
+                a          : 1,
+                explanation: '¡Bien! Ctrl+C copia el archivo (el original queda en su lugar) y Ctrl+V lo pega en el nuevo destino. Ctrl+X lo movería en vez de copiarlo.'
+            },
+            {
+                moduleIdx : 1,
+                lesson: {
+                    num     : 'Módulo 2 · Lección 2 de 2',
+                    title   : 'Extensiones de Archivo',
+                    icon    : 'fas fa-file-alt',
+                    iconBg  : 'bg-yellow-100',
+                    iconColor: 'text-yellow-600',
+                    badgeBg : 'bg-yellow-100 text-yellow-700',
+                    content : 'La extensión es la "etiqueta" que aparece al final del nombre de un archivo (después del punto). Le dice al computador qué programa necesita para abrirlo. Ejemplos: .docx = Microsoft Word, .xlsx = Microsoft Excel, .pdf = documento no editable (Adobe), .jpg o .png = imágenes, .mp4 = video. En Windows puedes ver las extensiones en el Explorador de archivos.',
+                    keyPoint: '.docx = Word · .xlsx = Excel · .pdf = Adobe · .jpg = imagen · .mp4 = video'
+                },
+                q          : '¿Qué extensión tienen los documentos creados en Microsoft Word desde la versión 2007 en adelante?',
+                options    : ['.xls o .xlsx  (hojas de cálculo de Excel)', '.pdf  (documento portable no editable)', '.doc o .docx  (documento de texto de Word)'],
+                a          : 2,
+                explanation: '¡Correcto! Los archivos de Word usan .docx (Word 2007 en adelante) o .doc (versiones antiguas). El .xlsx es de Excel y el .pdf es un formato no editable.'
+            },
+            // ── MÓDULO 3: Ofimática ──
+            {
+                moduleIdx : 2,
+                lesson: {
+                    num     : 'Módulo 3 · Lección 1 de 2',
+                    title   : 'Microsoft Excel',
+                    icon    : 'fas fa-file-excel',
+                    iconBg  : 'bg-green-100',
+                    iconColor: 'text-green-600',
+                    badgeBg : 'bg-green-100 text-green-700',
+                    content : 'Microsoft Excel es el programa de hojas de cálculo de Office. Organiza la información en filas y columnas (llamadas "celdas"). Sus funciones principales son: realizar cálculos automáticos con fórmulas (suma, promedio, porcentaje), crear gráficos y estadísticas, gestionar inventarios y llevar registros contables. Es el programa más usado en empresas para manejar datos numéricos.',
+                    keyPoint: 'Excel = tablas + fórmulas + gráficos. Ideal para contabilidad, inventarios y análisis de datos.'
+                },
+                q          : '¿Para qué se usa principalmente Microsoft Excel?',
+                options    : ['Editar y retocar fotografías digitales', 'Crear y gestionar hojas de cálculo con datos, fórmulas y gráficos', 'Navegar y buscar páginas en internet'],
+                a          : 1,
+                explanation: '¡Exacto! Excel es la herramienta ideal para trabajar con datos numéricos, fórmulas y tablas. No sirve para editar fotos (eso es Photoshop) ni para navegar (eso es Chrome o Firefox).'
+            },
+            {
+                moduleIdx : 2,
+                lesson: {
+                    num     : 'Módulo 3 · Lección 2 de 2',
+                    title   : 'Microsoft PowerPoint',
+                    icon    : 'fas fa-file-powerpoint',
+                    iconBg  : 'bg-green-100',
+                    iconColor: 'text-green-600',
+                    badgeBg : 'bg-green-100 text-green-700',
+                    content : 'Microsoft PowerPoint es el programa para crear presentaciones visuales. Cada "página" de una presentación se llama DIAPOSITIVA. Puedes agregar texto, imágenes, gráficos, videos y animaciones. Se usa en reuniones de trabajo, exposiciones académicas, capacitaciones y ventas. Un archivo de PowerPoint tiene la extensión .pptx.',
+                    keyPoint: 'En PowerPoint, cada página = DIAPOSITIVA (nunca "hoja" ni "página"). Un archivo PowerPoint = .pptx'
+                },
+                q          : 'En una presentación de Microsoft PowerPoint, ¿cómo se llama cada "página" individual?',
+                options    : ['Hoja de trabajo', 'Diapositiva', 'Capítulo'],
+                a          : 1,
+                explanation: '¡Correcto! En PowerPoint, cada página se llama DIAPOSITIVA. Este término es importante en el ambiente laboral — decir "hoja" sería incorrecto técnicamente.'
+            },
+            // ── MÓDULO 4: Internet y Seguridad ──
+            {
+                moduleIdx : 3,
+                lesson: {
+                    num     : 'Módulo 4 · Lección 1 de 2',
+                    title   : 'Phishing: El Fraude Digital',
+                    icon    : 'fas fa-user-secret',
+                    iconBg  : 'bg-purple-100',
+                    iconColor: 'text-purple-600',
+                    badgeBg : 'bg-purple-100 text-purple-700',
+                    content : 'El phishing es uno de los fraudes digitales más comunes. Funciona así: un delincuente envía un correo, mensaje de WhatsApp o SMS que parece venir de un banco, empresa o red social. El mensaje incluye un link a una página falsa idéntica a la real. Si ingresas tus datos ahí, el delincuente los roba. Señales de alerta: mensajes urgentes, links extraños, solicitudes de contraseñas o datos bancarios.',
+                    keyPoint: '🚨 Ningún banco ni empresa legítima te pedirá tu contraseña por correo o mensaje. Si lo piden, es fraude.'
+                },
+                q          : '¿Qué es el "phishing"?',
+                options    : ['Un tipo de antivirus gratuito para proteger el computador', 'Un intento de robar datos personales mediante correos o páginas web falsas', 'Una herramienta para mejorar la velocidad de tu conexión a internet'],
+                a          : 1,
+                explanation: '¡Correcto! El phishing es un ataque de ingeniería social. Los delincuentes se disfrazan de empresas reales para robarte contraseñas o datos bancarios. Siempre verifica el remitente antes de hacer clic.'
+            },
+            {
+                moduleIdx : 3,
+                lesson: {
+                    num     : 'Módulo 4 · Lección 2 de 2',
+                    title   : 'Contraseñas Seguras',
+                    icon    : 'fas fa-lock',
+                    iconBg  : 'bg-purple-100',
+                    iconColor: 'text-purple-600',
+                    badgeBg : 'bg-purple-100 text-purple-700',
+                    content : 'Una contraseña débil es como dejar la llave bajo el tapete. Una contraseña segura debe tener: mínimo 8 caracteres, letras mayúsculas Y minúsculas, al menos un número y al menos un símbolo (@, #, !, $, *). Evita: tu nombre, fecha de nacimiento, "123456", "password" o palabras del diccionario. Usa contraseñas diferentes para cada cuenta importante.',
+                    keyPoint: 'Contraseña segura = MAYÚSCULAS + minúsculas + números + símbolos. Ejemplo: G7#mK!9p ✅'
+                },
+                q          : '¿Cuál de estas opciones representa una contraseña SEGURA?',
+                options    : ['"123456"  (números en secuencia)', '"tuNombre + tu fecha de nacimiento"  (datos personales)', '"G7#mK!9p"  (mayúsculas, minúsculas, números y símbolos)'],
+                a          : 2,
+                explanation: '¡Excelente! Una contraseña como G7#mK!9p es segura porque combina mayúsculas, minúsculas, números y símbolos. Las opciones A y B son las más hackeadas del mundo.'
+            }
+        ];
+
+        const modules = [
+            { label:'Módulo 1 · Fundamentos',  icon:'fas fa-desktop',      qs:[0,1] },
+            { label:'Módulo 2 · Windows',       icon:'fas fa-folder',       qs:[2,3] },
+            { label:'Módulo 3 · Ofimática',     icon:'fas fa-file-excel',   qs:[4,5] },
+            { label:'Módulo 4 · Seguridad',     icon:'fas fa-wifi',         qs:[6,7] }
+        ];
+
+        let currentIdx   = 0;
+        let score        = 0;
+        let quizPhase    = 'learning'; // 'learning' | 'answering'
+        const passingScore = 0.75;
+
+        // ── NAVEGACIÓN ───────────────────────────────────────────────
+        function scrollToForm() { document.getElementById('form-datos').scrollIntoView({ behavior:'smooth' }); }
+        function exitQuiz()     { if(confirm('¿Seguro que deseas salir?')) location.reload(); }
+
+        function switchView(viewName) {
+            ['view-sales-page','view-quiz-app','view-checkout','view-fail'].forEach(id =>
+                document.getElementById(id).classList.add('hidden-section')
+            );
+            document.getElementById(viewName).classList.remove('hidden-section');
+            window.scrollTo(0, 0);
+        }
+
+        // ── FORMULARIO ───────────────────────────────────────────────
+        function submitLandingForm(e) {
+            e.preventDefault();
+            userData = {
+                docType : document.getElementById('land-doctype').value,
+                docNum  : document.getElementById('land-docnum').value,
+                name    : document.getElementById('land-name').value,
+                phone   : document.getElementById('land-phone').value
+            };
+            trackEvent('form_submitted');
+            startQuizFlow();
+        }
+
+        // ── QUIZ FLOW ────────────────────────────────────────────────
+        function startQuizFlow() {
+            currentIdx = 0; score = 0; quizPhase = 'learning';
+            trackEvent('quiz_start');
+            switchView('view-quiz-app');
+            loadLesson();
+        }
+
+        function updateHeader() {
+            const mod = modules.find(m => m.qs.includes(currentIdx)) || modules[0];
+            document.getElementById('module-label').innerText = mod.label;
+            document.getElementById('module-icon').className  = mod.icon + ' opacity-80 text-base';
+            document.getElementById('q-current').innerText    = currentIdx + 1;
+            document.getElementById('q-total').innerText      = curriculum.length;
+            document.getElementById('progress-bar').style.width = (currentIdx / curriculum.length * 100) + '%';
+            modules.forEach((m, i) => {
+                const dot = document.getElementById('mdot-' + i);
+                const cur  = m.qs.includes(currentIdx);
+                const done = m.qs[m.qs.length - 1] < currentIdx;
+                dot.className = 'module-dot' + (cur ? ' active' : '') + (done ? ' done' : '');
+            });
+        }
+
+        // ── FASE 1: MOSTRAR LECCIÓN ──────────────────────────────────
+        function loadLesson() {
+            quizPhase = 'learning';
+            const item = curriculum[currentIdx];
+            const L    = item.lesson;
+            updateHeader();
+
+            // Mostrar lección, ocultar pregunta
+            document.getElementById('lesson-card').classList.remove('hidden');
+            document.getElementById('question-card').classList.add('hidden');
+
+            // Poblar contenido
+            document.getElementById('lesson-module-badge').className   = `inline-flex items-center gap-2 text-xs font-black px-3 py-1.5 rounded-full mb-4 shadow-sm ${L.badgeBg}`;
+            document.getElementById('lesson-module-badge').innerHTML    = `<i class="${L.icon}"></i> ${L.num}`;
+            document.getElementById('lesson-icon-circle').className     = `w-11 h-11 rounded-2xl flex items-center justify-center text-xl flex-shrink-0 ${L.iconBg}`;
+            document.getElementById('lesson-icon-circle').innerHTML     = `<i class="${L.icon} ${L.iconColor}"></i>`;
+            document.getElementById('lesson-num').innerText             = L.num;
+            document.getElementById('lesson-title').innerText           = L.title;
+            document.getElementById('lesson-content').innerText         = L.content;
+            document.getElementById('lesson-keypoint-text').innerText   = L.keyPoint;
+
+            // Botón: "Entendido, responder"
+            setBtnAction('¡Entendido! Responder pregunta <i class="fas fa-arrow-right ml-2"></i>', 'sky', showQuestion);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ── FASE 2: MOSTRAR PREGUNTA ─────────────────────────────────
+        function showQuestion() {
+            quizPhase = 'answering';
+            const item = curriculum[currentIdx];
+
+            document.getElementById('lesson-card').classList.add('hidden');
+            document.getElementById('question-card').classList.remove('hidden');
+            document.getElementById('feedback-area').classList.add('hidden');
+
+            document.getElementById('q-text').innerText = item.q;
+            const container = document.getElementById('q-options');
+            container.innerHTML = '';
+
+            item.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left p-5 rounded-2xl border-2 border-slate-100 bg-white shadow-sm hover:border-sky-300 hover:bg-sky-50 transition-all text-slate-700 font-semibold text-base active:scale-[0.98] leading-snug';
+                btn.innerHTML = `<span class="inline-flex items-center justify-center w-8 h-8 bg-slate-100 rounded-full mr-3 text-slate-500 font-bold text-sm flex-shrink-0">${String.fromCharCode(65+idx)}</span>${opt}`;
+                btn.onclick   = () => checkAnswer(btn, idx, item.a, item.explanation);
+                container.appendChild(btn);
+            });
+
+            // Botón deshabilitado
+            setBtnAction('Selecciona una respuesta', 'disabled', null);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ── FASE 3: EVALUAR RESPUESTA ────────────────────────────────
+        function checkAnswer(btnSelected, selectedIdx, correctIdx, explanation) {
+            document.getElementById('q-options').querySelectorAll('button').forEach(b => b.disabled = true);
+
+            const isCorrect = selectedIdx === correctIdx;
+            if (isCorrect) score++;
+
+            // Colorear opción seleccionada
+            btnSelected.className = `w-full text-left p-5 rounded-2xl border-2 ${isCorrect ? 'border-green-500 bg-green-50 text-green-800' : 'border-red-500 bg-red-50 text-red-800'} font-bold shadow-md text-base leading-snug`;
+            btnSelected.querySelector('span').className = `inline-flex items-center justify-center w-8 h-8 ${isCorrect ? 'bg-green-200 text-green-700' : 'bg-red-200 text-red-700'} rounded-full mr-3 font-bold text-sm flex-shrink-0`;
+
+            // Si falla, mostrar la correcta
+            if (!isCorrect) {
+                const correctBtn = document.getElementById('q-options').querySelectorAll('button')[correctIdx];
+                correctBtn.className = 'w-full text-left p-5 rounded-2xl border-2 border-green-500 bg-green-50 opacity-90 font-semibold text-base leading-snug';
+            }
+
+            // Feedback con explicación
+            const fb = document.getElementById('feedback-area');
+            fb.classList.remove('hidden');
+            fb.className = `mt-3 p-5 rounded-2xl shadow-sm border-2 ${isCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`;
+            document.getElementById('feedback-header').className = `flex items-center gap-2 font-black text-lg mb-2 ${isCorrect ? 'text-green-700' : 'text-red-700'}`;
+            document.getElementById('feedback-header').innerHTML = isCorrect
+                ? '<i class="fas fa-check-circle text-2xl"></i> ¡Respuesta Correcta!'
+                : '<i class="fas fa-times-circle text-2xl"></i> Respuesta Incorrecta';
+            document.getElementById('feedback-explanation').className = `text-sm leading-relaxed font-medium ${isCorrect ? 'text-green-800' : 'text-red-800'}`;
+            document.getElementById('feedback-explanation').innerText = explanation;
+
+            trackEvent('quiz_answer', { leccion: currentIdx + 1, result: isCorrect ? 'ok' : 'fail' });
+
+            // Botón siguiente
+            const isLast = currentIdx === curriculum.length - 1;
+            setBtnAction(
+                isLast ? 'Ver mi resultado <i class="fas fa-flag-checkered ml-2"></i>' : 'Siguiente lección <i class="fas fa-arrow-right ml-2"></i>',
+                'sky',
+                advanceLesson
+            );
+            setTimeout(() => document.getElementById('feedback-area').scrollIntoView({ behavior:'smooth', block:'end' }), 400);
+        }
+
+        function advanceLesson() {
+            currentIdx++;
+            if (currentIdx < curriculum.length) {
+                loadLesson();
+            } else {
+                finishExam();
+            }
+        }
+
+        // ── BOTÓN DE ACCIÓN DINÁMICO ─────────────────────────────────
+        function setBtnAction(html, style, handler) {
+            const btn = document.getElementById('btn-action');
+            const styles = {
+                sky      : 'w-full bg-gradient-to-r from-sky-600 to-sky-800 text-white font-black py-4 rounded-2xl text-lg transition-all shadow-[0_10px_25px_-5px_rgba(2,132,199,0.5)] flex justify-center items-center cursor-pointer active:scale-95 tracking-wide',
+                disabled : 'w-full bg-gray-200 text-gray-400 font-bold py-4 rounded-2xl text-lg transition-all shadow-inner flex justify-center items-center cursor-not-allowed tracking-wide'
+            };
+            btn.className = styles[style] || styles.disabled;
+            btn.innerHTML = html;
+            btn.disabled  = !handler;
+            btn.onclick   = handler || null;
+        }
+
+        // ── FIN DEL EXAMEN ───────────────────────────────────────────
+        function finishExam() {
+            const pct = score / curriculum.length;
+            if (pct >= passingScore) {
+                trackEvent('quiz_passed', { score: score + '/' + curriculum.length });
+                switchView('view-checkout');
+                startCheckoutTimer();
+                const el = document.getElementById('checkout-name');
+                if (el && userData.name) el.textContent = userData.name.split(' ')[0] + ',';
+            } else {
+                trackEvent('quiz_failed', { score: score + '/' + curriculum.length });
+                switchView('view-fail');
+                const el = document.getElementById('fail-score');
+                if (el) el.textContent = `Tu puntaje: ${score} de ${curriculum.length} respuestas correctas`;
+            }
+        }
+
+        // ── CONTADOR ─────────────────────────────────────────────────
+        let timerInterval = null;
+        function startCheckoutTimer() {
+            let s = 24 * 60;
+            const el = document.getElementById('checkout-timer');
+            if (!el) return;
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                s--;
+                if (s <= 0) { clearInterval(timerInterval); el.textContent = '00:00'; return; }
+                el.textContent = String(Math.floor(s/60)).padStart(2,'0') + ':' + String(s%60).padStart(2,'0');
+            }, 1000);
+        }
+
+        // ── PAGO ─────────────────────────────────────────────────────
+        async function initPayment() {
+            trackEvent('payment_initiated', { metodo:'Wompi', curso:'Informática Básica' });
+            const loader = document.getElementById('pay-loader');
+            if (loader) loader.classList.remove('hidden');
+            const parts = (userData.name||'').split(' ');
+            try {
+                await fetch(API_INGRESOS, {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({ nombre: parts[0]||'', apellido: parts.slice(1).join(' ')||'', numeroDeDocumento: userData.docNum||'', telefono: userData.phone||'', valor:80000, cuenta:'Wompi Web', tipo:'Curso Informática Básica', usuarioId:1 })
+                });
+            } catch(_) {}
+            if (loader) loader.classList.add('hidden');
+            // ╔═══════════════════════════════════════════════════════╗
+            // ║  REEMPLAZA CON EL ENLACE DE TU PASARELA WOMPI AQUÍ    ║
+            // ╚═══════════════════════════════════════════════════════╝
+            window.open('https://checkout.nequi.wompi.co/l/7R3AgN', '_blank');
+        }
+
+        // ── FAQ ───────────────────────────────────────────────────────
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling, icon = btn.querySelector('i'), isOpen = !answer.classList.contains('hidden');
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('.faq-item button i').forEach(i => i.style.transform = '');
+            if (!isOpen) { answer.classList.remove('hidden'); icon.style.transform = 'rotate(180deg)'; }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => trackEvent('page_view'));
+    </script>
+</body>
+</html>

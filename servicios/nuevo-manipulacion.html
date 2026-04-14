@@ -27,25 +27,39 @@
             100% { box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
         }
 
-        /* --- BOTÓN DE PAGO NEQUI --- */
-        .btn-nequi-pay {
-            background: linear-gradient(135deg, var(--nequi-pink) 0%, var(--nequi-purple) 100%);
+        /* --- BOTÓN DE PAGO PRINCIPAL --- */
+        .btn-pay-main {
+            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
             color: white;
-            box-shadow: 0 10px 25px -5px rgba(218, 0, 99, 0.6);
+            box-shadow: 0 10px 30px -5px rgba(22, 163, 74, 0.6);
             transition: all 0.3s ease;
             border: 2px solid rgba(255,255,255,0.2);
         }
-        .btn-nequi-pay:hover, .btn-nequi-pay:active {
+        .btn-pay-main:hover, .btn-pay-main:active {
              transform: translateY(-3px) scale(1.02);
-             box-shadow: 0 15px 35px -5px rgba(218, 0, 99, 0.8);
-             filter: brightness(1.1);
+             box-shadow: 0 18px 40px -5px rgba(22, 163, 74, 0.8);
+             filter: brightness(1.05);
         }
         /* Animación pulso botón pago */
-        .animate-pulse-slow { animation: pulse-slow 3s infinite ease-in-out; }
+        .animate-pulse-slow { animation: pulse-slow 2.5s infinite ease-in-out; }
         @keyframes pulse-slow {
-            0%, 100% { box-shadow: 0 10px 25px -5px rgba(218, 0, 99, 0.6); }
-            50% { box-shadow: 0 20px 40px -5px rgba(218, 0, 99, 0.9); }
+            0%, 100% { box-shadow: 0 10px 30px -5px rgba(22, 163, 74, 0.6); }
+            50% { box-shadow: 0 22px 45px -5px rgba(22, 163, 74, 0.9); }
         }
+
+        /* Pasos de pago */
+        .pay-step { display: flex; align-items: flex-start; gap: 12px; }
+        .pay-step-num { width: 28px; height: 28px; background: #002e7d; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; margin-top: 2px; }
+
+        /* Timer urgencia */
+        .urgency-bar { background: linear-gradient(90deg, #dc2626, #b91c1c); }
+        .timer-digit { font-variant-numeric: tabular-nums; }
+
+        /* Métodos de pago */
+        .payment-method-badge { display: inline-flex; align-items: center; gap: 5px; background: white; border: 1.5px solid #e5e7eb; border-radius: 8px; padding: 5px 10px; font-size: 11px; font-weight: 700; color: #374151; }
+        .payment-method-badge.nequi { border-color: #DA0063; color: #DA0063; }
+        .payment-method-badge.bancolombia { border-color: #FDDA24; background: #FDDA24; color: #1a1a1a; }
+        .payment-method-badge.card { border-color: #3b82f6; color: #3b82f6; }
         
         /* Listas */
         .benefit-list li { margin-bottom: 12px; display: flex; align-items: start; }
@@ -63,7 +77,7 @@
                     <p class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider font-semibold">Formación & Certificación</p>
                 </div>
             </div>
-            <a href="#inicio-examen" onclick="scrollToExam()" class="bg-green-600 text-white text-xs md:text-sm font-bold px-5 py-2.5 rounded-full shadow-sm hover:bg-green-700 transition transform active:scale-95 flex items-center">
+            <a href="#form-datos" onclick="scrollToForm()" class="bg-green-600 text-white text-xs md:text-sm font-bold px-5 py-2.5 rounded-full shadow-sm hover:bg-green-700 transition transform active:scale-95 flex items-center">
                 <i class="fas fa-play mr-2 text-[10px]"></i> Iniciar Examen
             </a>
         </div>
@@ -72,90 +86,330 @@
     <main id="main-container" class="flex-grow">
 
         <div id="view-sales-page">
-            
-            <section class="bg-black text-white pt-12 pb-20 px-4 text-center rounded-b-[2.5rem] shadow-2xl relative overflow-hidden">
-            
-                
-                <div class="relative z-10 max-w-3xl mx-auto">
-                    <div class="inline-flex items-center bg-red-600/90 backdrop-blur text-white text-xs md:text-sm font-bold px-4 py-1.5 rounded-full mb-6 animate-bounce shadow-lg">
-                        <i class="fas fa-utensils mr-2"></i> Exigido por Secretaría de Salud
+
+            <!-- TICKER urgencia -->
+            <div class="bg-red-600 overflow-hidden py-2 border-b border-red-700">
+                <div class="flex whitespace-nowrap animate-[ticker_20s_linear_infinite]" style="animation:ticker 22s linear infinite">
+                    <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-exclamation-circle"></i> Resolución 2674 de 2013 — Obligatorio para todo manipulador de alimentos</span>
+                    <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-certificate"></i> Certificado válido ante Secretaría de Salud</span>
+                    <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-bolt"></i> Examen gratis — Carnet en menos de 10 minutos</span>
+                    <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-exclamation-circle"></i> Resolución 2674 de 2013 — Obligatorio para todo manipulador de alimentos</span>
+                    <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-certificate"></i> Certificado válido ante Secretaría de Salud</span>
+                    <span class="text-white text-xs font-bold mx-8 flex items-center gap-2"><i class="fas fa-bolt"></i> Examen gratis — Carnet en menos de 10 minutos</span>
+                </div>
+            </div>
+            <style>@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }</style>
+
+            <!-- HERO -->
+            <section class="bg-gradient-to-br from-slate-900 via-black to-slate-900 text-white pt-10 pb-16 px-4 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                <div class="relative z-10 max-w-4xl mx-auto text-center">
+
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 bg-red-600 text-white text-xs font-black px-4 py-1.5 rounded-full mb-5 shadow-lg">
+                        <span class="w-2 h-2 bg-white rounded-full animate-ping inline-block"></span>
+                        EXIGIDO POR SECRETARÍA DE SALUD — RESOLUCIÓN 2674
                     </div>
-                    <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-tight tracking-tight">
-                        Evita el Cierre de tu Cocina: <br class="hidden md:block">Certifícate en <span class="text-yellow-400 inline-block transform -rotate-1">Manipulación de Alimentos</span>
+
+                    <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight tracking-tight">
+                        Obtén tu <span class="text-yellow-400">Carnet de Manipulador</span><br class="hidden md:block"> de Alimentos Hoy
                     </h1>
-                    <p class="text-gray-300 text-lg md:text-2xl mb-10 leading-relaxed font-medium max-w-2xl mx-auto">
-                        Cumple la resolución 2674 de 2013. Curso 100% Válido para restaurantes, plantas y transportadores.
+                    <p class="text-gray-300 text-base md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
+                        100% online · Desde tu celular · <strong class="text-white">Sin cursos presenciales</strong> · Válido para restaurantes, plantas y transportadores.
                     </p>
-                    
-                    <div class="bg-white text-slate-900 p-6 md:p-8 rounded-2xl shadow-[0_20px_50px_rgba(255,255,255,0.1)] max-w-sm mx-auto transform transition duration-500 hover:scale-105 relative z-20 border-4 border-yellow-400">
-                        <div class="absolute -top-4 right-4 bg-red-600 text-white text-xs font-black px-3 py-1 rounded-full uppercase tracking-wide shadow-sm animate-pulse">Oferta Hoy</div>
-                        <div class="flex justify-center items-baseline gap-3 mb-6">
-                            <span class="text-5xl md:text-6xl font-black text-primary tracking-tighter">$25.000</span>
-                            <span class="text-lg text-gray-400 line-through font-semibold">$50.000</span>
+
+                    <!-- Prueba social -->
+                    <div class="flex items-center justify-center gap-3 mb-8">
+                        <div class="flex -space-x-2">
+                            <div class="w-9 h-9 rounded-full bg-blue-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">JM</div>
+                            <div class="w-9 h-9 rounded-full bg-green-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">LR</div>
+                            <div class="w-9 h-9 rounded-full bg-orange-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">CP</div>
+                            <div class="w-9 h-9 rounded-full bg-purple-500 border-2 border-white flex items-center justify-center text-white text-xs font-bold">+</div>
                         </div>
-                        <button onclick="scrollToExam()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl shadow-xl text-lg transition flex justify-center items-center pulse-btn-red active:scale-95">
-                            ¡Quiero mi Carnet! <i class="fas fa-arrow-right ml-3"></i>
+                        <p class="text-sm text-gray-300 font-medium"><strong class="text-yellow-400">+1.200 personas</strong> certificadas este mes</p>
+                    </div>
+
+                    <!-- Tarjeta de precio y CTA principal -->
+                    <div class="bg-white text-slate-900 rounded-3xl p-6 md:p-8 max-w-sm mx-auto shadow-2xl border-4 border-yellow-400 relative">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-red-600 text-white text-xs font-black px-4 py-1.5 rounded-full shadow-md animate-pulse whitespace-nowrap uppercase tracking-wide">
+                            🔥 50% OFF — Solo hoy
+                        </div>
+                        <div class="flex justify-center items-baseline gap-3 mb-2 mt-2">
+                            <span class="text-5xl font-black text-primary">$25.000</span>
+                            <span class="text-xl text-gray-400 line-through font-semibold">$50.000</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mb-5 font-medium">Curso + Certificado + Carnet · Vigencia 1 año</p>
+                        <button onclick="scrollToForm()" class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-2xl text-lg shadow-xl transition pulse-btn-red active:scale-95 flex items-center justify-center gap-2">
+                            <i class="fas fa-id-card"></i> OBTENER MI CARNET AHORA
                         </button>
-                         <p class="text-xs text-gray-400 mt-3 flex items-center justify-center"><i class="fas fa-check-circle mr-1 text-green-500"></i> Entrega inmediata post-examen</p>
+                        <div class="flex items-center justify-center gap-4 mt-4 text-xs text-gray-500">
+                            <span class="flex items-center gap-1"><i class="fas fa-redo text-blue-400"></i> Examen gratis</span>
+                            <span class="flex items-center gap-1"><i class="fas fa-bolt text-yellow-400"></i> Carnet en 10 min</span>
+                        </div>
+                    </div>
+
+                    <!-- Trust badges -->
+                    <div class="flex flex-wrap justify-center gap-3 mt-7">
+                        <span class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold"><i class="fas fa-shield-alt text-green-400"></i> Pago 100% seguro</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold"><i class="fas fa-mobile-alt text-blue-400"></i> Desde tu celular</span>
+                        <span class="flex items-center gap-1.5 text-xs text-gray-400 font-semibold"><i class="fas fa-clock text-yellow-400"></i> Menos de 10 min</span>
                     </div>
                 </div>
             </section>
 
-            <section class="py-16 px-4 bg-white">
-                <div class="max-w-5xl mx-auto">
-                    <h2 class="text-2xl md:text-3xl font-bold text-center mb-10 text-slate-800">
-                        ¿Tu negocio pasaría una inspección sorpresa hoy?
-                    </h2>
-                    <div class="grid md:grid-cols-2 gap-8 items-start">
-                        <div class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
-                            <p class="text-gray-600 mb-6 text-lg font-medium leading-relaxed">
-                                No arriesgues tu inversión. La falta de capacitación certificada del personal es la causa #1 de:
-                            </p>
-                            <ul class="benefit-list text-base text-gray-700">
-                                <li><i class="fas fa-ban text-red-500"></i> <strong>Clausura inmediata</strong> del establecimiento.</li>
-                                <li><i class="fas fa-file-invoice-dollar text-red-500"></i> <strong>Multas costosas</strong> y procesos legales.</li>
-                                <li><i class="fas fa-bacterium text-red-500"></i> <strong>Intoxicaciones</strong> en clientes (Mala reputación).</li>
-                            </ul>
+            <!-- FORMULARIO DE DATOS -->
+            <section id="form-datos" class="py-12 px-4 bg-primary relative overflow-hidden">
+                <div class="absolute inset-0 opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+                <div class="max-w-lg mx-auto relative z-10">
+
+                    <!-- Encabezado -->
+                    <div class="text-center mb-7">
+                        <div class="inline-flex items-center gap-2 bg-white/10 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-4">
+                            <i class="fas fa-user-check"></i> PASO 1 DE 2 — TUS DATOS
                         </div>
-                        <div class="bg-white border-2 border-blue-100 p-6 rounded-2xl shadow-lg relative overflow-hidden">
-                            <div class="absolute top-0 right-0 -mt-4 -mr-4 bg-blue-100 w-20 h-20 rounded-full opacity-50"></div>
-                            <h3 class="font-bold text-xl text-blue-800 mb-4 flex items-center"><i class="fas fa-certificate text-blue-500 mr-2"></i> Solución Inmediata:</h3>
-                            <p class="text-base text-gray-700 mb-4 leading-relaxed">
-                                En <strong>Conalianza</strong> certificamos tus conocimientos sin que pierdas días de trabajo en cursos presenciales.
+                        <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">Ingresa tus datos para <span class="text-yellow-400">personalizar tu carnet</span></h2>
+                        <p class="text-blue-200 text-sm mt-2">Solo toma 20 segundos · Se usan para emitir tu certificado oficial</p>
+                    </div>
+
+                    <!-- Card del formulario -->
+                    <div class="bg-white rounded-3xl shadow-2xl p-6 md:p-8">
+                        <form id="landing-form" onsubmit="submitLandingForm(event)" class="space-y-4">
+
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">Tipo de Documento <span class="text-red-500">*</span></label>
+                                    <select id="land-doctype" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer transition">
+                                        <option value="" disabled selected>Selecciona…</option>
+                                        <option value="CC">Cédula de Ciudadanía</option>
+                                        <option value="TI">Tarjeta de Identidad</option>
+                                        <option value="CE">Cédula de Extranjería</option>
+                                        <option value="PPT">Permiso PPT</option>
+                                        <option value="PAS">Pasaporte</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-2 sm:col-span-1">
+                                    <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">Número de Documento <span class="text-red-500">*</span></label>
+                                    <input type="number" id="land-docnum" required placeholder="Ej: 1090333444"
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">Nombre Completo <span class="text-red-500">*</span></label>
+                                <input type="text" id="land-name" required placeholder="Nombres y apellidos"
+                                    class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition capitalize" />
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-600 mb-1.5 uppercase tracking-wide">WhatsApp <span class="text-red-500">*</span> <span class="text-gray-400 font-normal normal-case">(para enviarte el carnet)</span></label>
+                                <div class="relative">
+                                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-500">🇨🇴 +57</span>
+                                    <input type="tel" id="land-phone" required placeholder="3001234567" maxlength="10"
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-16 pr-4 py-3 text-sm font-semibold text-slate-800 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition" />
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full bg-red-600 hover:bg-red-700 text-white font-black py-4 rounded-2xl text-lg shadow-xl transition pulse-btn-red active:scale-95 flex items-center justify-center gap-3 mt-2">
+                                <i class="fas fa-play-circle text-xl"></i>
+                                INICIAR MI EXAMEN GRATIS
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+
+                            <p class="text-center text-xs text-gray-400 flex items-center justify-center gap-1.5">
+                                <i class="fas fa-lock text-green-500"></i> Tus datos solo se usan para emitir tu certificado oficial
                             </p>
-                            <p class="font-medium text-blue-900">
-                                Realiza el examen online desde tu celular. Si apruebas, obtienes tu <strong>Certificado y Carnet de Manipulador</strong> al instante por solo $25.000.
-                            </p>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIESGOS -->
+            <section class="py-12 px-4 bg-white">
+                <div class="max-w-4xl mx-auto text-center">
+                    <p class="text-xs font-bold uppercase tracking-widest text-red-600 mb-2">¿Sabías esto?</p>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-8">Sin carnet, tu negocio está en riesgo hoy</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-red-50 border border-red-100 rounded-2xl p-5 text-left">
+                            <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-ban text-red-500 text-lg"></i></div>
+                            <h3 class="font-bold text-slate-800 mb-1">Clausura inmediata</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">La Secretaría de Salud puede cerrar tu local en la primera visita si el personal no está certificado.</p>
+                        </div>
+                        <div class="bg-orange-50 border border-orange-100 rounded-2xl p-5 text-left">
+                            <div class="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-file-invoice-dollar text-orange-500 text-lg"></i></div>
+                            <h3 class="font-bold text-slate-800 mb-1">Multas hasta $1.000.000</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">El incumplimiento de la Res. 2674 genera sanciones económicas y procesos legales ante el INVIMA.</p>
+                        </div>
+                        <div class="bg-yellow-50 border border-yellow-100 rounded-2xl p-5 text-left">
+                            <div class="w-10 h-10 bg-yellow-100 rounded-xl flex items-center justify-center mb-3"><i class="fas fa-bacterium text-yellow-600 text-lg"></i></div>
+                            <h3 class="font-bold text-slate-800 mb-1">Daño a tu reputación</h3>
+                            <p class="text-sm text-gray-500 leading-relaxed">Una intoxicación o alerta pública puede destruir años de trabajo y la confianza de tus clientes.</p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section id="inicio-examen" class="py-20 px-4 bg-black text-white text-center relative overflow-hidden">
-                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                <div class="max-w-2xl mx-auto relative z-10">
-                    <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center text-slate-900 text-4xl mx-auto mb-6 shadow-lg shadow-yellow-400/30">
+            <!-- CÓMO FUNCIONA -->
+            <section class="py-12 px-4 bg-slate-50">
+                <div class="max-w-3xl mx-auto text-center">
+                    <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2">Simple y rápido</p>
+                    <h2 class="text-2xl md:text-3xl font-black text-slate-900 mb-8">Tu carnet en 3 pasos desde el celular</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center relative">
+                            <div class="w-12 h-12 bg-primary text-white rounded-2xl flex items-center justify-center text-xl font-black mx-auto mb-4 shadow-md">1</div>
+                            <h3 class="font-bold text-slate-800 mb-1">Haz el examen gratis</h3>
+                            <p class="text-sm text-gray-500">8 preguntas sobre BPM. Intentos ilimitados sin costo.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center relative">
+                            <div class="w-12 h-12 bg-green-600 text-white rounded-2xl flex items-center justify-center text-xl font-black mx-auto mb-4 shadow-md">2</div>
+                            <h3 class="font-bold text-slate-800 mb-1">Paga $25.000 seguro</h3>
+                            <p class="text-sm text-gray-500">Wompi (Bancolombia): Nequi, PSE, tarjeta o débito.</p>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 text-center relative">
+                            <div class="w-12 h-12 bg-yellow-400 text-slate-900 rounded-2xl flex items-center justify-center text-xl font-black mx-auto mb-4 shadow-md">3</div>
+                            <h3 class="font-bold text-slate-800 mb-1">Recibe tu carnet</h3>
+                            <p class="text-sm text-gray-500">Certificado + carnet digital por WhatsApp en menos de 10 min.</p>
+                        </div>
+                    </div>
+                    <button onclick="scrollToForm()" class="bg-red-600 hover:bg-red-700 text-white font-black py-4 px-10 rounded-full text-lg shadow-xl transition pulse-btn-red active:scale-95 inline-flex items-center gap-2">
+                        <i class="fas fa-id-card"></i> Quiero mi carnet — comenzar
+                    </button>
+                </div>
+            </section>
+
+            <!-- QUÉ INCLUYE -->
+            <section class="py-12 px-4 bg-white">
+                <div class="max-w-3xl mx-auto">
+                    <div class="text-center mb-8">
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2">Todo incluido</p>
+                        <h2 class="text-2xl md:text-3xl font-black text-slate-900">¿Qué recibes por $25.000?</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-4 bg-green-50 border border-green-100 rounded-2xl p-5">
+                            <div class="w-10 h-10 bg-green-600 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-certificate"></i></div>
+                            <div><h3 class="font-bold text-slate-800">Certificado Digital PDF</h3><p class="text-sm text-gray-500 mt-0.5">Válido ante Secretaría de Salud y INVIMA. Res. 2674 de 2013.</p></div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-blue-50 border border-blue-100 rounded-2xl p-5">
+                            <div class="w-10 h-10 bg-blue-600 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-id-card"></i></div>
+                            <div><h3 class="font-bold text-slate-800">Carnet con QR verificable</h3><p class="text-sm text-gray-500 mt-0.5">Escaneable por cualquier inspector para verificar autenticidad.</p></div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-yellow-50 border border-yellow-100 rounded-2xl p-5">
+                            <div class="w-10 h-10 bg-yellow-500 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fas fa-calendar-check"></i></div>
+                            <div><h3 class="font-bold text-slate-800">Vigencia de 1 año</h3><p class="text-sm text-gray-500 mt-0.5">Cumples con la normativa durante todo el año sin renovación anticipada.</p></div>
+                        </div>
+                        <div class="flex items-start gap-4 bg-purple-50 border border-purple-100 rounded-2xl p-5">
+                            <div class="w-10 h-10 bg-purple-600 text-white rounded-xl flex items-center justify-center flex-shrink-0"><i class="fab fa-whatsapp"></i></div>
+                            <div><h3 class="font-bold text-slate-800">Entrega por WhatsApp</h3><p class="text-sm text-gray-500 mt-0.5">Recibes todo en menos de 10 minutos directamente en tu celular.</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TESTIMONIOS -->
+            <section class="py-12 px-4 bg-slate-50">
+                <div class="max-w-3xl mx-auto text-center">
+                    <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2">Lo dicen nuestros usuarios</p>
+                    <h2 class="text-2xl font-black text-slate-900 mb-8">Miles ya están certificados</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 text-left">
+                            <div class="flex text-yellow-400 text-sm mb-3">★★★★★</div>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-4">"Lo hice en 15 minutos desde el celular. Pensé que iba a ser complicado pero fue muy fácil."</p>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">JL</div>
+                                <div><p class="text-xs font-bold text-slate-800">Jorge L.</p><p class="text-[10px] text-gray-400">Cocinero · Bogotá</p></div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 text-left">
+                            <div class="flex text-yellow-400 text-sm mb-3">★★★★★</div>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-4">"Nos lo exigieron en una inspección. Gracias a Conalianza certificamos a todo el equipo ese mismo día."</p>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-xs font-bold">MR</div>
+                                <div><p class="text-xs font-bold text-slate-800">María R.</p><p class="text-[10px] text-gray-400">Administradora · Medellín</p></div>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-100 text-left">
+                            <div class="flex text-yellow-400 text-sm mb-3">★★★★★</div>
+                            <p class="text-sm text-gray-600 leading-relaxed mb-4">"El carnet llegó rapidísimo por WhatsApp. Muy profesional y a un precio justo."</p>
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-xs font-bold">CA</div>
+                                <div><p class="text-xs font-bold text-slate-800">Carlos A.</p><p class="text-[10px] text-gray-400">Dueño de restaurante · Cali</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="py-12 px-4 bg-white">
+                <div class="max-w-2xl mx-auto">
+                    <div class="text-center mb-8">
+                        <p class="text-xs font-bold uppercase tracking-widest text-primary mb-2">Preguntas frecuentes</p>
+                        <h2 class="text-2xl font-black text-slate-900">Resolvemos tus dudas</h2>
+                    </div>
+                    <div class="space-y-3" id="faq-list">
+                        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                                ¿El certificado es legalmente válido?
+                                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                                Sí. Conalianza está habilitada para emitir certificados de manipulación de alimentos bajo la Resolución 2674 de 2013, válido para presentar ante la Secretaría de Salud, INVIMA o cualquier inspector sanitario.
+                            </div>
+                        </div>
+                        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                                ¿Qué pasa si no apruebo el examen?
+                                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                                Puedes repetirlo las veces que necesites sin ningún costo adicional. El examen es gratuito — solo pagas cuando apruebas y quieres tu carnet.
+                            </div>
+                        </div>
+                        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                                ¿Cómo recibo el carnet?
+                                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                                Luego de confirmar el pago por la pasarela, recibes el certificado en PDF y el carnet digital directamente en tu WhatsApp en menos de 10 minutos. Sin esperas.
+                            </div>
+                        </div>
+                        <div class="faq-item border border-slate-100 rounded-2xl overflow-hidden shadow-sm">
+                            <button onclick="toggleFaq(this)" class="w-full text-left px-5 py-4 font-bold text-slate-800 flex justify-between items-center bg-white hover:bg-slate-50 transition text-sm md:text-base">
+                                ¿Puedo certificar a todo mi personal?
+                                <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                            </button>
+                            <div class="faq-answer hidden px-5 pb-4 text-sm text-gray-600 leading-relaxed bg-white">
+                                ¡Claro! Cada persona realiza el examen individualmente desde su celular. Para grupos de más de 5 personas escríbenos al WhatsApp y te damos una tarifa especial.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA FINAL -->
+            <section id="inicio-examen" class="py-16 px-4 bg-gradient-to-br from-slate-900 to-black text-white text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
+                <div class="max-w-xl mx-auto relative z-10">
+                    <div class="w-16 h-16 bg-yellow-400 rounded-2xl flex items-center justify-center text-slate-900 text-3xl mx-auto mb-6 shadow-lg shadow-yellow-400/30">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h2 class="text-3xl md:text-4xl font-black mb-4">¡Valida tu Experiencia!</h2>
-                    <p class="text-gray-300 mb-10 text-lg md:text-xl leading-relaxed">
-                        Realiza la evaluación diagnóstica <strong>gratuita</strong>. Si tienes buenas prácticas de manufactura (BPM), aprobarás fácil y rápido.
+                    <h2 class="text-3xl md:text-4xl font-black mb-3">¿Listo para certificarte?</h2>
+                    <p class="text-gray-300 mb-8 text-base md:text-lg leading-relaxed">
+                        El examen es <strong class="text-white">completamente gratis</strong>. Solo pagas si apruebas y decides obtener tu carnet.
                     </p>
-                    <button onclick="startQuizFlow()" class="group relative bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-black text-xl py-5 px-12 rounded-full shadow-2xl w-full md:w-auto transform transition active:scale-95 overflow-hidden">
-                        <span class="relative z-10 flex items-center justify-center">
-                            <i class="fas fa-play-circle mr-3 text-2xl"></i> INICIAR EXAMEN AHORA
-                        </span>
-                        <div class="absolute inset-0 h-full w-full scale-0 rounded-full transition-all duration-300 group-hover:scale-110 group-hover:bg-yellow-300/30"></div>
+                    <button onclick="scrollToForm()" class="group bg-yellow-400 hover:bg-yellow-500 text-slate-900 font-black text-xl py-5 px-12 rounded-full shadow-2xl w-full md:w-auto transform transition active:scale-95 inline-flex items-center justify-center gap-3">
+                        <i class="fas fa-id-card text-2xl"></i> INICIAR MI PROCESO AHORA
                     </button>
-                    <p class="mt-6 text-sm text-gray-400 font-medium flex items-center justify-center">
-                        <i class="fas fa-sync-alt mr-2"></i> Intentos ilimitados sin costo adicional.
+                    <p class="mt-5 text-sm text-gray-400 font-medium flex items-center justify-center gap-2">
+                        <i class="fas fa-sync-alt"></i> Intentos ilimitados · Sin costo hasta aprobar
                     </p>
                 </div>
             </section>
 
-            <footer class="bg-slate-100 py-8 text-center text-sm text-gray-500 mt-auto border-t border-slate-200">
-                <p class="font-medium mb-2">© 2024 Conalianza Capacitaciones</p>
-                <p>Educación para el trabajo y el desarrollo humano.</p>
+            <footer class="bg-slate-900 py-8 text-center text-sm text-gray-500 border-t border-slate-800">
+                <p class="font-medium mb-1 text-gray-400">© 2024 Conalianza Capacitaciones</p>
+                <p class="text-xs">Educación para el trabajo y el desarrollo humano · Res. 2674 de 2013</p>
             </footer>
         </div>
 
@@ -192,61 +446,171 @@
         </div>
 
 
-        <div id="view-checkout" class="hidden-section min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 fade-in">
-            <div class="max-w-md w-full text-center relative z-10">
-                
-                <div class="absolute top-0 left-1/2 -translate-x-1/2 -mt-20 w-full h-full pointer-events-none overflow-hidden z-0">
-                     <div class="absolute top-1/4 left-1/4 w-4 h-4 bg-red-400 rounded-full opacity-70 animate-ping"></div>
-                     <div class="absolute top-1/3 right-1/4 w-3 h-3 bg-blue-400 rounded-lg opacity-70 animate-bounce"></div>
-                </div>
+        <div id="view-checkout" class="hidden-section min-h-screen bg-slate-50 flex flex-col pb-10 fade-in">
 
-                <div class="mb-8 inline-flex p-5 rounded-full bg-green-100 shadow-[0_0_30px_rgba(22,163,74,0.3)] relative z-10 animate-[bounce_2s_infinite]">
-                    <i class="fas fa-check-circle text-7xl text-green-600"></i>
-                </div>
-                
-                <h2 class="text-4xl font-black text-slate-900 mb-3 tracking-tight leading-none">¡APROBADO!</h2>
-                <p class="text-lg text-gray-600 mb-8 font-medium leading-relaxed px-4">
-                    Has aprobado la evaluación BPM. Tu carnet está listo.
+            <!-- Barra de urgencia con contador -->
+            <div class="urgency-bar text-white text-center py-2.5 px-4 sticky top-0 z-50 shadow-md">
+                <p class="text-sm font-bold flex items-center justify-center gap-2">
+                    <i class="fas fa-clock animate-pulse"></i>
+                    Tu resultado está reservado por:
+                    <span class="bg-white/20 rounded px-2 py-0.5 font-black timer-digit" id="checkout-timer">23:59</span>
                 </p>
+            </div>
 
-                <div class="bg-white border-2 border-blue-50 rounded-2xl p-6 shadow-lg mb-8 text-left relative overflow-hidden z-10">
-                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase">Curso + Carnet</div>
-                    <h3 class="font-bold text-gray-800 border-b border-gray-100 pb-3 mb-4 text-lg flex items-center">
-                        <i class="fas fa-receipt mr-2 text-blue-500"></i> Resumen del Pedido
-                    </h3>
-                    
-                    <div class="space-y-3 mb-6">
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600 font-medium"><i class="fas fa-utensils text-gray-400 mr-2 sm"></i>Curso:</span>
+            <div class="max-w-md w-full mx-auto px-4 pt-6">
+
+                <!-- Cabecera aprobado -->
+                <div class="text-center mb-6">
+                    <div class="inline-flex p-4 rounded-full bg-green-100 shadow-[0_0_25px_rgba(22,163,74,0.25)] mb-4">
+                        <i class="fas fa-check-circle text-6xl text-green-600"></i>
+                    </div>
+                    <h2 class="text-4xl font-black text-slate-900 tracking-tight leading-none mb-2">¡APROBADO!</h2>
+                    <p class="text-base text-gray-500 font-medium">Bien <strong id="checkout-name" class="text-slate-700"></strong>, completa el pago para recibir tu carnet.</p>
+                </div>
+
+                <!-- Resumen del pedido -->
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-100 mb-4 overflow-hidden">
+                    <div class="bg-primary text-white text-xs font-bold px-4 py-2 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fas fa-receipt"></i> Resumen del Pedido
+                    </div>
+                    <div class="p-5 space-y-3">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500 font-medium flex items-center gap-2"><i class="fas fa-utensils text-gray-300"></i> Curso</span>
                             <span class="font-bold text-slate-800">Manipulación de Alimentos</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-gray-600 font-medium"><i class="fas fa-clock text-gray-400 mr-2 sm"></i>Vigencia:</span>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500 font-medium flex items-center gap-2"><i class="fas fa-certificate text-gray-300"></i> Incluye</span>
+                            <span class="font-bold text-slate-800">Certificado + Carnet</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-gray-500 font-medium flex items-center gap-2"><i class="fas fa-calendar-check text-gray-300"></i> Vigencia</span>
                             <span class="font-bold text-slate-800">1 Año (Legal)</span>
                         </div>
-                    </div>
-                    
-                    <div class="flex justify-between items-center pt-4 border-t border-gray-100 bg-blue-50/50 -mx-6 -mb-6 p-6">
-                        <span class="font-extrabold text-xl text-primary">Total a Pagar:</span>
-                        <span class="font-black text-3xl text-green-600 tracking-tight">$25.000 COP</span>
+                        <div class="flex justify-between items-center pt-3 border-t border-gray-100">
+                            <span class="font-extrabold text-lg text-primary">Total:</span>
+                            <div class="text-right">
+                                <span class="text-gray-400 line-through text-sm mr-2">$50.000</span>
+                                <span class="font-black text-2xl text-green-600">$25.000 COP</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <a href="https://checkout.nequi.wompi.co/l/AWUVic" class="btn-nequi-pay animate-pulse-slow w-full flex items-center justify-between py-5 px-6 rounded-2xl text-xl font-black mb-6 no-underline relative z-20 group">
-                    <div class="bg-white rounded-xl p-2 flex-shrink-0 shadow-sm">
-                         <img src="https://zen-marketing-assets.s3-us-west-2.amazonaws.com/images/gordan-tmp/logo-Nequi_by_Bancolombia.png" alt="Logo Nequi" class="h-8 md:h-10 w-auto object-contain">
-                    </div>
-                    <span class="flex-grow text-center pl-4 tracking-wide text-white text-lg md:text-xl lg:text-2xl">PAGAR $25.000 Y DESCARGAR</span>
-                    <i class="fas fa-chevron-right ml-4 text-white/70 group-hover:translate-x-1 transition-transform"></i>
-                </a>
-                
-                <div class="text-xs text-gray-500 bg-white p-3 rounded-xl border border-gray-100 shadow-sm flex items-start text-left relative z-10">
-                    <i class="fas fa-shield-alt text-green-500 mt-0.5 mr-2 text-sm"></i>
-                    <div>
-                        <strong>Pago Seguro:</strong> Procesado por Wompi Bancolombia.
-                        <br><span class="text-red-500 font-bold">IMPORTANTE:</span> Toma captura al finalizar.
+                <!-- Métodos de pago con logos reales -->
+                <div class="bg-slate-50 border border-slate-100 rounded-xl p-3 mb-4">
+                    <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest text-center mb-2.5">Métodos de pago aceptados</p>
+                    <div class="flex flex-wrap justify-center items-center gap-2">
+                        <!-- Nequi -->
+                        <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center gap-1.5 shadow-sm">
+                            <img src="https://zen-marketing-assets.s3-us-west-2.amazonaws.com/images/gordan-tmp/logo-Nequi_by_Bancolombia.png"
+                                 onerror="this.parentElement.innerHTML='<span class=\'text-xs font-bold\' style=\'color:#DA0063\'>Nequi</span>'"
+                                 alt="Nequi" class="h-5 w-auto object-contain">
+                        </div>
+                        <!-- PSE -->
+                        <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center gap-1.5 shadow-sm">
+                            <img src="https://www.pse.com.co/images/logo-pse.png"
+                                 onerror="this.parentElement.innerHTML='<span class=\'text-xs font-bold text-blue-700\'>PSE</span>'"
+                                 alt="PSE" class="h-5 w-auto object-contain">
+                        </div>
+                        <!-- Bancolombia -->
+                        <div class="bg-[#FDDA24] border border-yellow-300 rounded-lg px-2.5 py-1.5 flex items-center gap-1.5 shadow-sm">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Bancolombia_logo.svg/200px-Bancolombia_logo.svg.png"
+                                 onerror="this.parentElement.innerHTML='<span class=\'text-xs font-bold text-slate-900\'>Bancolombia</span>'"
+                                 alt="Bancolombia" class="h-4 w-auto object-contain">
+                        </div>
+                        <!-- Visa -->
+                        <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center shadow-sm">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/200px-Visa_Inc._logo.svg.png"
+                                 onerror="this.parentElement.innerHTML='<span class=\'text-xs font-bold text-blue-800\'>VISA</span>'"
+                                 alt="Visa" class="h-4 w-auto object-contain">
+                        </div>
+                        <!-- Mastercard -->
+                        <div class="bg-white border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center shadow-sm">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png"
+                                 onerror="this.parentElement.innerHTML='<span class=\'text-xs font-bold\'>Mastercard</span>'"
+                                 alt="Mastercard" class="h-5 w-auto object-contain">
+                        </div>
                     </div>
                 </div>
+
+                <!-- BOTÓN DE PAGO PRINCIPAL -->
+                <button onclick="initPayment()"
+                   class="btn-pay-main animate-pulse-slow w-full flex items-center justify-center gap-3 py-5 px-6 rounded-2xl font-black mb-3 cursor-pointer border-0 group">
+                    <i class="fas fa-lock text-white/80 text-lg"></i>
+                    <span class="text-white text-xl tracking-wide">PAGAR $25.000 — SEGURO</span>
+                    <span id="pay-loader" class="hidden"><i class="fas fa-circle-notch fa-spin text-white"></i></span>
+                    <i class="fas fa-chevron-right text-white/70 group-hover:translate-x-1 transition-transform"></i>
+                </button>
+
+                <!-- Powered by Wompi -->
+                <p class="text-center text-xs text-gray-400 font-medium mb-4 flex items-center justify-center gap-1">
+                    <i class="fas fa-shield-alt text-green-500"></i>
+                    Pago procesado por <strong class="text-gray-500">Wompi</strong> · Respaldado por Bancolombia
+                </p>
+
+                <!-- Cómo pagar: 3 pasos -->
+                <div class="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 mb-4">
+                    <h3 class="font-bold text-slate-800 text-sm mb-4 flex items-center gap-2">
+                        <i class="fas fa-info-circle text-blue-500"></i> ¿Cómo pago? — Solo 3 pasos
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="pay-step">
+                            <div class="pay-step-num">1</div>
+                            <div>
+                                <p class="font-semibold text-sm text-slate-800">Haz clic en "PAGAR $25.000"</p>
+                                <p class="text-xs text-gray-500 mt-0.5">Se abre la pasarela segura de Wompi (Bancolombia).</p>
+                            </div>
+                        </div>
+                        <div class="pay-step">
+                            <div class="pay-step-num">2</div>
+                            <div>
+                                <p class="font-semibold text-sm text-slate-800">Elige tu método de pago</p>
+                                <p class="text-xs text-gray-500 mt-0.5">Nequi, PSE, tarjeta de crédito o débito. Todos funcionan.</p>
+                            </div>
+                        </div>
+                        <div class="pay-step">
+                            <div class="pay-step-num">3</div>
+                            <div>
+                                <p class="font-semibold text-sm text-slate-800">Toma captura del comprobante y envíala por WhatsApp</p>
+                                <p class="text-xs text-gray-500 mt-0.5">Recibe tu <strong>certificado y carnet en menos de 10 minutos</strong> al WhatsApp que registres.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Qué recibirás -->
+                <div class="bg-green-50 border border-green-100 rounded-xl p-4 mb-4">
+                    <h3 class="font-bold text-green-800 text-sm mb-3 flex items-center gap-2">
+                        <i class="fas fa-gift text-green-600"></i> Lo que recibes al pagar:
+                    </h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center gap-2 text-sm text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> <strong>Certificado digital</strong> en PDF (válido ante Secretaría de Salud)</li>
+                        <li class="flex items-center gap-2 text-sm text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> <strong>Carnet de Manipulador</strong> con QR verificable</li>
+                        <li class="flex items-center gap-2 text-sm text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> <strong>Entrega en menos de 10 minutos</strong> por WhatsApp</li>
+                        <li class="flex items-center gap-2 text-sm text-green-900"><i class="fas fa-check-circle text-green-500 flex-shrink-0"></i> Vigencia <strong>1 año</strong> — resolución 2674 de 2013</li>
+                    </ul>
+                </div>
+
+                <!-- Prueba social -->
+                <div class="flex items-center gap-3 bg-white rounded-xl border border-slate-100 p-3 mb-4 shadow-sm">
+                    <div class="flex -space-x-2 flex-shrink-0">
+                        <div class="w-8 h-8 rounded-full bg-blue-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">JL</div>
+                        <div class="w-8 h-8 rounded-full bg-green-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">MR</div>
+                        <div class="w-8 h-8 rounded-full bg-red-400 border-2 border-white flex items-center justify-center text-white text-xs font-bold">CP</div>
+                    </div>
+                    <p class="text-xs text-gray-600 font-medium"><strong class="text-slate-800">+320 personas</strong> obtuvieron su carnet esta semana usando la pasarela.</p>
+                </div>
+
+                <!-- Botón WhatsApp (secundario) -->
+                <div class="text-center">
+                    <p class="text-xs text-gray-400 mb-2 font-medium">¿Tienes dudas antes de pagar?</p>
+                    <a href="https://wa.me/573001234567?text=Hola%2C%20aprobé%20el%20examen%20y%20quiero%20información%20sobre%20el%20pago"
+                       target="_blank" rel="noopener"
+                       class="inline-flex items-center gap-2 text-xs text-gray-500 hover:text-green-700 font-semibold underline transition">
+                        <i class="fab fa-whatsapp text-green-500 text-base"></i> Hablar con un asesor por WhatsApp
+                    </a>
+                </div>
+
             </div>
         </div>
 
@@ -304,9 +668,94 @@
             feedback: document.getElementById('feedback-area')
         };
 
+        // ── N8N TRACKING ────────────────────────────────────────────
+        const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
+        const API_INGRESOS = 'https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico';
+
+        function trackEvent(eventName, extraData = {}) {
+            const payload = {
+                evento   : eventName,
+                pagina   : 'Nuevo Manipulación de Alimentos',
+                fecha    : new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
+                usuario  : userData,
+                ...extraData
+            };
+            fetch(N8N_WEBHOOK, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(payload),
+                keepalive: true
+            }).catch(() => {});
+        }
+
+        // DATOS DEL USUARIO (se llena en el formulario de la landing)
+        let userData = { docType: '', docNum: '', name: '', phone: '' };
+
         // NAVEGACIÓN
         function scrollToExam() {
             document.getElementById('inicio-examen').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToForm() {
+            document.getElementById('form-datos').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // SUBMIT FORMULARIO LANDING → inicia examen
+        function submitLandingForm(e) {
+            e.preventDefault();
+            userData = {
+                docType : document.getElementById('land-doctype').value,
+                docNum  : document.getElementById('land-docnum').value,
+                name    : document.getElementById('land-name').value,
+                phone   : document.getElementById('land-phone').value
+            };
+            trackEvent('form_submitted');
+            startQuizFlow();
+        }
+
+        // PAGO CON REGISTRO EN API + TRACKING
+        async function initPayment() {
+            trackEvent('payment_initiated', { metodo: 'Wompi' });
+            const loader = document.getElementById('pay-loader');
+            if (loader) loader.classList.remove('hidden');
+
+            const nameParts = (userData.name || '').split(' ');
+            const payload = {
+                nombre           : nameParts[0] || 'Sin nombre',
+                apellido         : nameParts.slice(1).join(' ') || '',
+                numeroDeDocumento: userData.docNum  || '',
+                telefono         : userData.phone   || '',
+                valor            : 25000,
+                cuenta           : 'Wompi Web',
+                tipo             : 'Curso Manipulación de alimentos',
+                usuarioId        : 1
+            };
+
+            try {
+                await fetch(API_INGRESOS, {
+                    method : 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body   : JSON.stringify(payload)
+                });
+            } catch (_) {}
+
+            if (loader) loader.classList.add('hidden');
+            window.open('https://checkout.nequi.wompi.co/l/AWUVic', '_blank');
+        }
+
+        // FAQ ACORDEÓN
+        function toggleFaq(btn) {
+            const answer = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            const isOpen = !answer.classList.contains('hidden');
+            // Cerrar todos
+            document.querySelectorAll('.faq-answer').forEach(a => a.classList.add('hidden'));
+            document.querySelectorAll('.faq-item button i').forEach(i => i.style.transform = '');
+            // Abrir el clickeado si estaba cerrado
+            if (!isOpen) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            }
         }
 
         function exitQuiz() {
@@ -330,6 +779,7 @@
         function startQuizFlow() {
             currentIdx = 0;
             score = 0;
+            trackEvent('quiz_start');
             switchView('quiz');
             loadQuestion();
         }
@@ -402,10 +852,40 @@
         function finishExam() {
             const finalScore = score / questions.length;
             if (finalScore >= passingScore) {
+                trackEvent('quiz_passed', { score: score + '/' + questions.length });
                 switchView('checkout');
+                startCheckoutTimer();
+                const firstName = userData.name ? userData.name.split(' ')[0] : '';
+                const el = document.getElementById('checkout-name');
+                if (el && firstName) el.textContent = firstName + ',';
             } else {
+                trackEvent('quiz_failed', { score: score + '/' + questions.length });
                 switchView('fail');
             }
+        }
+
+        // Tracking page view al cargar
+        document.addEventListener('DOMContentLoaded', () => trackEvent('page_view'));
+
+        // CONTADOR DE URGENCIA EN CHECKOUT
+        let checkoutTimerInterval = null;
+        function startCheckoutTimer() {
+            let totalSeconds = 24 * 60; // 24 minutos (urgencia visible)
+            const timerEl = document.getElementById('checkout-timer');
+            if (!timerEl) return;
+
+            clearInterval(checkoutTimerInterval);
+            checkoutTimerInterval = setInterval(() => {
+                totalSeconds--;
+                if (totalSeconds <= 0) {
+                    clearInterval(checkoutTimerInterval);
+                    timerEl.textContent = '00:00';
+                    return;
+                }
+                const m = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+                const s = String(totalSeconds % 60).padStart(2, '0');
+                timerEl.textContent = `${m}:${s}`;
+            }, 1000);
         }
     </script>
 </body>
