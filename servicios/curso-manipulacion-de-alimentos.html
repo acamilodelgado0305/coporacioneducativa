@@ -379,30 +379,31 @@
         }
 
         async function registerAndPay() {
-            trackEvent('payment_initiated', { metodo: 'Nequi/PSE' });
-            document.getElementById('loader-nequi').classList.remove('hidden');
-            
-            const payload = {
-                nombre: state.userData.name.split(' ')[0],
-                apellido: state.userData.name.split(' ').slice(1).join(' '),
-                numeroDeDocumento: state.userData.num,
-                valor: 22000,
-                cuenta: "Nequi Web",
-                tipo: "Curso Manipulación de alimentos",
-                usuarioId: 1
-            };
+    trackEvent('payment_initiated', { metodo: 'Nequi/PSE' });
+    document.getElementById('loader-nequi').classList.remove('hidden');
+    
+  const payload = {
+    nombre: state.userData.name.split(' ')[0],
+    apellido: state.userData.name.split(' ').slice(1).join(' '),
+    numeroDeDocumento: state.userData.num,
+    valor: 22000,
+    cuenta: "Nequi Web",
+    tipo: "Curso Manipulación de alimentos",
+    business_id: 3,   // ← negocio al que pertenece el ingreso
+    usuarioId: 25      // ← usuario/vendedor que gestiona este formulario
+};
 
-            try {
-                await fetch('https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (e) {}
-            
-            window.open('https://checkout.nequi.wompi.co/l/bSxc9E', '_blank');
-            document.getElementById('loader-nequi').classList.add('hidden');
-        }
+    try {
+        await fetch('https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+    } catch (e) {}
+    
+    window.open('https://checkout.nequi.wompi.co/l/bSxc9E', '_blank');
+    document.getElementById('loader-nequi').classList.add('hidden');
+}
 
         function startNewProcess() {
             localStorage.removeItem(STORAGE_KEY);
