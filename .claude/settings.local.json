@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -oE \"#[0-9a-fA-F]{6}|rgb\\\\\\([0-9, ]+\\\\\\)|rgba\\\\\\([0-9, .]+\\\\\\)\" \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\servicios\\\\landing-manipulacion.html\")"
+    ]
+  }
+}

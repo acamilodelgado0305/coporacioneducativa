@@ -74,10 +74,121 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .btn-nequi {
-            background: #110e2e; 
+            background: #110e2e;
             background-image: linear-gradient(135deg, #2D0F3F 0%, #180925 100%);
             border: 1px solid rgba(255,255,255,0.1);
         }
+
+        /* ── LANDING VIEW ── */
+        .landing-hero {
+            background: linear-gradient(160deg, #14532d 0%, #15803d 60%, #16a34a 100%);
+            padding: 32px 28px 28px;
+            color: #fff;
+            text-align: center;
+        }
+        .landing-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(255,255,255,.12);
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 99px;
+            padding: 4px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: .04em;
+            color: #bbf7d0;
+            margin-bottom: 14px;
+        }
+        .landing-pulse {
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: #86efac;
+            animation: lpulse 1.8s ease-in-out infinite;
+        }
+        @keyframes lpulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(1.5)} }
+
+        .landing-hero h2 {
+            font-size: clamp(20px, 4vw, 26px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+        .landing-hero p {
+            font-size: 13px;
+            color: #bbf7d0;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .price-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,.1);
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 12px;
+            padding: 12px 22px;
+            margin-bottom: 22px;
+        }
+        .price-tag .old { font-size: 13px; color: #86efac; text-decoration: line-through; }
+        .price-tag .now { font-size: 28px; font-weight: 800; color: #fff; }
+        .price-tag .sub { font-size: 11px; color: #86efac; text-align: left; line-height: 1.4; }
+
+        .btn-start {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: #fff;
+            color: #15803d;
+            font-weight: 700;
+            font-size: 16px;
+            padding: 15px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: transform .1s, box-shadow .2s;
+            box-shadow: 0 6px 24px rgba(0,0,0,.2);
+        }
+        .btn-start:hover { transform: translateY(-1px); box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+        .btn-start:active { transform: scale(.98); }
+
+        .landing-benefits {
+            padding: 22px 28px;
+            display: grid;
+            gap: 12px;
+        }
+        .benefit-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+        .benefit-icon-wrap {
+            width: 36px; height: 36px; min-width: 36px;
+            border-radius: 8px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 15px;
+        }
+        .benefit-row h4 { font-size: 13px; font-weight: 700; color: #0f172a; margin-bottom: 2px; }
+        .benefit-row p  { font-size: 12px; color: #64748b; line-height: 1.5; }
+
+        .landing-trust {
+            padding: 14px 28px 24px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px 20px;
+        }
+        .trust-chip {
+            display: flex; align-items: center; gap: 5px;
+            font-size: 11px; font-weight: 500; color: #64748b;
+        }
+        .trust-chip i { color: #16a34a; }
     </style>
 </head>
 <body class="antialiased text-slate-800">
@@ -94,6 +205,56 @@
 
         <main class="main-card fade-in">
             <div class="brand-bar"></div>
+
+            <!-- ── LANDING PRE-EXAMEN ── -->
+            <div id="view-landing" class="hidden-section">
+                <div class="landing-hero">
+                    <div class="landing-badge"><span class="landing-pulse"></span> Resolución 2674/2013 · Obligatorio</div>
+                    <h2>Certifícate en<br>Manipulación de Alimentos</h2>
+                    <p>100% en línea · Examen de 8 preguntas · Certificado inmediato</p>
+                    <div class="price-tag">
+                        <div>
+                            <div class="old">$35.000</div>
+                            <div class="now">$22.000</div>
+                        </div>
+                        <div class="sub">Pago único<br>Sin mensualidades</div>
+                    </div>
+                    <button class="btn-start" onclick="startExam()">
+                        <i class="fas fa-play-circle"></i> Iniciar examen ahora
+                    </button>
+                </div>
+
+                <div class="landing-benefits">
+                    <div class="benefit-row">
+                        <div class="benefit-icon-wrap" style="background:#dcfce7;color:#15803d"><i class="fas fa-certificate"></i></div>
+                        <div>
+                            <h4>Certificado con validez legal</h4>
+                            <p>Válido ante Secretaría de Salud. Cumple la normativa sanitaria colombiana.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-row">
+                        <div class="benefit-icon-wrap" style="background:#eff6ff;color:#1d4ed8"><i class="fas fa-bolt"></i></div>
+                        <div>
+                            <h4>Resultado inmediato</h4>
+                            <p>Aprueba el examen y descarga tu certificado al instante. Sin esperas.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-row">
+                        <div class="benefit-icon-wrap" style="background:#fefce8;color:#ca8a04"><i class="fas fa-mobile-alt"></i></div>
+                        <div>
+                            <h4>Desde cualquier dispositivo</h4>
+                            <p>Celular, tablet o computador. Sin instalaciones. Solo 15 minutos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="landing-trust">
+                    <div class="trust-chip"><i class="fas fa-users"></i> +5.000 certificados</div>
+                    <div class="trust-chip"><i class="fas fa-lock"></i> Pago 100% seguro</div>
+                    <div class="trust-chip"><i class="fas fa-shield-alt"></i> Res. 2674/2013</div>
+                </div>
+            </div>
+            <!-- ── FIN LANDING ── -->
 
             <div id="view-registration" class="p-8 md:p-10 hidden-section">
                 <div class="text-center mb-6">
@@ -235,7 +396,7 @@
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
 
         let state = {
-            view: 'view-quiz-app',
+            view: 'view-landing',
             pendingCheckout: false,
             userData: { type: '', num: '', name: '' },
             quiz: { currentIdx: 0, score: 0 }
@@ -280,7 +441,7 @@
         }
 
         function switchView(viewName) {
-            ['view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'].forEach(id => {
+            ['view-landing', 'view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'].forEach(id => {
                 document.getElementById(id).classList.add('hidden-section');
             });
             document.getElementById(viewName).classList.remove('hidden-section');
@@ -404,6 +565,13 @@
     window.open('https://checkout.nequi.wompi.co/l/bSxc9E', '_blank');
     document.getElementById('loader-nequi').classList.add('hidden');
 }
+
+        function startExam() {
+            state.view = 'view-quiz-app';
+            saveState();
+            trackEvent('exam_started');
+            applyStateToUI();
+        }
 
         function startNewProcess() {
             localStorage.removeItem(STORAGE_KEY);
