@@ -6,6 +6,18 @@
     <title>Certificación Oficial | Manipulación de Alimentos</title>
     <link rel="icon" href="../logopagina.png" type="image/png" />
     
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '639715789143642');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"/></noscript>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -519,6 +531,7 @@
             if (percent >= 0.75) {
                 state.view = state.userData.name ? 'view-checkout' : 'view-registration';
                 trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
+                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' });
             } else {
                 state.view = 'view-fail';
                 trackEvent('quiz_failed', { score: state.quiz.score + "/8" });
@@ -541,6 +554,7 @@
 
         async function registerAndPay() {
     trackEvent('payment_initiated', { metodo: 'Nequi/PSE' });
+    fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
     document.getElementById('loader-nequi').classList.remove('hidden');
     
   const payload = {
@@ -570,6 +584,7 @@
             state.view = 'view-quiz-app';
             saveState();
             trackEvent('exam_started');
+            fbq('track', 'ViewContent', { content_name: 'Manipulación de Alimentos', value: 22000, currency: 'COP' });
             applyStateToUI();
         }
 
