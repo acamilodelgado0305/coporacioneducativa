@@ -402,12 +402,13 @@
   const payload = {
     nombre: state.userData.name.split(' ')[0],
     apellido: state.userData.name.split(' ').slice(1).join(' '),
+    tipoDocumento: state.userData.type,
     numeroDeDocumento: state.userData.num,
     valor: 22000,
     cuenta: "Nequi Web",
     tipo: "Curso Manipulación de alimentos",
-    business_id: 3,   // ← negocio al que pertenece el ingreso
-    usuarioId: 25      // ← usuario/vendedor que gestiona este formulario
+    business_id: 3,
+    usuarioId: 25
 };
 
     try {
