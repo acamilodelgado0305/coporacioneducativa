@@ -1,0 +1,19 @@
+# Astro
+certitec-astro/node_modules/
+certitec-astro/dist/
+certitec-astro/.astro/
+
+# Environment variables
+.env
+.env.local
+
+# Editor
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+npm-debug.log*
