@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Certificación Oficial | Manipulación de Alimentos</title>
     <link rel="icon" href="../logopagina.png" type="image/png" />
-
+    
     <!-- Meta Pixel -->
     <script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -19,12 +19,12 @@
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"/></noscript>
 
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
+    
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
+        body { 
+            font-family: 'Inter', sans-serif; 
             background-color: #f8fafc;
             background-image: radial-gradient(1200px 600px at 10% -10%, rgba(14, 165, 233, 0.15), transparent 60%),
                               radial-gradient(1000px 500px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%);
@@ -65,13 +65,13 @@
         }
         .input-pro:focus {
             background-color: #ffffff;
-            border-color: #16a34a;
+            border-color: #16a34a; 
             outline: none;
             box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
         }
 
         .btn-action {
-            background: #15803d;
+            background: #15803d; 
             color: white;
             font-weight: 600;
             border-radius: 8px;
@@ -85,29 +85,18 @@
         .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-pay {
-            background: linear-gradient(135deg, #15803d 0%, #16a34a 100%);
-            transition: transform 0.15s, box-shadow 0.15s;
-            box-shadow: 0 8px 24px -6px rgba(21, 128, 61, 0.55);
+        .btn-nequi {
+            background: #110e2e;
+            background-image: linear-gradient(135deg, #2D0F3F 0%, #180925 100%);
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .btn-pay:hover { box-shadow: 0 12px 30px -6px rgba(21, 128, 61, 0.65); transform: translateY(-1px); }
-        .btn-pay:active { transform: scale(0.98); }
 
-        .timer-urgent { color: #ef4444; animation: timerPulse 1s infinite; }
-        @keyframes timerPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
-
-        .value-icon {
-            width: 36px; height: 36px;
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
     </style>
 </head>
 <body class="antialiased text-slate-800">
 
     <div class="bg-overlay flex flex-col items-center justify-center p-4 min-h-screen">
-
+        
         <div class="mb-6 text-center">
             <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/20">
                 <img src="../logof.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2921/2921822.png'" class="w-10 h-10 object-contain p-1" alt="Logo">
@@ -119,7 +108,7 @@
         <main class="main-card fade-in">
             <div class="brand-bar"></div>
 
-            <!-- REGISTRO -->
+
             <div id="view-registration" class="p-8 md:p-10 hidden-section">
                 <div class="text-center mb-6">
                     <h2 id="reg-title" class="text-2xl font-bold text-slate-900 mb-2">Datos para tu Certificado</h2>
@@ -158,7 +147,6 @@
                 </form>
             </div>
 
-            <!-- QUIZ -->
             <div id="view-quiz-app" class="flex flex-col h-full">
                 <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
                     <span class="text-xs font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200">
@@ -181,135 +169,73 @@
                 </div>
             </div>
 
-            <!-- CHECKOUT -->
             <div id="view-checkout" class="hidden-section">
-
-                <!-- Header verde con check + timer -->
-                <div class="bg-gradient-to-br from-green-700 to-green-600 p-6 text-center text-white relative overflow-hidden">
-                    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 20%, white 1px, transparent 1px); background-size: 30px 30px;"></div>
-
-                    <!-- Social proof -->
-                    <div class="relative inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm rounded-full px-3 py-1.5 text-xs font-semibold mb-4">
-                        <span class="w-2 h-2 bg-green-300 rounded-full animate-pulse flex-shrink-0"></span>
-                        847 personas certificadas este mes
+                <div class="bg-green-50 p-8 text-center border-b border-green-100">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4 animate-bounce shadow-sm">
+                        <i class="fas fa-check text-4xl text-green-600"></i>
                     </div>
-
-                    <div class="relative inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full mb-3 shadow-inner">
-                        <i class="fas fa-check text-3xl"></i>
-                    </div>
-                    <h2 class="relative text-2xl font-black tracking-tight">¡EXAMEN APROBADO!</h2>
-                    <p class="relative text-green-100 mt-1 text-sm">Hola <span id="display-name" class="font-bold text-white"></span>, ya tienes tu certificación lista.</p>
-
-                    <!-- Timer urgencia -->
-                    <div class="relative mt-4 bg-black/25 backdrop-blur-sm rounded-2xl px-5 py-3 inline-block">
-                        <p class="text-[10px] text-green-200 uppercase font-black tracking-widest mb-0.5">⏱ Tu sesión vence en</p>
-                        <p id="checkout-timer" class="text-3xl font-black font-mono tracking-widest">15:00</p>
-                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800">¡EXAMEN APROBADO!</h2>
+                    <p class="text-gray-600 mt-2 text-sm">Hola <span id="display-name" class="font-bold"></span>, ya aprobaste tu certificación.</p>
                 </div>
 
-                <div class="p-6 space-y-5">
-
-                    <!-- Value stack -->
-                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Lo que recibes hoy</p>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <div class="value-icon bg-green-100">
-                                    <i class="fas fa-certificate text-green-600 text-sm"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-sm text-slate-800 leading-none">Certificado PDF oficial</p>
-                                    <p class="text-xs text-slate-400 mt-0.5">Válido ante Secretaría de Salud — Res. 2674</p>
-                                </div>
-                                <i class="fas fa-check text-green-500 ml-auto text-sm"></i>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="value-icon bg-blue-100">
-                                    <i class="fas fa-id-card text-blue-600 text-sm"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-sm text-slate-800 leading-none">Carnet digital con tus datos</p>
-                                    <p class="text-xs text-slate-400 mt-0.5">Para portar en el trabajo y presentar en inspecciones</p>
-                                </div>
-                                <i class="fas fa-check text-green-500 ml-auto text-sm"></i>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="value-icon bg-amber-100">
-                                    <i class="fas fa-bolt text-amber-500 text-sm"></i>
-                                </div>
-                                <div>
-                                    <p class="font-semibold text-sm text-slate-800 leading-none">Entrega inmediata</p>
-                                    <p class="text-xs text-slate-400 mt-0.5">Descarga disponible justo después del pago</p>
-                                </div>
-                                <i class="fas fa-check text-green-500 ml-auto text-sm"></i>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Precio con anclaje -->
-                    <div class="flex justify-between items-center px-1">
+                <div class="p-8 space-y-6">
+                    <div class="flex justify-between items-center border-b border-gray-100 pb-4">
                         <span class="text-gray-500 text-sm font-medium">Total a pagar:</span>
-                        <div class="text-right">
-                            <p class="text-xs text-gray-400 line-through font-medium">$45.000 COP</p>
-                            <p class="text-2xl font-black text-slate-800 leading-none">$22.000 <span class="text-sm font-semibold text-slate-500">COP</span></p>
-                        </div>
+                        <span class="text-2xl font-bold text-slate-800">$22.000 COP</span>
                     </div>
 
-                    <!-- Botón de pago principal -->
-                    <div onclick="registerAndPay()" class="btn-pay cursor-pointer block w-full p-5 rounded-2xl text-white relative overflow-hidden group">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="font-black text-xl leading-none">Pagar ahora</p>
-                                <p class="text-green-200 text-xs mt-1.5 font-medium">Nequi · PSE · Tarjeta débito / crédito</p>
-                            </div>
+                    <div onclick="registerAndPay()" class="btn-nequi cursor-pointer block w-full p-4 rounded-xl text-white shadow-xl relative overflow-hidden group hover:shadow-2xl transition-all">
+                        <div class="relative z-10 flex items-center justify-between">
                             <div class="flex items-center gap-3">
-                                <div id="loader-nequi" class="hidden"><i class="fas fa-circle-notch fa-spin text-xl"></i></div>
-                                <div class="bg-white/20 rounded-xl p-2.5">
-                                    <i id="icon-arrow" class="fas fa-chevron-right text-lg group-hover:translate-x-1 transition-transform"></i>
+                                <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-10 h-10 rounded-lg border border-white/20 object-contain bg-white" alt="Nequi">
+                                <div class="text-left">
+                                    <p class="font-bold text-lg leading-none">Pagar con Nequi / PSE</p>
+                                    <p class="text-xs text-white/60 mt-1">Activación automática inmediata.</p>
                                 </div>
                             </div>
+                            <div id="loader-nequi" class="hidden"><i class="fas fa-circle-notch fa-spin text-xl"></i></div>
+                            <i id="icon-arrow" class="fas fa-chevron-right group-hover:translate-x-1 transition"></i>
                         </div>
                     </div>
 
-                    <!-- Trust badges -->
-                    <div class="flex items-center justify-center gap-3 text-xs text-gray-400 flex-wrap">
-                        <span><i class="fas fa-lock mr-1 text-gray-400"></i>Pago seguro</span>
-                        <span class="text-gray-200">·</span>
-                        <span><i class="fas fa-shield-alt mr-1 text-green-500"></i>Wompi by Bancolombia</span>
-                        <span class="text-gray-200">·</span>
-                        <span><i class="fas fa-bolt mr-1 text-amber-400"></i>Entrega inmediata</span>
+                    <div class="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                        <div class="flex items-center gap-2 mb-4">
+                            <i class="fas fa-university text-yellow-500 text-xl"></i>
+                            <h3 class="font-bold text-slate-700">Transferencias Manuales</h3>
+                        </div>
+                        <div class="grid grid-cols-1 gap-3 mb-4">
+                            <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                                <p class="text-[10px] text-gray-500 uppercase font-bold">Nequi / Daviplata</p>
+                                <p class="text-lg font-mono font-bold text-slate-800 select-all">3223267797</p>
+                            </div>
+                            <div class="bg-gray-50 p-3 rounded border border-gray-200 text-center">
+                                <p class="text-[10px] text-gray-500 uppercase font-bold">Bancolombia Ahorros</p>
+                                <p class="text-lg font-mono font-bold text-slate-800 select-all">816-589697-49</p>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante." 
+                           target="_blank" onclick="trackEvent('whatsapp_comprobante')"
+                           class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-green-600 text-white font-bold py-3 rounded-lg transition shadow-md">
+                            <i class="fab fa-whatsapp text-xl"></i> Enviar Comprobante
+                        </a>
+                        <p class="text-xs text-center text-gray-500 mt-2">Este es el <strong>único canal autorizado</strong> para recibir comprobantes de pago.</p>
                     </div>
 
-                    <button onclick="startNewProcess()" class="w-full py-2 text-gray-400 text-xs font-medium hover:text-gray-500 transition mt-1">
-                        <i class="fas fa-redo-alt mr-1"></i> Iniciar nuevo proceso
+                    <button onclick="startNewProcess()" class="w-full py-3 rounded-lg border border-gray-300 text-gray-500 text-sm font-medium hover:bg-gray-100 transition mt-2">
+                        <i class="fas fa-redo-alt mr-2"></i> Iniciar nuevo proceso
                     </button>
                 </div>
             </div>
 
-            <!-- FALLO -->
             <div id="view-fail" class="hidden-section text-center p-10">
-                <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full mb-5">
-                    <i class="fas fa-redo text-4xl text-orange-500"></i>
+                <div class="inline-flex items-center justify-center w-20 h-20 bg-red-100 rounded-full mb-6">
+                    <i class="fas fa-times text-4xl text-red-500"></i>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">¡Casi lo logras!</h2>
-                <p class="text-gray-600 mb-1 text-sm">Obtuviste <span id="fail-score" class="font-black text-slate-800"></span> respuestas correctas.</p>
-                <p class="text-gray-400 mb-6 text-xs">Necesitas mínimo 6/8 (75%) para certificarte.</p>
-
-                <!-- Tip rápido -->
-                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4 mb-6 text-left">
-                    <p class="text-xs font-black text-amber-700 uppercase tracking-wider mb-2"><i class="fas fa-lightbulb mr-1"></i> Repasa esto antes de reintentar</p>
-                    <ul class="text-sm text-amber-800 space-y-1.5">
-                        <li><i class="fas fa-thermometer-half mr-1.5 text-orange-400"></i>Zona de peligro: entre <strong>5°C y 60°C</strong></li>
-                        <li><i class="fas fa-hands-wash mr-1.5 text-blue-400"></i>Lavado de manos: mínimo <strong>20–30 segundos con jabón</strong></li>
-                        <li><i class="fas fa-flask mr-1.5 text-red-400"></i>Químicos siempre en lugar <strong>separado y rotulado</strong></li>
-                    </ul>
-                </div>
-
-                <button onclick="startNewProcess()" class="btn-action w-full py-4 text-base shadow-lg shadow-green-900/10 flex justify-center items-center gap-2">
-                    <i class="fas fa-redo-alt"></i> Intentar de nuevo — es gratis
-                </button>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">No alcanzaste el puntaje</h2>
+                <p class="text-gray-500 mb-8 text-sm">Necesitas un mínimo del 75% para certificarte. Puedes intentarlo de nuevo gratis.</p>
+                <button onclick="startNewProcess()" class="btn-action w-full py-3 bg-slate-800 hover:bg-slate-900 shadow-lg">Reiniciar</button>
             </div>
-
         </main>
 
         <footer class="mt-8 text-center text-slate-500 text-xs pb-4">
@@ -326,8 +252,7 @@
             view: 'view-quiz-app',
             pendingCheckout: false,
             userData: { type: '', num: '', name: '' },
-            quiz: { currentIdx: 0, score: 0 },
-            checkoutExpiry: null
+            quiz: { currentIdx: 0, score: 0 }
         };
 
         const questions = [
@@ -341,7 +266,7 @@
             { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 }
         ];
 
-        // --- TRACKING ---
+        // --- TRACKING N8N ---
         function trackEvent(eventName, extraData = {}) {
             const payload = {
                 evento: eventName,
@@ -350,6 +275,7 @@
                 usuario: state.userData,
                 ...extraData
             };
+            // Enviamos como text/plain para evitar problemas de CORS Preflight
             fetch(N8N_WEBHOOK, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain' },
@@ -360,7 +286,7 @@
 
         // --- LÓGICA CORE ---
         function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-
+        
         function loadState() {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) state = JSON.parse(saved);
@@ -373,7 +299,7 @@
                 document.getElementById(id).classList.add('hidden-section');
             });
             document.getElementById(viewName).classList.remove('hidden-section');
-            window.scrollTo(0, 0);
+            window.scrollTo(0,0);
         }
 
         function applyStateToUI() {
@@ -385,7 +311,6 @@
             }
             switchView(state.view);
             if (state.view === 'view-quiz-app') loadQuestionUI();
-            if (state.view === 'view-checkout') startCheckoutTimer();
         }
 
         function loadQuestionUI() {
@@ -393,17 +318,17 @@
             document.getElementById('q-text').innerText = q.q;
             document.getElementById('q-current').innerText = state.quiz.currentIdx + 1;
             document.getElementById('progress-bar').style.width = (state.quiz.currentIdx / questions.length * 100) + "%";
-
+            
             const container = document.getElementById('q-options');
             container.innerHTML = '';
             document.getElementById('feedback-area').className = 'hidden';
             document.getElementById('btn-next').disabled = true;
-            document.getElementById('btn-next').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('btn-next').classList.add('opacity-50');
 
             q.options.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = "w-full text-left p-4 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 transition-all font-medium flex items-center";
-                btn.innerHTML = `<span class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3 flex-shrink-0"></span><span>${opt}</span>`;
+                btn.innerHTML = `<span class="w-5 h-5 rounded-full border-2 border-gray-300 mr-3"></span><span>${opt}</span>`;
                 btn.onclick = () => checkAnswer(idx, q.a, btn);
                 container.appendChild(btn);
             });
@@ -412,7 +337,7 @@
         function checkAnswer(selectedIdx, correctIdx, btn) {
             const allBtns = document.getElementById('q-options').querySelectorAll('button');
             allBtns.forEach(b => b.disabled = true);
-
+            
             const feedback = document.getElementById('feedback-area');
             feedback.classList.remove('hidden');
 
@@ -429,7 +354,7 @@
                 trackEvent('quiz_answer', { pregunta: state.quiz.currentIdx + 1, result: 'fail' });
             }
             document.getElementById('btn-next').disabled = false;
-            document.getElementById('btn-next').classList.remove('opacity-50', 'cursor-not-allowed');
+            document.getElementById('btn-next').classList.remove('opacity-50');
             saveState();
         }
 
@@ -447,14 +372,12 @@
             const percent = (state.quiz.score / questions.length);
             if (percent >= 0.75) {
                 state.view = state.userData.name ? 'view-checkout' : 'view-registration';
-                state.checkoutExpiry = Date.now() + 15 * 60 * 1000;
                 trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
                 fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' });
             } else {
                 state.view = 'view-fail';
                 trackEvent('quiz_failed', { score: state.quiz.score + "/8" });
             }
-            saveState();
             applyStateToUI();
         }
 
@@ -465,104 +388,51 @@
                 num: document.getElementById('user-docnum').value,
                 name: document.getElementById('user-fullname').value
             };
-            if (!state.checkoutExpiry) {
-                state.checkoutExpiry = Date.now() + 15 * 60 * 1000;
-            }
             state.view = 'view-checkout';
             saveState();
             trackEvent('registration_submitted');
             applyStateToUI();
         }
 
-        // --- TIMER DE URGENCIA ---
-        let timerInterval = null;
-
-        function startCheckoutTimer() {
-            if (!state.checkoutExpiry) {
-                state.checkoutExpiry = Date.now() + 15 * 60 * 1000;
-                saveState();
-            }
-
-            if (timerInterval) clearInterval(timerInterval);
-
-            function tick() {
-                const remaining = state.checkoutExpiry - Date.now();
-                const el = document.getElementById('checkout-timer');
-                if (!el) return;
-
-                if (remaining <= 0) {
-                    clearInterval(timerInterval);
-                    el.innerText = '00:00';
-                    el.classList.add('timer-urgent');
-                    return;
-                }
-
-                const mins = Math.floor(remaining / 60000);
-                const secs = Math.floor((remaining % 60000) / 1000);
-                el.innerText = `${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
-
-                // Rojo cuando quedan menos de 3 minutos
-                if (remaining < 3 * 60 * 1000) {
-                    el.classList.add('timer-urgent');
-                } else {
-                    el.classList.remove('timer-urgent');
-                }
-            }
-
-            tick();
-            timerInterval = setInterval(tick, 1000);
-        }
-
-        // --- PAGO ---
         async function registerAndPay() {
-            trackEvent('payment_initiated', { metodo: 'Wompi' });
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
-            document.getElementById('loader-nequi').classList.remove('hidden');
-            document.getElementById('icon-arrow').classList.add('hidden');
+    trackEvent('payment_initiated', { metodo: 'Nequi/PSE' });
+    fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+    document.getElementById('loader-nequi').classList.remove('hidden');
+    
+  const payload = {
+    nombre: state.userData.name.split(' ')[0],
+    apellido: state.userData.name.split(' ').slice(1).join(' '),
+    tipoDocumento: state.userData.type,
+    numeroDeDocumento: state.userData.num,
+    valor: 22000,
+    cuenta: "Nequi Web",
+    tipo: "Curso Manipulación de alimentos",
+    business_id: 3,
+    usuarioId: 25
+};
 
-            const payload = {
-                nombre: state.userData.name.split(' ')[0],
-                apellido: state.userData.name.split(' ').slice(1).join(' '),
-                tipoDocumento: state.userData.type,
-                numeroDeDocumento: state.userData.num,
-                valor: 22000,
-                cuenta: 'Wompi Web',
-                tipo: 'Curso Manipulación de alimentos',
-                business_id: 3,
-                usuarioId: 25
-            };
-
-            try {
-                await fetch('https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-            } catch (e) {}
-
-            window.open('https://checkout.wompi.co/l/qa6YDm', '_blank');
-            document.getElementById('loader-nequi').classList.add('hidden');
-            document.getElementById('icon-arrow').classList.remove('hidden');
-        }
+    try {
+        await fetch('https://controla-570877385695.northamerica-northeast1.run.app/api/ingresos/publico', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+    } catch (e) {}
+    
+    window.open(' https://checkout.nequi.wompi.co/l/qa6YDm', '_blank');
+    document.getElementById('loader-nequi').classList.add('hidden');
+}
 
         function startNewProcess() {
-            if (timerInterval) clearInterval(timerInterval);
             localStorage.removeItem(STORAGE_KEY);
             location.reload();
         }
 
-        function resetApp() { if (confirm('¿Reiniciar?')) startNewProcess(); }
-
-        // Muestra el puntaje exacto en la vista de fallo
-        function renderFailScore() {
-            const el = document.getElementById('fail-score');
-            if (el) el.innerText = `${state.quiz.score}/8`;
-        }
+        function resetApp() { if(confirm('¿Reiniciar?')) startNewProcess(); }
 
         document.addEventListener('DOMContentLoaded', () => {
             loadState();
             trackEvent('page_view');
-            if (state.view === 'view-fail') renderFailScore();
         });
     </script>
 </body>
