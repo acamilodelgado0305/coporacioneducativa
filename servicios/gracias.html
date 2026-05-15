@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>¡Compra Exitosa! | CertiTec Colombia</title>
+    <link rel="icon" href="../logopagina.png" type="image/png" />
+
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '639715789143642');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"/></noscript>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            background-image:
+                radial-gradient(1200px 600px at 10% -10%, rgba(14, 165, 233, 0.15), transparent 60%),
+                radial-gradient(1000px 500px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%);
+            background-attachment: fixed;
+        }
+
+        .bg-overlay {
+            background: linear-gradient(180deg, rgba(248, 250, 252, 0.9), rgba(241, 245, 249, 0.9));
+            min-height: 100vh;
+        }
+
+        .main-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.35);
+            overflow: hidden;
+            max-width: 560px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .brand-bar {
+            height: 8px;
+            background: linear-gradient(90deg, #15803d 0%, #16a34a 50%, #22c55e 100%);
+            width: 100%;
+        }
+
+        .check-circle {
+            width: 88px;
+            height: 88px;
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 0 0 12px rgba(21, 128, 61, 0.08), 0 8px 24px rgba(21, 128, 61, 0.2);
+            animation: popIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .check-icon {
+            font-size: 40px;
+            color: #15803d;
+            animation: checkDraw 0.4s 0.3s ease both;
+        }
+
+        .fade-up {
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .fade-up-1 { animation-delay: 0.15s; }
+        .fade-up-2 { animation-delay: 0.28s; }
+        .fade-up-3 { animation-delay: 0.40s; }
+        .fade-up-4 { animation-delay: 0.52s; }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes popIn {
+            from { transform: scale(0.5); opacity: 0; }
+            to   { transform: scale(1);   opacity: 1; }
+        }
+
+        @keyframes checkDraw {
+            from { transform: scale(0) rotate(-30deg); opacity: 0; }
+            to   { transform: scale(1) rotate(0deg);   opacity: 1; }
+        }
+
+        .info-pill {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 10px;
+            padding: 14px 18px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #ffffff;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.1s;
+            font-size: 15px;
+        }
+        .btn-whatsapp:hover  { opacity: 0.92; }
+        .btn-whatsapp:active { transform: scale(0.98); }
+
+        .course-name-badge {
+            display: inline-block;
+            background: #f0fdf4;
+            color: #15803d;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 6px;
+            padding: 4px 12px;
+            border: 1px solid #bbf7d0;
+        }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <div class="bg-overlay flex flex-col items-center justify-center p-4 min-h-screen">
+
+        <!-- Logo -->
+        <div class="mb-6 text-center fade-up fade-up-1">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white text-green-700 mb-2 shadow-lg ring-4 ring-green-600/20">
+                <img src="../logof.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/2921/2921822.png'" class="w-10 h-10 object-contain p-1" alt="Logo CertiTec">
+            </div>
+            <h1 class="text-slate-900 font-bold text-xl tracking-wide uppercase">CertiTec Colombia</h1>
+            <p class="text-slate-500 text-xs">Certificaciones Laborales Oficiales</p>
+        </div>
+
+        <main class="main-card">
+            <div class="brand-bar"></div>
+
+            <div class="p-8 md:p-10 space-y-6">
+
+                <!-- Check animado -->
+                <div class="text-center pt-2">
+                    <div class="check-circle">
+                        <i class="fas fa-check check-icon"></i>
+                    </div>
+                </div>
+
+                <!-- Título principal -->
+                <div class="text-center fade-up fade-up-2">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-1">¡Pago Recibido!</h2>
+                    <p class="text-slate-500 text-sm">Tu compra ha sido procesada exitosamente</p>
+                    <div class="mt-3">
+                        <span class="course-name-badge" id="course-label">Certificado Manipulación de Alimentos</span>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Mensaje principal -->
+                <div class="info-pill fade-up fade-up-3">
+                    <div class="flex items-start gap-3">
+                        <div class="flex-shrink-0 w-9 h-9 rounded-full bg-green-100 flex items-center justify-center mt-0.5">
+                            <i class="fas fa-envelope text-green-600 text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold text-slate-800 text-sm mb-0.5">Recibirás tus documentos por correo electrónico</p>
+                            <p class="text-slate-500 text-xs leading-relaxed">
+                                Tu <strong class="text-slate-700">certificado oficial</strong> y toda la documentación serán enviados al correo registrado en un plazo máximo de <strong class="text-slate-700">24 horas hábiles</strong>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pasos -->
+                <div class="space-y-3 fade-up fade-up-3">
+                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">¿Qué sigue?</p>
+
+                    <div class="flex items-center gap-3">
+                        <div class="flex-shrink-0 w-7 h-7 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">1</div>
+                        <p class="text-sm text-slate-600">Revisa tu bandeja de entrada y la carpeta de <strong>Spam</strong></p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="flex-shrink-0 w-7 h-7 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">2</div>
+                        <p class="text-sm text-slate-600">Descarga y guarda tu <strong>certificado en PDF</strong></p>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="flex-shrink-0 w-7 h-7 rounded-full bg-green-600 text-white text-xs font-bold flex items-center justify-center">3</div>
+                        <p class="text-sm text-slate-600">Si en 24h no recibes nada, contáctanos por WhatsApp</p>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- Botón WhatsApp -->
+                <div class="fade-up fade-up-4">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20acabo%20de%20realizar%20mi%20pago%20y%20quiero%20confirmar%20mi%20certificado."
+                       target="_blank" rel="noopener noreferrer"
+                       class="btn-whatsapp" id="whatsapp-btn">
+                        <i class="fab fa-whatsapp text-lg"></i>
+                        Soporte por WhatsApp
+                    </a>
+                    <p class="text-center text-xs text-slate-400 mt-2">¿Tienes dudas? Estamos disponibles para ayudarte</p>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <p class="mt-6 text-xs text-slate-400 text-center fade-up fade-up-4">
+            © 2025 CertiTec Colombia · Todos los derechos reservados
+        </p>
+
+    </div>
+
+    <script>
+        (function () {
+            // Lee datos guardados en localStorage por el flujo de pago
+            var stored = {};
+            try {
+                stored = JSON.parse(localStorage.getItem('certitec_data_v2') || '{}');
+            } catch (e) {}
+
+            // También acepta parámetros en la URL: ?curso=…&valor=…&moneda=…
+            var params = new URLSearchParams(window.location.search);
+            var courseName = params.get('curso')
+                          || stored.curso
+                          || stored.content_name
+                          || 'Certificado CertiTec Colombia';
+            var value     = parseFloat(params.get('valor') || stored.valor || stored.value || 0);
+            var currency  = params.get('moneda') || stored.moneda || stored.currency || 'COP';
+
+            // Actualiza la etiqueta del curso en la UI
+            var label = document.getElementById('course-label');
+            if (label && courseName) label.textContent = courseName;
+
+            // Actualiza el enlace de WhatsApp con el nombre del curso
+            var waBtn = document.getElementById('whatsapp-btn');
+            if (waBtn) {
+                var msg = 'Hola, acabo de realizar mi pago de ' + courseName + ' y quiero confirmar mi certificado.';
+                waBtn.href = 'https://wa.me/573107941580?text=' + encodeURIComponent(msg);
+            }
+
+            // Dispara el evento Purchase del Meta Pixel
+            if (typeof fbq === 'function') {
+                var purchaseParams = {
+                    content_name: courseName,
+                    content_type: 'product',
+                    currency: currency
+                };
+                if (value > 0) {
+                    purchaseParams.value = value;
+                    purchaseParams.num_items = 1;
+                }
+                fbq('track', 'Purchase', purchaseParams);
+            }
+        })();
+    </script>
+
+</body>
+</html>

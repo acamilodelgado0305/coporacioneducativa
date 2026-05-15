@@ -2,7 +2,16 @@
   "permissions": {
     "allow": [
       "Bash(grep -oE \"#[0-9a-fA-F]{6}|rgb\\\\\\([0-9, ]+\\\\\\)|rgba\\\\\\([0-9, .]+\\\\\\)\" \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\servicios\\\\landing-manipulacion.html\")",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\" -Recurse -Force)",
+      "Bash(Select-Object FullName)",
+      "Bash(ConvertTo-Csv -NoTypeInformation)",
+      "Bash(Out-String)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\" -Recurse -Force | Where-Object { $_.PSIsContainer -eq $false } | Select-Object FullName | Sort-Object FullName | ForEach-Object { $_.FullName.Replace\\(\"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\\", \"\"\\) })",
+      "Bash(thank)",
+      "Bash(confirmacion)",
+      "Bash(confirmation\")",
+      "Bash(xargs grep -l \"gracias\\\\|thank\\\\|confirmacion\\\\|confirmation\")"
     ]
   }
 }
