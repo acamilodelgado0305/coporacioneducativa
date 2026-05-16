@@ -427,13 +427,6 @@
                 Certificado de<br><span>Manipulación de Alimentos</span>
             </h1>
             <p class="header-sub">Válido ante la Secretaría de Salud · Resolución 2674 de 2013</p>
-            <div class="header-stats">
-                <div class="stat-item"><i class="fas fa-users"></i> +2.800 certificados este mes</div>
-                <div class="stat-sep"></div>
-                <div class="stat-item"><i class="fas fa-bolt"></i> Resultado inmediato</div>
-                <div class="stat-sep"></div>
-                <div class="stat-item"><i class="fas fa-star"></i> 100% en línea</div>
-            </div>
         </div>
 
         <main class="main-card fade-in">
@@ -1022,22 +1015,33 @@
         }
 
         // ── Exit intent ──
-        let exitShown = false;
+        let pendingExitReason = null;
 
         function showExitModal() {
-            if (exitShown || state.view !== 'view-checkout') return;
-            exitShown = true;
-            document.getElementById('exit-modal').classList.remove('hidden');
+            pendingExitReason = null;
             document.getElementById('exit-reasons').classList.remove('hidden');
             document.getElementById('exit-response').classList.add('hidden');
-            trackEvent('exit_intent_shown');
+            document.getElementById('exit-modal').classList.remove('hidden');
         }
 
         function closeExitModal() {
             document.getElementById('exit-modal').classList.add('hidden');
+            document.getElementById('exit-reasons').classList.remove('hidden');
+            document.getElementById('exit-response').classList.add('hidden');
+            if (pendingExitReason) {
+                trackEvent('exit_intent_reason', pendingExitReason);
+                pendingExitReason = null;
+            }
+        }
+
+        function payFromModal() {
+            pendingExitReason = null;
+            document.getElementById('exit-modal').classList.add('hidden');
+            registerAndPay();
         }
 
         function backToReasons() {
+            pendingExitReason = null;
             document.getElementById('exit-reasons').classList.remove('hidden');
             document.getElementById('exit-response').classList.add('hidden');
         }
