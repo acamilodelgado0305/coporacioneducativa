@@ -228,12 +228,12 @@
         .value-strip-text span { font-size: 11px; color: #4ade80; /* adjust */ color: #166534; opacity: 0.8; }
 
         .btn-submit-main {
-            background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+            background: #3283FA;
             color: white;
             font-weight: 700;
-            font-size: 16px;
-            border-radius: 12px;
-            padding: 16px 24px;
+            font-size: 15px;
+            border-radius: 8px;
+            padding: 12px 24px;
             width: 100%;
             display: flex;
             align-items: center;
@@ -242,7 +242,7 @@
             cursor: pointer;
             border: none;
             transition: all 0.2s;
-            box-shadow: 0 8px 24px -8px rgba(21,128,61,0.5);
+            box-shadow: 0 8px 24px -8px rgba(29,78,216,0.5);
             position: relative;
             overflow: hidden;
         }
@@ -252,7 +252,7 @@
             inset: 0;
             background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
         }
-        .btn-submit-main:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -8px rgba(21,128,61,0.55); }
+        .btn-submit-main:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -8px rgba(29,78,216,0.55); }
         .btn-submit-main:active { transform: scale(0.99); }
 
         .trust-row {
@@ -434,23 +434,6 @@
             <!-- ── REGISTRO ── -->
             <div id="view-registration" class="p-7 md:p-9 hidden-section">
 
-                <!-- Pasos -->
-                <div class="form-step-bar">
-                    <div class="step-node">
-                        <div class="step-circle active">1</div>
-                        <span class="step-label active">Tus datos</span>
-                    </div>
-                    <div class="step-line"></div>
-                    <div class="step-node">
-                        <div class="step-circle pending">2</div>
-                        <span class="step-label">Examen</span>
-                    </div>
-                    <div class="step-line"></div>
-                    <div class="step-node">
-                        <div class="step-circle pending">3</div>
-                        <span class="step-label">Certificado</span>
-                    </div>
-                </div>
 
             
 
@@ -498,15 +481,8 @@
 
                     <div class="pt-2">
                         <button type="submit" class="btn-submit-main">
-                            <i class="fas fa-play-circle text-xl"></i>
-                            <span>Comenzar Evaluación Gratuita</span>
-                            <i class="fas fa-arrow-right text-sm opacity-70"></i>
+                            <span>Continuar</span>
                         </button>
-                        <div class="trust-row">
-                            <div class="trust-item"><i class="fas fa-lock"></i> Datos seguros</div>
-                            <div class="trust-item"><i class="fas fa-check-circle"></i> Gratis hasta aprobar</div>
-                            <div class="trust-item"><i class="fas fa-bolt"></i> Certificado al instante</div>
-                        </div>
                     </div>
 
                 </form>
