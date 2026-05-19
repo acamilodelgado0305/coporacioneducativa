@@ -86,9 +86,11 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         .btn-nequi {
-            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            background: linear-gradient(135deg, #6B21A8 0%, #9333EA 100%);
             border: none;
+            box-shadow: 0 8px 28px -8px rgba(107, 33, 168, 0.6);
         }
+        .btn-nequi:hover { box-shadow: 0 12px 32px -8px rgba(107, 33, 168, 0.7); }
 
         /* ── Header rediseño ── */
         .page-header {
@@ -432,11 +434,20 @@
             <div class="brand-bar"></div>
 
             <!-- ── REGISTRO ── -->
-            <div id="view-registration" class="p-7 md:p-9 hidden-section">
+            <div id="view-registration" class="hidden-section">
 
+                <!-- Banner aprobado -->
+                <div class="flex items-center gap-3 bg-green-50 border-b border-green-100 px-5 py-3">
+                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check text-green-600 text-sm"></i>
+                    </div>
+                    <div>
+                        <p class="text-green-800 font-bold text-sm leading-tight">¡Examen aprobado!</p>
+                        <p class="text-green-600 text-xs mt-0.5">Completa tus datos para recibir tu certificado</p>
+                    </div>
+                </div>
 
-            
-
+                <div class="p-7 md:p-9">
                 <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-4">
 
                     <div class="field-group">
@@ -486,6 +497,7 @@
                     </div>
 
                 </form>
+                </div>
             </div>
 
             <div id="view-quiz-app" class="flex flex-col h-full">
@@ -556,13 +568,22 @@
                         </div>
                     </div>
 
-                    <!-- Botón Wompi -->
-                    <div onclick="registerAndPay()" class="btn-nequi cursor-pointer block w-full px-4 py-3.5 rounded-xl text-white shadow-lg relative overflow-hidden group hover:scale-[1.01] transition-all active:scale-[0.99]">
+                    <!-- Botón Nequi -->
+                    <div onclick="registerAndPay()" class="btn-nequi cursor-pointer block w-full px-4 py-4 rounded-xl text-white relative overflow-hidden group hover:scale-[1.01] transition-all active:scale-[0.99]">
                         <div class="relative z-10 flex items-center gap-3">
-                            <img src="https://wompi.com/assets/downloadble/logos_wompi/Wompi_ContraccionPrincipal.jpg" class="w-9 h-9 rounded-lg object-contain bg-white p-1 flex-shrink-0" alt="Wompi">
-                            <p class="font-bold text-sm flex-1 text-right">Pagar ahora</p>
+                            <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="w-10 h-10 rounded-lg object-contain bg-white p-1 flex-shrink-0" alt="Nequi">
+                            <div class="flex-1">
+                                <p class="font-bold text-sm leading-tight">Pagar con Nequi</p>
+                                <p class="text-xs text-white/70 leading-tight mt-0.5">Rápido · Seguro · Sin complicaciones</p>
+                            </div>
                             <i class="fas fa-chevron-right text-white/70 group-hover:translate-x-1 transition text-sm flex-shrink-0"></i>
                         </div>
+                    </div>
+
+                    <!-- Confirmación post-pago -->
+                    <div class="flex items-start gap-2 bg-purple-50 border border-purple-100 rounded-lg px-3 py-2.5">
+                        <i class="fas fa-envelope-open-text text-purple-400 text-xs mt-0.5 flex-shrink-0"></i>
+                        <p class="text-xs text-purple-700 leading-relaxed">Tu certificado en PDF llegará a tu correo el <strong>mismo día</strong> después del pago.</p>
                     </div>
 
                     <!-- Transferencia manual collapse -->
@@ -595,7 +616,7 @@
                         <i class="fas fa-redo-alt mr-1.5"></i> Iniciar nuevo proceso
                     </button>
                     <p class="text-center text-xs text-gray-400 flex items-center justify-center gap-2">
-                        <i class="fas fa-lock text-green-400"></i> Pago 100% seguro · Wompi by Bancolombia
+                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por Nequi
                     </p>
                 </div>
             </div>
@@ -776,7 +797,7 @@
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
 
         let state = {
-            view: 'view-registration',
+            view: 'view-quiz-app',
             pendingCheckout: false,
             userData: { type: '', num: '', name: '', email: '' },
             quiz: { currentIdx: 0, score: 0 }
@@ -817,7 +838,7 @@
         function loadState() {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) state = JSON.parse(saved);
-            if (state.view === 'view-landing') state.view = 'view-registration';
+            if (state.view === 'view-landing') state.view = 'view-quiz-app';
             applyStateToUI();
         }
 
@@ -930,7 +951,7 @@
         function finishQuiz() {
             const percent = (state.quiz.score / questions.length);
             if (percent >= 0.75) {
-                state.view = 'view-checkout';
+                state.view = 'view-registration';
                 trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
                 fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' });
             } else {
@@ -949,7 +970,7 @@
                 name: document.getElementById('user-fullname').value,
                 email: document.getElementById('user-email').value
             };
-            state.view = 'view-quiz-app';
+            state.view = 'view-checkout';
             saveState();
             trackEvent('registration_submitted');
             applyStateToUI();
@@ -1040,8 +1061,8 @@
         const exitResponses = {
             seguridad: {
                 title: '¡Tu dinero está 100% protegido!',
-                sub:   'Wompi es la pasarela oficial de Bancolombia',
-                body:  'Wompi procesa millones de pagos al mes para Rappi, Bancolombia y cientos de negocios en Colombia. Tu transacción está cifrada y nunca almacenamos datos de tarjeta. Puedes pagar también por transferencia si prefieres.',
+                sub:   'Nequi cifra cada transacción de extremo a extremo',
+                body:  'Nequi es la billetera digital oficial de Bancolombia y procesa millones de pagos al mes. Tu transacción está cifrada y nunca almacenamos datos de tu cuenta. También puedes pagar por transferencia manual si prefieres.',
                 actions: `
                     <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-lock"></i> Pagar de forma segura ahora
@@ -1062,7 +1083,7 @@
             metodo: {
                 title: 'Tenemos varias formas de pago',
                 sub:   'Sin tarjeta ni apps bancarias',
-                body:  'Además de Wompi, puedes pagar con Nequi, Daviplata o transferencia Bancolombia. Solo envíanos el comprobante y listo. Escríbenos y te damos los datos.',
+                body:  'Puedes pagar con Nequi, Daviplata o transferencia Bancolombia. Solo envíanos el comprobante por WhatsApp y listo. Escríbenos y te damos los datos.',
                 actions: `
                     <a href="https://wa.me/573107941580?text=Hola%2C%20no%20tengo%20tarjeta%20ni%20Nequi%2C%20%C2%BFc%C3%B3mo%20puedo%20pagar%20mi%20certificado%3F" target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Ver otras formas de pago
