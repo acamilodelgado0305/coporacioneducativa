@@ -1,11 +1,14 @@
+---
+import '../../styles/global.css';
+---
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Certificación Oficial | Manipulación de Alimentos</title>
-    <link rel="icon" href="../logopagina.png" type="image/png" />
-    
+    <title>Examen | Manipulación de Alimentos — CertiTec</title>
+    <link rel="icon" href="/logopagina.png" type="image/png" />
+
     <!-- Meta Pixel -->
     <script>
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -18,13 +21,12 @@
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"/></noscript>
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <style>
-        body { 
-            font-family: 'Inter', sans-serif; 
+
+    <style is:global>
+        body {
+            font-family: 'Inter', sans-serif !important;
             background-color: #f8fafc;
             background-image: radial-gradient(1200px 600px at 10% -10%, rgba(14, 165, 233, 0.15), transparent 60%),
                               radial-gradient(1000px 500px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%);
@@ -65,13 +67,13 @@
         }
         .input-pro:focus {
             background-color: #ffffff;
-            border-color: #16a34a; 
+            border-color: #16a34a;
             outline: none;
             box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
         }
 
         .btn-action {
-            background: #15803d; 
+            background: #15803d;
             color: white;
             font-weight: 600;
             border-radius: 8px;
@@ -81,7 +83,6 @@
         .btn-action:active { transform: scale(0.98); }
         .btn-action:disabled { background: #9ca3af; cursor: not-allowed; }
 
-        .hidden-section { display: none !important; }
         .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -92,27 +93,11 @@
         }
         .btn-nequi:hover { box-shadow: 0 12px 32px -8px rgba(107, 33, 168, 0.7); }
 
-        /* ── Header rediseño ── */
         .page-header {
             max-width: 640px;
             width: 100%;
             margin: 0 auto 20px;
             text-align: center;
-        }
-        .badge-oficial {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: #f0fdf4;
-            border: 1px solid #bbf7d0;
-            color: #15803d;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 5px 12px;
-            border-radius: 20px;
-            margin-bottom: 10px;
         }
         .header-title {
             font-size: clamp(22px, 5vw, 30px);
@@ -127,58 +112,8 @@
             color: #64748b;
             margin-top: 6px;
         }
-        .header-stats {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 12px;
-        }
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 12px;
-            color: #475569;
-            font-weight: 500;
-        }
-        .stat-item i { color: #15803d; font-size: 11px; }
-        .stat-sep { width: 1px; height: 14px; background: #cbd5e1; }
 
-        /* ── Form rediseño ── */
-        .form-step-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0;
-            margin-bottom: 24px;
-        }
-        .step-node {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-        .step-circle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            transition: all 0.2s;
-        }
-        .step-circle.active  { background: #15803d; color: #fff; box-shadow: 0 0 0 4px rgba(21,128,61,0.15); }
-        .step-circle.pending { background: #e2e8f0; color: #94a3b8; }
-        .step-label { font-size: 10px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; }
-        .step-label.active { color: #15803d; }
-        .step-line { width: 48px; height: 2px; background: #e2e8f0; margin: 0 4px; margin-bottom: 16px; flex-shrink: 0; }
-
-        .input-wrap {
-            position: relative;
-        }
+        .input-wrap { position: relative; }
         .input-wrap .input-icon {
             position: absolute;
             left: 14px;
@@ -204,30 +139,6 @@
             margin-bottom: 6px;
         }
         .field-group label .req { color: #ef4444; }
-
-        .value-strip {
-            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
-            border: 1px solid #bbf7d0;
-            border-radius: 10px;
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .value-strip-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: #15803d;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .value-strip-icon i { color: #fff; font-size: 15px; }
-        .value-strip-text p { font-size: 12px; color: #15803d; font-weight: 700; margin: 0; }
-        .value-strip-text span { font-size: 11px; color: #4ade80; /* adjust */ color: #166534; opacity: 0.8; }
 
         .btn-submit-main {
             background: #3283FA;
@@ -257,23 +168,7 @@
         .btn-submit-main:hover { transform: translateY(-1px); box-shadow: 0 12px 28px -8px rgba(29,78,216,0.55); }
         .btn-submit-main:active { transform: scale(0.99); }
 
-        .trust-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            margin-top: 12px;
-        }
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 11px;
-            color: #64748b;
-        }
-        .trust-item i { color: #15803d; font-size: 10px; }
-
-        /* ── Quiz opciones ── */
+        /* Quiz opciones */
         .opt-btn {
             width: 100%;
             text-align: left;
@@ -289,14 +184,8 @@
             transition: all 0.15s;
             cursor: pointer;
         }
-        .opt-btn:hover:not(:disabled) {
-            border-color: #86efac;
-            background: #f0fdf4;
-        }
-        .opt-btn:hover:not(:disabled) .opt-circle {
-            border-color: #16a34a;
-            background: #dcfce7;
-        }
+        .opt-btn:hover:not(:disabled) { border-color: #86efac; background: #f0fdf4; }
+        .opt-btn:hover:not(:disabled) .opt-circle { border-color: #16a34a; background: #dcfce7; }
         .opt-circle {
             width: 22px;
             height: 22px;
@@ -311,7 +200,7 @@
             font-size: 11px;
         }
 
-        /* ── Modal respuesta incorrecta ── */
+        /* Modal respuesta incorrecta */
         .modal-backdrop {
             position: fixed;
             inset: 0;
@@ -323,9 +212,7 @@
             background: rgba(15, 23, 42, 0.55);
             backdrop-filter: blur(4px);
         }
-        @media (min-width: 480px) {
-            .modal-backdrop { align-items: center; }
-        }
+        @media (min-width: 480px) { .modal-backdrop { align-items: center; } }
         .modal-box {
             background: #ffffff;
             border-radius: 20px;
@@ -358,7 +245,7 @@
         .btn-modal-continue:hover  { background: #1e293b; }
         .btn-modal-continue:active { transform: scale(0.98); }
 
-        /* ── Exit intent modal ── */
+        /* Exit intent modal */
         .exit-reason-btn {
             width: 100%;
             text-align: left;
@@ -416,27 +303,27 @@
         }
         .btn-exit-wa:hover { opacity: 0.9; }
 
+        /* Garantiza que .hidden siempre oculte, sin importar el orden de carga de CSS */
+        .hidden { display: none !important; }
     </style>
 </head>
 <body class="antialiased text-slate-800">
 
     <div class="bg-overlay flex flex-col items-center justify-center p-4 min-h-screen">
-        
-        <!-- ── ENCABEZADO ── -->
+
+        <!-- ENCABEZADO -->
         <div class="page-header">
             <h1 class="header-title">
                 Certificado de<br><span>Manipulación de Alimentos</span>
             </h1>
-            <p class="header-sub">Válido ante la Secretaría de Salud · Resolución 2674 </p>
+            <p class="header-sub">Válido ante la Secretaría de Salud · Resolución 2674</p>
         </div>
 
         <main class="main-card fade-in">
             <div class="brand-bar"></div>
 
-            <!-- ── REGISTRO ── -->
+            <!-- VISTA: REGISTRO (aparece tras aprobar) -->
             <div id="view-registration" class="hidden-section">
-
-                <!-- Banner aprobado -->
                 <div class="flex items-center gap-3 bg-green-50 border-b border-green-100 px-5 py-3">
                     <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-check text-green-600 text-sm"></i>
@@ -500,6 +387,7 @@
                 </div>
             </div>
 
+            <!-- VISTA: QUIZ (visible por defecto) -->
             <div id="view-quiz-app" class="flex flex-col h-full">
                 <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
                     <span class="text-xs font-bold text-green-700 bg-green-100 px-3 py-1 rounded-full border border-green-200">
@@ -521,9 +409,9 @@
                 </div>
             </div>
 
+            <!-- VISTA: CHECKOUT -->
             <div id="view-checkout" class="hidden-section">
 
-                <!-- Banner aprobado (compacto) -->
                 <div class="flex items-center gap-3 bg-white border-b border-slate-100 px-5 py-3">
                     <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                         <i class="fas fa-check text-green-600 text-sm"></i>
@@ -537,13 +425,11 @@
 
                     <!-- Ticket de compra -->
                     <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
-                        <!-- Cabecera ticket -->
                         <div class="bg-slate-50 border-b border-slate-200 px-4 py-2.5 flex items-center gap-2">
                             <i class="fas fa-receipt text-slate-400 text-xs"></i>
                             <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Resumen de compra</span>
                         </div>
 
-                        <!-- Filas del ticket -->
                         <div class="px-4 py-3 space-y-2.5">
                             <div class="flex justify-between items-center">
                                 <span class="text-xs text-slate-400">Producto</span>
@@ -558,17 +444,15 @@
                             </div>
                         </div>
 
-                        <!-- Línea perforada -->
                         <div class="border-t border-dashed border-slate-300 mx-4"></div>
 
-                        <!-- Total -->
                         <div class="px-4 py-3 flex justify-between items-center">
                             <span class="text-sm font-bold text-slate-700">Pagas</span>
                             <span class="text-2xl font-extrabold text-slate-900">$22.000 <span class="text-sm font-normal text-slate-400">COP</span></span>
                         </div>
                     </div>
 
-                    <!-- Botón Nequi (Pago Automático Principal) -->
+                    <!-- Botón Nequi (Pago Automático) -->
                     <div onclick="registerAndPay()" class="btn-nequi cursor-pointer block w-full px-4 py-4 rounded-xl text-white relative overflow-hidden group hover:scale-[1.01] transition-all active:scale-[0.99]">
                         <div class="relative z-10 flex items-center gap-3">
                             <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="w-10 h-10 rounded-lg object-contain bg-white p-1 flex-shrink-0" alt="Nequi">
@@ -580,16 +464,14 @@
                         </div>
                     </div>
 
-                    <!-- Medios de Pago Alternativos (Visibles Directamente) -->
+                    <!-- Transferencia Manual -->
                     <div class="space-y-3">
-                        <!-- Divider con texto -->
                         <div class="relative flex py-1 items-center">
                             <div class="flex-grow border-t border-slate-200"></div>
                             <span class="flex-shrink mx-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">¿Prefieres transferencia directa?</span>
                             <div class="flex-grow border-t border-slate-200"></div>
                         </div>
 
-                        <!-- Tarjeta de Transferencia Manual -->
                         <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-3 shadow-sm">
                             <div class="flex items-center gap-2 pb-2 border-b border-slate-100">
                                 <div class="w-6 h-6 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
@@ -601,7 +483,6 @@
                                 </div>
                             </div>
 
-                            <!-- Cuentas con botón Copiar -->
                             <div class="space-y-2">
                                 <div class="flex items-center justify-between bg-slate-50 px-3 py-2 rounded-lg border border-slate-100">
                                     <div class="flex items-center gap-1.5">
@@ -630,7 +511,6 @@
                                 </div>
                             </div>
 
-                            <!-- Botón WhatsApp de Reportar Pago y Ayuda -->
                             <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante."
                                target="_blank" onclick="trackEvent('whatsapp_comprobante')"
                                class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm mt-1">
@@ -639,7 +519,7 @@
                         </div>
                     </div>
 
-                    <!-- Sellos de Confianza y Garantía -->
+                    <!-- Sellos de confianza -->
                     <div class="grid grid-cols-3 gap-2 py-1">
                         <div class="flex flex-col items-center text-center p-2 bg-slate-50 rounded-xl border border-slate-100">
                             <i class="fas fa-shield-alt text-emerald-600 text-sm mb-1"></i>
@@ -658,7 +538,6 @@
                         </div>
                     </div>
 
-                    <!-- Botón de Reiniciar Proceso (Sutil) -->
                     <div class="pt-1 text-center">
                         <button onclick="startNewProcess()" class="text-xs text-slate-400 hover:text-slate-600 transition flex items-center justify-center gap-1.5 mx-auto hover:underline">
                             <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
@@ -671,6 +550,7 @@
                 </div>
             </div>
 
+            <!-- VISTA: REPROBADO -->
             <div id="view-fail" class="hidden-section text-center p-10">
                 <div class="inline-flex items-center justify-center w-20 h-20 bg-orange-100 rounded-full mb-4">
                     <i class="fas fa-redo text-4xl text-orange-500"></i>
@@ -689,7 +569,6 @@
             <p class="mt-2 text-[10px] opacity-70">© 2026 CertiTec Colombia</p>
         </footer>
     </div>
-
 
 
     <!-- Modal editar correo -->
@@ -721,7 +600,6 @@
     <div id="exit-modal" class="modal-backdrop hidden">
         <div class="modal-box" style="max-width:400px">
 
-            <!-- Pantalla 1: razones -->
             <div id="exit-reasons">
                 <div class="p-5 border-b border-slate-100 flex items-start justify-between gap-3">
                     <div>
@@ -734,41 +612,32 @@
                 </div>
                 <div class="p-4 space-y-2">
                     <button class="exit-reason-btn" onclick="showExitResponse('seguridad')">
-                        <span class="reason-icon">😟</span>
-                        <span>No me genera seguridad</span>
+                        <span class="reason-icon">😟</span><span>No me genera seguridad</span>
                     </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('dinero')">
-                        <span class="reason-icon">💰</span>
-                        <span>No tengo el dinero disponible ahora</span>
+                        <span class="reason-icon">💰</span><span>No tengo el dinero disponible ahora</span>
                     </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('metodo')">
-                        <span class="reason-icon">💳</span>
-                        <span>No tengo cómo pagar (tarjeta / Nequi)</span>
+                        <span class="reason-icon">💳</span><span>No tengo cómo pagar (tarjeta / Nequi)</span>
                     </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('empresa')">
-                        <span class="reason-icon">🏢</span>
-                        <span>Lo pagará mi empresa o empleador</span>
+                        <span class="reason-icon">🏢</span><span>Lo pagará mi empresa o empleador</span>
                     </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('necesidad')">
-                        <span class="reason-icon">🤷</span>
-                        <span>No sé si realmente lo necesito</span>
+                        <span class="reason-icon">🤷</span><span>No sé si realmente lo necesito</span>
                     </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('tiempo')">
-                        <span class="reason-icon">⏰</span>
-                        <span>Ahora no tengo tiempo</span>
+                        <span class="reason-icon">⏰</span><span>Ahora no tengo tiempo</span>
                     </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('pregunta')">
-                        <span class="reason-icon">❓</span>
-                        <span>Tengo una pregunta antes de pagar</span>
+                        <span class="reason-icon">❓</span><span>Tengo una pregunta antes de pagar</span>
                     </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('vigente')">
-                        <span class="reason-icon">📄</span>
-                        <span>Ya tengo un certificado vigente</span>
+                        <span class="reason-icon">📄</span><span>Ya tengo un certificado vigente</span>
                     </button>
                 </div>
             </div>
 
-            <!-- Pantalla 2: respuesta -->
             <div id="exit-response" class="hidden exit-response">
                 <div class="p-5 border-b border-slate-100 flex items-start justify-between gap-3">
                     <div>
@@ -818,7 +687,7 @@
         </div>
     </div>
 
-    <script>
+    <script is:inline>
         const STORAGE_KEY = 'certitec_data_v2';
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
 
@@ -840,27 +709,25 @@
             { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 }
         ];
 
-        // --- TRACKING N8N ---
-        function trackEvent(eventName, extraData = {}) {
+        function trackEvent(eventName, extraData) {
+            if (!extraData) extraData = {};
             const payload = {
                 evento: eventName,
-                pagina: "Curso Manipulación de Alimentos",
+                pagina: "Examen Manipulación de Alimentos",
                 fecha: new Date().toLocaleString('es-CO', { timeZone: 'America/Bogota' }),
                 usuario: state.userData,
                 ...extraData
             };
-            // Enviamos como text/plain para evitar problemas de CORS Preflight
             fetch(N8N_WEBHOOK, {
                 method: 'POST',
                 headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(payload),
                 keepalive: true
-            }).catch(() => {});
+            }).catch(function() {});
         }
 
-        // --- LÓGICA CORE ---
         function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-        
+
         function loadState() {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) state = JSON.parse(saved);
@@ -869,11 +736,11 @@
         }
 
         function switchView(viewName) {
-            ['view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'].forEach(id => {
+            ['view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'].forEach(function(id) {
                 document.getElementById(id).classList.add('hidden-section');
             });
             document.getElementById(viewName).classList.remove('hidden-section');
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }
 
         function applyStateToUI() {
@@ -901,18 +768,18 @@
             btnNext.disabled = true;
             btnNext.classList.add('opacity-50', 'cursor-not-allowed');
 
-            q.options.forEach((opt, idx) => {
+            q.options.forEach(function(opt, idx) {
                 const btn = document.createElement('button');
                 btn.className = 'opt-btn';
-                btn.innerHTML = `<span class="opt-circle"></span><span>${opt}</span>`;
-                btn.onclick = () => checkAnswer(idx, q.a, btn);
+                btn.innerHTML = '<span class="opt-circle"></span><span>' + opt + '</span>';
+                btn.onclick = function() { checkAnswer(idx, q.a, btn); };
                 container.appendChild(btn);
             });
         }
 
         function checkAnswer(selectedIdx, correctIdx, btn) {
             const allBtns = document.getElementById('q-options').querySelectorAll('button');
-            allBtns.forEach(b => { b.disabled = true; b.style.cursor = 'default'; });
+            allBtns.forEach(function(b) { b.disabled = true; b.style.cursor = 'default'; });
 
             const circle = btn.querySelector('.opt-circle');
 
@@ -979,7 +846,9 @@
             if (percent >= 0.75) {
                 state.view = 'view-registration';
                 trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
-                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' });
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' });
+                }
             } else {
                 state.view = 'view-fail';
                 trackEvent('quiz_failed', { score: state.quiz.score + "/8" });
@@ -1004,27 +873,27 @@
 
         function registerAndPay() {
             trackEvent('payment_initiated', { metodo: 'Nequi/PSE' });
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+            }
             window.location.href = 'https://checkout.nequi.wompi.co/l/qa6YDm';
         }
 
         function copyToClipboard(text, btnId) {
-            navigator.clipboard.writeText(text).then(() => {
+            navigator.clipboard.writeText(text).then(function() {
                 const btn = document.getElementById(btnId);
                 const originalHTML = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check text-[8px] text-green-600"></i> ¡Copiado!';
                 btn.style.background = '#dcfce7';
                 btn.style.color = '#15803d';
                 btn.style.borderColor = '#bbf7d0';
-                setTimeout(() => {
+                setTimeout(function() {
                     btn.innerHTML = originalHTML;
                     btn.style.background = '';
                     btn.style.color = '';
                     btn.style.borderColor = '';
                 }, 2000);
-            }).catch(err => {
-                console.error('Error al copiar: ', err);
-            });
+            }).catch(function(err) { console.error('Error al copiar: ', err); });
         }
 
         function startNewProcess() {
@@ -1032,12 +901,11 @@
             location.reload();
         }
 
-        // ── Editar correo ──
         function openEditEmailModal() {
             document.getElementById('edit-email-input').value = state.userData.email || '';
             document.getElementById('edit-email-error').classList.add('hidden');
             document.getElementById('edit-email-modal').classList.remove('hidden');
-            setTimeout(() => document.getElementById('edit-email-input').focus(), 100);
+            setTimeout(function() { document.getElementById('edit-email-input').focus(); }, 100);
         }
 
         function closeEditEmailModal() {
@@ -1059,13 +927,12 @@
             closeEditEmailModal();
         }
 
-        // ── Correo en checkout ──
         function populateCheckoutEmail() {
             const el = document.getElementById('checkout-email');
             if (el && state.userData.email) el.textContent = state.userData.email;
         }
 
-        // ── Exit intent ──
+        // Exit intent
         let pendingExitReason = null;
 
         function showExitModal() {
@@ -1102,113 +969,82 @@
                 title: '¡Tu dinero está 100% protegido!',
                 sub:   'Nequi cifra cada transacción de extremo a extremo',
                 body:  'Nequi es la billetera digital oficial de Bancolombia y procesa millones de pagos al mes. Tu transacción está cifrada y nunca almacenamos datos de tu cuenta. También puedes pagar por transferencia manual si prefieres.',
-                actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
-                        <i class="fas fa-lock"></i> Pagar de forma segura ahora
-                    </button>
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20la%20seguridad%20del%20pago." target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Resolver mis dudas por WhatsApp
-                    </a>`
+                actions: '<button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();"><i class="fas fa-lock"></i> Pagar de forma segura ahora</button><a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20la%20seguridad%20del%20pago." target="_blank" class="btn-exit-wa"><i class="fab fa-whatsapp text-lg"></i> Resolver mis dudas por WhatsApp</a>'
             },
             dinero: {
                 title: 'Puedes pagar por transferencia manual',
                 sub:   'Nequi · Daviplata · Bancolombia',
                 body:  'Transfiere $22.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
-                actions: `
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado." target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual
-                    </a>`
+                actions: '<a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado." target="_blank" class="btn-exit-wa"><i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual</a>'
             },
             metodo: {
                 title: 'Tenemos varias formas de pago',
                 sub:   'Sin tarjeta ni apps bancarias',
                 body:  'Puedes pagar con Nequi, Daviplata o transferencia Bancolombia. Solo envíanos el comprobante por WhatsApp y listo. Escríbenos y te damos los datos.',
-                actions: `
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20no%20tengo%20tarjeta%20ni%20Nequi%2C%20%C2%BFc%C3%B3mo%20puedo%20pagar%20mi%20certificado%3F" target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Ver otras formas de pago
-                    </a>`
+                actions: '<a href="https://wa.me/573107941580?text=Hola%2C%20no%20tengo%20tarjeta%20ni%20Nequi%2C%20%C2%BFc%C3%B3mo%20puedo%20pagar%20mi%20certificado%3F" target="_blank" class="btn-exit-wa"><i class="fab fa-whatsapp text-lg"></i> Ver otras formas de pago</a>'
             },
             empresa: {
                 title: '¡Tu empresa puede pagarlo fácilmente!',
                 sub:   'Emitimos factura o soporte de pago',
                 body:  'Podemos enviarte una factura o soporte oficial para que tu empresa o empleador realice el pago. Escríbenos y te explicamos el proceso en minutos.',
-                actions: `
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20mi%20empresa%20va%20a%20pagar%20el%20certificado%2C%20%C2%BFc%C3%B3mo%20lo%20tramitamos%3F" target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Coordinar pago con mi empresa
-                    </a>`
+                actions: '<a href="https://wa.me/573107941580?text=Hola%2C%20mi%20empresa%20va%20a%20pagar%20el%20certificado%2C%20%C2%BFc%C3%B3mo%20lo%20tramitamos%3F" target="_blank" class="btn-exit-wa"><i class="fab fa-whatsapp text-lg"></i> Coordinar pago con mi empresa</a>'
             },
             necesidad: {
                 title: 'El certificado es obligatorio por ley',
                 sub:   'Resolución 2674 de 2013 — Secretaría de Salud',
-                body:  'Si trabajas o vas a trabajar en cocinas, restaurantes, cafeterías o cualquier establecimiento de alimentos, la ley colombiana exige este certificado. Sin él, el establecimiento puede ser sancionado.',
-                actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
-                        <i class="fas fa-certificate"></i> Obtener mi certificado ahora
-                    </button>
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20si%20necesito%20el%20certificado." target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Consultar con un asesor
-                    </a>`
+                body:  'Si trabajas o vas a trabajar en cocinas, restaurantes, cafeterías o cualquier establecimiento de alimentos, la ley colombiana exige este certificado.',
+                actions: '<button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();"><i class="fas fa-certificate"></i> Obtener mi certificado ahora</button><a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20si%20necesito%20el%20certificado." target="_blank" class="btn-exit-wa"><i class="fab fa-whatsapp text-lg"></i> Consultar con un asesor</a>'
             },
             tiempo: {
                 title: 'Solo toma 5 minutos completar el pago',
                 sub:   'Y el certificado llega a tu correo hoy',
-                body:  'Ya aprobaste el examen — lo más difícil ya lo hiciste. El pago tarda menos de 2 minutos y tu certificado llega al correo el mismo día. ¿Lo terminamos ahora?',
-                actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
-                        <i class="fas fa-bolt"></i> Terminar en 2 minutos
-                    </button>`
+                body:  'Ya aprobaste el examen — lo más difícil ya lo hiciste. El pago tarda menos de 2 minutos y tu certificado llega al correo el mismo día.',
+                actions: '<button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();"><i class="fas fa-bolt"></i> Terminar en 2 minutos</button>'
             },
             pregunta: {
                 title: '¡Con gusto te respondemos!',
                 sub:   'Un asesor te atiende ahora mismo',
-                body:  'Escríbenos por WhatsApp y resolvemos tu duda en minutos. No dejes que una pregunta te impida obtener tu certificado hoy.',
-                actions: `
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20certificado%20antes%20de%20pagar." target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Hacer mi pregunta ahora
-                    </a>`
+                body:  'Escríbenos por WhatsApp y resolvemos tu duda en minutos.',
+                actions: '<a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20certificado%20antes%20de%20pagar." target="_blank" class="btn-exit-wa"><i class="fab fa-whatsapp text-lg"></i> Hacer mi pregunta ahora</a>'
             },
             vigente: {
                 title: 'Verifica la vigencia de tu certificado',
                 sub:   'Los certificados vencen cada año',
-                body:  'El certificado de manipulación de alimentos tiene una vigencia de 1 año. Si el tuyo está próximo a vencer o ya venció, necesitas renovarlo para seguir trabajando legalmente.',
-                actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
-                        <i class="fas fa-sync-alt"></i> Renovar mi certificado
-                    </button>
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20verificar%20si%20necesito%20renovar%20mi%20certificado." target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Consultar mi caso
-                    </a>`
+                body:  'El certificado de manipulación de alimentos tiene una vigencia de 1 año. Si el tuyo está próximo a vencer o ya venció, necesitas renovarlo.',
+                actions: '<button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();"><i class="fas fa-sync-alt"></i> Renovar mi certificado</button><a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20verificar%20si%20necesito%20renovar%20mi%20certificado." target="_blank" class="btn-exit-wa"><i class="fab fa-whatsapp text-lg"></i> Consultar mi caso</a>'
             }
         };
 
         function showExitResponse(reason) {
             const r = exitResponses[reason];
-            document.getElementById('exit-resp-title').textContent   = r.title;
-            document.getElementById('exit-resp-sub').textContent     = r.sub;
-            document.getElementById('exit-resp-body').textContent    = r.body;
-            document.getElementById('exit-resp-actions').innerHTML   = r.actions;
+            document.getElementById('exit-resp-title').textContent = r.title;
+            document.getElementById('exit-resp-sub').textContent   = r.sub;
+            document.getElementById('exit-resp-body').textContent  = r.body;
+            document.getElementById('exit-resp-actions').innerHTML = r.actions;
             document.getElementById('exit-reasons').classList.add('hidden');
             document.getElementById('exit-response').classList.remove('hidden');
+            const labels = {
+                seguridad: 'No me genera seguridad',
+                dinero:    'No tengo el dinero disponible ahora',
+                metodo:    'No tengo cómo pagar (tarjeta / Nequi)',
+                empresa:   'Lo pagará mi empresa o empleador',
+                necesidad: 'No sé si realmente lo necesito',
+                tiempo:    'Ahora no tengo tiempo',
+                pregunta:  'Tengo una pregunta antes de pagar',
+                vigente:   'Ya tengo un certificado vigente'
+            };
             trackEvent('exit_intent_reason', {
                 reason_key:   reason,
-                reason_label: {
-                    seguridad: 'No me genera seguridad',
-                    dinero:    'No tengo el dinero disponible ahora',
-                    metodo:    'No tengo cómo pagar (tarjeta / Nequi)',
-                    empresa:   'Lo pagará mi empresa o empleador',
-                    necesidad: 'No sé si realmente lo necesito',
-                    tiempo:    'Ahora no tengo tiempo',
-                    pregunta:  'Tengo una pregunta antes de pagar',
-                    vigente:   'Ya tengo un certificado vigente'
-                }[reason] || reason,
-                nombre: state.userData.name  || '(no registrado)',
-                correo: state.userData.email || '(no registrado)',
+                reason_label: labels[reason] || reason,
+                nombre:    state.userData.name  || '(no registrado)',
+                correo:    state.userData.email || '(no registrado)',
                 documento: (state.userData.type || '') + ' ' + (state.userData.num || '')
             });
         }
 
-
-        function resetApp() { if(confirm('¿Reiniciar?')) startNewProcess(); }
+        function resetApp() {
+            if (confirm('¿Reiniciar el examen?')) startNewProcess();
+        }
 
         // Exit intent detection
         let exitModalShown = false;
@@ -1235,7 +1071,7 @@
             }
         });
 
-        document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', function() {
             loadState();
             trackEvent('page_view');
         });

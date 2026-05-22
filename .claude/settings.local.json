@@ -11,7 +11,15 @@
       "Bash(thank)",
       "Bash(confirmacion)",
       "Bash(confirmation\")",
-      "Bash(xargs grep -l \"gracias\\\\|thank\\\\|confirmacion\\\\|confirmation\")"
+      "Bash(xargs grep -l \"gracias\\\\|thank\\\\|confirmacion\\\\|confirmation\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\" -Force)",
+      "Bash(Select-Object Name, PSIsContainer)",
+      "Bash(Format-Table -AutoSize)",
+      "PowerShell(Get-ChildItem -Path \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\certitec-astro\\\\src\\\\pages\" -Recurse -Force | Where-Object { -not $_.PSIsContainer } | Select-Object FullName)",
+      "Bash(Move-Item -Path \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\certitec-astro\\\\src\\\\pages\\\\cursos\\\\manipulacion-de-alimentos\\\\index.astro\" -Destination \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\certitec-astro\\\\src\\\\pages\\\\mda\\\\index.astro\")",
+      "Bash(Move-Item -Path \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\certitec-astro\\\\src\\\\pages\\\\cursos\\\\manipulacion-de-alimentos\\\\examen.astro\" -Destination \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\certitec-astro\\\\src\\\\pages\\\\mda\\\\examen.astro\")",
+      "Bash(Remove-Item -Path \"C:\\\\Users\\\\ASUS\\\\Documents\\\\DESARROLLO\\\\LANDINGS\\\\CorporacioneducativaConalianza\\\\certitec-astro\\\\src\\\\pages\\\\cursos\\\\manipulacion-de-alimentos\" -Recurse)",
+      "Bash(cp \"C:/Users/ASUS/Documents/DESARROLLO/LANDINGS/CorporacioneducativaConalianza/certitec-astro/src/pages/cursos/[slug].astro\" \"C:/Users/ASUS/Documents/DESARROLLO/LANDINGS/CorporacioneducativaConalianza/certitec-astro/src/pages/[slug].astro\" && rm -rf \"C:/Users/ASUS/Documents/DESARROLLO/LANDINGS/CorporacioneducativaConalianza/certitec-astro/src/pages/cursos\")"
     ]
   }
 }

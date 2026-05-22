@@ -39,7 +39,7 @@ export interface Curso {
 
 export const cursos: Curso[] = [
   {
-    slug: 'manipulacion-de-alimentos',
+    slug: 'mda',
     titulo: 'Manipulación de',
     tituloResaltado: 'Alimentos',
     tagline: 'Requisito Legal Obligatorio',

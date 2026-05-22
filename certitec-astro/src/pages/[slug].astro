@@ -1,10 +1,12 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { cursos } from '../../data/cursos';
-import '../../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { cursos } from '../data/cursos';
+import '../styles/global.css';
 
 export function getStaticPaths() {
-  return cursos.map(c => ({ params: { slug: c.slug }, props: { curso: c } }));
+  return cursos
+    .filter(c => c.slug !== 'mda')
+    .map(c => ({ params: { slug: c.slug }, props: { curso: c } }));
 }
 
 const { curso } = Astro.props;
