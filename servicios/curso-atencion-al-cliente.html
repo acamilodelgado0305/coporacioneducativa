@@ -45,20 +45,8 @@
 </head>
 <body class="text-slate-800 antialiased flex flex-col min-h-screen">
 
-    <header class="bg-white/95 backdrop-blur-sm shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="../logof.png" onerror="this.style.display='none'" alt="CertiTec" class="h-8 md:h-10 mr-2" />
-                <div class="leading-tight">
-                    <p class="font-bold text-primary text-sm md:text-lg">CertiTec</p>
-                    <p class="text-[10px] text-gray-500 uppercase font-semibold">Servicio al Cliente</p>
-                </div>
-            </div>
-            <a href="#inicio-examen" onclick="scrollToExam()" class="bg-green-600 text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-green-700 transition">
-                <i class="fas fa-play mr-1"></i> Examen
-            </a>
-        </div>
-    </header>
+    <site-header course="Atención al Cliente" cta-text="Iniciar Examen" cta-href="#inicio-examen" cta-color="#16a34a"></site-header>
+    <script src="../components/header.js"></script>
 
     <main id="main-container" class="flex-grow">
 
