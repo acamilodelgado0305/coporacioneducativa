@@ -909,10 +909,13 @@
     <script>
         const STORAGE_KEY = 'certitec_data_v2';
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
+        const CRM_LEADS_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/crm/leads/publico';
+        const CRM_BUSINESS_ID = 3;
 
         let state = {
             view: 'view-quiz-app',
             pendingCheckout: false,
+            leadCreated: false,
             userData: { type: '', num: '', name: '', email: '' },
             quiz: { currentIdx: 0, score: 0 }
         };
@@ -944,6 +947,36 @@
                 body: JSON.stringify(payload),
                 keepalive: true
             }).catch(() => {});
+        }
+
+        // --- CRM LEAD (se crea una sola vez al completar el formulario) ---
+        function createCrmLead() {
+            if (state.leadCreated) return;
+            state.leadCreated = true;
+            saveState();
+
+            const u = state.userData;
+            const payload = {
+                business_id: CRM_BUSINESS_ID,
+                nombre: u.name,
+                empresa: '',
+                telefono: '',
+                email: u.email,
+                origen: 'WEB',
+                valor_estimado: 22000,
+                notas: `Certificado Manipulación de Alimentos | Documento: ${u.type} ${u.num} | Examen aprobado`
+            };
+
+            fetch(CRM_LEADS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+                keepalive: true
+            }).catch(() => {
+                // Si falla, permitir un reintento en una próxima acción
+                state.leadCreated = false;
+                saveState();
+            });
         }
 
         // --- LÓGICA CORE ---
@@ -1087,6 +1120,7 @@
             state.view = 'view-checkout';
             saveState();
             trackEvent('registration_submitted');
+            createCrmLead();
             applyStateToUI();
         }
 
