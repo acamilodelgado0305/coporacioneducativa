@@ -959,12 +959,14 @@
             const payload = {
                 business_id: CRM_BUSINESS_ID,
                 nombre: u.name,
+                tipo_documento: u.type,
+                numero_documento: u.num,
                 empresa: '',
                 telefono: '',
                 email: u.email,
                 origen: 'WEB',
                 valor_estimado: 22000,
-                notas: `Certificado Manipulación de Alimentos | Documento: ${u.type} ${u.num} | Examen aprobado`
+                notas: `Certificado Manipulación de Alimentos | Examen aprobado`
             };
 
             fetch(CRM_LEADS_URL, {
