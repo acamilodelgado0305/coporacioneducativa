@@ -102,19 +102,29 @@
         .fade-in { animation: fadeIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-nequi {
-            background: linear-gradient(135deg, #6B21A8 0%, #9333EA 100%);
-            border: none;
-            box-shadow: 0 8px 28px -8px rgba(107, 33, 168, 0.6);
+        .btn-pay-option {
+            background: #ffffff;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 15px;
+            border-radius: 12px;
+            padding: 15px 20px;
+            border: 1.5px solid #e2e8f0;
+            cursor: pointer;
+            width: 100%;
+            display: block;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
         }
-        .btn-nequi:hover { box-shadow: 0 12px 32px -8px rgba(107, 33, 168, 0.7); }
-
-        .btn-transfer {
-            background: linear-gradient(135deg, #0158AD 0%, #0a7ed9 100%);
-            border: none;
-            box-shadow: 0 8px 28px -8px rgba(1, 88, 173, 0.6);
+        .btn-pay-option:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
         }
-        .btn-transfer:hover { background: linear-gradient(135deg, #014e99 0%, #0972c4 100%); box-shadow: 0 12px 32px -8px rgba(1, 88, 173, 0.7); }
+        .btn-pay-option:active {
+            transform: scale(0.99);
+        }
 
         /* ── Header rediseño ── */
         .page-header {
@@ -716,40 +726,40 @@
             <div class="p-5 space-y-3 overflow-y-auto" style="max-height:72vh">
 
                 <!-- PSE -->
-                <button onclick="registerAndPay()" class="btn-pay-main group">
+                <button onclick="registerAndPay()" class="btn-pay-option group">
                     <div class="flex items-center gap-3">
                         <img src="https://microempresas.co/wp-content/uploads/2024/12/pse-logo-big.webp" class="w-9 h-9 rounded-lg object-contain bg-white p-1 flex-shrink-0" alt="PSE">
                         <div class="flex-1 text-left">
-                            <p class="font-extrabold text-sm leading-tight">PSE — $22.000</p>
-                            <p class="text-xs text-slate-800/60 leading-tight mt-0.5">Débito desde tu banco · Aprobación inmediata</p>
+                            <p class="font-extrabold text-sm leading-tight text-slate-800">PSE — $22.000</p>
+                            <p class="text-xs text-slate-500 leading-tight mt-0.5">Débito desde tu banco · Aprobación inmediata</p>
                         </div>
-                        <i class="fas fa-arrow-right text-slate-800 text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                        <i class="fas fa-arrow-right text-slate-400 text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
                     </div>
                 </button>
 
                 <!-- NEQUI -->
-                <button onclick="payWithNequi()" class="btn-pay-main btn-nequi group">
+                <button onclick="payWithNequi()" class="btn-pay-option group">
                     <div class="flex items-center gap-3">
                         <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
                         <div class="flex-1 text-left">
-                            <p class="font-extrabold text-sm leading-tight text-white">Nequi — $22.000</p>
-                            <p class="text-xs text-white/70 leading-tight mt-0.5">Desde tu app Nequi · Aprobación inmediata</p>
+                            <p class="font-extrabold text-sm leading-tight text-slate-800">Nequi — $22.000</p>
+                            <p class="text-xs text-slate-500 leading-tight mt-0.5">Desde tu app Nequi · Aprobación inmediata</p>
                         </div>
-                        <i class="fas fa-arrow-right text-white text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                        <i class="fas fa-arrow-right text-slate-400 text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
                     </div>
                 </button>
 
                 <!-- TRANSFERENCIA -->
-                <button type="button" id="transfer-toggle" onclick="toggleTransfer()" class="btn-pay-main btn-transfer group">
+                <button type="button" id="transfer-toggle" onclick="toggleTransfer()" class="btn-pay-option group">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center text-[#0158AD] flex-shrink-0">
+                        <div class="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center text-[#0158AD] flex-shrink-0">
                             <i class="fas fa-university text-base"></i>
                         </div>
                         <div class="flex-1 text-left">
-                            <p class="font-extrabold text-sm leading-tight text-white">Transferencia — $22.000</p>
-                            <p class="text-xs text-white/70 leading-tight mt-0.5">Nequi · Daviplata · Bancolombia · Corresponsal</p>
+                            <p class="font-extrabold text-sm leading-tight text-slate-800">Transferencia — $22.000</p>
+                            <p class="text-xs text-slate-500 leading-tight mt-0.5">Nequi · Daviplata · Bancolombia · Corresponsal</p>
                         </div>
-                        <i id="transfer-chevron" class="fas fa-chevron-down text-white text-sm flex-shrink-0 transition-transform"></i>
+                        <i id="transfer-chevron" class="fas fa-chevron-down text-slate-400 text-sm flex-shrink-0 transition-transform"></i>
                     </div>
                 </button>
 
