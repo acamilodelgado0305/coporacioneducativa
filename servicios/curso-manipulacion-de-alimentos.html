@@ -571,9 +571,12 @@
                             <p class="text-white/70 text-xs mt-0.5">Solo falta el pago para recibir tu certificado</p>
                         </div>
                     </div>
-                    <div class="bg-white/10 rounded-lg px-3 py-2 flex items-center gap-2">
-                        <i class="fas fa-clock text-[#FBC13D] text-xs"></i>
-                        <p class="text-xs text-white/90 leading-snug"><span class="font-bold text-[#FBC13D]">Resultado reservado por tiempo limitado.</span> Completa el pago para asegurar tu certificado hoy.</p>
+                    <div class="bg-white/10 rounded-lg px-3 py-2 flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-clock text-[#FBC13D] text-xs"></i>
+                            <p class="text-xs text-white/90 leading-snug"><span class="font-bold text-[#FBC13D]">Resultado reservado.</span> Completa tu pago antes de que expire:</p>
+                        </div>
+                        <span id="checkout-timer" class="bg-red-600 text-white text-[11px] font-black px-2 py-0.5 rounded-md animate-pulse">10:00</span>
                     </div>
                 </div>
 
@@ -632,15 +635,16 @@
                                 <i class="fas fa-bolt text-[#0158AD]"></i> Pago en Línea (Aprobación Inmediata):
                             </p>
 
-                            <!-- NEQUI -->
-                            <button onclick="payWithNequi()" class="btn-pay-option group">
+                            <!-- NEQUI (RECOMENDADO) -->
+                            <button onclick="payWithNequi()" class="btn-pay-option group relative border-2 border-[#DA0063] hover:bg-[#fff5f8] transition-all">
+                                <span class="bg-[#DA0063] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
                                 <div class="flex items-center gap-3">
                                     <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
                                     <div class="flex-1 text-left">
-                                        <p class="font-extrabold text-sm leading-tight text-slate-800">Nequi — $22.000</p>
-                                        <p class="text-xs text-slate-500 leading-tight mt-0.5">Paga desde tu celular · RappiPay PSE</p>
+                                        <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — $22.000</p>
+                                        <p class="text-xs text-[#DA0063] font-bold leading-tight mt-0.5">Aprobación inmediata · RappiPay PSE</p>
                                     </div>
-                                    <i class="fas fa-arrow-right text-slate-400 text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                                    <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
                                 </div>
                             </button>
                         </div>
@@ -687,31 +691,34 @@
                             </div>
 
                             <!-- Instrucciones y Verificación -->
-                            <div class="bg-[#f8fafc] border border-slate-200 rounded-xl p-3.5 space-y-3 mt-1">
-                                <p class="text-xs font-bold text-slate-700 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                                    <i class="fas fa-check-circle text-green-500"></i> Pasos para validar tu pago:
+                            <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-3.5 space-y-3 mt-1">
+                                <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                    <i class="fas fa-info-circle text-emerald-600"></i> Pasos para reportar tu pago manual:
                                 </p>
                                 <div class="space-y-2.5 text-xs text-slate-600">
                                     <div class="flex items-start gap-2.5">
-                                        <span class="w-4 h-4 rounded-full bg-[#0158AD] text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span>
-                                        <p>Realiza la transferencia por <strong class="text-slate-800">$22.000</strong> a cualquiera de las cuentas de arriba.</p>
+                                        <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span>
+                                        <p>Envía la transferencia por <strong class="text-slate-800">$22.000</strong> a cualquiera de las cuentas indicadas.</p>
                                     </div>
                                     <div class="flex items-start gap-2.5">
-                                        <span class="w-4 h-4 rounded-full bg-[#0158AD] text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span>
-                                        <p>Guarda una **captura de pantalla o PDF** del comprobante exitoso.</p>
+                                        <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span>
+                                        <p>Toma una **captura de pantalla** o guarda el comprobante en PDF.</p>
                                     </div>
                                     <div class="flex items-start gap-2.5">
-                                        <span class="w-4 h-4 rounded-full bg-[#0158AD] text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span>
-                                        <p>Haz clic abajo para **enviar el comprobante por WhatsApp** y activar tu certificado de inmediato.</p>
+                                        <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span>
+                                        <p>Presiona el botón de abajo para **enviar tu comprobante de inmediato**.</p>
                                     </div>
                                 </div>
 
-                                <!-- Botón WhatsApp Prominente -->
+                                <!-- Botón WhatsApp Prominente de Reportar -->
                                 <div class="pt-1.5">
                                     <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante."
                                        target="_blank" onclick="trackEvent('whatsapp_comprobante')"
-                                       class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white font-extrabold py-3.5 px-5 rounded-xl transition-all shadow-lg text-sm border-2 border-green-300 animate-pulse">
-                                        <i class="fab fa-whatsapp text-lg animate-bounce"></i> 👉 ENVIAR COMPROBANTE DE PAGO POR WHATSAPP
+                                       class="w-full flex flex-col items-center justify-center gap-1 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg text-sm border-2 border-green-300 animate-pulse text-center decoration-none no-underline">
+                                        <span class="font-black text-sm tracking-wide flex items-center gap-2 justify-center">
+                                            <i class="fab fa-whatsapp text-lg"></i> 👉 ENVIAR CAPTURA DE PAGO AQUÍ
+                                        </span>
+                                        <span class="text-[10px] text-white/95 font-medium leading-none">Validación inmediata · Certificado listo hoy</span>
                                     </a>
                                 </div>
                             </div>
@@ -758,6 +765,23 @@
                             <i class="fas fa-certificate text-[#0158AD] text-sm mb-1"></i>
                             <span class="text-[9px] font-bold text-slate-700">Validez Oficial</span>
                             <span class="text-[7px] text-slate-400">Resolución 2674</span>
+                        </div>
+                    </div>
+
+                    <!-- Reaseguro y Preguntas de Pago -->
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3 text-left">
+                        <p class="text-xs font-bold text-slate-700 uppercase tracking-wide flex items-center gap-1.5">
+                            <i class="fas fa-shield-alt text-[#0158AD]"></i> Preguntas Frecuentes sobre el Pago:
+                        </p>
+                        <div class="space-y-2.5 text-xs">
+                            <div>
+                                <p class="font-bold text-slate-800">¿Qué pasa si tengo problemas para pagar por Nequi?</p>
+                                <p class="text-slate-500 mt-0.5">Si la pasarela de pago falla, puedes transferir manualmente a nuestras cuentas de Nequi o Bancolombia que se muestran arriba y enviarnos el comprobante por WhatsApp. Te lo validamos y activamos en 5 minutos.</p>
+                            </div>
+                            <div class="border-t border-slate-200/60 pt-2">
+                                <p class="font-bold text-slate-800">¿El certificado es válido a nivel nacional?</p>
+                                <p class="text-slate-500 mt-0.5">Sí, nuestro certificado de manipulación de alimentos cumple plenamente con la Resolución 2674 de 2013 y es 100% legal y válido ante cualquier Secretaría de Salud e INVIMA de Colombia.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -1028,7 +1052,10 @@
             }
             switchView(state.view);
             if (state.view === 'view-quiz-app') loadQuestionUI();
-            if (state.view === 'view-checkout') populateCheckoutEmail();
+            if (state.view === 'view-checkout') {
+                populateCheckoutEmail();
+                startCheckoutTimer();
+            }
         }
 
         function loadQuestionUI() {
@@ -1216,6 +1243,30 @@
             if (email && state.userData.email) email.textContent = state.userData.email;
             if (name  && state.userData.name)  name.textContent  = state.userData.name;
             if (doc   && state.userData.type)  doc.textContent   = state.userData.type + ' ' + state.userData.num;
+        }
+
+        // ── Temporizador Checkout ──
+        let timerInterval = null;
+        function startCheckoutTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            let timeLimit = 10 * 60; // 10 minutos en segundos
+            const timerEl = document.getElementById('checkout-timer');
+            if (!timerEl) return;
+            
+            function updateTimer() {
+                let minutes = Math.floor(timeLimit / 60);
+                let seconds = timeLimit % 60;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                timerEl.textContent = minutes + ':' + seconds;
+                if (timeLimit <= 0) {
+                    clearInterval(timerInterval);
+                    timerEl.textContent = '00:00';
+                }
+                timeLimit--;
+            }
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
         }
 
         // ── Exit intent ──
