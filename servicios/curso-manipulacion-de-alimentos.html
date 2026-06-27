@@ -959,6 +959,8 @@
             view: 'view-quiz-app',
             pendingCheckout: false,
             leadCreated: false,
+            leadId: null,
+            leadProposed: false,
             userData: { type: '', num: '', name: '', email: '' },
             quiz: { currentIdx: 0, score: 0 }
         };
@@ -1017,9 +1019,34 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
                 keepalive: true
-            }).catch(() => {
+            })
+            .then(res => res.json())
+            .then(data => {
+                // Guardamos el id del lead para poder avanzarlo a PROPUESTA al iniciar el pago
+                const leadId = data?.id ?? data?.lead_id ?? data?.data?.id ?? data?.lead?.id ?? null;
+                if (leadId) { state.leadId = leadId; saveState(); }
+            })
+            .catch(() => {
                 // Si falla, permitir un reintento en una próxima acción
                 state.leadCreated = false;
+                saveState();
+            });
+        }
+
+        // --- CRM: avanzar el lead a PROPUESTA cuando el usuario inicia el pago ---
+        function markLeadAsProposal() {
+            if (state.leadProposed || !state.leadId) return; // sin id, el lead queda como estaba
+            state.leadProposed = true;
+            saveState();
+
+            fetch(`${CRM_LEADS_URL}/${state.leadId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ business_id: CRM_BUSINESS_ID, estado: 'PROPUESTA' }),
+                keepalive: true
+            }).catch(() => {
+                // Si falla, permitir un reintento en un próximo intento de pago
+                state.leadProposed = false;
                 saveState();
             });
         }
@@ -1174,12 +1201,14 @@
 
         function registerAndPay() {
             trackEvent('payment_initiated', { metodo: 'PSE' });
+            markLeadAsProposal();
             fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
             window.location.href = 'https://linkdepagospse.rappipay.co/AV4v5j';
         }
 
         function payWithNequi() {
             trackEvent('payment_initiated', { metodo: 'Nequi' });
+            markLeadAsProposal();
             fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
             window.location.href = 'https://checkout.nequi.wompi.co/l/qa6YDm';
         }
