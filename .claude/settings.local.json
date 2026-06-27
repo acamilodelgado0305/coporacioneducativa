@@ -23,7 +23,13 @@
       "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" -X POST http://localhost:8080/api/crm/leads/publico -H \"Content-Type: application/json\" -d \"{\\\\\"business_id\\\\\":3,\\\\\"nombre\\\\\":\\\\\"Prueba\\\\\",\\\\\"email\\\\\":\\\\\"test@test.com\\\\\",\\\\\"origen\\\\\":\\\\\"WEB\\\\\"}\" --max-time 5)",
       "Bash(echo \"exit: $?\")",
       "Bash(curl -s -i -X OPTIONS http://localhost:8080/api/crm/leads/publico -H \"Origin: http://127.0.0.1:5500\" -H \"Access-Control-Request-Method: POST\" -H \"Access-Control-Request-Headers: content-type\" --max-time 5)",
-      "Bash(curl -s -o /dev/null -w \"text/plain -> HTTP %{http_code}\\\\n\" -X POST http://localhost:8080/api/crm/leads/publico -H \"Content-Type: text/plain\" -d \"{\\\\\"business_id\\\\\":3,\\\\\"nombre\\\\\":\\\\\"PruebaTextPlain\\\\\",\\\\\"email\\\\\":\\\\\"tp@test.com\\\\\",\\\\\"origen\\\\\":\\\\\"WEB\\\\\"}\" --max-time 5)"
+      "Bash(curl -s -o /dev/null -w \"text/plain -> HTTP %{http_code}\\\\n\" -X POST http://localhost:8080/api/crm/leads/publico -H \"Content-Type: text/plain\" -d \"{\\\\\"business_id\\\\\":3,\\\\\"nombre\\\\\":\\\\\"PruebaTextPlain\\\\\",\\\\\"email\\\\\":\\\\\"tp@test.com\\\\\",\\\\\"origen\\\\\":\\\\\"WEB\\\\\"}\" --max-time 5)",
+      "Bash(node -e ' *)",
+      "PowerShell($node = \\(Get-Command node -ErrorAction SilentlyContinue\\); $py = \\(Get-Command python -ErrorAction SilentlyContinue\\); \"node: $\\($node.Source\\)\"; \"python: $\\($py.Source\\)\")",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(git checkout *)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'feat: redisena formularios estilo Google Forms y optimiza checkout' -m '- Registro: estilo Google Forms \\(tarjetas, inputs underline, placeholder '\\\\''Tu respuesta'\\\\''\\) y nuevo orden de campos: nombre, tipo de documento, documento, correo *)"
     ]
   }
 }
