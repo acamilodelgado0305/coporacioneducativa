@@ -307,7 +307,7 @@
         }
         .trust-item i { color: #0158AD; font-size: 10px; }
 
-        /* ÔöÇÔöÇ Quiz opciones ÔöÇÔöÇ */
+        /* ── Quiz opciones ── */
         .opt-btn {
             width: 100%;
             text-align: left;
@@ -344,7 +344,6 @@
             transition: all 0.15s;
             font-size: 11px;
         }
-
 
         /* ── Modal respuesta incorrecta ── */
         .modal-backdrop {
@@ -451,120 +450,6 @@
         }
         .btn-exit-wa:hover { opacity: 0.9; }
 
-
-        /* ── Pago: reaseguro y otras opciones ── */
-        .pay-secure {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 11px;
-            color: #64748b;
-            margin-top: 10px;
-        }
-        .pay-secure i { color: #16a34a; }
-        .pay-alt {
-            width: 100%;
-            margin-top: 12px;
-            background: #fff;
-            color: #475569;
-            font-weight: 600;
-            font-size: 13px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            padding: 12px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            transition: all 0.15s;
-        }
-        .pay-alt:hover { background: #f8fafc; border-color: #cbd5e1; color: #0f172a; }
-        .pay-alt i { color: #0158AD; }
-        .pay-modal-box {
-            max-width: 400px;
-            max-height: 88vh;
-            overflow-y: auto;
-        }
-        /* Tarjetas de método de pago (selección) */
-        .pay-method {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 13px 14px;
-            border: 1.5px solid #e2e8f0;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.15s;
-            background: #fff;
-        }
-        .pay-method:hover { border-color: #93c5fd; background: #f8fafc; }
-        .pay-method.selected { border-color: #0158AD; background: #eff6ff; box-shadow: 0 0 0 3px rgba(1, 88, 173, 0.12); }
-        .pay-method-radio {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            border: 2px solid #cbd5e1;
-            flex-shrink: 0;
-            position: relative;
-            transition: all 0.15s;
-        }
-        .pay-method.selected .pay-method-radio { border-color: #0158AD; }
-        .pay-method.selected .pay-method-radio::after {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            border-radius: 50%;
-            background: #0158AD;
-        }
-        .pay-method-logo {
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            object-fit: contain;
-            background: #fff;
-            border: 1px solid #f1f5f9;
-            padding: 3px;
-            flex-shrink: 0;
-        }
-        .pay-method-info { flex: 1; min-width: 0; }
-        .pay-method-name { font-weight: 700; font-size: 14px; color: #1e293b; line-height: 1.2; }
-        .pay-method-sub { font-size: 11.5px; color: #64748b; margin-top: 2px; }
-
-        /* ── Bottom sheet: el modal de pago sube desde abajo como card completa ── */
-        #payment-select-modal {
-            padding: 0;
-            align-items: flex-end;
-        }
-        #payment-select-modal .modal-box {
-            max-width: 100%;
-            width: 100%;
-            border-radius: 20px 20px 0 0;
-            max-height: 94vh;
-            animation: sheetUp 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @media (min-width: 480px) {
-            #payment-select-modal .modal-box { max-width: 460px; }
-        }
-        @keyframes sheetUp {
-            from { transform: translateY(100%); }
-            to   { transform: translateY(0); }
-        }
-        .sheet-handle {
-            width: 40px;
-            height: 4px;
-            border-radius: 999px;
-            background: #cbd5e1;
-            margin: 10px auto 0;
-            flex-shrink: 0;
-        }
-
-
-        /* WA Float */
-        .wa { position: fixed; bottom: 30px; right: 20px; z-index: 150; width: 52px; height: 52px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(37,211,102,.4); transition: .2s; text-decoration: none; }
-        .wa:hover { transform: scale(1.1); }
-        .wa i { color: #fff; font-size: 24px; }
     </style>
 </head>
 <body class="antialiased text-slate-800">
@@ -583,9 +468,9 @@
         </div>
 
         <main class="main-card fade-in">
-            <div id="brand-bar" class="brand-bar"></div>
+            <div class="brand-bar"></div>
 
-            <!-- ÔöÇÔöÇ REGISTRO ÔöÇÔöÇ -->
+            <!-- ── REGISTRO ── -->
             <div id="view-registration" class="hidden-section">
 
                 <!-- Banner aprobado -->
@@ -629,7 +514,7 @@
                         <label>Nombre Completo <span class="req">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-user input-icon"></i>
-                            <input type="text" id="user-fullname" required placeholder="Nombres y Apellidos" class="input-pro capitalize" autocomplete="name" />
+                            <input type="text" id="user-fullname" required placeholder="Nombres y Apellidos" class="input-pro capitalize" />
                         </div>
                     </div>
 
@@ -637,7 +522,7 @@
                         <label>Correo Electrónico <span class="req">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-envelope input-icon"></i>
-                            <input type="email" id="user-email" required placeholder="ejemplo@correo.com" class="input-pro" autocomplete="email" />
+                            <input type="email" id="user-email" required placeholder="ejemplo@correo.com" class="input-pro" />
                         </div>
                         <p class="text-xs text-slate-400 mt-1.5 ml-1">Aquí recibirás tu certificado en PDF.</p>
                     </div>
@@ -648,17 +533,6 @@
                         </button>
                     </div>
 
-                    <!-- Botones movidos desde el checkout -->
-                    <div class="pt-4 flex items-center justify-center gap-4">
-                        <button type="button" onclick="showExitModal()" class="text-xs text-slate-400 hover:text-red-500 transition flex items-center gap-1.5 hover:underline">
-                            <i class="fas fa-times text-[9px]"></i> Cancelar
-                        </button>
-                        <span class="text-slate-200 text-xs">|</span>
-                        <button type="button" onclick="startNewProcess()" class="text-xs text-slate-400 hover:text-slate-600 transition flex items-center gap-1.5 hover:underline">
-                            <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
-                        </button>
-                    </div>
-
                 </form>
                 </div>
             </div>
@@ -666,7 +540,7 @@
             <div id="view-quiz-app" class="flex flex-col h-full">
                 <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
                     <span class="text-xs font-bold text-[#014a94] bg-blue-100 px-3 py-1 rounded-full border border-blue-200">
-                        PREGUNTA <span id="q-current">1</span>/10
+                        PREGUNTA <span id="q-current">1</span>/8
                     </span>
                     <button onclick="resetApp()" class="text-xs text-gray-400 hover:text-red-500 underline">Reiniciar</button>
                 </div>
@@ -769,27 +643,104 @@
                         </div>
                     </div>
 
-                    <!-- PAGO PRINCIPAL -->
-                    <div class="pt-2">
-                        <!-- NEQUI (RECOMENDADO) -->
-                        <button onclick="payWithNequi()" class="btn-pay-option group relative border-2 border-[#DA0063] hover:bg-[#fff5f8] transition-all">
-                            <span class="bg-[#DA0063] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
-                            <div class="flex items-center gap-3">
-                                <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
-                                <div class="flex-1 text-left">
-                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Desbloquear y Descargar Certificado</p>
-                                    <p class="text-[11px] text-[#DA0063] font-bold leading-tight mt-0.5">Pago seguro con Nequi/PSE — $25.000</p>
+                    <!-- OPCIONES DE PAGO DIRECTAS (SIN MODAL) -->
+                    <div class="space-y-4 pt-2">
+
+                        <!-- SECCIÓN 1: PAGO EN LÍNEA -->
+                        <div class="space-y-2.5">
+                            <p class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                                <i class="fas fa-bolt text-[#0158AD]"></i> Pago en Línea (Aprobación Inmediata):
+                            </p>
+
+                            <!-- NEQUI (RECOMENDADO) -->
+                            <button onclick="payWithNequi()" class="btn-pay-option group relative border-2 border-[#DA0063] hover:bg-[#fff5f8] transition-all">
+                                <span class="bg-[#DA0063] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
+                                <div class="flex items-center gap-3">
+                                    <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
+                                    <div class="flex-1 text-left">
+                                        <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — $22.000</p>
+                                        <p class="text-xs text-[#DA0063] font-bold leading-tight mt-0.5">Aprobación inmediata · RappiPay PSE</p>
+                                    </div>
+                                    <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
                                 </div>
-                                <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                        </div>
+
+                        <!-- SECCIÓN 2: PAGO POR TRANSFERENCIA -->
+                        <div class="bg-white border border-slate-200 rounded-xl p-4 shadow-sm space-y-3.5">
+                            <p class="font-bold text-slate-800 text-sm flex items-center gap-2 border-b border-slate-100 pb-2.5">
+                                <i class="fas fa-university text-[#0158AD]"></i> Pago por Transferencia o Corresponsal:
+                            </p>
+
+                            <!-- Cuentas -->
+                            <div class="grid grid-cols-1 gap-2.5">
+                                <div class="bg-slate-50 px-3 py-2.5 rounded-lg border border-slate-100">
+                                    <div class="flex items-center gap-1.5 mb-2">
+                                        <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="w-6 h-6 rounded object-contain bg-black/10 p-0.5 flex-shrink-0" alt="Nequi">
+                                        <div>
+                                            <p class="text-xs font-semibold text-slate-700 leading-none">Nequi / Daviplata</p>
+                                            <p class="text-[9px] text-slate-400">Número de celular</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-md px-2.5 py-1.5">
+                                        <span class="text-sm font-mono font-bold text-slate-900 tracking-wider whitespace-nowrap">3223267797</span>
+                                        <button id="copy-nequi-btn" onclick="copyToClipboard('3223267797', 'copy-nequi-btn')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1 flex-shrink-0">
+                                            <i class="far fa-copy text-[8px]"></i> Copiar
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="bg-slate-50 px-3 py-2.5 rounded-lg border border-slate-100">
+                                    <div class="flex items-center gap-1.5 mb-2">
+                                        <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="w-6 h-6 rounded object-contain bg-white p-0.5 flex-shrink-0" alt="Bancolombia">
+                                        <div>
+                                            <p class="text-xs font-semibold text-slate-700 leading-none">Bancolombia Ahorros</p>
+                                            <p class="text-[9px] text-slate-400">Cta. de ahorros</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-md px-2.5 py-1.5">
+                                        <span class="text-sm font-mono font-bold text-slate-900 tracking-wider whitespace-nowrap">816-589697-49</span>
+                                        <button id="copy-bancolombia-btn" onclick="copyToClipboard('816-589697-49', 'copy-bancolombia-btn')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1 flex-shrink-0">
+                                            <i class="far fa-copy text-[8px]"></i> Copiar
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </button>
-                        <p class="text-center text-[10.5px] text-slate-500 mt-2.5 font-medium"><i class="fas fa-bolt text-[#FBC13D]"></i> Toma menos de 1 minuto. Entrega instantánea por correo.</p>
 
-                        <p class="pay-secure"><i class="fas fa-lock"></i> Pago 100% seguro · Cifrado SSL · Procesado por Nequi</p>
+                            <!-- Instrucciones y Verificación -->
+                            <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-3.5 space-y-3 mt-1">
+                                <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                                    <i class="fas fa-info-circle text-emerald-600"></i> Pasos para reportar tu pago manual:
+                                </p>
+                                <div class="space-y-2.5 text-xs text-slate-600">
+                                    <div class="flex items-start gap-2.5">
+                                        <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span>
+                                        <p>Envía la transferencia por <strong class="text-slate-800">$22.000</strong> a cualquiera de las cuentas indicadas.</p>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
+                                        <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span>
+                                        <p>Toma una **captura de pantalla** o guarda el comprobante en PDF.</p>
+                                    </div>
+                                    <div class="flex items-start gap-2.5">
+                                        <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span>
+                                        <p>Presiona el botón de abajo para **enviar tu comprobante de inmediato**.</p>
+                                    </div>
+                                </div>
 
-                        <button onclick="openPaymentOptionsModal()" class="pay-alt">
-                            <i class="fas fa-wallet"></i> Ver otras formas de pago (PSE o transferencia)
-                        </button>
+                                <!-- Botón WhatsApp Prominente de Reportar -->
+                                <div class="pt-1.5">
+                                    <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante."
+                                       target="_blank" onclick="trackEvent('whatsapp_comprobante')"
+                                       class="w-full flex flex-col items-center justify-center gap-1 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg text-sm border-2 border-green-300 animate-pulse text-center decoration-none no-underline">
+                                        <span class="font-black text-sm tracking-wide flex items-center gap-2 justify-center">
+                                            <i class="fab fa-whatsapp text-lg"></i> 👉 ENVIAR CAPTURA DE PAGO AQUÍ
+                                        </span>
+                                        <span class="text-[10px] text-white/95 font-medium leading-none">Validación inmediata · Certificado listo hoy</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- ¿Qué incluye? -->
@@ -842,7 +793,7 @@
                         <div class="space-y-2.5 text-xs">
                             <div>
                                 <p class="font-bold text-slate-800">¿Qué pasa si tengo problemas para pagar por Nequi?</p>
-                                <p class="text-slate-500 mt-0.5">Si la pasarela de pago falla, toca <strong class="text-slate-700">"Ver otras formas de pago"</strong> y transfiere a Nequi o Bancolombia; envíanos el comprobante por WhatsApp y te lo validamos y activamos en 5 minutos.</p>
+                                <p class="text-slate-500 mt-0.5">Si la pasarela de pago falla, puedes transferir manualmente a nuestras cuentas de Nequi o Bancolombia que se muestran arriba y enviarnos el comprobante por WhatsApp. Te lo validamos y activamos en 5 minutos.</p>
                             </div>
                             <div class="border-t border-slate-200/60 pt-2">
                                 <p class="font-bold text-slate-800">¿El certificado es válido a nivel nacional?</p>
@@ -978,196 +929,6 @@
         </div>
     </div>
 
-    <!-- Modal selección de método de pago (se abre tras "Continuar" en el formulario) -->
-    <div id="payment-select-modal" class="modal-backdrop hidden">
-        <div class="modal-box pay-modal-box">
-            <div class="sheet-handle"></div>
-            <div class="px-5 pt-4 pb-3 border-b border-slate-100">
-                <div class="flex items-center justify-between mb-3">
-                    <p class="font-bold text-slate-800 text-lg leading-tight">Elige cómo pagar</p>
-                    <button onclick="closePaymentSelectModal()" class="text-slate-400 hover:text-slate-600 transition flex-shrink-0 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 flex justify-between items-center shadow-sm">
-                    <div>
-                        <p class="text-[11px] text-blue-700 font-black uppercase tracking-widest mb-1 opacity-90">Total a pagar</p>
-                        <p class="text-xs text-slate-700 font-semibold flex items-center gap-1.5"><i class="fas fa-certificate text-blue-500"></i> Certificado Oficial</p>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-3xl font-black text-slate-900 tracking-tighter drop-shadow-sm">$25.000</span>
-                        <span class="text-[10px] text-slate-500 font-bold block -mt-1">COP · ÚNICO PAGO</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Paso 1: selección de método -->
-            <div id="pay-select-step" class="p-5">
-                <div class="space-y-2.5">
-                    <div class="pay-method" data-method="wompi" onclick="selectPayMethod('wompi')">
-                        <span class="pay-method-radio"></span>
-                        <img src="https://play-lh.googleusercontent.com/pXKMtJ7L_qlXfPFfLMXnKMFB_RLwD__i_45MAF-885qChVAtFm5FUjyvW_YWZhTqzBMQtj0FYVPCd9DCh-kzVJE=w240-h480-rw" class="pay-method-logo" alt="Wompi">
-                        <div class="pay-method-info">
-                            <p class="pay-method-name">Pago en línea</p>
-                            <p class="pay-method-sub">Tarjeta, PSE o Nequi · Aprobación inmediata</p>
-                        </div>
-                    </div>
-
-                    <div class="pay-method" data-method="nequi" onclick="selectPayMethod('nequi')">
-                        <span class="pay-method-radio"></span>
-                        <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="pay-method-logo" alt="Nequi">
-                        <div class="pay-method-info">
-                            <p class="pay-method-name">Nequi</p>
-                            <p class="pay-method-sub">Transfiere desde tu celular</p>
-                        </div>
-                    </div>
-
-                    <div class="pay-method" data-method="daviplata" onclick="selectPayMethod('daviplata')">
-                        <span class="pay-method-radio"></span>
-                        <img src="https://play-lh.googleusercontent.com/bNPDiFqg28L6ckatfuP-WgrxDRDk0JEOkC6nUIQp7Q61RW78i1bw-ffMmEjyxl-qP6dv3ANDOQqmIbBtgJI3EA" class="pay-method-logo" alt="Daviplata">
-                        <div class="pay-method-info">
-                            <p class="pay-method-name">Daviplata</p>
-                            <p class="pay-method-sub">Transfiere desde tu celular</p>
-                        </div>
-                    </div>
-
-                    <div class="pay-method" data-method="bancolombia" onclick="selectPayMethod('bancolombia')">
-                        <span class="pay-method-radio"></span>
-                        <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="pay-method-logo" alt="Bancolombia">
-                        <div class="pay-method-info">
-                            <p class="pay-method-name">Bancolombia</p>
-                            <p class="pay-method-sub">Transferencia o corresponsal</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button id="pay-continue-btn" onclick="continuePayment()" class="btn-pay-main mt-4" disabled style="opacity:0.5;cursor:not-allowed;">
-                    Continuar
-                </button>
-                <p class="text-center text-[11px] text-slate-400 mt-3 flex items-center justify-center gap-1.5">
-                    <i class="fas fa-lock"></i> Pago 100% seguro · Tu certificado llega hoy
-                </p>
-                <button onclick="startNewProcess()" class="w-full text-xs text-slate-400 hover:text-slate-600 transition flex items-center justify-center gap-1.5 hover:underline mt-4 pt-4 border-t border-slate-100">
-                    <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
-                </button>
-            </div>
-
-            <!-- Paso 2: detalle del método elegido (Nequi / Bancolombia) -->
-            <div id="pay-detail-step" class="p-5 hidden">
-                <div id="pay-detail-content"></div>
-                <button onclick="backToPaySelect()" class="w-full text-xs text-slate-400 hover:text-slate-600 underline pt-3">← Cambiar método de pago</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal otras formas de pago -->
-    <div id="payment-options-modal" class="modal-backdrop hidden">
-        <div class="modal-box pay-modal-box">
-            <div class="flex items-center justify-between p-5 border-b border-slate-100">
-                <div>
-                    <p class="font-bold text-slate-800 text-base leading-tight">Otras formas de pago</p>
-                    <p class="text-xs text-slate-500 mt-0.5">Elige la opción que prefieras</p>
-                </div>
-                <button onclick="closePaymentOptionsModal()" class="text-slate-300 hover:text-slate-500 transition flex-shrink-0">
-                    <i class="fas fa-times text-lg"></i>
-                </button>
-            </div>
-
-            <div class="p-5 space-y-4">
-
-                <!-- Opción en línea: PSE / RappiPay -->
-                <button onclick="registerAndPay()" class="btn-pay-option group relative border-2 border-[#0158AD] hover:bg-blue-50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-[#0158AD] flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-university text-white text-sm"></i>
-                        </div>
-                        <div class="flex-1 text-left">
-                            <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con PSE / Débito bancario</p>
-                            <p class="text-xs text-[#0158AD] font-bold leading-tight mt-0.5">Aprobación inmediata · RappiPay</p>
-                        </div>
-                        <i class="fas fa-arrow-right text-[#0158AD] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
-                    </div>
-                </button>
-
-                <!-- Divisor -->
-                <div class="flex items-center gap-3">
-                    <div class="flex-1 h-px bg-slate-200"></div>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">o paga por transferencia</span>
-                    <div class="flex-1 h-px bg-slate-200"></div>
-                </div>
-
-                <!-- Cuentas -->
-                <div class="grid grid-cols-1 gap-2.5">
-                    <div class="bg-slate-50 px-3 py-2.5 rounded-lg border border-slate-100">
-                        <div class="flex items-center gap-1.5 mb-2">
-                            <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="w-6 h-6 rounded object-contain bg-black/10 p-0.5 flex-shrink-0" alt="Nequi">
-                            <div>
-                                <p class="text-xs font-semibold text-slate-700 leading-none">Nequi / Daviplata</p>
-                                <p class="text-[9px] text-slate-400">Número de celular</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-md px-2.5 py-1.5">
-                            <span class="text-sm font-mono font-bold text-slate-900 tracking-wider whitespace-nowrap">3223267797</span>
-                            <button id="copy-nequi-btn" onclick="copyToClipboard('3223267797', 'copy-nequi-btn')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1 flex-shrink-0">
-                                <i class="far fa-copy text-[8px]"></i> Copiar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 px-3 py-2.5 rounded-lg border border-slate-100">
-                        <div class="flex items-center gap-1.5 mb-2">
-                            <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="w-6 h-6 rounded object-contain bg-white p-0.5 flex-shrink-0" alt="Bancolombia">
-                            <div>
-                                <p class="text-xs font-semibold text-slate-700 leading-none">Bancolombia Ahorros</p>
-                                <p class="text-[9px] text-slate-400">Cta. de ahorros</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-md px-2.5 py-1.5">
-                            <span class="text-sm font-mono font-bold text-slate-900 tracking-wider whitespace-nowrap">816-589697-49</span>
-                            <button id="copy-bancolombia-btn" onclick="copyToClipboard('816-589697-49', 'copy-bancolombia-btn')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1 flex-shrink-0">
-                                <i class="far fa-copy text-[8px]"></i> Copiar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Instrucciones y Verificación -->
-                <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-3.5 space-y-3 mt-1">
-                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                        <i class="fas fa-info-circle text-emerald-600"></i> Pasos para reportar tu pago manual:
-                    </p>
-                    <div class="space-y-2.5 text-xs text-slate-600">
-                        <div class="flex items-start gap-2.5">
-                            <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span>
-                            <p>Envía la transferencia por <strong class="text-slate-800">$25.000</strong> a cualquiera de las cuentas indicadas.</p>
-                        </div>
-                        <div class="flex items-start gap-2.5">
-                            <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span>
-                            <p>Toma una captura de pantalla o guarda el comprobante en PDF.</p>
-                        </div>
-                        <div class="flex items-start gap-2.5">
-                            <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span>
-                            <p>Presiona el botón de abajo para enviar tu comprobante de inmediato.</p>
-                        </div>
-                    </div>
-
-                    <!-- Botón WhatsApp Prominente de Reportar -->
-                    <div class="pt-1.5">
-                        <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante."
-                           target="_blank" onclick="trackEvent('whatsapp_comprobante')"
-                           class="w-full flex flex-col items-center justify-center gap-1 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg text-sm border-2 border-green-300 text-center decoration-none no-underline">
-                            <span class="font-black text-sm tracking-wide flex items-center gap-2 justify-center">
-                                <i class="fab fa-whatsapp text-lg"></i> ENVIAR CAPTURA DE PAGO AQUÍ
-                            </span>
-                            <span class="text-[10px] text-white/95 font-medium leading-none">Validación inmediata · Certificado listo hoy</span>
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
     <!-- Modal respuesta incorrecta -->
     <div id="wrong-modal" class="modal-backdrop hidden">
         <div class="modal-box">
@@ -1202,8 +963,6 @@
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
         const CRM_LEADS_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/crm/leads/publico';
         const CRM_BUSINESS_ID = 3;
-        // Link de pago de Wompi (cambia solo esta línea si usas otro link, p. ej. uno multimétodo)
-        const WOMPI_CHECKOUT_URL = 'https://checkout.nequi.wompi.co/l/AWUVic';
 
         let state = {
             view: 'view-quiz-app',
@@ -1262,7 +1021,7 @@
                 telefono: '',
                 email: u.email,
                 origen: 'WEB',
-                valor_estimado: 25000,
+                valor_estimado: 22000,
                 notas: `Certificado Manipulación de Alimentos | Examen aprobado`
             };
 
@@ -1318,9 +1077,6 @@
                 document.getElementById(id).classList.add('hidden-section');
             });
             document.getElementById(viewName).classList.remove('hidden-section');
-            const brandBar = document.getElementById('brand-bar');
-            const hideBrand = (viewName === 'view-registration' || viewName === 'view-quiz-app');
-            if (brandBar) brandBar.style.display = hideBrand ? 'none' : 'block';
             window.scrollTo(0,0);
         }
 
@@ -1447,11 +1203,11 @@
                 name: document.getElementById('user-fullname').value,
                 email: document.getElementById('user-email').value
             };
+            state.view = 'view-checkout';
             saveState();
             trackEvent('registration_submitted');
             createCrmLead();
-            // Abrir el selector de método de pago (el inicio de pago se marca al elegir método y continuar)
-            openPaymentSelectModal();
+            applyStateToUI();
         }
 
         function registerAndPay() {
@@ -1464,8 +1220,8 @@
         function payWithNequi() {
             trackEvent('payment_initiated', { metodo: 'Nequi' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
-            window.location.href = WOMPI_CHECKOUT_URL;
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+            window.location.href = 'https://checkout.nequi.wompi.co/l/qa6YDm';
         }
 
         function copyToClipboard(text, btnId) {
@@ -1490,121 +1246,6 @@
         function startNewProcess() {
             localStorage.removeItem(STORAGE_KEY);
             location.reload();
-        }
-
-        // ── Selección de método de pago (modal tras "Continuar") ──
-        let selectedPayMethod = null;
-        const payMethodsInfo = {
-            nequi: {
-                nombre: 'Nequi',
-                cuentaLabel: 'Número de celular',
-                cuenta: '3223267797',
-                logo: 'https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png'
-            },
-            daviplata: {
-                nombre: 'Daviplata',
-                cuentaLabel: 'Número de celular',
-                cuenta: '3223267797',
-                logo: 'https://play-lh.googleusercontent.com/bNPDiFqg28L6ckatfuP-WgrxDRDk0JEOkC6nUIQp7Q61RW78i1bw-ffMmEjyxl-qP6dv3ANDOQqmIbBtgJI3EA'
-            },
-            bancolombia: {
-                nombre: 'Bancolombia Ahorros',
-                cuentaLabel: 'Cuenta de ahorros',
-                cuenta: '816-589697-49',
-                logo: 'https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png'
-            }
-        };
-
-        function openPaymentSelectModal() {
-            selectedPayMethod = null;
-            document.getElementById('pay-select-step').classList.remove('hidden');
-            document.getElementById('pay-detail-step').classList.add('hidden');
-            document.querySelectorAll('.pay-method').forEach(el => el.classList.remove('selected'));
-            const btn = document.getElementById('pay-continue-btn');
-            btn.disabled = true;
-            btn.style.opacity = '0.5';
-            btn.style.cursor = 'not-allowed';
-            document.getElementById('payment-select-modal').classList.remove('hidden');
-        }
-
-        function closePaymentSelectModal() {
-            document.getElementById('payment-select-modal').classList.add('hidden');
-        }
-
-        function selectPayMethod(method) {
-            selectedPayMethod = method;
-            document.querySelectorAll('.pay-method').forEach(el => el.classList.remove('selected'));
-            const sel = document.querySelector('.pay-method[data-method="' + method + '"]');
-            if (sel) sel.classList.add('selected');
-            const btn = document.getElementById('pay-continue-btn');
-            btn.disabled = false;
-            btn.style.opacity = '1';
-            btn.style.cursor = 'pointer';
-        }
-
-        function continuePayment() {
-            if (!selectedPayMethod) return;
-            // El inicio de pago se marca aquí: al elegir método y dar Continuar
-            trackEvent('payment_initiated', { metodo: selectedPayMethod });
-            markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
-
-            if (selectedPayMethod === 'wompi') {
-                window.location.href = WOMPI_CHECKOUT_URL;
-                return;
-            }
-            showPayDetail(selectedPayMethod);
-        }
-
-        function showPayDetail(method) {
-            const info = payMethodsInfo[method];
-            if (!info) return;
-            const waText = encodeURIComponent('Hola, aprobé el examen de manipulación y voy a pagar por ' + info.nombre + '. Adjunto comprobante.');
-            const logoHtml = info.logo
-                ? '<img src="' + info.logo + '" class="w-11 h-11 rounded-lg object-contain bg-slate-50 border border-slate-100 p-1 flex-shrink-0" alt="' + info.nombre + '">'
-                : '<div class="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0" style="background:' + info.iconBg + '"><i class="fas ' + info.icon + ' text-white text-lg"></i></div>';
-            document.getElementById('pay-detail-content').innerHTML =
-                '<div class="flex items-center gap-3 mb-4">' +
-                    logoHtml +
-                    '<div><p class="font-bold text-slate-800 text-sm leading-tight">' + info.nombre + '</p>' +
-                    '<p class="text-xs text-slate-500">Transfiere <strong class="text-slate-700">$25.000</strong></p></div>' +
-                '</div>' +
-                '<div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4">' +
-                    '<p class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-1.5">' + info.cuentaLabel + '</p>' +
-                    '<div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2">' +
-                        '<span class="text-base font-mono font-bold text-slate-900 tracking-wide">' + info.cuenta + '</span>' +
-                        '<button id="pay-copy-btn" onclick="copyToClipboard(\'' + info.cuenta + '\', \'pay-copy-btn\')" class="text-[10px] bg-[#0158AD] hover:bg-[#0166c7] text-white font-bold px-3 py-1.5 rounded-md transition flex items-center gap-1 flex-shrink-0">' +
-                            '<i class="far fa-copy"></i> Copiar</button>' +
-                    '</div>' +
-                '</div>' +
-                '<div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-3.5 space-y-2.5 mb-4">' +
-                    '<p class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fas fa-info-circle text-emerald-600"></i> Cómo reportar tu pago:</p>' +
-                    '<div class="space-y-2 text-xs text-slate-600">' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span><p>Transfiere <strong>$25.000</strong> a la cuenta de arriba.</p></div>' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span><p>Toma una captura del comprobante.</p></div>' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span><p>Envíalo por WhatsApp para validar y recibir tu certificado.</p></div>' +
-                    '</div>' +
-                '</div>' +
-                '<a href="https://wa.me/573107941580?text=' + waText + '" target="_blank" onclick="trackEvent(\'whatsapp_comprobante\', { metodo: \'' + method + '\' })" class="w-full flex flex-col items-center justify-center gap-0.5 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg no-underline">' +
-                    '<span class="font-black text-sm flex items-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Enviar comprobante por WhatsApp</span>' +
-                    '<span class="text-[10px] text-white/95">Validación inmediata · Certificado hoy</span>' +
-                '</a>';
-            document.getElementById('pay-select-step').classList.add('hidden');
-            document.getElementById('pay-detail-step').classList.remove('hidden');
-        }
-
-        function backToPaySelect() {
-            document.getElementById('pay-detail-step').classList.add('hidden');
-            document.getElementById('pay-select-step').classList.remove('hidden');
-        }
-
-        // ── Otras formas de pago (modal) ──
-        function openPaymentOptionsModal() {
-            trackEvent('payment_options_opened');
-            document.getElementById('payment-options-modal').classList.remove('hidden');
-        }
-        function closePaymentOptionsModal() {
-            document.getElementById('payment-options-modal').classList.add('hidden');
         }
 
         // ── Editar correo ──

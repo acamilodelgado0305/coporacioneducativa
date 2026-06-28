@@ -29,7 +29,12 @@
       "mcp__Claude_Preview__preview_start",
       "Bash(git checkout *)",
       "Bash(git add *)",
-      "Bash(git commit -m 'feat: redisena formularios estilo Google Forms y optimiza checkout' -m '- Registro: estilo Google Forms \\(tarjetas, inputs underline, placeholder '\\\\''Tu respuesta'\\\\''\\) y nuevo orden de campos: nombre, tipo de documento, documento, correo *)"
+      "Bash(git commit -m 'feat: redisena formularios estilo Google Forms y optimiza checkout' -m '- Registro: estilo Google Forms \\(tarjetas, inputs underline, placeholder '\\\\''Tu respuesta'\\\\''\\) y nuevo orden de campos: nombre, tipo de documento, documento, correo *)",
+      "Bash(git fetch *)",
+      "Bash(git stash *)",
+      "Bash(git merge *)",
+      "Bash(git revert *)",
+      "Bash(git push *)"
     ]
   }
 }
