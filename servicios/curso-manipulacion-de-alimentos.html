@@ -790,19 +790,6 @@
                         <span class="gform-approved"><i class="fas fa-check-circle"></i> Examen aprobado</span>
                         <h2 class="gform-title">Datos para tu certificado</h2>
                         <p class="gform-desc">¡Felicitaciones! Completa tus datos para emitir tu Certificado de Manipulación de Alimentos. Lo recibirás en PDF a tu correo.</p>
-                        <div class="price-strip">
-                            <div class="price-strip-left">
-                                <i class="fas fa-certificate"></i>
-                                <div>
-                                    <p class="price-strip-label">Pago único</p>
-                                    <p class="price-strip-note">Certificado oficial · Validez 1 año</p>
-                                </div>
-                            </div>
-                            <div class="price-strip-right">
-                                <span class="price-strip-amount">$25.000</span>
-                                <span class="price-strip-cur">COP</span>
-                            </div>
-                        </div>
                         <p class="gform-required-hint">* Indica una pregunta obligatoria</p>
                     </div>
                 </div>
@@ -843,7 +830,7 @@
 
                     <!-- Acción -->
                     <div class="gform-actions">
-                        <button type="submit" class="gform-submit">Continuar al pago · $25.000 <i class="fas fa-arrow-right" style="font-size:12px"></i></button>
+                        <button type="submit" class="gform-submit">Continuar <i class="fas fa-arrow-right" style="font-size:12px"></i></button>
                         <p class="gform-privacy"><i class="fas fa-lock"></i> Tus datos están seguros y solo se usan para tu certificado.</p>
                     </div>
 
@@ -858,10 +845,10 @@
                     <div class="gform-header-body">
                         <span class="gform-approved" style="background:#e8f0fe;color:#0158AD;"><i class="fas fa-clipboard-check"></i> Evaluación oficial</span>
                         <h2 class="gform-title">Examen de Manipulación de Alimentos</h2>
-                        <p class="gform-desc">Responde las 8 preguntas. Necesitas 6 respuestas correctas para aprobar y emitir tu certificado.</p>
+                        <p class="gform-desc">Responde las 10 preguntas. Necesitas 8 respuestas correctas para aprobar y emitir tu certificado.</p>
                         <div class="quiz-progress">
                             <div class="quiz-progress-head">
-                                <span>Pregunta <span id="q-current">1</span> de 8</span>
+                                <span>Pregunta <span id="q-current">1</span> de 10</span>
                                 <button type="button" onclick="resetApp()" class="quiz-reset">Reiniciar</button>
                             </div>
                             <div class="quiz-progress-track">
@@ -1052,8 +1039,8 @@
                     <i class="fas fa-redo text-4xl text-orange-500"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">¡Casi lo logras!</h2>
-                <p class="text-gray-600 mb-1 text-sm">Obtuviste <span id="fail-score" class="font-bold text-slate-800"></span>/8 respuestas correctas.</p>
-                <p class="text-gray-500 mb-8 text-sm">Necesitas al menos 6/8 para aprobar. ¡Inténtalo de nuevo ahora, es gratis!</p>
+                <p class="text-gray-600 mb-1 text-sm">Obtuviste <span id="fail-score" class="font-bold text-slate-800"></span>/10 respuestas correctas.</p>
+                <p class="text-gray-500 mb-8 text-sm">Necesitas al menos 8/10 para aprobar. ¡Inténtalo de nuevo ahora, es gratis!</p>
                 <button onclick="startNewProcess()" class="btn-action w-full py-4 text-base shadow-lg flex items-center justify-center gap-2">
                     <i class="fas fa-redo-alt"></i> Intentar de nuevo — ¡Es gratis!
                 </button>
@@ -1171,14 +1158,23 @@
     <div id="payment-select-modal" class="modal-backdrop hidden">
         <div class="modal-box pay-modal-box">
             <div class="sheet-handle"></div>
-            <div class="flex items-center justify-between px-5 pt-3 pb-4 border-b border-slate-100">
-                <div>
-                    <p class="font-bold text-slate-800 text-base leading-tight">Elige cómo pagar</p>
-                    <p class="text-xs text-slate-500 mt-0.5">Certificado de Manipulación · <strong class="text-slate-700">$25.000</strong></p>
+            <div class="px-5 pt-4 pb-3 border-b border-slate-100">
+                <div class="flex items-center justify-between mb-3">
+                    <p class="font-bold text-slate-800 text-lg leading-tight">Elige cómo pagar</p>
+                    <button onclick="closePaymentSelectModal()" class="text-slate-400 hover:text-slate-600 transition flex-shrink-0 bg-slate-100 hover:bg-slate-200 w-8 h-8 rounded-full flex items-center justify-center">
+                        <i class="fas fa-times"></i>
+                    </button>
                 </div>
-                <button onclick="closePaymentSelectModal()" class="text-slate-300 hover:text-slate-500 transition flex-shrink-0">
-                    <i class="fas fa-times text-lg"></i>
-                </button>
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 flex justify-between items-center shadow-sm">
+                    <div>
+                        <p class="text-[11px] text-blue-700 font-black uppercase tracking-widest mb-1 opacity-90">Total a pagar</p>
+                        <p class="text-xs text-slate-700 font-semibold flex items-center gap-1.5"><i class="fas fa-certificate text-blue-500"></i> Certificado Oficial</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-3xl font-black text-slate-900 tracking-tighter drop-shadow-sm">$25.000</span>
+                        <span class="text-[10px] text-slate-500 font-bold block -mt-1">COP · ÚNICO PAGO</span>
+                    </div>
+                </div>
             </div>
 
             <!-- Paso 1: selección de método -->
@@ -1403,7 +1399,9 @@
             { q: "5. Si tienes gripe o heridas en las manos, ¿qué debes hacer?", options: ["Usar tapabocas y seguir trabajando", "Informar al jefe y no manipular alimentos", "Ponerse doble guante"], a: 1 },
             { q: "6. El agua utilizada para preparar alimentos debe ser:", options: ["De río", "Potable", "Lluvia"], a: 1 },
             { q: "7. ¿Cómo se deben almacenar los productos químicos de aseo?", options: ["Junto a la comida para tenerlos cerca", "En un lugar separado y rotulado", "En la nevera"], a: 1 },
-            { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 }
+            { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 },
+            { q: "9. ¿Qué indumentaria es obligatoria para un manipulador de alimentos?", options: ["Ropa deportiva cómoda", "Uniforme de color claro, gorro y sin joyas", "Cualquier ropa limpia"], a: 1 },
+            { q: "10. Las uñas de un manipulador de alimentos deben estar:", options: ["Pintadas para verse bien", "Largas pero limpias", "Cortas, limpias y sin esmalte"], a: 2 }
         ];
 
         // --- TRACKING N8N ---
@@ -1607,11 +1605,11 @@
             const percent = (state.quiz.score / questions.length);
             if (percent >= 0.75) {
                 state.view = 'view-registration';
-                trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
+                trackEvent('quiz_passed', { score: state.quiz.score + "/10" });
                 fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 25000, currency: 'COP' });
             } else {
                 state.view = 'view-fail';
-                trackEvent('quiz_failed', { score: state.quiz.score + "/8" });
+                trackEvent('quiz_failed', { score: state.quiz.score + "/10" });
                 document.getElementById('fail-score').innerText = state.quiz.score;
             }
             applyStateToUI();
