@@ -551,6 +551,25 @@
             color: #d93025;
             margin-top: 16px;
         }
+        /* Tira de precio (visible en el formulario) */
+        .price-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border: 1px solid #bfdbfe;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-top: 16px;
+        }
+        .price-strip-left { display: flex; align-items: center; gap: 10px; }
+        .price-strip-left > i { color: #0158AD; font-size: 20px; flex-shrink: 0; }
+        .price-strip-label { font-size: 13px; font-weight: 700; color: #0c4a8a; line-height: 1.15; }
+        .price-strip-note { font-size: 11px; color: #2563eb; opacity: 0.85; margin-top: 2px; }
+        .price-strip-right { text-align: right; line-height: 1; flex-shrink: 0; }
+        .price-strip-amount { font-size: 23px; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+        .price-strip-cur { font-size: 11px; color: #64748b; display: block; margin-top: 2px; }
         .gform-q { padding: 22px 24px; }
         .gform-q-title {
             font-size: 15px;
@@ -669,6 +688,78 @@
             max-height: 88vh;
             overflow-y: auto;
         }
+        /* Tarjetas de método de pago (selección) */
+        .pay-method {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 14px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.15s;
+            background: #fff;
+        }
+        .pay-method:hover { border-color: #93c5fd; background: #f8fafc; }
+        .pay-method.selected { border-color: #0158AD; background: #eff6ff; box-shadow: 0 0 0 3px rgba(1, 88, 173, 0.12); }
+        .pay-method-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #cbd5e1;
+            flex-shrink: 0;
+            position: relative;
+            transition: all 0.15s;
+        }
+        .pay-method.selected .pay-method-radio { border-color: #0158AD; }
+        .pay-method.selected .pay-method-radio::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            border-radius: 50%;
+            background: #0158AD;
+        }
+        .pay-method-logo {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            object-fit: contain;
+            background: #fff;
+            border: 1px solid #f1f5f9;
+            padding: 3px;
+            flex-shrink: 0;
+        }
+        .pay-method-info { flex: 1; min-width: 0; }
+        .pay-method-name { font-weight: 700; font-size: 14px; color: #1e293b; line-height: 1.2; }
+        .pay-method-sub { font-size: 11.5px; color: #64748b; margin-top: 2px; }
+
+        /* ── Bottom sheet: el modal de pago sube desde abajo como card completa ── */
+        #payment-select-modal {
+            padding: 0;
+            align-items: flex-end;
+        }
+        #payment-select-modal .modal-box {
+            max-width: 100%;
+            width: 100%;
+            border-radius: 20px 20px 0 0;
+            max-height: 94vh;
+            animation: sheetUp 0.34s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @media (min-width: 480px) {
+            #payment-select-modal .modal-box { max-width: 460px; }
+        }
+        @keyframes sheetUp {
+            from { transform: translateY(100%); }
+            to   { transform: translateY(0); }
+        }
+        .sheet-handle {
+            width: 40px;
+            height: 4px;
+            border-radius: 999px;
+            background: #cbd5e1;
+            margin: 10px auto 0;
+            flex-shrink: 0;
+        }
 
     </style>
 </head>
@@ -699,6 +790,19 @@
                         <span class="gform-approved"><i class="fas fa-check-circle"></i> Examen aprobado</span>
                         <h2 class="gform-title">Datos para tu certificado</h2>
                         <p class="gform-desc">¡Felicitaciones! Completa tus datos para emitir tu Certificado de Manipulación de Alimentos. Lo recibirás en PDF a tu correo.</p>
+                        <div class="price-strip">
+                            <div class="price-strip-left">
+                                <i class="fas fa-certificate"></i>
+                                <div>
+                                    <p class="price-strip-label">Pago único</p>
+                                    <p class="price-strip-note">Certificado oficial · Validez 1 año</p>
+                                </div>
+                            </div>
+                            <div class="price-strip-right">
+                                <span class="price-strip-amount">$25.000</span>
+                                <span class="price-strip-cur">COP</span>
+                            </div>
+                        </div>
                         <p class="gform-required-hint">* Indica una pregunta obligatoria</p>
                     </div>
                 </div>
@@ -739,7 +843,7 @@
 
                     <!-- Acción -->
                     <div class="gform-actions">
-                        <button type="submit" class="gform-submit">Continuar <i class="fas fa-arrow-right" style="font-size:12px"></i></button>
+                        <button type="submit" class="gform-submit">Continuar al pago · $25.000 <i class="fas fa-arrow-right" style="font-size:12px"></i></button>
                         <p class="gform-privacy"><i class="fas fa-lock"></i> Tus datos están seguros y solo se usan para tu certificado.</p>
                     </div>
 
@@ -841,7 +945,7 @@
                                 <p class="text-[9px] text-slate-400 mt-0.5">Precio único · Sin costos ocultos</p>
                             </div>
                             <div class="text-right">
-                                <span class="text-2xl font-extrabold text-slate-900">$22.000</span>
+                                <span class="text-2xl font-extrabold text-slate-900">$25.000</span>
                                 <span class="text-xs text-slate-400 block font-normal">COP</span>
                             </div>
                         </div>
@@ -855,7 +959,7 @@
                             <div class="flex items-center gap-3">
                                 <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
                                 <div class="flex-1 text-left">
-                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — $22.000</p>
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — $25.000</p>
                                     <p class="text-xs text-[#DA0063] font-bold leading-tight mt-0.5">Aprobación inmediata · RappiPay PSE</p>
                                 </div>
                                 <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
@@ -1063,6 +1167,79 @@
         </div>
     </div>
 
+    <!-- Modal selección de método de pago (se abre tras "Continuar" en el formulario) -->
+    <div id="payment-select-modal" class="modal-backdrop hidden">
+        <div class="modal-box pay-modal-box">
+            <div class="sheet-handle"></div>
+            <div class="flex items-center justify-between px-5 pt-3 pb-4 border-b border-slate-100">
+                <div>
+                    <p class="font-bold text-slate-800 text-base leading-tight">Elige cómo pagar</p>
+                    <p class="text-xs text-slate-500 mt-0.5">Certificado de Manipulación · <strong class="text-slate-700">$25.000</strong></p>
+                </div>
+                <button onclick="closePaymentSelectModal()" class="text-slate-300 hover:text-slate-500 transition flex-shrink-0">
+                    <i class="fas fa-times text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Paso 1: selección de método -->
+            <div id="pay-select-step" class="p-5">
+                <div class="space-y-2.5">
+                    <div class="pay-method" data-method="wompi" onclick="selectPayMethod('wompi')">
+                        <span class="pay-method-radio"></span>
+                        <img src="https://play-lh.googleusercontent.com/pXKMtJ7L_qlXfPFfLMXnKMFB_RLwD__i_45MAF-885qChVAtFm5FUjyvW_YWZhTqzBMQtj0FYVPCd9DCh-kzVJE=w240-h480-rw" class="pay-method-logo" alt="Wompi">
+                        <div class="pay-method-info">
+                            <p class="pay-method-name">Pago en línea</p>
+                            <p class="pay-method-sub">Tarjeta, PSE o Nequi · Aprobación inmediata</p>
+                        </div>
+                    </div>
+
+                    <div class="pay-method" data-method="nequi" onclick="selectPayMethod('nequi')">
+                        <span class="pay-method-radio"></span>
+                        <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="pay-method-logo" alt="Nequi">
+                        <div class="pay-method-info">
+                            <p class="pay-method-name">Nequi</p>
+                            <p class="pay-method-sub">Transfiere desde tu celular</p>
+                        </div>
+                    </div>
+
+                    <div class="pay-method" data-method="daviplata" onclick="selectPayMethod('daviplata')">
+                        <span class="pay-method-radio"></span>
+                        <img src="https://play-lh.googleusercontent.com/bNPDiFqg28L6ckatfuP-WgrxDRDk0JEOkC6nUIQp7Q61RW78i1bw-ffMmEjyxl-qP6dv3ANDOQqmIbBtgJI3EA" class="pay-method-logo" alt="Daviplata">
+                        <div class="pay-method-info">
+                            <p class="pay-method-name">Daviplata</p>
+                            <p class="pay-method-sub">Transfiere desde tu celular</p>
+                        </div>
+                    </div>
+
+                    <div class="pay-method" data-method="bancolombia" onclick="selectPayMethod('bancolombia')">
+                        <span class="pay-method-radio"></span>
+                        <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="pay-method-logo" alt="Bancolombia">
+                        <div class="pay-method-info">
+                            <p class="pay-method-name">Bancolombia</p>
+                            <p class="pay-method-sub">Transferencia o corresponsal</p>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="pay-continue-btn" onclick="continuePayment()" class="btn-pay-main mt-4" disabled style="opacity:0.5;cursor:not-allowed;">
+                    Continuar
+                </button>
+                <p class="text-center text-[11px] text-slate-400 mt-3 flex items-center justify-center gap-1.5">
+                    <i class="fas fa-lock"></i> Pago 100% seguro · Tu certificado llega hoy
+                </p>
+                <button onclick="startNewProcess()" class="w-full text-xs text-slate-400 hover:text-slate-600 transition flex items-center justify-center gap-1.5 hover:underline mt-4 pt-4 border-t border-slate-100">
+                    <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
+                </button>
+            </div>
+
+            <!-- Paso 2: detalle del método elegido (Nequi / Bancolombia) -->
+            <div id="pay-detail-step" class="p-5 hidden">
+                <div id="pay-detail-content"></div>
+                <button onclick="backToPaySelect()" class="w-full text-xs text-slate-400 hover:text-slate-600 underline pt-3">← Cambiar método de pago</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Modal otras formas de pago -->
     <div id="payment-options-modal" class="modal-backdrop hidden">
         <div class="modal-box pay-modal-box">
@@ -1142,7 +1319,7 @@
                     <div class="space-y-2.5 text-xs text-slate-600">
                         <div class="flex items-start gap-2.5">
                             <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span>
-                            <p>Envía la transferencia por <strong class="text-slate-800">$22.000</strong> a cualquiera de las cuentas indicadas.</p>
+                            <p>Envía la transferencia por <strong class="text-slate-800">$25.000</strong> a cualquiera de las cuentas indicadas.</p>
                         </div>
                         <div class="flex items-start gap-2.5">
                             <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span>
@@ -1206,7 +1383,7 @@
         const CRM_LEADS_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/crm/leads/publico';
         const CRM_BUSINESS_ID = 3;
         // Link de pago de Wompi (cambia solo esta línea si usas otro link, p. ej. uno multimétodo)
-        const WOMPI_CHECKOUT_URL = 'https://checkout.nequi.wompi.co/l/qa6YDm';
+        const WOMPI_CHECKOUT_URL = 'https://checkout.nequi.wompi.co/l/AWUVic';
 
         let state = {
             view: 'view-quiz-app',
@@ -1263,9 +1440,8 @@
                 telefono: '',
                 email: u.email,
                 origen: 'WEB',
-                valor_estimado: 22000,
-                estado: 'PROPUESTA',
-                notas: `Certificado Manipulación de Alimentos | Examen aprobado · Enviado a pago`
+                valor_estimado: 25000,
+                notas: `Certificado Manipulación de Alimentos | Examen aprobado`
             };
 
             fetch(CRM_LEADS_URL, {
@@ -1432,7 +1608,7 @@
             if (percent >= 0.75) {
                 state.view = 'view-registration';
                 trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
-                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' });
+                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 25000, currency: 'COP' });
             } else {
                 state.view = 'view-fail';
                 trackEvent('quiz_failed', { score: state.quiz.score + "/8" });
@@ -1449,28 +1625,24 @@
                 name: document.getElementById('user-fullname').value,
                 email: document.getElementById('user-email').value
             };
-            // Dejamos guardado el checkout: si el usuario vuelve sin pagar, verá la página con todas las opciones
-            state.view = 'view-checkout';
             saveState();
             trackEvent('registration_submitted');
             createCrmLead();
-            // Enviar directo a la pasarela de pago (se ahorra la pantalla de checkout)
-            trackEvent('payment_initiated', { metodo: 'Wompi (directo)' });
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
-            window.location.href = WOMPI_CHECKOUT_URL;
+            // Abrir el selector de método de pago (el inicio de pago se marca al elegir método y continuar)
+            openPaymentSelectModal();
         }
 
         function registerAndPay() {
             trackEvent('payment_initiated', { metodo: 'PSE' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
             window.location.href = 'https://linkdepagospse.rappipay.co/AV4v5j';
         }
 
         function payWithNequi() {
             trackEvent('payment_initiated', { metodo: 'Nequi' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
             window.location.href = WOMPI_CHECKOUT_URL;
         }
 
@@ -1496,6 +1668,112 @@
         function startNewProcess() {
             localStorage.removeItem(STORAGE_KEY);
             location.reload();
+        }
+
+        // ── Selección de método de pago (modal tras "Continuar") ──
+        let selectedPayMethod = null;
+        const payMethodsInfo = {
+            nequi: {
+                nombre: 'Nequi',
+                cuentaLabel: 'Número de celular',
+                cuenta: '3223267797',
+                logo: 'https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png'
+            },
+            daviplata: {
+                nombre: 'Daviplata',
+                cuentaLabel: 'Número de celular',
+                cuenta: '3223267797',
+                logo: 'https://play-lh.googleusercontent.com/bNPDiFqg28L6ckatfuP-WgrxDRDk0JEOkC6nUIQp7Q61RW78i1bw-ffMmEjyxl-qP6dv3ANDOQqmIbBtgJI3EA'
+            },
+            bancolombia: {
+                nombre: 'Bancolombia Ahorros',
+                cuentaLabel: 'Cuenta de ahorros',
+                cuenta: '816-589697-49',
+                logo: 'https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png'
+            }
+        };
+
+        function openPaymentSelectModal() {
+            selectedPayMethod = null;
+            document.getElementById('pay-select-step').classList.remove('hidden');
+            document.getElementById('pay-detail-step').classList.add('hidden');
+            document.querySelectorAll('.pay-method').forEach(el => el.classList.remove('selected'));
+            const btn = document.getElementById('pay-continue-btn');
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+            document.getElementById('payment-select-modal').classList.remove('hidden');
+        }
+
+        function closePaymentSelectModal() {
+            document.getElementById('payment-select-modal').classList.add('hidden');
+        }
+
+        function selectPayMethod(method) {
+            selectedPayMethod = method;
+            document.querySelectorAll('.pay-method').forEach(el => el.classList.remove('selected'));
+            const sel = document.querySelector('.pay-method[data-method="' + method + '"]');
+            if (sel) sel.classList.add('selected');
+            const btn = document.getElementById('pay-continue-btn');
+            btn.disabled = false;
+            btn.style.opacity = '1';
+            btn.style.cursor = 'pointer';
+        }
+
+        function continuePayment() {
+            if (!selectedPayMethod) return;
+            // El inicio de pago se marca aquí: al elegir método y dar Continuar
+            trackEvent('payment_initiated', { metodo: selectedPayMethod });
+            markLeadAsProposal();
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+
+            if (selectedPayMethod === 'wompi') {
+                window.location.href = WOMPI_CHECKOUT_URL;
+                return;
+            }
+            showPayDetail(selectedPayMethod);
+        }
+
+        function showPayDetail(method) {
+            const info = payMethodsInfo[method];
+            if (!info) return;
+            const waText = encodeURIComponent('Hola, aprobé el examen de manipulación y voy a pagar por ' + info.nombre + '. Adjunto comprobante.');
+            const logoHtml = info.logo
+                ? '<img src="' + info.logo + '" class="w-11 h-11 rounded-lg object-contain bg-slate-50 border border-slate-100 p-1 flex-shrink-0" alt="' + info.nombre + '">'
+                : '<div class="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0" style="background:' + info.iconBg + '"><i class="fas ' + info.icon + ' text-white text-lg"></i></div>';
+            document.getElementById('pay-detail-content').innerHTML =
+                '<div class="flex items-center gap-3 mb-4">' +
+                    logoHtml +
+                    '<div><p class="font-bold text-slate-800 text-sm leading-tight">' + info.nombre + '</p>' +
+                    '<p class="text-xs text-slate-500">Transfiere <strong class="text-slate-700">$25.000</strong></p></div>' +
+                '</div>' +
+                '<div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4">' +
+                    '<p class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-1.5">' + info.cuentaLabel + '</p>' +
+                    '<div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2">' +
+                        '<span class="text-base font-mono font-bold text-slate-900 tracking-wide">' + info.cuenta + '</span>' +
+                        '<button id="pay-copy-btn" onclick="copyToClipboard(\'' + info.cuenta + '\', \'pay-copy-btn\')" class="text-[10px] bg-[#0158AD] hover:bg-[#0166c7] text-white font-bold px-3 py-1.5 rounded-md transition flex items-center gap-1 flex-shrink-0">' +
+                            '<i class="far fa-copy"></i> Copiar</button>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-3.5 space-y-2.5 mb-4">' +
+                    '<p class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fas fa-info-circle text-emerald-600"></i> Cómo reportar tu pago:</p>' +
+                    '<div class="space-y-2 text-xs text-slate-600">' +
+                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span><p>Transfiere <strong>$25.000</strong> a la cuenta de arriba.</p></div>' +
+                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span><p>Toma una captura del comprobante.</p></div>' +
+                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span><p>Envíalo por WhatsApp para validar y recibir tu certificado.</p></div>' +
+                    '</div>' +
+                '</div>' +
+                '<a href="https://wa.me/573107941580?text=' + waText + '" target="_blank" onclick="trackEvent(\'whatsapp_comprobante\', { metodo: \'' + method + '\' })" class="w-full flex flex-col items-center justify-center gap-0.5 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg no-underline">' +
+                    '<span class="font-black text-sm flex items-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Enviar comprobante por WhatsApp</span>' +
+                    '<span class="text-[10px] text-white/95">Validación inmediata · Certificado hoy</span>' +
+                '</a>';
+            document.getElementById('pay-select-step').classList.add('hidden');
+            document.getElementById('pay-detail-step').classList.remove('hidden');
+        }
+
+        function backToPaySelect() {
+            document.getElementById('pay-detail-step').classList.add('hidden');
+            document.getElementById('pay-select-step').classList.remove('hidden');
         }
 
         // ── Otras formas de pago (modal) ──
@@ -1612,7 +1890,7 @@
             dinero: {
                 title: 'Puedes pagar por transferencia manual',
                 sub:   'Nequi · Daviplata · Bancolombia',
-                body:  'Transfiere $22.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
+                body:  'Transfiere $25.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
                 actions: `
                     <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual
