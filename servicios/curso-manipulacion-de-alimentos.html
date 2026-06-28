@@ -620,9 +620,26 @@
                                 <p class="text-[9px] text-slate-400 mt-0.5">Precio único · Sin costos ocultos</p>
                             </div>
                             <div class="text-right">
-                                <span class="text-2xl font-extrabold text-slate-900">$22.000</span>
+                                <span class="text-2xl font-extrabold text-slate-900">$25.000</span>
                                 <span class="text-xs text-slate-400 block font-normal">COP</span>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Certificado bloqueado visual -->
+                    <div class="relative bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center text-center overflow-hidden mb-2">
+                        <div class="absolute inset-0 opacity-40 blur-[1px] pointer-events-none flex flex-col items-center justify-center" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 10px, #e2e8f0 10px, #e2e8f0 11px); background-size: 100% 20px;">
+                            <i class="fas fa-certificate text-5xl text-slate-300 mb-2"></i>
+                            <div class="w-2/3 h-2 bg-slate-300 rounded mb-2"></div>
+                            <div class="w-1/2 h-2 bg-slate-300 rounded"></div>
+                        </div>
+                        
+                        <div class="relative z-10 flex flex-col items-center">
+                            <div class="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center mb-2">
+                                <i class="fas fa-lock text-[#0158AD] text-lg"></i>
+                            </div>
+                            <h3 class="text-sm font-black text-slate-800 mb-0.5">¡Tu certificado está listo!</h3>
+                            <p class="text-[11px] text-slate-600 font-medium max-w-[250px] leading-snug">Comienza el pago para desbloquear y descargar tu documento oficial en PDF.</p>
                         </div>
                     </div>
 
@@ -785,15 +802,7 @@
                         </div>
                     </div>
 
-                    <div class="pt-1 flex items-center justify-center gap-4">
-                        <button onclick="showExitModal()" class="text-xs text-slate-400 hover:text-red-500 transition flex items-center gap-1.5 hover:underline">
-                            <i class="fas fa-times text-[9px]"></i> Cancelar
-                        </button>
-                        <span class="text-slate-200 text-xs">|</span>
-                        <button onclick="startNewProcess()" class="text-xs text-slate-400 hover:text-slate-600 transition flex items-center gap-1.5 hover:underline">
-                            <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
-                        </button>
-                    </div>
+
                     <p class="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
                         <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por Nequi
                     </p>
@@ -805,8 +814,8 @@
                     <i class="fas fa-redo text-4xl text-orange-500"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">¡Casi lo logras!</h2>
-                <p class="text-gray-600 mb-1 text-sm">Obtuviste <span id="fail-score" class="font-bold text-slate-800"></span>/8 respuestas correctas.</p>
-                <p class="text-gray-500 mb-8 text-sm">Necesitas al menos 6/8 para aprobar. ¡Inténtalo de nuevo ahora, es gratis!</p>
+                <p class="text-gray-600 mb-1 text-sm">Obtuviste <span id="fail-score" class="font-bold text-slate-800"></span>/10 respuestas correctas.</p>
+                <p class="text-gray-500 mb-8 text-sm">Necesitas al menos 8/10 para aprobar. ¡Inténtalo de nuevo ahora, es gratis!</p>
                 <button onclick="startNewProcess()" class="btn-action w-full py-4 text-base shadow-lg flex items-center justify-center gap-2">
                     <i class="fas fa-redo-alt"></i> Intentar de nuevo — ¡Es gratis!
                 </button>
@@ -973,7 +982,9 @@
             { q: "5. Si tienes gripe o heridas en las manos, ¿qué debes hacer?", options: ["Usar tapabocas y seguir trabajando", "Informar al jefe y no manipular alimentos", "Ponerse doble guante"], a: 1 },
             { q: "6. El agua utilizada para preparar alimentos debe ser:", options: ["De río", "Potable", "Lluvia"], a: 1 },
             { q: "7. ¿Cómo se deben almacenar los productos químicos de aseo?", options: ["Junto a la comida para tenerlos cerca", "En un lugar separado y rotulado", "En la nevera"], a: 1 },
-            { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 }
+            { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 },
+            { q: "9. ¿Qué indumentaria es obligatoria para un manipulador de alimentos?", options: ["Ropa deportiva cómoda", "Uniforme de color claro, gorro y sin joyas", "Cualquier ropa limpia"], a: 1 },
+            { q: "10. Las uñas de un manipulador de alimentos deben estar:", options: ["Pintadas para verse bien", "Largas pero limpias", "Cortas, limpias y sin esmalte"], a: 2 }
         ];
 
         // --- TRACKING N8N ---
@@ -1174,11 +1185,11 @@
             const percent = (state.quiz.score / questions.length);
             if (percent >= 0.75) {
                 state.view = 'view-registration';
-                trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
-                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' });
+                trackEvent('quiz_passed', { score: state.quiz.score + "/10" });
+                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 25000, currency: 'COP' });
             } else {
                 state.view = 'view-fail';
-                trackEvent('quiz_failed', { score: state.quiz.score + "/8" });
+                trackEvent('quiz_failed', { score: state.quiz.score + "/10" });
                 document.getElementById('fail-score').innerText = state.quiz.score;
             }
             applyStateToUI();
@@ -1202,7 +1213,7 @@
         function registerAndPay() {
             trackEvent('payment_initiated', { metodo: 'PSE' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
             window.location.href = 'https://linkdepagospse.rappipay.co/AV4v5j';
         }
 
@@ -1342,7 +1353,7 @@
             dinero: {
                 title: 'Puedes pagar por transferencia manual',
                 sub:   'Nequi · Daviplata · Bancolombia',
-                body:  'Transfiere $22.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
+                body:  'Transfiere $25.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
                 actions: `
                     <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual
@@ -1445,5 +1456,10 @@
             trackEvent('page_view');
         });
     </script>
+
+    <!-- WA FLOAT -->
+    <a href="https://wa.me/573107941580?text=Hola,%20tengo%20una%20pregunta%20sobre%20el%20certificado%20de%20manipulación%20de%20alimentos" target="_blank" class="wa" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 </body>
 </html>
