@@ -934,11 +934,11 @@
 
                 <p class="text-[11px] text-slate-500 leading-snug mb-4 flex items-start gap-1.5">
                     <i class="fas fa-envelope-open-text text-[#0158AD] mt-0.5 flex-shrink-0"></i>
-                    Tu certificado en PDF se enviará al correo indicado una vez confirmado el pago. Verifica que sea correcto antes de continuar.
+                    Verifica que tus datos sean correctos. Al continuar te llevamos a WhatsApp para finalizar y recibir tu certificado.
                 </p>
 
-                <button onclick="payWithNequi()" class="btn-pay-main">
-                    Continuar al pago <i class="fas fa-arrow-right text-xs ml-1"></i>
+                <button onclick="goToWhatsApp()" class="btn-pay-main !bg-[#25D366] hover:!bg-[#20ba5a]">
+                    <i class="fab fa-whatsapp text-base mr-2"></i> Continuar por WhatsApp
                 </button>
                 <button onclick="startNewProcess()" class="w-full text-xs text-slate-400 hover:text-slate-600 transition flex items-center justify-center gap-1.5 hover:underline mt-4 pt-4 border-t border-slate-100">
                     <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
@@ -1306,7 +1306,7 @@
                 telefono: '',
                 email: u.email,
                 origen: 'WEB',
-                valor_estimado: 22000,
+                valor_estimado: 25000,
                 notas: `Certificado Manipulación de Alimentos | Examen aprobado`
             };
 
@@ -1488,12 +1488,29 @@
                 name: document.getElementById('user-fullname').value,
                 email: document.getElementById('user-email').value
             };
-            // state.view = 'view-checkout'; // Hiding summary page as requested
             saveState();
             trackEvent('registration_submitted');
             createCrmLead();
             applyStateToUI();
             openPaymentSelectModal();
+        }
+
+        // El botón "Continuar" del modal de confirmación lleva al usuario a WhatsApp con sus datos
+        function goToWhatsApp() {
+            const u = state.userData || {};
+            // Marcamos el intento de pago aquí: al ir a WhatsApp es donde el usuario recibe las cuentas
+            trackEvent('payment_initiated', { metodo: 'WhatsApp' });
+            markLeadAsProposal();
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+
+            const doc = ((u.type || '') + ' ' + (u.num || '')).trim();
+            const msg = '¡Hola! Aprobé el examen de Manipulación de Alimentos ✅\n' +
+                'Estos son mis datos para recibir mi certificado:\n\n' +
+                '• Nombre: ' + (u.name || '') + '\n' +
+                '• Documento: ' + doc + '\n' +
+                '• Correo: ' + (u.email || '');
+
+            window.location.href = 'https://wa.me/573107941580?text=' + encodeURIComponent(msg);
         }
 
         function registerAndPay() {
@@ -1506,7 +1523,7 @@
         function payWithNequi() {
             trackEvent('payment_initiated', { metodo: 'Nequi' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
             window.location.href = WOMPI_CHECKOUT_URL;
         }
 
