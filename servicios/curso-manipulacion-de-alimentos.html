@@ -1510,7 +1510,15 @@
                 '• Documento: ' + doc + '\n' +
                 '• Correo: ' + (u.email || '');
 
-            window.location.href = 'https://wa.me/573107941580?text=' + encodeURIComponent(msg);
+            const phone = '573107941580';
+            const text = encodeURIComponent(msg);
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+
+            // En móvil abrimos el chat directo con el deep link (sin la página puente de wa.me).
+            // En escritorio usamos wa.me como respaldo por si no hay WhatsApp instalado.
+            window.location.href = isMobile
+                ? 'whatsapp://send?phone=' + phone + '&text=' + text
+                : 'https://wa.me/' + phone + '?text=' + text;
         }
 
         function registerAndPay() {
