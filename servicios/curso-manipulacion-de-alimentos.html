@@ -1653,10 +1653,18 @@
             btn.style.cursor = 'pointer';
         }
 
+        const PAY_METHOD_LABELS = { pse: 'PSE', wompi: 'Wompi', transferencia: 'WhatsApp' };
+
         function continuePayment() {
             if (!selectedPayMethod) return;
+
+            if (selectedPayMethod === 'transferencia') {
+                goToWhatsApp();
+                return;
+            }
+
             // El inicio de pago se marca aquí: al elegir método y dar Continuar
-            trackEvent('payment_initiated', { metodo: selectedPayMethod });
+            trackEvent('payment_initiated', { metodo: PAY_METHOD_LABELS[selectedPayMethod] || selectedPayMethod });
             markLeadAsProposal();
             fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
 
@@ -1666,10 +1674,6 @@
             }
             if (selectedPayMethod === 'wompi') {
                 window.location.href = WOMPI_CHECKOUT_URL;
-                return;
-            }
-            if (selectedPayMethod === 'transferencia') {
-                goToWhatsApp();
                 return;
             }
         }
