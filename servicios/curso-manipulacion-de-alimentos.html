@@ -548,7 +548,7 @@
     <site-header id="site-header-el" course="Manipulación de Alimentos"></site-header>
     <script src="../components/header.js"></script>
 
-    <img id="payment-hero-img" src="../pagobpm.jpeg" alt="Manipulación de Alimentos" class="hidden-section block w-full h-36 md:h-44 object-cover">
+    <img id="payment-hero-img" src="../pagobpm.jpeg" alt="Manipulación de Alimentos" class="hidden-section block w-full h-28 md:h-36 object-cover object-bottom">
 
     <div id="bg-overlay-wrap" class="bg-overlay flex flex-col items-center justify-center p-4 min-h-screen">
         
@@ -859,7 +859,7 @@
                 </div>
 
                 <!-- Paso 1: selección de método -->
-                <div id="pay-select-step" class="px-5 pb-28 pt-0">
+                <div id="pay-select-step" class="px-5 pb-8 pt-0">
                     <p class="font-bold text-slate-800 text-sm mb-2.5">Método de Pago</p>
                     <div class="border-t border-b border-slate-200 divide-y divide-slate-200">
                         <div class="pay-method" data-method="pse" onclick="selectPayMethod('pse')">
@@ -1012,9 +1012,14 @@
                     Verifica que tus datos sean correctos. Al continuar te llevamos a WhatsApp para finalizar y recibir tu certificado.
                 </p>
 
-                <button onclick="continueToPayMethods()" class="btn-pay-main !bg-[#36C85A] hover:!bg-[#2fb050] !text-white">
-                    <i class="fas fa-lock text-base mr-2"></i> Ir a pagar
-                </button>
+                <div class="grid grid-cols-2 gap-2.5">
+                    <button onclick="showExitModal()" class="py-3.5 px-4 rounded-xl border border-slate-200 text-slate-500 font-bold text-sm hover:bg-slate-50 transition">
+                        Cancelar
+                    </button>
+                    <button onclick="continueToPayMethods()" class="btn-pay-main !mt-0 !w-full !py-3 !rounded-full !bg-[#36C85A] hover:!bg-[#2fb050] !text-white">
+                        <i class="fas fa-lock text-base mr-2"></i> Ir a pagar
+                    </button>
+                </div>
                 <button onclick="startNewProcess()" class="w-full text-xs text-slate-400 hover:text-slate-600 transition flex items-center justify-center gap-1.5 hover:underline mt-4 pt-4 border-t border-slate-100">
                     <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
                 </button>
@@ -1186,10 +1191,6 @@
                         <span class="reason-icon">💳</span>
                         <span>No tengo cómo pagar (tarjeta / Nequi)</span>
                     </button>
-                    <button class="exit-reason-btn" onclick="showExitResponse('empresa')">
-                        <span class="reason-icon">🏢</span>
-                        <span>Lo pagará mi empresa o empleador</span>
-                    </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('necesidad')">
                         <span class="reason-icon">🤷</span>
                         <span>No sé si realmente lo necesito</span>
@@ -1198,14 +1199,14 @@
                         <span class="reason-icon">⏰</span>
                         <span>Ahora no tengo tiempo</span>
                     </button>
-                    <button class="exit-reason-btn" onclick="showExitResponse('pregunta')">
-                        <span class="reason-icon">❓</span>
-                        <span>Tengo una pregunta antes de pagar</span>
-                    </button>
                     <button class="exit-reason-btn" onclick="showExitResponse('vigente')">
                         <span class="reason-icon">📄</span>
                         <span>Ya tengo un certificado vigente</span>
                     </button>
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20hablar%20con%20un%20asesor%20antes%20de%20pagar%20mi%20certificado." target="_blank" class="exit-reason-btn" style="text-decoration:none;">
+                        <span class="reason-icon">🙋</span>
+                        <span>Hablar con un asesor por WhatsApp</span>
+                    </a>
                 </div>
             </div>
 
@@ -1425,14 +1426,9 @@
         }
 
         function resetPaySelectStep() {
-            selectedPayMethod = null;
             document.getElementById('pay-select-step').classList.remove('hidden');
             document.getElementById('pay-detail-step').classList.add('hidden');
-            document.querySelectorAll('.pay-method').forEach(el => el.classList.remove('selected'));
-            const btn = document.getElementById('pay-continue-btn');
-            btn.disabled = true;
-            btn.style.opacity = '0.5';
-            btn.style.cursor = 'not-allowed';
+            selectPayMethod('pse');
         }
 
         function loadQuestionUI() {
@@ -1630,6 +1626,9 @@
             state.view = 'view-payment';
             saveState();
             switchView('view-payment');
+            // Posible lead: el cliente llegó a la vista de pago
+            trackEvent('payment_view_reached');
+            markLeadAsProposal();
         }
 
         function backToSummary() {
