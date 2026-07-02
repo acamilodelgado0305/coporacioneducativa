@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Diplomado en Primeros Auxilios | CertiTec</title>
+    <link rel="icon" href="../logopagina.png" type="image/png" />
+
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '639715789143642');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"/></noscript>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --primary: #0f172a; 
+            --accent: #ef4444; 
+            --accent-glow: rgba(239, 68, 68, 0.4);
+            --nequi-pink: #DA0063; 
+            --nequi-purple: #6A008F;
+        }
+        body { font-family: "Inter", sans-serif; background-color: #f8fafc; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+        h1, h2, h3, h4, .outfit-font { font-family: "Outfit", sans-serif; }
+
+        .hidden-section { display: none !important; }
+        .fade-in { animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Premium Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .premium-shadow { box-shadow: 0 20px 40px -15px rgba(0,0,0,0.3); }
+        .premium-glow { box-shadow: 0 0 30px var(--accent-glow); }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-nequi-pay {
+            background: linear-gradient(135deg, var(--nequi-pink) 0%, var(--nequi-purple) 100%);
+            color: white;
+            box-shadow: 0 8px 25px -5px rgba(218, 0, 99, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .btn-nequi-pay:active { transform: scale(0.97); }
+
+        .animate-pulse-glow { animation: pulse-glow 3s infinite; }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 15px var(--accent-glow); }
+            50% { box-shadow: 0 0 35px rgba(239, 68, 68, 0.6); }
+        }
+
+        .module-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out; }
+        .module-content.expanded { max-height: 1000px; }
+
+        /* Custom Scrollbar for study section */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col min-h-screen selection:bg-red-500 selection:text-white">
+
+    <site-header course="Diplomado P. Auxilios" cta-text="Empezar a Estudiar" cta-href="#inicio-estudio" cta-color="#ef4444"></site-header>
+    <script src="../components/header.js"></script>
+
+    <main id="main-container" class="flex-grow pt-14">
+
+        <!-- VISTA VENTAS / LANDING PREMIUM -->
+        <div id="view-sales-page">
+            
+            <!-- Hero Section Premium -->
+            <section class="relative bg-slate-900 text-white pt-20 pb-28 px-4 overflow-hidden rounded-b-[2.5rem] shadow-2xl">
+                <!-- Decorative background elements -->
+                <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
+                    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-red-600 rounded-full mix-blend-multiply filter blur-[120px] opacity-40 animate-pulse"></div>
+                    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-multiply filter blur-[120px] opacity-40 animate-pulse" style="animation-delay: 2s"></div>
+                </div>
+
+                <div class="max-w-4xl mx-auto relative z-10 text-center">
+                    <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold px-4 py-1.5 rounded-full mb-6">
+                        <span class="w-2 h-2 rounded-full bg-red-500 animate-ping"></span>
+                        DIPLOMADO INTENSIVO CERTIFICADO
+                    </div>
+
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black mb-6 leading-[1.1] tracking-tight outfit-font">
+                        Diplomado en <br>
+                        <span class="gradient-text">Primeros Auxilios</span>
+                    </h1>
+
+                    <p class="text-slate-300 text-lg md:text-xl mb-10 max-w-2xl mx-auto leading-relaxed">
+                        Domina las técnicas vitales de respuesta a emergencias. Estudia el material completo en nuestra plataforma y presenta el examen final. <strong>100% Válido y Online.</strong>
+                    </p>
+
+                    <!-- Pricing Card Hero -->
+                    <div class="glass-card p-6 md:p-8 rounded-3xl premium-shadow relative z-10 mx-auto max-w-md border-t border-t-white/30">
+                        <p class="text-sm text-slate-300 font-medium mb-1 uppercase tracking-wider">Inversión Única</p>
+                        <div class="flex justify-center items-end gap-2 mb-6">
+                            <span class="text-5xl md:text-6xl font-black text-white outfit-font">$80.000</span>
+                            <span class="text-lg text-slate-400 mb-2 font-medium">COP</span>
+                        </div>
+                        <button onclick="scrollToStudy()" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded-2xl text-lg shadow-lg shadow-red-500/30 transition-all transform active:scale-95 flex items-center justify-center gap-3">
+                            <i class="fas fa-book-open"></i> EMPEZAR A ESTUDIAR AHORA
+                        </button>
+                        <p class="text-xs text-slate-400 mt-4 text-center"><i class="fas fa-shield-alt mr-1"></i> Certificado de 120 Horas válido en todo el país</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="py-16 px-6 bg-white relative z-20 -mt-10">
+                <div class="max-w-5xl mx-auto">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300 group">
+                            <div class="w-14 h-14 bg-red-100 text-red-500 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-red-500 group-hover:text-white transition duration-300">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2 outfit-font">Contenido Completo</h3>
+                            <p class="text-sm text-slate-600">Material de estudio detallado con las últimas guías de reanimación y primeros auxilios.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300 group">
+                            <div class="w-14 h-14 bg-blue-100 text-blue-500 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-blue-500 group-hover:text-white transition duration-300">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2 outfit-font">Diploma Válido</h3>
+                            <p class="text-sm text-slate-600">Certificación exigida en empresas, instituciones de salud, colegios y brigadas de emergencia.</p>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-100 p-6 rounded-2xl shadow-sm hover:shadow-md transition duration-300 group">
+                            <div class="w-14 h-14 bg-green-100 text-green-500 rounded-xl flex items-center justify-center text-2xl mb-4 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-white transition duration-300">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="font-bold text-slate-900 text-lg mb-2 outfit-font">Estudia a tu Ritmo</h3>
+                            <p class="text-sm text-slate-600">Accede desde tu celular en cualquier momento. Estudia, presenta el examen y certifícate.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONTENIDO DE ESTUDIO (Módulos interactivos) -->
+            <section id="inicio-estudio" class="py-16 px-4 bg-slate-50 border-t border-slate-200">
+                <div class="max-w-3xl mx-auto">
+                    <div class="text-center mb-10">
+                        <span class="text-red-500 font-bold tracking-wider text-sm uppercase">Material Académico</span>
+                        <h2 class="text-3xl md:text-4xl font-black text-slate-900 mt-2 mb-4 outfit-font">Módulos de Estudio</h2>
+                        <p class="text-slate-600">Lee detenidamente el material de cada módulo. Este contenido será evaluado en el examen final para obtener tu diplomado.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Módulo 1 -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <button onclick="toggleModule('mod1')" class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition text-left focus:outline-none">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold">1</div>
+                                    <h3 class="font-bold text-lg text-slate-800 outfit-font">Conceptos Básicos y Bioseguridad</h3>
+                                </div>
+                                <i id="icon-mod1" class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                            </button>
+                            <div id="content-mod1" class="module-content px-6 bg-slate-50">
+                                <div class="py-4 text-slate-600 text-sm space-y-4 border-t border-slate-100">
+                                    <p><strong>Definición:</strong> Los primeros auxilios son las técnicas y atenciones inmediatas que se le brindan a un lesionado o enfermo repentino antes de la llegada de asistencia médica profesional.</p>
+                                    <p><strong>Bioseguridad (El principio PAS):</strong>
+                                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                                            <li><strong>P</strong>roteger: Evalúa la escena. Asegúrate de que el entorno sea seguro para ti y para la víctima. Usa guantes y mascarilla si es posible.</li>
+                                            <li><strong>A</strong>visar: Llama al servicio de emergencias médicas (123 en Colombia).</li>
+                                            <li><strong>S</strong>ocorrer: Una vez asegurado el entorno y dado el aviso, procede a atender a la víctima según tus conocimientos.</li>
+                                        </ul>
+                                    </p>
+                                    <p><strong>Evaluación Inicial:</strong> Consiste en verificar el estado de consciencia, la respiración y el pulso. Se utiliza la técnica VOS (Ver, Oír, Sentir) para comprobar la respiración durante un máximo de 10 segundos.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 2 -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <button onclick="toggleModule('mod2')" class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition text-left focus:outline-none">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold">2</div>
+                                    <h3 class="font-bold text-lg text-slate-800 outfit-font">Reanimación Cardiopulmonar (RCP)</h3>
+                                </div>
+                                <i id="icon-mod2" class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                            </button>
+                            <div id="content-mod2" class="module-content px-6 bg-slate-50">
+                                <div class="py-4 text-slate-600 text-sm space-y-4 border-t border-slate-100">
+                                    <p>Si la persona NO responde y NO respira normalmente, se debe iniciar RCP inmediatamente.</p>
+                                    <p><strong>Puntos Clave del RCP en Adultos:</strong>
+                                        <ul class="list-disc pl-5 mt-2 space-y-2">
+                                            <li><strong>Posición:</strong> Coloca el talón de una mano en el centro del pecho (mitad inferior del esternón) y la otra mano encima, entrelazando los dedos. Mantén los brazos rectos.</li>
+                                            <li><strong>Compresiones:</strong> Realiza compresiones fuertes y rápidas.
+                                                <br>- Profundidad: Al menos 5 cm.
+                                                <br>- Ritmo: Entre 100 y 120 compresiones por minuto.
+                                            </li>
+                                            <li><strong>Relación:</strong> Si estás entrenado, realiza 30 compresiones seguidas de 2 ventilaciones (boca a boca con barrera). Si no, realiza RCP solo con las manos (compresiones ininterrumpidas).</li>
+                                            <li><strong>DEA:</strong> Si hay un Desfibrilador Externo Automático disponible, enciéndelo y sigue las instrucciones de voz de inmediato.</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 3 -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <button onclick="toggleModule('mod3')" class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition text-left focus:outline-none">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold">3</div>
+                                    <h3 class="font-bold text-lg text-slate-800 outfit-font">Manejo de Hemorragias</h3>
+                                </div>
+                                <i id="icon-mod3" class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                            </button>
+                            <div id="content-mod3" class="module-content px-6 bg-slate-50">
+                                <div class="py-4 text-slate-600 text-sm space-y-4 border-t border-slate-100">
+                                    <p><strong>1. Presión Directa:</strong> Es la técnica principal. Coloca un apósito limpio, gasa o tela sobre la herida y presiona firmemente con ambas manos.</p>
+                                    <p><strong>2. No Retirar Apósitos:</strong> Si la sangre empapa el apósito, NO lo quites. Coloca otro encima y sigue presionando. Quitar el primer apósito destruye los coágulos que se están formando.</p>
+                                    <p><strong>3. Elevación:</strong> Si es en una extremidad (y no hay sospecha de fractura), eleva la extremidad por encima del nivel del corazón para reducir el flujo sanguíneo.</p>
+                                    <p><strong>4. Torniquete:</strong> Solo debe usarse como último recurso en hemorragias exanguinantes en extremidades que no se detienen con presión directa. Debe colocarse unos 5-7 cm por encima de la herida, anotando la hora de colocación.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 4 -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <button onclick="toggleModule('mod4')" class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition text-left focus:outline-none">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold">4</div>
+                                    <h3 class="font-bold text-lg text-slate-800 outfit-font">Quemaduras y Atragantamiento (OVACE)</h3>
+                                </div>
+                                <i id="icon-mod4" class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                            </button>
+                            <div id="content-mod4" class="module-content px-6 bg-slate-50">
+                                <div class="py-4 text-slate-600 text-sm space-y-4 border-t border-slate-100">
+                                    <p><strong>Quemaduras:</strong>
+                                        <br>- <strong>Acción Principal:</strong> Enfriar la zona afectada con agua corriente fresca (no helada) durante 15 a 20 minutos.
+                                        <br>- <strong>Qué NO hacer:</strong> No aplicar hielo directo, no reventar las ampollas, no aplicar remedios caseros (café, crema dental, aceite), no quitar la ropa pegada a la piel.
+                                    </p>
+                                    <p><strong>Atragantamiento (Maniobra de Heimlich):</strong>
+                                        <br>- <strong>Obstrucción Parcial (la persona tose):</strong> Anima a la persona a seguir tosiendo. NO des golpes en la espalda si está de pie y tosiendo, podría empeorar la obstrucción.
+                                        <br>- <strong>Obstrucción Total (no puede hablar, toser ni respirar, se lleva las manos al cuello):</strong> Realiza la maniobra de Heimlich. Párate detrás de la persona, rodea su cintura con los brazos, haz un puño y colócalo ligeramente por encima del ombligo. Sujeta el puño con la otra mano y presiona hacia adentro y hacia arriba de forma fuerte y rápida.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Módulo 5 -->
+                        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                            <button onclick="toggleModule('mod5')" class="w-full px-6 py-5 flex items-center justify-between bg-white hover:bg-slate-50 transition text-left focus:outline-none">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 bg-slate-100 rounded-full flex items-center justify-center text-slate-600 font-bold">5</div>
+                                    <h3 class="font-bold text-lg text-slate-800 outfit-font">Fracturas e Inmovilización</h3>
+                                </div>
+                                <i id="icon-mod5" class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+                            </button>
+                            <div id="content-mod5" class="module-content px-6 bg-slate-50">
+                                <div class="py-4 text-slate-600 text-sm space-y-4 border-t border-slate-100">
+                                    <p>Ante la sospecha de una fractura, esguince o luxación, el objetivo principal es inmovilizar para evitar más daño.</p>
+                                    <p><strong>Reglas Generales:</strong>
+                                        <ul class="list-disc pl-5 mt-2 space-y-1">
+                                            <li><strong>NO intentes enderezar</strong> ni reacomodar el hueso a su lugar original.</li>
+                                            <li>Inmoviliza la extremidad en la posición en la que fue encontrada.</li>
+                                            <li>Para inmovilizar, usa una férula (puede ser cartón, madera o algo rígido) que abarque la articulación por encima y por debajo de la fractura.</li>
+                                            <li>Si hay una herida abierta con el hueso expuesto (fractura abierta), cubre la herida con apósitos estériles antes de inmovilizar sin hacer presión directa sobre el hueso expuesto.</li>
+                                        </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cta Examen -->
+            <section class="py-16 px-4 bg-slate-900 text-white text-center relative overflow-hidden">
+                <!-- Decoración -->
+                <div class="absolute inset-0 z-0 opacity-20">
+                    <div class="absolute w-full h-[1px] bg-white/20 top-1/4"></div>
+                    <div class="absolute w-full h-[1px] bg-white/20 top-2/4"></div>
+                    <div class="absolute w-full h-[1px] bg-white/20 top-3/4"></div>
+                </div>
+
+                <div class="max-w-md mx-auto relative z-10">
+                    <div class="w-16 h-16 bg-red-500/20 rounded-2xl mx-auto flex items-center justify-center mb-6">
+                        <i class="fas fa-clipboard-check text-4xl text-red-400"></i>
+                    </div>
+                    <h2 class="text-3xl font-black mb-4 outfit-font">¿Listo para evaluarte?</h2>
+                    <p class="text-slate-400 mb-8 text-sm leading-relaxed">
+                        Demuestra lo aprendido respondiendo este cuestionario de 15 preguntas. Aprueba con 75% o más para obtener tu Diplomado.
+                    </p>
+                    <button onclick="startQuizFlow()" class="bg-red-500 hover:bg-red-600 text-white font-bold text-lg py-4 px-10 rounded-xl shadow-[0_10px_25px_-5px_rgba(239,68,68,0.5)] w-full transition-all transform active:scale-95 flex justify-center items-center gap-3 animate-pulse-glow">
+                        <i class="fas fa-play"></i> INICIAR EXAMEN AHORA
+                    </button>
+                    <p class="mt-5 text-xs text-slate-500 font-medium">Puedes intentarlo cuantas veces necesites.</p>
+                </div>
+            </section>
+
+            <footer class="bg-white py-6 text-center text-xs text-slate-500 border-t border-slate-200">
+                <p>© 2024 CertiTec Colombia. Educación continua y certificaciones.</p>
+            </footer>
+        </div>
+
+        <!-- VISTA QUIZ -->
+        <div id="view-quiz-app" class="hidden-section min-h-screen bg-slate-50 flex flex-col">
+            <div class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-40 flex justify-between items-center">
+                <span class="text-sm font-bold tracking-wide">Pregunta <span id="q-current" class="text-red-400">1</span>/15</span>
+                <button onclick="exitQuiz()" class="text-xs bg-white/10 hover:bg-white/20 transition px-3 py-1.5 rounded-lg font-medium flex items-center gap-2">
+                    <i class="fas fa-times"></i> Salir
+                </button>
+            </div>
+            <div class="w-full bg-slate-200 h-1.5 sticky top-[56px] z-30">
+                <div id="progress-bar" class="bg-gradient-to-r from-red-500 to-red-600 h-1.5 transition-all duration-500 ease-out" style="width: 0%"></div>
+            </div>
+
+            <div class="flex-grow container mx-auto max-w-2xl p-4 md:p-6 pb-32">
+                <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-6 md:p-8 mb-4 fade-in">
+                    <h3 id="q-text" class="text-xl md:text-2xl font-bold text-slate-800 mb-8 leading-snug outfit-font">
+                        Cargando pregunta...
+                    </h3>
+                    <div id="q-options" class="space-y-4"></div>
+                </div>
+                <div id="feedback-area" class="hidden p-4 rounded-xl font-bold text-center text-sm md:text-base transition-all duration-300"></div>
+            </div>
+
+            <div class="fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 p-4 z-50 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+                <div class="max-w-2xl mx-auto">
+                    <button id="btn-next" onclick="nextQuestion()" disabled class="w-full bg-slate-100 text-slate-400 font-bold py-4 rounded-xl transition-all flex justify-center items-center text-lg">
+                        Selecciona una opción
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA CHECKOUT (Éxito) -->
+        <div id="view-checkout" class="hidden-section min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 fade-in">
+            <div class="max-w-md w-full text-center bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+
+                <div class="mb-6 inline-flex p-4 rounded-full bg-green-50 animate-bounce relative">
+                    <div class="absolute inset-0 bg-green-500/20 rounded-full animate-ping"></div>
+                    <i class="fas fa-check-circle text-6xl text-green-500 relative z-10"></i>
+                </div>
+
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 mb-2 outfit-font">¡EXAMEN APROBADO!</h2>
+                <p class="text-slate-600 mb-8 text-sm md:text-base">
+                    Felicitaciones. Has superado el puntaje requerido y tu <strong>Diplomado en Primeros Auxilios</strong> está listo para ser generado.
+                </p>
+
+                <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-8 text-left">
+                    <div class="flex justify-between items-center mb-3 text-sm">
+                        <span class="text-slate-500">Programa:</span>
+                        <span class="font-bold text-slate-800 text-right">Diplomado Primeros Auxilios</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-3 text-sm">
+                        <span class="text-slate-500">Intensidad:</span>
+                        <span class="font-bold text-slate-800">120 Horas</span>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-200">
+                        <span class="font-bold text-slate-600">Total a Pagar:</span>
+                        <span class="font-black text-3xl text-green-600">$80.000 COP</span>
+                    </div>
+                </div>
+
+                <!-- Enlace de $80.000 (el mismo de informatica) -->
+                <a href="https://checkout.nequi.wompi.co/l/7R3AgN"
+                   onclick="fbq('track','InitiateCheckout',{content_name:'Diplomado Primeros Auxilios',value:80000,currency:'COP',num_items:1})"
+                   class="btn-nequi-pay animate-pulse-glow w-full flex items-center justify-between py-4 px-6 rounded-2xl text-lg font-bold mb-6 no-underline relative group overflow-hidden">
+                    <div class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                    <div class="bg-white rounded-xl p-2 shadow-sm relative z-10">
+                        <img src="https://zen-marketing-assets.s3-us-west-2.amazonaws.com/images/gordan-tmp/logo-Nequi_by_Bancolombia.png" alt="Nequi" class="h-6 md:h-7 w-auto object-contain">
+                    </div>
+                    <span class="flex-grow text-center pl-2 text-white text-lg md:text-xl relative z-10">PAGAR $80.000</span>
+                    <i class="fas fa-chevron-right text-white/80 relative z-10 text-xl"></i>
+                </a>
+
+                <div class="bg-amber-50 p-4 rounded-xl text-left border border-amber-200">
+                    <div class="flex items-start gap-3">
+                        <i class="fas fa-exclamation-triangle text-amber-500 mt-0.5"></i>
+                        <p class="text-xs text-amber-800 leading-relaxed font-medium">
+                            <strong>Paso Final Obligatorio:</strong> Al completar el pago en Nequi, debes tomar una <strong>captura de pantalla</strong> (pantallazo) del comprobante exitoso para validar y enviarte tu diploma.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA FAIL -->
+        <div id="view-fail" class="hidden-section min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 fade-in">
+            <div class="bg-white p-8 md:p-10 rounded-3xl shadow-xl text-center max-w-md w-full border-t-4 border-red-500">
+                <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-times text-4xl text-red-500"></i>
+                </div>
+                <h2 class="text-3xl font-black text-slate-900 mb-4 outfit-font">No Aprobaste</h2>
+                <p class="text-slate-600 mb-8 text-base">
+                    No alcanzaste el puntaje mínimo requerido del 75%. Te sugerimos repasar los módulos de estudio antes de volver a intentarlo.
+                </p>
+                <div class="flex flex-col gap-3">
+                    <button onclick="startQuizFlow()" class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-slate-800 transition shadow-lg text-lg">
+                        <i class="fas fa-redo-alt mr-2"></i> Reintentar Examen
+                    </button>
+                    <button onclick="switchView('sales')" class="w-full bg-white text-slate-700 border border-slate-300 font-bold py-4 rounded-xl hover:bg-slate-50 transition text-lg">
+                        <i class="fas fa-book-open mr-2"></i> Volver al Material
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Funciones UI Acordeón Módulos
+        function toggleModule(id) {
+            const content = document.getElementById('content-' + id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (content.classList.contains('expanded')) {
+                content.classList.remove('expanded');
+                icon.classList.remove('rotate-180');
+            } else {
+                content.classList.add('expanded');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        function scrollToStudy() {
+            document.getElementById('inicio-estudio').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => { toggleModule('mod1'); }, 500); // Abre el primer modulo
+        }
+
+        // Base de datos de preguntas
+        const questions = [
+            {
+                q: "¿Qué significan las siglas PAS en primeros auxilios?",
+                options: ["Proteger, Avisar, Socorrer", "Prevenir, Actuar, Salvar", "Preparar, Asistir, Sanar"],
+                a: 0
+            },
+            {
+                q: "¿Cuál es el ritmo recomendado para las compresiones torácicas durante la RCP en un adulto?",
+                options: ["60 a 80 compresiones por minuto", "100 a 120 compresiones por minuto", "Más de 140 compresiones por minuto"],
+                a: 1
+            },
+            {
+                q: "Si una persona NO responde y NO respira normalmente, la primera acción inmediata debe ser:",
+                options: ["Llamar a emergencias e iniciar RCP", "Darle agua para que reaccione", "Esperar 5 minutos a ver si despierta"],
+                a: 0
+            },
+            {
+                q: "En caso de una hemorragia externa importante, ¿qué es lo primero que NO debes hacer?",
+                options: ["Aplicar presión directa sobre la herida", "Quitar el primer apósito empapado de sangre", "Elevar la extremidad si no hay fractura"],
+                a: 1
+            },
+            {
+                q: "¿Cuándo está indicado el uso de un torniquete?",
+                options: ["Para cualquier tipo de corte en brazos o piernas", "Como primer recurso en heridas superficiales", "Como último recurso en hemorragias exanguinantes en extremidades"],
+                a: 2
+            },
+            {
+                q: "Ante una quemadura térmica (fuego o líquidos calientes), el tratamiento inicial correcto es:",
+                options: ["Aplicar crema dental o mantequilla", "Reventar las ampollas de inmediato", "Enfriar la zona con agua corriente fresca por 15-20 minutos"],
+                a: 2
+            },
+            {
+                q: "Si alguien se está atragantando (obstrucción total), no puede hablar y se lleva las manos al cuello, debes:",
+                options: ["Realizar la maniobra de Heimlich", "Darle pequeños golpes en la cabeza", "Acostarlo en el suelo boca arriba sin hacer nada más"],
+                a: 0
+            },
+            {
+                q: "¿Qué debes hacer si una persona tose fuertemente al atragantarse (obstrucción parcial)?",
+                options: ["Darle golpes fuertes en la espalda inmediatamente", "Animarla a que siga tosiendo vigorosamente", "Realizar maniobra de Heimlich de una vez"],
+                a: 1
+            },
+            {
+                q: "Si sospechas de una fractura en un brazo, la regla general de inmovilización es:",
+                options: ["Tratar de enderezar el hueso antes de entablillar", "Inmovilizar la extremidad en la posición en la que fue encontrada", "Pedirle que mueva el brazo rápidamente"],
+                a: 1
+            },
+            {
+                q: "¿Qué técnica se utiliza para comprobar si una víctima inconsciente está respirando?",
+                options: ["Técnica VOS (Ver, Oír, Sentir)", "Medirle la presión arterial", "Hacerle preguntas en voz alta"],
+                a: 0
+            },
+            {
+                q: "Durante una RCP con ventilaciones (boca a boca) realizada por alguien entrenado, ¿cuál es la relación correcta?",
+                options: ["15 compresiones por 2 ventilaciones", "30 compresiones por 2 ventilaciones", "50 compresiones por 5 ventilaciones"],
+                a: 1
+            },
+            {
+                q: "Si hay una fractura abierta (hueso expuesto), ¿cuál es el procedimiento correcto?",
+                options: ["Hacer presión fuerte y directa sobre el hueso expuesto", "Lavar el hueso con alcohol", "Cubrir con apósitos estériles sin presionar el hueso e inmovilizar"],
+                a: 2
+            },
+            {
+                q: "¿Qué se debe evaluar primero al llegar a la escena de una emergencia (según la 'P' de PAS)?",
+                options: ["El pulso de la víctima", "Si la escena es segura para el auxiliador y la víctima", "La edad del paciente"],
+                a: 1
+            },
+            {
+                q: "Si una persona sufre una amputación o herida muy grave con sangrado masivo en un brazo que no se detiene con presión directa, ¿cuál es el siguiente paso?",
+                options: ["Colocar un torniquete 5-7 cm por encima de la herida", "Darle a beber agua fría", "Esperar 15 minutos presionando suavemente"],
+                a: 0
+            },
+            {
+                q: "¿Cuál de estos elementos NO debe aplicarse en una quemadura?",
+                options: ["Agua fría corriente", "Apósitos estériles secos", "Crema dental o aceites"],
+                a: 2
+            }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+        const passingScore = 0.75; // 75% o más para aprobar (12/15)
+
+        const els = {
+            sales: document.getElementById('view-sales-page'),
+            quiz: document.getElementById('view-quiz-app'),
+            checkout: document.getElementById('view-checkout'),
+            fail: document.getElementById('view-fail'),
+            qText: document.getElementById('q-text'),
+            qOptions: document.getElementById('q-options'),
+            qCurrent: document.getElementById('q-current'),
+            progress: document.getElementById('progress-bar'),
+            btnNext: document.getElementById('btn-next'),
+            feedback: document.getElementById('feedback-area')
+        };
+
+        function exitQuiz() {
+            if (confirm("¿Estás seguro de salir del examen? Tu progreso se perderá.")) {
+                switchView('sales');
+            }
+        }
+
+        function switchView(viewName) {
+            els.sales.classList.add('hidden-section');
+            els.quiz.classList.add('hidden-section');
+            els.checkout.classList.add('hidden-section');
+            els.fail.classList.add('hidden-section');
+            
+            // Map the internal name to the HTML element id
+            let viewId = 'view-' + viewName;
+            if (viewName === 'sales') viewId = 'view-sales-page';
+            if (viewName === 'quiz') viewId = 'view-quiz-app';
+            
+            document.getElementById(viewId).classList.remove('hidden-section');
+            window.scrollTo(0, 0);
+        }
+
+        function startQuizFlow() {
+            currentIdx = 0;
+            score = 0;
+            switchView('quiz');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentIdx];
+            els.qText.innerText = q.q;
+            els.qCurrent.innerText = currentIdx + 1;
+            els.progress.style.width = ((currentIdx / questions.length) * 100) + "%";
+
+            els.qOptions.innerHTML = '';
+            els.feedback.className = 'hidden';
+            els.btnNext.disabled = true;
+            els.btnNext.className = "w-full bg-slate-200 text-slate-400 font-bold py-4 rounded-xl transition-all flex justify-center items-center text-lg cursor-not-allowed";
+            els.btnNext.innerHTML = 'Selecciona una opción';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-5 rounded-xl border-2 border-slate-100 bg-white hover:border-red-200 hover:bg-red-50 text-slate-700 font-medium active:scale-[0.98] transition-all text-base md:text-lg";
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(btn, idx, q.a);
+                els.qOptions.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(btn, idx, correct) {
+            const opts = els.qOptions.querySelectorAll('button');
+            opts.forEach(b => b.disabled = true);
+
+            els.feedback.classList.remove('hidden');
+
+            if (idx === correct) {
+                score++;
+                btn.className = "w-full text-left p-5 rounded-xl border-2 border-green-500 bg-green-50 text-green-800 font-bold text-base md:text-lg shadow-sm";
+                els.feedback.innerHTML = '<i class="fas fa-check-circle mr-2"></i> ¡Respuesta Correcta!';
+                els.feedback.className = "block p-4 rounded-xl bg-green-100 text-green-800 font-bold text-center mb-6 text-base shadow-inner";
+            } else {
+                btn.className = "w-full text-left p-5 rounded-xl border-2 border-red-500 bg-red-50 text-red-800 font-bold text-base md:text-lg shadow-sm";
+                els.feedback.innerHTML = '<i class="fas fa-times-circle mr-2"></i> Respuesta Incorrecta';
+                els.feedback.className = "block p-4 rounded-xl bg-red-100 text-red-800 font-bold text-center mb-6 text-base shadow-inner";
+                
+                // Highlight correct answer
+                opts[correct].className = "w-full text-left p-5 rounded-xl border-2 border-green-400 bg-green-50 text-green-700 opacity-80 mt-2 text-base md:text-lg";
+            }
+
+            els.btnNext.disabled = false;
+            els.btnNext.className = "w-full bg-red-500 text-white font-bold py-4 rounded-xl shadow-lg hover:bg-red-600 transition-all cursor-pointer text-lg flex justify-center items-center gap-2";
+            els.btnNext.innerHTML = 'Continuar <i class="fas fa-arrow-right"></i>';
+        }
+
+        function nextQuestion() {
+            currentIdx++;
+            if (currentIdx < questions.length) {
+                loadQuestion();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                if ((score / questions.length) >= passingScore) {
+                    // Aprueba
+                    fbq('track', 'Lead', { content_name: 'Examen Aprobado Diplomado Primeros Auxilios', value: 80000, currency: 'COP' });
+                    switchView('checkout');
+                } else {
+                    // Falla
+                    switchView('fail');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
