@@ -612,6 +612,15 @@
                     </div>
 
                     <div class="field-group">
+                        <label>Celular / WhatsApp <span class="req">*</span></label>
+                        <div class="input-wrap">
+                            <i class="fas fa-phone input-icon"></i>
+                            <input type="tel" id="user-phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Ej: 3101234567" class="input-pro" />
+                        </div>
+                        <p class="text-xs text-slate-400 mt-1.5 ml-1">Por aquí te confirmamos tu certificado.</p>
+                    </div>
+
+                    <div class="field-group">
                         <label>Correo Electrónico <span class="req">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-envelope input-icon"></i>
@@ -1273,7 +1282,8 @@
             leadCreated: false,
             leadId: null,
             leadProposed: false,
-            userData: { type: '', num: '', name: '', email: '' },
+            leadEventId: null,
+            userData: { type: '', num: '', name: '', phone: '', email: '' },
             quiz: { currentIdx: 0, score: 0 }
         };
 
@@ -1308,6 +1318,29 @@
             }).catch(() => {});
         }
 
+        // --- META: helpers para fbc/fbp y deduplicación con la Conversions API ---
+        function getCookie(name) {
+            const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+            return m ? decodeURIComponent(m.pop()) : '';
+        }
+        // _fbc: si no existe la cookie pero llega ?fbclid= en la URL, lo construimos.
+        function getFbc() {
+            const cookie = getCookie('_fbc');
+            if (cookie) return cookie;
+            const fbclid = new URLSearchParams(window.location.search).get('fbclid');
+            return fbclid ? 'fb.1.' + Date.now() + '.' + fbclid : '';
+        }
+        function getFbp() { return getCookie('_fbp'); }
+        // event_id estable por lead: se comparte entre el Pixel (navegador) y la CAPI (servidor)
+        // para que Meta deduplique el mismo evento 'Lead'.
+        function getLeadEventId() {
+            if (!state.leadEventId) {
+                state.leadEventId = 'lead-' + Date.now() + '-' + Math.random().toString(36).slice(2, 10);
+                saveState();
+            }
+            return state.leadEventId;
+        }
+
         // --- CRM LEAD (se crea una sola vez al completar el formulario) ---
         function createCrmLead() {
             if (state.leadCreated) return;
@@ -1321,11 +1354,15 @@
                 tipo_documento: u.type,
                 numero_documento: u.num,
                 empresa: '',
-                telefono: '',
+                telefono: u.phone || '',
                 email: u.email,
                 origen: 'WEB',
                 valor_estimado: 25000,
-                notas: `Certificado Manipulación de Alimentos | Examen aprobado`
+                notas: `Certificado Manipulación de Alimentos | Examen aprobado`,
+                // Datos para la Conversions API (server-side) de Meta:
+                fbc: getFbc(),
+                fbp: getFbp(),
+                event_id: getLeadEventId()
             };
 
             fetch(CRM_LEADS_URL, {
@@ -1414,6 +1451,7 @@
                 document.getElementById('user-doctype').value = state.userData.type;
                 document.getElementById('user-docnum').value = state.userData.num;
                 document.getElementById('user-fullname').value = state.userData.name;
+                document.getElementById('user-phone').value = state.userData.phone || '';
                 document.getElementById('user-email').value = state.userData.email;
             }
             switchView(state.view);
@@ -1521,7 +1559,8 @@
             if (percent >= 0.75) {
                 state.view = 'view-registration';
                 trackEvent('quiz_passed', { score: state.quiz.score + "/10" });
-                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 25000, currency: 'COP' });
+                // eventID compartido con la Conversions API (server-side) para deduplicar
+                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 25000, currency: 'COP' }, { eventID: getLeadEventId() });
             } else {
                 state.view = 'view-fail';
                 trackEvent('quiz_failed', { score: state.quiz.score + "/10" });
@@ -1536,6 +1575,7 @@
                 type: document.getElementById('user-doctype').value,
                 num: document.getElementById('user-docnum').value,
                 name: document.getElementById('user-fullname').value,
+                phone: document.getElementById('user-phone').value,
                 email: document.getElementById('user-email').value
             };
             saveState();
