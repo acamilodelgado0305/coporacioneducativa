@@ -499,6 +499,30 @@
         .pay-method-info { flex: 1; min-width: 0; }
         .pay-method-name { font-weight: 700; font-size: 14px; color: #1e293b; line-height: 1.2; }
         .pay-method-sub { font-size: 11.5px; color: #64748b; margin-top: 2px; }
+        .pay-method.recommended {
+            border: 1.5px solid #0158AD !important;
+            border-radius: 12px;
+            background: #f5f9ff;
+            position: relative;
+            padding: 13px 12px;
+            margin: 10px 0;
+        }
+        .pay-method.recommended:hover { background: #eef5ff; }
+        .pay-method-badge {
+            position: absolute;
+            top: -9px;
+            right: 14px;
+            background: #0158AD;
+            color: #fff;
+            font-size: 9px;
+            font-weight: 800;
+            letter-spacing: 0.4px;
+            padding: 2px 9px;
+            border-radius: 999px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 5px rgba(1,88,173,0.3);
+            white-space: nowrap;
+        }
     
         /* Bottom sheet para móvil */
         @media (max-width: 480px) {
@@ -871,21 +895,22 @@
                 <div id="pay-select-step" class="px-5 pb-8 pt-0">
                     <p class="font-bold text-slate-800 text-sm mb-2.5">Método de Pago</p>
                     <div class="border-t border-b border-slate-200 divide-y divide-slate-200">
+                        <div class="pay-method recommended" data-method="wompi" onclick="selectPayMethod('wompi')">
+                            <span class="pay-method-badge">Recomendado</span>
+                            <span class="pay-method-radio"></span>
+                            <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="pay-method-logo" alt="Nequi">
+                            <div class="pay-method-info">
+                                <p class="pay-method-name">Wompi-Nequi</p>
+                                <p class="pay-method-sub">Wompi pasarela de pagos</p>
+                            </div>
+                        </div>
+
                         <div class="pay-method" data-method="pse" onclick="selectPayMethod('pse')">
                             <span class="pay-method-radio"></span>
                             <img src="https://images.ctfassets.net/ex6ts2p2j0ib/33ZB3pSE7aWIQ6qUTvGEid/cc6bd9d687b772c39657b0af40f174c9/banner-50__pse---new--logo.png?w=3840&q=75" class="pay-method-logo" alt="PSE">
                             <div class="pay-method-info">
                                 <p class="pay-method-name">PSE ACH</p>
                                 <p class="pay-method-sub">Pagos Seguros en Línea</p>
-                            </div>
-                        </div>
-
-                        <div class="pay-method" data-method="wompi" onclick="selectPayMethod('wompi')">
-                            <span class="pay-method-radio"></span>
-                            <img src="https://play-lh.googleusercontent.com/pXKMtJ7L_qlXfPFfLMXnKMFB_RLwD__i_45MAF-885qChVAtFm5FUjyvW_YWZhTqzBMQtj0FYVPCd9DCh-kzVJE=w240-h480-rw" class="pay-method-logo" alt="Wompi">
-                            <div class="pay-method-info">
-                                <p class="pay-method-name">Wompi</p>
-                                <p class="pay-method-sub">Wompi pasarela de pagos</p>
                             </div>
                         </div>
 
@@ -1274,7 +1299,7 @@
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
         const CRM_LEADS_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/crm/leads/publico';
         const CRM_BUSINESS_ID = 3;
-        const WOMPI_CHECKOUT_URL = 'https://checkout.nequi.wompi.co/l/AWUVic';
+        const WOMPI_CHECKOUT_URL = 'https://checkout.nequi.wompi.co/l/8c4kg6';
 
         let state = {
             view: 'view-quiz-app',
@@ -1466,7 +1491,7 @@
         function resetPaySelectStep() {
             document.getElementById('pay-select-step').classList.remove('hidden');
             document.getElementById('pay-detail-step').classList.add('hidden');
-            selectPayMethod('pse');
+            selectPayMethod('wompi');
         }
 
         function loadQuestionUI() {
