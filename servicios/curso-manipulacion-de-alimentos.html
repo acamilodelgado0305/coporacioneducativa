@@ -921,7 +921,7 @@
                             </div>
                             <div class="pay-method-info">
                                 <p class="pay-method-name">Pagar por transferencia</p>
-                                <p class="pay-method-sub">Nequi, Daviplata o Bancolombia · Vía WhatsApp</p>
+                                <p class="pay-method-sub">Nequi, Daviplata o Bancolombia · Cuentas al instante</p>
                             </div>
                         </div>
                     </div>
@@ -1724,7 +1724,13 @@
             if (!selectedPayMethod) return;
 
             if (selectedPayMethod === 'transferencia') {
-                goToWhatsApp();
+                // El cliente decide pagar por transferencia: le mostramos las
+                // cuentas al instante. Lo único que hará en WhatsApp es enviar
+                // el comprobante después de pagar.
+                trackEvent('payment_initiated', { metodo: 'Transferencia' });
+                markLeadAsProposal();
+                fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+                showTransferDetail();
                 return;
             }
 
@@ -1764,46 +1770,67 @@
             }
         };
 
-        function showPayDetail(method) {
-            const info = payMethodsInfo[method];
-            if (!info) return;
-            const waText = encodeURIComponent('Hola, aprobé el examen de manipulación y voy a pagar por ' + info.nombre + '. Adjunto comprobante.');
-            const logoHtml = info.logo
-                ? '<img src="' + info.logo + '" class="w-11 h-11 rounded-lg object-contain bg-slate-50 border border-slate-100 p-1 flex-shrink-0" alt="' + info.nombre + '">'
-                : '<div class="w-11 h-11 rounded-lg flex items-center justify-center flex-shrink-0" style="background:' + info.iconBg + '"><i class="fas ' + info.icon + ' text-white text-lg"></i></div>';
-            document.getElementById('pay-detail-content').innerHTML =
-                '<div class="flex items-center gap-3 mb-4">' +
-                    logoHtml +
-                    '<div><p class="font-bold text-slate-800 text-sm leading-tight">' + info.nombre + '</p>' +
-                    '<p class="text-xs text-slate-500">Transfiere <strong class="text-slate-700">$25.000</strong></p></div>' +
-                '</div>' +
-                '<div class="bg-slate-50 border border-slate-200 rounded-xl p-3 mb-4">' +
-                    '<p class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold mb-1.5">' + info.cuentaLabel + '</p>' +
-                    '<div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-lg px-3 py-2">' +
-                        '<span class="text-base font-mono font-bold text-slate-900 tracking-wide">' + info.cuenta + '</span>' +
-                        '<button id="pay-copy-btn" onclick="copyToClipboard(\'' + info.cuenta + '\', \'pay-copy-btn\')" class="text-[10px] bg-[#0158AD] hover:bg-[#0166c7] text-white font-bold px-3 py-1.5 rounded-md transition flex items-center gap-1 flex-shrink-0">' +
+        // Muestra las tres cuentas de transferencia (Nequi, Daviplata,
+        // Bancolombia) de una vez. El cliente copia la que prefiera, paga y
+        // solo tiene que enviar el comprobante por WhatsApp.
+        function showTransferDetail() {
+            const u = state.userData || {};
+            const doc = ((u.type || '') + ' ' + (u.num || '')).trim();
+            const accounts = ['nequi', 'daviplata', 'bancolombia'];
+
+            const cardsHtml = accounts.map(key => {
+                const info = payMethodsInfo[key];
+                const btnId = 'tdetail-copy-' + key;
+                return '' +
+                    '<div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2.5">' +
+                        '<img src="' + info.logo + '" class="w-9 h-9 rounded-lg object-contain bg-slate-50 border border-slate-100 p-1 flex-shrink-0" alt="' + info.nombre + '">' +
+                        '<div class="min-w-0 flex-1">' +
+                            '<p class="text-[11px] font-bold text-slate-800 leading-tight">' + info.nombre + '</p>' +
+                            '<p class="text-[10px] text-slate-400 leading-tight">' + info.cuentaLabel + '</p>' +
+                            '<p class="text-sm font-mono font-bold text-slate-900 tracking-wide leading-tight mt-0.5">' + info.cuenta + '</p>' +
+                        '</div>' +
+                        '<button id="' + btnId + '" onclick="copyToClipboard(\'' + info.cuenta + '\', \'' + btnId + '\')" class="text-[10px] bg-[#0158AD] hover:bg-[#0166c7] text-white font-bold px-3 py-2 rounded-md transition flex items-center gap-1 flex-shrink-0">' +
                             '<i class="far fa-copy"></i> Copiar</button>' +
-                    '</div>' +
+                    '</div>';
+            }).join('');
+
+            const waMsg = '¡Hola! Ya realicé el pago de mi certificado de Manipulación de Alimentos por transferencia ✅\n' +
+                'Adjunto mi comprobante. 📎\n\n' +
+                'Mis datos:\n' +
+                '• Nombre: ' + (u.name || '') + '\n' +
+                '• Documento: ' + doc + '\n' +
+                '• Correo: ' + (u.email || '');
+            const waText = encodeURIComponent(waMsg);
+
+            document.getElementById('pay-detail-content').innerHTML =
+                '<div class="mb-3">' +
+                    '<p class="font-black text-slate-800 text-sm leading-tight">Paga por transferencia</p>' +
+                    '<p class="text-xs text-slate-500 mt-0.5">Transfiere <strong class="text-slate-700">$25.000</strong> a la cuenta que prefieras</p>' +
                 '</div>' +
+                '<div class="space-y-2 mb-4">' + cardsHtml + '</div>' +
                 '<div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-3.5 space-y-2.5 mb-4">' +
-                    '<p class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fas fa-info-circle text-emerald-600"></i> Cómo reportar tu pago:</p>' +
+                    '<p class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fas fa-info-circle text-emerald-600"></i> Último paso</p>' +
                     '<div class="space-y-2 text-xs text-slate-600">' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span><p>Transfiere <strong>$25.000</strong> a la cuenta de arriba.</p></div>' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span><p>Toma una captura del comprobante.</p></div>' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span><p>Envíalo por WhatsApp para validar y recibir tu certificado.</p></div>' +
+                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span><p>Transfiere <strong>$25.000</strong> a la cuenta que prefieras.</p></div>' +
+                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span><p>Toma la captura o guarda el comprobante.</p></div>' +
+                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span><p>Envíalo por WhatsApp con el botón de abajo. <strong>¡Eso es todo!</strong></p></div>' +
                     '</div>' +
                 '</div>' +
-                '<a href="https://wa.me/573107941580?text=' + waText + '" target="_blank" onclick="trackEvent(\'whatsapp_comprobante\', { metodo: \'' + method + '\' })" class="w-full flex flex-col items-center justify-center gap-0.5 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg no-underline">' +
-                    '<span class="font-black text-sm flex items-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Enviar comprobante por WhatsApp</span>' +
+                '<a href="https://wa.me/573107941580?text=' + waText + '" target="_blank" onclick="trackEvent(\'whatsapp_comprobante\', { metodo: \'transferencia\' })" class="w-full flex flex-col items-center justify-center gap-0.5 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg no-underline">' +
+                    '<span class="font-black text-sm flex items-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Ya pagué, enviar comprobante</span>' +
                     '<span class="text-[10px] text-white/95">Validación inmediata · Certificado hoy</span>' +
                 '</a>';
             document.getElementById('pay-select-step').classList.add('hidden');
             document.getElementById('pay-detail-step').classList.remove('hidden');
+            // Ocultamos la barra inferior: el CTA ahora es el botón de WhatsApp del panel
+            document.getElementById('payment-action-bar').classList.add('hidden-section');
         }
 
         function backToPaySelect() {
             document.getElementById('pay-detail-step').classList.add('hidden');
             document.getElementById('pay-select-step').classList.remove('hidden');
+            // Restauramos la barra inferior con el botón "Continuar"
+            document.getElementById('payment-action-bar').classList.remove('hidden-section');
         }
 
         function startNewProcess() {
