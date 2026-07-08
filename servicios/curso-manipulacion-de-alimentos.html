@@ -758,20 +758,50 @@
                         </div>
                     </div>
 
-                    <!-- Certificado bloqueado visual -->
-                    <div class="relative bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col items-center justify-center text-center overflow-hidden mb-2">
-                        <div class="absolute inset-0 opacity-40 blur-[1px] pointer-events-none flex flex-col items-center justify-center" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 10px, #e2e8f0 10px, #e2e8f0 11px); background-size: 100% 20px;">
-                            <i class="fas fa-certificate text-5xl text-slate-300 mb-2"></i>
-                            <div class="w-2/3 h-2 bg-slate-300 rounded mb-2"></div>
-                            <div class="w-1/2 h-2 bg-slate-300 rounded"></div>
+                    <!-- Aclaración de marca: quién es la plataforma y quién emite (contexto desde el primer momento) -->
+                    <div class="bg-blue-50 border border-blue-100 rounded-xl px-4 py-3 flex items-start gap-3 mb-2">
+                        <div class="w-8 h-8 rounded-lg bg-[#0158AD] flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-circle-info text-white text-sm"></i>
                         </div>
-                        
-                        <div class="relative z-10 flex flex-col items-center">
-                            <div class="w-10 h-10 bg-white rounded-full shadow flex items-center justify-center mb-2">
-                                <i class="fas fa-lock text-[#0158AD] text-lg"></i>
+                        <div class="text-xs leading-snug">
+                            <p class="text-slate-700"><strong class="text-[#0158AD]">CertiTec</strong> es la plataforma donde te inscribes y pagas.</p>
+                            <p class="text-slate-600 mt-0.5">Tu certificado lo <strong class="text-slate-800">emite y firma Alianza Capacitarte</strong>, entidad de formación avalada.</p>
+                        </div>
+                    </div>
+
+                    <!-- Vista previa del documento REAL que recibirás -->
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-2">
+                        <div class="bg-slate-50 border-b border-slate-200 px-4 py-2.5 flex items-center justify-between">
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
+                                <i class="fas fa-eye text-[#0158AD] text-xs"></i> Así se ve tu certificado
+                            </span>
+                            <span class="text-[9px] font-bold text-[#0158AD] bg-blue-50 border border-blue-100 px-2 py-0.5 rounded-full uppercase tracking-wide">Vista previa</span>
+                        </div>
+                        <div class="p-4 grid grid-cols-2 gap-3 items-start">
+                            <div class="relative">
+                                <img src="../preview_certificado.png.png" alt="Certificado de Manipulación de Alimentos - Alianza Capacitarte" class="w-full rounded-lg border border-slate-200 shadow-sm" loading="lazy">
+                                <span class="absolute bottom-1.5 left-1.5 bg-black/60 text-white text-[8px] font-semibold px-1.5 py-0.5 rounded">Certificado PDF</span>
                             </div>
-                            <h3 class="text-sm font-black text-slate-800 mb-0.5">¡Tu certificado está listo!</h3>
-                            <p class="text-[11px] text-slate-600 font-medium max-w-[250px] leading-snug">Comienza el pago para desbloquear y descargar tu documento oficial en PDF.</p>
+                            <div class="flex flex-col gap-2">
+                                <div class="relative">
+                                    <img src="../preview_carnet.png.png" alt="Carnet de Manipulación de Alimentos - Alianza Capacitarte" class="w-full rounded-lg border border-slate-200 shadow-sm" loading="lazy">
+                                    <span class="absolute bottom-1.5 left-1.5 bg-black/60 text-white text-[8px] font-semibold px-1.5 py-0.5 rounded">Carnet</span>
+                                </div>
+                                <p class="text-[10px] text-slate-500 leading-snug">
+                                    <i class="fas fa-user-check text-[#0158AD] mr-1"></i> Se emite <strong class="text-slate-700">a tu nombre y documento</strong> al confirmar el pago. Lo recibes hoy en PDF.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Garantía de devolución (reversión de riesgo) -->
+                    <div class="flex items-start gap-3 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 mb-1">
+                        <div class="w-9 h-9 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-hand-holding-dollar text-white text-sm"></i>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold text-emerald-800 leading-tight">Garantía de devolución del 100%</p>
+                            <p class="text-xs text-emerald-700/80 mt-0.5 leading-snug">Si no recibes tu certificado el mismo día del pago, te devolvemos todo tu dinero.</p>
                         </div>
                     </div>
 
@@ -800,7 +830,7 @@
 
                         <!-- OTRAS FORMAS DE PAGO (MODAL) -->
                         <div class="pt-2">
-                            <button onclick="openPaymentSelectModal()" class="w-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold py-3.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-sm">
+                            <button onclick="continueToPayMethods()" class="w-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 font-bold py-3.5 px-4 rounded-xl transition-all flex items-center justify-center gap-2 text-sm shadow-sm">
                                 <i class="fas fa-wallet text-[#0158AD]"></i> Ver otras formas de pago (PSE, Tarjeta, Transferencia)
                             </button>
                         </div>
@@ -855,6 +885,77 @@
                             <i class="fas fa-certificate text-[#0158AD] text-sm mb-1"></i>
                             <span class="text-[9px] font-bold text-slate-700">Validez Oficial</span>
                             <span class="text-[7px] text-slate-400">Resolución 2674</span>
+                        </div>
+                    </div>
+
+                    <!-- ¿Quién respalda tu certificado? (legitimidad verificable) -->
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                        <div class="bg-slate-50 border-b border-slate-200 px-4 py-2.5 flex items-center gap-2">
+                            <i class="fas fa-shield-halved text-[#0158AD] text-xs"></i>
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Quién emite y respalda tu certificado</span>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5 text-xs">
+                            <div class="flex items-start gap-2.5">
+                                <i class="fas fa-certificate text-[#0158AD] mt-0.5 w-3.5 text-center flex-shrink-0"></i>
+                                <p class="text-slate-600">Emitido por <strong class="text-slate-800">Alianza Capacitarte</strong> · <span class="font-mono text-slate-500">NIT 712.121.85-2</span></p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i class="fas fa-landmark text-[#0158AD] mt-0.5 w-3.5 text-center flex-shrink-0"></i>
+                                <p class="text-slate-600"><strong class="text-slate-800">Avalado por la Seccional de Salud de Antioquia</strong> · Registro CSO-2018</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i class="fas fa-user-tie text-[#0158AD] mt-0.5 w-3.5 text-center flex-shrink-0"></i>
+                                <p class="text-slate-600">Firmado por profesional con <strong class="text-slate-800">Tarjeta Profesional vigente</strong> (T.P. 54254333632 NTS)</p>
+                            </div>
+                            <div class="flex items-start gap-2.5">
+                                <i class="fas fa-gavel text-[#0158AD] mt-0.5 w-3.5 text-center flex-shrink-0"></i>
+                                <p class="text-slate-600">Conforme a la <strong class="text-slate-800">Resolución 2674 de 2013</strong> y el Decreto 3075 de 1997 · Intensidad 10 horas</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ====== TESTIMONIOS (reales — comentarios públicos de nuestros anuncios en Facebook) ====== -->
+                    <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm">
+                        <div class="bg-slate-50 border-b border-slate-200 px-4 py-2.5 flex items-center justify-between gap-2">
+                            <span class="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-2">
+                                <i class="fas fa-comments text-[#0158AD] text-xs"></i> Lo que dicen quienes ya se certificaron
+                            </span>
+                            <span class="text-[9px] text-slate-400 flex items-center gap-1 flex-shrink-0"><i class="fab fa-facebook text-[#1877F2]"></i> Comentarios reales</span>
+                        </div>
+                        <div class="px-4 py-3 space-y-2.5">
+                            <div class="border border-slate-200 rounded-lg p-3 bg-slate-50/50">
+                                <div class="flex items-center gap-1 text-amber-400 mb-1 text-[11px]">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 italic">"Gracias, sí me llegó a mi correo. Excelente servicio 🙏"</p>
+                                <p class="text-[11px] mt-1.5 flex items-center gap-1.5">
+                                    <span class="font-semibold text-slate-700">María Antonia Delgado</span>
+                                    <i class="fab fa-facebook text-[#1877F2] text-[10px]"></i>
+                                    <span class="text-slate-400">Comentario verificado</span>
+                                </p>
+                            </div>
+                            <div class="border border-slate-200 rounded-lg p-3 bg-slate-50/50">
+                                <div class="flex items-center gap-1 text-amber-400 mb-1 text-[11px]">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 italic">"Uy sí, yo también lo hice y me lo entregaron al momento."</p>
+                                <p class="text-[11px] mt-1.5 flex items-center gap-1.5">
+                                    <span class="font-semibold text-slate-700">Sol Ángel Aguirre</span>
+                                    <i class="fab fa-facebook text-[#1877F2] text-[10px]"></i>
+                                    <span class="text-slate-400">Comentario verificado</span>
+                                </p>
+                            </div>
+                            <div class="border border-slate-200 rounded-lg p-3 bg-slate-50/50">
+                                <div class="flex items-center gap-1 text-amber-400 mb-1 text-[11px]">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-xs text-slate-600 italic">"Gracias, es excelente. Yo lo obtuve."</p>
+                                <p class="text-[11px] mt-1.5 flex items-center gap-1.5">
+                                    <span class="font-semibold text-slate-700">Clauss Clauss</span>
+                                    <i class="fab fa-facebook text-[#1877F2] text-[10px]"></i>
+                                    <span class="text-slate-400">Comentario verificado</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -1467,6 +1568,12 @@
                 paymentHeroImg.classList.add('hidden-section');
             }
 
+            // El título superior del curso es redundante en el checkout: ya tiene su
+            // propio banner "Examen aprobado" y la aclaración de marca encima de la vista previa.
+            if (viewName === 'view-checkout') {
+                pageHeader.classList.add('hidden-section');
+            }
+
             window.scrollTo(0,0);
         }
 
@@ -1606,8 +1713,12 @@
             saveState();
             trackEvent('registration_submitted');
             createCrmLead();
+            // Flujo unificado: al terminar el registro llevamos al usuario a la
+            // vista de checkout (resumen + revisualización del certificado +
+            // confianza + opciones de pago), en vez del modal de confirmación suelto.
+            state.view = 'view-checkout';
+            saveState();
             applyStateToUI();
-            openPaymentSelectModal();
         }
 
         // El botón "Continuar" del modal de confirmación lleva al usuario a WhatsApp con sus datos
@@ -1697,10 +1808,12 @@
         }
 
         function backToSummary() {
-            state.view = 'view-registration';
+            // El botón "atrás" del selector de métodos vuelve al checkout unificado
+            state.view = 'view-checkout';
             saveState();
-            switchView('view-registration');
-            openPaymentSelectModal();
+            switchView('view-checkout');
+            populateCheckoutEmail();
+            startCheckoutTimer();
         }
 
         function closePaymentSelectModal() {
