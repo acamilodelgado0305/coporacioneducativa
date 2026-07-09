@@ -314,42 +314,156 @@
         }
         .trust-item i { color: #0158AD; font-size: 10px; }
 
-        /* ── Quiz opciones ── */
+        /* ── Quiz estilo moderno (menos bordes saturados, más limpio) ── */
+        .quiz-card {
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            margin-bottom: 16px;
+        }
+        .quiz-question {
+            display: block;
+            font-size: 15px;
+            font-weight: 700;
+            color: #334155;
+            line-height: 1.4;
+            margin-bottom: 14px;
+        }
+        /* Como etiqueta de campo (formulario de datos), un poco más compacto */
+        .quiz-card label.quiz-question { margin-bottom: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.025em; color: #64748b; }
         .opt-btn {
             width: 100%;
             text-align: left;
-            padding: 14px 16px;
-            border-radius: 10px;
-            border: 1.5px solid #e2e8f0;
-            background: #fff;
+            padding: 14px 18px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            background: #f8fafc;
             display: flex;
             align-items: center;
+            gap: 14px;
             font-weight: 500;
             font-size: 14px;
-            color: #334155;
-            transition: all 0.15s;
+            color: #475569;
+            transition: all 0.2s;
             cursor: pointer;
         }
         .opt-btn:hover:not(:disabled) {
-            border-color: #93c5fd;
-            background: #eff6ff;
-        }
-        .opt-btn:hover:not(:disabled) .opt-circle {
-            border-color: #0158AD;
-            background: #dbeafe;
+            border-color: #cbd5e1;
+            background: #f1f5f9;
         }
         .opt-circle {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             border: 2px solid #cbd5e1;
-            margin-right: 12px;
             flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.15s;
-            font-size: 11px;
+            transition: all 0.2s;
+        }
+        .opt-btn:hover:not(:disabled) .opt-circle {
+            border-color: #94a3b8;
+        }
+        .quiz-next-btn {
+            background: #0158AD;
+            color: #fff;
+            font-weight: 700;
+            font-size: 14px;
+            padding: 12px 24px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            transition: background 0.2s, transform 0.1s;
+            box-shadow: 0 4px 6px -1px rgba(1, 88, 173, 0.2);
+        }
+        .quiz-next-btn:hover:not(:disabled) { background: #01467f; }
+        .quiz-next-btn:active:not(:disabled) { transform: scale(0.98); }
+        .quiz-next-btn:disabled { background: #cbd5e1; cursor: not-allowed; box-shadow: none; color: #94a3b8; }
+        .opt-btn.selected {
+            border-color: #0158AD;
+            background: #eff6ff;
+            color: #0158AD;
+            font-weight: 600;
+            box-shadow: 0 0 0 1px #0158AD;
+        }
+        .opt-btn.selected .opt-circle { border-color: #0158AD; }
+        .opt-btn.selected .opt-circle::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #0158AD;
+        }
+        .quiz-card.is-missing {
+            border-color: #fca5a5;
+            background: #fef2f2;
+        }
+        .q-required {
+            display: none;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #ef4444;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        .quiz-card.is-missing .q-required { display: flex; }
+        .quiz-req-star { color: #ef4444; font-weight: 700; margin-left: 2px; }
+
+        /* ── Formulario de datos: cabecera de sección + campos estilo moderno ── */
+        .reg-section-head {
+            background: transparent;
+            border: none;
+            padding: 0 0 16px 0;
+            margin-bottom: 0;
+            box-shadow: none;
+        }
+        .reg-section-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1e293b;
+            line-height: 1.3;
+        }
+        .reg-section-desc {
+            font-size: 14px;
+            color: #64748b;
+            margin-top: 4px;
+            line-height: 1.5;
+        }
+        .forms-input {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 12px;
+            background: #f8fafc;
+            padding: 12px 16px;
+            font-size: 14px;
+            color: #334155;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .forms-input::placeholder { color: #94a3b8; font-weight: 400; }
+        .forms-input:focus { outline: none; border-color: #0158AD; background: #ffffff; box-shadow: 0 0 0 3px rgba(1, 88, 173, 0.1); }
+        .forms-select {
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            padding-right: 36px;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 14px;
+        }
+        .forms-help {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         /* ── Modal respuesta incorrecta ── */
@@ -589,104 +703,100 @@
 
             <!-- ── REGISTRO ── -->
             <div id="view-registration" class="hidden-section">
+                <div class="px-5 md:px-7 pt-5 pb-6">
 
-                <!-- Banner aprobado -->
-                <div class="flex items-center gap-3 bg-blue-50 border-b border-blue-100 px-5 py-3">
-                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-check text-[#0158AD] text-sm"></i>
-                    </div>
-                    <div>
-                        <p class="text-[#013d7a] font-bold text-sm leading-tight">¡Examen aprobado!</p>
-                        <p class="text-[#0158AD] text-xs mt-0.5">Completa tus datos para recibir tu certificado</p>
-                    </div>
-                </div>
-
-                <div class="p-7 md:p-9">
-                <form id="reg-form" onsubmit="submitRegistration(event)" class="space-y-4">
-
-                    <div class="field-group">
-                        <label>Tipo de Documento <span class="req">*</span></label>
-                        <div class="input-wrap">
-                            <i class="fas fa-id-card input-icon"></i>
-                            <select id="user-doctype" required class="input-pro cursor-pointer">
-                                <option value="" disabled selected>Selecciona...</option>
-                                <option value="CC">Cédula de Ciudadanía</option>
-                                <option value="TI">Tarjeta de Identidad</option>
-                                <option value="CE">Cédula de Extranjería</option>
-                                <option value="PPT">Permiso por Protección Temporal (PPT)</option>
-                                <option value="PAS">Pasaporte</option>
-                            </select>
+                    <!-- Cabecera de sección (nueva sección del formulario, estilo Google Forms) -->
+                    <div class="reg-section-head">
+                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-[#0158AD] px-2.5 py-1 rounded-full">
+                                <i class="fas fa-user-pen text-[10px]"></i> Sección 1 de 2
+                            </span>
+                            <span class="text-[11px] font-semibold text-slate-400">Después: examen</span>
                         </div>
+                        <h2 class="reg-section-title">Tus datos para el certificado</h2>
+                        <p class="reg-section-desc">Completa tus datos y luego presenta el examen (8 preguntas). Recibe tu certificado hoy en tu correo.</p>
                     </div>
 
-                    <div class="field-group">
-                        <label>Número de Documento <span class="req">*</span></label>
-                        <div class="input-wrap">
-                            <i class="fas fa-hashtag input-icon"></i>
-                            <input type="number" id="user-docnum" required placeholder="Ej: 1090333444" class="input-pro" />
+                    <form id="reg-form" onsubmit="submitRegistration(event)">
+                        <div class="quiz-card space-y-5">
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="quiz-question" for="user-doctype">Tipo de documento <span class="quiz-req-star">*</span></label>
+                                    <select id="user-doctype" required class="forms-input forms-select">
+                                        <option value="" disabled selected>Elige una opción</option>
+                                        <option value="CC">Cédula de Ciudadanía</option>
+                                        <option value="TI">Tarjeta de Identidad</option>
+                                        <option value="CE">Cédula de Extranjería</option>
+                                        <option value="PPT">Permiso (PPT)</option>
+                                        <option value="PAS">Pasaporte</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="quiz-question" for="user-docnum">Número de documento <span class="quiz-req-star">*</span></label>
+                                    <input type="number" id="user-docnum" required placeholder="Tu número" class="forms-input" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="quiz-question" for="user-fullname">Nombre completo <span class="quiz-req-star">*</span></label>
+                                <input type="text" id="user-fullname" required placeholder="Tus nombres y apellidos" class="forms-input capitalize" />
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="quiz-question" for="user-phone">Celular / WhatsApp <span class="quiz-req-star">*</span></label>
+                                    <input type="tel" id="user-phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Ej: 3101234567" class="forms-input" />
+                                </div>
+
+                                <div>
+                                    <label class="quiz-question" for="user-email">Correo electrónico <span class="quiz-req-star">*</span></label>
+                                    <input type="email" id="user-email" required placeholder="ejemplo@correo.com" class="forms-input" />
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-3 mt-2 border-t border-slate-100">
+                                <button type="button" onclick="startNewProcess()" class="text-[12px] text-slate-400 hover:text-slate-600 transition flex items-center gap-1.5 font-semibold">
+                                    <i class="fas fa-rotate-left text-[10px]"></i> Reiniciar
+                                </button>
+                                <button type="submit" class="quiz-next-btn w-full md:w-auto justify-center">
+                                    Comenzar Examen <i class="fas fa-arrow-right text-xs ml-1.5"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="field-group">
-                        <label>Nombre Completo <span class="req">*</span></label>
-                        <div class="input-wrap">
-                            <i class="fas fa-user input-icon"></i>
-                            <input type="text" id="user-fullname" required placeholder="Nombres y Apellidos" class="input-pro capitalize" />
-                        </div>
-                    </div>
-
-                    <div class="field-group">
-                        <label>Celular / WhatsApp <span class="req">*</span></label>
-                        <div class="input-wrap">
-                            <i class="fas fa-phone input-icon"></i>
-                            <input type="tel" id="user-phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Ej: 3101234567" class="input-pro" />
-                        </div>
-                        <p class="text-xs text-slate-400 mt-1.5 ml-1">Por aquí te confirmamos tu certificado.</p>
-                    </div>
-
-                    <div class="field-group">
-                        <label>Correo Electrónico <span class="req">*</span></label>
-                        <div class="input-wrap">
-                            <i class="fas fa-envelope input-icon"></i>
-                            <input type="email" id="user-email" required placeholder="ejemplo@correo.com" class="input-pro" />
-                        </div>
-                        <p class="text-xs text-slate-400 mt-1.5 ml-1">Aquí recibirás tu certificado en PDF.</p>
-                    </div>
-
-                    <div class="pt-2">
-                        <button type="submit" class="btn-submit-main">
-                            <span>Continuar</span>
-                        </button>
-                    </div>
-                    
-                    <div class="pt-4 flex items-center justify-center">
-                        <button type="button" onclick="startNewProcess()" class="text-xs text-slate-400 hover:text-slate-600 transition flex items-center gap-1.5 hover:underline">
-                            <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
-                        </button>
-                    </div>
-
-                </form>
+                    </form>
                 </div>
             </div>
 
             <div id="view-quiz-app" class="flex flex-col h-full">
-                <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
-                    <span class="text-xs font-bold text-[#014a94] bg-blue-100 px-3 py-1 rounded-full border border-blue-200">
-                        PREGUNTA <span id="q-current">1</span>/8
-                    </span>
-                    <button onclick="resetApp()" class="text-xs text-gray-400 hover:text-red-500 underline">Reiniciar</button>
-                </div>
-                <div class="w-full bg-gray-200 h-1.5">
-                    <div id="progress-bar" class="bg-[#0158AD] h-full transition-all duration-500" style="width: 0%"></div>
+                <!-- Barra de progreso superior (estilo Forms) -->
+                <div class="w-full bg-slate-100 h-1.5">
+                    <div id="progress-bar" class="bg-[#0158AD] h-full rounded-r-full transition-all duration-500" style="width: 0%"></div>
                 </div>
 
-                <div class="p-8 md:p-10 flex-grow">
-                    <h3 id="q-text" class="text-xl font-bold text-slate-800 mb-6 leading-relaxed">Cargando pregunta...</h3>
-                    <div id="q-options" class="space-y-3"></div>
+                <div class="px-5 md:px-7 pt-5 pb-2 flex-grow">
+                    <!-- Encabezado del formulario -->
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="inline-flex items-center gap-1.5 text-[11px] font-bold text-[#0158AD] bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full">
+                            <i class="fas fa-list-check text-[10px]"></i> <span id="quiz-answered-count">0</span> de 8 respondidas
+                        </span>
+                        <button onclick="resetApp()" class="text-[11px] text-slate-400 hover:text-slate-600 transition flex items-center gap-1">
+                            <i class="fas fa-rotate-left text-[9px]"></i> Reiniciar
+                        </button>
+                    </div>
+
+                    <p class="text-[13px] text-slate-500 mb-4 px-0.5 leading-snug"><strong class="text-slate-700">Sección 2 de 2 · Examen.</strong> Responde las 8 preguntas y pulsa <strong class="text-slate-700">Finalizar</strong> para ver tu resultado.</p>
+
+                    <!-- Todas las preguntas en una sola vista (estilo Google Forms) -->
+                    <div id="q-list" class="space-y-4"></div>
                 </div>
 
-                <div class="p-6 bg-gray-50 border-t border-gray-100 flex justify-end">
-                    <button id="btn-next" onclick="nextQuestion()" disabled class="btn-action px-8 py-3 opacity-50 cursor-not-allowed shadow-md">Siguiente</button>
+                <div class="px-5 md:px-7 pb-6 pt-3 flex items-center justify-between border-t border-slate-100">
+                    <span class="text-[11px] text-slate-400 font-medium">Examen de certificación</span>
+                    <button id="btn-submit" onclick="submitQuiz()" class="quiz-next-btn">
+                        Finalizar <i class="fas fa-arrow-right text-xs ml-1.5"></i>
+                    </button>
                 </div>
             </div>
 
@@ -752,7 +862,7 @@
                                 <p class="text-[9px] text-slate-400 mt-0.5">Precio único · Sin costos ocultos</p>
                             </div>
                             <div class="text-right">
-                                <span class="text-2xl font-extrabold text-slate-900">$25.000</span>
+                                <span class="text-2xl font-extrabold text-slate-900">$22.000</span>
                                 <span class="text-xs text-slate-400 block font-normal">COP</span>
                             </div>
                         </div>
@@ -820,7 +930,7 @@
                                 <div class="flex items-center gap-3">
                                     <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
                                     <div class="flex-1 text-left">
-                                        <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — $25.000</p>
+                                        <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — $22.000</p>
                                         <p class="text-xs text-[#DA0063] font-bold leading-tight mt-0.5">Aprobación inmediata · RappiPay PSE</p>
                                     </div>
                                     <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
@@ -1015,14 +1125,30 @@
                             </div>
                         </div>
 
-                        <div class="pay-method" data-method="transferencia" onclick="selectPayMethod('transferencia')">
+                        <div class="pay-method" data-method="transfer_nequi" onclick="selectPayMethod('transfer_nequi')">
                             <span class="pay-method-radio"></span>
-                            <div class="pay-method-logo flex items-center justify-center bg-[#25D366]">
-                                <i class="fab fa-whatsapp text-white text-xl"></i>
-                            </div>
+                            <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="pay-method-logo object-contain border border-slate-100 p-0.5 bg-white" alt="Nequi">
                             <div class="pay-method-info">
-                                <p class="pay-method-name">Pagar por transferencia</p>
-                                <p class="pay-method-sub">Nequi, Daviplata o Bancolombia · Cuentas al instante</p>
+                                <p class="pay-method-name">Transferencia Nequi</p>
+                                <p class="pay-method-sub">Aprobación enviando comprobante</p>
+                            </div>
+                        </div>
+
+                        <div class="pay-method" data-method="transfer_daviplata" onclick="selectPayMethod('transfer_daviplata')">
+                            <span class="pay-method-radio"></span>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoTF4HCpITzvdH82RnnHdqbqE2aaIW9zg22dOmLxD-xA&s=10" class="pay-method-logo object-contain border border-slate-100 p-0.5 bg-white" alt="Daviplata">
+                            <div class="pay-method-info">
+                                <p class="pay-method-name">Transferencia Daviplata</p>
+                                <p class="pay-method-sub">Aprobación enviando comprobante</p>
+                            </div>
+                        </div>
+
+                        <div class="pay-method" data-method="transfer_bancolombia" onclick="selectPayMethod('transfer_bancolombia')">
+                            <span class="pay-method-radio"></span>
+                            <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="pay-method-logo object-contain border border-slate-100 p-1 bg-white" alt="Bancolombia">
+                            <div class="pay-method-info">
+                                <p class="pay-method-name">Bancolombia Ahorros</p>
+                                <p class="pay-method-sub">Aprobación enviando comprobante</p>
                             </div>
                         </div>
                     </div>
@@ -1050,9 +1176,9 @@
                     <i class="fas fa-redo text-4xl text-orange-500"></i>
                 </div>
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">¡Casi lo logras!</h2>
-                <p class="text-gray-600 mb-1 text-sm">Obtuviste <span id="fail-score" class="font-bold text-slate-800"></span>/10 respuestas correctas.</p>
-                <p class="text-gray-500 mb-8 text-sm">Necesitas al menos 8/10 para aprobar. ¡Inténtalo de nuevo ahora, es gratis!</p>
-                <button onclick="startNewProcess()" class="btn-action w-full py-4 text-base shadow-lg flex items-center justify-center gap-2">
+                <p class="text-gray-600 mb-1 text-sm">Obtuviste <span id="fail-score" class="font-bold text-slate-800"></span>/8 respuestas correctas.</p>
+                <p class="text-gray-500 mb-8 text-sm">Necesitas al menos 6/8 para aprobar. ¡Inténtalo de nuevo ahora, es gratis!</p>
+                <button onclick="retryQuiz()" class="btn-action w-full py-4 text-base shadow-lg flex items-center justify-center gap-2">
                     <i class="fas fa-redo-alt"></i> Intentar de nuevo — ¡Es gratis!
                 </button>
             </div>
@@ -1138,13 +1264,13 @@
                     <!-- Total -->
                     <div class="flex items-center justify-between gap-3 px-4 py-3 bg-blue-50/60 border-t border-blue-100">
                         <span class="text-sm font-bold text-slate-700">Total a pagar</span>
-                        <span class="font-black text-lg text-[#0158AD]">$25.000</span>
+                        <span class="font-black text-lg text-[#0158AD]">$22.000</span>
                     </div>
                 </div>
 
                 <p class="text-[11px] text-slate-500 leading-snug mb-4 flex items-start gap-1.5">
                     <i class="fas fa-envelope-open-text text-[#0158AD] mt-0.5 flex-shrink-0"></i>
-                    Verifica que tus datos sean correctos. Al continuar te llevamos a WhatsApp para finalizar y recibir tu certificado.
+                    Verifica que tus datos sean correctos. Al continuar eliges tu método de pago y recibes tu certificado el mismo día.
                 </p>
 
                 <div class="grid grid-cols-2 gap-2.5">
@@ -1165,105 +1291,83 @@
     <!-- Modal otras formas de pago -->
     <div id="payment-options-modal" class="modal-backdrop hidden">
         <div class="modal-box pay-modal-box">
-            <div class="flex items-center justify-between p-5 border-b border-slate-100">
-                <div>
-                    <p class="font-bold text-slate-800 text-base leading-tight">Otras formas de pago</p>
-                    <p class="text-xs text-slate-500 mt-0.5">Elige la opción que prefieras</p>
+            <div class="flex items-start justify-between p-5 pb-2 border-b border-slate-100">
+                <div class="space-y-1">
+                    <p class="font-black text-slate-800 text-lg leading-tight">¡Para obtener tu certificado!</p>
+                    <p class="text-sm text-slate-500 font-medium">Estos son nuestros medios de pago seguros:</p>
                 </div>
-                <button onclick="closePaymentOptionsModal()" class="text-slate-300 hover:text-slate-500 transition flex-shrink-0">
-                    <i class="fas fa-times text-lg"></i>
+                <button onclick="closePaymentOptionsModal()" class="text-slate-400 hover:text-slate-600 transition flex-shrink-0 bg-slate-50 rounded-full w-8 h-8 flex items-center justify-center">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
 
             <div class="p-5 space-y-4">
 
-                <!-- Opción en línea: PSE / RappiPay -->
-                <button onclick="registerAndPay()" class="btn-pay-option group relative border-2 border-[#0158AD] hover:bg-blue-50 transition-all">
-                    <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-lg bg-[#0158AD] flex items-center justify-center flex-shrink-0">
-                            <i class="fas fa-university text-white text-sm"></i>
+                <!-- Cuentas minimalist -->
+                <div class="space-y-3">
+                    
+                    <!-- Nequi -->
+                    <div class="flex items-center justify-between p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-colors">
+                        <div class="flex items-center gap-3.5">
+                            <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="w-9 h-9 rounded object-contain p-1 bg-slate-50 border border-slate-100" alt="Nequi">
+                            <div>
+                                <p class="text-[13px] font-semibold text-slate-500 uppercase tracking-wide">Nequi</p>
+                                <p class="text-base font-mono font-bold text-slate-900 mt-0.5">3223267797</p>
+                            </div>
                         </div>
-                        <div class="flex-1 text-left">
-                            <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con PSE / Débito bancario</p>
-                            <p class="text-xs text-[#0158AD] font-bold leading-tight mt-0.5">Aprobación inmediata · RappiPay</p>
-                        </div>
-                        <i class="fas fa-arrow-right text-[#0158AD] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                        <button id="copy-nequi-btn" onclick="copyToClipboard('3223267797', 'copy-nequi-btn')" class="text-[11px] text-[#0158AD] font-bold hover:bg-blue-50 transition px-3 py-1.5 rounded-lg border border-blue-100 flex items-center gap-1.5 flex-shrink-0">
+                            <i class="far fa-copy"></i> Copiar
+                        </button>
                     </div>
+
+                    <!-- Daviplata -->
+                    <div class="flex items-center justify-between p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-colors">
+                        <div class="flex items-center gap-3.5">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoTF4HCpITzvdH82RnnHdqbqE2aaIW9zg22dOmLxD-xA&s=10" class="w-9 h-9 rounded object-contain p-1 bg-slate-50 border border-slate-100" alt="Daviplata">
+                            <div>
+                                <p class="text-[13px] font-semibold text-slate-500 uppercase tracking-wide">Daviplata</p>
+                                <p class="text-base font-mono font-bold text-slate-900 mt-0.5">3223267797</p>
+                            </div>
+                        </div>
+                        <button id="copy-daviplata-btn" onclick="copyToClipboard('3223267797', 'copy-daviplata-btn')" class="text-[11px] text-[#0158AD] font-bold hover:bg-blue-50 transition px-3 py-1.5 rounded-lg border border-blue-100 flex items-center gap-1.5 flex-shrink-0">
+                            <i class="far fa-copy"></i> Copiar
+                        </button>
+                    </div>
+
+                    <!-- Bancolombia -->
+                    <div class="flex items-center justify-between p-3.5 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-colors">
+                        <div class="flex items-center gap-3.5">
+                            <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="w-9 h-9 rounded object-contain p-1 bg-slate-50 border border-slate-100" alt="Bancolombia">
+                            <div>
+                                <p class="text-[13px] font-semibold text-slate-500 uppercase tracking-wide">Bancolombia Ahorros</p>
+                                <p class="text-base font-mono font-bold text-slate-900 mt-0.5">816-589697-49</p>
+                            </div>
+                        </div>
+                        <button id="copy-bancolombia-btn" onclick="copyToClipboard('816-589697-49', 'copy-bancolombia-btn')" class="text-[11px] text-[#0158AD] font-bold hover:bg-blue-50 transition px-3 py-1.5 rounded-lg border border-blue-100 flex items-center gap-1.5 flex-shrink-0">
+                            <i class="far fa-copy"></i> Copiar
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- PSE option minimalistic -->
+                <button onclick="registerAndPay()" class="w-full mt-2 bg-slate-50 border border-slate-200 hover:bg-slate-100 transition flex items-center justify-center gap-2 py-3 rounded-xl text-sm text-slate-600 font-bold shadow-sm">
+                    <i class="fas fa-university text-slate-400"></i> Pagar con PSE / Tarjeta en línea
                 </button>
 
-                <!-- Divisor -->
-                <div class="flex items-center gap-3">
-                    <div class="flex-1 h-px bg-slate-200"></div>
-                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">o paga por transferencia</span>
-                    <div class="flex-1 h-px bg-slate-200"></div>
-                </div>
-
-                <!-- Cuentas -->
-                <div class="grid grid-cols-1 gap-2.5">
-                    <div class="bg-slate-50 px-3 py-2.5 rounded-lg border border-slate-100">
-                        <div class="flex items-center gap-1.5 mb-2">
-                            <img src="https://mimerkato.com/wp-content/uploads/2021/04/Nequi-Depositos-2.png" class="w-6 h-6 rounded object-contain bg-black/10 p-0.5 flex-shrink-0" alt="Nequi">
-                            <div>
-                                <p class="text-xs font-semibold text-slate-700 leading-none">Nequi / Daviplata</p>
-                                <p class="text-[9px] text-slate-400">Número de celular</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-md px-2.5 py-1.5">
-                            <span class="text-sm font-mono font-bold text-slate-900 tracking-wider whitespace-nowrap">3223267797</span>
-                            <button id="copy-nequi-btn" onclick="copyToClipboard('3223267797', 'copy-nequi-btn')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1 flex-shrink-0">
-                                <i class="far fa-copy text-[8px]"></i> Copiar
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-50 px-3 py-2.5 rounded-lg border border-slate-100">
-                        <div class="flex items-center gap-1.5 mb-2">
-                            <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="w-6 h-6 rounded object-contain bg-white p-0.5 flex-shrink-0" alt="Bancolombia">
-                            <div>
-                                <p class="text-xs font-semibold text-slate-700 leading-none">Bancolombia Ahorros</p>
-                                <p class="text-[9px] text-slate-400">Cta. de ahorros</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 bg-white border border-slate-200 rounded-md px-2.5 py-1.5">
-                            <span class="text-sm font-mono font-bold text-slate-900 tracking-wider whitespace-nowrap">816-589697-49</span>
-                            <button id="copy-bancolombia-btn" onclick="copyToClipboard('816-589697-49', 'copy-bancolombia-btn')" class="text-[9px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1 flex-shrink-0">
-                                <i class="far fa-copy text-[8px]"></i> Copiar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Instrucciones y Verificación -->
-                <div class="bg-emerald-50/50 border border-emerald-200 rounded-xl p-3.5 space-y-3 mt-1">
-                    <p class="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                        <i class="fas fa-info-circle text-emerald-600"></i> Pasos para reportar tu pago manual:
+                <!-- Instrucciones minimalistic -->
+                <div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 mt-3">
+                    <p class="text-sm font-bold text-slate-800 flex items-center gap-1.5 mb-2">
+                        <i class="fas fa-camera text-[#0158AD]"></i> Importante
                     </p>
-                    <div class="space-y-2.5 text-xs text-slate-600">
-                        <div class="flex items-start gap-2.5">
-                            <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span>
-                            <p>Envía la transferencia por <strong class="text-slate-800">$25.000</strong> a cualquiera de las cuentas indicadas.</p>
-                        </div>
-                        <div class="flex items-start gap-2.5">
-                            <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span>
-                            <p>Toma una captura de pantalla o guarda el comprobante en PDF.</p>
-                        </div>
-                        <div class="flex items-start gap-2.5">
-                            <span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span>
-                            <p>Presiona el botón de abajo para enviar tu comprobante de inmediato.</p>
-                        </div>
-                    </div>
-
-                    <!-- Botón WhatsApp Prominente de Reportar -->
-                    <div class="pt-1.5">
-                        <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante."
-                           target="_blank" onclick="trackEvent('whatsapp_comprobante')"
-                           class="w-full flex flex-col items-center justify-center gap-1 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg text-sm border-2 border-green-300 text-center decoration-none no-underline">
-                            <span class="font-black text-sm tracking-wide flex items-center gap-2 justify-center">
-                                <i class="fab fa-whatsapp text-lg"></i> ENVIAR CAPTURA DE PAGO AQUÍ
-                            </span>
-                            <span class="text-[10px] text-white/95 font-medium leading-none">Validación inmediata · Certificado listo hoy</span>
-                        </a>
-                    </div>
+                    <p class="text-[13px] text-slate-600 leading-relaxed mb-4">
+                        Una vez hagas el pago, envía una <strong>foto del comprobante</strong> por este chat para verificarlo de inmediato.
+                    </p>
+                    <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante."
+                        target="_blank" onclick="trackEvent('whatsapp_comprobante')"
+                        class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition text-sm font-bold shadow-sm decoration-none no-underline">
+                        <i class="fab fa-whatsapp text-lg"></i> ENVIAR COMPROBANTE
+                    </a>
                 </div>
 
             </div>
@@ -1400,17 +1504,17 @@
         const N8N_WEBHOOK = 'https://n8n.certitecol.com/webhook/6a03322d-f85e-46df-a0f4-fb27010a6b0c';
         const CRM_LEADS_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/crm/leads/publico';
         const CRM_BUSINESS_ID = 3;
-        const WOMPI_CHECKOUT_URL = 'https://checkout.nequi.wompi.co/l/8c4kg6';
+        const WOMPI_CHECKOUT_URL = 'https://checkout.wompi.co/l/YiAxIv';
 
         let state = {
-            view: 'view-quiz-app',
+            view: 'view-registration',
             pendingCheckout: false,
             leadCreated: false,
             leadId: null,
             leadProposed: false,
             leadEventId: null,
             userData: { type: '', num: '', name: '', phone: '', email: '' },
-            quiz: { currentIdx: 0, score: 0 }
+            quiz: { answers: {}, score: 0 }
         };
 
         const questions = [
@@ -1421,9 +1525,7 @@
             { q: "5. Si tienes gripe o heridas en las manos, ¿qué debes hacer?", options: ["Usar tapabocas y seguir trabajando", "Informar al jefe y no manipular alimentos", "Ponerse doble guante"], a: 1 },
             { q: "6. El agua utilizada para preparar alimentos debe ser:", options: ["De río", "Potable", "Lluvia"], a: 1 },
             { q: "7. ¿Cómo se deben almacenar los productos químicos de aseo?", options: ["Junto a la comida para tenerlos cerca", "En un lugar separado y rotulado", "En la nevera"], a: 1 },
-            { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 },
-            { q: "9. ¿Qué indumentaria es obligatoria para un manipulador de alimentos?", options: ["Ropa deportiva cómoda", "Uniforme de color claro, gorro y sin joyas", "Cualquier ropa limpia"], a: 1 },
-            { q: "10. Las uñas de un manipulador de alimentos deben estar:", options: ["Pintadas para verse bien", "Largas pero limpias", "Cortas, limpias y sin esmalte"], a: 2 }
+            { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 }
         ];
 
         // --- TRACKING N8N ---
@@ -1483,8 +1585,8 @@
                 telefono: u.phone || '',
                 email: u.email,
                 origen: 'WEB',
-                valor_estimado: 25000,
-                notas: `Certificado Manipulación de Alimentos | Examen aprobado`,
+                valor_estimado: 22000,
+                notas: `Certificado Manipulación de Alimentos | Datos registrados`,
                 // Datos para la Conversions API (server-side) de Meta:
                 fbc: getFbc(),
                 fbp: getFbp(),
@@ -1534,7 +1636,14 @@
         function loadState() {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) state = JSON.parse(saved);
-            if (state.view === 'view-landing') state.view = 'view-quiz-app';
+            if (state.view === 'view-landing') state.view = 'view-registration';
+            // view-checkout quedó fuera del flujo (ahora usamos el modal de confirmación)
+            if (state.view === 'view-checkout') state.view = 'view-registration';
+            // Los datos van primero: si están en el examen sin datos, empezar por el formulario
+            if (state.view === 'view-quiz-app' && !(state.userData && state.userData.name)) state.view = 'view-registration';
+            // Estructura del quiz por secciones (todas las preguntas en una vista)
+            if (!state.quiz) state.quiz = { answers: {}, score: 0 };
+            if (!state.quiz.answers) state.quiz.answers = {};
             applyStateToUI();
         }
 
@@ -1568,6 +1677,13 @@
                 paymentHeroImg.classList.add('hidden-section');
             }
 
+            // El examen y el formulario de datos son vistas largas: alinear arriba
+            // para poder desplazarse sin que se corte el inicio.
+            if (viewName === 'view-quiz-app' || viewName === 'view-registration') {
+                bgOverlayWrap.classList.remove('justify-center');
+                bgOverlayWrap.classList.add('justify-start');
+            }
+
             // El título superior del curso es redundante en el checkout: ya tiene su
             // propio banner "Examen aprobado" y la aclaración de marca encima de la vista previa.
             if (viewName === 'view-checkout') {
@@ -1587,7 +1703,7 @@
                 document.getElementById('user-email').value = state.userData.email;
             }
             switchView(state.view);
-            if (state.view === 'view-quiz-app') loadQuestionUI();
+            if (state.view === 'view-quiz-app') renderQuiz();
             if (state.view === 'view-checkout') {
                 populateCheckoutEmail();
                 startCheckoutTimer();
@@ -1601,63 +1717,50 @@
             selectPayMethod('wompi');
         }
 
-        function loadQuestionUI() {
-            const q = questions[state.quiz.currentIdx];
-            document.getElementById('q-text').innerText = q.q;
-            document.getElementById('q-current').innerText = state.quiz.currentIdx + 1;
-            document.getElementById('progress-bar').style.width = (state.quiz.currentIdx / questions.length * 100) + "%";
+        // Renderiza TODAS las preguntas en una sola vista (secciones estilo Google Forms)
+        function renderQuiz() {
+            if (!state.quiz) state.quiz = { answers: {}, score: 0 };
+            if (!state.quiz.answers) state.quiz.answers = {};
+            const list = document.getElementById('q-list');
+            list.innerHTML = '';
 
-            const container = document.getElementById('q-options');
-            container.innerHTML = '';
-            const btnNext = document.getElementById('btn-next');
-            btnNext.disabled = true;
-            btnNext.classList.add('opacity-50', 'cursor-not-allowed');
+            questions.forEach((q, qIdx) => {
+                const optsHtml = q.options.map((opt, optIdx) => {
+                    const sel = state.quiz.answers[qIdx] === optIdx ? ' selected' : '';
+                    return `<button type="button" class="opt-btn${sel}" onclick="selectAnswer(${qIdx}, ${optIdx}, this)"><span class="opt-circle"></span><span>${opt}</span></button>`;
+                }).join('');
 
-            q.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = 'opt-btn';
-                btn.innerHTML = `<span class="opt-circle"></span><span>${opt}</span>`;
-                btn.onclick = () => checkAnswer(idx, q.a, btn);
-                container.appendChild(btn);
+                const card = document.createElement('div');
+                card.className = 'quiz-card';
+                card.setAttribute('data-qcard', qIdx);
+                card.innerHTML =
+                    `<h3 class="quiz-question">${q.q} <span class="quiz-req-star">*</span></h3>` +
+                    `<div class="space-y-2.5">${optsHtml}</div>` +
+                    `<p class="q-required"><i class="fas fa-circle-exclamation"></i> Selecciona una respuesta.</p>`;
+                list.appendChild(card);
             });
+
+            updateQuizProgress();
         }
 
-        function checkAnswer(selectedIdx, correctIdx, btn) {
-            const allBtns = document.getElementById('q-options').querySelectorAll('button');
-            allBtns.forEach(b => { b.disabled = true; b.style.cursor = 'default'; });
-
-            const circle = btn.querySelector('.opt-circle');
-
-            if (selectedIdx === correctIdx) {
-                state.quiz.score++;
-                btn.style.borderColor = '#0158AD';
-                btn.style.background = '#eff6ff';
-                btn.style.color = '#014a94';
-                circle.style.background = '#0158AD';
-                circle.style.borderColor = '#0158AD';
-                circle.innerHTML = '<i class="fas fa-check" style="color:#fff;font-size:10px"></i>';
-                trackEvent('quiz_answer', { pregunta: state.quiz.currentIdx + 1, result: 'ok' });
-                enableNext();
-            } else {
-                btn.style.borderColor = '#f87171';
-                btn.style.background = '#fef2f2';
-                btn.style.color = '#b91c1c';
-                circle.style.background = '#ef4444';
-                circle.style.borderColor = '#ef4444';
-                circle.innerHTML = '<i class="fas fa-times" style="color:#fff;font-size:10px"></i>';
-
-                const correctBtn = allBtns[correctIdx];
-                const correctCircle = correctBtn.querySelector('.opt-circle');
-                correctBtn.style.borderColor = '#0158AD';
-                correctBtn.style.background = '#eff6ff';
-                correctCircle.style.background = '#0158AD';
-                correctCircle.style.borderColor = '#0158AD';
-                correctCircle.innerHTML = '<i class="fas fa-check" style="color:#fff;font-size:10px"></i>';
-
-                trackEvent('quiz_answer', { pregunta: state.quiz.currentIdx + 1, result: 'fail' });
-                showWrongModal(questions[state.quiz.currentIdx].options[correctIdx]);
-            }
+        // Guarda la opción elegida y actualiza el radio (sin calificar todavía)
+        function selectAnswer(qIdx, optIdx, btn) {
+            state.quiz.answers[qIdx] = optIdx;
+            const card = document.querySelector(`[data-qcard="${qIdx}"]`);
+            card.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+            card.classList.remove('is-missing');
+            updateQuizProgress();
             saveState();
+        }
+
+        function updateQuizProgress() {
+            const total = questions.length;
+            const answered = Object.keys(state.quiz.answers).length;
+            const counter = document.getElementById('quiz-answered-count');
+            if (counter) counter.innerText = answered;
+            const bar = document.getElementById('progress-bar');
+            if (bar) bar.style.width = (answered / total * 100) + '%';
         }
 
         function showWrongModal(correctAnswer) {
@@ -1676,29 +1779,48 @@
             btnNext.classList.remove('opacity-50', 'cursor-not-allowed');
         }
 
-        function nextQuestion() {
-            state.quiz.currentIdx++;
-            if (state.quiz.currentIdx < questions.length) {
-                loadQuestionUI();
-            } else {
-                finishQuiz();
+        function submitQuiz() {
+            // Validar que todas las preguntas estén respondidas (estilo Google Forms)
+            let firstMissing = null;
+            questions.forEach((q, i) => {
+                const card = document.querySelector(`[data-qcard="${i}"]`);
+                if (!card) return;
+                if (state.quiz.answers[i] === undefined) {
+                    card.classList.add('is-missing');
+                    if (firstMissing === null) firstMissing = card;
+                } else {
+                    card.classList.remove('is-missing');
+                }
+            });
+            if (firstMissing) {
+                firstMissing.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
             }
+            // Calificar todas las respuestas
+            let score = 0;
+            questions.forEach((q, i) => { if (state.quiz.answers[i] === q.a) score++; });
+            state.quiz.score = score;
             saveState();
+            trackEvent('quiz_submitted', { score: score + "/" + questions.length });
+            finishQuiz();
         }
 
         function finishQuiz() {
             const percent = (state.quiz.score / questions.length);
             if (percent >= 0.75) {
-                state.view = 'view-registration';
-                trackEvent('quiz_passed', { score: state.quiz.score + "/10" });
+                // Los datos ya se capturaron al inicio: abrir el modal de confirmación
+                // de pago sobre el examen aprobado.
+                trackEvent('quiz_passed', { score: state.quiz.score + "/8" });
                 // eventID compartido con la Conversions API (server-side) para deduplicar
-                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 25000, currency: 'COP' }, { eventID: getLeadEventId() });
+                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: 22000, currency: 'COP' }, { eventID: getLeadEventId() });
+                saveState();
+                openPaymentSelectModal();
             } else {
                 state.view = 'view-fail';
-                trackEvent('quiz_failed', { score: state.quiz.score + "/10" });
+                trackEvent('quiz_failed', { score: state.quiz.score + "/8" });
                 document.getElementById('fail-score').innerText = state.quiz.score;
+                applyStateToUI();
             }
-            applyStateToUI();
         }
 
         function submitRegistration(e) {
@@ -1710,14 +1832,11 @@
                 phone: document.getElementById('user-phone').value,
                 email: document.getElementById('user-email').value
             };
+            // Los datos van al inicio: al enviarlos creamos el lead y pasamos al examen.
+            state.view = 'view-quiz-app';
             saveState();
             trackEvent('registration_submitted');
             createCrmLead();
-            // Flujo unificado: al terminar el registro llevamos al usuario a la
-            // vista de checkout (resumen + revisualización del certificado +
-            // confianza + opciones de pago), en vez del modal de confirmación suelto.
-            state.view = 'view-checkout';
-            saveState();
             applyStateToUI();
         }
 
@@ -1727,7 +1846,7 @@
             // Marcamos el intento de pago aquí: al ir a WhatsApp es donde el usuario recibe las cuentas
             trackEvent('payment_initiated', { metodo: 'WhatsApp' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
 
             const doc = ((u.type || '') + ' ' + (u.num || '')).trim();
             const msg = '¡Hola! Aprobé el examen de Manipulación de Alimentos ✅\n' +
@@ -1750,14 +1869,14 @@
         function registerAndPay() {
             trackEvent('payment_initiated', { metodo: 'PSE' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
             window.location.href = 'https://linkdepagospse.rappipay.co/AV4v5j';
         }
 
         function payWithNequi() {
             trackEvent('payment_initiated', { metodo: 'Nequi' });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
             window.location.href = WOMPI_CHECKOUT_URL;
         }
 
@@ -1808,12 +1927,11 @@
         }
 
         function backToSummary() {
-            // El botón "atrás" del selector de métodos vuelve al checkout unificado
-            state.view = 'view-checkout';
+            // El botón "atrás" del selector de métodos vuelve al modal de confirmación (sobre el examen)
+            state.view = 'view-quiz-app';
             saveState();
-            switchView('view-checkout');
-            populateCheckoutEmail();
-            startCheckoutTimer();
+            switchView('view-quiz-app');
+            openPaymentSelectModal();
         }
 
         function closePaymentSelectModal() {
@@ -1831,18 +1949,18 @@
             btn.style.cursor = 'pointer';
         }
 
-        const PAY_METHOD_LABELS = { pse: 'PSE', wompi: 'Wompi', transferencia: 'WhatsApp' };
+        const PAY_METHOD_LABELS = { pse: 'PSE', wompi: 'Wompi', transferencia: 'WhatsApp', transfer_nequi: 'Nequi', transfer_daviplata: 'Daviplata', transfer_bancolombia: 'Bancolombia' };
 
         function continuePayment() {
             if (!selectedPayMethod) return;
 
-            if (selectedPayMethod === 'transferencia') {
+            if (selectedPayMethod === 'transferencia' || selectedPayMethod.startsWith('transfer_')) {
                 // El cliente decide pagar por transferencia: le mostramos las
                 // cuentas al instante. Lo único que hará en WhatsApp es enviar
                 // el comprobante después de pagar.
-                trackEvent('payment_initiated', { metodo: 'Transferencia' });
+                trackEvent('payment_initiated', { metodo: PAY_METHOD_LABELS[selectedPayMethod] || 'Transferencia' });
                 markLeadAsProposal();
-                fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+                fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
                 showTransferDetail();
                 return;
             }
@@ -1850,7 +1968,7 @@
             // El inicio de pago se marca aquí: al elegir método y dar Continuar
             trackEvent('payment_initiated', { metodo: PAY_METHOD_LABELS[selectedPayMethod] || selectedPayMethod });
             markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 22000, currency: 'COP', num_items: 1 });
 
             if (selectedPayMethod === 'pse') {
                 window.location.href = 'https://linkdepagospse.rappipay.co/AV4v5j';
@@ -1873,7 +1991,7 @@
                 nombre: 'Daviplata',
                 cuentaLabel: 'Número de celular',
                 cuenta: '3223267797',
-                logo: 'https://play-lh.googleusercontent.com/bNPDiFqg28L6ckatfuP-WgrxDRDk0JEOkC6nUIQp7Q61RW78i1bw-ffMmEjyxl-qP6dv3ANDOQqmIbBtgJI3EA'
+                logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoTF4HCpITzvdH82RnnHdqbqE2aaIW9zg22dOmLxD-xA&s=10'
             },
             bancolombia: {
                 nombre: 'Bancolombia Ahorros',
@@ -1895,14 +2013,15 @@
                 const info = payMethodsInfo[key];
                 const btnId = 'tdetail-copy-' + key;
                 return '' +
-                    '<div class="flex items-center gap-2.5 bg-white border border-slate-200 rounded-xl px-3 py-2.5">' +
-                        '<img src="' + info.logo + '" class="w-9 h-9 rounded-lg object-contain bg-slate-50 border border-slate-100 p-1 flex-shrink-0" alt="' + info.nombre + '">' +
-                        '<div class="min-w-0 flex-1">' +
-                            '<p class="text-[11px] font-bold text-slate-800 leading-tight">' + info.nombre + '</p>' +
-                            '<p class="text-[10px] text-slate-400 leading-tight">' + info.cuentaLabel + '</p>' +
-                            '<p class="text-sm font-mono font-bold text-slate-900 tracking-wide leading-tight mt-0.5">' + info.cuenta + '</p>' +
+                    '<div class="flex items-center justify-between bg-white border border-slate-200 rounded-xl px-3.5 py-3 shadow-sm hover:border-slate-300 transition-colors">' +
+                        '<div class="flex items-center gap-3.5">' +
+                            '<img src="' + info.logo + '" class="w-9 h-9 rounded object-contain bg-slate-50 border border-slate-100 p-1 flex-shrink-0" alt="' + info.nombre + '">' +
+                            '<div class="min-w-0 flex-1">' +
+                                '<p class="text-[13px] font-semibold text-slate-500 uppercase tracking-wide">' + info.nombre + '</p>' +
+                                '<p class="text-base font-mono font-bold text-slate-900 mt-0.5 leading-none">' + info.cuenta + '</p>' +
+                            '</div>' +
                         '</div>' +
-                        '<button id="' + btnId + '" onclick="copyToClipboard(\'' + info.cuenta + '\', \'' + btnId + '\')" class="text-[10px] bg-[#0158AD] hover:bg-[#0166c7] text-white font-bold px-3 py-2 rounded-md transition flex items-center gap-1 flex-shrink-0">' +
+                        '<button id="' + btnId + '" onclick="copyToClipboard(\'' + info.cuenta + '\', \'' + btnId + '\')" class="text-[11px] bg-blue-50 hover:bg-blue-100 text-[#0158AD] font-bold px-3 py-1.5 rounded-lg border border-blue-100 transition flex items-center gap-1.5 flex-shrink-0">' +
                             '<i class="far fa-copy"></i> Copiar</button>' +
                     '</div>';
             }).join('');
@@ -1916,23 +2035,18 @@
             const waText = encodeURIComponent(waMsg);
 
             document.getElementById('pay-detail-content').innerHTML =
-                '<div class="mb-3">' +
-                    '<p class="font-black text-slate-800 text-sm leading-tight">Paga por transferencia</p>' +
-                    '<p class="text-xs text-slate-500 mt-0.5">Transfiere <strong class="text-slate-700">$25.000</strong> a la cuenta que prefieras</p>' +
+                '<div class="space-y-1 mb-4">' +
+                    '<p class="font-black text-slate-800 text-lg leading-tight">¡Para obtener tu certificado!</p>' +
+                    '<p class="text-sm text-slate-500 font-medium">Estos son nuestros medios de pago seguros:</p>' +
                 '</div>' +
-                '<div class="space-y-2 mb-4">' + cardsHtml + '</div>' +
-                '<div class="bg-emerald-50/60 border border-emerald-200 rounded-xl p-3.5 space-y-2.5 mb-4">' +
-                    '<p class="text-xs font-bold text-emerald-800 uppercase tracking-wider flex items-center gap-1.5"><i class="fas fa-info-circle text-emerald-600"></i> Último paso</p>' +
-                    '<div class="space-y-2 text-xs text-slate-600">' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">1</span><p>Transfiere <strong>$25.000</strong> a la cuenta que prefieras.</p></div>' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">2</span><p>Toma la captura o guarda el comprobante.</p></div>' +
-                        '<div class="flex items-start gap-2"><span class="w-4 h-4 rounded-full bg-emerald-600 text-white font-bold flex items-center justify-center text-[9px] flex-shrink-0 mt-0.5">3</span><p>Envíalo por WhatsApp con el botón de abajo. <strong>¡Eso es todo!</strong></p></div>' +
-                    '</div>' +
-                '</div>' +
-                '<a href="https://wa.me/573107941580?text=' + waText + '" target="_blank" onclick="trackEvent(\'whatsapp_comprobante\', { metodo: \'transferencia\' })" class="w-full flex flex-col items-center justify-center gap-0.5 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition-all shadow-lg no-underline">' +
-                    '<span class="font-black text-sm flex items-center gap-2"><i class="fab fa-whatsapp text-lg"></i> Ya pagué, enviar comprobante</span>' +
-                    '<span class="text-[10px] text-white/95">Validación inmediata · Certificado hoy</span>' +
-                '</a>';
+                '<div class="space-y-3 mb-5">' + cardsHtml + '</div>' +
+                '<div class="bg-blue-50/50 border border-blue-100 rounded-xl p-4 mb-4">' +
+                    '<p class="text-sm font-bold text-slate-800 flex items-center gap-1.5 mb-2"><i class="fas fa-camera text-[#0158AD]"></i> Importante</p>' +
+                    '<p class="text-[13px] text-slate-600 leading-relaxed mb-4">Una vez hagas el pago, envía una <strong>foto del comprobante</strong> por este chat para verificarlo de inmediato.</p>' +
+                    '<a href="https://wa.me/573107941580?text=' + waText + '" target="_blank" onclick="trackEvent(\'whatsapp_comprobante\', { metodo: \'transferencia\' })" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl transition text-sm font-bold shadow-sm decoration-none no-underline">' +
+                        '<i class="fab fa-whatsapp text-lg"></i> ENVIAR COMPROBANTE' +
+                    '</a>' +
+                '</div>';
             document.getElementById('pay-select-step').classList.add('hidden');
             document.getElementById('pay-detail-step').classList.remove('hidden');
             // Ocultamos la barra inferior: el CTA ahora es el botón de WhatsApp del panel
@@ -2057,7 +2171,7 @@
             dinero: {
                 title: 'Puedes pagar por transferencia manual',
                 sub:   'Nequi · Daviplata · Bancolombia',
-                body:  'Transfiere $25.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
+                body:  'Transfiere $22.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
                 actions: `
                     <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual
@@ -2152,7 +2266,15 @@
         }
 
 
-        function resetApp() { if(confirm('¿Reiniciar?')) startNewProcess(); }
+        function retryQuiz() {
+            // Reintentar el examen SIN perder los datos ya ingresados
+            state.quiz = { answers: {}, score: 0 };
+            state.view = 'view-quiz-app';
+            saveState();
+            applyStateToUI();
+        }
+
+        function resetApp() { if(confirm('¿Reiniciar el examen?')) retryQuiz(); }
 
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -2167,7 +2289,7 @@
             <div class="grid grid-cols-2 gap-2.5 items-center">
                 <div>
                     <p class="text-[10px] text-black font-semibold">Total a pagar</p>
-                    <p class="text-2xl font-extrabold text-slate-900 leading-tight">$25.000</p>
+                    <p class="text-2xl font-extrabold text-slate-900 leading-tight">$22.000</p>
                 </div>
                 <button id="pay-continue-btn" onclick="continuePayment()" class="btn-pay-main !mt-0 !w-full !py-3 !rounded-full !bg-[#36C85A] hover:!bg-[#2fb050] !text-white" disabled style="opacity:0.5;cursor:not-allowed;">
                     Continuar
