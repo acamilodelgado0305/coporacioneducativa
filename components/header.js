@@ -164,7 +164,6 @@
               <nav class="sh-nav">
                 <a href="${homeUrl}">Inicio</a>
                 <a href="${cursosUrl}">Cursos</a>
-                <a href="${base}verificacion.html">Verificar Certificado</a>
               </nav>
               ${ctaHtml}
               <a href="https://wa.me/573107941580" target="_blank" rel="noopener" class="sh-support">
