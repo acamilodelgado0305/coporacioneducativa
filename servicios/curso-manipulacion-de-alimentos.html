@@ -643,7 +643,7 @@
                                 <p class="text-[9px] text-slate-400 mt-0.5">Precio único · Sin costos ocultos</p>
                             </div>
                             <div class="text-right">
-                                <span class="text-2xl font-extrabold text-slate-900">$25.000</span>
+                                <span class="text-2xl font-extrabold text-slate-900">25.000</span>
                                 <span class="text-xs text-slate-400 block font-normal">COP</span>
                             </div>
                         </div>
@@ -658,7 +658,7 @@
                             <div class="flex items-center gap-3">
                                 <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
                                 <div class="flex-1 text-left">
-                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — $25.000</p>
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — 25.000</p>
                                     <p class="text-xs text-[#DA0063] font-bold leading-tight mt-0.5">Aprobación inmediata</p>
                                 </div>
                                 <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
@@ -710,7 +710,7 @@
                                 </div>
 
                                 <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20manipulación%20y%20ya%20realicé%20el%20pago.%20Adjunto%20comprobante."
-                                   target="_blank" onclick="trackEvent('whatsapp_comprobante')"
+                                   target="_blank" onclick="reportPaymentWhatsApp()"
                                    class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-xl text-sm font-bold no-underline transition-all">
                                     <i class="fab fa-whatsapp"></i> Enviar comprobante por WhatsApp
                                 </a>
@@ -1322,6 +1322,13 @@
             window.location.href = WOMPI_CHECKOUT_URL;
         }
 
+        function reportPaymentWhatsApp() {
+            trackEvent('payment_initiated', { metodo: 'WhatsApp' });
+            markLeadAsProposal();
+            fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+            trackEvent('whatsapp_comprobante');
+        }
+
         function copyToClipboard(text, btnId) {
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById(btnId);
@@ -1432,7 +1439,7 @@
             dinero: {
                 title: 'Puedes pagar por transferencia manual',
                 sub:   'Nequi · Daviplata · Bancolombia',
-                body:  'Transfiere $25.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
+                body:  'Transfiere 25.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
                 actions: `
                     <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual
