@@ -1125,7 +1125,20 @@
         function loadState() {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) state = JSON.parse(saved);
-            if (!VALID_VIEWS.includes(state.view)) state.view = 'view-quiz-app';
+
+            const hasRegisteredData = !!(state.userData && state.userData.name);
+            const viewIsValid = VALID_VIEWS.includes(state.view);
+            const quizIdxIsValid = state.quiz && state.quiz.currentIdx >= 0 && state.quiz.currentIdx < questions.length;
+
+            if (!viewIsValid) {
+                // Si ya tenemos sus datos guardados (registro/examen previo), lo llevamos directo al pago.
+                // Si no, empieza el examen desde cero.
+                state.view = hasRegisteredData ? 'view-checkout' : 'view-quiz-app';
+            }
+            if (state.view === 'view-quiz-app' && !quizIdxIsValid) {
+                state.quiz = { currentIdx: 0, score: 0 };
+            }
+
             applyStateToUI();
         }
 
