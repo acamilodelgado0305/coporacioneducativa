@@ -1120,15 +1120,17 @@
         // --- LÓGICA CORE ---
         function saveState() { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
         
+        const VALID_VIEWS = ['view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'];
+
         function loadState() {
             const saved = localStorage.getItem(STORAGE_KEY);
             if (saved) state = JSON.parse(saved);
-            if (state.view === 'view-landing') state.view = 'view-quiz-app';
+            if (!VALID_VIEWS.includes(state.view)) state.view = 'view-quiz-app';
             applyStateToUI();
         }
 
         function switchView(viewName) {
-            ['view-registration', 'view-quiz-app', 'view-checkout', 'view-fail'].forEach(id => {
+            VALID_VIEWS.forEach(id => {
                 document.getElementById(id).classList.add('hidden-section');
             });
             document.getElementById(viewName).classList.remove('hidden-section');
