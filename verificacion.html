@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Verificación de Certificados | Corporación Educativa Conalianza</title>
+  <link rel="icon" href="logopagina.png" type="image/png" />
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- SweetAlert2 para notificaciones elegantes -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- date-fns -->
+  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/index.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.30.0/locale/es/index.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            heading: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              primary: '#002e7d',
+              secondary: '#0c8dac',
+              accent: '#ff6b6b'
+            }
+          },
+          animation: {
+            'fade-in-up': 'fadeInUp 0.5s ease-out forwards',
+            'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeInUp: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #f4f7f6;
+      background-image: radial-gradient(circle at top right, rgba(12, 141, 172, 0.05), transparent 40%),
+                        radial-gradient(circle at bottom left, rgba(0, 46, 125, 0.05), transparent 40%);
+      background-attachment: fixed;
+    }
+    
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+    }
+
+    .input-premium {
+      background: #f8fafc;
+      border: 2px solid #e2e8f0;
+      transition: all 0.3s ease;
+    }
+
+    .input-premium:focus {
+      background: #ffffff;
+      border-color: #0c8dac;
+      box-shadow: 0 0 0 4px rgba(12, 141, 172, 0.1);
+      outline: none;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #002e7d 0%, #0c8dac 100%);
+      transition: all 0.3s ease;
+      background-size: 200% auto;
+    }
+
+    .btn-gradient:hover {
+      background-position: right center;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(12, 141, 172, 0.4);
+    }
+
+    .btn-gradient:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Ocultar sección de resultados inicialmente */
+    #results-section { display: none; }
+    
+    .flag-colombia {
+      width: 28px;
+      height: 20px;
+      display: inline-flex;
+      flex-direction: column;
+      border-radius: 2px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .flag-colombia .y { background-color: #FCD116; height: 50%; width: 100%; }
+    .flag-colombia .b { background-color: #003893; height: 25%; width: 100%; }
+    .flag-colombia .r { background-color: #CE1126; height: 25%; width: 100%; }
+
+    /* ── Bloque desplegable del Plan de Capacitación ── */
+    details.plan-block > summary {
+      list-style: none;
+      cursor: pointer;
+      user-select: none;
+    }
+    details.plan-block > summary::-webkit-details-marker { display: none; }
+    details.plan-block > summary .chevron {
+      transition: transform 0.25s ease;
+    }
+    details.plan-block[open] > summary .chevron {
+      transform: rotate(90deg);
+    }
+
+    /* Tabla del temario */
+    .tbl-plan { border-collapse: collapse; width: 100%; }
+    .tbl-plan th, .tbl-plan td {
+      border: 1px solid #9ca3af;
+      padding: 6px 10px;
+      font-size: 12.5px;
+      vertical-align: top;
+    }
+    .tbl-plan thead th {
+      background: #e8eeeb;
+      color: #2f5f46;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 11px;
+      text-align: left;
+    }
+    .tbl-plan td.cap {
+      white-space: nowrap;
+      font-weight: 600;
+      color: #374151;
+      background: #fbfcfb;
+      width: 1%;
+    }
+
+    /* ── Impresión: constancia para el ente sanitario ── */
+    @media print {
+      @page { margin: 12mm; }
+      body { background: #fff !important; }
+      header, footer, #search-section, .no-print { display: none !important; }
+      main { display: block !important; padding: 0 !important; }
+      #results-section {
+        display: block !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      details.plan-block > div { display: block !important; }
+      .print-only { display: block !important; }
+      .page-break { page-break-inside: avoid; }
+    }
+    .print-only { display: none; }
+
+    /* loader spinner */
+    .loader {
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top: 3px solid white;
+      width: 20px;
+      height: 20px;
+      -webkit-animation: spin 1s linear infinite; /* Safari */
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-gray-800">
+
+  <!-- HEADER -->
+  <header class="bg-white border-b border-gray-100 shadow-sm sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <a href="index.html" class="hover:opacity-80 transition-opacity">
+          <img src="logof.png" alt="Logo" class="h-10 object-contain" />
+        </a>
+        <div class="hidden sm:block border-l border-gray-200 pl-4">
+          <p class="font-heading font-bold text-brand-primary text-sm leading-tight tracking-tight">
+            Portal de Verificación
+          </p>
+          <div class="flex items-center gap-1.5 mt-0.5">
+            <div class="flag-colombia w-4 h-3">
+              <div class="y"></div><div class="b"></div><div class="r"></div>
+            </div>
+            <p class="text-[10px] text-gray-500 tracking-wide font-medium uppercase">Validez Nacional</p>
+          </div>
+        </div>
+      </div>
+      <a href="index.html" class="flex items-center gap-2 text-sm font-medium text-gray-500 hover:text-brand-secondary transition-colors bg-gray-50 hover:bg-gray-100 px-4 py-2 rounded-full">
+        <i data-lucide="arrow-left" class="w-4 h-4"></i> Volver al inicio
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-grow flex items-center justify-center p-4 sm:p-6 lg:p-8">
+    <div class="w-full max-w-4xl">
+
+      <!-- BÚSQUEDA SECTION -->
+      <div id="search-section" class="bg-white p-6 sm:p-10 max-w-4xl mx-auto border border-gray-200 mt-10 shadow-sm">
+        
+        <!-- Header Corporativo -->
+        <div class="mb-8">
+          <h2 class="text-2xl text-[#004e82] font-normal flex items-center gap-2">
+            <span class="text-blue-700 text-lg">▶</span> Consulta de Certificados.
+          </h2>
+          <p class="text-gray-500 tracking-[0.2em] text-[11px] sm:text-xs uppercase mt-1">R E G I S T R O &nbsp; Ú N I C O &nbsp; N A C I O N A L .</p>
+        </div>
+
+        <div class="mb-2">
+          <p class="text-sm text-gray-700">Por favor suministre los siguientes datos</p>
+        </div>
+        <div class="h-1 bg-gray-200 w-full mb-6"></div>
+        
+        <form id="verify-form" class="space-y-6">
+          
+          <!-- Tabla de Datos -->
+          <div class="border-l-[6px] border-[#3c7657] bg-[#f0f4f2] w-full flex flex-col shadow-sm">
+            <!-- Row 1: Tipo de Documento -->
+            <div class="flex flex-col sm:flex-row border-b border-white">
+              <div class="sm:w-2/5 p-4 text-[#3c7657] text-sm font-medium">
+                Tipo de Documento
+              </div>
+              <div class="sm:w-3/5 p-3 bg-[#f8faf9]">
+                <select class="w-full sm:w-64 border border-gray-400 rounded-sm p-1 text-sm bg-gray-50 focus:outline-none focus:border-blue-500 text-gray-800">
+                  <option>Cédula de Ciudadanía</option>
+                  <option>Tarjeta de Identidad</option>
+                  <option>Cédula de Extranjería</option>
+                  <option>Pasaporte</option>
+                </select>
+              </div>
+            </div>
+            
+            <!-- Row 2: Número de documento -->
+            <div class="flex flex-col sm:flex-row">
+              <div class="sm:w-2/5 p-4 text-[#3c7657] text-sm font-medium">
+                Número de documento (sin puntos, ni comas)
+              </div>
+              <div class="sm:w-3/5 p-3 bg-[#f8faf9] flex items-center">
+                <input 
+                  type="text" 
+                  id="cedula-input"
+                  class="w-full sm:w-64 border border-gray-400 rounded-sm p-1 text-sm bg-gray-50 focus:outline-none focus:border-blue-500 text-gray-900"
+                  autocomplete="off"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Botón Buscar -->
+          <div class="mt-8 pl-1">
+            <button 
+              type="submit" 
+              id="btn-consultar"
+              class="flex items-center gap-2 border border-gray-400 bg-gradient-to-b from-white to-gray-200 rounded-full px-5 py-1 hover:from-gray-50 hover:to-gray-300 active:bg-gray-300 text-sm text-gray-800 shadow-sm transition-all"
+            >
+              <div id="btn-icon" class="w-3.5 h-3.5 rounded-full border border-gray-600 bg-gradient-to-br from-yellow-400 to-green-600 flex items-center justify-center shadow-inner">
+                <div class="w-1 h-1 bg-yellow-100 rounded-full"></div>
+              </div>
+              <span id="btn-text">Buscar</span>
+              <div id="btn-loader" class="loader hidden ml-2 border-gray-600 w-3 h-3 border-2 border-t-transparent"></div>
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- RESULTADOS SECTION -->
+      <div id="results-section" class="bg-white p-6 sm:p-10 max-w-4xl mx-auto border border-gray-200 mt-10 shadow-sm animate-fade-in-up" style="display: none;">
+        
+        <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-2xl text-[#004e82] font-normal flex items-center gap-2">
+              <span class="text-blue-700 text-lg">▶</span> Resultado de Verificación.
+            </h2>
+            <p class="text-gray-500 tracking-[0.2em] text-[11px] sm:text-xs uppercase mt-1">S i s t e m a &nbsp; A c a d é m i c o .</p>
+          </div>
+          <div class="flex items-center gap-2 no-print">
+            <button id="btn-print" class="flex items-center gap-2 border border-gray-400 bg-gradient-to-b from-white to-gray-200 rounded-sm px-4 py-1.5 hover:from-gray-50 hover:to-gray-300 text-sm text-gray-800 shadow-sm transition-all">
+              <i data-lucide="printer" class="w-3.5 h-3.5"></i> Imprimir constancia
+            </button>
+            <button id="btn-new-search" class="flex items-center gap-2 border border-gray-400 bg-gradient-to-b from-white to-gray-200 rounded-sm px-4 py-1.5 hover:from-gray-50 hover:to-gray-300 text-sm text-gray-800 shadow-sm transition-all">
+              « Volver a consultar
+            </button>
+          </div>
+        </div>
+
+        <!-- Encabezado visible solo al imprimir -->
+        <div class="print-only mb-4 pb-3 border-b-2 border-[#004e82]">
+          <img src="logof.png" alt="Corporación Educativa Conalianza" style="height:46px;object-fit:contain;" />
+          <p style="font-size:13px;font-weight:700;color:#004e82;margin-top:6px;">CONSTANCIA DE VERIFICACIÓN DE FORMACIÓN</p>
+          <p style="font-size:10px;color:#6b7280;">Documento generado desde el portal público de verificación de Corporación Educativa Conalianza.</p>
+        </div>
+
+        <div class="h-1 bg-gray-200 w-full mb-6"></div>
+
+        <!-- Header Perfil Estudiante (Corporate Table) -->
+        <div class="border-l-[6px] border-[#3c7657] bg-[#f0f4f2] w-full flex flex-col shadow-sm mb-8 page-break">
+          <div class="flex flex-col sm:flex-row border-b border-white">
+            <div class="sm:w-1/4 p-3 text-[#3c7657] text-sm font-medium">Nombre Completo</div>
+            <div class="sm:w-3/4 p-3 bg-[#f8faf9] text-gray-800 font-bold uppercase" id="student-name"></div>
+          </div>
+          <div class="flex flex-col sm:flex-row border-b border-white">
+            <div class="sm:w-1/4 p-3 text-[#3c7657] text-sm font-medium">Documento</div>
+            <div class="sm:w-3/4 p-3 bg-[#f8faf9] text-gray-800 uppercase">
+              <span id="student-doc-type"></span> <span id="student-doc-num"></span>
+            </div>
+          </div>
+          <div class="flex flex-col sm:flex-row border-b border-white">
+            <div class="sm:w-1/4 p-3 text-[#3c7657] text-sm font-medium">Estado</div>
+            <div class="sm:w-3/4 p-3 bg-[#f8faf9] text-green-700 font-bold">Activo - Verificado</div>
+          </div>
+          <div class="flex flex-col sm:flex-row">
+            <div class="sm:w-1/4 p-3 text-[#3c7657] text-sm font-medium">Fecha de la consulta</div>
+            <div class="sm:w-3/4 p-3 bg-[#f8faf9] text-gray-700 text-sm" id="consulta-fecha"></div>
+          </div>
+        </div>
+
+        <div class="mb-4 text-sm text-gray-700 font-bold border-b border-gray-200 pb-2">
+          Certificaciones Registradas: <span id="cert-count" class="text-[#004e82]">0</span>
+        </div>
+
+        <!-- Lista de Cursos -->
+        <div id="courses-container" class="space-y-6">
+          <!-- Los cursos se inyectarán aquí -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-gray-200 bg-white/50 backdrop-blur-sm mt-auto">
+    <div class="max-w-5xl mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-medium">
+      <div class="flex items-center gap-3">
+        <div class="flag-colombia w-5 h-3.5"><div class="y"></div><div class="b"></div><div class="r"></div></div>
+        <span>Plataforma Oficial de Verificación Colombia</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span>Resolución 2674/2013</span>
+        <span class="w-1 h-1 rounded-full bg-gray-300"></span>
+        <span>Decreto 3075/1997</span>
+      </div>
+      <p>&copy; <span id="current-year"></span> Corporación Educativa Conalianza.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Iniciar íconos de Lucide
+    lucide.createIcons();
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // ─── CONFIGURACIÓN DE API ────────────────────────────────
+    // OJO: la verificación y la descarga viven en DOS backends distintos.
+    //  - Consulta de cliente/certificados  →  backend POS "controla" (Cloud Run)
+    //  - Generación de PDF certificado/carnet →  backend académico "andesback" (Cloud Run)
+    // El viejo host https://backendcoalianza.vercel.app está caído
+    // (Express no corre como función serverless de Vercel → FUNCTION_INVOCATION_FAILED).
+    const API_LOOKUP_URL = 'https://controla-570877385695.northamerica-northeast1.run.app';
+    const API_DOCS_URL   = 'https://clasit-backend-api-570877385695.us-central1.run.app';
+
+    // Consulta por cédula.
+    // Endpoint REAL del backend (mismo que usa andesfront):
+    //   GET /api/clients/:cedula
+    //   → BACKEND/src/routes/clientRoutes.js  (montado en /api en app.js)
+    // Responde 200 con { nombre, apellido, numeroDeDocumento, tipoDeDocumento,
+    //   tipo: [cursos], createdAt, fechaVencimiento } ó 404 si no existe.
+    async function getClientByCedula(cedula) {
+      const endpoint = `${API_LOOKUP_URL}/api/clients/${cedula}`;
+      const response = await fetch(endpoint);
+      if (!response.ok) {
+        if (response.status === 404) throw new Error('NOT_FOUND');
+        throw new Error('SERVER_ERROR');
+      }
+      return await response.json();
+    }
+
+    // ─── LÓGICA DE LA UI ──────────────────────────────────────
+    const form = document.getElementById('verify-form');
+    const input = document.getElementById('cedula-input');
+    const btnConsultar = document.getElementById('btn-consultar');
+    const btnIcon = document.getElementById('btn-icon');
+    const btnLoader = document.getElementById('btn-loader');
+    const btnText = document.getElementById('btn-text');
+    
+    const searchSection = document.getElementById('search-section');
+    const resultsSection = document.getElementById('results-section');
+    
+    // Filtro para solo números
+    input.addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+    });
+
+    const setBtnLoading = (isLoading) => {
+      btnConsultar.disabled = isLoading;
+      if (isLoading) {
+        btnIcon.classList.add('hidden');
+        btnLoader.classList.remove('hidden');
+        btnText.textContent = 'Verificando en base de datos...';
+      } else {
+        btnIcon.classList.remove('hidden');
+        btnLoader.classList.add('hidden');
+        btnText.textContent = 'Consultar Certificados';
+      }
+    };
+
+    const extractIntensity = (courseName) => {
+      if (!courseName) return '10';
+      const numbers = courseName.match(/(\d+)/g);
+      return numbers && numbers.length ? numbers[numbers.length - 1] : '10';
+    };
+
+    // Helper formato fecha (date-fns global)
+    const fmt = (dateStr) => {
+      if (!dateStr) return '—';
+      try {
+        return window.dateFns.format(new Date(dateStr), "d 'de' MMMM 'de' yyyy", { locale: window.dateFns.locale.es });
+      } catch {
+        return dateStr;
+      }
+    };
+
+    // ─── PLANES DE CAPACITACIÓN ──────────────────────────────
+    // Contenido programático que la autoridad sanitaria necesita ver al verificar.
+    // Para añadir un curso nuevo: agrega una entrada con su `match` (palabras clave
+    // en minúscula que aparecen en el nombre del curso registrado en la base de datos).
+    // Cada capítulo acepta `horas` opcional; si se define en TODOS los capítulos, la
+    // tabla muestra automáticamente la columna de intensidad por capítulo.
+    const PLANES = [
+      {
+        match: ['manipulac', 'alimentos'],
+        programa: 'Manipulación Higiénica de Alimentos',
+        objetivo: 'Formar al manipulador de alimentos en las prácticas higiénicas, sanitarias y de bioseguridad exigidas por la normatividad colombiana, con el fin de prevenir la contaminación y garantizar la inocuidad de los alimentos durante todas las etapas de la cadena.',
+        dirigidoA: 'Personal que interviene en la fabricación, procesamiento, preparación, envase, almacenamiento, transporte, distribución y comercialización de alimentos.',
+        modalidad: 'Teórico-práctica, con acompañamiento de instructor y material de estudio.',
+        metodologia: 'Desarrollo de los capítulos del contenido programático, casos aplicados al puesto de trabajo y refuerzo de prácticas higiénicas.',
+        evaluacion: 'Evaluación final de conocimientos sobre la totalidad del contenido programático. El certificado se expide únicamente al aprobar.',
+        vigencia: 'El certificado tiene vigencia de un (1) año contado desde la fecha de expedición; vencido este término debe realizarse la actualización.',
+        normas: [
+          'Ley 9 de 1979 — Código Sanitario Nacional.',
+          'Decreto 3075 de 1997 — Buenas Prácticas de Manufactura.',
+          'Resolución 2674 de 2013 — Requisitos sanitarios y capacitación del manipulador de alimentos.'
+        ],
+        capitulos: [
+          { n: 'Capítulo uno',    tema: 'Atención y servicio al cliente' },
+          { n: 'Capítulo dos',    tema: 'Legislación alimentaria en Colombia' },
+          { n: 'Capítulo tres',   tema: 'Factores de contaminación de los alimentos' },
+          { n: 'Capítulo cuatro', tema: 'Normas y hábitos del manipulador de alimentos' },
+          { n: 'Capítulo cinco',  tema: 'Limpieza de instalaciones, equipos y utensilios de trabajo' },
+          { n: 'Capítulo seis',   tema: 'Preparación de productos químicos para procedimientos de desinfección' },
+          { n: 'Capítulo siete',  tema: 'Manejo de insumos y residuos' },
+          { n: 'Capítulo ocho',   tema: 'Normas de bioseguridad y segregación en la fuente' }
+        ]
+      }
+    ];
+
+    // Plan genérico para cursos que aún no tienen temario cargado.
+    const PLAN_GENERICO = {
+      programa: null,
+      objetivo: 'Desarrollar en el participante las competencias teóricas y prácticas propias del programa certificado.',
+      dirigidoA: 'Personal que desempeña o va a desempeñar labores relacionadas con el programa certificado.',
+      modalidad: 'Teórico-práctica, con acompañamiento de instructor y material de estudio.',
+      metodologia: 'Desarrollo del contenido programático del programa y aplicación al puesto de trabajo.',
+      evaluacion: 'Evaluación final de conocimientos. El certificado se expide únicamente al aprobar.',
+      vigencia: 'Según la vigencia registrada en este certificado.',
+      normas: [],
+      capitulos: []
+    };
+
+    const getPlan = (cursoName) => {
+      const name = (cursoName || '').toLowerCase();
+      const found = PLANES.find(p => p.match.some(k => name.includes(k)));
+      return found || PLAN_GENERICO;
+    };
+
+    const esc = (s) => String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+    // Construye el bloque "Plan de capacitación" de una certificación.
+    const renderPlan = (cursoName, intensity) => {
+      const plan = getPlan(cursoName);
+      const conHoras = plan.capitulos.length > 0 && plan.capitulos.every(c => c.horas != null);
+
+      const filas = plan.capitulos.map(c => `
+        <tr>
+          <td class="cap">${esc(c.n)}</td>
+          <td>${esc(c.tema)}</td>
+          ${conHoras ? `<td style="text-align:center;white-space:nowrap;">${esc(c.horas)} h</td>` : ''}
+        </tr>
+      `).join('');
+
+      const tabla = plan.capitulos.length ? `
+        <p class="text-sm text-gray-700 mb-3">La capacitación se desarrolló mediante la siguiente programación:</p>
+        <div class="overflow-x-auto mb-5">
+          <table class="tbl-plan">
+            <thead>
+              <tr>
+                <th>Capítulo</th>
+                <th>Tema</th>
+                ${conHoras ? '<th style="text-align:center;">Horas</th>' : ''}
+              </tr>
+            </thead>
+            <tbody>${filas}</tbody>
+            <tfoot>
+              <tr>
+                <td class="cap" style="background:#e8eeeb;color:#2f5f46;">Total</td>
+                <td style="background:#e8eeeb;font-weight:600;color:#2f5f46;" ${conHoras ? '' : 'colspan="1"'}>
+                  ${plan.capitulos.length} capítulos — intensidad horaria total: ${esc(intensity)} horas
+                </td>
+                ${conHoras ? `<td style="background:#e8eeeb;text-align:center;font-weight:700;color:#2f5f46;">${esc(intensity)} h</td>` : ''}
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      ` : `
+        <p class="text-sm text-gray-600 mb-5 bg-gray-50 border border-gray-200 p-3">
+          El contenido programático detallado de este programa reposa en los archivos académicos de la entidad
+          y puede ser solicitado por la autoridad sanitaria al <strong>+57 310 794 1580</strong>.
+        </p>
+      `;
+
+      const fila = (label, valor) => `
+        <tr class="border-b border-gray-100 align-top">
+          <td class="py-2 pr-4 font-semibold text-gray-600 w-2/5 sm:w-1/3">${label}</td>
+          <td class="py-2 text-gray-700">${esc(valor)}</td>
+        </tr>
+      `;
+
+      const normas = plan.normas.length ? `
+        <div class="mt-5">
+          <p class="text-xs font-bold text-gray-700 uppercase tracking-wide mb-2">Marco normativo aplicado</p>
+          <ul class="list-disc list-inside space-y-1 text-[12.5px] text-gray-700">
+            ${plan.normas.map(n => `<li>${esc(n)}</li>`).join('')}
+          </ul>
+        </div>
+      ` : '';
+
+      return `
+        <details class="plan-block border border-gray-300 mt-6 page-break" open>
+          <summary class="bg-[#f0f4f2] px-4 py-2.5 border-b border-gray-300 flex items-center justify-between">
+            <span class="text-xs font-bold text-[#3c7657] uppercase tracking-wide flex items-center gap-2">
+              <span class="chevron text-[#3c7657]">▶</span> Plan de capacitación y contenido programático
+            </span>
+            <span class="text-[10px] text-gray-500 uppercase no-print">Ver / ocultar</span>
+          </summary>
+          <div class="p-4 sm:p-5 bg-white">
+            ${plan.programa ? `<p class="text-sm font-bold text-[#004e82] mb-4">${esc(plan.programa)}</p>` : ''}
+
+            <table class="w-full text-left text-[13px] mb-5 border-collapse">
+              <tbody>
+                ${fila('Objetivo de la formación', plan.objetivo)}
+                ${fila('Dirigido a', plan.dirigidoA)}
+                ${fila('Modalidad', plan.modalidad)}
+                ${fila('Metodología', plan.metodologia)}
+                ${fila('Intensidad horaria total', `${intensity} horas`)}
+                ${fila('Evaluación', plan.evaluacion)}
+                ${fila('Vigencia del certificado', plan.vigencia)}
+              </tbody>
+            </table>
+
+            ${tabla}
+            ${normas}
+          </div>
+        </details>
+      `;
+    };
+
+    let currentStudentData = null;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const cedula = input.value.trim();
+      
+      if (cedula.length < 5) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Documento Inválido',
+          text: 'Por favor ingresa un número de documento válido (mínimo 5 dígitos).',
+          confirmButtonColor: '#0c8dac'
+        });
+        return;
+      }
+
+      setBtnLoading(true);
+
+      try {
+        const data = await getClientByCedula(cedula);
+        
+        if (!data || (!data.numeroDeDocumento && !data.numero_documento && !data.documento)) {
+          throw new Error('NOT_FOUND');
+        }
+
+        // Normalizar numeroDeDocumento
+        if (!data.numeroDeDocumento) {
+            data.numeroDeDocumento = data.numero_documento || data.documento || cedula;
+        }
+
+        currentStudentData = data;
+        renderResults(data);
+
+      } catch (err) {
+        let msg = 'No fue posible conectarse con el servidor. Intenta nuevamente.';
+        if (err.message === 'NOT_FOUND') {
+          msg = 'El documento no registra certificaciones activas en nuestra base de datos.';
+        }
+        
+        Swal.fire({
+          icon: 'error',
+          title: 'Sin Resultados',
+          text: msg,
+          confirmButtonColor: '#002e7d'
+        });
+      } finally {
+        setBtnLoading(false);
+      }
+    });
+
+    // Constancia imprimible: se abren todos los planes antes de mandar a imprimir.
+    document.getElementById('btn-print').addEventListener('click', () => {
+      document.querySelectorAll('details.plan-block').forEach(d => d.open = true);
+      window.print();
+    });
+
+    document.getElementById('btn-new-search').addEventListener('click', () => {
+      input.value = '';
+      currentStudentData = null;
+      resultsSection.style.display = 'none';
+      searchSection.style.display = 'block';
+      setTimeout(() => input.focus(), 100);
+    });
+
+    const renderResults = (data) => {
+      const { nombre, apellido, tipoDeDocumento, tipoDocumento, tipo_documento, numeroDeDocumento, tipo, createdAt, fechaVencimiento } = data;
+      
+      const docType = tipoDeDocumento || tipoDocumento || tipo_documento || 'C.C.';
+      const fullName = `${nombre || ''} ${apellido || ''}`.trim();
+      
+      document.getElementById('student-name').textContent = fullName || 'Usuario Encontrado';
+      document.getElementById('student-doc-type').textContent = docType;
+      document.getElementById('student-doc-num').textContent = numeroDeDocumento;
+      
+      // Sello de trazabilidad de la consulta (útil para la autoridad sanitaria)
+      document.getElementById('consulta-fecha').textContent =
+        new Date().toLocaleString('es-CO', {
+          day: '2-digit', month: 'long', year: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+
+      const cursosArr = Array.isArray(tipo) ? tipo : (tipo ? [tipo] : []);
+      document.getElementById('cert-count').textContent = cursosArr.length;
+
+      const container = document.getElementById('courses-container');
+      container.innerHTML = '';
+
+      if (cursosArr.length === 0) {
+        container.innerHTML = `
+          <div class="border border-gray-300 p-8 text-center flex flex-col items-center justify-center bg-gray-50">
+            <p class="text-gray-500 font-medium text-sm">No se encontraron certificaciones activas para este usuario.</p>
+          </div>
+        `;
+      } else {
+        cursosArr.forEach((cursoName, index) => {
+          const isFoodHandling = cursoName.toLowerCase().includes('manipulac') || cursoName.toLowerCase().includes('alimentos');
+          const intensity = extractIntensity(cursoName);
+
+          const card = document.createElement('div');
+          card.className = 'border border-gray-300 bg-white shadow-sm page-break';
+          
+          let legalNote = '';
+          let carnetBtn = '';
+
+          if (isFoodHandling) {
+            legalNote = `
+              <div class="px-4 py-2 bg-[#f0f4f2] border-t border-gray-300 text-[11px] text-[#3c7657] font-medium leading-relaxed">
+                Resolución 2674/2013 — Decreto 3075/1997. Certificado con validez nacional en Colombia.
+              </div>
+            `;
+            carnetBtn = `
+              <button onclick="handleDownload('carnet', '${cursoName}')" class="flex items-center justify-center gap-2 border border-gray-400 bg-gradient-to-b from-white to-gray-200 rounded-sm px-4 py-2 hover:from-gray-50 hover:to-gray-300 text-xs text-gray-800 shadow-sm transition-all ml-0 sm:ml-2 mt-2 sm:mt-0">
+                Descargar Carnet
+              </button>
+            `;
+          }
+
+          card.innerHTML = `
+            <div class="bg-gray-100 px-4 py-2 border-b border-gray-300 flex items-center justify-between">
+              <span class="text-xs font-bold text-gray-700 uppercase">Registro Académico</span>
+              <span class="text-[10px] font-bold bg-green-600 text-white px-2 py-0.5 rounded-sm shadow-inner">VÁLIDO</span>
+            </div>
+            <div class="p-4 sm:p-6">
+              <h4 class="font-bold text-[#004e82] text-lg sm:text-xl mb-6">${cursoName}</h4>
+              
+              <table class="w-full text-left text-sm text-gray-700 mb-6 border-collapse">
+                <tbody>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-2.5 pr-4 font-semibold w-2/5 sm:w-1/3">Intensidad Horaria:</td>
+                    <td class="py-2.5">${intensity} horas</td>
+                  </tr>
+                  <tr class="border-b border-gray-100">
+                    <td class="py-2.5 pr-4 font-semibold">Fecha de Expedición:</td>
+                    <td class="py-2.5">${fmt(createdAt)}</td>
+                  </tr>
+                  <tr>
+                    <td class="py-2.5 pr-4 font-semibold">Vencimiento:</td>
+                    <td class="py-2.5 text-red-600 font-medium">${fmt(fechaVencimiento)}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="flex flex-col sm:flex-row sm:justify-center items-stretch sm:items-center no-print">
+                <button onclick="handleDownload('certificado', '${cursoName}')" class="flex items-center justify-center gap-2 border border-[#004e82] bg-gradient-to-b from-[#005a96] to-[#003859] rounded-sm px-4 py-2 hover:opacity-90 text-xs text-white shadow-sm transition-all">
+                  Descargar Certificado PDF
+                </button>
+                ${carnetBtn}
+              </div>
+
+              ${renderPlan(cursoName, intensity)}
+            </div>
+            ${legalNote}
+          `;
+          container.appendChild(card);
+        });
+      }
+
+      // Volver a renderizar los íconos inyectados dinámicamente
+      lucide.createIcons();
+
+      searchSection.style.display = 'none';
+      resultsSection.style.display = 'block';
+    };
+
+    // ─── DESCARGA DE ARCHIVOS ────────────────────────────────
+    window.handleDownload = async (docType, courseName) => {
+      const intensity = extractIntensity(courseName);
+      const { nombre, apellido, numeroDeDocumento, tipoDeDocumento, tipoDocumento, tipo_documento, createdAt, fechaVencimiento } = currentStudentData;
+      const tDoc = tipoDeDocumento || tipoDocumento || tipo_documento || 'C.C';
+
+      // Alerta de carga
+      Swal.fire({
+        title: 'Generando documento...',
+        text: 'Por favor espera unos segundos. No cierres la ventana.',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      });
+
+      try {
+        let endpoint = '';
+        const opts = { method: 'POST' };
+
+        if (docType === 'certificado') {
+          endpoint = courseName.toLowerCase().includes('excel')
+            ? `${API_DOCS_URL}/api/generar-certificado-pdf`
+            : `${API_DOCS_URL}/api/generar-certificado`;
+          opts.headers = { 'Content-Type': 'application/json' };
+          opts.body = JSON.stringify({
+            nombre: `${nombre || ''} ${apellido || ''}`.trim(),
+            numeroDocumento: numeroDeDocumento,
+            tipoDocumento: tDoc,
+            curso: courseName,
+            intensidadHoraria: intensity,
+            // Fecha real de expedición (la misma que muestra la tarjeta), no la de hoy.
+            fechaExpedicion: createdAt,
+            fechaVencimiento: fechaVencimiento,
+            fechaFinalizacion: createdAt, // usado por la variante /generar-certificado-pdf (excel)
+          });
+        } else {
+          endpoint = `${API_DOCS_URL}/api/generar-carnet`;
+          const fd = new FormData();
+          fd.append('nombre', `${nombre || ''} ${apellido || ''}`.trim());
+          fd.append('numeroDocumento', numeroDeDocumento);
+          fd.append('tipoDocumento', tDoc);
+          fd.append('intensidadHoraria', intensity);
+          // Fechas reales: frontal = expedición, posterior = vencimiento.
+          if (createdAt) fd.append('fechaExpedicion', createdAt);
+          if (fechaVencimiento) fd.append('fechaVencimiento', fechaVencimiento);
+          opts.body = fd;
+        }
+
+        const res = await fetch(endpoint, opts);
+        if (!res.ok) throw new Error('Error en la generación del documento');
+
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        const fileName = `${docType}_${nombre || 'usuario'}_${apellido || ''}.pdf`.replace(/\s+/g, '_');
+        a.setAttribute('download', fileName);
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+        Swal.fire({
+          icon: 'success',
+          title: '¡Descarga exitosa!',
+          text: 'El documento se ha guardado en tu carpeta de Descargas.',
+          confirmButtonColor: '#0c8dac'
+        });
+
+      } catch (err) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrió un problema',
+          text: 'No se pudo generar el documento en este momento. Por favor intenta más tarde.',
+          confirmButtonColor: '#002e7d'
+        });
+      }
+    };
+  </script>
+</body>
+</html>
