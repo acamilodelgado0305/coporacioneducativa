@@ -21,6 +21,15 @@
         .btn-main:hover { background-color: #059669; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2); }
         .btn-main:disabled { background-color: #9ca3af; cursor: not-allowed; transform: none; box-shadow: none; }
     </style>
+    <!-- Fallback anti-CDN: la clase .hidden solo existe dentro de Tailwind (CDN).
+         Si cdn.tailwindcss.com falla, es bloqueado o tarda en ejecutarse, sin esta
+         regla los modales (.modal-backdrop tiene display:flex propio) se pintan
+         todos a la vez. Va sin !important para que Tailwind, al cargar, conserve
+         la prioridad en los overrides responsive (sm:block, md:flex, md:hidden). -->
+    <style>
+        .hidden { display: none; }
+        .modal-backdrop.hidden { display: none !important; }
+    </style>
 </head>
 <body class="flex flex-col min-h-screen">
     <header class="bg-white shadow-sm">

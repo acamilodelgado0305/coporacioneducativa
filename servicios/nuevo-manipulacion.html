@@ -65,6 +65,15 @@
         .benefit-list li { margin-bottom: 12px; display: flex; align-items: start; }
         .benefit-list i { color: var(--success); margin-right: 12px; margin-top: 4px; flex-shrink: 0; font-size: 1.1rem; }
     </style>
+    <!-- Fallback anti-CDN: la clase .hidden solo existe dentro de Tailwind (CDN).
+         Si cdn.tailwindcss.com falla, es bloqueado o tarda en ejecutarse, sin esta
+         regla los modales (.modal-backdrop tiene display:flex propio) se pintan
+         todos a la vez. Va sin !important para que Tailwind, al cargar, conserve
+         la prioridad en los overrides responsive (sm:block, md:flex, md:hidden). -->
+    <style>
+        .hidden { display: none; }
+        .modal-backdrop.hidden { display: none !important; }
+    </style>
 </head>
 <body class="text-slate-800 antialiased flex flex-col min-h-screen">
 

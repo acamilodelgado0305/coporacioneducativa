@@ -28,6 +28,15 @@
         .hero-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.6); z-index: 1; }
         .hero-content { position: relative; z-index: 2; text-align: center; max-width: 900px; margin: 0 auto; }
     </style>
+    <!-- Fallback anti-CDN: la clase .hidden solo existe dentro de Tailwind (CDN).
+         Si cdn.tailwindcss.com falla, es bloqueado o tarda en ejecutarse, sin esta
+         regla los modales (.modal-backdrop tiene display:flex propio) se pintan
+         todos a la vez. Va sin !important para que Tailwind, al cargar, conserve
+         la prioridad en los overrides responsive (sm:block, md:flex, md:hidden). -->
+    <style>
+        .hidden { display: none; }
+        .modal-backdrop.hidden { display: none !important; }
+    </style>
 </head>
 <body class="bg-slate-100">
     <div id="progress-bar"></div>

@@ -57,6 +57,15 @@
         }
         .whatsapp-float:hover { transform: scale(1.1); }
     </style>
+    <!-- Fallback anti-CDN: la clase .hidden solo existe dentro de Tailwind (CDN).
+         Si cdn.tailwindcss.com falla, es bloqueado o tarda en ejecutarse, sin esta
+         regla los modales (.modal-backdrop tiene display:flex propio) se pintan
+         todos a la vez. Va sin !important para que Tailwind, al cargar, conserve
+         la prioridad en los overrides responsive (sm:block, md:flex, md:hidden). -->
+    <style>
+        .hidden { display: none; }
+        .modal-backdrop.hidden { display: none !important; }
+    </style>
 </head>
 <body class="antialiased selection:bg-blue-500 selection:text-white">
 

@@ -189,6 +189,15 @@
       100% { transform: rotate(360deg); }
     }
   </style>
+    <!-- Fallback anti-CDN: la clase .hidden solo existe dentro de Tailwind (CDN).
+         Si cdn.tailwindcss.com falla, es bloqueado o tarda en ejecutarse, sin esta
+         regla los modales (.modal-backdrop tiene display:flex propio) se pintan
+         todos a la vez. Va sin !important para que Tailwind, al cargar, conserve
+         la prioridad en los overrides responsive (sm:block, md:flex, md:hidden). -->
+    <style>
+        .hidden { display: none; }
+        .modal-backdrop.hidden { display: none !important; }
+    </style>
 </head>
 <body class="min-h-screen flex flex-col text-gray-800">
 
