@@ -991,6 +991,14 @@
         const CRM_LEADS_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/crm/leads/publico';
         const CRM_BUSINESS_ID = 3;
 
+        // --- CATÁLOGO DE SERVICIOS (backend + Meta) ---
+        // Estos dos valores deben ser IDÉNTICOS a los que la CAPI envía desde el
+        // servidor: Meta deduplica por event_name + event_id, así que si el navegador
+        // y el servidor mandan content_* distintos el evento que sobreviva puede caer
+        // en la conversión personalizada equivocada (o en ninguna).
+        const SERVICIO_SLUG   = 'auxiliar-bodega';   // se envía como `servicio` al CRM y como content_ids
+        const SERVICIO_NOMBRE = 'Auxiliar de Bodega';   // content_name
+
         // Datos del producto (se usan en tracking, CRM y Pixel)
         const PAGINA   = 'Curso Auxiliar de Bodega y Logística';
         const PRODUCTO = 'Certificado Auxiliar de Bodega y Logística';
@@ -1204,14 +1212,20 @@
         }
 
         // --- CRM LEAD (se crea una sola vez al completar el formulario) ---
+        // Guardia en memoria: impide dos envíos simultáneos en la misma sesión sin
+        // persistir nada todavía. Antes se guardaba leadCreated=true ANTES de enviar,
+        // así que si la pestaña se cerraba durante la petición ese navegador no volvía
+        // a mandar el lead nunca más.
+        let crmLeadInFlight = false;
+
         function createCrmLead() {
-            if (state.leadCreated) return;
-            state.leadCreated = true;
-            saveState();
+            if (state.leadCreated || crmLeadInFlight) return;
+            crmLeadInFlight = true;
 
             const u = state.userData;
             const payload = {
                 business_id: CRM_BUSINESS_ID,
+                servicio: SERVICIO_SLUG,
                 nombre: u.name,
                 tipo_documento: u.type,
                 numero_documento: u.num,
@@ -1233,17 +1247,21 @@
                 body: JSON.stringify(payload),
                 keepalive: true
             })
-            .then(res => res.json())
+            .then(res => res.ok ? res.json() : Promise.reject(new Error('HTTP ' + res.status)))
             .then(data => {
+                // El lead solo se da por creado cuando el CRM lo confirma.
+                state.leadCreated = true;
                 // Guardamos el id del lead para poder avanzarlo a PROPUESTA al iniciar el pago
                 const leadId = data?.id ?? data?.lead_id ?? data?.data?.id ?? data?.lead?.id ?? null;
-                if (leadId) { state.leadId = leadId; saveState(); }
-            })
-            .catch(() => {
-                // Si falla, permitir un reintento en una próxima acción
-                state.leadCreated = false;
+                if (leadId) state.leadId = leadId;
                 saveState();
-            });
+            })
+            .catch(err => {
+                // Los fallos del CRM eran mudos. Ahora avisan por n8n/Telegram y el lead
+                // queda pendiente, listo para reintentarse en la próxima acción.
+                trackEvent('crm_lead_error', { detalle: String((err && err.message) || err) });
+            })
+            .finally(() => { crmLeadInFlight = false; });
         }
 
         // --- CRM: avanzar el lead a PROPUESTA cuando el usuario inicia el pago ---
@@ -1414,7 +1432,13 @@
                 state.view = 'view-registration';
                 trackEvent('quiz_passed', { score: state.quiz.score + "/" + questions.length });
                 // eventID compartido con la Conversions API (server-side) para deduplicar
-                fbq('track', 'Lead', { content_name: 'Examen Aprobado', value: PRECIO, currency: 'COP' }, { eventID: getLeadEventId() });
+                fbq('track', 'Lead', {
+                    content_ids:      [SERVICIO_SLUG],
+                    content_name:     SERVICIO_NOMBRE,
+                    content_category: 'Cursos',
+                    content_type:     'product',
+                    value: PRECIO, currency: 'COP'
+                }, { eventID: getLeadEventId() });
             } else {
                 state.view = 'view-fail';
                 trackEvent('quiz_failed', { score: state.quiz.score + "/" + questions.length });
