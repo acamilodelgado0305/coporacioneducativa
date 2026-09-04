@@ -1005,8 +1005,11 @@
         const PRECIO   = 50000;
 
         const PSE_CHECKOUT_URL = 'https://linkdepagospse.rappipay.co/kZYKi5';
-        // Link de cobro Nequi/Wompi de este curso (botón principal del checkout).
-        const WOMPI_CHECKOUT_URL = 'https://checkout.wompi.co/method';
+        // Link de cobro Nequi/Wompi de ESTE curso: monto fijo de 50.000.
+        // Debe tener la forma /l/<id>; la ruta pelada checkout.wompi.co/method no sirve
+        // (sin id ni monto, Wompi responde "Página no disponible").
+        // Si se deja vacío, el botón de Nequi se oculta y PSE queda como principal.
+        const WOMPI_CHECKOUT_URL = 'https://checkout.nequi.wompi.co/l/jzJ7MY';
 
         let state = {
             view: 'view-quiz-app',
@@ -1497,6 +1500,7 @@
         }
 
         function payWithNequi() {
+            if (!WOMPI_CHECKOUT_URL) return; // sin link de cobro configurado no hacemos nada
             trackEvent('payment_initiated', { metodo: 'Nequi' });
             markLeadAsProposal();
             fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
