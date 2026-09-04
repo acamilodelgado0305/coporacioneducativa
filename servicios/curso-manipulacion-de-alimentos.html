@@ -314,6 +314,22 @@
         }
         .trust-item i { color: #0158AD; font-size: 10px; }
 
+        /* ── Gráfico de la pregunta ── */
+        .q-figure {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 14px 12px;
+            margin-bottom: 22px;
+        }
+        .q-figure svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+
         /* ── Quiz opciones ── */
         .opt-btn {
             width: 100%;
@@ -579,7 +595,7 @@
             <div id="view-quiz-app" class="flex flex-col h-full">
                 <div class="bg-gray-50 px-8 py-4 flex justify-between items-center border-b border-gray-200">
                     <span class="text-xs font-bold text-[#014a94] bg-blue-100 px-3 py-1 rounded-full border border-blue-200">
-                        PREGUNTA <span id="q-current">1</span>/8
+                        PREGUNTA <span id="q-current">1</span>/10
                     </span>
                     <button onclick="resetApp()" class="text-xs text-gray-400 hover:text-red-500 underline">Reiniciar</button>
                 </div>
@@ -589,6 +605,7 @@
 
                 <div class="p-8 md:p-10 flex-grow">
                     <h3 id="q-text" class="text-xl font-bold text-slate-800 mb-6 leading-relaxed">Cargando pregunta...</h3>
+                    <div id="q-figure" class="q-figure hidden"></div>
                     <div id="q-options" class="space-y-3"></div>
                 </div>
 
@@ -982,16 +999,132 @@
             quiz: { currentIdx: 0, score: 0 }
         };
 
+        // Algunas preguntas traen un `svg` ilustrativo. En los gráficos comparativos
+        // las dos opciones usan los mismos grises a propósito, para que la respuesta
+        // se deduzca del conocimiento y no del color del dibujo.
         const questions = [
             { q: "1. ¿Cuál es la norma principal que regula la manipulación de alimentos en Colombia?", options: ["Resolución 2674 de 2013", "Código de Policía", "Ley 100"], a: 0 },
-            { q: "2. La contaminación cruzada ocurre cuando:", options: ["Se lavan bien los alimentos", "Se mezclan alimentos crudos con cocidos", "Se congela la carne"], a: 1 },
-            { q: "3. ¿Cuánto tiempo mínimo debe durar el lavado de manos?", options: ["5 segundos", "20 a 30 segundos con jabón", "Solo enjuagar con agua"], a: 1 },
-            { q: "4. ¿Cuál es la zona de temperatura de peligro para los alimentos?", options: ["Entre 5°C y 60°C", "Menos de 0°C", "Más de 100°C"], a: 0 },
+
+            { q: "2. Observa las dos preparaciones. ¿En cuál hay riesgo de contaminación cruzada?",
+              options: ["En la preparación A", "En la preparación B", "En ninguna de las dos"], a: 0,
+              svg: `<svg viewBox="0 0 320 178" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Preparación A: pollo crudo y ensalada sobre la misma tabla de corte. Preparación B: cada alimento sobre su propia tabla">
+                <rect x="20" y="52" width="124" height="46" rx="7" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+                <ellipse cx="55" cy="75" rx="20" ry="13" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <path d="M45 72 h20 M47 80 h16" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M89 74 a20 20 0 0 0 40 0 z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="99" cy="70" r="5" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="109" cy="66" r="6" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="119" cy="70" r="5" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="82" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Pollo crudo y ensalada</text>
+                <text x="82" y="131" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">en la misma tabla</text>
+                <text x="82" y="168" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">PREPARACIÓN A</text>
+                <rect x="176" y="52" width="58" height="46" rx="7" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+                <ellipse cx="205" cy="75" rx="18" ry="12" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <path d="M196 72 h18 M198 80 h14" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="242" y="52" width="58" height="46" rx="7" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+                <path d="M252 74 a19 19 0 0 0 38 0 z" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="261" cy="70" r="5" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="271" cy="66" r="6" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="281" cy="70" r="5" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="238" y="118" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Cada alimento en</text>
+                <text x="238" y="131" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">su propia tabla</text>
+                <text x="238" y="168" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">PREPARACIÓN B</text>
+              </svg>` },
+
+            { q: "3. Este es el procedimiento correcto de lavado de manos. ¿Cuánto tiempo mínimo debe durar?",
+              options: ["5 segundos", "20 a 30 segundos con jabón", "Solo enjuagar con agua"], a: 1,
+              svg: `<svg viewBox="0 0 320 162" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Los seis pasos del lavado de manos: palmas, dorso, entre los dedos, uñas, pulgares y muñecas">
+                <text x="160" y="13" text-anchor="middle" font-size="10" font-weight="700" fill="#0158AD" letter-spacing="0.8">PASOS DEL LAVADO DE MANOS</text>
+                <circle cx="58" cy="50" r="19" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/>
+                <text x="58" y="57" text-anchor="middle" font-size="16" font-weight="800" fill="#0158AD">1</text>
+                <text x="58" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Palmas</text>
+                <circle cx="160" cy="50" r="19" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/>
+                <text x="160" y="57" text-anchor="middle" font-size="16" font-weight="800" fill="#0158AD">2</text>
+                <text x="160" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Dorso</text>
+                <circle cx="262" cy="50" r="19" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/>
+                <text x="262" y="57" text-anchor="middle" font-size="16" font-weight="800" fill="#0158AD">3</text>
+                <text x="262" y="83" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Entre dedos</text>
+                <circle cx="58" cy="112" r="19" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/>
+                <text x="58" y="119" text-anchor="middle" font-size="16" font-weight="800" fill="#0158AD">4</text>
+                <text x="58" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Uñas</text>
+                <circle cx="160" cy="112" r="19" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/>
+                <text x="160" y="119" text-anchor="middle" font-size="16" font-weight="800" fill="#0158AD">5</text>
+                <text x="160" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Pulgares</text>
+                <circle cx="262" cy="112" r="19" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/>
+                <text x="262" y="119" text-anchor="middle" font-size="16" font-weight="800" fill="#0158AD">6</text>
+                <text x="262" y="145" text-anchor="middle" font-size="10" font-weight="600" fill="#475569">Muñecas</text>
+              </svg>` },
+
+            { q: "4. En el termómetro, la franja marcada es la zona de peligro. ¿Entre qué temperaturas está?",
+              options: ["Entre 5°C y 60°C", "Menos de 0°C", "Más de 100°C"], a: 0,
+              svg: `<svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Termómetro con tres franjas: alimento caliente arriba, la zona de peligro marcada con interrogación en el centro, y alimento refrigerado abajo">
+                <text x="48" y="12" text-anchor="middle" font-size="10" font-weight="700" fill="#94a3b8">°C</text>
+                <rect x="28" y="18" width="40" height="44" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+                <rect x="28" y="66" width="40" height="62" rx="6" fill="#dbeafe" stroke="#0158AD" stroke-width="2.5"/>
+                <text x="48" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="#0158AD">?</text>
+                <rect x="28" y="132" width="40" height="32" rx="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+                <path d="M74 40 H86" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/>
+                <path d="M74 97 H86" stroke="#0158AD" stroke-width="2" stroke-linecap="round"/>
+                <path d="M74 148 H86" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"/>
+                <text x="92" y="44" font-size="12" font-weight="600" fill="#334155">Alimento caliente</text>
+                <text x="92" y="94" font-size="12" font-weight="800" fill="#0158AD">ZONA DE PELIGRO</text>
+                <text x="92" y="109" font-size="10.5" font-weight="600" fill="#64748b">¿en qué rango?</text>
+                <text x="92" y="152" font-size="12" font-weight="600" fill="#334155">Alimento refrigerado</text>
+              </svg>` },
+
             { q: "5. Si tienes gripe o heridas en las manos, ¿qué debes hacer?", options: ["Usar tapabocas y seguir trabajando", "Informar al jefe y no manipular alimentos", "Ponerse doble guante"], a: 1 },
+
             { q: "6. El agua utilizada para preparar alimentos debe ser:", options: ["De río", "Potable", "Lluvia"], a: 1 },
-            { q: "7. ¿Cómo se deben almacenar los productos químicos de aseo?", options: ["Junto a la comida para tenerlos cerca", "En un lugar separado y rotulado", "En la nevera"], a: 1 },
+
+            { q: "7. Observa las dos bodegas de insumos. ¿Cuál almacena bien los productos químicos de aseo?",
+              options: ["La bodega A", "La bodega B", "Las dos están bien"], a: 0,
+              svg: `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Bodega A: los alimentos en un estante y los químicos rotulados en otro estante aparte. Bodega B: alimentos y químicos juntos en el mismo estante">
+                <rect x="20" y="24" width="124" height="36" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+                <rect x="34" y="32" width="20" height="20" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <rect x="62" y="32" width="20" height="20" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <rect x="90" y="32" width="20" height="20" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="82" y="74" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">Alimentos</text>
+                <rect x="20" y="84" width="124" height="36" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+                <rect x="52" y="96" width="6" height="5" fill="#94a3b8"/>
+                <rect x="46" y="100" width="18" height="20" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <rect x="86" y="96" width="6" height="5" fill="#94a3b8"/>
+                <rect x="80" y="100" width="18" height="20" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="82" y="134" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">Químicos rotulados</text>
+                <text x="82" y="170" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">BODEGA A</text>
+                <rect x="176" y="54" width="124" height="36" rx="5" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+                <rect x="190" y="62" width="20" height="20" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <rect x="218" y="62" width="20" height="20" rx="2" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <rect x="252" y="66" width="6" height="5" fill="#94a3b8"/>
+                <rect x="246" y="70" width="18" height="20" rx="3" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <text x="238" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">Alimentos y químicos</text>
+                <text x="238" y="119" text-anchor="middle" font-size="10" font-weight="700" fill="#475569">en el mismo estante</text>
+                <text x="238" y="170" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">BODEGA B</text>
+              </svg>` },
+
             { q: "8. El carnet de manipulación de alimentos tiene validez ante:", options: ["Solo el restaurante donde trabajo", "Secretaría de Salud (Nacional)", "La policía de tránsito"], a: 1 },
-            { q: "9. ¿Qué indumentaria es obligatoria para un manipulador de alimentos?", options: ["Ropa deportiva cómoda", "Uniforme de color claro, gorro y sin joyas", "Cualquier ropa limpia"], a: 1 },
+
+            { q: "9. ¿Cuál de los dos manipuladores está correctamente presentado para trabajar?",
+              options: ["El manipulador A", "El manipulador B", "Los dos cumplen la norma"], a: 0,
+              svg: `<svg viewBox="0 0 320 208" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Manipulador A: con gorro, uniforme claro y sin joyas. Manipulador B: sin gorro, con ropa de calle, reloj y aretes">
+                <path d="M64 48 q0 -20 18 -20 q18 0 18 20 z" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+                <rect x="60" y="46" width="44" height="9" rx="4" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1.5"/>
+                <circle cx="82" cy="72" r="16" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+                <rect x="52" y="94" width="60" height="56" rx="11" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+                <path d="M72 94 L82 110 L92 94" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M82 114 V144" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4 4"/>
+                <text x="82" y="166" text-anchor="middle" font-size="9.5" font-weight="600" fill="#475569">Gorro y uniforme claro,</text>
+                <text x="82" y="178" text-anchor="middle" font-size="9.5" font-weight="600" fill="#475569">sin joyas</text>
+                <text x="82" y="203" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0158AD">MANIPULADOR A</text>
+                <circle cx="238" cy="72" r="16" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
+                <circle cx="254" cy="78" r="3.5" fill="#475569"/>
+                <path d="M208 100 L226 92 L238 98 L250 92 L268 100 L263 112 L254 108 V150 H222 V108 L213 112 Z" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round"/>
+                <circle cx="238" cy="100" r="7" fill="none" stroke="#94a3b8" stroke-width="2"/>
+                <rect x="207" y="112" width="12" height="9" rx="2" fill="none" stroke="#475569" stroke-width="2"/>
+                <text x="238" y="166" text-anchor="middle" font-size="9.5" font-weight="600" fill="#475569">Sin gorro, ropa de calle,</text>
+                <text x="238" y="178" text-anchor="middle" font-size="9.5" font-weight="600" fill="#475569">reloj y aretes</text>
+                <text x="238" y="203" text-anchor="middle" font-size="11.5" font-weight="800" fill="#0158AD">MANIPULADOR B</text>
+              </svg>` },
+
             { q: "10. Las uñas de un manipulador de alimentos deben estar:", options: ["Pintadas para verse bien", "Largas pero limpias", "Cortas, limpias y sin esmalte"], a: 2 }
         ];
 
@@ -1150,6 +1283,16 @@
             const q = questions[state.quiz.currentIdx];
             document.getElementById('q-text').innerText = q.q;
             document.getElementById('q-current').innerText = state.quiz.currentIdx + 1;
+
+            // Gráfico ilustrativo (solo en algunas preguntas)
+            const fig = document.getElementById('q-figure');
+            if (q.svg) {
+                fig.innerHTML = q.svg;
+                fig.classList.remove('hidden');
+            } else {
+                fig.innerHTML = '';
+                fig.classList.add('hidden');
+            }
             document.getElementById('progress-bar').style.width = (state.quiz.currentIdx / questions.length * 100) + "%";
 
             const container = document.getElementById('q-options');
