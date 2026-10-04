@@ -27,8 +27,16 @@
 
       gtag('config', 'AW-18401724817');
     </script>
-    <!-- La conversión "Compra" de Google Ads se envía al final del body,
-         junto con el Purchase de Meta, ya con el curso y el valor reales. -->
+
+    <!-- Event snippet for Compra conversion page -->
+    <script>
+      gtag('event', 'conversion', {
+          'send_to': 'AW-18401724817/PDdzCMv6j-UcEJGT0MZE',
+          'value': 1.0,
+          'currency': 'COP',
+          'transaction_id': ''
+      });
+    </script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -256,20 +264,20 @@
 
     <script>
         (function () {
-            // Último pago iniciado en cualquiera de las landings (lo guarda beginCheckout())
+            // Lee datos guardados en localStorage por el flujo de pago
             var stored = {};
             try {
-                stored = JSON.parse(localStorage.getItem('certitec_last_checkout') || '{}');
+                stored = JSON.parse(localStorage.getItem('certitec_data_v2') || '{}');
             } catch (e) {}
 
             // También acepta parámetros en la URL: ?curso=…&valor=…&moneda=…
             var params = new URLSearchParams(window.location.search);
             var courseName = params.get('curso')
                           || stored.curso
+                          || stored.content_name
                           || 'Certificado CertiTec Colombia';
-            var value     = parseFloat(params.get('valor') || stored.valor || 0);
-            var currency  = params.get('moneda') || 'COP';
-            var txId      = stored.id || '';
+            var value     = parseFloat(params.get('valor') || stored.valor || stored.value || 0);
+            var currency  = params.get('moneda') || stored.moneda || stored.currency || 'COP';
 
             // Actualiza la etiqueta del curso en la UI
             var label = document.getElementById('course-label');
@@ -282,13 +290,6 @@
                 waBtn.href = 'https://wa.me/573107941580?text=' + encodeURIComponent(msg);
             }
 
-            // Si recargan la página no contamos la misma compra dos veces
-            var TRACKED_KEY = 'certitec_purchase_tracked';
-            var alreadyTracked = false;
-            try { alreadyTracked = !!txId && localStorage.getItem(TRACKED_KEY) === txId; } catch (e) {}
-            if (alreadyTracked) return;
-            try { if (txId) localStorage.setItem(TRACKED_KEY, txId); } catch (e) {}
-
             // Dispara el evento Purchase del Meta Pixel
             if (typeof fbq === 'function') {
                 var purchaseParams = {
@@ -296,23 +297,11 @@
                     content_type: 'product',
                     currency: currency
                 };
-                if (stored.slug) purchaseParams.content_ids = [stored.slug];
                 if (value > 0) {
                     purchaseParams.value = value;
                     purchaseParams.num_items = 1;
                 }
-                if (txId) fbq('track', 'Purchase', purchaseParams, { eventID: 'purchase-' + txId });
-                else fbq('track', 'Purchase', purchaseParams);
-            }
-
-            // Conversión "Compra" de Google Ads con el valor real
-            if (typeof gtag === 'function') {
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-18401724817/PDdzCMv6j-UcEJGT0MZE',
-                    'value': value > 0 ? value : 1.0,
-                    'currency': currency,
-                    'transaction_id': txId
-                });
+                fbq('track', 'Purchase', purchaseParams);
             }
         })();
     </script>

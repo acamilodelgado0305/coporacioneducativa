@@ -546,7 +546,7 @@
                         <label>Número de Documento <span class="req">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-hashtag input-icon"></i>
-                            <input type="text" id="user-docnum" required inputmode="numeric" autocomplete="off" placeholder="Ej: 1090333444" class="input-pro" />
+                            <input type="number" id="user-docnum" required placeholder="Ej: 1090333444" class="input-pro" />
                         </div>
                     </div>
 
@@ -554,7 +554,7 @@
                         <label>Nombre Completo <span class="req">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-user input-icon"></i>
-                            <input type="text" id="user-fullname" required autocomplete="name" placeholder="Nombres y Apellidos" class="input-pro capitalize" />
+                            <input type="text" id="user-fullname" required placeholder="Nombres y Apellidos" class="input-pro capitalize" />
                         </div>
                     </div>
 
@@ -562,7 +562,7 @@
                         <label>Celular / WhatsApp <span class="req">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-phone input-icon"></i>
-                            <input type="tel" id="user-phone" required inputmode="numeric" autocomplete="tel-national" pattern="[0-9]{10}" title="Celular de 10 dígitos, ej: 3101234567" oninput="normalizePhone(this)" placeholder="Ej: 3101234567" class="input-pro" />
+                            <input type="tel" id="user-phone" required inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="Ej: 3101234567" class="input-pro" />
                         </div>
                         <p class="text-xs text-slate-400 mt-1.5 ml-1">Por aquí te confirmamos tu certificado.</p>
                     </div>
@@ -571,7 +571,7 @@
                         <label>Correo Electrónico <span class="req">*</span></label>
                         <div class="input-wrap">
                             <i class="fas fa-envelope input-icon"></i>
-                            <input type="email" id="user-email" required autocomplete="email" placeholder="ejemplo@correo.com" class="input-pro" />
+                            <input type="email" id="user-email" required placeholder="ejemplo@correo.com" class="input-pro" />
                         </div>
                         <p class="text-xs text-slate-400 mt-1.5 ml-1">Aquí recibirás tu certificado en PDF.</p>
                     </div>
@@ -740,7 +740,7 @@
                                     </div>
                                 </div>
 
-                                <a href="https://wa.me/573107941580" data-wa="Hola, acabo de aprobar el examen de Servicios de Aseo Generales y ya realicé el pago. Adjunto comprobante."
+                                <a href="https://wa.me/573107941580?text=Hola,%20acabo%20de%20aprobar%20el%20examen%20de%20Servicios%20de%20Aseo%20Generales%20y%20ya%20realic%C3%A9%20el%20pago.%20Adjunto%20comprobante."
                                    target="_blank" onclick="reportPaymentWhatsApp()"
                                    class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-xl text-sm font-bold no-underline transition-all">
                                     <i class="fab fa-whatsapp"></i> Enviar comprobante por WhatsApp
@@ -766,6 +766,15 @@
                         </div>
                     </div>
 
+                    <div class="pt-4 flex items-center justify-center gap-4 mb-2">
+                        <button onclick="showExitModal()" class="text-xs text-slate-400 hover:text-red-500 transition flex items-center gap-1.5 hover:underline">
+                            <i class="fas fa-times text-[9px]"></i> Cancelar
+                        </button>
+                        <span class="text-slate-200 text-xs">|</span>
+                        <button onclick="startNewProcess()" class="text-xs text-slate-400 hover:text-slate-600 transition flex items-center gap-1.5 hover:underline">
+                            <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
+                        </button>
+                    </div>
 
                     <!-- ¿Qué incluye? -->
                     <div class="bg-[#eff6ff] border border-[#bfdbfe] rounded-xl px-4 py-3 space-y-2">
@@ -782,10 +791,6 @@
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-shield-alt text-[#0158AD] text-xs flex-shrink-0 w-3"></i>
                                 <span class="text-xs text-slate-700">Diploma y certificado emitidos por Alianza Capacitarte</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <i class="fas fa-search text-[#0158AD] text-xs flex-shrink-0 w-3"></i>
-                                <span class="text-xs text-slate-700">Verificable en línea con tu número de documento</span>
                             </div>
                             <div class="flex items-center gap-2">
                                 <i class="fas fa-headset text-[#0158AD] text-xs flex-shrink-0 w-3"></i>
@@ -834,16 +839,6 @@
                     <p class="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
                         <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por PSE
                     </p>
-
-                    <div class="pt-2 flex items-center justify-center gap-4">
-                        <button onclick="showExitModal()" class="text-xs text-slate-400 hover:text-red-500 transition flex items-center gap-1.5 hover:underline">
-                            <i class="fas fa-times text-[9px]"></i> Cancelar
-                        </button>
-                        <span class="text-slate-200 text-xs">|</span>
-                        <button onclick="startNewProcess()" class="text-xs text-slate-400 hover:text-slate-600 transition flex items-center gap-1.5 hover:underline">
-                            <i class="fas fa-redo-alt text-[9px]"></i> Iniciar nuevo proceso
-                        </button>
-                    </div>
                 </div>
             </div>
 
@@ -999,7 +994,7 @@
                         <span class="reason-icon">📄</span>
                         <span>No sé si me sirve para conseguir empleo</span>
                     </button>
-                    <a href="https://wa.me/573107941580" data-wa="Hola, quiero hablar con un asesor antes de pagar mi certificado." target="_blank" class="exit-reason-btn" style="text-decoration:none;">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20hablar%20con%20un%20asesor%20antes%20de%20pagar%20mi%20certificado." target="_blank" class="exit-reason-btn" style="text-decoration:none;">
                         <span class="reason-icon">🙋</span>
                         <span>Hablar con un asesor por WhatsApp</span>
                     </a>
@@ -1053,7 +1048,6 @@
         // Único link de cobro de este curso. El link de PSE/RappiPay no trae monto fijo:
         // el usuario escribe 35.000 en la pasarela (por eso el botón lo indica).
         const PSE_CHECKOUT_URL = 'https://linkdepagospse.rappipay.co/AV4v5j';
-        const WA_PHONE = '573107941580';
 
         let state = {
             view: 'view-quiz-app',
@@ -1354,7 +1348,6 @@
             if (state.view === 'view-quiz-app') loadQuestionUI();
             if (state.view === 'view-checkout') {
                 populateCheckoutEmail();
-                armExitIntent();
             }
         }
 
@@ -1478,11 +1471,10 @@
             e.preventDefault();
             state.userData = {
                 type: document.getElementById('user-doctype').value,
-                // Sin puntos ni espacios: "1.090.333.444" llega al CRM como 1090333444
-                num: document.getElementById('user-docnum').value.replace(/[\s.,-]/g, '').toUpperCase(),
-                name: document.getElementById('user-fullname').value.trim().replace(/\s+/g, ' '),
+                num: document.getElementById('user-docnum').value,
+                name: document.getElementById('user-fullname').value,
                 phone: document.getElementById('user-phone').value,
-                email: document.getElementById('user-email').value.trim()
+                email: document.getElementById('user-email').value
             };
             state.consent = {
                 aceptado: true,
@@ -1522,62 +1514,19 @@
                 : 'https://wa.me/' + phone + '?text=' + text;
         }
 
-        // Todas las formas de pago pasan por aquí. Además deja en localStorage el curso
-        // y el valor para que gracias.html envíe el Purchase con datos reales.
-        function beginCheckout(metodo) {
-            trackEvent('payment_initiated', { metodo });
-            markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_ids: [SERVICIO_SLUG], content_name: PRODUCTO, content_type: 'product', value: PRECIO, currency: 'COP', num_items: 1 });
-            try {
-                localStorage.setItem('certitec_last_checkout', JSON.stringify({
-                    id: getLeadEventId(), slug: SERVICIO_SLUG, curso: PRODUCTO, valor: PRECIO, metodo, fecha: Date.now()
-                }));
-            } catch (e) {}
-        }
-
         function registerAndPay() {
-            beginCheckout('PSE');
+            trackEvent('payment_initiated', { metodo: 'PSE' });
+            markLeadAsProposal();
+            fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
             window.location.href = PSE_CHECKOUT_URL;
         }
 
         function reportPaymentWhatsApp() {
-            beginCheckout('WhatsApp');
+            trackEvent('payment_initiated', { metodo: 'WhatsApp' });
+            markLeadAsProposal();
+            fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
             trackEvent('whatsapp_comprobante');
         }
-
-        // --- WHATSAPP CON DATOS DEL USUARIO ---
-        // Los enlaces con data-wa="mensaje" salen con curso, nombre, documento y correo,
-        // así el asesor ubica el lead y cierra la venta sin pedir los datos otra vez.
-        function waUrl(intro) {
-            const u = state.userData || {};
-            const lines = [intro, '', '• Curso: ' + PRODUCTO];
-            if (u.name) {
-                lines.push('• Nombre: ' + u.name,
-                           '• Documento: ' + ((u.type || '') + ' ' + (u.num || '')).trim(),
-                           '• Correo: ' + (u.email || ''));
-            }
-            return 'https://wa.me/' + WA_PHONE + '?text=' + encodeURIComponent(lines.join('\n'));
-        }
-
-        // Se arma en el clic (fase de captura) para usar siempre los datos actuales,
-        // incluso si el usuario corrigió el correo después de cargar la página.
-        document.addEventListener('click', (e) => {
-            const a = e.target.closest && e.target.closest('a[data-wa]');
-            if (a) a.href = waUrl(a.dataset.wa);
-        }, true);
-
-        // --- FORMULARIO ---
-        // Acepta "310 123 4567" o "+57 310..." pegado y lo deja en 10 dígitos.
-        function normalizePhone(input) {
-            let v = input.value.replace(/\D/g, '');
-            if (v.length > 10 && v.startsWith('57')) v = v.slice(2);
-            input.value = v.slice(0, 10);
-        }
-
-        // El pasaporte puede traer letras: cambiamos el teclado del celular según el tipo.
-        document.getElementById('user-doctype').addEventListener('change', (e) => {
-            document.getElementById('user-docnum').inputMode = e.target.value === 'PAS' ? 'text' : 'numeric';
-        });
 
         function copyToClipboard(text, btnId) {
             navigator.clipboard.writeText(text).then(() => {
@@ -1601,13 +1550,6 @@
         function toggleOtherPayments() {
             document.getElementById('other-payments-panel').classList.toggle('hidden');
             document.getElementById('other-payments-chevron').classList.toggle('rotate-180');
-        }
-
-        function openOtherPayments() {
-            const panel = document.getElementById('other-payments-panel');
-            panel.classList.remove('hidden');
-            document.getElementById('other-payments-chevron').classList.add('rotate-180');
-            panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
 
         function startNewProcess() {
@@ -1688,32 +1630,6 @@
 
 
 
-        // En el pago, el primer "atrás" del celular abre el modal de "¿qué pasó?" en vez
-        // de sacar al usuario (antes solo se veía si tocaba el link "Cancelar").
-        // Una sola vez por sesión: el siguiente "atrás" sale normal.
-        const EXIT_INTENT_KEY = STORAGE_KEY + '_exit_shown';
-
-        function exitIntentShown() {
-            try { return !!sessionStorage.getItem(EXIT_INTENT_KEY); } catch (e) { return true; }
-        }
-
-        function armExitIntent() {
-            if (exitIntentShown()) return;
-            if (!(history.state && history.state.certitecCheckout)) {
-                history.pushState({ certitecCheckout: true }, '');
-            }
-        }
-
-        window.addEventListener('popstate', (e) => {
-            if (e.state && e.state.certitecCheckout) return;
-            if (state.view !== 'view-checkout') return;
-            // Ya se mostró: completamos la salida que el usuario pidió
-            if (exitIntentShown()) { history.back(); return; }
-            try { sessionStorage.setItem(EXIT_INTENT_KEY, '1'); } catch (err) {}
-            trackEvent('exit_intent_back');
-            showExitModal();
-        });
-
         function backToReasons() {
             pendingExitReason = null;
             document.getElementById('exit-reasons').classList.remove('hidden');
@@ -1729,28 +1645,25 @@
                     <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-lock"></i> Pagar de forma segura ahora
                     </button>
-                    <a href="https://wa.me/573107941580" data-wa="Hola, tengo dudas sobre la seguridad del pago del curso de Servicios de Aseo Generales." target="_blank" class="btn-exit-wa">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20la%20seguridad%20del%20pago%20del%20curso%20de%20Servicios%20de%20Aseo%20Generales." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Resolver mis dudas por WhatsApp
                     </a>`
             },
             dinero: {
-                title: 'Tu examen aprobado no se pierde',
-                sub:   'Paga cuando tengas el dinero, sin repetir el examen',
-                body:  'Tus datos y tu resultado ya quedaron registrados. Escríbenos por WhatsApp y te enviamos el link de pago para que lo tengas a mano y pagues cuando puedas. También puedes transferir 35.000 a Nequi, Daviplata o Bancolombia.',
+                title: 'Puedes pagar por transferencia manual',
+                sub:   'Nequi · Daviplata · Bancolombia',
+                body:  'Transfiere 35.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
                 actions: `
-                    <a href="https://wa.me/573107941580" data-wa="Hola, aprobé el examen pero quiero pagar más adelante. ¿Me envían el link de pago?" target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Enviarme el link de pago por WhatsApp
-                    </a>
-                    <button class="w-full text-sm font-semibold text-[#0158AD] underline py-2" onclick="closeExitModal(); openOtherPayments();">
-                        Ver cuentas para transferir
-                    </button>`
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado%20de%20Servicios%20de%20Aseo%20Generales." target="_blank" class="btn-exit-wa">
+                        <i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual
+                    </a>`
             },
             metodo: {
                 title: 'Tenemos varias formas de pago',
                 sub:   'Sin tarjeta ni apps bancarias',
                 body:  'Puedes pagar con Nequi, Daviplata o transferencia Bancolombia. Solo envíanos el comprobante por WhatsApp y listo. Escríbenos y te damos los datos.',
                 actions: `
-                    <a href="https://wa.me/573107941580" data-wa="Hola, no tengo tarjeta ni Nequi, ¿cómo puedo pagar mi certificado de Servicios de Aseo Generales?" target="_blank" class="btn-exit-wa">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20no%20tengo%20tarjeta%20ni%20Nequi%2C%20%C2%BFc%C3%B3mo%20puedo%20pagar%20mi%20certificado%20de%20Servicios%20de%20Aseo%20Generales%3F" target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Ver otras formas de pago
                     </a>`
             },
@@ -1759,7 +1672,7 @@
                 sub:   'Emitimos factura o soporte de pago',
                 body:  'Podemos enviarte una factura o soporte oficial para que tu empresa o empleador realice el pago. Escríbenos y te explicamos el proceso en minutos.',
                 actions: `
-                    <a href="https://wa.me/573107941580" data-wa="Hola, mi empresa va a pagar el certificado de Servicios de Aseo Generales, ¿cómo lo tramitamos?" target="_blank" class="btn-exit-wa">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20mi%20empresa%20va%20a%20pagar%20el%20certificado%20de%20Servicios%20de%20Aseo%20Generales%2C%20%C2%BFc%C3%B3mo%20lo%20tramitamos%3F" target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Coordinar pago con mi empresa
                     </a>`
             },
@@ -1771,7 +1684,7 @@
                     <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-certificate"></i> Obtener mi certificado ahora
                     </button>
-                    <a href="https://wa.me/573107941580" data-wa="Hola, tengo dudas sobre si necesito el certificado de Servicios de Aseo Generales." target="_blank" class="btn-exit-wa">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20si%20necesito%20el%20certificado%20de%20Servicios%20de%20Aseo%20Generales." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Consultar con un asesor
                     </a>`
             },
@@ -1789,7 +1702,7 @@
                 sub:   'Un asesor te atiende ahora mismo',
                 body:  'Escríbenos por WhatsApp y resolvemos tu duda en minutos. No dejes que una pregunta te impida obtener tu certificado hoy.',
                 actions: `
-                    <a href="https://wa.me/573107941580" data-wa="Hola, tengo una pregunta sobre el certificado de Servicios de Aseo Generales antes de pagar." target="_blank" class="btn-exit-wa">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20certificado%20de%20Servicios%20de%20Aseo%20Generales%20antes%20de%20pagar." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Hacer mi pregunta ahora
                     </a>`
             },
@@ -1801,7 +1714,7 @@
                     <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-briefcase"></i> Quiero mi certificado
                     </button>
-                    <a href="https://wa.me/573107941580" data-wa="Hola, quiero saber cómo me sirve el certificado de Servicios de Aseo Generales para conseguir empleo." target="_blank" class="btn-exit-wa">
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20saber%20c%C3%B3mo%20me%20sirve%20el%20certificado%20de%20Servicios%20de%20Aseo%20Generales%20para%20conseguir%20empleo." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Preguntar a un asesor
                     </a>`
             }
