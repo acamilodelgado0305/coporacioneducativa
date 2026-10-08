@@ -793,7 +793,7 @@
                         <div class="space-y-2.5 text-xs">
                             <div>
                                 <p class="font-bold text-slate-800">¿Qué pasa si el pago en línea me falla?</p>
-                                <p class="text-slate-500 mt-0.5">Si la pasarela falla, puedes transferir manualmente a nuestras cuentas de Nequi, Daviplata o Bancolombia que aparecen arriba y enviarnos el comprobante por WhatsApp. Lo validamos y activamos tu certificado en minutos.</p>
+                                <p class="text-slate-500 mt-0.5">Si la pasarela de PSE falla, escríbenos por WhatsApp al 310 794 1580 y te ayudamos a completar el pago.</p>
                             </div>
                             <div class="border-t border-slate-200/60 pt-2">
                                 <p class="font-bold text-slate-800">¿Para qué me sirve este certificado?</p>
@@ -1746,7 +1746,7 @@
             seguridad: {
                 title: '¡Tu dinero está 100% protegido!',
                 sub:   'Pago procesado por PSE · cifrado de extremo a extremo',
-                body:  'El pago se procesa por la pasarela de PSE/RappiPay, la misma que usan miles de comercios en Colombia. La transacción va cifrada y nunca almacenamos los datos de tu cuenta. Si prefieres, también puedes pagar por transferencia manual.',
+                body:  'El pago se procesa por la pasarela de PSE/RappiPay, la misma que usan miles de comercios en Colombia. La transacción va cifrada y nunca almacenamos los datos de tu cuenta.',
                 actions: `
                     <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-lock"></i> Pagar de forma segura ahora
@@ -1756,21 +1756,27 @@
                     </a>`
             },
             dinero: {
-                title: 'Puedes pagar por transferencia manual',
-                sub:   'Nequi · Daviplata · Bancolombia',
-                body:  'Transfiere 50.000 a cualquiera de nuestras cuentas y envíanos el comprobante por WhatsApp. Activamos tu certificado de inmediato, sin necesidad de tarjeta.',
+                title: 'Tu examen aprobado queda guardado',
+                sub:   'Paga cuando tengas el dinero',
+                body:  'No pierdes lo que ya hiciste: tu resultado queda guardado en este dispositivo. Cuando tengas los 50.000, vuelve a esta página y paga por PSE desde tu banco en menos de 2 minutos.',
                 actions: `
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20por%20transferencia%20manual%20mi%20certificado%20de%20Bodega%20y%20Log%C3%ADstica." target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Pagar por transferencia manual
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
+                        <i class="fas fa-lock"></i> Pagar con PSE ahora
+                    </button>
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20m%C3%A1s%20adelante%20mi%20certificado%20de%20Bodega%20y%20Log%C3%ADstica." target="_blank" class="btn-exit-wa">
+                        <i class="fab fa-whatsapp text-lg"></i> Hablar con un asesor
                     </a>`
             },
             metodo: {
-                title: 'Tenemos varias formas de pago',
-                sub:   'Sin tarjeta ni apps bancarias',
-                body:  'Puedes pagar con Nequi, Daviplata o transferencia Bancolombia. Solo envíanos el comprobante por WhatsApp y listo. Escríbenos y te damos los datos.',
+                title: 'Solo necesitas una cuenta bancaria',
+                sub:   'PSE funciona con todos los bancos de Colombia',
+                body:  'No necesitas tarjeta de crédito: con PSE pagas directo desde tu cuenta de ahorros o corriente de cualquier banco. Si tienes dudas para hacerlo, un asesor te guía por WhatsApp.',
                 actions: `
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20no%20tengo%20tarjeta%20ni%20Nequi%2C%20%C2%BFc%C3%B3mo%20puedo%20pagar%20mi%20certificado%20de%20Bodega%3F" target="_blank" class="btn-exit-wa">
-                        <i class="fab fa-whatsapp text-lg"></i> Ver otras formas de pago
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
+                        <i class="fas fa-university"></i> Pagar con PSE
+                    </button>
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20necesito%20ayuda%20para%20pagar%20por%20PSE%20mi%20certificado%20de%20Bodega%20y%20Log%C3%ADstica." target="_blank" class="btn-exit-wa">
+                        <i class="fab fa-whatsapp text-lg"></i> Que un asesor me guíe
                     </a>`
             },
             empresa: {
