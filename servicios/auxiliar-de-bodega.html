@@ -691,17 +691,27 @@
                     <!-- OPCIONES DE PAGO -->
                     <div class="space-y-3 pt-2">
 
-                        <!-- NEQUI (RECOMENDADO) -->
-                        <button onclick="payWithNequi()" class="btn-pay-option group relative border-2 border-[#DA0063] hover:bg-[#fff5f8] transition-all">
-                            <span class="bg-[#DA0063] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
+                        <!-- PSE (RECOMENDADO) -->
+                        <button onclick="registerAndPay()" class="btn-pay-option group relative border-2 border-[#0158AD] hover:bg-[#eff6ff] transition-all">
+                            <span class="bg-[#0158AD] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
                             <div class="flex items-center gap-3">
-                                <img src="https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj" class="w-9 h-9 rounded-lg object-cover bg-white flex-shrink-0" alt="Nequi">
+                                <img src="https://images.ctfassets.net/ex6ts2p2j0ib/33ZB3pSE7aWIQ6qUTvGEid/cc6bd9d687b772c39657b0af40f174c9/banner-50__pse---new--logo.png?w=3840&q=75" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="PSE">
                                 <div class="flex-1 text-left">
-                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Nequi en línea — 50.000</p>
-                                    <p class="text-xs text-[#DA0063] font-bold leading-tight mt-0.5">Aprobación inmediata</p>
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con PSE — 50.000</p>
+                                    <p class="text-xs text-[#0158AD] font-bold leading-tight mt-0.5">Débito desde tu banco · Ingresa el monto 50.000</p>
                                 </div>
-                                <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                                <i class="fas fa-arrow-right text-[#0158AD] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
                             </div>
+                        </button>
+
+                        <!-- ENVIAR COMPROBANTE (verificación manual del pago) -->
+                        <button onclick="sendPseProof()" class="w-full flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-xl transition-all shadow-sm">
+                            <i class="fab fa-whatsapp text-2xl flex-shrink-0"></i>
+                            <div class="flex-1 text-left">
+                                <p class="font-extrabold text-sm leading-tight">Enviar comprobante para verificación</p>
+                                <p class="text-[11px] font-semibold leading-tight mt-0.5 opacity-90">Documento: <span id="proof-doc" class="font-mono"></span></p>
+                            </div>
+                            <i class="fas fa-arrow-right text-sm flex-shrink-0"></i>
                         </button>
 
                         <!-- OTRAS FORMAS DE PAGO (DROPDOWN) -->
@@ -711,14 +721,6 @@
                                 <i id="other-payments-chevron" class="fas fa-chevron-down text-xs text-slate-400 transition-transform"></i>
                             </button>
                             <div id="other-payments-panel" class="hidden border-t border-slate-100 p-4 space-y-3 bg-slate-50/60">
-
-                                <button onclick="registerAndPay()" class="btn-pay-option border-2 border-[#0158AD]">
-                                    <div class="flex items-center gap-3">
-                                        <img src="https://images.ctfassets.net/ex6ts2p2j0ib/33ZB3pSE7aWIQ6qUTvGEid/cc6bd9d687b772c39657b0af40f174c9/banner-50__pse---new--logo.png?w=3840&q=75" class="w-6 h-6 rounded object-contain bg-white border border-slate-100 p-0.5 flex-shrink-0" alt="PSE">
-                                        <p class="flex-1 text-left font-bold text-sm text-slate-800">PSE / Débito bancario</p>
-                                        <i class="fas fa-arrow-right text-[#0158AD] text-xs flex-shrink-0"></i>
-                                    </div>
-                                </button>
 
                                 <div class="grid grid-cols-1 gap-2">
                                     <div class="bg-white px-3 py-2.5 rounded-lg border border-slate-200">
@@ -845,7 +847,7 @@
 
 
                     <p class="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
-                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por Nequi
+                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por PSE
                     </p>
                 </div>
             </div>
@@ -872,6 +874,91 @@
 
 
 
+
+    <!-- Modal pago PSE: el comprobante por WhatsApp es obligatorio para liberar el certificado -->
+    <div id="pse-modal" class="modal-backdrop hidden">
+        <div class="modal-box" style="max-width:400px">
+
+            <!-- Paso 1: instrucciones antes de pagar -->
+            <div id="pse-step-pay">
+                <div class="flex items-center justify-between p-5 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.ctfassets.net/ex6ts2p2j0ib/33ZB3pSE7aWIQ6qUTvGEid/cc6bd9d687b772c39657b0af40f174c9/banner-50__pse---new--logo.png?w=3840&q=75" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="PSE">
+                        <div>
+                            <p class="font-bold text-slate-800 text-sm">Pagar con PSE — 50.000</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Sigue estos 3 pasos para recibir tu certificado</p>
+                        </div>
+                    </div>
+                    <button onclick="closePseModal()" class="text-slate-300 hover:text-slate-500 transition">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <div class="p-5 space-y-4">
+                    <ol class="space-y-3 text-xs text-slate-600 leading-snug">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#0158AD] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            <span class="pt-1">Paga en PSE desde tu banco e ingresa el monto <strong class="text-slate-800">50.000</strong>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#0158AD] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            <span class="pt-1">Al terminar, toma captura del <strong class="text-slate-800">comprobante de pago</strong>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#0158AD] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            <span class="pt-1"><strong class="text-slate-800">Obligatorio:</strong> envía el comprobante por WhatsApp al <strong class="text-slate-800">310 794 1580</strong>. Sin el comprobante no podemos verificar tu pago ni liberar tu certificado.</span>
+                        </li>
+                    </ol>
+                    <button onclick="startPsePayment()" class="btn-submit-main" style="font-size:14px;padding:13px 20px">
+                        <i class="fas fa-university"></i> Entendido, ir a pagar con PSE
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 2: envío del comprobante. Sin botón de cerrar: es obligatorio -->
+            <div id="pse-step-proof" class="hidden">
+                <div class="flex items-center gap-3 p-5 bg-green-50 border-b border-green-100">
+                    <div class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center flex-shrink-0">
+                        <i class="fab fa-whatsapp text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 text-sm leading-tight">Último paso: envía tu comprobante</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Obligatorio para liberar tu certificado</p>
+                    </div>
+                </div>
+                <div class="p-5 space-y-4">
+                    <p class="text-xs text-slate-600 leading-relaxed">Cuando termines el pago en PSE, envía la captura del comprobante al WhatsApp de verificación de pagos <strong class="text-slate-800">310 794 1580</strong>. Tu certificado se libera solo cuando verificamos el comprobante.</p>
+                    <button onclick="sendPseProof()" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
+                        <i class="fab fa-whatsapp text-lg"></i> Ya pagué: enviar comprobante
+                    </button>
+                    <button onclick="startPsePayment()" class="w-full text-center text-xs text-[#0158AD] font-semibold underline">
+                        Aún no he pagado: abrir PSE de nuevo
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 3: comprobante enviado -->
+            <div id="pse-step-done" class="hidden">
+                <div class="flex items-center gap-3 p-5 bg-blue-50 border-b border-blue-100">
+                    <div class="w-10 h-10 rounded-full bg-[#0158AD] flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check text-white text-base"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 text-sm leading-tight">Estamos verificando tu pago</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Te confirmamos por WhatsApp</p>
+                    </div>
+                </div>
+                <div class="p-5 space-y-4">
+                    <p class="text-xs text-slate-600 leading-relaxed">Asegúrate de haber adjuntado la captura del comprobante en el chat. Apenas lo verifiquemos te enviamos tu certificado al correo registrado.</p>
+                    <button onclick="closePseModal()" class="btn-submit-main" style="font-size:14px;padding:13px 20px">
+                        <i class="fas fa-check"></i> Listo
+                    </button>
+                    <button onclick="sendPseProof()" class="w-full text-center text-xs text-[#0158AD] font-semibold underline">
+                        No se abrió WhatsApp: enviar comprobante de nuevo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal editar correo -->
     <div id="edit-email-modal" class="modal-backdrop hidden">
@@ -1054,11 +1141,6 @@
         const PRECIO   = 50000;
 
         const PSE_CHECKOUT_URL = 'https://linkdepagospse.rappipay.co/AV4v5j';
-        // Link de cobro Nequi/Wompi de ESTE curso: monto fijo de 50.000.
-        // Debe tener la forma /l/<id>; la ruta pelada checkout.wompi.co/method no sirve
-        // (sin id ni monto, Wompi responde "Página no disponible").
-        // Si se deja vacío, el botón de Nequi se oculta y PSE queda como principal.
-        const WOMPI_CHECKOUT_URL = 'https://linkdepagospse.rappipay.co/AV4v5j'; // temporal: botón principal apunta a PSE (antes https://checkout.nequi.wompi.co/l/jzJ7MY)
 
         let state = {
             view: 'view-quiz-app',
@@ -1070,7 +1152,9 @@
             userData: { type: '', num: '', name: '', phone: '', email: '' },
             // Prueba de la autorización de tratamiento de datos (Ley 1581): la ley exige poder demostrarla
             consent: null,
-            quiz: { currentIdx: 0, score: 0 }
+            quiz: { currentIdx: 0, score: 0 },
+            // Pago por PSE: null | 'iniciado' | 'comprobante_enviado'
+            psePago: null
         };
 
         // Algunas preguntas traen un `svg` ilustrativo. Los gráficos comparativos son
@@ -1384,6 +1468,7 @@
             if (state.view === 'view-quiz-app') loadQuestionUI();
             if (state.view === 'view-checkout') {
                 populateCheckoutEmail();
+                if (state.psePago === 'iniciado') showPseStep('pse-step-proof');
             }
         }
 
@@ -1550,19 +1635,68 @@
                 : 'https://wa.me/' + phone + '?text=' + text;
         }
 
-        function registerAndPay() {
-            trackEvent('payment_initiated', { metodo: 'PSE' });
-            markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
-            window.location.href = PSE_CHECKOUT_URL;
+        // ── Pago PSE con comprobante obligatorio ──
+        // PSE no nos avisa cuando el pago se aprueba: lo verificamos a mano con el comprobante
+        // que el usuario manda por WhatsApp. Por eso, una vez abre PSE, el modal queda fijo en
+        // "envía tu comprobante" (también si vuelve o recarga la página) hasta que lo envíe.
+        const PAYMENT_PROOF_PHONE = '573107941580';
+
+        function showPseStep(step) {
+            ['pse-step-pay', 'pse-step-proof', 'pse-step-done'].forEach(id => {
+                document.getElementById(id).classList.toggle('hidden', id !== step);
+            });
+            document.getElementById('pse-modal').classList.remove('hidden');
         }
 
-        function payWithNequi() {
-            if (!WOMPI_CHECKOUT_URL) return; // sin link de cobro configurado no hacemos nada
-            trackEvent('payment_initiated', { metodo: 'Nequi' });
-            markLeadAsProposal();
-            fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
-            window.location.href = WOMPI_CHECKOUT_URL;
+        function closePseModal() {
+            document.getElementById('pse-modal').classList.add('hidden');
+        }
+
+        function registerAndPay() {
+            showPseStep(state.psePago === 'iniciado' ? 'pse-step-proof' : 'pse-step-pay');
+        }
+
+        function startPsePayment() {
+            if (state.psePago !== 'iniciado') {
+                trackEvent('payment_initiated', { metodo: 'PSE' });
+                markLeadAsProposal();
+                fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
+            }
+            state.psePago = 'iniciado';
+            saveState();
+            showPseStep('pse-step-proof');
+
+            // PSE en otra pestaña para que esta siga mostrando el paso del comprobante.
+            // Si el navegador bloquea la pestaña nueva, abrimos PSE aquí mismo: el estado
+            // ya quedó guardado y al volver se muestra de nuevo el paso del comprobante.
+            const win = window.open(PSE_CHECKOUT_URL, '_blank');
+            if (!win) window.location.href = PSE_CHECKOUT_URL;
+        }
+
+        function sendPseProof() {
+            const u = state.userData || {};
+            trackEvent('whatsapp_comprobante', { metodo: 'PSE' });
+            state.psePago = 'comprobante_enviado';
+            saveState();
+            showPseStep('pse-step-done');
+
+            const doc = ((u.type || '') + ' ' + (u.num || '')).trim();
+            const msg = '¡Hola! Ya pagué por PSE mi certificado de Auxiliar de Bodega y Logística ✅\n' +
+                'Adjunto el comprobante de pago para su verificación.\n\n' +
+                '• Nombre: ' + (u.name || '') + '\n' +
+                '• Documento: ' + doc + '\n' +
+                '• Correo: ' + (u.email || '');
+
+            const text = encodeURIComponent(msg);
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+
+            // Igual que goToWhatsApp: en móvil el deep link abre el chat directo; en escritorio
+            // wa.me en otra pestaña para que esta página siga mostrando la confirmación.
+            if (isMobile) {
+                window.location.href = 'whatsapp://send?phone=' + PAYMENT_PROOF_PHONE + '&text=' + text;
+            } else {
+                window.open('https://wa.me/' + PAYMENT_PROOF_PHONE + '?text=' + text, '_blank');
+            }
         }
 
         function reportPaymentWhatsApp() {
@@ -1650,6 +1784,8 @@
             if (email && state.userData.email) email.textContent = state.userData.email;
             if (name  && state.userData.name)  name.textContent  = state.userData.name;
             if (doc   && state.userData.type)  doc.textContent   = state.userData.type + ' ' + state.userData.num;
+            const proofDoc = document.getElementById('proof-doc');
+            if (proofDoc && state.userData.type) proofDoc.textContent = state.userData.type + ' ' + state.userData.num;
         }
 
         // ── Exit intent ──
