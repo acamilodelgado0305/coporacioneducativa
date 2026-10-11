@@ -670,9 +670,27 @@
                     <!-- OPCIONES DE PAGO -->
                     <div class="space-y-3 pt-2">
 
-                        <!-- PSE (RECOMENDADO) -->
-                        <button onclick="registerAndPay()" class="btn-pay-option group relative border-2 border-[#0158AD] hover:bg-[#eff6ff] transition-all">
-                            <span class="bg-[#0158AD] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
+                        <!-- MERCADO PAGO (RECOMENDADO): entrega automática al correo -->
+                        <button id="mp-pay-btn" onclick="payWithMercadoPago()" class="btn-pay-option group relative border-2 border-[#009EE3] hover:bg-[#f0f9ff] transition-all disabled:opacity-70 disabled:cursor-wait">
+                            <span class="bg-[#009EE3] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
+                            <div class="flex items-center gap-3">
+                                <div class="w-9 h-9 rounded-lg bg-[#009EE3] flex items-center justify-center flex-shrink-0">
+                                    <i class="fas fa-handshake text-white text-base"></i>
+                                </div>
+                                <div id="mp-btn-label" class="flex-1 text-left">
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Mercado Pago — 25.000</p>
+                                    <p class="text-xs text-[#0077B5] font-bold leading-tight mt-0.5">PSE, tarjeta o efectivo · Certificado automático a tu correo</p>
+                                </div>
+                                <div id="mp-btn-loader" class="hidden flex-1 text-left">
+                                    <p class="font-bold text-sm text-slate-600"><i class="fas fa-circle-notch fa-spin mr-1.5"></i>Abriendo Mercado Pago…</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-[#009EE3] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </button>
+                        <p id="mp-error" class="hidden text-xs text-red-500 text-center -mt-1" role="alert"></p>
+
+                        <!-- PSE directo (verificación manual con comprobante) -->
+                        <button onclick="registerAndPay()" class="btn-pay-option group relative border border-slate-200 hover:bg-[#eff6ff] transition-all">
                             <div class="flex items-center gap-3">
                                 <img src="https://images.ctfassets.net/ex6ts2p2j0ib/33ZB3pSE7aWIQ6qUTvGEid/cc6bd9d687b772c39657b0af40f174c9/banner-50__pse---new--logo.png?w=3840&q=75" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="PSE">
                                 <div class="flex-1 text-left">
@@ -783,7 +801,7 @@
 
 
                     <p class="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
-                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por PSE
+                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por Mercado Pago o PSE
                     </p>
                 </div>
             </div>
@@ -1068,6 +1086,9 @@
         const SERVICIO_NOMBRE = 'Manipulación de Alimentos';   // content_name
         // El link de PSE/RappiPay no trae monto fijo: el usuario escribe 25.000 en la pasarela.
         const PSE_CHECKOUT_URL = 'https://linkdepagospse.rappipay.co/AV4v5j';
+        // Mercado Pago: el backend crea el link con el precio fijo y, al aprobarse el pago,
+        // envía certificado + carnet al correo automáticamente (sin comprobante por WhatsApp).
+        const MP_PREFERENCIA_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/pagos/mp/preferencia';
 
         let state = {
             view: 'view-quiz-app',
@@ -1143,11 +1164,13 @@
         // persistir nada todavía. Antes se guardaba leadCreated=true ANTES de enviar,
         // así que si la pestaña se cerraba durante la petición ese navegador no volvía
         // a mandar el lead nunca más.
-        let crmLeadInFlight = false;
+        // Devuelve la petición en curso para que el pago con Mercado Pago pueda
+        // esperarla: el link de pago exige que el lead ya exista en el CRM.
+        let crmLeadRequest = null;
 
         function createCrmLead() {
-            if (state.leadCreated || crmLeadInFlight) return;
-            crmLeadInFlight = true;
+            if (state.leadCreated) return Promise.resolve();
+            if (crmLeadRequest) return crmLeadRequest;
 
             const u = state.userData;
             const payload = {
@@ -1169,7 +1192,7 @@
                 event_id: getLeadEventId()
             };
 
-            fetch(CRM_LEADS_URL, {
+            crmLeadRequest = fetch(CRM_LEADS_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -1189,7 +1212,8 @@
                 // queda pendiente, listo para reintentarse en la próxima acción.
                 trackEvent('crm_lead_error', { detalle: String((err && err.message) || err) });
             })
-            .finally(() => { crmLeadInFlight = false; });
+            .finally(() => { crmLeadRequest = null; });
+            return crmLeadRequest;
         }
 
         // --- CRM: avanzar el lead a PROPUESTA cuando el usuario inicia el pago ---
@@ -1414,6 +1438,62 @@
                 ? 'whatsapp://send?phone=' + phone + '&text=' + text
                 : 'https://wa.me/' + phone + '?text=' + text;
         }
+
+        // ── Pago con Mercado Pago (entrega automática) ──
+        let mpPaying = false;
+
+        function setMpLoading(loading, errorMsg) {
+            document.getElementById('mp-btn-label').classList.toggle('hidden', loading);
+            document.getElementById('mp-btn-loader').classList.toggle('hidden', !loading);
+            document.getElementById('mp-pay-btn').disabled = loading;
+            const error = document.getElementById('mp-error');
+            error.textContent = errorMsg || '';
+            error.classList.toggle('hidden', !errorMsg);
+        }
+
+        async function payWithMercadoPago() {
+            if (mpPaying) return;
+            mpPaying = true;
+            setMpLoading(true);
+            try {
+                // El lead se crea al registrarse, sin esperar respuesta. El link de pago
+                // exige que ya exista, así que aquí se espera (o se reintenta si falló).
+                await createCrmLead();
+
+                let res, data;
+                for (let intento = 0; intento < 3; intento++) {
+                    res = await fetch(MP_PREFERENCIA_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            numeroDocumento: state.userData.num,
+                            producto: 'bpm',
+                            email: state.userData.email
+                        })
+                    });
+                    data = await res.json().catch(() => ({}));
+                    // 404 = el CRM aún no tiene el lead: se da un respiro y se reintenta.
+                    if (res.status !== 404) break;
+                    await new Promise(r => setTimeout(r, 1500));
+                }
+                if (!res.ok || !data.init_point) throw new Error(data.code || ('HTTP ' + res.status));
+
+                trackEvent('payment_initiated', { metodo: 'MercadoPago' });
+                markLeadAsProposal();
+                fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+                window.location.href = data.init_point;
+            } catch (err) {
+                trackEvent('mp_preferencia_error', { detalle: String((err && err.message) || err) });
+                setMpLoading(false, 'No pudimos abrir Mercado Pago. Intenta de nuevo o paga por PSE.');
+                mpPaying = false;
+            }
+        }
+
+        // Al volver con "Atrás" desde Mercado Pago el navegador restaura la página tal
+        // cual (con el botón cargando): se deja listo para un nuevo intento.
+        window.addEventListener('pageshow', (e) => {
+            if (e.persisted && mpPaying) { mpPaying = false; setMpLoading(false); }
+        });
 
         // ── Pago PSE con comprobante obligatorio ──
         // PSE no nos avisa cuando el pago se aprueba: lo verificamos a mano con el comprobante

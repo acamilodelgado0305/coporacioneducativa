@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Pagar certificado | CertiTec Colombia</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="../logopagina.png" type="image/png" />
+
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '639715789143642');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"/></noscript>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            background-image:
+                radial-gradient(1200px 600px at 10% -10%, rgba(14, 165, 233, 0.15), transparent 60%),
+                radial-gradient(1000px 500px at 90% 10%, rgba(59, 130, 246, 0.12), transparent 60%);
+            background-attachment: fixed;
+        }
+        .main-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.35);
+            overflow: hidden;
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .brand-bar { height: 8px; width: 100%; background: linear-gradient(90deg, #0158AD, #009EE3); }
+        .input-pro {
+            width: 100%;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 10px;
+            padding: 13px 14px;
+            font-size: 16px;
+            letter-spacing: 0.04em;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .input-pro:focus { border-color: #009EE3; box-shadow: 0 0 0 3px rgba(0, 158, 227, 0.18); }
+        .btn-mp {
+            width: 100%;
+            background: #009EE3;
+            color: #ffffff;
+            font-weight: 700;
+            border-radius: 10px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 15px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+        .btn-mp:hover { opacity: 0.92; }
+        .btn-mp:active { transform: scale(0.98); }
+        .btn-mp:disabled { opacity: 0.7; cursor: wait; }
+    </style>
+    <!-- Fallback anti-CDN (igual que en gracias.html): .hidden sin Tailwind. -->
+    <style>
+        .hidden { display: none; }
+    </style>
+</head>
+<body class="antialiased text-slate-800">
+
+    <site-header></site-header>
+    <script src="../components/header.js"></script>
+
+    <div class="flex flex-col items-center justify-center p-4 min-h-screen">
+
+        <div class="mb-6 text-center">
+            <div class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white mb-2 shadow-lg ring-4 ring-sky-600/20">
+                <img src="../logof.png" class="w-10 h-10 object-contain p-1" alt="Logo CertiTec">
+            </div>
+            <h1 class="text-slate-900 font-bold text-xl tracking-wide uppercase">CertiTec Colombia</h1>
+            <p class="text-slate-500 text-xs">Certificaciones Laborales Oficiales</p>
+        </div>
+
+        <main class="main-card">
+            <div class="brand-bar"></div>
+            <form id="pay-form" class="p-8 space-y-5" novalidate>
+                <div class="text-center">
+                    <h2 class="text-xl font-bold text-slate-900 mb-1">Paga tu certificado</h2>
+                    <p class="text-slate-500 text-sm">Manipulación de Alimentos · <strong class="text-slate-800">25.000 COP</strong></p>
+                </div>
+
+                <div>
+                    <label for="doc-input" class="block text-sm font-semibold text-slate-700 mb-1.5">Número de documento</label>
+                    <input id="doc-input" class="input-pro" type="text" inputmode="numeric" autocomplete="off"
+                           placeholder="Ej: 1023456789" maxlength="20" required />
+                    <p class="text-xs text-slate-400 mt-1.5">El mismo con el que presentaste el examen.</p>
+                </div>
+
+                <p id="form-error" class="hidden text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2.5" role="alert"></p>
+
+                <button id="pay-btn" type="submit" class="btn-mp">
+                    <span id="pay-label"><i class="fas fa-lock mr-1.5"></i>Pagar con Mercado Pago</span>
+                    <span id="pay-loader" class="hidden"><i class="fas fa-circle-notch fa-spin mr-1.5"></i>Abriendo Mercado Pago…</span>
+                </button>
+
+                <p class="text-center text-xs text-slate-400">
+                    PSE, tarjeta o efectivo. Al aprobarse el pago, tu certificado y carnet llegan a tu correo automáticamente.
+                </p>
+            </form>
+        </main>
+
+        <a class="mt-5 text-sm text-slate-500 hover:text-slate-700" target="_blank" rel="noopener noreferrer"
+           href="https://wa.me/573107941580?text=Hola%2C%20necesito%20ayuda%20para%20pagar%20mi%20certificado.">
+            <i class="fab fa-whatsapp text-green-600 mr-1"></i> ¿Necesitas ayuda? Escríbenos
+        </a>
+    </div>
+
+    <script>
+        (function () {
+            var MP_PREFERENCIA_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/pagos/mp/preferencia';
+            var MENSAJES = {
+                LEAD_NO_ENCONTRADO: 'No encontramos un examen aprobado con ese documento. Revisa el número o <a class="underline font-semibold" href="curso-manipulacion-de-alimentos.html">presenta el examen aquí</a>.',
+                DOCUMENTO_INVALIDO: 'Escribe tu número de documento sin puntos ni espacios.',
+                DEMASIADOS_INTENTOS: 'Demasiados intentos. Espera unos minutos y vuelve a intentarlo.'
+            };
+
+            var form = document.getElementById('pay-form');
+            var input = document.getElementById('doc-input');
+            var btn = document.getElementById('pay-btn');
+            var errorBox = document.getElementById('form-error');
+
+            // ?doc=123 en el enlace (p. ej. el que se manda por WhatsApp) llena el campo.
+            var docParam = new URLSearchParams(window.location.search).get('doc');
+            if (docParam) input.value = docParam;
+
+            function setLoading(loading) {
+                btn.disabled = loading;
+                document.getElementById('pay-label').classList.toggle('hidden', loading);
+                document.getElementById('pay-loader').classList.toggle('hidden', !loading);
+            }
+            function showError(html) {
+                errorBox.innerHTML = html;
+                errorBox.classList.remove('hidden');
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                errorBox.classList.add('hidden');
+                var doc = input.value.replace(/[^0-9A-Za-z]/g, '');
+                if (doc.length < 4) { showError(MENSAJES.DOCUMENTO_INVALIDO); input.focus(); return; }
+
+                setLoading(true);
+                fetch(MP_PREFERENCIA_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ numeroDocumento: doc, producto: 'bpm' })
+                })
+                .then(function (res) {
+                    return res.json().catch(function () { return {}; }).then(function (data) {
+                        if (!res.ok || !data.init_point) throw data;
+                        fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+                        window.location.href = data.init_point;
+                    });
+                })
+                .catch(function (err) {
+                    setLoading(false);
+                    showError(MENSAJES[err && err.code] || 'No pudimos abrir Mercado Pago. Intenta de nuevo en un momento.');
+                });
+            });
+
+            // Al volver con "Atrás" desde Mercado Pago, el botón queda listo otra vez.
+            window.addEventListener('pageshow', function (e) { if (e.persisted) setLoading(false); });
+        })();
+    </script>
+
+</body>
+</html>
