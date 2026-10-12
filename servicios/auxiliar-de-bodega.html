@@ -704,15 +704,15 @@
                             </div>
                         </button>
 
-                        <!-- TRANSFERENCIA NEQUI (alternativa a PSE) -->
-                        <button onclick="openNequiPayment()" class="btn-pay-option group relative border border-slate-200 hover:border-[#DA0063] hover:bg-[#fdf2f8] transition-all">
+                        <!-- TRANSFERENCIA BANCOLOMBIA (alternativa a PSE) -->
+                        <button onclick="openBankTransfer()" class="btn-pay-option group relative border border-slate-200 hover:border-[#FDDA24] hover:bg-[#fffbea] transition-all">
                             <div class="flex items-center gap-3">
-                                <img src="../nequi.svg" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Nequi">
+                                <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Bancolombia">
                                 <div class="flex-1 text-left">
-                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Transferir por Nequi — 50.000</p>
-                                    <p class="text-xs text-slate-500 font-semibold leading-tight mt-0.5">Envía a 322 326 7797 y manda el comprobante</p>
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Transferir a Bancolombia — 50.000</p>
+                                    <p class="text-xs text-slate-500 font-semibold leading-tight mt-0.5">Ahorros 816-589697-49 · envía el comprobante</p>
                                 </div>
-                                <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                                <i class="fas fa-arrow-right text-[#2C2A29] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
                             </div>
                         </button>
 
@@ -805,7 +805,7 @@
                         <div class="space-y-2.5 text-xs">
                             <div>
                                 <p class="font-bold text-slate-800">¿Qué pasa si el pago en línea me falla?</p>
-                                <p class="text-slate-500 mt-0.5">Puedes transferir por Nequi al 322 326 7797 (a nombre de Andres Delgado) y enviarnos el comprobante por WhatsApp al 310 794 1580. Si tienes dudas, escríbenos y te ayudamos a completar el pago.</p>
+                                <p class="text-slate-500 mt-0.5">Puedes transferir a Bancolombia Ahorros 816-589697-49 y enviarnos el comprobante por WhatsApp al 310 794 1580. Si tienes dudas, escríbenos y te ayudamos a completar el pago.</p>
                             </div>
                             <div class="border-t border-slate-200/60 pt-2">
                                 <p class="font-bold text-slate-800">¿Para qué me sirve este certificado?</p>
@@ -816,7 +816,7 @@
 
 
                     <p class="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
-                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · PSE o transferencia Nequi
+                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · PSE o transferencia Bancolombia
                     </p>
                 </div>
             </div>
@@ -883,13 +883,13 @@
                 </div>
             </div>
 
-            <!-- Transferencia Nequi: datos de la cuenta + envío del comprobante -->
-            <div id="pse-step-nequi" class="hidden">
+            <!-- Transferencia Bancolombia: datos de la cuenta + envío del comprobante -->
+            <div id="pse-step-bank" class="hidden">
                 <div class="flex items-center justify-between p-5 border-b border-slate-100">
                     <div class="flex items-center gap-3">
-                        <img src="../nequi.svg" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Nequi">
+                        <img src="https://images.seeklogo.com/logo-png/42/1/bancolombia-logo-png_seeklogo-428092.png" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Bancolombia">
                         <div>
-                            <p class="font-bold text-slate-800 text-sm">Transferir por Nequi — 50.000</p>
+                            <p class="font-bold text-slate-800 text-sm">Transferir a Bancolombia — 50.000</p>
                             <p class="text-xs text-slate-500 mt-0.5">Transfiere y envía el comprobante</p>
                         </div>
                     </div>
@@ -900,17 +900,13 @@
                 <div class="p-5 space-y-4">
                     <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5 text-xs">
                         <div class="flex items-center justify-between gap-2">
-                            <span class="text-slate-500">Número Nequi</span>
+                            <span class="text-slate-500">Bancolombia Ahorros</span>
                             <span class="flex items-center gap-2">
-                                <span class="font-mono font-extrabold text-slate-900 text-sm">322 326 7797</span>
-                                <button id="copy-nequi-btn" onclick="copyNequiNumber()" class="text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1">
+                                <span class="font-mono font-extrabold text-slate-900 text-sm">816-589697-49</span>
+                                <button id="copy-bank-btn" onclick="copyBankAccount()" class="text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1">
                                     <i class="far fa-copy text-[9px]"></i> Copiar
                                 </button>
                             </span>
-                        </div>
-                        <div class="flex items-center justify-between gap-2 border-t border-slate-200/70 pt-2.5">
-                            <span class="text-slate-500">A nombre de</span>
-                            <span class="font-bold text-slate-900">Andres Delgado</span>
                         </div>
                         <div class="flex items-center justify-between gap-2 border-t border-slate-200/70 pt-2.5">
                             <span class="text-slate-500">Valor</span>
@@ -919,19 +915,19 @@
                     </div>
                     <ol class="space-y-3 text-xs text-slate-600 leading-snug">
                         <li class="flex gap-3">
-                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">1</span>
-                            <span class="pt-1">Transfiere <strong class="text-slate-800">50.000</strong> al Nequi <strong class="text-slate-800">322 326 7797</strong> desde tu app Nequi o desde tu banco.</span>
+                            <span class="w-6 h-6 rounded-full bg-[#FDDA24] text-[#2C2A29] text-[11px] font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            <span class="pt-1">Transfiere <strong class="text-slate-800">50.000</strong> a Bancolombia Ahorros <strong class="text-slate-800">816-589697-49</strong> desde la app de tu banco.</span>
                         </li>
                         <li class="flex gap-3">
-                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            <span class="w-6 h-6 rounded-full bg-[#FDDA24] text-[#2C2A29] text-[11px] font-bold flex items-center justify-center flex-shrink-0">2</span>
                             <span class="pt-1">Toma captura del <strong class="text-slate-800">comprobante de la transferencia</strong>.</span>
                         </li>
                         <li class="flex gap-3">
-                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            <span class="w-6 h-6 rounded-full bg-[#FDDA24] text-[#2C2A29] text-[11px] font-bold flex items-center justify-center flex-shrink-0">3</span>
                             <span class="pt-1"><strong class="text-slate-800">Obligatorio:</strong> envía el comprobante por WhatsApp al <strong class="text-slate-800">310 794 1580</strong> para liberar tu certificado.</span>
                         </li>
                     </ol>
-                    <button onclick="sendPseProof('Nequi')" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
+                    <button onclick="sendPseProof('Bancolombia')" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
                         <i class="fab fa-whatsapp text-lg"></i> Ya transferí: enviar comprobante
                     </button>
                 </div>
@@ -956,8 +952,8 @@
                     <button onclick="startPsePayment()" class="w-full text-center text-xs text-[#0158AD] font-semibold underline">
                         Aún no he pagado: abrir PSE de nuevo
                     </button>
-                    <button onclick="openNequiPayment()" class="w-full text-center text-xs text-[#DA0063] font-semibold underline">
-                        PSE no me funcionó: prefiero transferir por Nequi
+                    <button onclick="openBankTransfer()" class="w-full text-center text-xs text-slate-700 font-semibold underline">
+                        PSE no me funcionó: prefiero transferir a Bancolombia
                     </button>
                 </div>
             </div>
@@ -1181,7 +1177,7 @@
             quiz: { currentIdx: 0, score: 0 },
             // Pago por PSE: null | 'iniciado' | 'comprobante_enviado'
             psePago: null,
-            // Método con el que dijo pagar: 'PSE' | 'Nequi'
+            // Método con el que dijo pagar: 'PSE' | 'Bancolombia'
             metodoPago: null
         };
 
@@ -1670,7 +1666,7 @@
         const PAYMENT_PROOF_PHONE = '573107941580';
 
         function showPseStep(step) {
-            ['pse-step-pay', 'pse-step-nequi', 'pse-step-proof', 'pse-step-done'].forEach(id => {
+            ['pse-step-pay', 'pse-step-bank', 'pse-step-proof', 'pse-step-done'].forEach(id => {
                 document.getElementById(id).classList.toggle('hidden', id !== step);
             });
             document.getElementById('pse-modal').classList.remove('hidden');
@@ -1702,23 +1698,23 @@
             if (!win) window.location.href = PSE_CHECKOUT_URL;
         }
 
-        // ── Transferencia Nequi: también se verifica a mano con el comprobante ──
-        const NEQUI_NUMBER = '3223267797';
-        let nequiTracked = false;
+        // ── Transferencia Bancolombia: también se verifica a mano con el comprobante ──
+        const BANK_ACCOUNT = '81658969749';
+        let bankTracked = false;
 
-        function openNequiPayment() {
-            if (!nequiTracked) {
-                nequiTracked = true;
-                trackEvent('payment_initiated', { metodo: 'Nequi' });
+        function openBankTransfer() {
+            if (!bankTracked) {
+                bankTracked = true;
+                trackEvent('payment_initiated', { metodo: 'Bancolombia' });
                 markLeadAsProposal();
                 fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
             }
-            showPseStep('pse-step-nequi');
+            showPseStep('pse-step-bank');
         }
 
-        function copyNequiNumber() {
-            const btn = document.getElementById('copy-nequi-btn');
-            navigator.clipboard.writeText(NEQUI_NUMBER).then(() => {
+        function copyBankAccount() {
+            const btn = document.getElementById('copy-bank-btn');
+            navigator.clipboard.writeText(BANK_ACCOUNT).then(() => {
                 const originalHTML = btn.innerHTML;
                 btn.innerHTML = '<i class="fas fa-check text-[9px]"></i> ¡Copiado!';
                 setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
@@ -1736,8 +1732,8 @@
             showPseStep('pse-step-done');
 
             const doc = ((u.type || '') + ' ' + (u.num || '')).trim();
-            const msg = (metodo === 'Nequi'
-                    ? '¡Hola! Ya transferí por Nequi el pago de mi certificado de Auxiliar de Bodega y Logística ✅\n'
+            const msg = (metodo === 'Bancolombia'
+                    ? '¡Hola! Ya transferí a Bancolombia el pago de mi certificado de Auxiliar de Bodega y Logística ✅\n'
                     : '¡Hola! Ya pagué por PSE mi certificado de Auxiliar de Bodega y Logística ✅\n') +
                 'Adjunto el comprobante de pago para su verificación.\n\n' +
                 '• Nombre: ' + (u.name || '') + '\n' +
@@ -1870,13 +1866,13 @@
             metodo: {
                 title: 'Solo necesitas una cuenta bancaria',
                 sub:   'PSE funciona con todos los bancos de Colombia',
-                body:  'No necesitas tarjeta de crédito: con PSE pagas directo desde tu cuenta de ahorros o corriente de cualquier banco. También puedes transferir por Nequi al 322 326 7797 y enviarnos el comprobante.',
+                body:  'No necesitas tarjeta de crédito: con PSE pagas directo desde tu cuenta de ahorros o corriente de cualquier banco. También puedes transferir a Bancolombia Ahorros 816-589697-49 y enviarnos el comprobante.',
                 actions: `
                     <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-university"></i> Pagar con PSE
                     </button>
-                    <button class="btn-exit-pay" onclick="closeExitModal(); openNequiPayment();">
-                        <i class="fas fa-mobile-alt"></i> Transferir por Nequi
+                    <button class="btn-exit-pay" onclick="closeExitModal(); openBankTransfer();">
+                        <i class="fas fa-exchange-alt"></i> Transferir a Bancolombia
                     </button>
                     <a href="https://wa.me/573107941580?text=Hola%2C%20necesito%20ayuda%20para%20pagar%20por%20PSE%20mi%20certificado%20de%20Bodega%20y%20Log%C3%ADstica." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Que un asesor me guíe
