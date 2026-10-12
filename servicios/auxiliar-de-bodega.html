@@ -704,6 +704,18 @@
                             </div>
                         </button>
 
+                        <!-- TRANSFERENCIA NEQUI (alternativa a PSE) -->
+                        <button onclick="openNequiPayment()" class="btn-pay-option group relative border border-slate-200 hover:border-[#DA0063] hover:bg-[#fdf2f8] transition-all">
+                            <div class="flex items-center gap-3">
+                                <img src="../nequi.svg" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Nequi">
+                                <div class="flex-1 text-left">
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Transferir por Nequi — 50.000</p>
+                                    <p class="text-xs text-slate-500 font-semibold leading-tight mt-0.5">Envía a 322 326 7797 y manda el comprobante</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </button>
+
                         <!-- ENVIAR COMPROBANTE (verificación manual del pago) -->
                         <button onclick="sendPseProof()" class="w-full flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-xl transition-all shadow-sm">
                             <i class="fab fa-whatsapp text-2xl flex-shrink-0"></i>
@@ -793,7 +805,7 @@
                         <div class="space-y-2.5 text-xs">
                             <div>
                                 <p class="font-bold text-slate-800">¿Qué pasa si el pago en línea me falla?</p>
-                                <p class="text-slate-500 mt-0.5">Si la pasarela de PSE falla, escríbenos por WhatsApp al 310 794 1580 y te ayudamos a completar el pago.</p>
+                                <p class="text-slate-500 mt-0.5">Puedes transferir por Nequi al 322 326 7797 (a nombre de Andres Delgado) y enviarnos el comprobante por WhatsApp al 310 794 1580. Si tienes dudas, escríbenos y te ayudamos a completar el pago.</p>
                             </div>
                             <div class="border-t border-slate-200/60 pt-2">
                                 <p class="font-bold text-slate-800">¿Para qué me sirve este certificado?</p>
@@ -804,7 +816,7 @@
 
 
                     <p class="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
-                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por PSE
+                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · PSE o transferencia Nequi
                     </p>
                 </div>
             </div>
@@ -871,6 +883,60 @@
                 </div>
             </div>
 
+            <!-- Transferencia Nequi: datos de la cuenta + envío del comprobante -->
+            <div id="pse-step-nequi" class="hidden">
+                <div class="flex items-center justify-between p-5 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <img src="../nequi.svg" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Nequi">
+                        <div>
+                            <p class="font-bold text-slate-800 text-sm">Transferir por Nequi — 50.000</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Transfiere y envía el comprobante</p>
+                        </div>
+                    </div>
+                    <button onclick="closePseModal()" class="text-slate-300 hover:text-slate-500 transition">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <div class="p-5 space-y-4">
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5 text-xs">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-slate-500">Número Nequi</span>
+                            <span class="flex items-center gap-2">
+                                <span class="font-mono font-extrabold text-slate-900 text-sm">322 326 7797</span>
+                                <button id="copy-nequi-btn" onclick="copyNequiNumber()" class="text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1">
+                                    <i class="far fa-copy text-[9px]"></i> Copiar
+                                </button>
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 border-t border-slate-200/70 pt-2.5">
+                            <span class="text-slate-500">A nombre de</span>
+                            <span class="font-bold text-slate-900">Andres Delgado</span>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 border-t border-slate-200/70 pt-2.5">
+                            <span class="text-slate-500">Valor</span>
+                            <span class="font-extrabold text-slate-900 text-sm">50.000</span>
+                        </div>
+                    </div>
+                    <ol class="space-y-3 text-xs text-slate-600 leading-snug">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            <span class="pt-1">Transfiere <strong class="text-slate-800">50.000</strong> al Nequi <strong class="text-slate-800">322 326 7797</strong> desde tu app Nequi o desde tu banco.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            <span class="pt-1">Toma captura del <strong class="text-slate-800">comprobante de la transferencia</strong>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            <span class="pt-1"><strong class="text-slate-800">Obligatorio:</strong> envía el comprobante por WhatsApp al <strong class="text-slate-800">310 794 1580</strong> para liberar tu certificado.</span>
+                        </li>
+                    </ol>
+                    <button onclick="sendPseProof('Nequi')" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
+                        <i class="fab fa-whatsapp text-lg"></i> Ya transferí: enviar comprobante
+                    </button>
+                </div>
+            </div>
+
             <!-- Paso 2: envío del comprobante. Sin botón de cerrar: es obligatorio -->
             <div id="pse-step-proof" class="hidden">
                 <div class="flex items-center gap-3 p-5 bg-green-50 border-b border-green-100">
@@ -884,11 +950,14 @@
                 </div>
                 <div class="p-5 space-y-4">
                     <p class="text-xs text-slate-600 leading-relaxed">Cuando termines el pago en PSE, envía la captura del comprobante al WhatsApp de verificación de pagos <strong class="text-slate-800">310 794 1580</strong>. Tu certificado se libera solo cuando verificamos el comprobante.</p>
-                    <button onclick="sendPseProof()" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
+                    <button onclick="sendPseProof('PSE')" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
                         <i class="fab fa-whatsapp text-lg"></i> Ya pagué: enviar comprobante
                     </button>
                     <button onclick="startPsePayment()" class="w-full text-center text-xs text-[#0158AD] font-semibold underline">
                         Aún no he pagado: abrir PSE de nuevo
+                    </button>
+                    <button onclick="openNequiPayment()" class="w-full text-center text-xs text-[#DA0063] font-semibold underline">
+                        PSE no me funcionó: prefiero transferir por Nequi
                     </button>
                 </div>
             </div>
@@ -1111,7 +1180,9 @@
             consent: null,
             quiz: { currentIdx: 0, score: 0 },
             // Pago por PSE: null | 'iniciado' | 'comprobante_enviado'
-            psePago: null
+            psePago: null,
+            // Método con el que dijo pagar: 'PSE' | 'Nequi'
+            metodoPago: null
         };
 
         // Algunas preguntas traen un `svg` ilustrativo. Los gráficos comparativos son
@@ -1599,7 +1670,7 @@
         const PAYMENT_PROOF_PHONE = '573107941580';
 
         function showPseStep(step) {
-            ['pse-step-pay', 'pse-step-proof', 'pse-step-done'].forEach(id => {
+            ['pse-step-pay', 'pse-step-nequi', 'pse-step-proof', 'pse-step-done'].forEach(id => {
                 document.getElementById(id).classList.toggle('hidden', id !== step);
             });
             document.getElementById('pse-modal').classList.remove('hidden');
@@ -1620,6 +1691,7 @@
                 fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
             }
             state.psePago = 'iniciado';
+            state.metodoPago = 'PSE';
             saveState();
             showPseStep('pse-step-proof');
 
@@ -1630,15 +1702,43 @@
             if (!win) window.location.href = PSE_CHECKOUT_URL;
         }
 
-        function sendPseProof() {
+        // ── Transferencia Nequi: también se verifica a mano con el comprobante ──
+        const NEQUI_NUMBER = '3223267797';
+        let nequiTracked = false;
+
+        function openNequiPayment() {
+            if (!nequiTracked) {
+                nequiTracked = true;
+                trackEvent('payment_initiated', { metodo: 'Nequi' });
+                markLeadAsProposal();
+                fbq('track', 'InitiateCheckout', { content_name: PRODUCTO, value: PRECIO, currency: 'COP', num_items: 1 });
+            }
+            showPseStep('pse-step-nequi');
+        }
+
+        function copyNequiNumber() {
+            const btn = document.getElementById('copy-nequi-btn');
+            navigator.clipboard.writeText(NEQUI_NUMBER).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check text-[9px]"></i> ¡Copiado!';
+                setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+            }).catch(err => console.error('Error al copiar: ', err));
+        }
+
+        function sendPseProof(metodo) {
             const u = state.userData || {};
-            trackEvent('whatsapp_comprobante', { metodo: 'PSE' });
+            // Sin método explícito (botón general o reenvío), usamos el último con el que pagó.
+            metodo = metodo || state.metodoPago || 'PSE';
+            trackEvent('whatsapp_comprobante', { metodo: metodo });
+            state.metodoPago = metodo;
             state.psePago = 'comprobante_enviado';
             saveState();
             showPseStep('pse-step-done');
 
             const doc = ((u.type || '') + ' ' + (u.num || '')).trim();
-            const msg = '¡Hola! Ya pagué por PSE mi certificado de Auxiliar de Bodega y Logística ✅\n' +
+            const msg = (metodo === 'Nequi'
+                    ? '¡Hola! Ya transferí por Nequi el pago de mi certificado de Auxiliar de Bodega y Logística ✅\n'
+                    : '¡Hola! Ya pagué por PSE mi certificado de Auxiliar de Bodega y Logística ✅\n') +
                 'Adjunto el comprobante de pago para su verificación.\n\n' +
                 '• Nombre: ' + (u.name || '') + '\n' +
                 '• Documento: ' + doc + '\n' +
@@ -1770,10 +1870,13 @@
             metodo: {
                 title: 'Solo necesitas una cuenta bancaria',
                 sub:   'PSE funciona con todos los bancos de Colombia',
-                body:  'No necesitas tarjeta de crédito: con PSE pagas directo desde tu cuenta de ahorros o corriente de cualquier banco. Si tienes dudas para hacerlo, un asesor te guía por WhatsApp.',
+                body:  'No necesitas tarjeta de crédito: con PSE pagas directo desde tu cuenta de ahorros o corriente de cualquier banco. También puedes transferir por Nequi al 322 326 7797 y enviarnos el comprobante.',
                 actions: `
                     <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-university"></i> Pagar con PSE
+                    </button>
+                    <button class="btn-exit-pay" onclick="closeExitModal(); openNequiPayment();">
+                        <i class="fas fa-mobile-alt"></i> Transferir por Nequi
                     </button>
                     <a href="https://wa.me/573107941580?text=Hola%2C%20necesito%20ayuda%20para%20pagar%20por%20PSE%20mi%20certificado%20de%20Bodega%20y%20Log%C3%ADstica." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Que un asesor me guíe
