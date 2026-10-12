@@ -670,24 +670,41 @@
                     <!-- OPCIONES DE PAGO -->
                     <div class="space-y-3 pt-2">
 
-                        <!-- MERCADO PAGO (RECOMENDADO): entrega automática al correo -->
-                        <button id="mp-pay-btn" onclick="payWithMercadoPago()" class="btn-pay-option group relative border-2 border-[#009EE3] hover:bg-[#f0f9ff] transition-all disabled:opacity-70 disabled:cursor-wait">
-                            <span class="bg-[#009EE3] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
+                        <!-- PSE (RECOMENDADO) -->
+                        <button onclick="registerAndPay()" class="btn-pay-option group relative border-2 border-[#0158AD] hover:bg-[#eff6ff] transition-all">
+                            <span class="bg-[#0158AD] text-white text-[8px] font-extrabold px-2.5 py-0.5 rounded-full absolute -top-2.5 right-4 shadow-md uppercase tracking-wider animate-pulse">RECOMENDADO</span>
                             <div class="flex items-center gap-3">
-                                <div class="w-9 h-9 rounded-lg bg-[#009EE3] flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-handshake text-white text-base"></i>
+                                <img src="https://images.ctfassets.net/ex6ts2p2j0ib/33ZB3pSE7aWIQ6qUTvGEid/cc6bd9d687b772c39657b0af40f174c9/banner-50__pse---new--logo.png?w=3840&q=75" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="PSE">
+                                <div class="flex-1 text-left">
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con PSE — 25.000</p>
+                                    <p class="text-xs text-[#0158AD] font-bold leading-tight mt-0.5">Débito desde tu banco · Ingresa el monto 25.000</p>
                                 </div>
-                                <div id="mp-btn-label" class="flex-1 text-left">
-                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Pagar con Mercado Pago — 25.000</p>
-                                    <p class="text-xs text-[#0077B5] font-bold leading-tight mt-0.5">PSE, tarjeta o efectivo · Certificado automático a tu correo</p>
-                                </div>
-                                <div id="mp-btn-loader" class="hidden flex-1 text-left">
-                                    <p class="font-bold text-sm text-slate-600"><i class="fas fa-circle-notch fa-spin mr-1.5"></i>Abriendo Mercado Pago…</p>
-                                </div>
-                                <i class="fas fa-arrow-right text-[#009EE3] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                                <i class="fas fa-arrow-right text-[#0158AD] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
                             </div>
                         </button>
-                        <p id="mp-error" class="hidden text-xs text-red-500 text-center -mt-1" role="alert"></p>
+
+                        <!-- TRANSFERENCIA NEQUI (alternativa a PSE) -->
+                        <button onclick="openNequiPayment()" class="btn-pay-option group relative border border-slate-200 hover:border-[#DA0063] hover:bg-[#fdf2f8] transition-all">
+                            <div class="flex items-center gap-3">
+                                <img src="../nequi.svg" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Nequi">
+                                <div class="flex-1 text-left">
+                                    <p class="font-extrabold text-sm leading-tight text-slate-800">Transferir por Nequi — 25.000</p>
+                                    <p class="text-xs text-slate-500 font-semibold leading-tight mt-0.5">Envía a 322 326 7797 y manda el comprobante</p>
+                                </div>
+                                <i class="fas fa-arrow-right text-[#DA0063] text-sm flex-shrink-0 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </button>
+
+                        <!-- ENVIAR COMPROBANTE (verificación manual del pago) -->
+                        <button onclick="sendPseProof()" class="w-full flex items-center gap-3 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3 px-4 rounded-xl transition-all shadow-sm">
+                            <i class="fab fa-whatsapp text-2xl flex-shrink-0"></i>
+                            <div class="flex-1 text-left">
+                                <p class="font-extrabold text-sm leading-tight">Enviar comprobante para verificación</p>
+                                <p class="text-[11px] font-semibold leading-tight mt-0.5 opacity-90">Documento: <span id="proof-doc" class="font-mono"></span></p>
+                            </div>
+                            <i class="fas fa-arrow-right text-sm flex-shrink-0"></i>
+                        </button>
+
                     </div>
 
                     <!-- Certificado bloqueado visual -->
@@ -766,8 +783,8 @@
                         </p>
                         <div class="space-y-2.5 text-xs">
                             <div>
-                                <p class="font-bold text-slate-800">¿Qué pasa si tengo problemas para pagar?</p>
-                                <p class="text-slate-500 mt-0.5">Si Mercado Pago no te deja completar el pago, escríbenos por WhatsApp al 310 794 1580 y te ayudamos.</p>
+                                <p class="font-bold text-slate-800">¿Qué pasa si tengo problemas para pagar por PSE?</p>
+                                <p class="text-slate-500 mt-0.5">Puedes transferir por Nequi al 322 326 7797 (a nombre de Andres Delgado) y enviarnos el comprobante por WhatsApp al 310 794 1580. Si tienes dudas, escríbenos y te ayudamos a completar el pago.</p>
                             </div>
                             <div class="border-t border-slate-200/60 pt-2">
                                 <p class="font-bold text-slate-800">¿El certificado es válido a nivel nacional?</p>
@@ -778,7 +795,7 @@
 
 
                     <p class="text-center text-xs text-slate-400 flex items-center justify-center gap-2">
-                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · Procesado por Mercado Pago
+                        <i class="fas fa-lock text-purple-400"></i> Pago 100% seguro · PSE o transferencia Nequi
                     </p>
                 </div>
             </div>
@@ -805,6 +822,148 @@
 
 
 
+
+    <!-- Modal pago PSE: el comprobante por WhatsApp es obligatorio para liberar el certificado -->
+    <div id="pse-modal" class="modal-backdrop hidden">
+        <div class="modal-box" style="max-width:400px">
+
+            <!-- Paso 1: instrucciones antes de pagar -->
+            <div id="pse-step-pay">
+                <div class="flex items-center justify-between p-5 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <img src="https://images.ctfassets.net/ex6ts2p2j0ib/33ZB3pSE7aWIQ6qUTvGEid/cc6bd9d687b772c39657b0af40f174c9/banner-50__pse---new--logo.png?w=3840&q=75" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="PSE">
+                        <div>
+                            <p class="font-bold text-slate-800 text-sm">Pagar con PSE — 25.000</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Sigue estos 3 pasos para recibir tu certificado</p>
+                        </div>
+                    </div>
+                    <button onclick="closePseModal()" class="text-slate-300 hover:text-slate-500 transition">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <div class="p-5 space-y-4">
+                    <ol class="space-y-3 text-xs text-slate-600 leading-snug">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#0158AD] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            <span class="pt-1">Paga en PSE desde tu banco e ingresa el monto <strong class="text-slate-800">25.000</strong>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#0158AD] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            <span class="pt-1">Al terminar, toma captura del <strong class="text-slate-800">comprobante de pago</strong>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#0158AD] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            <span class="pt-1"><strong class="text-slate-800">Obligatorio:</strong> envía el comprobante por WhatsApp al <strong class="text-slate-800">310 794 1580</strong>. Sin el comprobante no podemos verificar tu pago ni liberar tu certificado.</span>
+                        </li>
+                    </ol>
+                    <button onclick="startPsePayment()" class="btn-submit-main" style="font-size:14px;padding:13px 20px">
+                        <i class="fas fa-university"></i> Entendido, ir a pagar con PSE
+                    </button>
+                </div>
+            </div>
+
+            <!-- Transferencia Nequi: datos de la cuenta + envío del comprobante -->
+            <div id="pse-step-nequi" class="hidden">
+                <div class="flex items-center justify-between p-5 border-b border-slate-100">
+                    <div class="flex items-center gap-3">
+                        <img src="../nequi.svg" class="w-9 h-9 rounded-lg object-contain bg-white border border-slate-100 p-1 flex-shrink-0" alt="Nequi">
+                        <div>
+                            <p class="font-bold text-slate-800 text-sm">Transferir por Nequi — 25.000</p>
+                            <p class="text-xs text-slate-500 mt-0.5">Transfiere y envía el comprobante</p>
+                        </div>
+                    </div>
+                    <button onclick="closePseModal()" class="text-slate-300 hover:text-slate-500 transition">
+                        <i class="fas fa-times text-lg"></i>
+                    </button>
+                </div>
+                <div class="p-5 space-y-4">
+                    <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5 text-xs">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="text-slate-500">Número Nequi</span>
+                            <span class="flex items-center gap-2">
+                                <span class="font-mono font-extrabold text-slate-900 text-sm">322 326 7797</span>
+                                <button id="copy-nequi-btn" onclick="copyNequiNumber()" class="text-[10px] bg-slate-200 hover:bg-slate-300 text-slate-600 font-bold px-2 py-1 rounded transition flex items-center gap-1">
+                                    <i class="far fa-copy text-[9px]"></i> Copiar
+                                </button>
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 border-t border-slate-200/70 pt-2.5">
+                            <span class="text-slate-500">A nombre de</span>
+                            <span class="font-bold text-slate-900">Andres Delgado</span>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 border-t border-slate-200/70 pt-2.5">
+                            <span class="text-slate-500">Valor</span>
+                            <span class="font-extrabold text-slate-900 text-sm">25.000</span>
+                        </div>
+                    </div>
+                    <ol class="space-y-3 text-xs text-slate-600 leading-snug">
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">1</span>
+                            <span class="pt-1">Transfiere <strong class="text-slate-800">25.000</strong> al Nequi <strong class="text-slate-800">322 326 7797</strong> desde tu app Nequi o desde tu banco.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">2</span>
+                            <span class="pt-1">Toma captura del <strong class="text-slate-800">comprobante de la transferencia</strong>.</span>
+                        </li>
+                        <li class="flex gap-3">
+                            <span class="w-6 h-6 rounded-full bg-[#DA0063] text-white text-[11px] font-bold flex items-center justify-center flex-shrink-0">3</span>
+                            <span class="pt-1"><strong class="text-slate-800">Obligatorio:</strong> envía el comprobante por WhatsApp al <strong class="text-slate-800">310 794 1580</strong> para liberar tu certificado.</span>
+                        </li>
+                    </ol>
+                    <button onclick="sendPseProof('Nequi')" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
+                        <i class="fab fa-whatsapp text-lg"></i> Ya transferí: enviar comprobante
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 2: envío del comprobante. Sin botón de cerrar: es obligatorio -->
+            <div id="pse-step-proof" class="hidden">
+                <div class="flex items-center gap-3 p-5 bg-green-50 border-b border-green-100">
+                    <div class="w-10 h-10 rounded-full bg-[#25D366] flex items-center justify-center flex-shrink-0">
+                        <i class="fab fa-whatsapp text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 text-sm leading-tight">Último paso: envía tu comprobante</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Obligatorio para liberar tu certificado</p>
+                    </div>
+                </div>
+                <div class="p-5 space-y-4">
+                    <p class="text-xs text-slate-600 leading-relaxed">Cuando termines el pago en PSE, envía la captura del comprobante al WhatsApp de verificación de pagos <strong class="text-slate-800">310 794 1580</strong>. Tu certificado se libera solo cuando verificamos el comprobante.</p>
+                    <button onclick="sendPseProof('PSE')" class="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20ba5a] text-white py-3.5 px-4 rounded-xl text-sm font-bold transition-all">
+                        <i class="fab fa-whatsapp text-lg"></i> Ya pagué: enviar comprobante
+                    </button>
+                    <button onclick="startPsePayment()" class="w-full text-center text-xs text-[#0158AD] font-semibold underline">
+                        Aún no he pagado: abrir PSE de nuevo
+                    </button>
+                    <button onclick="openNequiPayment()" class="w-full text-center text-xs text-[#DA0063] font-semibold underline">
+                        PSE no me funcionó: prefiero transferir por Nequi
+                    </button>
+                </div>
+            </div>
+
+            <!-- Paso 3: comprobante enviado -->
+            <div id="pse-step-done" class="hidden">
+                <div class="flex items-center gap-3 p-5 bg-blue-50 border-b border-blue-100">
+                    <div class="w-10 h-10 rounded-full bg-[#0158AD] flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-check text-white text-base"></i>
+                    </div>
+                    <div>
+                        <p class="font-bold text-slate-800 text-sm leading-tight">Estamos verificando tu pago</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Te confirmamos por WhatsApp</p>
+                    </div>
+                </div>
+                <div class="p-5 space-y-4">
+                    <p class="text-xs text-slate-600 leading-relaxed">Asegúrate de haber adjuntado la captura del comprobante en el chat. Apenas lo verifiquemos te enviamos tu certificado al correo registrado.</p>
+                    <button onclick="closePseModal()" class="btn-submit-main" style="font-size:14px;padding:13px 20px">
+                        <i class="fas fa-check"></i> Listo
+                    </button>
+                    <button onclick="sendPseProof()" class="w-full text-center text-xs text-[#0158AD] font-semibold underline">
+                        No se abrió WhatsApp: enviar comprobante de nuevo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Modal editar correo -->
     <div id="edit-email-modal" class="modal-backdrop hidden">
@@ -976,9 +1135,8 @@
         // en la conversión personalizada equivocada (o en ninguna).
         const SERVICIO_SLUG   = 'manipulacion-alimentos';   // se envía como `servicio` al CRM y como content_ids
         const SERVICIO_NOMBRE = 'Manipulación de Alimentos';   // content_name
-        // Mercado Pago: el backend crea el link con el precio fijo y, al aprobarse el pago,
-        // envía certificado + carnet al correo automáticamente (sin comprobante por WhatsApp).
-        const MP_PREFERENCIA_URL = 'https://controla-570877385695.northamerica-northeast1.run.app/api/pagos/mp/preferencia';
+        // El link de PSE/RappiPay no trae monto fijo: el usuario escribe 25.000 en la pasarela.
+        const PSE_CHECKOUT_URL = 'https://linkdepagospse.rappipay.co/AV4v5j';
 
         let state = {
             view: 'view-quiz-app',
@@ -990,7 +1148,11 @@
             userData: { type: '', num: '', name: '', phone: '', email: '' },
             // Prueba de la autorización de tratamiento de datos (Ley 1581): la ley exige poder demostrarla
             consent: null,
-            quiz: { currentIdx: 0, score: 0 }
+            quiz: { currentIdx: 0, score: 0 },
+            // Pago por PSE: null | 'iniciado' | 'comprobante_enviado'
+            psePago: null,
+            // Método con el que dijo pagar: 'PSE' | 'Nequi'
+            metodoPago: null
         };
 
         const questions = [
@@ -1052,13 +1214,11 @@
         // persistir nada todavía. Antes se guardaba leadCreated=true ANTES de enviar,
         // así que si la pestaña se cerraba durante la petición ese navegador no volvía
         // a mandar el lead nunca más.
-        // Devuelve la petición en curso para que el pago con Mercado Pago pueda
-        // esperarla: el link de pago exige que el lead ya exista en el CRM.
-        let crmLeadRequest = null;
+        let crmLeadInFlight = false;
 
         function createCrmLead() {
-            if (state.leadCreated) return Promise.resolve();
-            if (crmLeadRequest) return crmLeadRequest;
+            if (state.leadCreated || crmLeadInFlight) return;
+            crmLeadInFlight = true;
 
             const u = state.userData;
             const payload = {
@@ -1080,7 +1240,7 @@
                 event_id: getLeadEventId()
             };
 
-            crmLeadRequest = fetch(CRM_LEADS_URL, {
+            fetch(CRM_LEADS_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload),
@@ -1100,8 +1260,7 @@
                 // queda pendiente, listo para reintentarse en la próxima acción.
                 trackEvent('crm_lead_error', { detalle: String((err && err.message) || err) });
             })
-            .finally(() => { crmLeadRequest = null; });
-            return crmLeadRequest;
+            .finally(() => { crmLeadInFlight = false; });
         }
 
         // --- CRM: avanzar el lead a PROPUESTA cuando el usuario inicia el pago ---
@@ -1169,6 +1328,7 @@
             if (state.view === 'view-quiz-app') loadQuestionUI();
             if (state.view === 'view-checkout') {
                 populateCheckoutEmail();
+                if (state.psePago === 'iniciado') showPseStep('pse-step-proof');
             }
         }
 
@@ -1326,61 +1486,98 @@
                 : 'https://wa.me/' + phone + '?text=' + text;
         }
 
-        // ── Pago con Mercado Pago (entrega automática) ──
-        let mpPaying = false;
+        // ── Pago PSE con comprobante obligatorio ──
+        // PSE no nos avisa cuando el pago se aprueba: lo verificamos a mano con el comprobante
+        // que el usuario manda por WhatsApp. Por eso, una vez abre PSE, el modal queda fijo en
+        // "envía tu comprobante" (también si vuelve o recarga la página) hasta que lo envíe.
+        const PAYMENT_PROOF_PHONE = '573107941580';
 
-        function setMpLoading(loading, errorMsg) {
-            document.getElementById('mp-btn-label').classList.toggle('hidden', loading);
-            document.getElementById('mp-btn-loader').classList.toggle('hidden', !loading);
-            document.getElementById('mp-pay-btn').disabled = loading;
-            const error = document.getElementById('mp-error');
-            error.textContent = errorMsg || '';
-            error.classList.toggle('hidden', !errorMsg);
+        function showPseStep(step) {
+            ['pse-step-pay', 'pse-step-nequi', 'pse-step-proof', 'pse-step-done'].forEach(id => {
+                document.getElementById(id).classList.toggle('hidden', id !== step);
+            });
+            document.getElementById('pse-modal').classList.remove('hidden');
         }
 
-        async function payWithMercadoPago() {
-            if (mpPaying) return;
-            mpPaying = true;
-            setMpLoading(true);
-            try {
-                // El lead se crea al registrarse, sin esperar respuesta. El link de pago
-                // exige que ya exista, así que aquí se espera (o se reintenta si falló).
-                await createCrmLead();
+        function closePseModal() {
+            document.getElementById('pse-modal').classList.add('hidden');
+        }
 
-                let res, data;
-                for (let intento = 0; intento < 3; intento++) {
-                    res = await fetch(MP_PREFERENCIA_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            numeroDocumento: state.userData.num,
-                            producto: 'bpm',
-                            email: state.userData.email
-                        })
-                    });
-                    data = await res.json().catch(() => ({}));
-                    // 404 = el CRM aún no tiene el lead: se da un respiro y se reintenta.
-                    if (res.status !== 404) break;
-                    await new Promise(r => setTimeout(r, 1500));
-                }
-                if (!res.ok || !data.init_point) throw new Error(data.code || ('HTTP ' + res.status));
+        function registerAndPay() {
+            showPseStep(state.psePago === 'iniciado' ? 'pse-step-proof' : 'pse-step-pay');
+        }
 
-                trackEvent('payment_initiated', { metodo: 'MercadoPago' });
+        function startPsePayment() {
+            if (state.psePago !== 'iniciado') {
+                trackEvent('payment_initiated', { metodo: 'PSE' });
                 markLeadAsProposal();
                 fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
-                window.location.href = data.init_point;
-            } catch (err) {
-                trackEvent('mp_preferencia_error', { detalle: String((err && err.message) || err) });
-                setMpLoading(false, 'No pudimos abrir Mercado Pago. Intenta de nuevo o escríbenos por WhatsApp al 310 794 1580.');
-                mpPaying = false;
             }
+            state.psePago = 'iniciado';
+            state.metodoPago = 'PSE';
+            saveState();
+            showPseStep('pse-step-proof');
+
+            // PSE en otra pestaña para que esta siga mostrando el paso del comprobante.
+            // Si el navegador bloquea la pestaña nueva, abrimos PSE aquí mismo: el estado
+            // ya quedó guardado y al volver se muestra de nuevo el paso del comprobante.
+            const win = window.open(PSE_CHECKOUT_URL, '_blank');
+            if (!win) window.location.href = PSE_CHECKOUT_URL;
         }
 
-        // Al volver con "Atrás" desde Mercado Pago el navegador restaura la página tal
-        // cual (con el botón cargando): se deja listo para un nuevo intento.
-        window.addEventListener('pageshow', (e) => {
-            if (e.persisted && mpPaying) { mpPaying = false; setMpLoading(false); }
-        });
+        // ── Transferencia Nequi: también se verifica a mano con el comprobante ──
+        const NEQUI_NUMBER = '3223267797';
+        let nequiTracked = false;
+
+        function openNequiPayment() {
+            if (!nequiTracked) {
+                nequiTracked = true;
+                trackEvent('payment_initiated', { metodo: 'Nequi' });
+                markLeadAsProposal();
+                fbq('track', 'InitiateCheckout', { content_name: 'Certificado Manipulación de Alimentos', value: 25000, currency: 'COP', num_items: 1 });
+            }
+            showPseStep('pse-step-nequi');
+        }
+
+        function copyNequiNumber() {
+            const btn = document.getElementById('copy-nequi-btn');
+            navigator.clipboard.writeText(NEQUI_NUMBER).then(() => {
+                const originalHTML = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check text-[9px]"></i> ¡Copiado!';
+                setTimeout(() => { btn.innerHTML = originalHTML; }, 2000);
+            }).catch(err => console.error('Error al copiar: ', err));
+        }
+
+        function sendPseProof(metodo) {
+            const u = state.userData || {};
+            // Sin método explícito (botón general o reenvío), usamos el último con el que pagó.
+            metodo = metodo || state.metodoPago || 'PSE';
+            trackEvent('whatsapp_comprobante', { metodo: metodo });
+            state.metodoPago = metodo;
+            state.psePago = 'comprobante_enviado';
+            saveState();
+            showPseStep('pse-step-done');
+
+            const doc = ((u.type || '') + ' ' + (u.num || '')).trim();
+            const msg = (metodo === 'Nequi'
+                    ? '¡Hola! Ya transferí por Nequi el pago de mi certificado de Manipulación de Alimentos ✅\n'
+                    : '¡Hola! Ya pagué por PSE mi certificado de Manipulación de Alimentos ✅\n') +
+                'Adjunto el comprobante de pago para su verificación.\n\n' +
+                '• Nombre: ' + (u.name || '') + '\n' +
+                '• Documento: ' + doc + '\n' +
+                '• Correo: ' + (u.email || '');
+
+            const text = encodeURIComponent(msg);
+            const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
+
+            // Igual que goToWhatsApp: en móvil el deep link abre el chat directo; en escritorio
+            // wa.me en otra pestaña para que esta página siga mostrando la confirmación.
+            if (isMobile) {
+                window.location.href = 'whatsapp://send?phone=' + PAYMENT_PROOF_PHONE + '&text=' + text;
+            } else {
+                window.open('https://wa.me/' + PAYMENT_PROOF_PHONE + '?text=' + text, '_blank');
+            }
+        }
 
         function startNewProcess() {
             localStorage.removeItem(STORAGE_KEY);
@@ -1471,10 +1668,10 @@
         const exitResponses = {
             seguridad: {
                 title: '¡Tu dinero está 100% protegido!',
-                sub:   'Pago procesado por Mercado Pago · cifrado de extremo a extremo',
-                body:  'El pago se procesa por Mercado Pago, la pasarela que usan miles de comercios en Colombia. La transacción va cifrada y nunca almacenamos los datos de tu cuenta ni de tu tarjeta.',
+                sub:   'Pago procesado por PSE · cifrado de extremo a extremo',
+                body:  'El pago se procesa por la pasarela de PSE/RappiPay, la misma que usan miles de comercios en Colombia. La transacción va cifrada y nunca almacenamos los datos de tu cuenta.',
                 actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); payWithMercadoPago();">
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-lock"></i> Pagar de forma segura ahora
                     </button>
                     <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20la%20seguridad%20del%20pago." target="_blank" class="btn-exit-wa">
@@ -1484,24 +1681,27 @@
             dinero: {
                 title: 'Tu examen aprobado queda guardado',
                 sub:   'Paga cuando tengas el dinero',
-                body:  'No pierdes lo que ya hiciste: tu resultado queda guardado en este dispositivo. Cuando tengas los 25.000, vuelve a esta página y paga con Mercado Pago en menos de 2 minutos.',
+                body:  'No pierdes lo que ya hiciste: tu resultado queda guardado en este dispositivo. Cuando tengas los 25.000, vuelve a esta página y paga por PSE desde tu banco en menos de 2 minutos.',
                 actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); payWithMercadoPago();">
-                        <i class="fas fa-lock"></i> Pagar ahora
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
+                        <i class="fas fa-lock"></i> Pagar con PSE ahora
                     </button>
                     <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20pagar%20m%C3%A1s%20adelante%20mi%20certificado%20de%20Manipulaci%C3%B3n%20de%20Alimentos." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Hablar con un asesor
                     </a>`
             },
             metodo: {
-                title: 'Paga como prefieras',
-                sub:   'PSE, tarjeta o efectivo con Mercado Pago',
-                body:  'No necesitas tarjeta de crédito: con Mercado Pago puedes pagar por PSE desde cualquier banco, con tarjeta o en efectivo. Si tienes dudas para hacerlo, un asesor te guía por WhatsApp.',
+                title: 'Solo necesitas una cuenta bancaria',
+                sub:   'PSE funciona con todos los bancos de Colombia',
+                body:  'No necesitas tarjeta de crédito: con PSE pagas directo desde tu cuenta de ahorros o corriente de cualquier banco. También puedes transferir por Nequi al 322 326 7797 y enviarnos el comprobante.',
                 actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); payWithMercadoPago();">
-                        <i class="fas fa-university"></i> Pagar ahora
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
+                        <i class="fas fa-university"></i> Pagar con PSE
                     </button>
-                    <a href="https://wa.me/573107941580?text=Hola%2C%20necesito%20ayuda%20para%20pagar%20mi%20certificado%20de%20Manipulaci%C3%B3n%20de%20Alimentos." target="_blank" class="btn-exit-wa">
+                    <button class="btn-exit-pay" onclick="closeExitModal(); openNequiPayment();">
+                        <i class="fas fa-mobile-alt"></i> Transferir por Nequi
+                    </button>
+                    <a href="https://wa.me/573107941580?text=Hola%2C%20necesito%20ayuda%20para%20pagar%20por%20PSE%20mi%20certificado%20de%20Manipulaci%C3%B3n%20de%20Alimentos." target="_blank" class="btn-exit-wa">
                         <i class="fab fa-whatsapp text-lg"></i> Que un asesor me guíe
                     </a>`
             },
@@ -1519,7 +1719,7 @@
                 sub:   'Resolución 2674 de 2013 — Secretaría de Salud',
                 body:  'Si trabajas o vas a trabajar en cocinas, restaurantes, cafeterías o cualquier establecimiento de alimentos, la ley colombiana exige este certificado. Sin él, el establecimiento puede ser sancionado.',
                 actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); payWithMercadoPago();">
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-certificate"></i> Obtener mi certificado ahora
                     </button>
                     <a href="https://wa.me/573107941580?text=Hola%2C%20tengo%20dudas%20sobre%20si%20necesito%20el%20certificado." target="_blank" class="btn-exit-wa">
@@ -1531,7 +1731,7 @@
                 sub:   'Y el certificado llega a tu correo hoy',
                 body:  'Ya aprobaste el examen — lo más difícil ya lo hiciste. El pago tarda menos de 2 minutos y tu certificado llega al correo el mismo día. ¿Lo terminamos ahora?',
                 actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); payWithMercadoPago();">
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-bolt"></i> Terminar en 2 minutos
                     </button>`
             },
@@ -1549,7 +1749,7 @@
                 sub:   'Los certificados vencen cada año',
                 body:  'El certificado de manipulación de alimentos tiene una vigencia de 1 año. Si el tuyo está próximo a vencer o ya venció, necesitas renovarlo para seguir trabajando legalmente.',
                 actions: `
-                    <button class="btn-exit-pay" onclick="closeExitModal(); payWithMercadoPago();">
+                    <button class="btn-exit-pay" onclick="closeExitModal(); registerAndPay();">
                         <i class="fas fa-sync-alt"></i> Renovar mi certificado
                     </button>
                     <a href="https://wa.me/573107941580?text=Hola%2C%20quiero%20verificar%20si%20necesito%20renovar%20mi%20certificado." target="_blank" class="btn-exit-wa">
