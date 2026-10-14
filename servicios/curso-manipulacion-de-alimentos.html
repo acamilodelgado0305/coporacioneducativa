@@ -25,6 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="flujo/flujo.css" />
+    <link rel="preload" as="image" href="flujo/img/manipulacion-portada.jpg" fetchpriority="high" />
 </head>
 <body>
     <div class="app">
@@ -58,14 +59,11 @@
             producto: 'Certificado de Manipulación de Alimentos',
             entrega:  'tu certificado',
             aval:     'Válido ante la Secretaría de Salud · Resolución 2674',
-            certTexto: 'Recibió capacitación en Buenas Prácticas de Manipulación de Alimentos (BPM), conforme a la Resolución 2674 de 2013.',
+            portada:  { src: 'flujo/img/manipulacion-portada.jpg', alt: 'Cocineros con uniforme revisando alimentos en una cocina profesional' },
             precio:   25000,
             minutos:  3,
             minAprobar: 0.75,
-            // Link de PSE/RappiPay sin monto fijo: el usuario pega el valor que copiamos
-            pseUrl:   'https://linkdepagospse.rappipay.co/AV4v5j',
             whatsapp: '573107941580',
-            banco:    { numero: '81658969749', mostrar: '816-589697-49' },
             preguntas: [
                 { q: '¿Cuál es la norma principal que regula la manipulación de alimentos en Colombia?', options: ['Resolución 2674 de 2013', 'Código de Policía', 'Ley 100'], a: 0 },
                 { q: 'La contaminación cruzada ocurre cuando:', options: ['Se lavan bien los alimentos', 'Se mezclan alimentos crudos con cocidos', 'Se congela la carne'], a: 1 },
