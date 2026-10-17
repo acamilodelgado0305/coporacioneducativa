@@ -25,7 +25,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="flujo/flujo.css" />
-    <link rel="preload" as="image" href="flujo/img/bodega-portada.jpg" fetchpriority="high" />
+    <link rel="preload" as="image" href="flujo/img/bodega-portada.jpg?v=2" fetchpriority="high" />
 </head>
 <body>
     <div class="app">
@@ -60,110 +60,303 @@
             producto: 'Certificado Auxiliar de Bodega y Logística',
             entrega:  'tu diploma y tu certificado',
             aval:     'Diploma + Certificado · 40 horas',
-            portada:  { src: 'flujo/img/bodega-portada.jpg', alt: 'Auxiliar de bodega con uniforme revisando el inventario con una tableta y un lector de códigos' },
+            portada:  { src: 'flujo/img/bodega-portada.jpg?v=2', alt: 'Auxiliar de bodega con delantal verde verificando el inventario con un lector de códigos y una planilla entre estanterías de mercancía' },
             precio:   50000,
             minutos:  5,
             minAprobar: 0.75,
             whatsapp: '573107941580',
-            // Algunas preguntas traen un `svg` ilustrativo. Los gráficos comparativos son
+            // Cada pregunta trae un `svg` ilustrativo (clases fx-* = animaciones de flujo.css).
+            // Los gráficos comparativos son
             // neutros a propósito (los mismos grises en las dos opciones) para que la
             // respuesta se deduzca del conocimiento y no del color del dibujo.
             preguntas: [
-                { q: "¿Cuál es el primer paso crítico al recibir mercancía en la bodega?", options: ["Almacenarla de inmediato", "Verificar la factura contra el físico y el estado del producto", "Firmar la remisión sin revisar"], a: 1 },
+                { q: "¿Cuál es el primer paso crítico al recibir mercancía en la bodega?", options: ["Almacenarla de inmediato", "Verificar la factura contra el físico y el estado del producto", "Firmar la remisión sin revisar"], a: 1,
+                  svg: `<svg viewBox="0 0 320 146" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Un camión de proveedor llega al muelle de la bodega y deja cajas junto a su factura">
+                    <path d="M8 134 H312" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="8" y="104" width="124" height="30" fill="#cbd5e1"/>
+                    <path d="M8 104 H132" stroke="#F5AE14" stroke-width="4" stroke-dasharray="10 8"/>
+                    <g class="fx-slide">
+                      <rect x="138" y="30" width="134" height="80" rx="4" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+                      <rect x="144" y="36" width="34" height="68" rx="2" fill="#475569"/>
+                      <rect x="148" y="76" width="16" height="14" fill="#d9a066"/><rect x="160" y="88" width="14" height="14" fill="#c98a4b"/>
+                      <text x="226" y="76" text-anchor="middle" font-size="11" font-weight="900" fill="#0158AD" letter-spacing="1">PROVEEDOR</text>
+                      <path d="M272 58 H296 L312 78 V112 H272 Z" fill="#0158AD"/>
+                      <path d="M278 64 H294 L304 78 H278 Z" fill="#bfdbfe"/>
+                      <rect x="138" y="110" width="174" height="6" fill="#334155"/>
+                      <circle cx="170" cy="120" r="12" fill="#334155"/><circle cx="170" cy="120" r="4.5" fill="#cbd5e1"/>
+                      <circle cx="282" cy="120" r="12" fill="#334155"/><circle cx="282" cy="120" r="4.5" fill="#cbd5e1"/>
+                    </g>
+                    <g class="fx-drop" style="--d:.5s"><rect x="18" y="74" width="40" height="30" rx="2" fill="#d9a066" stroke="#9a6532" stroke-width="2"/><path d="M38 74 V104" stroke="#f2d3a5" stroke-width="6"/></g>
+                    <g class="fx-drop" style="--d:.62s"><rect x="62" y="74" width="40" height="30" rx="2" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2"/><path d="M82 74 V104" stroke="#f2d3a5" stroke-width="6"/></g>
+                    <g class="fx-drop" style="--d:.74s"><rect x="40" y="44" width="40" height="30" rx="2" fill="#d9a066" stroke="#9a6532" stroke-width="2"/><path d="M60 44 V74" stroke="#f2d3a5" stroke-width="6"/></g>
+                    <g class="fx-pop" style="--d:1s">
+                      <rect x="92" y="8" width="38" height="48" rx="4" fill="#fff" stroke="#0158AD" stroke-width="2"/>
+                      <text x="111" y="22" text-anchor="middle" font-size="7" font-weight="900" fill="#0158AD">FACTURA</text>
+                      <path d="M99 30 H123 M99 37 H123 M99 44 H115" stroke="#94a3b8" stroke-width="2" stroke-linecap="round"/>
+                    </g>
+                  </svg>` },
 
                 { q: "Estas tres cajas del mismo producto llegaron en fechas distintas. Aplicando PEPS (FIFO), ¿cuál debe despacharse primero?",
                   options: ["La caja A", "La caja B", "La caja C"], a: 0,
                   svg: `<svg viewBox="0 0 320 152" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Tres cajas del mismo producto en un estante con su fecha de ingreso: caja A del 12 de enero, caja B del 3 de febrero y caja C del 20 de febrero">
-                    <text x="160" y="16" text-anchor="middle" font-size="10.5" font-weight="700" fill="#0158AD" letter-spacing="0.8">FECHA DE INGRESO A BODEGA</text>
-                    <rect x="8" y="118" width="304" height="7" rx="2" fill="#cbd5e1"/>
-                    <rect x="16" y="125" width="7" height="20" fill="#cbd5e1"/>
-                    <rect x="297" y="125" width="7" height="20" fill="#cbd5e1"/>
-                    <rect x="26" y="48" width="76" height="70" rx="4" fill="#eef2f7" stroke="#94a3b8" stroke-width="2"/>
-                    <path d="M26 74 H102" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="64" y="68" text-anchor="middle" font-size="17" font-weight="800" fill="#334155">A</text>
-                    <text x="64" y="101" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">12 ene</text>
-                    <rect x="122" y="48" width="76" height="70" rx="4" fill="#eef2f7" stroke="#94a3b8" stroke-width="2"/>
-                    <path d="M122 74 H198" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="160" y="68" text-anchor="middle" font-size="17" font-weight="800" fill="#334155">B</text>
-                    <text x="160" y="101" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">03 feb</text>
-                    <rect x="218" y="48" width="76" height="70" rx="4" fill="#eef2f7" stroke="#94a3b8" stroke-width="2"/>
-                    <path d="M218 74 H294" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="256" y="68" text-anchor="middle" font-size="17" font-weight="800" fill="#334155">C</text>
-                    <text x="256" y="101" text-anchor="middle" font-size="11.5" font-weight="600" fill="#475569">20 feb</text>
+                    <text x="160" y="16" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0158AD" letter-spacing="0.8">FECHA DE INGRESO A BODEGA</text>
+                    <rect x="8" y="118" width="304" height="8" rx="2" fill="#F5AE14"/>
+                    <rect x="16" y="126" width="8" height="20" fill="#0158AD"/>
+                    <rect x="296" y="126" width="8" height="20" fill="#0158AD"/>
+                    <g class="fx-drop" style="--d:.05s">
+                      <rect x="26" y="44" width="76" height="74" rx="4" fill="#d9a066" stroke="#9a6532" stroke-width="2"/>
+                      <rect x="56" y="44" width="16" height="74" fill="#f2d3a5" opacity=".75"/>
+                      <circle cx="64" cy="66" r="13" fill="#fff" stroke="#9a6532" stroke-width="1.5"/>
+                      <text x="64" y="72" text-anchor="middle" font-size="16" font-weight="900" fill="#334155">A</text>
+                      <rect x="32" y="88" width="64" height="22" rx="4" fill="#fff" stroke="#9a6532" stroke-width="1.5"/>
+                      <text x="64" y="103" text-anchor="middle" font-size="11.5" font-weight="800" fill="#334155">12 ene</text>
+                    </g>
+                    <g class="fx-drop" style="--d:.2s">
+                      <rect x="122" y="44" width="76" height="74" rx="4" fill="#d9a066" stroke="#9a6532" stroke-width="2"/>
+                      <rect x="152" y="44" width="16" height="74" fill="#f2d3a5" opacity=".75"/>
+                      <circle cx="160" cy="66" r="13" fill="#fff" stroke="#9a6532" stroke-width="1.5"/>
+                      <text x="160" y="72" text-anchor="middle" font-size="16" font-weight="900" fill="#334155">B</text>
+                      <rect x="128" y="88" width="64" height="22" rx="4" fill="#fff" stroke="#9a6532" stroke-width="1.5"/>
+                      <text x="160" y="103" text-anchor="middle" font-size="11.5" font-weight="800" fill="#334155">03 feb</text>
+                    </g>
+                    <g class="fx-drop" style="--d:.35s">
+                      <rect x="218" y="44" width="76" height="74" rx="4" fill="#d9a066" stroke="#9a6532" stroke-width="2"/>
+                      <rect x="248" y="44" width="16" height="74" fill="#f2d3a5" opacity=".75"/>
+                      <circle cx="256" cy="66" r="13" fill="#fff" stroke="#9a6532" stroke-width="1.5"/>
+                      <text x="256" y="72" text-anchor="middle" font-size="16" font-weight="900" fill="#334155">C</text>
+                      <rect x="224" y="88" width="64" height="22" rx="4" fill="#fff" stroke="#9a6532" stroke-width="1.5"/>
+                      <text x="256" y="103" text-anchor="middle" font-size="11.5" font-weight="800" fill="#334155">20 feb</text>
+                    </g>
                   </svg>` },
 
-                { q: "El proceso de 'picking' consiste en:", options: ["Recolectar y alistar los productos de un pedido", "Barrer y ordenar los pasillos", "Cargar el camión de despacho"], a: 0 },
+                { q: "El proceso de 'picking' consiste en:", options: ["Recolectar y alistar los productos de un pedido", "Barrer y ordenar los pasillos", "Cargar el camión de despacho"], a: 0,
+                  svg: `<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Una orden de pedido con tres productos junto a una estantería con mercancía">
+                    <g class="fx-fade">
+                      <rect x="12" y="12" width="118" height="126" rx="9" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                      <path d="M12 21 A9 9 0 0 1 21 12 H121 A9 9 0 0 1 130 21 V36 H12 Z" fill="#0158AD"/>
+                      <text x="71" y="29" text-anchor="middle" font-size="10.5" font-weight="900" fill="#fff" letter-spacing=".5">PEDIDO #0412</text>
+                      ${['3 × Arroz', '2 × Aceite', '1 × Jabón'].map((t, i) => `
+                      <rect x="24" y="${52 + i * 28}" width="13" height="13" rx="3" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+                      <text x="45" y="${63 + i * 28}" font-size="12" font-weight="700" fill="#334155">${t}</text>`).join('')}
+                    </g>
+                    <path class="fx-flow" d="M148 76 H136" stroke="#0158AD" stroke-width="2.5" stroke-linecap="round"/>
+                    <g stroke="#F5AE14" stroke-width="4" stroke-linecap="round"><path d="M156 56 H306 M156 98 H306 M156 138 H306"/></g>
+                    <g fill="#0158AD"><rect x="152" y="12" width="5" height="128" rx="1.5"/><rect x="304" y="12" width="5" height="128" rx="1.5"/></g>
+                    ${[[166,30,24],[206,34,20],[250,30,24],[166,72,24],[214,76,20],[256,72,24],[170,110,26],[220,116,20],[262,110,26]].map(([x, y, h], i) => `
+                    <g class="fx-drop" style="--d:${(0.15 + i * 0.05).toFixed(2)}s"><rect x="${x}" y="${y}" width="34" height="${h}" rx="2" fill="${i % 2 ? '#c98a4b' : '#d9a066'}" stroke="#9a6532" stroke-width="1.5"/></g>`).join('')}
+                  </svg>` },
 
-                { q: "¿Cuáles son los EPP indispensables para un auxiliar de bodega?", options: ["Gorra y gafas de sol", "Botas de seguridad, casco y guantes", "Guantes de lana y bufanda"], a: 1 },
+                { q: "¿Cuáles son los EPP indispensables para un auxiliar de bodega?", options: ["Gorra y gafas de sol", "Botas de seguridad, casco y guantes", "Guantes de lana y bufanda"], a: 1,
+                  svg: `<svg viewBox="0 0 320 168" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Auxiliar de bodega de frente con signos de pregunta en la cabeza, las manos y los pies, que son las zonas que debe proteger">
+                    <path d="M90 156 H230" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <g class="fx-fade" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M151 104 L149 148 M169 104 L171 148" stroke="#1e3a5f" stroke-width="13" fill="none"/>
+                      <path d="M140 56 L126 100 M180 56 L194 100" stroke="#3b82f6" stroke-width="10" fill="none"/>
+                      <rect x="139" y="50" width="42" height="58" rx="10" fill="#3b82f6"/>
+                      <path d="M141 74 H179" stroke="#FFCD57" stroke-width="5"/>
+                      <circle cx="125" cy="104" r="6" fill="#e8b48a"/><circle cx="195" cy="104" r="6" fill="#e8b48a"/>
+                      <rect x="152" y="40" width="16" height="12" fill="#e8b48a"/>
+                      <circle cx="160" cy="30" r="14" fill="#e8b48a"/>
+                      <path d="M140 150 H156 M164 150 H180" stroke="#64748b" stroke-width="8" fill="none"/>
+                    </g>
+                    <g fill="none" stroke="#0158AD" stroke-width="2" stroke-dasharray="4 3">
+                      <circle class="fx-pulse" style="--d:.4s" cx="160" cy="26" r="22"/>
+                      <circle class="fx-pulse" style="--d:.7s" cx="125" cy="104" r="14"/>
+                      <circle class="fx-pulse" style="--d:.7s" cx="195" cy="104" r="14"/>
+                      <ellipse class="fx-pulse" style="--d:1s" cx="160" cy="150" rx="32" ry="11"/>
+                    </g>
+                    ${[[204,20],[94,104],[226,104],[214,150]].map(([x, y], i) => `
+                    <g class="fx-pop" style="--d:${(0.4 + i * 0.15).toFixed(2)}s">
+                      <circle cx="${x}" cy="${y}" r="11" fill="#0158AD"/>
+                      <text x="${x}" y="${y + 5}" text-anchor="middle" font-size="14" font-weight="900" fill="#fff">?</text>
+                    </g>`).join('')}
+                  </svg>` },
 
                 { q: "Observa las dos posturas para levantar la caja del suelo. ¿Cuál es la correcta?",
                   options: ["La postura A", "La postura B", "Las dos son igual de seguras"], a: 1,
-                  svg: `<svg viewBox="0 0 320 172" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Dos posturas para levantar una caja del suelo. En la postura A la persona dobla la espalda y mantiene las piernas rectas. En la postura B flexiona las rodillas y mantiene la espalda recta">
-                    <path d="M12 140 H150" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
-                    <path d="M172 140 H308" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
-                    <g stroke="#475569" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                      <path d="M62 140 V70"/>
-                      <path d="M76 140 V70"/>
-                      <path d="M69 70 L104 86"/>
-                      <path d="M100 84 L107 114"/>
+                  svg: `<svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Dos posturas para levantar una caja del suelo. En la postura A la persona tiene las piernas rectas y la espalda doblada hacia adelante. En la postura B la persona está agachada con las rodillas flexionadas, la espalda recta y la caja pegada al cuerpo">
+                    <rect x="6" y="4" width="150" height="148" rx="12" fill="#f1f5f9"/>
+                    <rect x="164" y="4" width="150" height="148" rx="12" fill="#f1f5f9"/>
+                    <path d="M16 140 H146" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M174 140 H304" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+
+                    <g class="fx-fade" style="--d:.05s" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                      <path d="M58 98 L54 136" stroke="#152b47" stroke-width="10"/>
+                      <path d="M62 98 L66 136" stroke="#1e3a5f" stroke-width="10"/>
+                      <path d="M48 138 H60 M60 138 H74" stroke="#334155" stroke-width="7"/>
+                      <path d="M60 96 Q80 64 106 84" stroke="#3b82f6" stroke-width="14"/>
+                      <path d="M104 86 L108 117" stroke="#3b82f6" stroke-width="8"/>
+                      <circle cx="108" cy="119" r="4.5" fill="#e8b48a" stroke="none"/>
+                      <circle cx="120" cy="97" r="10" fill="#e8b48a" stroke="none"/>
+                      <path d="M108.5 95 A11.5 11.5 0 0 1 131.5 95 Z" fill="#FFCD57" stroke="#d48f00" stroke-width="1.5"/>
+                      <rect x="96" y="117" width="40" height="23" rx="3" fill="#d9a066" stroke="#9a6532" stroke-width="2"/>
+                      <path d="M116 117 V140" stroke="#f2d3a5" stroke-width="6"/>
                     </g>
-                    <circle cx="113" cy="89" r="9" fill="#475569"/>
-                    <rect x="92" y="116" width="36" height="24" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
-                    <g stroke="#475569" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                      <path d="M212 140 L206 108 L232 99"/>
-                      <path d="M226 140 L220 108"/>
-                      <path d="M232 99 L243 66"/>
-                      <path d="M240 79 L253 114"/>
+
+                    <g class="fx-fade" style="--d:.25s" stroke-linecap="round" stroke-linejoin="round" fill="none">
+                      <path d="M196 106 L218 114 L204 136" stroke="#152b47" stroke-width="10"/>
+                      <path d="M198 104 L224 110 L212 136" stroke="#1e3a5f" stroke-width="10"/>
+                      <path d="M198 138 H210 M206 138 H220" stroke="#334155" stroke-width="7"/>
+                      <path d="M196 104 L204 68" stroke="#3b82f6" stroke-width="14"/>
+                      <path d="M205 72 L222 94 L234 116" stroke="#3b82f6" stroke-width="8"/>
+                      <circle cx="235" cy="118" r="4.5" fill="#e8b48a" stroke="none"/>
+                      <circle cx="207" cy="52" r="10" fill="#e8b48a" stroke="none"/>
+                      <path d="M195.5 50 A11.5 11.5 0 0 1 218.5 50 Z" fill="#FFCD57" stroke="#d48f00" stroke-width="1.5"/>
+                      <rect x="230" y="117" width="40" height="23" rx="3" fill="#d9a066" stroke="#9a6532" stroke-width="2"/>
+                      <path d="M250 117 V140" stroke="#f2d3a5" stroke-width="6"/>
                     </g>
-                    <circle cx="246" cy="57" r="9" fill="#475569"/>
-                    <rect x="238" y="116" width="36" height="24" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="81" y="164" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">POSTURA A</text>
-                    <text x="240" y="164" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">POSTURA B</text>
+
+                    <text x="81" y="172" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">POSTURA A</text>
+                    <text x="239" y="172" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">POSTURA B</text>
                   </svg>` },
 
-                { q: "Un conteo cíclico de inventario sirve para:", options: ["Contar toda la bodega una sola vez al año", "Verificar referencias específicas de forma periódica", "Dar de baja los productos sin rotación"], a: 1 },
+                { q: "Un conteo cíclico de inventario sirve para:", options: ["Contar toda la bodega una sola vez al año", "Verificar referencias específicas de forma periódica", "Dar de baja los productos sin rotación"], a: 1,
+                  svg: `<svg viewBox="0 0 320 158" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Calendario del mes con varios días marcados para conteo, repartidos semana a semana">
+                    <rect x="46" y="6" width="228" height="146" rx="10" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M46 16 A10 10 0 0 1 56 6 H264 A10 10 0 0 1 274 16 V32 H46 Z" fill="#0158AD"/>
+                    <text x="160" y="24" text-anchor="middle" font-size="10.5" font-weight="900" fill="#fff" letter-spacing="1">CALENDARIO DE CONTEOS</text>
+                    ${['L','M','M','J','V','S','D'].map((d, c) => `<text x="${66 + c * 31.3}" y="47" text-anchor="middle" font-size="9.5" font-weight="800" fill="#94a3b8">${d}</text>`).join('')}
+                    ${[0,1,2,3].map(r => [0,1,2,3,4,5,6].map(c => {
+                        const marked = (r % 2 === 0 && c === 1) || (r % 2 === 1 && c === 3);
+                        const x = 53 + c * 31.3, y = 54 + r * 24;
+                        return marked
+                          ? `<g class="fx-pop" style="--d:${(0.3 + r * 0.2).toFixed(1)}s"><rect x="${x}" y="${y}" width="26" height="20" rx="4" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/><path d="M${x + 7} ${y + 10} l4 4 l8 -8" stroke="#0158AD" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>`
+                          : `<rect x="${x}" y="${y}" width="26" height="20" rx="4" fill="#f1f5f9"/>`;
+                    }).join('')).join('')}
+                  </svg>` },
 
-                { q: "Si encuentras un producto averiado durante el alistamiento, debes:", options: ["Despacharlo igual para no retrasar el pedido", "Reportarlo como novedad de inmediato y separarlo", "Guardarlo al fondo de la estantería"], a: 1 },
+                { q: "Si encuentras un producto averiado durante el alistamiento, debes:", options: ["Despacharlo igual para no retrasar el pedido", "Reportarlo como novedad de inmediato y separarlo", "Guardarlo al fondo de la estantería"], a: 1,
+                  svg: `<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Tres cajas de un pedido; la del medio está aplastada y gotea">
+                    <path d="M14 136 H306" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <g class="fx-drop" style="--d:.05s"><rect x="28" y="74" width="76" height="60" rx="3" fill="#d9a066" stroke="#9a6532" stroke-width="2"/><path d="M66 74 V134" stroke="#f2d3a5" stroke-width="12"/></g>
+                    <g class="fx-drop" style="--d:.15s"><rect x="216" y="74" width="76" height="60" rx="3" fill="#d9a066" stroke="#9a6532" stroke-width="2"/><path d="M254 74 V134" stroke="#f2d3a5" stroke-width="12"/></g>
+                    <g class="fx-drop" style="--d:.25s">
+                      <path d="M122 134 L120 92 L136 82 L150 96 L164 78 L182 90 L198 84 L198 134 Z" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M136 96 L146 112 L140 124 M176 98 L168 114" stroke="#8a5a2b" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </g>
+                    <ellipse cx="160" cy="138" rx="30" ry="4" fill="#60a5fa" opacity=".55"/>
+                    <path class="fx-drip" d="M186 112 q-4 6 0 8 q4 -2 0 -8 Z" fill="#3b82f6"/>
+                    <path class="fx-drip" style="--d:.7s" d="M128 118 q-4 6 0 8 q4 -2 0 -8 Z" fill="#3b82f6"/>
+                    <g class="fx-pulse" style="--d:.6s">
+                      <path d="M160 14 L184 56 H136 Z" fill="#FFCD57" stroke="#d48f00" stroke-width="2.5" stroke-linejoin="round"/>
+                      <text x="160" y="51" text-anchor="middle" font-size="22" font-weight="900" fill="#334155">!</text>
+                    </g>
+                  </svg>` },
 
                 { q: "Estos dos arrumes llevan las mismas cajas. ¿Cuál está bien armado?",
                   options: ["El arrume A", "El arrume B", "Da igual, el peso no importa"], a: 0,
                   svg: `<svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Dos arrumes sobre estiba con las mismas cajas. En el arrume A la caja de 25 kilos va abajo y la de 5 kilos arriba. En el arrume B la de 5 kilos va abajo y la de 25 kilos arriba">
-                    <rect x="52" y="34" width="60" height="30" rx="3" fill="#eef2f7" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="82" y="54" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">5 kg</text>
-                    <rect x="30" y="66" width="104" height="52" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="82" y="98" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">25 kg</text>
-                    <rect x="24" y="120" width="116" height="12" rx="2" fill="#cbd5e1"/>
-                    <path d="M14 138 H150" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
-                    <rect x="186" y="34" width="104" height="52" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="238" y="66" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">25 kg</text>
-                    <rect x="208" y="88" width="60" height="30" rx="3" fill="#eef2f7" stroke="#94a3b8" stroke-width="2"/>
-                    <text x="238" y="108" text-anchor="middle" font-size="11" font-weight="700" fill="#475569">5 kg</text>
-                    <rect x="180" y="120" width="116" height="12" rx="2" fill="#cbd5e1"/>
-                    <path d="M170 138 H306" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round"/>
-                    <text x="82" y="160" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">ARRUME A</text>
-                    <text x="238" y="160" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">ARRUME B</text>
+                    <path d="M14 140 H150" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M170 140 H306" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <g fill="#b7793f">
+                      <rect x="24" y="120" width="116" height="7" rx="1.5"/>
+                      <rect x="28" y="127" width="12" height="11"/><rect x="76" y="127" width="12" height="11"/><rect x="124" y="127" width="12" height="11"/>
+                      <rect x="180" y="120" width="116" height="7" rx="1.5"/>
+                      <rect x="184" y="127" width="12" height="11"/><rect x="232" y="127" width="12" height="11"/><rect x="280" y="127" width="12" height="11"/>
+                    </g>
+                    <g class="fx-drop" style="--d:.05s">
+                      <rect x="30" y="66" width="104" height="52" rx="3" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2"/>
+                      <rect x="74" y="66" width="16" height="52" fill="#f2d3a5" opacity=".7"/>
+                      <rect x="56" y="82" width="52" height="22" rx="4" fill="#fff"/>
+                      <text x="82" y="98" text-anchor="middle" font-size="13" font-weight="900" fill="#334155">25 kg</text>
+                    </g>
+                    <g class="fx-drop" style="--d:.25s">
+                      <rect x="52" y="34" width="60" height="30" rx="3" fill="#e0b07a" stroke="#8a5a2b" stroke-width="2"/>
+                      <rect x="64" y="41" width="36" height="17" rx="3" fill="#fff"/>
+                      <text x="82" y="54" text-anchor="middle" font-size="11" font-weight="900" fill="#334155">5 kg</text>
+                    </g>
+                    <g class="fx-drop" style="--d:.15s">
+                      <rect x="208" y="88" width="60" height="30" rx="3" fill="#e0b07a" stroke="#8a5a2b" stroke-width="2"/>
+                      <rect x="220" y="95" width="36" height="17" rx="3" fill="#fff"/>
+                      <text x="238" y="108" text-anchor="middle" font-size="11" font-weight="900" fill="#334155">5 kg</text>
+                    </g>
+                    <g class="fx-drop" style="--d:.35s">
+                      <rect x="186" y="34" width="104" height="52" rx="3" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2"/>
+                      <rect x="230" y="34" width="16" height="52" fill="#f2d3a5" opacity=".7"/>
+                      <rect x="212" y="50" width="52" height="22" rx="4" fill="#fff"/>
+                      <text x="238" y="66" text-anchor="middle" font-size="13" font-weight="900" fill="#334155">25 kg</text>
+                    </g>
+                    <text x="82" y="160" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">ARRUME A</text>
+                    <text x="238" y="160" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">ARRUME B</text>
                   </svg>` },
 
-                { q: "El almacenamiento en altura debe hacerse sobre:", options: ["Racks o estanterías certificadas", "Estibas apiladas sin límite en el piso", "Mesas de madera improvisadas"], a: 0 },
+                { q: "El almacenamiento en altura debe hacerse sobre:", options: ["Racks o estanterías certificadas", "Estibas apiladas sin límite en el piso", "Mesas de madera improvisadas"], a: 0,
+                  svg: `<svg viewBox="0 0 320 166" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Mercancía apilada a tres metros de altura junto a una persona; el soporte de abajo está marcado con un signo de pregunta">
+                    <path d="M14 156 H306" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <g stroke="#0158AD" stroke-width="2" stroke-linecap="round" fill="#0158AD">
+                      <path d="M52 14 V154" fill="none"/><path d="M46 22 L52 12 L58 22 Z"/><path d="M46 146 L52 156 L58 146 Z"/>
+                    </g>
+                    <rect x="60" y="74" width="34" height="20" rx="4" fill="#0158AD"/>
+                    <text x="77" y="88" text-anchor="middle" font-size="11.5" font-weight="900" fill="#fff">3 m</text>
+                    <g class="fx-drop" style="--d:.45s"><rect x="116" y="14" width="88" height="34" rx="3" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2"/><path d="M160 14 V48" stroke="#f2d3a5" stroke-width="12"/></g>
+                    <g class="fx-drop" style="--d:.3s"><rect x="116" y="50" width="88" height="34" rx="3" fill="#d9a066" stroke="#9a6532" stroke-width="2"/><path d="M160 50 V84" stroke="#f2d3a5" stroke-width="12"/></g>
+                    <g class="fx-drop" style="--d:.15s"><rect x="116" y="86" width="88" height="34" rx="3" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2"/><path d="M160 86 V120" stroke="#f2d3a5" stroke-width="12"/></g>
+                    <g class="fx-pulse" style="--d:.9s">
+                      <rect x="110" y="123" width="100" height="31" rx="5" fill="#dbeafe" stroke="#0158AD" stroke-width="2.5" stroke-dasharray="6 4"/>
+                      <text x="160" y="145" text-anchor="middle" font-size="18" font-weight="900" fill="#0158AD">?</text>
+                    </g>
+                    <g class="fx-fade" style="--d:.2s" stroke-linecap="round">
+                      <path d="M254 126 L252 152 M262 126 L264 152" stroke="#1e3a5f" stroke-width="8"/>
+                      <path d="M258 98 V128" stroke="#3b82f6" stroke-width="14"/>
+                      <path d="M251 102 L246 124 M265 102 L270 124" stroke="#3b82f6" stroke-width="6"/>
+                      <circle cx="258" cy="86" r="8" fill="#e8b48a"/>
+                      <path d="M248.5 84 A9.5 9.5 0 0 1 267.5 84 Z" fill="#FFCD57" stroke="#d48f00" stroke-width="1.2"/>
+                    </g>
+                  </svg>` },
 
                 { q: "¿Cuál de estas dos formas de almacenar la mercancía es la correcta?",
                   options: ["La opción A: sobre estiba, separada del piso", "La opción B: apoyada directamente en el piso", "Las dos se pueden usar sin problema"], a: 0,
                   svg: `<svg viewBox="0 0 320 158" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Opción A: las cajas van sobre una estiba separada del piso. Opción B: las cajas se apoyan directamente sobre el piso">
-                    <rect x="34" y="34" width="96" height="42" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
-                    <rect x="34" y="78" width="96" height="26" rx="3" fill="#eef2f7" stroke="#94a3b8" stroke-width="2"/>
-                    <rect x="26" y="106" width="112" height="13" rx="2" fill="#cbd5e1"/>
-                    <rect x="34" y="119" width="12" height="11" fill="#cbd5e1"/>
-                    <rect x="76" y="119" width="12" height="11" fill="#cbd5e1"/>
-                    <rect x="118" y="119" width="12" height="11" fill="#cbd5e1"/>
                     <path d="M14 132 H150" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
-                    <rect x="190" y="48" width="96" height="42" rx="3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2"/>
-                    <rect x="190" y="92" width="96" height="38" rx="3" fill="#eef2f7" stroke="#94a3b8" stroke-width="2"/>
                     <path d="M170 132 H306" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
-                    <text x="82" y="152" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">OPCIÓN A</text>
-                    <text x="238" y="152" text-anchor="middle" font-size="12" font-weight="800" fill="#0158AD">OPCIÓN B</text>
+                    <g class="fx-fade" style="--d:.05s">
+                      <rect x="26" y="106" width="112" height="8" rx="1.5" fill="#b7793f"/>
+                      <rect x="26" y="121" width="112" height="7" rx="1.5" fill="#b7793f"/>
+                      <rect x="32" y="114" width="12" height="8" fill="#9a6532"/><rect x="76" y="114" width="12" height="8" fill="#9a6532"/><rect x="120" y="114" width="12" height="8" fill="#9a6532"/>
+                    </g>
+                    <g class="fx-drop" style="--d:.2s">
+                      <rect x="34" y="78" width="96" height="28" rx="3" fill="#d9a066" stroke="#9a6532" stroke-width="2"/>
+                      <rect x="74" y="78" width="16" height="28" fill="#f2d3a5" opacity=".75"/>
+                    </g>
+                    <g class="fx-drop" style="--d:.35s">
+                      <rect x="34" y="34" width="96" height="42" rx="3" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2"/>
+                      <rect x="74" y="34" width="16" height="42" fill="#f2d3a5" opacity=".7"/>
+                    </g>
+                    <g class="fx-drop" style="--d:.2s">
+                      <rect x="190" y="92" width="96" height="38" rx="3" fill="#d9a066" stroke="#9a6532" stroke-width="2"/>
+                      <rect x="230" y="92" width="16" height="38" fill="#f2d3a5" opacity=".75"/>
+                    </g>
+                    <g class="fx-drop" style="--d:.35s">
+                      <rect x="190" y="48" width="96" height="42" rx="3" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2"/>
+                      <rect x="230" y="48" width="16" height="42" fill="#f2d3a5" opacity=".7"/>
+                    </g>
+                    <text x="82" y="152" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">OPCIÓN A</text>
+                    <text x="238" y="152" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">OPCIÓN B</text>
                   </svg>` },
 
-                { q: "¿Qué documento respalda la salida de mercancía hacia el cliente?", options: ["La remisión o factura de despacho", "Una nota en el cuaderno del turno", "El correo del vendedor"], a: 0 },
+                { q: "¿Qué documento respalda la salida de mercancía hacia el cliente?", options: ["La remisión o factura de despacho", "Una nota en el cuaderno del turno", "El correo del vendedor"], a: 0,
+                  svg: `<svg viewBox="0 0 320 146" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Camión de despacho saliendo de la bodega hacia el cliente, con un documento marcado con un signo de pregunta">
+                    <path d="M8 134 H312" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <g stroke="#94a3b8" stroke-width="3" stroke-linecap="round">
+                      <path class="fx-flow" d="M14 60 H40"/><path class="fx-flow" d="M6 78 H40"/><path class="fx-flow" d="M18 96 H40"/>
+                    </g>
+                    <g class="fx-bob">
+                      <rect x="48" y="34" width="132" height="76" rx="4" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+                      <text x="114" y="68" text-anchor="middle" font-size="11" font-weight="900" fill="#0158AD" letter-spacing="1">DESPACHO</text>
+                      <text x="114" y="84" text-anchor="middle" font-size="9" font-weight="700" fill="#64748b">→ cliente</text>
+                      <path d="M180 58 H204 L222 80 V112 H180 Z" fill="#0158AD"/>
+                      <path d="M186 64 H202 L214 80 H186 Z" fill="#bfdbfe"/>
+                      <rect x="48" y="110" width="174" height="6" fill="#334155"/>
+                      <circle cx="80" cy="120" r="12" fill="#334155"/><circle cx="80" cy="120" r="4.5" fill="#cbd5e1"/>
+                      <circle cx="196" cy="120" r="12" fill="#334155"/><circle cx="196" cy="120" r="4.5" fill="#cbd5e1"/>
+                    </g>
+                    <g class="fx-pop" style="--d:.4s">
+                      <rect x="244" y="22" width="56" height="70" rx="5" fill="#fff" stroke="#0158AD" stroke-width="2"/>
+                      <path d="M254 38 H290 M254 48 H290 M254 58 H280" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round"/>
+                      <circle cx="296" cy="88" r="13" fill="#0158AD"/>
+                      <text x="296" y="94" text-anchor="middle" font-size="16" font-weight="900" fill="#fff">?</text>
+                    </g>
+                  </svg>` },
 
                 { q: "En esta bodega las ubicaciones se rotulan como pasillo-rack-nivel. ¿Cómo se lee la casilla marcada?",
                   options: ["A-03-2", "2-03-A", "03-A-2"], a: 0,
@@ -172,16 +365,23 @@
                     <text x="24" y="49" text-anchor="middle" font-size="9.5" font-weight="700" fill="#94a3b8">NIVEL 3</text>
                     <text x="24" y="89" text-anchor="middle" font-size="9.5" font-weight="700" fill="#94a3b8">NIVEL 2</text>
                     <text x="24" y="129" text-anchor="middle" font-size="9.5" font-weight="700" fill="#94a3b8">NIVEL 1</text>
-                    <g fill="#eef2f7" stroke="#cbd5e1" stroke-width="2">
-                      <rect x="52" y="24" width="62" height="34" rx="3"/><rect x="118" y="24" width="62" height="34" rx="3"/>
-                      <rect x="184" y="24" width="62" height="34" rx="3"/><rect x="250" y="24" width="62" height="34" rx="3"/>
-                      <rect x="52" y="64" width="62" height="34" rx="3"/><rect x="118" y="64" width="62" height="34" rx="3"/>
-                      <rect x="250" y="64" width="62" height="34" rx="3"/>
-                      <rect x="52" y="104" width="62" height="34" rx="3"/><rect x="118" y="104" width="62" height="34" rx="3"/>
-                      <rect x="184" y="104" width="62" height="34" rx="3"/><rect x="250" y="104" width="62" height="34" rx="3"/>
+                    <g stroke="#F5AE14" stroke-width="4" stroke-linecap="round">
+                      <path d="M50 60 H314"/><path d="M50 100 H314"/><path d="M50 140 H314"/>
                     </g>
-                    <rect x="184" y="64" width="62" height="34" rx="3" fill="#dbeafe" stroke="#0158AD" stroke-width="2.5"/>
-                    <text x="215" y="88" text-anchor="middle" font-size="17" font-weight="800" fill="#0158AD">?</text>
+                    <g fill="#0158AD">
+                      <rect x="47" y="20" width="5" height="122" rx="1.5"/><rect x="113" y="20" width="5" height="122" rx="1.5"/>
+                      <rect x="179" y="20" width="5" height="122" rx="1.5"/><rect x="245" y="20" width="5" height="122" rx="1.5"/>
+                      <rect x="311" y="20" width="5" height="122" rx="1.5"/>
+                    </g>
+                    ${[[0,0],[1,0],[2,0],[3,0],[0,1],[1,1],[3,1],[0,2],[1,2],[2,2],[3,2]].map(([c, r], i) => `
+                    <g class="fx-drop" style="--d:${(i * 0.04).toFixed(2)}s">
+                      <rect x="${60 + c * 66}" y="${32 + r * 40}" width="46" height="26" rx="2" fill="#d9a066" stroke="#9a6532" stroke-width="1.5"/>
+                      <rect x="${78 + c * 66}" y="${32 + r * 40}" width="10" height="26" fill="#f2d3a5" opacity=".75"/>
+                    </g>`).join('')}
+                    <g class="fx-pulse">
+                      <rect x="186" y="64" width="56" height="34" rx="4" fill="#dbeafe" stroke="#0158AD" stroke-width="2.5" stroke-dasharray="5 3"/>
+                      <text x="214" y="88" text-anchor="middle" font-size="18" font-weight="900" fill="#0158AD">?</text>
+                    </g>
                     <text x="83" y="154" text-anchor="middle" font-size="10.5" font-weight="700" fill="#64748b">01</text>
                     <text x="149" y="154" text-anchor="middle" font-size="10.5" font-weight="700" fill="#64748b">02</text>
                     <text x="215" y="154" text-anchor="middle" font-size="10.5" font-weight="700" fill="#64748b">03</text>
@@ -192,24 +392,84 @@
                 { q: "Este es el flujo de la mercancía dentro de la bodega. ¿Qué paso falta en el recuadro 3?",
                   options: ["Picking y alistamiento del pedido", "Compra al proveedor", "Cobro de la factura al cliente"], a: 0,
                   svg: `<svg viewBox="0 0 320 214" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Flujo de la bodega en cuatro pasos: 1 recepción, 2 almacenamiento, 3 paso faltante marcado con un signo de interrogación, y 4 despacho">
-                    <rect x="54" y="4" width="212" height="38" rx="9" fill="#eef2f7" stroke="#cbd5e1" stroke-width="2"/>
-                    <text x="160" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">1. Recepción</text>
-                    <g stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                      <path d="M160 45 V55"/><path d="M154 51 L160 57 L166 51"/>
-                      <path d="M160 101 V111"/><path d="M154 107 L160 113 L166 107"/>
-                      <path d="M160 157 V167"/><path d="M154 163 L160 169 L166 163"/>
+                    <g stroke="#0158AD" stroke-width="2.5" stroke-linecap="round" fill="none">
+                      <path class="fx-flow" d="M160 43 V56"/><path class="fx-flow" d="M160 99 V112"/><path class="fx-flow" d="M160 155 V168"/>
                     </g>
-                    <rect x="54" y="60" width="212" height="38" rx="9" fill="#eef2f7" stroke="#cbd5e1" stroke-width="2"/>
-                    <text x="160" y="84" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">2. Almacenamiento</text>
-                    <rect x="54" y="116" width="212" height="38" rx="9" fill="#dbeafe" stroke="#0158AD" stroke-width="2.5" stroke-dasharray="6 4"/>
-                    <text x="160" y="142" text-anchor="middle" font-size="15" font-weight="800" fill="#0158AD">3.  ?</text>
-                    <rect x="54" y="172" width="212" height="38" rx="9" fill="#eef2f7" stroke="#cbd5e1" stroke-width="2"/>
-                    <text x="160" y="196" text-anchor="middle" font-size="13" font-weight="700" fill="#334155">4. Despacho</text>
+                    <g fill="#0158AD"><path d="M154 54 L160 60 L166 54 Z"/><path d="M154 110 L160 116 L166 110 Z"/><path d="M154 166 L160 172 L166 166 Z"/></g>
+                    <g class="fx-fade" style="--d:.05s">
+                      <rect x="40" y="4" width="240" height="38" rx="10" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                      <circle cx="62" cy="23" r="12" fill="#0158AD"/><text x="62" y="28" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">1</text>
+                      <text x="84" y="28" font-size="13.5" font-weight="800" fill="#334155">Recepción</text>
+                      <rect x="236" y="14" width="30" height="18" rx="2" fill="#d9a066" stroke="#9a6532" stroke-width="1.5"/><path d="M251 14 V32" stroke="#f2d3a5" stroke-width="5"/>
+                    </g>
+                    <g class="fx-fade" style="--d:.2s">
+                      <rect x="40" y="60" width="240" height="38" rx="10" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                      <circle cx="62" cy="79" r="12" fill="#0158AD"/><text x="62" y="84" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">2</text>
+                      <text x="84" y="84" font-size="13.5" font-weight="800" fill="#334155">Almacenamiento</text>
+                      <g stroke="#0158AD" stroke-width="2.5"><path d="M236 68 V92 M268 68 V92"/></g>
+                      <path d="M236 80 H268 M236 92 H268" stroke="#F5AE14" stroke-width="2.5"/>
+                      <rect x="242" y="70" width="10" height="9" fill="#d9a066"/><rect x="254" y="82" width="10" height="9" fill="#d9a066"/>
+                    </g>
+                    <g class="fx-pulse" style="--d:.8s">
+                      <rect x="40" y="116" width="240" height="38" rx="10" fill="#dbeafe" stroke="#0158AD" stroke-width="2.5" stroke-dasharray="6 4"/>
+                      <circle cx="62" cy="135" r="12" fill="#0158AD"/><text x="62" y="140" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">3</text>
+                      <text x="160" y="141" text-anchor="middle" font-size="18" font-weight="900" fill="#0158AD">?</text>
+                    </g>
+                    <g class="fx-fade" style="--d:.35s">
+                      <rect x="40" y="172" width="240" height="38" rx="10" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                      <circle cx="62" cy="191" r="12" fill="#0158AD"/><text x="62" y="196" text-anchor="middle" font-size="13" font-weight="900" fill="#fff">4</text>
+                      <text x="84" y="196" font-size="13.5" font-weight="800" fill="#334155">Despacho</text>
+                      <rect x="232" y="180" width="24" height="18" rx="2" fill="#94a3b8"/><rect x="256" y="186" width="12" height="12" rx="2" fill="#0158AD"/>
+                      <circle cx="240" cy="200" r="3.5" fill="#334155"/><circle cx="262" cy="200" r="3.5" fill="#334155"/>
+                    </g>
                   </svg>` },
 
-                { q: "En el Kardex, la diferencia entre el stock del sistema y el conteo físico se registra como:", options: ["Faltante o sobrante de inventario", "Descuento comercial", "Devolución del proveedor"], a: 0 },
+                { q: "En el Kardex, la diferencia entre el stock del sistema y el conteo físico se registra como:", options: ["Faltante o sobrante de inventario", "Descuento comercial", "Devolución del proveedor"], a: 0,
+                  svg: `<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Tarjeta Kardex del arroz de 500 gramos: el sistema dice 120 unidades, el conteo físico da 114 y la diferencia es de menos 6 unidades">
+                    <rect x="16" y="6" width="288" height="138" rx="10" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                    <path d="M16 16 A10 10 0 0 1 26 6 H294 A10 10 0 0 1 304 16 V34 H16 Z" fill="#0158AD"/>
+                    <text x="30" y="25" font-size="11" font-weight="900" fill="#fff" letter-spacing=".8">KARDEX</text>
+                    <text x="290" y="25" text-anchor="end" font-size="10.5" font-weight="700" fill="#bfdbfe">Ref. 2045 · Arroz 500 g</text>
+                    <g class="fx-fade" style="--d:.1s">
+                      <text x="32" y="60" font-size="13" font-weight="600" fill="#475569">Stock en el sistema</text>
+                      <text x="288" y="60" text-anchor="end" font-size="15" font-weight="900" fill="#334155">120 und</text>
+                    </g>
+                    <path d="M28 72 H292" stroke="#e2e8f0" stroke-width="1.5"/>
+                    <g class="fx-fade" style="--d:.35s">
+                      <text x="32" y="94" font-size="13" font-weight="600" fill="#475569">Conteo físico</text>
+                      <text x="288" y="94" text-anchor="end" font-size="15" font-weight="900" fill="#334155">114 und</text>
+                    </g>
+                    <g class="fx-pop" style="--d:.7s">
+                      <rect x="24" y="106" width="272" height="30" rx="6" fill="#dbeafe" stroke="#0158AD" stroke-width="2" stroke-dasharray="6 4"/>
+                      <text x="32" y="126" font-size="13" font-weight="800" fill="#0158AD">Diferencia</text>
+                      <text x="288" y="126" text-anchor="end" font-size="15" font-weight="900" fill="#0158AD">−6 und · ¿?</text>
+                    </g>
+                  </svg>` },
 
-                { q: "Antes de cargar el camión de despacho, el auxiliar debe:", options: ["Verificar que las referencias y cantidades coincidan con la remisión", "Subir la carga en el orden que resulte más rápido", "Dejar la revisión en manos del conductor"], a: 0 }
+                { q: "Antes de cargar el camión de despacho, el auxiliar debe:", options: ["Verificar que las referencias y cantidades coincidan con la remisión", "Subir la carga en el orden que resulte más rápido", "Dejar la revisión en manos del conductor"], a: 0,
+                  svg: `<svg viewBox="0 0 320 146" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Cajas del pedido en el muelle listas para subir a un camión abierto">
+                    <path d="M8 134 H312" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="8" y="104" width="124" height="30" fill="#cbd5e1"/>
+                    <path d="M8 104 H132" stroke="#F5AE14" stroke-width="4" stroke-dasharray="10 8"/>
+                    <g>
+                      <rect x="138" y="30" width="134" height="80" rx="4" fill="#e2e8f0" stroke="#64748b" stroke-width="2"/>
+                      <rect x="144" y="36" width="44" height="68" rx="2" fill="#475569"/>
+                      <text x="232" y="76" text-anchor="middle" font-size="11" font-weight="900" fill="#0158AD" letter-spacing="1">DESPACHO</text>
+                      <path d="M272 58 H296 L312 78 V112 H272 Z" fill="#0158AD"/>
+                      <path d="M278 64 H294 L304 78 H278 Z" fill="#bfdbfe"/>
+                      <rect x="138" y="110" width="174" height="6" fill="#334155"/>
+                      <circle cx="170" cy="120" r="12" fill="#334155"/><circle cx="170" cy="120" r="4.5" fill="#cbd5e1"/>
+                      <circle cx="282" cy="120" r="12" fill="#334155"/><circle cx="282" cy="120" r="4.5" fill="#cbd5e1"/>
+                    </g>
+                    <path class="fx-flow" d="M110 66 Q134 50 156 66" stroke="#0158AD" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M150 60 L158 68 L148 70 Z" fill="#0158AD"/>
+                    ${[[18,74,'01'],[62,74,'02'],[40,44,'03']].map(([x, y, n], i) => `
+                    <g class="fx-drop" style="--d:${(0.1 + i * 0.12).toFixed(2)}s">
+                      <rect x="${x}" y="${y}" width="40" height="30" rx="2" fill="${i === 1 ? '#c98a4b' : '#d9a066'}" stroke="#9a6532" stroke-width="2"/>
+                      <rect x="${x + 8}" y="${y + 8}" width="24" height="14" rx="2" fill="#fff"/>
+                      <text x="${x + 20}" y="${y + 19}" text-anchor="middle" font-size="9" font-weight="900" fill="#334155">${n}</text>
+                    </g>`).join('')}
+                  </svg>` }
             ]
         };
     </script>

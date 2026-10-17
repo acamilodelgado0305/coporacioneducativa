@@ -43,7 +43,7 @@
     function initialState() {
         return {
             screen: 'inicio',
-            quiz: { idx: 0, score: 0 },
+            quiz: { idx: 0, score: 0, res: [] },   // res: aciertos por pregunta (true/false)
             user: { type: 'CC', num: '', name: '', phone: '', email: '' },
             consent: null,
             leadCreated: false,
@@ -270,9 +270,17 @@
 
         examen: () => {
             const q = C.preguntas[S.quiz.idx];
+            const res = S.quiz.res || [];
+            let racha = 0;
+            for (let k = res.length - 1; k >= 0 && res[k]; k--) racha++;
             return `
             <section class="screen">
-                <p class="q-count">Pregunta ${S.quiz.idx + 1} de ${TOTAL}</p>
+                <div class="q-head">
+                    <p class="q-count">Pregunta ${S.quiz.idx + 1} de ${TOTAL}</p>
+                    ${racha >= 2 ? `<span class="q-streak"><i class="fas fa-fire"></i> ${racha} seguidas</span>` : ''}
+                </div>
+                <div class="q-dots" aria-hidden="true">${C.preguntas.map((_, k) =>
+                    `<i class="${k < res.length ? (res[k] ? 'ok' : 'bad') : k === S.quiz.idx ? 'now' : ''}"></i>`).join('')}</div>
                 <h2 class="q-title">${q.q}</h2>
                 ${q.svg ? `<div class="q-figure">${q.svg}</div>` : ''}
                 <div class="options" id="options">
@@ -382,6 +390,7 @@
             </section>
             <div class="actions">
                 <button class="btn btn-wa" onclick="F.confirmar()"><i class="fab fa-whatsapp"></i> Confirmar pedido</button>
+                <button class="btn-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
             </div>`,
 
         listo: () => `
@@ -428,7 +437,7 @@
     // ════════════════ Examen ════════════════
     function startExam() {
         trackEvent('exam_started');
-        S.quiz = { idx: 0, score: 0 };
+        S.quiz = { idx: 0, score: 0, res: [] };
         go('examen');
     }
 
@@ -453,7 +462,10 @@
 
         // El avance se guarda ya; la pausa es solo visual (una recarga no repite la pregunta)
         if (correct) S.quiz.score++;
+        (S.quiz.res = S.quiz.res || [])[S.quiz.idx] = correct;
         S.quiz.idx++;
+        const dot = document.querySelectorAll('.q-dots i')[S.quiz.idx - 1];
+        if (dot) dot.className = correct ? 'ok' : 'bad';
         save();
         answerTimer = setTimeout(() => {
             if (S.quiz.idx < TOTAL) render();
@@ -479,7 +491,7 @@
     }
 
     function retry() {
-        S.quiz = { idx: 0, score: 0 };
+        S.quiz = { idx: 0, score: 0, res: [] };
         go('examen');
     }
 
