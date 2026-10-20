@@ -1,7 +1,7 @@
 /**
  * Flujo de venta de certificados — una sola decisión por pantalla.
  *
- *   inicio → examen → (fallo) → datos → pedido → listo
+ *   inicio → examen → (fallo) → datos → pedido → (comprobante) → listo
  *
  * Cada curso es una página que define `window.CURSO` (precio, preguntas, textos)
  * y carga este archivo. Ver certificado-manipulacion-de-alimentos.html.
@@ -10,8 +10,9 @@
  *   - n8n (Telegram): trackEvent()
  *   - CRM: createCrmLead() al completar los datos y markLeadAsProposal() al confirmar el pedido
  *   - Meta: Pixel 'Lead' (con event_id compartido con la CAPI del CRM) e 'InitiateCheckout'
- *   - Pago: por ahora se coordina por WhatsApp. "Confirmar pedido" abre el chat con los
- *           datos; allí se le dan las opciones de pago y se recibe el comprobante.
+ *   - Pago: si el curso define `nequiUrl`, se paga con Nequi en ese link de Wompi y el
+ *           comprobante llega por WhatsApp (pantalla "comprobante"). Si no, o si el cliente
+ *           lo prefiere, "Confirmar pedido" abre el chat con los datos y allí se coordina el pago.
  */
 (function () {
     const C = window.CURSO;
@@ -27,9 +28,9 @@
     const IS_MOBILE  = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
 
     // Paso de la barra de progreso y a dónde lleva "Atrás"
-    const PASO  = { inicio: 0, examen: 1, fallo: 1, datos: 2, pedido: 3, listo: 4 };
-    const ATRAS = { pedido: 'datos' };
-    const NOMBRE_PASO = ['', 'Examen', 'Tus datos', 'Confirmar', 'Listo'];
+    const PASO  = { inicio: 0, examen: 1, fallo: 1, datos: 2, pedido: 3, comprobante: 3, listo: 4 };
+    const ATRAS = { pedido: 'datos', comprobante: 'pedido' };
+    const NOMBRE_PASO = ['', 'Examen', 'Tus datos', C.nequiUrl ? 'Pago' : 'Confirmar', 'Listo'];
 
     const DOCS = {
         CC:  'Cédula de Ciudadanía',
@@ -50,7 +51,8 @@
             leadId: null,
             leadProposed: false,
             leadEventId: null,
-            pedido: false      // true al confirmar el pedido por WhatsApp
+            pedido: false,     // true al confirmar el pedido o empezar a pagar
+            metodo: null       // 'Nequi' | 'WhatsApp'
         };
     }
 
@@ -64,8 +66,11 @@
         s.user = Object.assign(initialState().user, s.user || {});
         // Antes los datos se pedían en dos pantallas (nombre y contacto)
         if (s.screen === 'nombre' || s.screen === 'contacto') s.screen = 'datos';
-        // Antes se pagaba en la página; ahora el pago se coordina por WhatsApp
-        if (s.screen === 'pago' || s.screen === 'comprobante' || s.screen === 'transferencia') s.screen = 'pedido';
+        // Pedidos confirmados antes de que existiera el pago con Nequi
+        if (s.pedido && !s.metodo) s.metodo = 'WhatsApp';
+        // Pantallas de pago de versiones anteriores (PSE, transferencia): vuelven al pedido
+        const enComprobanteNequi = s.screen === 'comprobante' && C.nequiUrl && s.metodo === 'Nequi';
+        if (s.screen === 'pago' || s.screen === 'transferencia' || (s.screen === 'comprobante' && !enComprobanteNequi)) s.screen = 'pedido';
         if (!(s.screen in PASO)) s.screen = 'inicio';
         return s;
     }
@@ -124,6 +129,27 @@
     function docIsNumeric(type) { return type === 'CC' || type === 'TI'; }
 
     function fbqSafe() { try { if (window.fbq) window.fbq.apply(null, arguments); } catch (e) {} }
+
+    function legacyCopy(text) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        let ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) {}
+        ta.remove();
+        return ok;
+    }
+
+    function copyText(text) {
+        if (navigator.clipboard && window.isSecureContext) {
+            return navigator.clipboard.writeText(text).then(() => true, () => legacyCopy(text));
+        }
+        return Promise.resolve(legacyCopy(text));
+    }
 
     function openWhatsApp(phone, msg) {
         const text = encodeURIComponent(msg);
@@ -258,7 +284,7 @@
                     <p class="how-title">Así de fácil</p>
                     <ol>
                         <li><span class="how-n">1</span><div><b>Presenta el examen gratis</b><span>${TOTAL} preguntas · ${C.minutos} minutos · sin registrarte</span></div></li>
-                        <li><span class="how-n">2</span><div><b>Pagas solo si apruebas</b><span>${PRECIO_TXT} · coordinamos el pago por WhatsApp</span></div></li>
+                        <li><span class="how-n">2</span><div><b>Pagas solo si apruebas</b><span>${PRECIO_TXT} · ${C.nequiUrl ? 'pagas con Nequi en línea' : 'coordinamos el pago por WhatsApp'}</span></div></li>
                         <li><span class="how-n">3</span><div><b>Recibe ${C.entrega}</b><span>En PDF, en tu correo el mismo día</span></div></li>
                     </ol>
                 </div>
@@ -379,6 +405,22 @@
                     </div>
                     <div class="row total"><span>Total</span><span class="price">${PRECIO_TXT} <small>COP</small></span></div>
                 </div>
+                ${C.nequiUrl ? `
+                <div class="how">
+                    <p class="how-title">Cómo sigue</p>
+                    <ol>
+                        <li><span class="how-n">1</span><div><b>Paga con Nequi</b><span>Se abre la página de pago segura de Wompi</span></div></li>
+                        <li><span class="how-n">2</span><div><b>Envía tu comprobante</b><span>Por WhatsApp, con una captura del pago</span></div></li>
+                        <li><span class="how-n">3</span><div><b>Recibe ${C.entrega}</b><span>En PDF, en tu correo</span></div></li>
+                    </ol>
+                </div>
+                <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige <b>Nequi</b>.</span></p>
+                <button class="btn-link reset-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
+            </section>
+            <div class="actions">
+                <button class="btn btn-nequi" onclick="F.pagarNequi()"><i class="fas fa-lock"></i> Pagar ${PRECIO_TXT} con Nequi</button>
+                <button class="btn-link" onclick="F.confirmar()">Prefiero pagar por WhatsApp</button>
+            </div>` : `
                 <div class="how">
                     <p class="how-title">Cómo sigue</p>
                     <ol>
@@ -391,17 +433,44 @@
             <div class="actions">
                 <button class="btn btn-wa" onclick="F.confirmar()"><i class="fab fa-whatsapp"></i> Confirmar pedido</button>
                 <button class="btn-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
+            </div>`}`,
+
+        comprobante: () => `
+            <section class="screen">
+                <button class="back" onclick="F.back()"><i class="fas fa-arrow-left"></i> Atrás</button>
+                <div class="result-icon info start"><i class="fas fa-receipt"></i></div>
+                <h1 class="h2">¿Ya pagaste? Envía tu comprobante</h1>
+                <p class="sub">Con el comprobante verificamos tu pago y te enviamos ${C.entrega} a <b>${esc(S.user.email)}</b>.</p>
+                <ol class="steps-list">
+                    <li><span>1</span>Toma una captura del pago aprobado.</li>
+                    <li><span>2</span>Toca el botón verde y adjunta la captura en el chat.</li>
+                </ol>
+                <div class="help-box">
+                    <p>¿Aún no has pagado?</p>
+                    <button class="link" onclick="F.pagarNequi()">Abrir el pago con Nequi otra vez (valor ${PRECIO_TXT})</button>
+                    <button class="link" onclick="F.confirmar()">Nequi no me funcionó: pagar por WhatsApp</button>
+                </div>
+            </section>
+            <div class="actions">
+                <button class="btn btn-wa" onclick="F.enviarComprobante()"><i class="fab fa-whatsapp"></i> Enviar comprobante</button>
             </div>`,
 
         listo: () => `
             <section class="screen center">
                 <div class="result-icon ok"><i class="fas fa-check"></i></div>
+                ${S.metodo === 'Nequi' ? `
+                <h1 class="h2">¡Listo, ${esc(firstName())}!</h1>
+                <p class="lead">Estamos verificando tu pago. Apenas lo confirmemos te enviamos ${C.entrega} en PDF a <b>${esc(S.user.email)}</b>.</p>
+                <div class="info-card">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>¿No alcanzaste a adjuntar la captura del comprobante en el chat? Hazlo ahora para que podamos verificar tu pago.</span>
+                </div>` : `
                 <h1 class="h2">¡Pedido confirmado, ${esc(firstName())}!</h1>
                 <p class="lead">Envía el mensaje que te dejamos listo en WhatsApp. Allí te damos las opciones de pago y, cuando nos mandes tu comprobante, te enviamos ${C.entrega} en PDF a <b>${esc(S.user.email)}</b>.</p>
                 <div class="info-card">
                     <i class="fab fa-whatsapp"></i>
                     <span>¿No se abrió WhatsApp o no alcanzaste a enviar el mensaje? Toca el botón para abrirlo de nuevo.</span>
-                </div>
+                </div>`}
             </section>
             <div class="actions">
                 <button class="btn btn-outline" onclick="F.abrirWhatsApp()"><i class="fab fa-whatsapp"></i> Abrir WhatsApp de nuevo</button>
@@ -625,33 +694,64 @@
     }
 
     // ════════════════ Pedido ════════════════
-    // El pedido llega por WhatsApp con todos los datos; allí se le dan las
+    // Con Nequi: paga en el link de Wompi y el comprobante llega por WhatsApp.
+    // Por WhatsApp: el pedido llega con todos los datos; allí se le dan las
     // opciones de pago y se recibe el comprobante.
-    function pedidoMsg() {
+    function datosMsg() {
         const u = S.user;
-        return '¡Hola! Quiero confirmar mi pedido ✅\n\n' +
-            '• Producto: ' + C.producto + '\n' +
+        return '• Producto: ' + C.producto + '\n' +
             '• Valor: ' + PRECIO_TXT + '\n' +
             '• Nombre: ' + (u.name || '') + '\n' +
             '• Documento: ' + ((u.type || '') + ' ' + (u.num || '')).trim() + '\n' +
             '• Correo: ' + (u.email || '') + '\n' +
-            '• Celular: ' + (u.phone || '') + '\n\n' +
-            '¿Cómo hago el pago?';
+            '• Celular: ' + (u.phone || '');
     }
 
-    function confirmar() {
+    function pedidoMsg() {
+        return '¡Hola! Quiero confirmar mi pedido ✅\n\n' + datosMsg() + '\n\n¿Cómo hago el pago?';
+    }
+
+    function comprobanteMsg() {
+        return '¡Hola! Ya pagué con Nequi ✅\n' +
+            'Adjunto el comprobante de pago para su verificación.\n\n' + datosMsg();
+    }
+
+    // Un solo InitiateCheckout por pedido; el evento de n8n se envía cada vez que cambia el método
+    function iniciarPedido(metodo, evento, extra) {
+        if (S.metodo !== metodo) trackEvent(evento, extra);
         if (!S.pedido) {
-            trackEvent('pedido_confirmado', { canal: 'WhatsApp' });
             fbqSafe('track', 'InitiateCheckout', { content_name: C.producto, value: C.precio, currency: 'COP', num_items: 1 });
             S.pedido = true;
         }
+        S.metodo = metodo;
         markLeadAsProposal();
+    }
+
+    function pagarNequi() {
+        // El link de Wompi no trae el valor: lo copiamos para que solo lo pegue
+        copyText(String(C.precio));
+        iniciarPedido('Nequi', 'payment_initiated', { metodo: 'Nequi' });
+        go('comprobante');
+        // Wompi en otra pestaña: esta queda lista para enviar el comprobante al volver.
+        // Si el navegador bloquea la pestaña, abrimos Wompi aquí mismo (el estado ya quedó guardado).
+        const win = window.open(C.nequiUrl, '_blank');
+        if (!win) window.location.href = C.nequiUrl;
+    }
+
+    function enviarComprobante() {
+        trackEvent('whatsapp_comprobante', { metodo: 'Nequi' });
+        go('listo');
+        openWhatsApp(C.whatsapp, comprobanteMsg());
+    }
+
+    function confirmar() {
+        iniciarPedido('WhatsApp', 'pedido_confirmado', { canal: 'WhatsApp' });
         go('listo');
         openWhatsApp(C.whatsapp, pedidoMsg());
     }
 
     function abrirWhatsApp() {
-        openWhatsApp(C.whatsapp, pedidoMsg());
+        openWhatsApp(C.whatsapp, S.metodo === 'Nequi' ? comprobanteMsg() : pedidoMsg());
     }
 
     function reset() {
@@ -667,7 +767,7 @@
         startExam, answer, retry,
         onName, onDoc, showDocType, onDocType,
         checkEmail, onEmailInput, applyEmail, onPhone, submitDatos,
-        confirmar, abrirWhatsApp, back, reset
+        pagarNequi, enviarComprobante, confirmar, abrirWhatsApp, back, reset
     };
 
     document.addEventListener('DOMContentLoaded', () => {

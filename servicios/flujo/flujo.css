@@ -5,6 +5,7 @@
      azul      = confianza (marca, estructura)
      ámbar     = la acción que lleva al siguiente paso
      verde     = progreso, acierto, WhatsApp
+     fucsia    = pagar con Nequi (su color de marca, para que lo reconozcan)
      rojo      = solo errores
    ═══════════════════════════════════════════════════════════════════ */
 
@@ -25,6 +26,7 @@
     --ok-line: #bbf7d0;
     --err: #dc2626;
     --wa: #25D366;
+    --nequi: #DA0063;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -119,6 +121,8 @@ main { flex: 1; display: flex; flex-direction: column; }
 .btn-primary:hover { filter: brightness(1.03); }
 .btn-wa { background: var(--wa); color: #fff; box-shadow: 0 10px 22px -12px rgba(22,163,74,.9); }
 .btn-wa i { font-size: 22px; }
+.btn-nequi { background: var(--nequi); color: #fff; box-shadow: 0 10px 22px -12px rgba(218,0,99,.9); }
+.btn-nequi:hover { filter: brightness(1.06); }
 .btn-outline { background: #fff; color: var(--text); border: 1.5px solid var(--line); min-height: 50px; font-size: 15px; }
 .btn-outline i { color: var(--wa); font-size: 19px; }
 .btn-link {
@@ -269,6 +273,7 @@ main { flex: 1; display: flex; flex-direction: column; }
 .result-icon.ok { background: var(--ok); color: #fff; box-shadow: 0 0 0 8px var(--ok-bg); }
 .result-icon.warn { background: #fff7ed; color: #ea580c; }
 .result-icon.info { background: var(--brand-soft); color: var(--brand); }
+.result-icon.start { margin: 4px 0 16px; }
 .success-banner {
     display: flex; align-items: center; gap: 12px;
     background: var(--ok-bg); border: 1px solid var(--ok-line); border-radius: 14px;
@@ -339,6 +344,27 @@ select.input {
 .row.total > span:first-child { color: var(--ink); font-weight: 800; }
 .price { font-size: 26px; font-weight: 900; letter-spacing: -.02em; white-space: nowrap; font-variant-numeric: tabular-nums; }
 .price small { font-size: 12px; font-weight: 600; color: #94a3b8; }
+.note {
+    display: flex; gap: 10px; margin-top: 14px;
+    padding: 12px; border-radius: 12px;
+    background: #fffbeb; border: 1px solid #fde68a;
+    font-size: 13.5px; line-height: 1.45; color: #475569;
+}
+.note i { color: #d97706; margin-top: 3px; }
+.note b { color: var(--ink); }
+.reset-link { display: block; margin: 14px auto 0; }
+
+/* ── Comprobante (pago con Nequi) ── */
+.steps-list { list-style: none; display: grid; gap: 12px; margin-top: 18px; }
+.steps-list li { display: flex; align-items: center; gap: 12px; font-size: 14.5px; line-height: 1.4; color: var(--text); }
+.steps-list li > span {
+    width: 28px; height: 28px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; background: var(--brand-soft); border: 1px solid var(--brand-line);
+    color: var(--brand); font-size: 13px; font-weight: 800;
+}
+.help-box { display: grid; gap: 8px; justify-items: start; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line); }
+.help-box p { font-size: 13px; font-weight: 700; color: var(--muted); }
 
 /* ── Listo ── */
 .info-card {
