@@ -8,10 +8,13 @@
  *
  * Integraciones (las mismas de las páginas anteriores):
  *   - n8n (Telegram): trackEvent()
- *   - CRM: createCrmLead() al completar los datos y markLeadAsProposal() al confirmar el pedido
+ *   - CRM: createCrmLead() al completar los datos (y de nuevo al confirmar el pedido, si falló)
+ *          y markLeadAsProposal() al confirmar el pedido
  *   - Meta: Pixel 'Lead' (con event_id compartido con la CAPI del CRM) e 'InitiateCheckout'
  *   - Pago: si el curso define `nequiUrl`, se paga con Nequi en ese link de Wompi; la
- *           pasarela confirma el pago, sin comprobante. Si no, o si el cliente lo prefiere,
+ *           pasarela confirma el pago, sin comprobante. Con `pagoEnLinea` el botón es
+ *           "Pagar en línea" (azul) en vez de la tarjeta de Nequi, para links de Wompi que
+ *           aceptan todos los medios. Si no hay link, o si el cliente lo prefiere,
  *           "Confirmar pedido" abre el chat con los datos y allí se coordina el pago.
  */
 (function () {
@@ -29,6 +32,8 @@
     // El mismo logo del botón "Pagar con Nequi" del checkout anterior.
     // Se carga sin referrer: con el de la página Google a veces lo bloquea (429).
     const NEQUI_LOGO = 'https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj';
+    // Botón azul "Pagar en línea" (Nequi, PSE o tarjeta en Wompi) en lugar de la tarjeta de Nequi
+    const EN_LINEA = !!(C.nequiUrl && C.pagoEnLinea);
 
     // Paso de la barra de progreso y a dónde lleva "Atrás"
     const PASO  = { inicio: 0, examen: 1, fallo: 1, datos: 2, pedido: 3, listo: 4 };
@@ -195,13 +200,16 @@
     }
 
     // ════════════════ CRM ════════════════
-    let crmLeadInFlight = false;
+    let crmLead = null;   // POST en curso
 
+    // Crea el lead una sola vez; si el intento anterior falló, lo reintenta.
+    // Devuelve una promesa que se resuelve cuando el CRM responde (bien o mal),
+    // para que el pedido por WhatsApp pueda esperarla.
     function createCrmLead() {
-        if (S.leadCreated || crmLeadInFlight) return;
-        crmLeadInFlight = true;
+        if (S.leadCreated) return Promise.resolve();
+        if (crmLead) return crmLead;
         const u = S.user;
-        fetch(CRM_LEADS_URL, {
+        crmLead = fetch(CRM_LEADS_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             keepalive: true,
@@ -233,7 +241,8 @@
             if (S.pedido) markLeadAsProposal();
         })
         .catch(err => trackEvent('crm_lead_error', { detalle: String((err && err.message) || err) }))
-        .finally(() => { crmLeadInFlight = false; });
+        .finally(() => { crmLead = null; });
+        return crmLead;
     }
 
     function markLeadAsProposal() {
@@ -287,7 +296,7 @@
                     <p class="how-title">Así de fácil</p>
                     <ol>
                         <li><span class="how-n">1</span><div><b>Presenta el examen gratis</b><span>${TOTAL} preguntas · ${C.minutos} minutos · sin registrarte</span></div></li>
-                        <li><span class="how-n">2</span><div><b>Pagas solo si apruebas</b><span>${PRECIO_TXT} · ${C.nequiUrl ? 'pagas con Nequi en línea' : 'coordinamos el pago por WhatsApp'}</span></div></li>
+                        <li><span class="how-n">2</span><div><b>Pagas solo si apruebas</b><span>${PRECIO_TXT} · ${EN_LINEA ? 'pagas en línea con Nequi, PSE o tarjeta' : C.nequiUrl ? 'pagas con Nequi en línea' : 'coordinamos el pago por WhatsApp'}</span></div></li>
                         <li><span class="how-n">3</span><div><b>Recibe ${C.entrega}</b><span>En PDF, en tu correo el mismo día</span></div></li>
                     </ol>
                 </div>
@@ -412,20 +421,26 @@
                 <div class="how">
                     <p class="how-title">Cómo sigue</p>
                     <ol>
-                        <li><span class="how-n">1</span><div><b>Paga con Nequi</b><span>Se abre la página de pago segura de Wompi</span></div></li>
+                        <li><span class="how-n">1</span><div><b>${EN_LINEA ? 'Paga en línea' : 'Paga con Nequi'}</b><span>${EN_LINEA ? 'Con Nequi, PSE o tarjeta en la página segura de Wompi' : 'Se abre la página de pago segura de Wompi'}</span></div></li>
                         <li><span class="how-n">2</span><div><b>Recibe ${C.entrega}</b><span>En PDF, en tu correo, apenas se apruebe tu pago</span></div></li>
                     </ol>
                 </div>
-                <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige <b>Nequi</b>.</span></p>
+                <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige ${EN_LINEA ? 'cómo quieres pagar' : '<b>Nequi</b>'}.</span></p>
                 <button class="btn-link reset-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
             </section>
             <div class="actions">
+                ${EN_LINEA ? `
+                <button class="btn btn-online" onclick="F.pagarNequi()">
+                    <i class="fas fa-lock"></i>
+                    <span class="btn-online-txt"><b>Pagar en línea — ${PRECIO_TXT}</b><span>Nequi, PSE o tarjeta · Al instante</span></span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>` : `
                 <button class="btn-nequi" onclick="F.pagarNequi()">
                     <span class="badge-rec">Recomendado</span>
                     <img src="${NEQUI_LOGO}" alt="Nequi" width="40" height="40" referrerpolicy="no-referrer" onerror="this.remove()">
                     <span class="btn-nequi-txt"><b>Pagar con Nequi en línea — ${PRECIO_TXT}</b><span>Aprobación inmediata</span></span>
                     <i class="fas fa-arrow-right"></i>
-                </button>
+                </button>`}
                 <button class="btn-link" onclick="F.confirmar()">Prefiero pagar por WhatsApp</button>
             </div>` : `
                 <div class="how">
@@ -446,11 +461,11 @@
             <section class="screen center">
                 <div class="result-icon ok"><i class="fas fa-check"></i></div>
                 <h1 class="h2">¡Ya casi, ${esc(firstName())}!</h1>
-                <p class="lead">Completa tu pago con Nequi en la página de Wompi. Apenas se apruebe, te enviamos ${C.entrega} en PDF a <b>${esc(S.user.email)}</b>.</p>
+                <p class="lead">Completa tu pago ${EN_LINEA ? '' : 'con Nequi '}en la página de Wompi. Apenas se apruebe, te enviamos ${C.entrega} en PDF a <b>${esc(S.user.email)}</b>.</p>
                 <p class="note"><i class="fas fa-circle-info"></i><span>¿Se cerró la página de pago? Ábrela de nuevo con el botón de abajo. El valor a pagar es <b>${PRECIO_TXT}</b>.</span></p>
             </section>
             <div class="actions">
-                <button class="btn btn-outline nequi" onclick="F.pagarNequi()"><i class="fas fa-rotate-right"></i> Abrir el pago con Nequi otra vez</button>
+                <button class="btn btn-outline ${EN_LINEA ? 'online' : 'nequi'}" onclick="F.pagarNequi()"><i class="fas fa-rotate-right"></i> Abrir el pago ${EN_LINEA ? '' : 'con Nequi '}otra vez</button>
                 <button class="btn-link" onclick="F.reset()">Hacer otro certificado</button>
             </div>` : `
             <section class="screen center">
@@ -713,8 +728,10 @@
         // El link de Wompi no trae el valor: lo copiamos para que solo lo pegue
         copyText(String(C.precio));
         // Aviso de intento de pago a Telegram (n8n) en cada intento, como en el checkout anterior
-        trackEvent('payment_initiated', { metodo: 'Nequi' });
+        // (`boton` distingue la prueba del botón "Pagar en línea")
+        trackEvent('payment_initiated', { metodo: 'Nequi', boton: EN_LINEA ? 'Pagar en línea' : 'Nequi' });
         iniciarPedido('Nequi');
+        createCrmLead();   // reintento si falló al enviar los datos: la confirmación del pago busca el lead
         go('listo');
         // Wompi en otra pestaña: esta queda en "listo" por si necesita abrir el pago otra vez.
         // Si el navegador bloquea la pestaña, abrimos Wompi aquí mismo (el estado ya quedó guardado).
@@ -722,20 +739,31 @@
         if (!win) window.location.href = C.nequiUrl;
     }
 
+    let waPendiente = null;   // apertura de WhatsApp que espera al CRM
+
     function confirmar() {
         if (S.metodo !== 'WhatsApp') trackEvent('pedido_confirmado', { canal: 'WhatsApp' });
         iniciarPedido('WhatsApp');
         go('listo');
-        openWhatsApp(C.whatsapp, pedidoMsg());
+        const lead = createCrmLead();   // reintento si falló al enviar los datos
+        if (!IS_MOBILE || S.leadCreated) return abrirWhatsApp();
+        // En el celular WhatsApp saca al cliente del navegador y la página queda congelada
+        // o se cierra: si el CRM aún no respondía, el lead no se registraba ni pasaba a
+        // PROPUESTA. Abrimos el chat cuando el CRM responde, máximo 3 s después.
+        const turno = waPendiente = {};
+        Promise.race([lead, new Promise(r => setTimeout(r, 3000))])
+            .then(() => { if (waPendiente === turno) abrirWhatsApp(); });
     }
 
     function abrirWhatsApp() {
+        waPendiente = null;
         openWhatsApp(C.whatsapp, pedidoMsg());
     }
 
     function reset() {
         if (!confirm('¿Empezar un certificado nuevo? Se borrarán los datos de este.')) return;
         try { localStorage.removeItem(C.storageKey); } catch (e) {}
+        waPendiente = null;
         S = initialState();
         history.replaceState(null, '');
         render();
