@@ -14,7 +14,8 @@
  *   - Pago: si el curso define `nequiUrl`, se paga con Nequi en ese link de Wompi; la
  *           pasarela confirma el pago, sin comprobante. Con `pagoEnLinea` el botón es
  *           "Pagar en línea" (azul) en vez de la tarjeta de Nequi, para links de Wompi que
- *           aceptan todos los medios. Si no hay link, o si el cliente lo prefiere,
+ *           aceptan todos los medios. Si el link no trae el valor, se copia al portapapeles
+ *           (con `valorEnLink` ya viene puesto). Si no hay link, o si el cliente lo prefiere,
  *           "Confirmar pedido" abre el chat con los datos y allí se coordina el pago.
  */
 (function () {
@@ -24,8 +25,7 @@
     const CRM_LEADS_URL   = 'https://controla-570877385695.northamerica-northeast1.run.app/api/crm/leads/publico';
     const CRM_BUSINESS_ID = 3;
 
-    const PRECIO_NUM = C.precio.toLocaleString('es-CO');   // "25.000"
-    const PRECIO_TXT = '$' + PRECIO_NUM;                   // "$25.000"
+    const PRECIO_TXT = C.precio.toLocaleString('es-CO');   // "25.000", sin el signo $
     const TOTAL      = C.preguntas.length;
     const MIN_OK     = Math.ceil(TOTAL * C.minAprobar);
     const IS_MOBILE  = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile/i.test(navigator.userAgent);
@@ -34,6 +34,17 @@
     const NEQUI_LOGO = 'https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj';
     // Botón azul "Pagar en línea" (Nequi, PSE o tarjeta en Wompi) en lugar de la tarjeta de Nequi
     const EN_LINEA = !!(C.nequiUrl && C.pagoEnLinea);
+    // Debajo de ese botón: los medios que acepta Wompi y el respaldo de Bancolombia
+    const PAGO_SEGURO = `
+                <div class="pay-trust">
+                    <span class="pay-logos" role="img" aria-label="Nequi, PSE, Visa y Mastercard">
+                        <span class="nequi"><img src="${NEQUI_LOGO}" alt="" width="18" height="18" referrerpolicy="no-referrer" onerror="this.remove()">Nequi</span>
+                        <span class="pse">PSE</span>
+                        <span class="visa">VISA</span>
+                        <span><svg viewBox="0 0 30 18" width="24" height="15" aria-hidden="true"><circle cx="10" cy="9" r="8" fill="#EB001B"/><circle cx="20" cy="9" r="8" fill="#F79E1B"/><path d="M15 2.8a8 8 0 0 1 0 12.4a8 8 0 0 1 0-12.4z" fill="#FF5F00"/></svg></span>
+                    </span>
+                    <span class="pay-secure"><i class="fas fa-shield-halved"></i> Pago seguro con Wompi, de Bancolombia</span>
+                </div>`;
 
     // Paso de la barra de progreso y a dónde lleva "Atrás"
     const PASO  = { inicio: 0, examen: 1, fallo: 1, datos: 2, pedido: 3, listo: 4 };
@@ -425,7 +436,8 @@
                         <li><span class="how-n">2</span><div><b>Recibe ${C.entrega}</b><span>En PDF, en tu correo, apenas se apruebe tu pago</span></div></li>
                     </ol>
                 </div>
-                <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige ${EN_LINEA ? 'cómo quieres pagar' : '<b>Nequi</b>'}.</span></p>
+                ${C.valorEnLink ? '' : `
+                <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige ${EN_LINEA ? 'cómo quieres pagar' : '<b>Nequi</b>'}.</span></p>`}
                 <button class="btn-link reset-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
             </section>
             <div class="actions">
@@ -434,7 +446,8 @@
                     <i class="fas fa-lock"></i>
                     <span class="btn-online-txt"><b>Pagar en línea — ${PRECIO_TXT}</b><span>Nequi, PSE o tarjeta · Al instante</span></span>
                     <i class="fas fa-arrow-right"></i>
-                </button>` : `
+                </button>
+                ${PAGO_SEGURO}` : `
                 <button class="btn-nequi" onclick="F.pagarNequi()">
                     <span class="badge-rec">Recomendado</span>
                     <img src="${NEQUI_LOGO}" alt="Nequi" width="40" height="40" referrerpolicy="no-referrer" onerror="this.remove()">
@@ -725,8 +738,8 @@
     }
 
     function pagarNequi() {
-        // El link de Wompi no trae el valor: lo copiamos para que solo lo pegue
-        copyText(String(C.precio));
+        // Si el link de Wompi no trae el valor, lo copiamos para que solo lo pegue
+        if (!C.valorEnLink) copyText(String(C.precio));
         // Aviso de intento de pago a Telegram (n8n) en cada intento, como en el checkout anterior
         // (`boton` distingue la prueba del botón "Pagar en línea")
         trackEvent('payment_initiated', { metodo: 'Nequi', boton: EN_LINEA ? 'Pagar en línea' : 'Nequi' });
