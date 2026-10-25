@@ -2,342 +2,348 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Curso Atención al Cliente | CertiTec</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#ffffff" />
+    <title>Certificado de Atención y Servicio al Cliente | CertiTec</title>
+    <meta name="description" content="Presenta el examen gratis y recibe hoy tu diploma y certificado de Atención y Servicio al Cliente en PDF." />
     <link rel="icon" href="../logopagina.png" type="image/png" />
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Meta Pixel -->
+    <script>
+        !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+        n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+        document,'script','https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '639715789143642');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=639715789143642&ev=PageView&noscript=1"/></noscript>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    
-    <style>
-        body { font-family: "Poppins", sans-serif; background-color: #f8fafc; scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
-        :root { --primary: #002e7d; --nequi-pink: #DA0063; --nequi-purple: #6A008F; }
-        
-        /* Utilidades */
-        .hidden-section { display: none !important; }
-        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
-        /* Botón Pulsante Rojo */
-        .pulse-btn-red { animation: pulse-red 2s infinite; }
-        @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
-        }
-
-        /* --- ESTILO BOTÓN DE PAGO (UNIFORME) --- */
-        .btn-nequi-pay {
-            background: linear-gradient(135deg, var(--nequi-pink) 0%, var(--nequi-purple) 100%);
-            color: white;
-            box-shadow: 0 8px 20px -5px rgba(218, 0, 99, 0.5);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-        .btn-nequi-pay:active { transform: scale(0.97); }
-        .animate-pulse-slow { animation: pulse-slow 3s infinite; }
-        @keyframes pulse-slow {
-            0%, 100% { box-shadow: 0 5px 15px -3px rgba(218, 0, 99, 0.5); }
-            50% { box-shadow: 0 10px 25px -3px rgba(218, 0, 99, 0.8); }
-        }
-    </style>
-    <!-- Fallback anti-CDN: la clase .hidden solo existe dentro de Tailwind (CDN).
-         Si cdn.tailwindcss.com falla, es bloqueado o tarda en ejecutarse, sin esta
-         regla los modales (.modal-backdrop tiene display:flex propio) se pintan
-         todos a la vez. Va sin !important para que Tailwind, al cargar, conserve
-         la prioridad en los overrides responsive (sm:block, md:flex, md:hidden). -->
-    <style>
-        .hidden { display: none; }
-        .modal-backdrop.hidden { display: none !important; }
-    </style>
+    <link rel="stylesheet" href="flujo/flujo.css" />
+    <link rel="preload" as="image" href="flujo/img/atencion-portada.jpg" fetchpriority="high" />
 </head>
-<body class="text-slate-800 antialiased flex flex-col min-h-screen">
+<body>
+    <div class="app">
+        <header class="topbar">
+            <a class="brand" href="../index.html"><img src="../logof.png" alt="" />CertiTec <span>Colombia</span></a>
+            <a class="support" target="_blank"
+               href="https://wa.me/573107941580?text=Hola%2C%20necesito%20ayuda%20con%20mi%20certificado%20de%20Atenci%C3%B3n%20al%20Cliente.">
+                <i class="fab fa-whatsapp"></i> Ayuda
+            </a>
+        </header>
 
-    <site-header course="Atención al Cliente" cta-text="Iniciar Examen" cta-href="#inicio-examen" cta-color="#16a34a"></site-header>
-    <script src="../components/header.js"></script>
-
-    <main id="main-container" class="flex-grow">
-
-        <div id="view-sales-page">
-            
-            <section class="bg-black text-white pt-10 pb-16 px-4 text-center rounded-b-[2rem] shadow-xl relative overflow-hidden">
-                <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-                
-                <div class="relative z-10 max-w-xl mx-auto">
-                    <div class="inline-block bg-purple-600 text-white text-xs font-bold px-3 py-1 rounded-full mb-4 animate-bounce">
-                        👔 Mejora tu Perfil Profesional
-                    </div>
-                    
-                    <h1 class="text-3xl md:text-5xl font-black mb-4 leading-tight">
-                        Certificación en <span class="text-yellow-400">Atención y Servicio al Cliente</span>
-                    </h1>
-                    
-                    <p class="text-gray-300 text-lg mb-8 leading-snug">
-                        Domina el manejo de PQRS, comunicación asertiva y clientes difíciles. <strong>Certifícate y destaca en cualquier entrevista.</strong>
-                    </p>
-                    
-                    <div class="bg-white text-slate-900 p-6 rounded-2xl shadow-2xl relative z-10 mx-4 border-b-4 border-purple-600">
-                        <div class="flex justify-center items-center gap-3 mb-4">
-                            <span class="text-5xl font-black text-primary">$50.000</span>
-                            <span class="text-sm text-gray-400 line-through font-bold">$100.000</span>
-                        </div>
-                        <button onclick="scrollToExam()" class="w-full bg-red-600 text-white font-bold py-4 rounded-xl text-lg shadow-lg pulse-btn-red transition active:scale-95">
-                            ¡CERTIFICARME AHORA!
-                        </button>
-                        <p class="text-[10px] text-gray-400 mt-2 text-center">Incluye Diploma + Acta de Notas</p>
-                    </div>
-                </div>
-            </section>
-
-            <section class="py-12 px-6 bg-white">
-                <div class="max-w-lg mx-auto space-y-6">
-                    <h2 class="text-xl font-bold text-center text-slate-800 mb-6">Habilidades clave para tu empleo:</h2>
-                    
-                    <div class="flex items-start">
-                        <div class="bg-purple-100 p-3 rounded-full mr-4 text-purple-600"><i class="fas fa-comments"></i></div>
-                        <div>
-                            <h3 class="font-bold text-slate-800">Comunicación Asertiva</h3>
-                            <p class="text-sm text-gray-600">Aprende a expresarte con claridad, respeto y empatía hacia el usuario.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start">
-                        <div class="bg-yellow-100 p-3 rounded-full mr-4 text-yellow-600"><i class="fas fa-exclamation-circle"></i></div>
-                        <div>
-                            <h3 class="font-bold text-slate-800">Manejo de PQRS</h3>
-                            <p class="text-sm text-gray-600">Protocolos para atender Peticiones, Quejas, Reclamos y Sugerencias.</p>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start">
-                        <div class="bg-blue-100 p-3 rounded-full mr-4 text-blue-600"><i class="fas fa-user-tie"></i></div>
-                        <div>
-                            <h3 class="font-bold text-slate-800">Etiqueta y Protocolo</h3>
-                            <p class="text-sm text-gray-600">Imagen personal, lenguaje corporal y atención telefónica profesional.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="inicio-examen" class="py-16 px-4 bg-black text-white text-center">
-                <div class="max-w-md mx-auto">
-                    <i class="fas fa-headset text-4xl text-yellow-400 mb-4"></i>
-                    <h2 class="text-2xl font-bold mb-3">¡Demuestra tu talento!</h2>
-                    <p class="text-gray-400 mb-8 text-sm">
-                        Responde 8 preguntas sobre situaciones reales de servicio. Si apruebas, podrás descargar tu certificado inmediatamente.
-                    </p>
-                    <button onclick="startQuizFlow()" class="bg-purple-600 hover:bg-purple-700 text-white font-black text-lg py-4 px-10 rounded-full shadow-lg w-full transition active:scale-95">
-                        <i class="fas fa-play mr-2"></i> INICIAR EXAMEN GRATIS
-                    </button>
-                    <p class="mt-4 text-xs text-gray-500">Intentos ilimitados.</p>
-                </div>
-            </section>
-
-            <footer class="bg-gray-100 py-6 text-center text-xs text-gray-500">
-                <p>© 2024 CertiTec Capacitaciones</p>
-            </footer>
+        <div id="progress" class="progress" hidden>
+            <div class="progress-top"><b id="progress-step"></b><span id="progress-name"></span></div>
+            <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
         </div>
 
-
-        <div id="view-quiz-app" class="hidden-section min-h-screen bg-slate-100 flex flex-col">
-            <div class="bg-primary text-white p-4 shadow sticky top-0 z-40 flex justify-between items-center">
-                <span class="text-sm font-bold">Pregunta <span id="q-current">1</span>/8</span>
-                <button onclick="exitQuiz()" class="text-xs bg-white/20 px-3 py-1 rounded">Salir</button>
-            </div>
-            <div class="w-full bg-gray-300 h-1.5 sticky top-[52px] z-30">
-                <div id="progress-bar" class="bg-green-500 h-1.5 transition-all duration-300" style="width: 0%"></div>
-            </div>
-
-            <div class="flex-grow container mx-auto max-w-xl p-4 pb-32"> 
-                <div class="bg-white rounded-xl shadow-sm p-6 mb-4 border border-gray-200 fade-in">
-                    <h3 id="q-text" class="text-lg font-bold text-slate-800 mb-6 leading-snug">
-                        Cargando...
-                    </h3>
-                    <div id="q-options" class="space-y-3">
-                        </div>
-                </div>
-                <div id="feedback-area" class="hidden p-4 rounded-lg font-bold text-center text-sm mb-4"></div>
-            </div>
-
-            <div class="fixed bottom-0 left-0 w-full bg-white border-t p-4 z-50 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
-                <div class="max-w-xl mx-auto">
-                    <button id="btn-next" onclick="nextQuestion()" disabled class="w-full bg-gray-200 text-gray-400 font-bold py-3.5 rounded-lg transition-all flex justify-center items-center">
-                        Siguiente
-                    </button>
-                </div>
-            </div>
-        </div>
-
-
-        <div id="view-checkout" class="hidden-section min-h-screen bg-white flex flex-col items-center justify-center p-6 fade-in">
-            <div class="max-w-sm w-full text-center">
-                
-                <div class="mb-6 inline-flex p-4 rounded-full bg-green-100 animate-bounce">
-                    <i class="fas fa-check-circle text-6xl text-green-600"></i>
-                </div>
-                
-                <h2 class="text-3xl font-black text-slate-900 mb-2">¡APROBADO!</h2>
-                <p class="text-gray-600 mb-6 text-sm px-4">
-                    Tu certificado de Servicio al Cliente está listo para emisión.
-                </p>
-
-                <div class="bg-slate-50 border border-slate-200 rounded-xl p-5 mb-6 text-left shadow-sm">
-                    <div class="flex justify-between items-center mb-2 text-sm">
-                        <span class="text-gray-500">Producto:</span>
-                        <span class="font-bold text-slate-800">Cert. Atención al Cliente</span>
-                    </div>
-                    <div class="flex justify-between items-center pt-3 border-t border-slate-200">
-                        <span class="font-bold text-lg text-primary">Total:</span>
-                        <span class="font-black text-2xl text-green-600">$50.000 COP</span>
-                    </div>
-                </div>
-
-                <a href="https://checkout.nequi.wompi.co/l/rxZMK8" class="btn-nequi-pay animate-pulse-slow w-full flex items-center justify-between py-4 px-5 rounded-xl text-lg font-bold mb-4 no-underline relative group">
-                    <div class="bg-white rounded-lg p-1.5 shadow-sm">
-                         <img src="https://zen-marketing-assets.s3-us-west-2.amazonaws.com/images/gordan-tmp/logo-Nequi_by_Bancolombia.png" alt="Nequi" class="h-6 w-auto object-contain">
-                    </div>
-                    <span class="flex-grow text-center pl-2 text-white text-base md:text-lg">PAGAR $50.000</span>
-                    <i class="fas fa-chevron-right text-white/80"></i>
-                </a>
-                
-                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 text-left mb-4">
-                    <p class="text-xs font-bold text-gray-500 mb-2 uppercase">O transferencia manual:</p>
-                    <p class="text-xs text-gray-700 font-mono mb-1">Nequi/Daviplata: <strong>3223267797</strong></p>
-                    <p class="text-xs text-gray-700 font-mono">Bancolombia Ahorros: <strong>816-589697-49</strong></p>
-                </div>
-
-                <div class="bg-blue-50 p-3 rounded-lg text-left border border-blue-100">
-                    <p class="text-[11px] text-blue-800 leading-tight">
-                        <i class="fas fa-info-circle mr-1"></i> <strong>Importante:</strong> Al finalizar el pago, toma captura de pantalla y envíala al WhatsApp para recibir tu diploma.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-
-        <div id="view-fail" class="hidden-section min-h-screen bg-slate-100 flex flex-col items-center justify-center p-6 fade-in">
-            <div class="bg-white p-8 rounded-2xl shadow-xl text-center max-w-sm w-full border-t-4 border-red-500">
-                <i class="fas fa-times-circle text-5xl text-red-500 mb-4"></i>
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">No aprobaste</h2>
-                <p class="text-gray-600 mb-6 text-sm">
-                    Revisa los conceptos de empatía y PQRS. Necesitas 75% para pasar.
-                </p>
-                <button onclick="startQuizFlow()" class="w-full bg-slate-800 text-white font-bold py-3 rounded-lg hover:bg-slate-700 transition">
-                    Intentar de Nuevo
-                </button>
-            </div>
-        </div>
-
-    </main>
+        <main id="main"></main>
+    </div>
 
     <script>
-        // --- PREGUNTAS ATENCIÓN AL CLIENTE ---
-        const questions = [
-            { q: "¿Qué significan las siglas PQRS en servicio al cliente?", options: ["Preguntas, Querer, Reír, Soñar", "Peticiones, Quejas, Reclamos y Sugerencias", "Problemas Que Requieren Solución"], a: 1 },
-            { q: "Ante un cliente enojado, el primer paso correcto es:", options: ["Discutir para demostrar que estás bien", "Escuchar activamente y mantener la calma", "Ignorarlo hasta que se calle"], a: 1 },
-            { q: "La 'Comunicación Asertiva' se define como:", options: ["Expresar ideas de forma clara, respetuosa y directa", "Hablar muy fuerte para ser escuchado", "Quedarse callado para no molestar"], a: 0 },
-            { q: "¿Cuál es la diferencia entre Atención y Servicio?", options: ["No hay diferencia", "Atención es el proceso (trámite) y Servicio es la experiencia (cómo se sintió)", "Atención es cobrar y Servicio es regalar cosas"], a: 1 },
-            { q: "La Empatía en el servicio al cliente significa:", options: ["Sentir lástima por el cliente", "Ponerse en el lugar del cliente para entender su necesidad", "Darle siempre la razón aunque no la tenga"], a: 1 },
-            { q: "Si no sabes la respuesta a una pregunta del cliente, debes:", options: ["Inventar una respuesta rápida", "Decirle que busque en Google", "Admitirlo honestamente y buscar la solución o a alguien que sepa"], a: 2 },
-            { q: "¿Por qué es importante la presentación personal?", options: ["Para salir bien en las fotos", "Porque proyecta la imagen y seriedad de la empresa", "Solo importa si eres jefe"], a: 1 },
-            { q: "Al finalizar una atención, siempre debes:", options: ["Colgar el teléfono de inmediato", "Verificar si el cliente quedó satisfecho y despedirse amablemente", "Pedir propina"], a: 1 }
-        ];
+        // Personas de los gráficos del examen: busto apoyado en la línea `y`, centrado en `cx`.
+        // El asesor lleva diadema y camisa azul; el cliente, camisa gris.
+        function persona(cx, y, { asesor = false, boca = 'neutra', mirada = 0 } = {}) {
+            const piel = asesor ? '#e8b48a' : '#c68b63';
+            const hy = y - 68;          // centro de la cabeza
+            const fx = cx + mirada;     // centro de la cara (mirada ≠ 0: mira hacia un lado)
+            const bocas = {
+                neutra: `M${fx - 5} ${hy + 9} H${fx + 5}`,
+                enojo:  `M${fx - 6} ${hy + 11} Q${fx} ${hy + 6} ${fx + 6} ${hy + 11}`
+            };
+            return `
+              <path d="M${cx - 30} ${y} V${y - 30} Q${cx - 30} ${y - 46} ${cx - 14} ${y - 46} H${cx + 14} Q${cx + 30} ${y - 46} ${cx + 30} ${y - 30} V${y} Z" fill="${asesor ? '#0158AD' : '#64748b'}"/>
+              ${asesor ? `<path d="M${cx - 8} ${y - 46} L${cx} ${y - 37} L${cx + 8} ${y - 46}" stroke="#fff" stroke-width="3" fill="none" stroke-linejoin="round"/>` : ''}
+              <rect x="${cx - 6}" y="${y - 54}" width="12" height="10" fill="${piel}"/>
+              <circle cx="${cx}" cy="${hy}" r="17" fill="${piel}"/>
+              <path d="M${cx - 17.5} ${hy - 2} A17.5 17.5 0 0 1 ${cx + 17.5} ${hy - 2} Q${cx + 6} ${hy - 12} ${cx - 17.5} ${hy - 2} Z" fill="${asesor ? '#5b3a29' : '#1f2937'}"/>
+              <circle cx="${fx - 6}" cy="${hy + 1}" r="2" fill="#334155"/><circle cx="${fx + 6}" cy="${hy + 1}" r="2" fill="#334155"/>
+              ${boca === 'enojo' ? `<path d="M${fx - 10} ${hy - 7} L${fx - 3} ${hy - 4} M${fx + 10} ${hy - 7} L${fx + 3} ${hy - 4}" stroke="#334155" stroke-width="2.5" stroke-linecap="round"/>` : ''}
+              <path d="${bocas[boca]}" stroke="#334155" stroke-width="2" fill="none" stroke-linecap="round"/>
+              ${asesor ? `
+              <path d="M${cx - 19} ${hy} A19 19 0 0 1 ${cx + 19} ${hy}" stroke="#334155" stroke-width="3.5" fill="none"/>
+              <rect x="${cx - 23}" y="${hy - 6}" width="7" height="13" rx="3" fill="#334155"/><rect x="${cx + 16}" y="${hy - 6}" width="7" height="13" rx="3" fill="#334155"/>
+              <path d="M${cx - 19} ${hy + 6} Q${cx - 17} ${hy + 15} ${cx - 8} ${hy + 15}" stroke="#334155" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+              <circle cx="${cx - 6}" cy="${hy + 15}" r="2.6" fill="#334155"/>` : ''}`;
+        }
 
-        let currentIdx = 0;
-        let score = 0;
-        const passingScore = 0.75; 
+        // Globo de diálogo con la cola hacia abajo en la x `cola`
+        function globo(x, y, w, h, cola, fill = '#fff') {
+            const b = y + h;
+            return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="12" fill="${fill}" stroke="#94a3b8" stroke-width="2"/>
+              <path d="M${cola - 7} ${b - 2} L${cola} ${b + 11} L${cola + 7} ${b - 2}" fill="${fill}" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M${cola - 6} ${b} H${cola + 6}" stroke="${fill}" stroke-width="2.6"/>`;
+        }
 
-        // Referencias DOM
-        const els = {
-            sales: document.getElementById('view-sales-page'),
-            quiz: document.getElementById('view-quiz-app'),
-            checkout: document.getElementById('view-checkout'),
-            fail: document.getElementById('view-fail'),
-            qText: document.getElementById('q-text'),
-            qOptions: document.getElementById('q-options'),
-            qCurrent: document.getElementById('q-current'),
-            progress: document.getElementById('progress-bar'),
-            btnNext: document.getElementById('btn-next'),
-            feedback: document.getElementById('feedback-area')
+        // Puntos de una estrella de 5 puntas centrada en (x, y)
+        function estrella(x, y, r) {
+            return [...Array(10)].map((_, i) => {
+                const a = (i * 36 - 90) * Math.PI / 180, rr = i % 2 ? r * 0.45 : r;
+                return (x + rr * Math.cos(a)).toFixed(1) + ',' + (y + rr * Math.sin(a)).toFixed(1);
+            }).join(' ');
+        }
+
+        // Puntos de "escribiendo…" (los tres laten uno tras otro)
+        function escribiendo(x, y) {
+            return [0, 1, 2].map(i => `<circle class="fx-pulse" style="--d:${(i * 0.2).toFixed(1)}s" cx="${x + i * 14}" cy="${y}" r="3.5" fill="#64748b"/>`).join('');
+        }
+
+        // Todo lo que cambia entre cursos vive aquí; la lógica está en flujo/flujo.js
+        window.CURSO = {
+            storageKey: 'certitec_flujo_atencion_v1',
+            // `pagina` es el campo por el que n8n enruta los avisos de Telegram
+            pagina:   'Curso Atención al Cliente',
+            // Deben coincidir con los que envía la CAPI del servidor (deduplicación en Meta)
+            slug:     'atencion-cliente',
+            nombre:   'Atención al Cliente',
+            titulo:   'Atención y Servicio al Cliente',
+            producto: 'Diplomado en Atención al Cliente',
+            entrega:  'tu diploma y tu certificado',
+            aval:     'Diploma + Certificado · 40 horas',
+            portada:  { src: 'flujo/img/atencion-portada.jpg', alt: 'Asesora de servicio al cliente con diadema atendiendo una llamada frente al computador' },
+            precio:   44900,
+            minutos:  4,
+            minAprobar: 0.75,
+            whatsapp: '573107941580',
+            // Link de pago Wompi propio del curso, con el valor ya puesto (valorEnLink: no se
+            // copia ni se avisa). Acepta Nequi, PSE y tarjeta, así que se muestra el botón
+            // azul "Pagar" (con los logos de los medios) en vez de la tarjeta de Nequi.
+            nequiUrl: 'https://checkout.wompi.co/l/i4NyQU',
+            valorEnLink: true,
+            pagoEnLinea: true,
+            // Cada pregunta trae un `svg` ilustrativo (clases fx-* = animaciones de flujo.css).
+            // Los gráficos comparativos son neutros a propósito (mismos colores en las dos
+            // opciones) para que la respuesta se deduzca del conocimiento y no del dibujo.
+            preguntas: [
+                { q: "¿Qué significan las siglas PQRS en servicio al cliente?",
+                  options: ["Preguntas, Quejas, Respuestas y Soluciones", "Peticiones, Quejas, Reclamos y Sugerencias", "Problemas Que Requieren Solución"], a: 1,
+                  svg: `<svg viewBox="0 0 320 126" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Cuatro fichas con las letras P, Q, R y S; la palabra de cada letra está oculta">
+                    <text x="160" y="16" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0158AD" letter-spacing="0.8">¿QUÉ SIGNIFICA CADA LETRA?</text>
+                    ${['P', 'Q', 'R', 'S'].map((l, i) => `
+                    <g class="fx-drop" style="--d:${(0.05 + i * 0.12).toFixed(2)}s">
+                      <rect x="${15 + i * 76}" y="28" width="62" height="62" rx="12" fill="#0158AD"/>
+                      <text x="${46 + i * 76}" y="71" text-anchor="middle" font-size="32" font-weight="900" fill="#fff">${l}</text>
+                      <rect x="${21 + i * 76}" y="100" width="50" height="8" rx="4" fill="#cbd5e1"/>
+                      <rect x="${27 + i * 76}" y="113" width="38" height="6" rx="3" fill="#e2e8f0"/>
+                    </g>`).join('')}
+                  </svg>` },
+
+                { q: "Un cliente llega muy molesto y levantando la voz. ¿Qué es lo primero que debes hacer?",
+                  options: ["Escucharlo sin interrumpir y mantener la calma", "Explicarle de inmediato que está equivocado", "Pasarlo a otro compañero sin decirle nada"], a: 0,
+                  svg: `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Un cliente enojado grita frente al mostrador; el asesor se pregunta qué hacer">
+                    <g class="fx-fade">${persona(78, 150, { boca: 'enojo' })}</g>
+                    <g class="fx-fade" style="--d:.15s">${persona(242, 150, { asesor: true })}</g>
+                    <rect x="8" y="146" width="304" height="10" rx="3" fill="#cbd5e1"/>
+                    <g class="fx-pulse" style="--d:.3s">
+                      ${globo(14, 8, 112, 40, 66)}
+                      <text x="70" y="34" text-anchor="middle" font-size="17" font-weight="900" fill="#334155">¡#@%&amp;!</text>
+                    </g>
+                    <g class="fx-pop" style="--d:.7s">
+                      ${globo(196, 10, 104, 34, 236)}
+                      <text x="248" y="32" text-anchor="middle" font-size="12.5" font-weight="800" fill="#0158AD">¿Qué hago?</text>
+                    </g>
+                  </svg>` },
+
+                { q: "Un cliente quiere cambiar un producto, pero no trae la factura y la política no lo permite. ¿Cuál respuesta es asertiva?",
+                  options: ["«Sin factura no se puede. Lea las condiciones.»", "«Tranquilo, se lo cambio aunque esté prohibido.»", "«Entiendo su situación. Sin factura no puedo hacer el cambio, pero le ayudo a pedir una copia.»"], a: 2,
+                  svg: `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="El cliente dice: quiero cambiarlo, pero no traje la factura. El asesor está pensando su respuesta">
+                    <g class="fx-fade">${persona(78, 150)}</g>
+                    <g class="fx-fade" style="--d:.15s">${persona(242, 150, { asesor: true })}</g>
+                    <rect x="8" y="146" width="304" height="10" rx="3" fill="#cbd5e1"/>
+                    <g class="fx-pop" style="--d:.3s">
+                      ${globo(8, 4, 176, 46, 70)}
+                      <text x="96" y="23" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">Quiero cambiarlo, pero</text>
+                      <text x="96" y="39" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">no traje la factura.</text>
+                    </g>
+                    <g class="fx-pop" style="--d:.7s">
+                      ${globo(222, 18, 66, 28, 246, '#eff6ff')}
+                      ${escribiendo(241, 32)}
+                    </g>
+                  </svg>` },
+
+                { q: "La empatía en el servicio al cliente significa:",
+                  options: ["Darle siempre la razón aunque no la tenga", "Ponerse en el lugar del cliente para entender lo que necesita", "Sentir lástima por su situación"], a: 1,
+                  svg: `<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Un cliente y un asesor frente a frente, unidos por flechas y un corazón en el medio">
+                    <g class="fx-fade">${persona(70, 140)}</g>
+                    <g class="fx-fade" style="--d:.15s">${persona(250, 140, { asesor: true })}</g>
+                    <rect x="8" y="136" width="304" height="10" rx="3" fill="#cbd5e1"/>
+                    <path class="fx-flow" d="M226 58 Q160 14 94 58" stroke="#0158AD" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path class="fx-flow" d="M94 82 Q160 124 226 82" stroke="#0158AD" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M100 52 L92 60 L103 62 Z" fill="#0158AD"/>
+                    <path d="M220 88 L228 80 L217 78 Z" fill="#0158AD"/>
+                    <path class="fx-pulse" style="--d:.4s" d="M160 88 C141 76 138 60 149 56 C155 54 160 58 160 63 C160 58 165 54 171 56 C182 60 179 76 160 88 Z" fill="#F5AE14" stroke="#d48f00" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>` },
+
+                { q: "¿Cuál de estas acciones demuestra escucha activa?",
+                  options: ["Repetir con tus palabras lo que dijo el cliente para confirmar que entendiste", "Revisar el celular mientras el cliente habla", "Interrumpirlo para ahorrar tiempo"], a: 0,
+                  svg: `<svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="El cliente habla y sus palabras llegan en ondas hasta el asesor">
+                    <g class="fx-fade">${persona(70, 140)}</g>
+                    <g class="fx-fade" style="--d:.15s">${persona(250, 140, { asesor: true })}</g>
+                    <rect x="8" y="136" width="304" height="10" rx="3" fill="#cbd5e1"/>
+                    <g class="fx-pop" style="--d:.2s">
+                      ${globo(10, 6, 118, 40, 64)}
+                      <rect x="24" y="17" width="90" height="6" rx="3" fill="#cbd5e1"/>
+                      <rect x="24" y="29" width="66" height="6" rx="3" fill="#cbd5e1"/>
+                    </g>
+                    <g stroke="#0158AD" stroke-width="3" fill="none" stroke-linecap="round">
+                      <path class="fx-pulse" style="--d:.2s" d="M124 64 Q134 80 124 96"/>
+                      <path class="fx-pulse" style="--d:.45s" d="M146 56 Q160 80 146 104"/>
+                      <path class="fx-pulse" style="--d:.7s" d="M170 48 Q188 80 170 112"/>
+                      <path class="fx-pulse" style="--d:.95s" d="M196 56 Q210 80 196 104"/>
+                    </g>
+                  </svg>` },
+
+                { q: "Suena el teléfono de la línea de atención. ¿Cómo debes contestar?",
+                  options: ["«¿Aló? ¿Quién habla?»", "Dejarlo sonar si estás ocupado con otra cosa", "Saludar, decir el nombre de la empresa y el tuyo, y ofrecer ayuda"], a: 2,
+                  svg: `<svg viewBox="0 0 320 146" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Un teléfono de escritorio sonando con el aviso de llamada entrante">
+                    <path d="M20 136 H300" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <g class="fx-pop">
+                      <rect x="90" y="8" width="140" height="26" rx="13" fill="#dbeafe" stroke="#0158AD" stroke-width="2"/>
+                      <text x="160" y="25" text-anchor="middle" font-size="9.5" font-weight="900" fill="#0158AD" letter-spacing="0.6">LLAMADA ENTRANTE</text>
+                    </g>
+                    <g class="fx-bob">
+                      <path d="M104 134 L120 86 H200 L216 134 Z" fill="#334155"/>
+                      ${[0, 1, 2].map(r => [0, 1, 2].map(c => `<circle cx="${140 + c * 20}" cy="${100 + r * 11}" r="3.2" fill="#cbd5e1"/>`).join('')).join('')}
+                      <path d="M98 82 Q98 66 116 66 H204 Q222 66 222 82 V88 H196 V80 H124 V88 H98 Z" fill="#475569"/>
+                    </g>
+                    <g stroke="#0158AD" stroke-width="3" fill="none" stroke-linecap="round">
+                      <path class="fx-pulse" style="--d:.1s" d="M86 70 Q76 86 86 102"/>
+                      <path class="fx-pulse" style="--d:.35s" d="M72 60 Q56 86 72 112"/>
+                      <path class="fx-pulse" style="--d:.1s" d="M234 70 Q244 86 234 102"/>
+                      <path class="fx-pulse" style="--d:.35s" d="M248 60 Q264 86 248 112"/>
+                    </g>
+                  </svg>` },
+
+                { q: "Observa a los dos asesores. ¿Cuál transmite disposición para ayudar al cliente?",
+                  options: ["El asesor A", "El asesor B", "Ninguno: la postura no comunica nada"], a: 1,
+                  svg: `<svg viewBox="0 0 320 176" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Dos asesores detrás del mostrador. El asesor A tiene los brazos cruzados y mira hacia otro lado. El asesor B mira de frente con las manos abiertas sobre el mostrador">
+                    <rect x="6" y="4" width="150" height="148" rx="12" fill="#f1f5f9"/>
+                    <rect x="164" y="4" width="150" height="148" rx="12" fill="#f1f5f9"/>
+                    <g class="fx-fade" style="--d:.05s">
+                      ${persona(81, 140, { asesor: true, mirada: 5 })}
+                      <rect x="55" y="108" width="52" height="12" rx="6" fill="#3b82f6" stroke="#013a75" stroke-width="1.5"/>
+                      <rect x="55" y="117" width="52" height="12" rx="6" fill="#3b82f6" stroke="#013a75" stroke-width="1.5"/>
+                      <circle cx="104" cy="114" r="5" fill="#e8b48a"/><circle cx="58" cy="123" r="5" fill="#e8b48a"/>
+                    </g>
+                    <g class="fx-fade" style="--d:.25s">
+                      ${persona(239, 140, { asesor: true })}
+                      <path d="M213 106 L204 132 M265 106 L274 132" stroke="#013a75" stroke-width="12" stroke-linecap="round"/>
+                      <path d="M213 106 L204 132 M265 106 L274 132" stroke="#3b82f6" stroke-width="9" stroke-linecap="round"/>
+                      <ellipse cx="203" cy="135" rx="8" ry="4.5" fill="#e8b48a"/><ellipse cx="275" cy="135" rx="8" ry="4.5" fill="#e8b48a"/>
+                    </g>
+                    <rect x="16" y="136" width="130" height="12" rx="3" fill="#cbd5e1"/>
+                    <rect x="174" y="136" width="130" height="12" rx="3" fill="#cbd5e1"/>
+                    <text x="81" y="170" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">ASESOR A</text>
+                    <text x="239" y="170" text-anchor="middle" font-size="12.5" font-weight="900" fill="#0158AD" letter-spacing="0.5">ASESOR B</text>
+                  </svg>` },
+
+                { q: "El cliente te pregunta algo que no sabes responder. ¿Qué haces?",
+                  options: ["Lo admites con honestidad y buscas la respuesta con quien sepa", "Inventas una respuesta para no quedar mal", "Le dices que lo busque en internet"], a: 0,
+                  svg: `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="El cliente pregunta cuánto dura la garantía y el asesor no sabe la respuesta">
+                    <g class="fx-fade">${persona(78, 150)}</g>
+                    <g class="fx-fade" style="--d:.15s">${persona(242, 150, { asesor: true })}</g>
+                    <rect x="8" y="146" width="304" height="10" rx="3" fill="#cbd5e1"/>
+                    <g class="fx-pop" style="--d:.25s">
+                      ${globo(8, 10, 156, 34, 70)}
+                      <text x="86" y="32" text-anchor="middle" font-size="11.5" font-weight="700" fill="#334155">¿Cuánto dura la garantía?</text>
+                    </g>
+                    <g class="fx-pulse" style="--d:.7s">
+                      <ellipse cx="262" cy="28" rx="30" ry="22" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+                      <circle cx="244" cy="58" r="4.5" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+                      <circle cx="238" cy="68" r="2.5" fill="#fff" stroke="#94a3b8" stroke-width="2"/>
+                      <text x="262" y="37" text-anchor="middle" font-size="24" font-weight="900" fill="#0158AD">?</text>
+                    </g>
+                  </svg>` },
+
+                { q: "Un cliente exige que le devuelvan el dinero porque el producto llegó dañado. Dentro de las PQRS, ¿qué está presentando?",
+                  options: ["Un reclamo", "Una sugerencia", "Una felicitación"], a: 0,
+                  svg: `<svg viewBox="0 0 320 146" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Una caja aplastada que llegó dañada y una flecha que devuelve el dinero al cliente">
+                    <path d="M14 136 H306" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                    <g class="fx-drop" style="--d:.05s">
+                      <path d="M34 134 L32 92 L48 82 L62 96 L76 78 L94 90 L110 84 L110 134 Z" fill="#c98a4b" stroke="#8a5a2b" stroke-width="2" stroke-linejoin="round"/>
+                      <path d="M48 96 L58 112 L52 124 M88 98 L80 114" stroke="#8a5a2b" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </g>
+                    <g class="fx-pulse" style="--d:.5s">
+                      <path d="M72 16 L94 54 H50 Z" fill="#FFCD57" stroke="#d48f00" stroke-width="2.5" stroke-linejoin="round"/>
+                      <text x="72" y="49" text-anchor="middle" font-size="20" font-weight="900" fill="#334155">!</text>
+                    </g>
+                    <path class="fx-flow" d="M126 92 Q182 34 232 76" stroke="#0158AD" stroke-width="3" fill="none" stroke-linecap="round"/>
+                    <path d="M224 70 L236 80 L222 84 Z" fill="#0158AD"/>
+                    <g class="fx-pop" style="--d:.6s">
+                      <circle cx="266" cy="100" r="28" fill="#FFCD57" stroke="#d48f00" stroke-width="3"/>
+                      <circle cx="266" cy="100" r="20" fill="none" stroke="#d48f00" stroke-width="1.5" opacity=".6"/>
+                      <text x="266" y="110" text-anchor="middle" font-size="26" font-weight="900" fill="#7a4f00">$</text>
+                    </g>
+                  </svg>` },
+
+                { q: "Un cliente calificó la atención con 2 de 5 estrellas. ¿Qué debe hacer la empresa?",
+                  options: ["Ignorarla: es solo una opinión", "Pedirle que cambie la calificación", "Contactarlo, entender qué falló y mejorar"], a: 2,
+                  svg: `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Encuesta de satisfacción con 2 de 5 estrellas y el comentario: me hicieron esperar mucho">
+                    <g class="fx-fade">
+                      <rect x="50" y="6" width="220" height="148" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                      <path d="M50 20 A14 14 0 0 1 64 6 H256 A14 14 0 0 1 270 20 V34 H50 Z" fill="#0158AD"/>
+                      <text x="160" y="25" text-anchor="middle" font-size="10.5" font-weight="900" fill="#fff" letter-spacing="0.8">¿CÓMO TE ATENDIMOS?</text>
+                    </g>
+                    ${[0, 1, 2, 3, 4].map(i => `
+                    <polygon class="fx-pop" style="--d:${(0.2 + i * 0.1).toFixed(1)}s" points="${estrella(88 + i * 36, 66, 15)}"
+                             fill="${i < 2 ? '#F5AE14' : '#e2e8f0'}" stroke="${i < 2 ? '#d48f00' : '#cbd5e1'}" stroke-width="2" stroke-linejoin="round"/>`).join('')}
+                    <text x="160" y="102" text-anchor="middle" font-size="13" font-weight="900" fill="#334155">2 de 5</text>
+                    <g class="fx-fade" style="--d:.8s">
+                      <rect x="68" y="114" width="184" height="28" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+                      <text x="160" y="132" text-anchor="middle" font-size="11" font-style="italic" font-weight="600" fill="#475569">«Me hicieron esperar mucho»</text>
+                    </g>
+                  </svg>` },
+
+                { q: "Un cliente pide que eliminen sus datos personales de la base de la empresa. En Colombia, ¿qué ley protege ese derecho?",
+                  options: ["El Código Nacional de Tránsito", "La Ley 1581 de 2012 (Habeas Data)", "Ninguna: la empresa decide"], a: 1,
+                  svg: `<svg viewBox="0 0 320 146" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Base de datos de clientes con la ficha de una persona y un escudo con candado">
+                    <g class="fx-fade">
+                      <path d="M56 32 V110 A50 14 0 0 0 156 110 V32" fill="#eff6ff" stroke="#0158AD" stroke-width="2.5"/>
+                      <path d="M56 58 A50 14 0 0 0 156 58 M56 84 A50 14 0 0 0 156 84" stroke="#0158AD" stroke-width="2" fill="none"/>
+                      <ellipse cx="106" cy="32" rx="50" ry="14" fill="#dbeafe" stroke="#0158AD" stroke-width="2.5"/>
+                    </g>
+                    <path class="fx-flow" d="M162 72 H180" stroke="#0158AD" stroke-width="2.5" stroke-linecap="round"/>
+                    <g class="fx-slide" style="--d:.2s">
+                      <rect x="186" y="38" width="112" height="66" rx="9" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                      <circle cx="210" cy="62" r="11" fill="#c68b63"/>
+                      <path d="M194 92 Q194 76 210 76 Q226 76 226 92 Z" fill="#64748b"/>
+                      <rect x="234" y="54" width="52" height="7" rx="3.5" fill="#cbd5e1"/>
+                      <rect x="234" y="67" width="40" height="7" rx="3.5" fill="#e2e8f0"/>
+                      <rect x="234" y="80" width="48" height="7" rx="3.5" fill="#e2e8f0"/>
+                    </g>
+                    <g class="fx-pop" style="--d:.7s">
+                      <path d="M286 90 L306 97 V110 Q306 126 286 134 Q266 126 266 110 V97 Z" fill="#0158AD"/>
+                      <rect x="278" y="108" width="16" height="13" rx="2" fill="#fff"/>
+                      <path d="M281 108 V104 A5 5 0 0 1 291 104 V108" stroke="#fff" stroke-width="2.5" fill="none"/>
+                    </g>
+                  </svg>` },
+
+                { q: "Al terminar de atender a un cliente, lo correcto es:",
+                  options: ["Cerrar rápido la conversación para atender al siguiente", "Confirmar que su necesidad quedó resuelta y despedirse amablemente", "Pedirle una buena calificación a cambio de un descuento"], a: 1,
+                  svg: `<svg viewBox="0 0 320 160" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Chat de atención: el cliente escribe que ya le llegó el pedido y el asesor está escribiendo">
+                    <g class="fx-fade">
+                      <rect x="40" y="6" width="240" height="148" rx="14" fill="#fff" stroke="#cbd5e1" stroke-width="2"/>
+                      <path d="M40 20 A14 14 0 0 1 54 6 H266 A14 14 0 0 1 280 20 V34 H40 Z" fill="#0158AD"/>
+                      <text x="160" y="25" text-anchor="middle" font-size="10.5" font-weight="900" fill="#fff" letter-spacing="0.8">CHAT DE ATENCIÓN</text>
+                    </g>
+                    <g class="fx-pop" style="--d:.25s">
+                      <rect x="54" y="46" width="168" height="28" rx="10" fill="#f1f5f9"/>
+                      <text x="64" y="64" font-size="11" font-weight="600" fill="#334155">Listo, ya me llegó el pedido 👍</text>
+                    </g>
+                    <g class="fx-pop" style="--d:.65s">
+                      <rect x="200" y="84" width="66" height="26" rx="13" fill="#dbeafe"/>
+                      ${escribiendo(219, 97)}
+                    </g>
+                    <rect x="54" y="122" width="212" height="22" rx="11" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+                  </svg>` }
+            ]
         };
-
-        // NAVEGACIÓN
-        function scrollToExam() {
-            document.getElementById('inicio-examen').scrollIntoView({ behavior: 'smooth' });
-        }
-        function exitQuiz() {
-            if(confirm("¿Salir del examen?")) location.reload();
-        }
-        function switchView(viewName) {
-            els.sales.classList.add('hidden-section'); els.quiz.classList.add('hidden-section'); 
-            els.checkout.classList.add('hidden-section'); els.fail.classList.add('hidden-section');
-            
-            if(viewName === 'quiz') els.quiz.classList.remove('hidden-section');
-            if(viewName === 'checkout') els.checkout.classList.remove('hidden-section');
-            if(viewName === 'fail') els.fail.classList.remove('hidden-section');
-            window.scrollTo(0, 0);
-        }
-
-        // LÓGICA
-        function startQuizFlow() {
-            currentIdx = 0; score = 0;
-            switchView('quiz'); loadQuestion();
-        }
-
-        function loadQuestion() {
-            const q = questions[currentIdx];
-            els.qText.innerText = q.q;
-            els.qCurrent.innerText = currentIdx + 1;
-            els.progress.style.width = ((currentIdx / questions.length) * 100) + "%";
-            
-            els.qOptions.innerHTML = '';
-            els.feedback.className = 'hidden';
-            els.btnNext.disabled = true;
-            els.btnNext.className = "w-full bg-gray-200 text-gray-400 font-bold py-3.5 rounded-lg transition-all flex justify-center items-center cursor-not-allowed";
-            els.btnNext.innerHTML = 'Selecciona una opción';
-
-            q.options.forEach((opt, idx) => {
-                const btn = document.createElement('button');
-                btn.className = "w-full text-left p-4 rounded-xl border border-gray-200 bg-white hover:bg-purple-50 text-slate-700 font-medium active:scale-[0.98] transition-all";
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(btn, idx, q.a);
-                els.qOptions.appendChild(btn);
-            });
-        }
-
-        function checkAnswer(btn, idx, correct) {
-            const opts = els.qOptions.querySelectorAll('button');
-            opts.forEach(b => b.disabled = true);
-
-            els.feedback.classList.remove('hidden');
-            
-            if (idx === correct) {
-                score++;
-                btn.className = "w-full text-left p-4 rounded-xl border-2 border-green-500 bg-green-50 text-green-800 font-bold";
-                els.feedback.innerHTML = '✅ ¡Correcto!';
-                els.feedback.className = "block p-3 rounded-lg bg-green-100 text-green-800 font-bold text-center mb-4";
-            } else {
-                btn.className = "w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-50 text-red-800 font-bold";
-                els.feedback.innerHTML = '❌ Incorrecto';
-                els.feedback.className = "block p-3 rounded-lg bg-red-100 text-red-800 font-bold text-center mb-4";
-                opts[correct].className = "w-full text-left p-4 rounded-xl border border-green-500 bg-green-50 opacity-70";
-            }
-
-            els.btnNext.disabled = false;
-            els.btnNext.className = "w-full bg-purple-600 text-white font-bold py-3.5 rounded-lg shadow-lg hover:bg-purple-700 transition-all cursor-pointer animate-pulse";
-            els.btnNext.innerHTML = 'Siguiente ➜';
-        }
-
-        function nextQuestion() {
-            currentIdx++;
-            if (currentIdx < questions.length) {
-                loadQuestion();
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else {
-                (score / questions.length) >= passingScore ? switchView('checkout') : switchView('fail');
-            }
-        }
     </script>
+    <script src="flujo/flujo.js"></script>
 </body>
 </html>
