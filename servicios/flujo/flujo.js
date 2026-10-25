@@ -52,11 +52,12 @@
     const ATRAS = { pedido: 'datos' };
     const NOMBRE_PASO = ['', 'Examen', 'Tus datos', C.nequiUrl ? 'Pago' : 'Confirmar', 'Listo'];
 
+    // Etiquetas cortas: el tipo de documento va en la misma fila del número
     const DOCS = {
-        CC:  'Cédula de Ciudadanía',
-        TI:  'Tarjeta de Identidad',
-        CE:  'Cédula de Extranjería',
-        PPT: 'Permiso por Protección Temporal (PPT)',
+        CC:  'CC',
+        TI:  'TI',
+        CE:  'CE',
+        PPT: 'PPT',
         PAS: 'Pasaporte'
     };
 
@@ -364,17 +365,15 @@
                                placeholder="Nombres y apellidos" value="${esc(S.user.name)}" oninput="F.onName(this)">
                         <span class="hint">Así aparecerá en tu certificado</span>
                     </label>
-                    <div class="field" id="doctype-field" ${S.user.type === 'CC' ? 'hidden' : ''}>
-                        <label class="label" for="in-doctype">Tipo de documento</label>
-                        <select id="in-doctype" class="input" onchange="F.onDocType(this)">
-                            ${Object.keys(DOCS).map(k => `<option value="${k}" ${S.user.type === k ? 'selected' : ''}>${DOCS[k]}</option>`).join('')}
-                        </select>
-                    </div>
                     <div class="field">
-                        <label class="label" id="doc-label" for="in-doc">${S.user.type === 'CC' ? 'Número de cédula' : 'Número de documento'}</label>
-                        <input id="in-doc" class="input" required autocomplete="off" maxlength="20" placeholder="Sin puntos ni espacios"
-                               value="${esc(S.user.num)}" oninput="F.onDoc(this)">
-                        <button type="button" class="link doc-toggle" id="doctype-toggle" onclick="F.showDocType()" ${S.user.type === 'CC' ? '' : 'hidden'}>¿No tienes cédula? Usa otro documento</button>
+                        <label class="label" for="in-doc">Tipo y número de documento</label>
+                        <div class="doc-row">
+                            <select id="in-doctype" class="input${S.user.type === 'PAS' ? ' wide' : ''}" aria-label="Tipo de documento" onchange="F.onDocType(this)">
+                                ${Object.keys(DOCS).map(k => `<option value="${k}" ${S.user.type === k ? 'selected' : ''}>${DOCS[k]}</option>`).join('')}
+                            </select>
+                            <input id="in-doc" class="input" required autocomplete="off" maxlength="20" placeholder="Sin puntos"
+                                   value="${esc(S.user.num)}" oninput="F.onDoc(this)">
+                        </div>
                     </div>
                     <div class="field">
                         <label class="label" for="in-email">Correo electrónico</label>
@@ -606,15 +605,9 @@
         save();
     }
 
-    function showDocType() {
-        $('doctype-field').hidden = false;
-        $('doctype-toggle').hidden = true;
-        $('in-doctype').focus();
-    }
-
     function onDocType(select) {
         S.user.type = select.value;
-        $('doc-label').textContent = S.user.type === 'CC' ? 'Número de cédula' : 'Número de documento';
+        select.classList.toggle('wide', S.user.type === 'PAS');   // "Pasaporte" no cabe en el ancho de "CC"
         setupDocInput();
         onDoc($('in-doc'));
     }
@@ -781,13 +774,17 @@
     // ════════════════ API para los botones ════════════════
     window.F = {
         startExam, answer, retry,
-        onName, onDoc, showDocType, onDocType,
+        onName, onDoc, onDocType,
         checkEmail, onEmailInput, applyEmail, onPhone, submitDatos,
         pagarNequi, confirmar, abrirWhatsApp, back, reset
     };
 
     document.addEventListener('DOMContentLoaded', () => {
-        history.replaceState(ATRAS[S.screen] ? { screen: S.screen } : null, '');
+        // Si la página abre en una pantalla con "Atrás" (p. ej. al volver otro día), se
+        // recrea debajo la entrada del paso anterior: si no, "Atrás"/"Cambiar" hacían
+        // history.back() y sacaban al usuario de la página.
+        history.replaceState(null, '');
+        if (ATRAS[S.screen]) history.pushState({ screen: S.screen }, '');
         render();
         trackEvent('page_view');
     });
