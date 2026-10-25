@@ -64,8 +64,12 @@
             minutos:  3,
             minAprobar: 0.75,
             whatsapp: '573107941580',
-            // Link de pago Wompi para Nequi (el cliente escribe el valor)
+            // Link de pago Wompi con el valor ya puesto (valorEnLink: no se copia ni se avisa).
+            // Acepta Nequi, PSE y tarjeta, así que se muestra el botón azul "Pagar"
+            // (con los logos de los medios) en vez de la tarjeta de Nequi.
             nequiUrl: 'https://checkout.nequi.wompi.co/l/8c4kg6',
+            valorEnLink: true,
+            pagoEnLinea: true,
             preguntas: [
                 { q: '¿Cuál es la norma principal que regula la manipulación de alimentos en Colombia?', options: ['Resolución 2674 de 2013', 'Código de Policía', 'Ley 100'], a: 0 },
                 { q: 'La contaminación cruzada ocurre cuando:', options: ['Se lavan bien los alimentos', 'Se mezclan alimentos crudos con cocidos', 'Se congela la carne'], a: 1 },
