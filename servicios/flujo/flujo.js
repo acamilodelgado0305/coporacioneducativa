@@ -15,9 +15,8 @@
  *           pasarela confirma el pago, sin comprobante. Con `pagoEnLinea` el botón es
  *           "Pagar" (azul, con los logos de los medios) en vez de la tarjeta de Nequi, para links de Wompi que
  *           aceptan todos los medios. Si el link no trae el valor, se copia al portapapeles
- *           (con `valorEnLink` ya viene puesto). Con link, todo el pago va por la pasarela
- *           (sin opción de WhatsApp). Si no hay link, "Confirmar pedido" abre el chat con
- *           los datos y allí se coordina el pago.
+ *           (con `valorEnLink` ya viene puesto). Si no hay link, o si el cliente lo prefiere,
+ *           "Confirmar pedido" abre el chat con los datos y allí se coordina el pago.
  */
 (function () {
     const C = window.CURSO;
@@ -450,6 +449,7 @@
                     <span class="btn-nequi-txt"><b>Pagar con Nequi en línea — ${PRECIO_TXT}</b><span>Aprobación inmediata</span></span>
                     <i class="fas fa-arrow-right"></i>
                 </button>`}
+                <button class="btn-link" onclick="F.confirmar()">Prefiero pagar por WhatsApp</button>
             </div>` : `
                 <div class="how">
                     <p class="how-title">Cómo sigue</p>
@@ -702,8 +702,8 @@
 
     // ════════════════ Pedido ════════════════
     // Con Nequi: paga en el link de Wompi y la pasarela confirma el pago.
-    // Por WhatsApp (cursos sin link de pago): el pedido llega con todos los datos;
-    // allí se le dan las opciones de pago y se recibe el comprobante.
+    // Por WhatsApp: el pedido llega con todos los datos; allí se le dan las
+    // opciones de pago y se recibe el comprobante.
     function pedidoMsg() {
         const u = S.user;
         return '¡Hola! Quiero confirmar mi pedido ✅\n\n' +
