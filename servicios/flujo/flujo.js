@@ -13,8 +13,10 @@
  *   - `sinEtiquetas`: en el formulario de datos, el nombre de cada campo va dentro de la
  *     casilla (placeholder) y no encima; las etiquetas quedan solo para lectores de pantalla.
  *   - `tituloDatos`: título del formulario de datos, en lugar del aviso "¡Aprobaste con X/Y!".
- *   - `pagoBajoPrecio` (con `nequiUrl`): los botones de pago van justo debajo del total,
- *     no en la barra fija del final de la pantalla.
+ *   - `botonIrAPagar` (con `nequiUrl`): debajo del resumen van el valor, el botón "Ir a pagar" y
+ *     "Pago seguro con Wompi", en lugar de la tarjeta de Nequi en la barra fija; la opción de
+ *     WhatsApp queda al final, después del panel de preguntas.
+ *   - `botonVerde`: los botones principales (Continuar, Intentar de nuevo) van en verde, como "Ir a pagar".
  *   - `faq` (con `nequiUrl`): lista de { q, a } que reemplaza el panel "Cómo sigue" de la
  *     pantalla de pago. `a` admite HTML (enlaces).
  *
@@ -44,6 +46,7 @@
     // El mismo logo del botón "Pagar con Nequi" del checkout anterior.
     // Se carga sin referrer: con el de la página Google a veces lo bloquea (429).
     const NEQUI_LOGO = 'https://yt3.googleusercontent.com/tBl_djxQMQ-IAxboBoNRIeKJ9hDXG8fC-M2ZEWHWCykr-P0umEveM3dbGi4Di04EHFRn7aB7=s900-c-k-c0x00ffffff-no-rj';
+    const WOMPI_LOGO = 'https://public-assets.wompi.com/brand_wompi/logos/logo-primary.svg';
     // Botón azul "Pagar" (Nequi, PSE o tarjeta en Wompi) en lugar de la tarjeta de Nequi
     const EN_LINEA = !!(C.nequiUrl && C.pagoEnLinea);
     // Debajo de ese botón: los medios que acepta Wompi y el respaldo de Bancolombia
@@ -458,10 +461,17 @@
                         <span>Envío a</span>
                         <span class="row-val"><b>${esc(S.user.email)}</b><button class="link" onclick="F.back()">Cambiar</button></span>
                     </div>
-                    <div class="row total"><span>Total</span><span class="price">${PRECIO_TXT} <small>COP</small></span></div>
+                    ${C.botonIrAPagar ? '' : `<div class="row total"><span>Total</span><span class="price">${PRECIO_TXT} <small>COP</small></span></div>`}
                 </div>
                 ${C.nequiUrl ? `
-                ${C.pagoBajoPrecio ? `<div class="pago-bajo-precio">${botonesPago()}</div>` : ''}
+                ${C.botonIrAPagar ? `
+                <div class="pago-bajo-precio">
+                    <div class="barra-pagar">
+                        <div class="barra-total"><span>1 producto</span><b>${PRECIO_TXT} <small>COP</small></b></div>
+                        <button class="btn-ir-pagar" onclick="F.pagarNequi()">Ir a pagar</button>
+                    </div>
+                    <p class="pago-wompi">Pago seguro con <img src="${WOMPI_LOGO}" alt="Wompi" width="59" height="14" onerror="this.replaceWith('Wompi')"></p>
+                </div>` : ''}
                 ${C.faq ? `
                 <div class="how faq">
                     <p class="how-title">Preguntas frecuentes</p>
@@ -477,9 +487,10 @@
                 </div>`}
                 ${C.valorEnLink ? '' : `
                 <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige ${EN_LINEA ? 'cómo quieres pagar' : '<b>Nequi</b>'}.</span></p>`}
+                ${C.botonIrAPagar ? `<button class="btn-link reset-link" onclick="F.confirmar()">Prefiero pagar por WhatsApp</button>` : ''}
                 <button class="btn-link reset-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
             </section>
-            ${C.pagoBajoPrecio ? '' : `<div class="actions">${botonesPago()}</div>`}` : `
+            ${C.botonIrAPagar ? '' : `<div class="actions">${botonesPago()}</div>`}` : `
                 <div class="how">
                     <p class="how-title">Cómo sigue</p>
                     <ol>
@@ -767,7 +778,7 @@
         if (!C.valorEnLink) copyText(String(C.precio));
         // Aviso de intento de pago a Telegram (n8n) en cada intento, como en el checkout anterior
         // (`boton` distingue la prueba del botón "Pagar en línea")
-        trackEvent('payment_initiated', { metodo: 'Nequi', boton: EN_LINEA ? 'Pagar en línea' : 'Nequi' });
+        trackEvent('payment_initiated', { metodo: 'Nequi', boton: C.botonIrAPagar ? 'Ir a pagar' : EN_LINEA ? 'Pagar en línea' : 'Nequi' });
         iniciarPedido('Nequi');
         createCrmLead();   // reintento si falló al enviar los datos: la confirmación del pago busca el lead
         go('listo');
@@ -816,6 +827,7 @@
     };
 
     document.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.toggle('boton-verde', !!C.botonVerde);
         // Si la página abre en una pantalla con "Atrás" (p. ej. al volver otro día), se
         // recrea debajo la entrada del paso anterior: si no, "Atrás"/"Cambiar" hacían
         // history.back() y sacaban al usuario de la página.
