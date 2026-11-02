@@ -6,6 +6,16 @@
  * Cada curso es una página que define `window.CURSO` (precio, preguntas, textos)
  * y carga este archivo. Ver certificado-manipulacion-de-alimentos.html.
  *
+ * Opciones del examen:
+ *   - `sinInicio`: la página abre directo en el examen, sin la pantalla de bienvenida.
+ *   - `botonContinuar`: tras responder, se avanza con el botón "Continuar" en vez de
+ *     pasar solo a la siguiente pregunta.
+ *   - `sinEtiquetas`: en el formulario de datos, el nombre de cada campo va dentro de la
+ *     casilla (placeholder) y no encima; las etiquetas quedan solo para lectores de pantalla.
+ *   - `tituloDatos`: título del formulario de datos, en lugar del aviso "¡Aprobaste con X/Y!".
+ *   - `pagoBajoPrecio` (con `nequiUrl`): los botones de pago van justo debajo del total,
+ *     no en la barra fija del final de la pantalla.
+ *
  * Integraciones (las mismas de las páginas anteriores):
  *   - n8n (Telegram): trackEvent()
  *   - CRM: createCrmLead() al completar los datos (y de nuevo al confirmar el pedido, si falló)
@@ -293,6 +303,20 @@
     });
 
     // ════════════════ Vistas ════════════════
+    function botonesPago() {
+        return `
+                ${EN_LINEA ? `
+                <button class="btn btn-online" onclick="F.pagarNequi()">Pagar</button>
+                ${PAGO_SEGURO}` : `
+                <button class="btn-nequi" onclick="F.pagarNequi()">
+                    <span class="badge-rec">Recomendado</span>
+                    <img src="${NEQUI_LOGO}" alt="Nequi" width="40" height="40" referrerpolicy="no-referrer" onerror="this.remove()">
+                    <span class="btn-nequi-txt"><b>Pagar con Nequi en línea — ${PRECIO_TXT}</b><span>Aprobación inmediata</span></span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>`}
+                <button class="btn-link" onclick="F.confirmar()">Prefiero pagar por WhatsApp</button>`;
+    }
+
     const VIEWS = {
         inicio: () => `
             <section class="screen">
@@ -338,7 +362,11 @@
                         <button class="opt" onclick="F.answer(${i})"><span class="opt-key">${String.fromCharCode(65 + i)}</span><span>${o}</span></button>`).join('')}
                 </div>
                 <p id="q-feedback" class="q-feedback" hidden></p>
-            </section>`;
+            </section>
+            ${C.botonContinuar ? `
+            <div class="actions" id="q-next" hidden>
+                <button class="btn btn-primary" onclick="F.continuar()">${S.quiz.idx + 1 < TOTAL ? 'Continuar' : 'Ver resultado'} <i class="fas fa-arrow-right"></i></button>
+            </div>` : ''}`;
         },
 
         fallo: () => `
@@ -353,15 +381,18 @@
 
         datos: () => `
             <section class="screen">
+                ${C.tituloDatos ? `
+                <h1 class="h2">${C.tituloDatos}</h1>
+                <p class="sub">Los usamos para emitir ${C.entrega}.</p>` : `
                 <div class="success-banner">
                     <i class="fas fa-circle-check"></i>
                     <div><b>¡Aprobaste con ${S.quiz.score}/${TOTAL}!</b><span>Completa tus datos para emitir ${C.entrega}</span></div>
-                </div>
-                <form id="f-datos" class="form" onsubmit="F.submitDatos(event)">
+                </div>`}
+                <form id="f-datos" class="form${C.sinEtiquetas ? ' sin-etiquetas' : ''}" onsubmit="F.submitDatos(event)">
                     <label class="field">
                         <span class="label">Nombre completo</span>
                         <input id="in-name" class="input" required autocomplete="name" autocapitalize="words"
-                               placeholder="Nombres y apellidos" value="${esc(S.user.name)}" oninput="F.onName(this)">
+                               placeholder="${C.sinEtiquetas ? 'Nombre completo' : 'Nombres y apellidos'}" value="${esc(S.user.name)}" oninput="F.onName(this)">
                         <span class="hint">Así aparecerá en tu certificado</span>
                     </label>
                     <div class="field">
@@ -370,14 +401,14 @@
                             <select id="in-doctype" class="input${S.user.type === 'PAS' ? ' wide' : ''}" aria-label="Tipo de documento" onchange="F.onDocType(this)">
                                 ${Object.keys(DOCS).map(k => `<option value="${k}" ${S.user.type === k ? 'selected' : ''}>${DOCS[k]}</option>`).join('')}
                             </select>
-                            <input id="in-doc" class="input" required autocomplete="off" maxlength="20" placeholder="Sin puntos"
+                            <input id="in-doc" class="input" required autocomplete="off" maxlength="20" placeholder="${C.sinEtiquetas ? 'N.º de documento' : 'Sin puntos'}"
                                    value="${esc(S.user.num)}" oninput="F.onDoc(this)">
                         </div>
                     </div>
                     <div class="field">
                         <label class="label" for="in-email">Correo electrónico</label>
                         <input id="in-email" class="input" type="email" required autocomplete="email" inputmode="email"
-                               autocapitalize="off" spellcheck="false" placeholder="tucorreo@gmail.com"
+                               autocapitalize="off" spellcheck="false" placeholder="${C.sinEtiquetas ? 'Correo electrónico' : 'tucorreo@gmail.com'}"
                                value="${esc(S.user.email)}" onblur="F.checkEmail()" oninput="F.onEmailInput()">
                         <button type="button" id="email-suggest" class="email-suggest" hidden onclick="F.applyEmail()"></button>
                         <p class="hint">Aquí te llega ${C.entrega} en PDF</p>
@@ -388,7 +419,7 @@
                             <span class="prefix"><i class="fab fa-whatsapp"></i> +57</span>
                             <input id="in-phone" class="input" type="tel" required inputmode="numeric" autocomplete="tel-national"
                                    pattern="3[0-9]{9}" title="Celular de 10 dígitos que empieza por 3"
-                                   placeholder="310 123 4567" value="${esc(S.user.phone)}" oninput="F.onPhone(this)">
+                                   placeholder="${C.sinEtiquetas ? 'Celular con WhatsApp' : '310 123 4567'}" value="${esc(S.user.phone)}" oninput="F.onPhone(this)">
                         </span>
                     </div>
                     <label class="consent">
@@ -428,6 +459,7 @@
                     <div class="row total"><span>Total</span><span class="price">${PRECIO_TXT} <small>COP</small></span></div>
                 </div>
                 ${C.nequiUrl ? `
+                ${C.pagoBajoPrecio ? `<div class="pago-bajo-precio">${botonesPago()}</div>` : ''}
                 <div class="how">
                     <p class="how-title">Cómo sigue</p>
                     <ol>
@@ -439,18 +471,7 @@
                 <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige ${EN_LINEA ? 'cómo quieres pagar' : '<b>Nequi</b>'}.</span></p>`}
                 <button class="btn-link reset-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
             </section>
-            <div class="actions">
-                ${EN_LINEA ? `
-                <button class="btn btn-online" onclick="F.pagarNequi()">Pagar</button>
-                ${PAGO_SEGURO}` : `
-                <button class="btn-nequi" onclick="F.pagarNequi()">
-                    <span class="badge-rec">Recomendado</span>
-                    <img src="${NEQUI_LOGO}" alt="Nequi" width="40" height="40" referrerpolicy="no-referrer" onerror="this.remove()">
-                    <span class="btn-nequi-txt"><b>Pagar con Nequi en línea — ${PRECIO_TXT}</b><span>Aprobación inmediata</span></span>
-                    <i class="fas fa-arrow-right"></i>
-                </button>`}
-                <button class="btn-link" onclick="F.confirmar()">Prefiero pagar por WhatsApp</button>
-            </div>` : `
+            ${C.pagoBajoPrecio ? '' : `<div class="actions">${botonesPago()}</div>`}` : `
                 <div class="how">
                     <p class="how-title">Cómo sigue</p>
                     <ol>
@@ -495,6 +516,7 @@
 
     function render() {
         clearTimeout(answerTimer);
+        if (S.screen === 'inicio' && C.sinInicio) return startExam();
         // Recarga justo después de la última respuesta: el examen ya terminó
         if (S.screen === 'examen' && S.quiz.idx >= TOTAL) return finishQuiz();
 
@@ -549,10 +571,16 @@
         const dot = document.querySelectorAll('.q-dots i')[S.quiz.idx - 1];
         if (dot) dot.className = correct ? 'ok' : 'bad';
         save();
-        answerTimer = setTimeout(() => {
-            if (S.quiz.idx < TOTAL) render();
-            else finishQuiz();
-        }, correct ? 800 : 1700);
+        if (C.botonContinuar) {
+            $('q-next').hidden = false;
+            return;
+        }
+        answerTimer = setTimeout(continuar, correct ? 800 : 1700);
+    }
+
+    function continuar() {
+        if (S.quiz.idx < TOTAL) render();
+        else finishQuiz();
     }
 
     function finishQuiz() {
@@ -773,7 +801,7 @@
 
     // ════════════════ API para los botones ════════════════
     window.F = {
-        startExam, answer, retry,
+        startExam, answer, continuar, retry,
         onName, onDoc, onDocType,
         checkEmail, onEmailInput, applyEmail, onPhone, submitDatos,
         pagarNequi, confirmar, abrirWhatsApp, back, reset

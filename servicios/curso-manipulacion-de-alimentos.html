@@ -24,8 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="flujo/flujo.css" />
-    <link rel="preload" as="image" href="flujo/img/manipulacion-portada.jpg" fetchpriority="high" />
+    <link rel="stylesheet" href="flujo/flujo.css?v=3" />
 </head>
 <body>
     <div class="app">
@@ -59,7 +58,11 @@
             producto: 'Certificado de Manipulación de Alimentos',
             entrega:  'tu certificado',
             aval:     'Válido ante la Secretaría de Salud · Resolución 2674',
-            portada:  { src: 'flujo/img/manipulacion-portada.jpg', alt: 'Cocineros con uniforme revisando alimentos en una cocina profesional' },
+            sinInicio: true,
+            botonContinuar: true,
+            sinEtiquetas: true,
+            tituloDatos: 'Registra tus datos',
+            pagoBajoPrecio: true,
             precio:   25000,
             minutos:  3,
             minAprobar: 0.75,
@@ -81,6 +84,6 @@
             ]
         };
     </script>
-    <script src="flujo/flujo.js"></script>
+    <script src="flujo/flujo.js?v=4"></script>
 </body>
 </html>
