@@ -404,6 +404,25 @@ select.input {
 .note b { color: var(--ink); }
 .reset-link { display: block; margin: 14px auto 0; }
 .pago-bajo-precio { display: grid; gap: 6px; margin-top: 14px; }
+/* Preguntas frecuentes de la pantalla de pago */
+.faq { padding-bottom: 6px; }
+.faq details { border-top: 1px solid var(--line); }
+.faq .how-title + details { border-top: 0; margin-top: 4px; }
+.faq summary {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    min-height: 48px; padding: 10px 0;
+    font-size: 14.5px; font-weight: 700; color: var(--ink); line-height: 1.3;
+    cursor: pointer; list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+    content: ''; width: 8px; height: 8px; flex-shrink: 0; margin-right: 3px;
+    border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted);
+    transform: rotate(45deg); transition: transform .15s;
+}
+.faq details[open] summary::after { transform: rotate(-135deg); }
+.faq details p { padding-bottom: 12px; font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+.faq details a { color: var(--brand); font-weight: 700; }
 .btn-outline.nequi i { color: var(--nequi); }
 .btn-outline.online i { color: var(--brand); }
 

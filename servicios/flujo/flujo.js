@@ -15,6 +15,8 @@
  *   - `tituloDatos`: título del formulario de datos, en lugar del aviso "¡Aprobaste con X/Y!".
  *   - `pagoBajoPrecio` (con `nequiUrl`): los botones de pago van justo debajo del total,
  *     no en la barra fija del final de la pantalla.
+ *   - `faq` (con `nequiUrl`): lista de { q, a } que reemplaza el panel "Cómo sigue" de la
+ *     pantalla de pago. `a` admite HTML (enlaces).
  *
  * Integraciones (las mismas de las páginas anteriores):
  *   - n8n (Telegram): trackEvent()
@@ -460,13 +462,19 @@
                 </div>
                 ${C.nequiUrl ? `
                 ${C.pagoBajoPrecio ? `<div class="pago-bajo-precio">${botonesPago()}</div>` : ''}
+                ${C.faq ? `
+                <div class="how faq">
+                    <p class="how-title">Preguntas frecuentes</p>
+                    ${C.faq.map(f => `
+                    <details><summary>${f.q}</summary><p>${f.a}</p></details>`).join('')}
+                </div>` : `
                 <div class="how">
                     <p class="how-title">Cómo sigue</p>
                     <ol>
                         <li><span class="how-n">1</span><div><b>${EN_LINEA ? 'Paga en línea' : 'Paga con Nequi'}</b><span>${EN_LINEA ? 'Con Nequi, PSE o tarjeta en la página segura de Wompi' : 'Se abre la página de pago segura de Wompi'}</span></div></li>
                         <li><span class="how-n">2</span><div><b>Recibe ${C.entrega}</b><span>En PDF, en tu correo, apenas se apruebe tu pago</span></div></li>
                     </ol>
-                </div>
+                </div>`}
                 ${C.valorEnLink ? '' : `
                 <p class="note"><i class="fas fa-circle-info"></i><span>Al tocar el botón copiamos el valor <b>${PRECIO_TXT}</b>: pégalo en «¿Cuánto vas a pagar?» y elige ${EN_LINEA ? 'cómo quieres pagar' : '<b>Nequi</b>'}.</span></p>`}
                 <button class="btn-link reset-link" onclick="F.reset()">Iniciar un nuevo proceso</button>
